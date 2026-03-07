@@ -5,7 +5,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
-public class MenuUIHandler : MonoBehaviour
+public class TitleMenuUIHandler : MonoBehaviour
 {
     public void Exit()
     {
