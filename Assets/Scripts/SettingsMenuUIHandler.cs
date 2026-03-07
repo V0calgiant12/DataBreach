@@ -7,5 +7,11 @@ using System.Collections.Generic;
 
 public class SettingsMenuUIHandler : MonoBehaviour
 {
-    
+    public GameObject titleMenu;
+
+    public void BackButton()
+    {
+        titleMenu.SetActive(true);
+        gameObject.SetActive(false);
+    }
 }

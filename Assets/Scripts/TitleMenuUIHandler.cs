@@ -7,6 +7,13 @@ using System.Collections.Generic;
 
 public class TitleMenuUIHandler : MonoBehaviour
 {
+    public GameObject settingsMenu;
+
+    public void SettingsButton()
+    {
+        settingsMenu.SetActive(true);
+        gameObject.SetActive(false);
+    }
     public void Exit()
     {
         #if UNITY_EDITOR
