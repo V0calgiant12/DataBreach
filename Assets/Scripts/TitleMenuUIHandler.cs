@@ -9,6 +9,10 @@ public class TitleMenuUIHandler : MonoBehaviour
 {
     public GameObject settingsMenu;
 
+    public void NewSaveButton()
+    {
+        
+    }
     public void SettingsButton()
     {
         settingsMenu.SetActive(true);
