@@ -11,7 +11,7 @@ public class TitleMenuUIHandler : MonoBehaviour
 
     public void NewSaveButton()
     {
-        
+        SceneManager.LoadScene(1);
     }
     public void SettingsButton()
     {
