@@ -11,21 +11,22 @@ public class TestScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.W))
+        if (Input.GetKey(KeyCode.W))
         {
-            transform.position = new Vector2(transform.position.x, transform.position.y + 1);
+            transform.position = new Vector2(transform.position.x, transform.position.y + 0.05f);
         }
-        if (Input.GetKeyDown(KeyCode.S))
+        if (Input.GetKey(KeyCode.S))
         {
-            transform.position = new Vector2(transform.position.x, transform.position.y - 1);
+            transform.position = new Vector2(transform.position.x, transform.position.y - 0.05f);
         }
-        if (Input.GetKeyDown(KeyCode.D))
+        if (Input.GetKey(KeyCode.D))
         {
-            transform.position = new Vector2(transform.position.x + 1, transform.position.y);
+            transform.position = new Vector2(transform.position.x + 0.05f, transform.position.y);
         }
-        if (Input.GetKeyDown(KeyCode.A))
+        if (Input.GetKey(KeyCode.A))
         {
-            transform.position = new Vector2(transform.position.x - 1, transform.position.y);
+            transform.position = new Vector2(transform.position.x - 0.05f, transform.position.y);
         }
+        transform.position = new Vector3(transform.position.x, transform.position.y, -10);
     }
 }
