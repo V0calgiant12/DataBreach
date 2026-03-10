@@ -8,7 +8,7 @@ using System.Collections.Generic;
 public class TitleMenuUIHandler : MonoBehaviour
 {
     public GameObject settingsMenu;
-    public SceneTransition sceneTransition;
+    private SceneTransition sceneTransition;
     void Start()
     {
         sceneTransition = GameObject.Find("SceneTransition").GetComponent<SceneTransition>();
