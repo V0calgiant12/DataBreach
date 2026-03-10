@@ -1,7 +1,9 @@
+using System;
 using System.Collections;
-using UnityEditorInternal;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEditor;
 
 public class SceneTransition : MonoBehaviour
 {
@@ -15,5 +17,19 @@ public class SceneTransition : MonoBehaviour
         _Transition.SetTrigger("Transition");
         yield return new WaitForSeconds(transitionTime);
         SceneManager.LoadScene(levelIndex);
+    }
+    public void ExitButton()
+    {
+        StartCoroutine(ExitFade());
+    }
+    IEnumerator ExitFade()
+    {
+        _Transition.SetTrigger("Transition");
+        yield return new WaitForSeconds(1);
+        #if UNITY_EDITOR
+            EditorApplication.ExitPlaymode();
+        #else
+            Application.Quit();
+        #endif
     }
 }
