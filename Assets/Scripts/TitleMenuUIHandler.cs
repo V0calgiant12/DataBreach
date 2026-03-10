@@ -8,10 +8,15 @@ using System.Collections.Generic;
 public class TitleMenuUIHandler : MonoBehaviour
 {
     public GameObject settingsMenu;
+    public SceneTransition sceneTransition;
+    void Start()
+    {
+        sceneTransition = GameObject.Find("SceneTransition").GetComponent<SceneTransition>();
+    }
 
     public void NewSaveButton()
     {
-        SceneManager.LoadScene(1);
+        sceneTransition.TransitionToScene(1,1);
     }
     public void SettingsButton()
     {
