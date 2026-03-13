@@ -9461,6 +9461,7 @@ GameObject:
   - component: {fileID: 1994518092}
   - component: {fileID: 1994518091}
   - component: {fileID: 1994518096}
+  - component: {fileID: 1994518097}
   m_Layer: 5
   m_Name: Settings Screen
   m_TagString: Untagged
@@ -9590,6 +9591,18 @@ MonoBehaviour:
   _InputInteract: 99
   _UpToJump: 0
   buttonText: {fileID: 0}
+--- !u!114 &1994518097
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1994518090}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca6e8625142de6847aaa1c82df6c37b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::VolumeController
 --- !u!1 &2029052601
 GameObject:
   m_ObjectHideFlags: 0
