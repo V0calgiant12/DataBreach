@@ -1,10 +1,13 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 using System.Collections;
 using UnityEngine.InputSystem.Controls;
 using Unity.VisualScripting;
 using System;
 using Mono.Cecil.Cil;
 using UnityEngine.InputSystem;
+using TMPro;
+using UnityEngine.UI;
 
 public class SettingsController : MonoBehaviour
 {
@@ -17,12 +20,21 @@ public class SettingsController : MonoBehaviour
     public KeyCode _InputAttack = KeyCode.Z; // 6
     public KeyCode _InputInteract = KeyCode.C; // 7
     private KeyCode currentKeyDown;
-    public void ListenForKey(int inputNumber)
+    private string objectName;
+    [SerializeField] private TextMeshProUGUI buttonText;
+    public void GetName(string name)
     {
-        StartCoroutine(StartListeningForKey(inputNumber));
+        objectName = name;
+        Debug.Log(objectName);
+    }
+    public void ListenForKey(SettingsButtonData data)
+    {
+        buttonText = data._TextMesh;
+        StartCoroutine(StartListeningForKey(data._SettingID));
     }
     private IEnumerator StartListeningForKey(int inputNumber)
     {
+        buttonText.text = "Press any key...";
         yield return new WaitUntil(() => Input.anyKeyDown);
         if (inputNumber == 0)
         {
@@ -56,6 +68,7 @@ public class SettingsController : MonoBehaviour
         {
             _InputInteract = currentKeyDown;
         }
+        buttonText.text = "" + currentKeyDown;
     }
     
     public void OnGUI()
