@@ -1,16 +1,16 @@
+using System;
+using TMPro;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class VolumeController : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    [SerializeField] private AudioMixer Mixer;
+    [SerializeField] private AudioSource AudioSource;
+    [SerializeField] private TextMeshProUGUI ValueText;
+    public void OnChangeSlider(float Value)
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        ValueText.SetText($"{Value.ToString("N4")}");
+        Mixer.SetFloat("Volume",MathF.Log10(Value)*20);
     }
 }
