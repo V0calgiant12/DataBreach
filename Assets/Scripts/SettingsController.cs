@@ -87,7 +87,7 @@ public class SettingsController : MonoBehaviour
     public void OnGUI()
     {
         Event e = Event.current;
-        if (e.isKey && e.keyCode != KeyCode.None && e.keyCode != KeyCode.Return && e.keyCode != KeyCode.Escape)
+        if ((e.isKey || e.isMouse) && e.keyCode != KeyCode.None && e.keyCode != KeyCode.Return && e.keyCode != KeyCode.Escape)
         {
             currentKeyDown = e.keyCode;
             Debug.Log(e.keyCode);
