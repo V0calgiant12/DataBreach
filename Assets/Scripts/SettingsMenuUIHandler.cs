@@ -13,10 +13,5 @@ public class SettingsMenuUIHandler : MonoBehaviour
     {
         titleMenu.SetActive(true);
         gameObject.SetActive(false);
-        #if UNITY_EDITOR
-            EditorApplication.ExitPlaymode();
-        #else
-            Application.Quit();
-        #endif
     }
 }
