@@ -7,7 +7,19 @@ using System.Collections.Generic;
 
 public class SettingsMenuUIHandler : MonoBehaviour
 {
-    public GameObject titleMenu;
+    [SerializeField] private GameObject titleMenu;
+    [SerializeField] private GameObject controlsMenu;
+    [SerializeField] private GameObject audioMenu;
+    public void ControlsButton()
+    {
+        audioMenu.SetActive(false);
+        controlsMenu.SetActive(true);
+    }
+    public void AudioButton()
+    {
+        controlsMenu.SetActive(false);
+        audioMenu.SetActive(true);
+    }
 
     public void BackButton()
     {
