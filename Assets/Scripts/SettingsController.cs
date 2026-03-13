@@ -18,7 +18,9 @@ public class SettingsController : MonoBehaviour
     public KeyCode _InputJump = KeyCode.Space; // 4
     public KeyCode _InputSprint = KeyCode.X; // 5
     public KeyCode _InputAttack = KeyCode.Z; // 6
-    public KeyCode _InputInteract = KeyCode.C; // 7
+    public KeyCode _InputParry = KeyCode.V; // 7
+    public KeyCode _InputInteract = KeyCode.C; // 8
+    public bool _UpToJump = false;
     private KeyCode currentKeyDown;
     private string objectName;
     [SerializeField] private TextMeshProUGUI buttonText;
@@ -66,9 +68,20 @@ public class SettingsController : MonoBehaviour
         }
         else if (inputNumber == 7)
         {
+            _InputParry = currentKeyDown;
+        }
+        else if (inputNumber == 8)
+        {
             _InputInteract = currentKeyDown;
         }
         buttonText.text = "" + currentKeyDown;
+    }
+    public void ToggleSetting(string settingName)
+    {
+        if(settingName == "UpToJump")
+        {
+            _UpToJump = !_UpToJump;
+        }
     }
     
     public void OnGUI()
