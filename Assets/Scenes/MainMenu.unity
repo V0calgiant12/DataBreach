@@ -1571,7 +1571,6 @@ GameObject:
   - component: {fileID: 717062978}
   - component: {fileID: 717062977}
   - component: {fileID: 717062976}
-  - component: {fileID: 717062975}
   m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
@@ -1599,18 +1598,6 @@ RectTransform:
   m_AnchoredPosition: {x: 370, y: 0}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &717062975
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 717062973}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7f718e78f1a71ba4bafe4aea1bc4d490, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::KeyListener
 --- !u!114 &717062976
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1655,10 +1642,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 717062975}
-        m_TargetAssemblyTypeName: KeyListener, Assembly-CSharp
+      - m_Target: {fileID: 1994518096}
+        m_TargetAssemblyTypeName: SettingsController, Assembly-CSharp
         m_MethodName: ListenForKey
-        m_Mode: 1
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -4436,7 +4423,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 220637246}
   m_HandleRect: {fileID: 220637245}
   m_Direction: 2
-  m_Value: 1
+  m_Value: 0.99999976
   m_Size: 0.766
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -4493,6 +4480,7 @@ GameObject:
   - component: {fileID: 1994518093}
   - component: {fileID: 1994518092}
   - component: {fileID: 1994518091}
+  - component: {fileID: 1994518096}
   m_Layer: 5
   m_Name: Settings Screen
   m_TagString: Untagged
@@ -4598,6 +4586,26 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1994518096
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1994518090}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f718e78f1a71ba4bafe4aea1bc4d490, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SettingsController
+  _InputLeft: 276
+  _InputRight: 275
+  _InputUp: 273
+  _InputDown: 274
+  _InputJump: 32
+  _InputSprint: 120
+  _InputAttack: 122
+  _InputInteract: 99
 --- !u!1 &2052107178
 GameObject:
   m_ObjectHideFlags: 0
