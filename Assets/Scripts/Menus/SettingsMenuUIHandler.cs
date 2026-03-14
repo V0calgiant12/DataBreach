@@ -17,8 +17,11 @@ public class SettingsMenuUIHandler : MonoBehaviour
     {
         SettingsData.Instance.LoadSettings();
         LoadSettings(); // Loads from scene persistence
+    }
+    public void OnAwake()
+    {
         controlsMenu.SetActive(true);
-        audioMenu.SetActive(true);
+        audioMenu.SetActive(false);
     }
     public void ControlsButton()
     {

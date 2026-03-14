@@ -16,6 +16,7 @@ public class TitleMenuUIHandler : MonoBehaviour
         SettingsData.Instance.LoadSettings(); // Loads from instance persistence
         settingsMenu.SetActive(true);
         settingsHandler.LoadSettings();
+        settingsHandler.OnAwake();
         settingsMenu.SetActive(false);
     }
 
