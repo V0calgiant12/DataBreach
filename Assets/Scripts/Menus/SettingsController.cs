@@ -38,41 +38,34 @@ public class SettingsController : MonoBehaviour
     {
         buttonText.text = "Press any key...";
         yield return new WaitUntil(() => Input.anyKeyDown);
-        if (inputNumber == 0)
-        {
-            _InputLeft = currentKeyDown;            
-        }
-        else if (inputNumber == 1)
-        {
-            _InputRight = currentKeyDown;
-        }
-        else if (inputNumber == 2)
-        {
-            _InputUp = currentKeyDown;
-        }
-        else if (inputNumber == 3)
-        {
-            _InputDown = currentKeyDown;
-        }
-        else if (inputNumber == 4)
-        {
-            _InputJump = currentKeyDown;
-        }
-        else if (inputNumber == 5)
-        {
-            _InputSprint = currentKeyDown;
-        }
-        else if (inputNumber == 6)
-        {
-            _InputAttack = currentKeyDown;
-        }
-        else if (inputNumber == 7)
-        {
-            _InputParry = currentKeyDown;
-        }
-        else if (inputNumber == 8)
-        {
-            _InputInteract = currentKeyDown;
+        switch(inputNumber){
+            case  0:
+                _InputLeft = currentKeyDown;
+                break;
+            case  1:
+                _InputRight = currentKeyDown;
+                break;
+            case  2:
+                _InputUp = currentKeyDown;
+                break;
+            case  3:
+                _InputDown = currentKeyDown;
+                break;
+            case  4:
+                _InputJump = currentKeyDown;
+                break;
+            case  5:
+                _InputSprint = currentKeyDown;
+                break;
+            case  6:
+                _InputAttack = currentKeyDown;
+                break;
+            case  7:
+                _InputParry = currentKeyDown;
+                break;
+            case  8:
+                _InputInteract = currentKeyDown;
+                break;
         }
         buttonText.text = "" + currentKeyDown;
     }
