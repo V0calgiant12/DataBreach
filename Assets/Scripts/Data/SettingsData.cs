@@ -17,11 +17,10 @@ public class SettingsData : MonoBehaviour
     public KeyCode _InputInteract = KeyCode.C; // 8
     public bool _UpToJump = false;
     [Header("Audio")]
-    [SerializeField] private AudioMixer Mixer;
-    public float MasterVolume;
-    public float MusicVolume;
-    public float EffectsVolume;
-    public float DialogueVolume;
+    public float _MasterVolume;
+    public float _MusicVolume;
+    public float _EffectsVolume;
+    public float _DialogueVolume;
     
     private void Awake()
     {
@@ -47,6 +46,11 @@ public class SettingsData : MonoBehaviour
         data._InputInteract = _InputInteract;
         data._UpToJump = _UpToJump;
 
+        data._MasterVolume = _MasterVolume;
+        data._MusicVolume = _MusicVolume;
+        data._EffectsVolume = _EffectsVolume;
+        data._DialogueVolume = _DialogueVolume;
+
         string json = JsonUtility.ToJson(data);
         File.WriteAllText(Application.persistentDataPath + "/settings.json", json);
     }
@@ -68,6 +72,11 @@ public class SettingsData : MonoBehaviour
             _InputParry = data._InputParry;
             _InputInteract = data._InputInteract;
             _UpToJump = data._UpToJump;
+            
+            _MasterVolume = data._MasterVolume;
+            _MusicVolume = data._MusicVolume;
+            _EffectsVolume = data._EffectsVolume;
+            _DialogueVolume = data._DialogueVolume;
         }
     }
 }
@@ -86,5 +95,10 @@ class SaveData
     public KeyCode _InputParry = KeyCode.V; // 7
     public KeyCode _InputInteract = KeyCode.C; // 8
     public bool _UpToJump = false;
+    [Header("Audio")]
+    public float _MasterVolume;
+    public float _MusicVolume;
+    public float _EffectsVolume;
+    public float _DialogueVolume;
     
 }

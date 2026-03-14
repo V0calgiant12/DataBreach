@@ -725,7 +725,7 @@ GameObject:
   - component: {fileID: 144276721}
   m_Layer: 5
   m_Name: MusicVolSlider
-  m_TagString: Untagged
+  m_TagString: AudioMenu
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -764,6 +764,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::VolumeController
   Mixer: {fileID: 24100000, guid: 246f48f13ca5833448ea181663ec054d, type: 2}
   type: 1
+  slider: {fileID: 2030573995}
 --- !u!114 &144276722
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2447,7 +2448,7 @@ GameObject:
   - component: {fileID: 476508635}
   m_Layer: 5
   m_Name: EffectsVolSlider
-  m_TagString: Untagged
+  m_TagString: AudioMenu
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2486,6 +2487,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::VolumeController
   Mixer: {fileID: 24100000, guid: 246f48f13ca5833448ea181663ec054d, type: 2}
   type: 2
+  slider: {fileID: 1994109065}
 --- !u!114 &476508636
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4585,7 +4587,7 @@ GameObject:
   - component: {fileID: 807435612}
   m_Layer: 5
   m_Name: MasterVolSlider
-  m_TagString: Untagged
+  m_TagString: AudioMenu
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4624,6 +4626,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::VolumeController
   Mixer: {fileID: 24100000, guid: 246f48f13ca5833448ea181663ec054d, type: 2}
   type: 0
+  slider: {fileID: 1468015405}
 --- !u!114 &807435613
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6489,7 +6492,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TitleMenuUIHandler
   settingsMenu: {fileID: 1994518090}
-  sceneTransition: {fileID: 0}
+  settingsHandler: {fileID: 1994518091}
 --- !u!1 &1111918744
 GameObject:
   m_ObjectHideFlags: 0
@@ -7742,7 +7745,7 @@ GameObject:
   - component: {fileID: 1346392786}
   m_Layer: 5
   m_Name: DialogueVolSlider
-  m_TagString: Untagged
+  m_TagString: AudioMenu
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7781,6 +7784,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::VolumeController
   Mixer: {fileID: 24100000, guid: 246f48f13ca5833448ea181663ec054d, type: 2}
   type: 3
+  slider: {fileID: 1970546184}
 --- !u!114 &1346392787
 MonoBehaviour:
   m_ObjectHideFlags: 0

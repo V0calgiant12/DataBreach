@@ -7,12 +7,16 @@ using UnityEditor;
 
 public class TitleMenuUIHandler : MonoBehaviour
 {
-    public GameObject settingsMenu;
-    public SceneTransition sceneTransition;
+    [SerializeField] private GameObject settingsMenu;
+    [SerializeField] private SettingsMenuUIHandler settingsHandler;
+    private SceneTransition sceneTransition;
     void Start()
     {
         sceneTransition = GameObject.Find("SceneTransition").GetComponent<SceneTransition>();
         SettingsData.Instance.LoadSettings(); // Loads from instance persistence
+        settingsMenu.SetActive(true);
+        settingsHandler.LoadSettings();
+        settingsMenu.SetActive(false);
     }
 
     public void NewSaveButton()

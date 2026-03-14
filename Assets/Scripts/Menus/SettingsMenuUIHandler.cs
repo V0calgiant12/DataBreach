@@ -48,8 +48,16 @@ public class SettingsMenuUIHandler : MonoBehaviour
         SettingsData.Instance._InputParry = keybinds._InputParry;
         SettingsData.Instance._InputInteract = keybinds._InputInteract;
         SettingsData.Instance._UpToJump = keybinds._UpToJump;
+        // Tells audio sliders to save their settings.
+        GameObject[] audioMenuItems = GameObject.FindGameObjectsWithTag("AudioMenu");
+        int index = 0;
+        while (index <= 3)
+        {
+            audioMenuItems[index].SendMessage("SaveSettings");
+            index += 1;
+        }
     }
-    private void LoadSettings()
+    public void LoadSettings()
     {
         keybinds._InputLeft = SettingsData.Instance._InputLeft;
         keybinds._InputRight = SettingsData.Instance._InputRight;
@@ -61,5 +69,15 @@ public class SettingsMenuUIHandler : MonoBehaviour
         keybinds._InputParry = SettingsData.Instance._InputParry;
         keybinds._InputInteract = SettingsData.Instance._InputInteract;
         keybinds._UpToJump = SettingsData.Instance._UpToJump;
+        // Tells audio sliders to load their settings.
+        audioMenu.SetActive(true);
+        GameObject[] audioMenuItems = GameObject.FindGameObjectsWithTag("AudioMenu");
+        int index = 0;
+        while (index <= 3)
+        {
+            audioMenuItems[index].SendMessage("LoadSettings");
+            index += 1;
+        }
+        audioMenu.SetActive(false);
     }
 }
