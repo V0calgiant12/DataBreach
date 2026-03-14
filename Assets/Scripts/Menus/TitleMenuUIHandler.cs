@@ -16,7 +16,6 @@ public class TitleMenuUIHandler : MonoBehaviour
         SettingsData.Instance.LoadSettings(); // Loads from instance persistence
         settingsMenu.SetActive(true);
         settingsHandler.LoadSettings();
-        settingsHandler.OnAwake();
         settingsMenu.SetActive(false);
     }
 
@@ -27,6 +26,7 @@ public class TitleMenuUIHandler : MonoBehaviour
     public void SettingsButton()
     {
         settingsMenu.SetActive(true);
+        settingsHandler.OnAwake();
         gameObject.SetActive(false);
     }
     public void Exit()
