@@ -12,6 +12,7 @@ public class TitleMenuUIHandler : MonoBehaviour
     void Start()
     {
         sceneTransition = GameObject.Find("SceneTransition").GetComponent<SceneTransition>();
+        SettingsData.Instance.LoadSettings(); // Loads from instance persistence
     }
 
     public void NewSaveButton()

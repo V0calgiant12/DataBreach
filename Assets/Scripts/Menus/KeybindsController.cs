@@ -9,7 +9,7 @@ using UnityEngine.InputSystem;
 using TMPro;
 using UnityEngine.UI;
 
-public class SettingsController : MonoBehaviour
+public class KeybindsController : MonoBehaviour
 {
     public KeyCode _InputLeft = KeyCode.LeftArrow; // 0
     public KeyCode _InputRight = KeyCode.RightArrow; // 1
@@ -24,6 +24,10 @@ public class SettingsController : MonoBehaviour
     private KeyCode currentKeyDown;
     private string objectName;
     [SerializeField] private TextMeshProUGUI buttonText;
+    void Start()
+    {
+        RefreshSettings();
+    }
     public void GetName(string name)
     {
         objectName = name;
@@ -69,11 +73,34 @@ public class SettingsController : MonoBehaviour
         }
         buttonText.text = "" + currentKeyDown;
     }
-    public void ToggleSetting(string settingName)
+    public void ToggleSetting(SettingsToggleData data) // Handles when a setting is toggled
     {
-        if(settingName == "UpToJump")
+        switch(data._ToggleID)
         {
-            _UpToJump = !_UpToJump;
+            case(0):
+                _UpToJump = !_UpToJump;
+                break;
+        }
+    }
+    private void RefreshSettings() // Gets the Saved settings and tells all other setting objects with the tag "ControlsMenu" to refresh their visuals, which is handled elsewhere.
+    {
+        _InputLeft = SettingsData.Instance._InputLeft;
+        _InputRight = SettingsData.Instance._InputRight;
+        _InputUp = SettingsData.Instance._InputUp;
+        _InputDown = SettingsData.Instance._InputDown;
+        _InputJump = SettingsData.Instance._InputJump;
+        _InputSprint = SettingsData.Instance._InputSprint;
+        _InputAttack = SettingsData.Instance._InputAttack;
+        _InputParry = SettingsData.Instance._InputParry;
+        _InputInteract = SettingsData.Instance._InputInteract;
+
+        _UpToJump = SettingsData.Instance._UpToJump;
+        GameObject[] controlsMenuItems = GameObject.FindGameObjectsWithTag("ControlsMenu");
+        int index = 0;
+        while (index <= 9)
+        {
+            controlsMenuItems[index].SendMessage("RefreshVisuals");
+            index += 1;
         }
     }
     
