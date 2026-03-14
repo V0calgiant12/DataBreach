@@ -12,6 +12,7 @@ public class VolumeController : MonoBehaviour
     //[SerializeField] private TextMeshProUGUI ValueText;
     [SerializeField] private VolumeType type;
     [SerializeField] private Slider slider;
+    public float defaultValue = 0.5f;
     public enum VolumeType
     {
         Master,
@@ -54,6 +55,7 @@ public class VolumeController : MonoBehaviour
                 slider.value = SettingsData.Instance._DialogueVolume;
                 break;
         }
+        OnChangeSlider(slider.value);
     }
     public void OnChangeSlider(float Value)
     {
@@ -74,5 +76,10 @@ public class VolumeController : MonoBehaviour
                 break;
         }
         
+    }
+    public void ResetToDefault()
+    {
+        slider.value = defaultValue;
+        OnChangeSlider(slider.value);
     }
 }

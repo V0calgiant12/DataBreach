@@ -17,6 +17,8 @@ public class SettingsMenuUIHandler : MonoBehaviour
     {
         SettingsData.Instance.LoadSettings();
         LoadSettings(); // Loads from scene persistence
+        controlsMenu.SetActive(true);
+        audioMenu.SetActive(true);
     }
     public void ControlsButton()
     {
@@ -49,6 +51,7 @@ public class SettingsMenuUIHandler : MonoBehaviour
         SettingsData.Instance._InputInteract = keybinds._InputInteract;
         SettingsData.Instance._UpToJump = keybinds._UpToJump;
         // Tells audio sliders to save their settings.
+        audioMenu.SetActive(true);
         GameObject[] audioMenuItems = GameObject.FindGameObjectsWithTag("AudioMenu");
         int index = 0;
         while (index <= 3)
@@ -56,6 +59,7 @@ public class SettingsMenuUIHandler : MonoBehaviour
             audioMenuItems[index].SendMessage("SaveSettings");
             index += 1;
         }
+        audioMenu.SetActive(false);
     }
     public void LoadSettings()
     {
