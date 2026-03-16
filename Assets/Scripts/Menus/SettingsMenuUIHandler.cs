@@ -13,7 +13,8 @@ public class SettingsMenuUIHandler : MonoBehaviour
     [SerializeField] private GameObject controlsMenu;
     [SerializeField] private GameObject audioMenu;
     [SerializeField] private GameObject gameMenu;
-    [SerializeField] private KeybindsController keybinds; // The Keybinds Controller, has all the keybinds in it.
+    [SerializeField] private KeybindsController keybinds; // The Keybinds Controller, has all settings under the controls tab in it.
+    [SerializeField] private GameSettingsController gameSettings; // The Game Settings Controller, has all settings under the game tab in it.
     void Start() // Loads settings on load, just incase the player doesn't go into the settings before playing.
     {
         SettingsData.Instance.LoadSettings();
@@ -53,6 +54,7 @@ public class SettingsMenuUIHandler : MonoBehaviour
     }
     private void SaveSettings() // Saves settings to be loaded upon reloading scene or game.
     {
+        // Controls Settings
         SettingsData.Instance._InputLeft = keybinds._InputLeft;
         SettingsData.Instance._InputRight = keybinds._InputRight;
         SettingsData.Instance._InputUp = keybinds._InputUp;
@@ -64,6 +66,7 @@ public class SettingsMenuUIHandler : MonoBehaviour
         SettingsData.Instance._InputInteract = keybinds._InputInteract;
         SettingsData.Instance._UpToJump = keybinds._UpToJump;
 
+        // Audio Settings
         // Tells audio sliders to save their settings.
         audioMenu.SetActive(true);
         GameObject[] audioMenuItems = GameObject.FindGameObjectsWithTag("AudioMenu");
@@ -74,9 +77,13 @@ public class SettingsMenuUIHandler : MonoBehaviour
             index += 1;
         }
         audioMenu.SetActive(false);
+
+        // Game Settings
+        SettingsData.Instance._RunInBackground = gameSettings._RunInBackground;
     }
     public void LoadSettings() // Fetches settings to load them.
     {
+        // Controls Settings
         keybinds._InputLeft = SettingsData.Instance._InputLeft;
         keybinds._InputRight = SettingsData.Instance._InputRight;
         keybinds._InputUp = SettingsData.Instance._InputUp;
@@ -88,6 +95,7 @@ public class SettingsMenuUIHandler : MonoBehaviour
         keybinds._InputInteract = SettingsData.Instance._InputInteract;
         keybinds._UpToJump = SettingsData.Instance._UpToJump;
 
+        // Audio Settings
         // Tells audio sliders to load their settings.
         audioMenu.SetActive(true);
         GameObject[] audioMenuItems = GameObject.FindGameObjectsWithTag("AudioMenu");
@@ -98,5 +106,8 @@ public class SettingsMenuUIHandler : MonoBehaviour
             index += 1;
         }
         audioMenu.SetActive(false);
+
+        // Game Settings
+        gameSettings._RunInBackground = SettingsData.Instance._RunInBackground;
     }
 }

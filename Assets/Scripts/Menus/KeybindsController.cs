@@ -77,7 +77,7 @@ public class KeybindsController : MonoBehaviour
     {
         switch(data._ToggleID)
         {
-            case(0):
+            case(0): // Up to jump
                 _UpToJump = !_UpToJump;
                 break;
         }

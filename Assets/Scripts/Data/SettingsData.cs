@@ -10,7 +10,7 @@ public class SettingsData : MonoBehaviour
     /// Next, add the variable to be saved and loaded in their respective functions.
     /// </summary>
     public static SettingsData Instance;
-    [Header("Keybinds")]
+    [Header("Controls")]
     public KeyCode _InputLeft = KeyCode.LeftArrow; // 0
     public KeyCode _InputRight = KeyCode.RightArrow; // 1
     public KeyCode _InputUp = KeyCode.UpArrow; // 2
@@ -26,6 +26,8 @@ public class SettingsData : MonoBehaviour
     public float _MusicVolume;
     public float _EffectsVolume;
     public float _DialogueVolume;
+    [Header("Game")]
+    public bool _RunInBackground = true;
     
     private void Awake()
     {
@@ -57,6 +59,8 @@ public class SettingsData : MonoBehaviour
         data._EffectsVolume = _EffectsVolume;
         data._DialogueVolume = _DialogueVolume;
 
+        data._RunInBackground = _RunInBackground;
+
         string json = JsonUtility.ToJson(data);
         File.WriteAllText(Application.persistentDataPath + "/settings.json", json);
     }
@@ -83,6 +87,9 @@ public class SettingsData : MonoBehaviour
             _MusicVolume = data._MusicVolume;
             _EffectsVolume = data._EffectsVolume;
             _DialogueVolume = data._DialogueVolume;
+            
+            _RunInBackground = data._RunInBackground;
+            UnityEditor.PlayerSettings.runInBackground = !_RunInBackground;
         }
     }
 }
@@ -90,7 +97,7 @@ public class SettingsData : MonoBehaviour
 [System.Serializable]
 class SaveSettings // This class quite literally just stores variables so they can be saved.
 {
-    [Header("Keybinds")]
+    [Header("Controls")]
     public KeyCode _InputLeft = KeyCode.LeftArrow; // 0
     public KeyCode _InputRight = KeyCode.RightArrow; // 1
     public KeyCode _InputUp = KeyCode.UpArrow; // 2
@@ -106,5 +113,7 @@ class SaveSettings // This class quite literally just stores variables so they c
     public float _MusicVolume;
     public float _EffectsVolume;
     public float _DialogueVolume;
+    [Header("Game")]
+    public bool _RunInBackground = true;
     
 }

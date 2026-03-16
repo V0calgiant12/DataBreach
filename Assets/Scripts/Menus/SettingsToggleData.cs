@@ -12,6 +12,9 @@ public class SettingsToggleData : MonoBehaviour
             case (0):
                 toggle.isOn = SettingsData.Instance._UpToJump;
                 break;
+            case (1):
+                toggle.isOn = SettingsData.Instance._RunInBackground;
+                break;
         }
     }
 }
