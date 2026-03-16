@@ -9,9 +9,9 @@ public class SettingsButtonData : MonoBehaviour
     public KeyCode _DefaultBind;
     void Awake()
     {
-        _TextMesh.text = "" + _DefaultBind;
+        _TextMesh.text = "" + _DefaultBind; // Failsafe to default bind if there is no button to display. Happens before everything else.
     }
-    public void RefreshVisuals()
+    public void RefreshVisuals() // Refreshes the text of all the keybind settings.
     {
         switch(_SettingID){
             case  0:

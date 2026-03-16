@@ -14,22 +14,23 @@ public class TitleMenuUIHandler : MonoBehaviour
     {
         sceneTransition = GameObject.Find("SceneTransition").GetComponent<SceneTransition>();
         SettingsData.Instance.LoadSettings(); // Loads from instance persistence
-        settingsMenu.SetActive(true);
-        settingsHandler.LoadSettings();
-        settingsMenu.SetActive(false);
+        
+        settingsMenu.SetActive(true); // Set entire settings menu to be awake
+        settingsHandler.LoadSettings(); // Loads settings                           We have to do this because loading wont work if the objects aren't awake.
+        settingsMenu.SetActive(false);// Set entire settings menu to not be awake
     }
 
-    public void NewSaveButton()
+    public void NewSaveButton() // Starts a transition to the Dev scene
     {
-        sceneTransition.TransitionToScene(1,1);
+        sceneTransition.TransitionToScene(1,1); // Dev scene, 1 second transition.
     }
-    public void SettingsButton()
+    public void SettingsButton() // Switches to settings menu.
     {
         settingsMenu.SetActive(true);
         settingsHandler.OnAwake();
         gameObject.SetActive(false);
     }
-    public void Exit()
+    public void Exit() // Close the game.
     {
         sceneTransition.ExitButton();
     }

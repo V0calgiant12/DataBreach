@@ -14,7 +14,8 @@ public class SceneTransition : MonoBehaviour
     }
     IEnumerator LoadScene(int levelIndex, float transitionTime)
     {
-        _Transition.SetTrigger("Transition");
+        // NOTE: Transition time does not extend or shorten the fade animation. Fade animation is 1 second long. We can change this if we want later on.
+        _Transition.SetTrigger("Transition"); 
         yield return new WaitForSeconds(transitionTime);
         SceneManager.LoadScene(levelIndex);
     }

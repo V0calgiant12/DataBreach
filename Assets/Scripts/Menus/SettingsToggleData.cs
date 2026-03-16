@@ -5,7 +5,7 @@ public class SettingsToggleData : MonoBehaviour
 {
     [SerializeField] private Toggle toggle;
     public int _ToggleID;
-    public void RefreshVisuals()
+    public void RefreshVisuals() // Refreshes the toggle state to be up to date witht he saves
     {
         switch (_ToggleID)
         {
