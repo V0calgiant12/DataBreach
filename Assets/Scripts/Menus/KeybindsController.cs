@@ -97,11 +97,46 @@ public class KeybindsController : MonoBehaviour
         _UpToJump = SettingsData.Instance._UpToJump;
         GameObject[] controlsMenuItems = GameObject.FindGameObjectsWithTag("ControlsMenu"); // Puts all controls menu objects in a list.
         int index = 0;
-        while (index <= controlsMenuItems.Length) // Repeats for every game object.
+        while (index <= controlsMenuItems.Length - 1) // Repeats for every game object.
         {
             controlsMenuItems[index].SendMessage("RefreshVisuals");
             index += 1;
         }
+    }
+
+    public void ResetToDefault(SettingsButtonData data)
+    {
+        buttonText = data._TextMesh;
+        switch(data._SettingID){ // This is a fancy if statement that only checks for the next item if the previous when was false.
+            case  0:
+                _InputLeft = data._DefaultBind;
+                break;
+            case  1:
+                _InputRight = data._DefaultBind;
+                break;
+            case  2:
+                _InputUp = data._DefaultBind;
+                break;
+            case  3:
+                _InputDown = data._DefaultBind;
+                break;
+            case  4:
+                _InputJump = data._DefaultBind;
+                break;
+            case  5:
+                _InputSprint = data._DefaultBind;
+                break;
+            case  6:
+                _InputAttack = data._DefaultBind;
+                break;
+            case  7:
+                _InputParry = data._DefaultBind;
+                break;
+            case  8:
+                _InputInteract = data._DefaultBind;
+                break;
+        }
+        buttonText.text = "" + data._DefaultBind;
     }
     
     public void OnGUI() // Runs basically any time this is active just less often than update but still runs when neccessary.
@@ -113,4 +148,5 @@ public class KeybindsController : MonoBehaviour
             //Debug.Log(e.keyCode);
         }
     }
+
 }
