@@ -4,6 +4,11 @@ using UnityEngine.Audio;
 
 public class SettingsData : MonoBehaviour
 {
+    /// <summary>
+    /// This script handels save data for things that are changed in the settings menu.
+    /// To add a new saved variable, first add it to this class, SettingsData, then add it to the SaveData class.
+    /// Next, add the variable to be saved and loaded in their respective functions.
+    /// </summary>
     public static SettingsData Instance;
     [Header("Keybinds")]
     public KeyCode _InputLeft = KeyCode.LeftArrow; // 0
@@ -32,9 +37,10 @@ public class SettingsData : MonoBehaviour
         Instance = this;
         DontDestroyOnLoad(gameObject);
     }
-    public void SaveSettings()
+    public void SaveSettings() // Saves data to a JSON file.
     {
-        SaveData data = new SaveData();
+        SaveSettings data = new SaveSettings();
+
         data._InputLeft = _InputLeft;
         data._InputRight = _InputRight;
         data._InputUp = _InputUp;
@@ -54,13 +60,13 @@ public class SettingsData : MonoBehaviour
         string json = JsonUtility.ToJson(data);
         File.WriteAllText(Application.persistentDataPath + "/settings.json", json);
     }
-    public void LoadSettings()
+    public void LoadSettings() // Loads data from the JSON file.
     {
         string path = Application.persistentDataPath + "/settings.json";
-        if (File.Exists(path))
+        if (File.Exists(path)) // Checks to see if the file even exists before attempting to read from it.
         {
             string json = File.ReadAllText(path);
-            SaveData data = JsonUtility.FromJson<SaveData>(json);
+            SaveSettings data = JsonUtility.FromJson<SaveSettings>(json);
             
             _InputLeft = data._InputLeft;
             _InputRight = data._InputRight;
@@ -82,7 +88,7 @@ public class SettingsData : MonoBehaviour
 }
 
 [System.Serializable]
-class SaveData
+class SaveSettings // This class quite literally just stores variables so they can be saved.
 {
     [Header("Keybinds")]
     public KeyCode _InputLeft = KeyCode.LeftArrow; // 0
