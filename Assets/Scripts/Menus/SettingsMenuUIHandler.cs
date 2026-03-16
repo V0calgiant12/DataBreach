@@ -13,28 +13,28 @@ public class SettingsMenuUIHandler : MonoBehaviour
     [SerializeField] private GameObject controlsMenu;
     [SerializeField] private GameObject audioMenu;
     [SerializeField] private KeybindsController keybinds; // The Keybinds Controller, has all the keybinds in it.
-    void Start()
+    void Start() // Loads settings on load, just incase the player doesn't go into the settings before playing.
     {
         SettingsData.Instance.LoadSettings();
         LoadSettings(); // Loads from scene persistence
     }
-    public void OnAwake()
+    public void OnAwake() // Defaults to controls tab
     {
         controlsMenu.SetActive(true);
         audioMenu.SetActive(false);
     }
-    public void ControlsButton()
+    public void ControlsButton() // Switches to controls tab
     {
         audioMenu.SetActive(false);
         controlsMenu.SetActive(true);
     }
-    public void AudioButton()
+    public void AudioButton() // Switches to audio tab
     {
         controlsMenu.SetActive(false);
         audioMenu.SetActive(true);
     }
 
-    public void BackButton()
+    public void BackButton() // Saves settings and switches back to main menu
     {
         SaveSettings(); // Saves for scene persistence
         SettingsData.Instance.SaveSettings(); // Saves for instance persistence

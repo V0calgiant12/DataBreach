@@ -24,25 +24,25 @@ public class KeybindsController : MonoBehaviour
     private KeyCode currentKeyDown;
     private string objectName;
     [SerializeField] private TextMeshProUGUI buttonText;
-    void Start()
+    void Start() // Refreshes settings on load.
     {
         RefreshSettings();
     }
-    public void GetName(string name)
+    public void GetName(string name) // Gets object name. Im actually not entirely sure if this code still runs anywhere but it's staying just incase it does.
     {
         objectName = name;
-        Debug.Log(objectName);
+        //Debug.Log(objectName);
     }
-    public void ListenForKey(SettingsButtonData data)
+    public void ListenForKey(SettingsButtonData data) // Initial function called when a button is pressed for rebinding. Has button data that is unique to each button.
     {
         buttonText = data._TextMesh;
         StartCoroutine(StartListeningForKey(data._SettingID));
     }
-    private IEnumerator StartListeningForKey(int inputNumber)
+    private IEnumerator StartListeningForKey(int inputNumber) // Listens for the next key to be pressed and acts accordingly when it does.
     {
         buttonText.text = "Press any key...";
         yield return new WaitUntil(() => Input.anyKeyDown);
-        switch(inputNumber){
+        switch(inputNumber){ // This is a fancy if statement that only checks for the next item if the previous when was false.
             case  0:
                 _InputLeft = currentKeyDown;
                 break;
@@ -82,7 +82,7 @@ public class KeybindsController : MonoBehaviour
                 break;
         }
     }
-    private void RefreshSettings() // Gets the Saved settings and tells all other setting objects with the tag "ControlsMenu" to refresh their visuals, which is handled elsewhere.
+    private void RefreshSettings() // Gets the saved settings and tells all other setting objects with the tag "ControlsMenu" to refresh their visuals, which is handled elsewhere.
     {
         _InputLeft = SettingsData.Instance._InputLeft;
         _InputRight = SettingsData.Instance._InputRight;
@@ -104,7 +104,7 @@ public class KeybindsController : MonoBehaviour
         }
     }
     
-    public void OnGUI()
+    public void OnGUI() // Runs basically any time this is active just less often than update but still runs when neccessary.
     {
         Event e = Event.current;
         if ((e.isKey || e.isMouse) && e.keyCode != KeyCode.None && e.keyCode != KeyCode.Return && e.keyCode != KeyCode.Escape)
