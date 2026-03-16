@@ -9,6 +9,7 @@ public class TitleMenuUIHandler : MonoBehaviour
 {
     [SerializeField] private GameObject settingsMenu;
     [SerializeField] private SettingsMenuUIHandler settingsHandler;
+    public GameObject settingsMenu;
     private SceneTransition sceneTransition;
     void Start()
     {
