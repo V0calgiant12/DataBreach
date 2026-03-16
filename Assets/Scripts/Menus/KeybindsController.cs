@@ -104,7 +104,7 @@ public class KeybindsController : MonoBehaviour
         }
     }
 
-    public void ResetToDefault(SettingsButtonData data)
+    public void ResetToDefault(SettingsButtonData data) // Resets the keybind to the default bind.
     {
         buttonText = data._TextMesh;
         switch(data._SettingID){ // This is a fancy if statement that only checks for the next item if the previous when was false.
