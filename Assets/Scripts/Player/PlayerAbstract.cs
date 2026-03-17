@@ -1,16 +1,9 @@
 using UnityEngine;
 
-public class PlayerAbstract : MonoBehaviour
+public abstract class PlayerAbstract
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    // States
+    public abstract void EnterState(PlayerStateManager player);
+    public abstract void UpdateState(PlayerStateManager player);
+    public abstract void OnCollisionEnter(PlayerStateManager player, Collision collision);
 }
