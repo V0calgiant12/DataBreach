@@ -17,7 +17,7 @@ public class TitleMenuUIHandler : MonoBehaviour
         
         settingsMenu.SetActive(true); // Set entire settings menu to be awake
         settingsHandler.LoadSettings(); // Loads settings                           We have to do this because loading wont work if the objects aren't awake.
-        settingsMenu.SetActive(false);// Set entire settings menu to not be awake
+        settingsMenu.SetActive(false); // Set entire settings menu to not be awake
     }
 
     public void NewSaveButton() // Starts a transition to the Dev scene

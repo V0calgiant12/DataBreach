@@ -2,12 +2,15 @@ using UnityEngine;
 
 public class GameSettingsController : MonoBehaviour
 {
+    [SerializeField] private GameObject gameMenu;
     [Header("Toggles")]
     public bool _RunInBackground = true;
 
     void Start() // Refreshes settings on load.
     {
+        gameMenu.SetActive(true);
         RefreshSettings();
+        gameMenu.SetActive(false);
     }
     public void ToggleSetting(SettingsToggleData data)
     {
@@ -24,11 +27,11 @@ public class GameSettingsController : MonoBehaviour
     {
         _RunInBackground = SettingsData.Instance._RunInBackground;
 
-        GameObject[] controlsMenuItems = GameObject.FindGameObjectsWithTag("GameMenu"); // Puts all controls menu objects in a list.
+        GameObject[] gameMenuItems = GameObject.FindGameObjectsWithTag("GameMenu"); // Puts all game menu objects in a list.
         int index = 0;
-        while (index <= controlsMenuItems.Length - 1) // Repeats for every game object.
+        while (index <= gameMenuItems.Length - 1) // Repeats for every game object.
         {
-            controlsMenuItems[index].SendMessage("RefreshVisuals");
+            gameMenuItems[index].SendMessage("RefreshVisuals");
             index += 1;
         }
     }

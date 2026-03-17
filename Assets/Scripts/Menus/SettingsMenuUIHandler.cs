@@ -83,6 +83,8 @@ public class SettingsMenuUIHandler : MonoBehaviour
     }
     public void LoadSettings() // Fetches settings to load them.
     {
+        audioMenu.SetActive(true);
+        gameMenu.SetActive(true);
         // Controls Settings
         keybinds._InputLeft = SettingsData.Instance._InputLeft;
         keybinds._InputRight = SettingsData.Instance._InputRight;
@@ -97,7 +99,6 @@ public class SettingsMenuUIHandler : MonoBehaviour
 
         // Audio Settings
         // Tells audio sliders to load their settings.
-        audioMenu.SetActive(true);
         GameObject[] audioMenuItems = GameObject.FindGameObjectsWithTag("AudioMenu");
         int index = 0;
         while (index <= 3)
@@ -105,9 +106,12 @@ public class SettingsMenuUIHandler : MonoBehaviour
             audioMenuItems[index].SendMessage("LoadSettings");
             index += 1;
         }
-        audioMenu.SetActive(false);
+        
 
         // Game Settings
         gameSettings._RunInBackground = SettingsData.Instance._RunInBackground;
+        
+        gameMenu.SetActive(false);
+        audioMenu.SetActive(false);
     }
 }
