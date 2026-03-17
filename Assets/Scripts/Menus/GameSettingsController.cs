@@ -19,7 +19,7 @@ public class GameSettingsController : MonoBehaviour
             //case 0 taken by Up To Jump in controls menu
             case(1): // Run in background
                 _RunInBackground = !_RunInBackground;
-                UnityEditor.PlayerSettings.runInBackground = !UnityEditor.PlayerSettings.runInBackground;
+                UnityEditor.PlayerSettings.runInBackground = _RunInBackground;
                 break;
         }
     }

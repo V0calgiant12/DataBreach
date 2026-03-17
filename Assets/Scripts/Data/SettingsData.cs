@@ -89,7 +89,7 @@ public class SettingsData : MonoBehaviour
             _DialogueVolume = data._DialogueVolume;
             
             _RunInBackground = data._RunInBackground;
-            UnityEditor.PlayerSettings.runInBackground = !_RunInBackground;
+            UnityEditor.PlayerSettings.runInBackground = _RunInBackground;
         }
     }
 }
