@@ -188,7 +188,6 @@ GameObject:
   - component: {fileID: 486369393}
   - component: {fileID: 486369392}
   - component: {fileID: 486369391}
-  - component: {fileID: 486369390}
   m_Layer: 0
   m_Name: BasicPlayer
   m_TagString: Untagged
@@ -196,20 +195,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &486369390
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 486369389}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8817e07ac801a1745859f2577d0af90c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::BasicPlayerController
-  BasicPlayer: {fileID: 486369389}
-  BasicRb: {fileID: 486369391}
 --- !u!50 &486369391
 Rigidbody2D:
   serializedVersion: 5
