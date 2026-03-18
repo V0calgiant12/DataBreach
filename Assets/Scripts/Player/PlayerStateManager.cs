@@ -9,15 +9,17 @@ public class PlayerStateManager : MonoBehaviour
     PlayerSprinting SprintingState = new PlayerSprinting();
     PlayerWalking WalkingState = new PlayerWalking();
     //11:42 https://www.youtube.com/watch?v=Vt8aZDPzRjI
-    public override void EnterState(PlayerStateManager player) 
+    void Start()
     {
-
+        currentState = IdleState;
+        currentState.EnterState(this);
+        Debug.Log("Player Idle / Idle State");
     }
-    public override void UpdateState(PlayerStateManager player)
+    void Update()
     {
-
+        
     }
-    public override void OnCollisionEnter(PlayerStateManager player, Collision collision) 
+    void SwitchState(PlayerAbstract state)
     {
         
     }
