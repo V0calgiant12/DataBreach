@@ -1,4 +1,6 @@
 using UnityEngine;
+using UnityEditor;
+using UnityEngine.CoreModule;
 
 public class GameSettingsController : MonoBehaviour
 {
@@ -20,6 +22,32 @@ public class GameSettingsController : MonoBehaviour
             case(1): // Run in background
                 _RunInBackground = !_RunInBackground;
                 UnityEditor.PlayerSettings.runInBackground = _RunInBackground;
+                break;
+        }
+    }
+    private void SetFullscreenMode(int mode)
+    {
+        switch(mode){
+            case(0):
+                Screen.fullScreenMode = FullscreenMode.ExclusiveFullScreen; 
+                break;
+            case(1):
+                Screen.fullScreenMode = FullscreenMode.FullScreenWindow; 
+                break;
+            case(2):
+                Screen.fullScreenMode = FullscreenMode.MaximizedWindow; 
+                break;
+            case(3):
+                Screen.fullScreenMode = FullscreenMode.Windowed; 
+                break;
+        }
+    }
+    public void DropdownSetting(SettingDropdownData data)
+    {
+        switch (data._DropdownID)
+        {
+            case(0):
+                UnityEditor.PlayerSettings.fullScreenMode;
                 break;
         }
     }

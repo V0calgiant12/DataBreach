@@ -28,6 +28,7 @@ public class SettingsData : MonoBehaviour
     public float _DialogueVolume;
     [Header("Game")]
     public bool _RunInBackground = true;
+    public int _Fullscreen = 0;
     
     private void Awake()
     {
@@ -115,5 +116,5 @@ class SaveSettings // This class quite literally just stores variables so they c
     public float _DialogueVolume;
     [Header("Game")]
     public bool _RunInBackground = true;
-    
+    public int _Fullscreen = 0;
 }
