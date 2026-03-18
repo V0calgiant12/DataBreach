@@ -16,7 +16,7 @@ public class PlayerStateManager : MonoBehaviour
     }
     void Update()
     {
-        
+        currentState.UpdateState(this);
     }
     public void SwitchState(PlayerAbstract state)
     {
