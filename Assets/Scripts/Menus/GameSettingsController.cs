@@ -1,7 +1,4 @@
 using UnityEngine;
-using UnityEditor;
-using UnityEngine.CoreModule;
-
 public class GameSettingsController : MonoBehaviour
 {
     [SerializeField] private GameObject gameMenu;
@@ -21,7 +18,7 @@ public class GameSettingsController : MonoBehaviour
             //case 0 taken by Up To Jump in controls menu
             case(1): // Run in background
                 _RunInBackground = !_RunInBackground;
-                UnityEditor.PlayerSettings.runInBackground = _RunInBackground;
+                Application.runInBackground = _RunInBackground;
                 break;
         }
     }
@@ -29,25 +26,26 @@ public class GameSettingsController : MonoBehaviour
     {
         switch(mode){
             case(0):
-                Screen.fullScreenMode = FullscreenMode.ExclusiveFullScreen; 
+                Screen.fullScreenMode = FullScreenMode.FullScreenWindow;
                 break;
             case(1):
-                Screen.fullScreenMode = FullscreenMode.FullScreenWindow; 
+                Screen.fullScreenMode = FullScreenMode.ExclusiveFullScreen; 
                 break;
             case(2):
-                Screen.fullScreenMode = FullscreenMode.MaximizedWindow; 
+                Screen.fullScreenMode = FullScreenMode.MaximizedWindow;
                 break;
             case(3):
-                Screen.fullScreenMode = FullscreenMode.Windowed; 
+                Screen.fullScreenMode = FullScreenMode.Windowed; 
                 break;
         }
+        Debug.Log(Screen.fullScreenMode);
     }
     public void DropdownSetting(SettingDropdownData data)
     {
         switch (data._DropdownID)
         {
             case(0):
-                UnityEditor.PlayerSettings.fullScreenMode;
+                SetFullscreenMode(data.dropdown.value);
                 break;
         }
     }

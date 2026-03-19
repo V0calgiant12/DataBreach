@@ -1,6 +1,5 @@
 using System.IO;
 using UnityEngine;
-using UnityEngine.Audio;
 
 public class SettingsData : MonoBehaviour
 {
@@ -90,7 +89,7 @@ public class SettingsData : MonoBehaviour
             _DialogueVolume = data._DialogueVolume;
             
             _RunInBackground = data._RunInBackground;
-            UnityEditor.PlayerSettings.runInBackground = _RunInBackground;
+            Application.runInBackground = _RunInBackground;
         }
     }
 }
