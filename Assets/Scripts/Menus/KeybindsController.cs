@@ -1,13 +1,6 @@
 using UnityEngine;
-using UnityEngine.EventSystems;
 using System.Collections;
-using UnityEngine.InputSystem.Controls;
-using Unity.VisualScripting;
-using System;
-using Mono.Cecil.Cil;
-using UnityEngine.InputSystem;
 using TMPro;
-using UnityEngine.UI;
 
 public class KeybindsController : MonoBehaviour
 {
