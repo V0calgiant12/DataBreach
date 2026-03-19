@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class PlayerStateManager : MonoBehaviour
 {
-    public PlayerAbstract currentState;
+    PlayerAbstract currentState;
     public PlayerAir AirState = new PlayerAir();
     public PlayerCrouching CrouchingState = new PlayerCrouching();
     public PlayerIdle IdleState = new PlayerIdle();
@@ -12,6 +12,7 @@ public class PlayerStateManager : MonoBehaviour
     void Start()
     {
         currentState = IdleState;
+        currentState.RunOnce(this);
         currentState.EnterState(this);
     }
     void Update()

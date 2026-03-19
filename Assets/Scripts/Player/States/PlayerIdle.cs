@@ -1,12 +1,17 @@
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class PlayerIdle : PlayerAbstract
 {
+    public override void RunOnce(PlayerStateManager player)
+    {
+        Setup();
+    }
     public override void EnterState(PlayerStateManager player)
     {
         Debug.Log("Player Idle / Idle State");
         GameObject Player = GameObject.Find("Player");
-        Debug.DrawRay(Player.transform.position, Vector2.down * JumpRaycastSize, Color.red);
+        PlayerRb = Player.GetComponent<Rigidbody2D>();
     }
     public override void UpdateState(PlayerStateManager player)
     {
@@ -32,7 +37,10 @@ public class PlayerIdle : PlayerAbstract
         if (Input.GetKeyDown(SettingsData.Instance._InputJump) && IsGrounded())
         {
             Debug.Log("jump");
+            PlayerRb.linearVelocity = new Vector2(PlayerRb.linearVelocityX,3f);
         }
+        Debug.Log(IsGrounded());
+        Debug.DrawRay(groundHit.point, groundHit.normal, Color.red);
     }
 
 }

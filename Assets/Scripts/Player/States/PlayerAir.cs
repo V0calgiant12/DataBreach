@@ -2,6 +2,10 @@ using UnityEngine;
 
 public class PlayerAir : PlayerAbstract
 {
+    public override void RunOnce(PlayerStateManager player)
+    {
+        
+    }
     public override void EnterState(PlayerStateManager player)
     {
         Debug.Log("Player is in the air / Air State");
