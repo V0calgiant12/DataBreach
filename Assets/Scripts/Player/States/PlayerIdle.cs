@@ -5,7 +5,8 @@ public class PlayerIdle : PlayerAbstract
     public override void EnterState(PlayerStateManager player)
     {
         Debug.Log("Player Idle / Idle State");
-        Debug.Log(SettingsData.Instance._InputAttack);
+        GameObject Player = GameObject.Find("Player");
+        Debug.DrawRay(Player.transform.position, Vector2.down * JumpRaycastSize, Color.red);
     }
     public override void UpdateState(PlayerStateManager player)
     {
@@ -28,13 +29,10 @@ public class PlayerIdle : PlayerAbstract
         {
             player.SwitchState(player.CrouchingState);
         }
+        if (Input.GetKeyDown(SettingsData.Instance._InputJump) && IsGrounded())
+        {
+            Debug.Log("jump");
+        }
     }
-    //public override void OnCollisionEnter(PlayerStateManager player)
-    //{
-        //Something with PlayerStateManager's OnCollisionEnter thingy is being annoying, i'll figure it out some other time. Take sudo code for now :)
-        //if (player colliding with ground) 
-        //{
-        //  player.SwitchState(player.AirState);
-        //}
-    //}
+
 }
