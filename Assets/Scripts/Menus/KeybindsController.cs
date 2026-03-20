@@ -1,6 +1,8 @@
 using UnityEngine;
 using System.Collections;
 using TMPro;
+using Unity.VisualScripting;
+using UnityEngine.UI;
 
 public class KeybindsController : MonoBehaviour
 {
@@ -17,6 +19,7 @@ public class KeybindsController : MonoBehaviour
     private KeyCode currentKeyDown;
     private string objectName;
     [SerializeField] private TextMeshProUGUI buttonText;
+    [SerializeField] private Button button;
     void Start() // Refreshes settings on load.
     {
         RefreshSettings();
@@ -29,6 +32,8 @@ public class KeybindsController : MonoBehaviour
     public void ListenForKey(SettingsButtonData data) // Initial function called when a button is pressed for rebinding. Has button data that is unique to each button.
     {
         buttonText = data._TextMesh;
+        button = data.GetComponent<Button>();
+        button.interactable = false;
         StartCoroutine(StartListeningForKey(data._SettingID));
     }
     private IEnumerator StartListeningForKey(int inputNumber) // Listens for the next key to be pressed and acts accordingly when it does.
@@ -65,6 +70,8 @@ public class KeybindsController : MonoBehaviour
                 break;
         }
         buttonText.text = "" + currentKeyDown;
+        //yield return new WaitUntil(()=> )); wait until mouse up
+        button.interactable = true;
     }
     public void ToggleSetting(SettingsToggleData data) // Handles when a setting is toggled
     {
