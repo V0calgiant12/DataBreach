@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 public class GameSettingsController : MonoBehaviour
@@ -5,6 +6,7 @@ public class GameSettingsController : MonoBehaviour
     [SerializeField] private GameObject gameMenu;
     [Header("Toggles")]
     public bool _RunInBackground = true;
+    public bool _ToggleSprint = false;
     public int _Fullscreen;
     public float _CameraZoom;
     public float _PlayerHue;
@@ -44,7 +46,6 @@ public class GameSettingsController : MonoBehaviour
                 Screen.fullScreenMode = FullScreenMode.Windowed; 
                 break;
         }
-        Debug.Log(Screen.fullScreenMode);
     }
     public void DropdownSetting(SettingDropdownData data)
     {
@@ -52,6 +53,9 @@ public class GameSettingsController : MonoBehaviour
         {
             case(0):
                 SetFullscreenMode(data.dropdown.value);
+                break;
+            case(1):
+                _ToggleSprint = data.dropdown.value == 1;
                 break;
         }
     }

@@ -80,6 +80,7 @@ public class SettingsMenuUIHandler : MonoBehaviour
 
         // Game Settings
         SettingsData.Instance._RunInBackground = gameSettings._RunInBackground;
+        SettingsData.Instance._ToggleSprint = gameSettings._ToggleSprint;
         SettingsData.Instance._CameraZoom = gameSettings._CameraZoom;
         SettingsData.Instance._PlayerHue = gameSettings._PlayerHue;
         SettingsData.Instance._PlayerSaturation = gameSettings._PlayerSaturation;
@@ -115,6 +116,7 @@ public class SettingsMenuUIHandler : MonoBehaviour
 
         // Game Settings
         gameSettings._RunInBackground = SettingsData.Instance._RunInBackground;
+        gameSettings._ToggleSprint = SettingsData.Instance._ToggleSprint;
         gameSettings._CameraZoom = SettingsData.Instance._CameraZoom;
         gameSettings._Fullscreen = SettingsData.Instance._Fullscreen;
         gameSettings._PlayerHue = SettingsData.Instance._PlayerHue;

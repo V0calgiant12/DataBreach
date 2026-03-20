@@ -1,5 +1,6 @@
 using UnityEngine;
 using TMPro;
+using System;
 
 public class SettingDropdownData : MonoBehaviour
 {
@@ -11,6 +12,9 @@ public class SettingDropdownData : MonoBehaviour
         {
             case (0):
                 dropdown.value = SettingsData.Instance._Fullscreen;
+                break;
+            case (1):
+                dropdown.value = Convert.ToInt16(SettingsData.Instance._ToggleSprint);
                 break;
         }
     }

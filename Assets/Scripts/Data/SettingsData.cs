@@ -27,6 +27,7 @@ public class SettingsData : MonoBehaviour
     public float _DialogueVolume = 0.5f;
     [Header("Game")]
     public bool _RunInBackground = true;
+    public bool _ToggleSprint = false;
     public float _CameraZoom = 10;
     public float _PlayerHue = 0;
     public float _PlayerSaturation = 1;
@@ -64,6 +65,7 @@ public class SettingsData : MonoBehaviour
         data._DialogueVolume = _DialogueVolume;
 
         data._RunInBackground = _RunInBackground;
+        data._ToggleSprint = _ToggleSprint;
         data._CameraZoom = _CameraZoom;
         data._PlayerHue = _PlayerHue;
         data._PlayerSaturation = _PlayerSaturation;
@@ -99,6 +101,7 @@ public class SettingsData : MonoBehaviour
             _DialogueVolume = data._DialogueVolume;
             
             _RunInBackground = data._RunInBackground;
+            _ToggleSprint = data._ToggleSprint;
             _CameraZoom = data._CameraZoom;
             _PlayerHue = data._PlayerHue;
             _PlayerSaturation = data._PlayerSaturation;
@@ -164,6 +167,7 @@ class SaveSettings // This class quite literally just stores variables so they c
     public float _DialogueVolume = 0.5f;
     [Header("Game")]
     public bool _RunInBackground = true;
+    public bool _ToggleSprint = false;
     public float _CameraZoom = 10;
     public float _PlayerHue = 0;
     public float _PlayerSaturation = 1;
