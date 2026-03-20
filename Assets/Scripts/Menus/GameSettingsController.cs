@@ -4,6 +4,8 @@ public class GameSettingsController : MonoBehaviour
     [SerializeField] private GameObject gameMenu;
     [Header("Toggles")]
     public bool _RunInBackground = true;
+    public int _Fullscreen;
+    public float _CameraZoom;
 
     void Start() // Refreshes settings on load.
     {
@@ -22,7 +24,7 @@ public class GameSettingsController : MonoBehaviour
                 break;
         }
     }
-    private void SetFullscreenMode(int mode)
+    public void SetFullscreenMode(int mode)
     {
         switch(mode){
             case(0):

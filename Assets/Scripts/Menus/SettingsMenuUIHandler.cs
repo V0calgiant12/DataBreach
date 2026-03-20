@@ -110,6 +110,9 @@ public class SettingsMenuUIHandler : MonoBehaviour
 
         // Game Settings
         gameSettings._RunInBackground = SettingsData.Instance._RunInBackground;
+        gameSettings._CameraZoom = SettingsData.Instance._CameraZoom;
+        gameSettings._Fullscreen = SettingsData.Instance._Fullscreen;
+        gameSettings.SetFullscreenMode(SettingsData.Instance._Fullscreen);
         
         gameMenu.SetActive(false);
         audioMenu.SetActive(false);
