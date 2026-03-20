@@ -16,6 +16,7 @@ public class SettingsMenuUIHandler : MonoBehaviour
     [SerializeField] private GameObject videoMenu;
     [SerializeField] private KeybindsController keybinds; // The Keybinds Controller, has all settings under the controls tab in it.
     [SerializeField] private GameSettingsController gameSettings; // The Game Settings Controller, has all settings under the game tab in it.
+    [SerializeField] private VideoSettingsController videoSettings; // The Video Settings Controller, has all settings under the video tab in it.
     void Start() // Loads settings on load, just incase the player doesn't go into the settings before playing.
     {
         SettingsData.Instance.LoadSettings();
@@ -98,7 +99,9 @@ public class SettingsMenuUIHandler : MonoBehaviour
         SettingsData.Instance._PlayerHue = gameSettings._PlayerHue;
         SettingsData.Instance._PlayerSaturation = gameSettings._PlayerSaturation;
         SettingsData.Instance._PlayerValue = gameSettings._PlayerValue;
-        SettingsData.Instance._Fullscreen = gameSettings._Fullscreen;
+
+        // Video Settings
+        SettingsData.Instance._Fullscreen = videoSettings._Fullscreen;
     }
     public void LoadSettings() // Fetches settings to load them.
     {
@@ -132,11 +135,13 @@ public class SettingsMenuUIHandler : MonoBehaviour
         gameSettings._RunInBackground = SettingsData.Instance._RunInBackground;
         gameSettings._ToggleSprint = SettingsData.Instance._ToggleSprint;
         gameSettings._CameraZoom = SettingsData.Instance._CameraZoom;
-        gameSettings._Fullscreen = SettingsData.Instance._Fullscreen;
         gameSettings._PlayerHue = SettingsData.Instance._PlayerHue;
         gameSettings._PlayerSaturation = SettingsData.Instance._PlayerSaturation;
         gameSettings._PlayerValue = SettingsData.Instance._PlayerValue;
-        gameSettings.SetFullscreenMode(SettingsData.Instance._Fullscreen);
+        
+        // Video Settings
+        videoSettings._Fullscreen = SettingsData.Instance._Fullscreen;
+        videoSettings.SetFullscreenMode(SettingsData.Instance._Fullscreen);
         
         gameMenu.SetActive(false);
         audioMenu.SetActive(false);

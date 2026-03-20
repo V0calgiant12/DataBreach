@@ -7,7 +7,7 @@ public class GameSettingsController : MonoBehaviour
     [Header("Toggles")]
     public bool _RunInBackground = true;
     public bool _ToggleSprint = false;
-    public int _Fullscreen;
+    [Header("Values")]
     public float _CameraZoom;
     public float _PlayerHue;
     public float _PlayerSaturation;
@@ -30,30 +30,10 @@ public class GameSettingsController : MonoBehaviour
                 break;
         }
     }
-    public void SetFullscreenMode(int mode)
-    {
-        switch(mode){
-            case(0):
-                Screen.fullScreenMode = FullScreenMode.FullScreenWindow;
-                break;
-            case(1):
-                Screen.fullScreenMode = FullScreenMode.ExclusiveFullScreen; 
-                break;
-            case(2):
-                Screen.fullScreenMode = FullScreenMode.MaximizedWindow;
-                break;
-            case(3):
-                Screen.fullScreenMode = FullScreenMode.Windowed; 
-                break;
-        }
-    }
     public void DropdownSetting(SettingDropdownData data)
     {
         switch (data._DropdownID)
         {
-            case(0):
-                SetFullscreenMode(data.dropdown.value);
-                break;
             case(1):
                 _ToggleSprint = data.dropdown.value == 1;
                 break;

@@ -32,6 +32,7 @@ public class SettingsData : MonoBehaviour
     public float _PlayerHue = 0;
     public float _PlayerSaturation = 1;
     public float _PlayerValue = 1;
+    [Header("Video")]
     public int _Fullscreen = 0;
     
     private void Awake()
@@ -70,6 +71,7 @@ public class SettingsData : MonoBehaviour
         data._PlayerHue = _PlayerHue;
         data._PlayerSaturation = _PlayerSaturation;
         data._PlayerValue = _PlayerValue;
+        
         data._Fullscreen = _Fullscreen;
 
         string json = JsonUtility.ToJson(data);
@@ -106,7 +108,9 @@ public class SettingsData : MonoBehaviour
             _PlayerHue = data._PlayerHue;
             _PlayerSaturation = data._PlayerSaturation;
             _PlayerValue = data._PlayerValue;
+
             _Fullscreen = data._Fullscreen;
+            
             Application.runInBackground = _RunInBackground;
             Debug.Log("Loaded settings from file!");
         }
@@ -140,6 +144,7 @@ public class SettingsData : MonoBehaviour
         _PlayerHue = 0;
         _PlayerSaturation = 1;
         _PlayerValue = 1;
+
         _Fullscreen = 0;
         
         Application.runInBackground = _RunInBackground;
@@ -172,5 +177,6 @@ class SaveSettings // This class quite literally just stores variables so they c
     public float _PlayerHue = 0;
     public float _PlayerSaturation = 1;
     public float _PlayerValue = 1;
+    [Header("Video")]
     public int _Fullscreen = 0;
 }
