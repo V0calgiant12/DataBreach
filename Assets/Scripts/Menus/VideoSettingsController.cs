@@ -35,6 +35,7 @@ public class VideoSettingsController : MonoBehaviour
         switch (data._DropdownID)
         {
             case(0):
+                _Fullscreen = data.dropdown.value;
                 SetFullscreenMode(data.dropdown.value);
                 break;
         }
