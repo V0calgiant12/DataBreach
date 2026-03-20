@@ -27,7 +27,10 @@ public class SettingsData : MonoBehaviour
     public float _DialogueVolume = 0.5f;
     [Header("Game")]
     public bool _RunInBackground = true;
-    public float _CameraZoom = 0.5f;
+    public float _CameraZoom = 10;
+    public float _PlayerHue;
+    public float _PlayerSaturation;
+    public float _PlayerValue;
     public int _Fullscreen = 0;
     
     private void Awake()
@@ -61,6 +64,8 @@ public class SettingsData : MonoBehaviour
         data._DialogueVolume = _DialogueVolume;
 
         data._RunInBackground = _RunInBackground;
+        data._CameraZoom = _CameraZoom;
+        data._Fullscreen = _Fullscreen;
 
         string json = JsonUtility.ToJson(data);
         File.WriteAllText(Application.persistentDataPath + "/settings.json", json);
@@ -122,7 +127,7 @@ public class SettingsData : MonoBehaviour
         _DialogueVolume = 0.5f;
 
         _RunInBackground = true;
-        _CameraZoom = 0.5f;
+        _CameraZoom = 10;
         _Fullscreen = 0;
         
         Application.runInBackground = _RunInBackground;
@@ -150,6 +155,9 @@ class SaveSettings // This class quite literally just stores variables so they c
     public float _DialogueVolume = 0.5f;
     [Header("Game")]
     public bool _RunInBackground = true;
-    public float _CameraZoom = 0.5f;
+    public float _CameraZoom = 10;
+    public float _PlayerHue;
+    public float _PlayerSaturation;
+    public float _PlayerValue;
     public int _Fullscreen = 0;
 }

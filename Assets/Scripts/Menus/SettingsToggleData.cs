@@ -3,9 +3,9 @@ using UnityEngine.UI;
 
 public class SettingsToggleData : MonoBehaviour
 {
-    [SerializeField] private Toggle toggle;
+    public Toggle toggle;
     public int _ToggleID;
-    public void RefreshVisuals() // Refreshes the toggle state to be up to date witht he saves
+    public void RefreshVisuals() // Refreshes the toggle state to be up to date with the saves
     {
         switch (_ToggleID)
         {

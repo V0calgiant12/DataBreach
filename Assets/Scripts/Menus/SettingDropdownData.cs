@@ -3,7 +3,6 @@ using TMPro;
 
 public class SettingDropdownData : MonoBehaviour
 {
-    
     public TMP_Dropdown dropdown;
     public int _DropdownID;
     public void RefreshVisuals() // Refreshes the toggle state to be up to date witht he saves

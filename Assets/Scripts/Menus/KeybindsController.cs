@@ -71,11 +71,11 @@ public class KeybindsController : MonoBehaviour
         switch(data._ToggleID)
         {
             case(0): // Up to jump
-                _UpToJump = !_UpToJump;
+                _UpToJump = data.toggle.isOn;
                 break;
         }
     }
-    private void RefreshSettings() // Gets the saved settings and tells all other setting objects with the tag "ControlsMenu" to refresh their visuals, which is handled elsewhere.
+    public void RefreshSettings() // Gets the saved settings and tells all other setting objects with the tag "ControlsMenu" to refresh their visuals, which is handled elsewhere.
     {
         _InputLeft = SettingsData.Instance._InputLeft;
         _InputRight = SettingsData.Instance._InputRight;

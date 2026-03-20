@@ -80,6 +80,8 @@ public class SettingsMenuUIHandler : MonoBehaviour
 
         // Game Settings
         SettingsData.Instance._RunInBackground = gameSettings._RunInBackground;
+        SettingsData.Instance._CameraZoom = gameSettings._CameraZoom;
+        SettingsData.Instance._Fullscreen = gameSettings._Fullscreen;
     }
     public void LoadSettings() // Fetches settings to load them.
     {
