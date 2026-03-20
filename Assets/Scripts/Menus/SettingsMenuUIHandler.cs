@@ -81,6 +81,9 @@ public class SettingsMenuUIHandler : MonoBehaviour
         // Game Settings
         SettingsData.Instance._RunInBackground = gameSettings._RunInBackground;
         SettingsData.Instance._CameraZoom = gameSettings._CameraZoom;
+        SettingsData.Instance._PlayerHue = gameSettings._PlayerHue;
+        SettingsData.Instance._PlayerSaturation = gameSettings._PlayerSaturation;
+        SettingsData.Instance._PlayerValue = gameSettings._PlayerValue;
         SettingsData.Instance._Fullscreen = gameSettings._Fullscreen;
     }
     public void LoadSettings() // Fetches settings to load them.
@@ -114,6 +117,9 @@ public class SettingsMenuUIHandler : MonoBehaviour
         gameSettings._RunInBackground = SettingsData.Instance._RunInBackground;
         gameSettings._CameraZoom = SettingsData.Instance._CameraZoom;
         gameSettings._Fullscreen = SettingsData.Instance._Fullscreen;
+        gameSettings._PlayerHue = SettingsData.Instance._PlayerHue;
+        gameSettings._PlayerSaturation = SettingsData.Instance._PlayerSaturation;
+        gameSettings._PlayerValue = SettingsData.Instance._PlayerValue;
         gameSettings.SetFullscreenMode(SettingsData.Instance._Fullscreen);
         
         gameMenu.SetActive(false);

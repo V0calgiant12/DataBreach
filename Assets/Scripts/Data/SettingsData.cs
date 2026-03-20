@@ -28,9 +28,9 @@ public class SettingsData : MonoBehaviour
     [Header("Game")]
     public bool _RunInBackground = true;
     public float _CameraZoom = 10;
-    public float _PlayerHue;
-    public float _PlayerSaturation;
-    public float _PlayerValue;
+    public float _PlayerHue = 0;
+    public float _PlayerSaturation = 1;
+    public float _PlayerValue = 1;
     public int _Fullscreen = 0;
     
     private void Awake()
@@ -65,6 +65,9 @@ public class SettingsData : MonoBehaviour
 
         data._RunInBackground = _RunInBackground;
         data._CameraZoom = _CameraZoom;
+        data._PlayerHue = _PlayerHue;
+        data._PlayerSaturation = _PlayerSaturation;
+        data._PlayerValue = _PlayerValue;
         data._Fullscreen = _Fullscreen;
 
         string json = JsonUtility.ToJson(data);
@@ -97,6 +100,9 @@ public class SettingsData : MonoBehaviour
             
             _RunInBackground = data._RunInBackground;
             _CameraZoom = data._CameraZoom;
+            _PlayerHue = data._PlayerHue;
+            _PlayerSaturation = data._PlayerSaturation;
+            _PlayerValue = data._PlayerValue;
             _Fullscreen = data._Fullscreen;
             Application.runInBackground = _RunInBackground;
             Debug.Log("Loaded settings from file!");
@@ -128,6 +134,9 @@ public class SettingsData : MonoBehaviour
 
         _RunInBackground = true;
         _CameraZoom = 10;
+        _PlayerHue = 0;
+        _PlayerSaturation = 1;
+        _PlayerValue = 1;
         _Fullscreen = 0;
         
         Application.runInBackground = _RunInBackground;
@@ -156,8 +165,8 @@ class SaveSettings // This class quite literally just stores variables so they c
     [Header("Game")]
     public bool _RunInBackground = true;
     public float _CameraZoom = 10;
-    public float _PlayerHue;
-    public float _PlayerSaturation;
-    public float _PlayerValue;
+    public float _PlayerHue = 0;
+    public float _PlayerSaturation = 1;
+    public float _PlayerValue = 1;
     public int _Fullscreen = 0;
 }

@@ -13,6 +13,15 @@ public class SettingSliderData : MonoBehaviour
             case (0):
                 slider.value = SettingsData.Instance._CameraZoom;
                 break;
+            case (1):
+                slider.value = SettingsData.Instance._PlayerHue;
+                break;
+            case (2):
+                slider.value = SettingsData.Instance._PlayerSaturation;
+                break;
+            case (3):
+                slider.value = SettingsData.Instance._PlayerValue;
+                break;
         }
     }
 }
