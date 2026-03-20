@@ -34,6 +34,7 @@ public class SettingsData : MonoBehaviour
     public float _PlayerValue = 1;
     [Header("Video")]
     public int _Fullscreen = 0;
+    public int _Resolution = 2;
     
     private void Awake()
     {
@@ -73,6 +74,7 @@ public class SettingsData : MonoBehaviour
         data._PlayerValue = _PlayerValue;
         
         data._Fullscreen = _Fullscreen;
+        data._Resolution = _Resolution;
 
         string json = JsonUtility.ToJson(data);
         File.WriteAllText(Application.persistentDataPath + "/settings.json", json);
@@ -110,6 +112,7 @@ public class SettingsData : MonoBehaviour
             _PlayerValue = data._PlayerValue;
 
             _Fullscreen = data._Fullscreen;
+            _Resolution = data._Resolution;
             
             Application.runInBackground = _RunInBackground;
             Debug.Log("Loaded settings from file!");
@@ -146,6 +149,7 @@ public class SettingsData : MonoBehaviour
         _PlayerValue = 1;
 
         _Fullscreen = 0;
+        _Resolution = 2;
         
         Application.runInBackground = _RunInBackground;
     }
@@ -179,4 +183,5 @@ class SaveSettings // This class quite literally just stores variables so they c
     public float _PlayerValue = 1;
     [Header("Video")]
     public int _Fullscreen = 0;
+    public int _Resolution = 2;
 }

@@ -102,6 +102,7 @@ public class SettingsMenuUIHandler : MonoBehaviour
 
         // Video Settings
         SettingsData.Instance._Fullscreen = videoSettings._Fullscreen;
+        SettingsData.Instance._Resolution = videoSettings._Resolution;
     }
     public void LoadSettings() // Fetches settings to load them.
     {
@@ -141,7 +142,10 @@ public class SettingsMenuUIHandler : MonoBehaviour
         
         // Video Settings
         videoSettings._Fullscreen = SettingsData.Instance._Fullscreen;
+        videoSettings._Resolution = SettingsData.Instance._Resolution;
+        
         videoSettings.SetFullscreenMode(SettingsData.Instance._Fullscreen);
+        videoSettings.SetResolution(SettingsData.Instance._Resolution);
         
         gameMenu.SetActive(false);
         audioMenu.SetActive(false);
