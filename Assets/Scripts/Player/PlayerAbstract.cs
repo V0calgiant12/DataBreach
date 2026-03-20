@@ -10,7 +10,7 @@ public abstract class PlayerAbstract
 
     public Vector2 PlayerVelocity;
     public Vector2 OffsetVelocity;
-    public Vector2 JumpRaycastSize;
+    public Vector2 JumpBoxcastSize = new Vector2(1, 0.25f);
     public LayerMask Ground;
     public Rigidbody2D PlayerRb;
     public GameObject Player;
@@ -29,6 +29,6 @@ public abstract class PlayerAbstract
     public bool IsGrounded()
     {
         Debug.Log("Checking for ground");
-        return groundHit = Physics2D.Raycast(new Vector2(Player.transform.position.x,Player.transform.position.y), Vector2.down, 1.2f, Ground);
+        return groundHit = Physics2D.BoxCast(new Vector2(Player.transform.position.x, Player.transform.position.y -1), JumpBoxcastSize, 0f, Vector2.down, 1.2f, Ground);
     }
 }

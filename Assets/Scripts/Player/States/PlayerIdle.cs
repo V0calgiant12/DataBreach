@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -40,7 +41,6 @@ public class PlayerIdle : PlayerAbstract
             PlayerRb.linearVelocity = new Vector2(PlayerRb.linearVelocityX,3f);
         }
         Debug.Log(IsGrounded());
-        Debug.DrawRay(groundHit.point, groundHit.normal, Color.red);
     }
 
 }
