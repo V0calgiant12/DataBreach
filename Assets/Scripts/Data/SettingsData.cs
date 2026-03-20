@@ -21,12 +21,13 @@ public class SettingsData : MonoBehaviour
     public KeyCode _InputInteract = KeyCode.C; // 8
     public bool _UpToJump = false;
     [Header("Audio")]
-    public float _MasterVolume;
-    public float _MusicVolume;
-    public float _EffectsVolume;
-    public float _DialogueVolume;
+    public float _MasterVolume = 0.5f;
+    public float _MusicVolume = 0.5f;
+    public float _EffectsVolume = 0.5f;
+    public float _DialogueVolume = 0.5f;
     [Header("Game")]
     public bool _RunInBackground = true;
+    public float _CameraZoom = 0.5f;
     public int _Fullscreen = 0;
     
     private void Awake()
@@ -63,6 +64,7 @@ public class SettingsData : MonoBehaviour
 
         string json = JsonUtility.ToJson(data);
         File.WriteAllText(Application.persistentDataPath + "/settings.json", json);
+        Debug.Log("Settings saved to file!");
     }
     public void LoadSettings() // Loads data from the JSON file.
     {
@@ -89,8 +91,41 @@ public class SettingsData : MonoBehaviour
             _DialogueVolume = data._DialogueVolume;
             
             _RunInBackground = data._RunInBackground;
+            _CameraZoom = data._CameraZoom;
+            _Fullscreen = data._Fullscreen;
             Application.runInBackground = _RunInBackground;
+            Debug.Log("Loaded settings from file!");
         }
+        else
+        {
+            NoFile();
+        }
+    }
+    private void NoFile()
+    {
+        Debug.Log("No settings file found! Falling back to default settings.");
+        
+        _InputLeft = KeyCode.LeftArrow;
+        _InputRight = KeyCode.RightArrow;
+        _InputUp = KeyCode.UpArrow;
+        _InputDown = KeyCode.DownArrow;
+        _InputJump = KeyCode.Space;
+        _InputSprint = KeyCode.X;
+        _InputAttack = KeyCode.Z;
+        _InputParry = KeyCode.V;
+        _InputInteract = KeyCode.C;
+        _UpToJump = false;
+        
+        _MasterVolume = 0.5f;
+        _MusicVolume = 0.5f;
+        _EffectsVolume = 0.5f;
+        _DialogueVolume = 0.5f;
+
+        _RunInBackground = true;
+        _CameraZoom = 0.5f;
+        _Fullscreen = 0;
+        
+        Application.runInBackground = _RunInBackground;
     }
 }
 
@@ -109,11 +144,12 @@ class SaveSettings // This class quite literally just stores variables so they c
     public KeyCode _InputInteract = KeyCode.C; // 8
     public bool _UpToJump = false;
     [Header("Audio")]
-    public float _MasterVolume;
-    public float _MusicVolume;
-    public float _EffectsVolume;
-    public float _DialogueVolume;
+    public float _MasterVolume = 0.5f;
+    public float _MusicVolume = 0.5f;
+    public float _EffectsVolume = 0.5f;
+    public float _DialogueVolume = 0.5f;
     [Header("Game")]
     public bool _RunInBackground = true;
+    public float _CameraZoom = 0.5f;
     public int _Fullscreen = 0;
 }
