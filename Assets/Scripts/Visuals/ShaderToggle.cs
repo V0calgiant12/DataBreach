@@ -1,9 +1,12 @@
 using UnityEngine;
 using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
+
 
 public class ShaderToggle : MonoBehaviour
 {
     [SerializeField] private Material shaderMaterial;
+    [SerializeField] private RenderFeatureToggler renderFeatureToggler;
     public GlobalKeyword pixelShaderDisabled;
     void Start()
     {
@@ -11,6 +14,7 @@ public class ShaderToggle : MonoBehaviour
         if (SettingsData.Instance._Pixelation)
         {
             Debug.Log("Shader On");
+            renderFeatureToggler.UpdateRenderFeatures();
             Shader.DisableKeyword(pixelShaderDisabled);
         }
         else
