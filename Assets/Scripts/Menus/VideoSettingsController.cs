@@ -7,6 +7,10 @@ public class VideoSettingsController : MonoBehaviour
     [SerializeField] private GameObject videoMenu;
     public int _Fullscreen;
     public int _Resolution;
+    public bool _Bloom;
+    public bool _ChromaticAberration;
+    public bool _Vignette;
+    public bool _Pixelation;
     
     void Start() // Refreshes settings on load.
     {
@@ -76,6 +80,26 @@ public class VideoSettingsController : MonoBehaviour
             case(2):
                 _Resolution = data.dropdown.value;
                 SetResolution(data.dropdown.value);
+                break;
+        }
+    }
+    public void ToggleSetting(SettingsToggleData data)
+    {
+        switch(data._ToggleID)
+        {
+            //case 0 taken by Up To Jump in Controls menu
+            //case 1 taken by Run In Background in Game menu
+            case(2): // Run in background
+                _Bloom = data.toggle.isOn;
+                break;
+            case(3): // Run in background
+                _ChromaticAberration = data.toggle.isOn;
+                break;
+            case(4): // Run in background
+                _Vignette = data.toggle.isOn;
+                break;
+            case(5): // Run in background
+                _Pixelation = data.toggle.isOn;
                 break;
         }
     }

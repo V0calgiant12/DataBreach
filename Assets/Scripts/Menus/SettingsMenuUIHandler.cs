@@ -103,6 +103,10 @@ public class SettingsMenuUIHandler : MonoBehaviour
         // Video Settings
         SettingsData.Instance._Fullscreen = videoSettings._Fullscreen;
         SettingsData.Instance._Resolution = videoSettings._Resolution;
+        SettingsData.Instance._Bloom = videoSettings._Bloom;
+        SettingsData.Instance._ChromaticAberration = videoSettings._ChromaticAberration;
+        SettingsData.Instance._Vignette = videoSettings._Vignette;
+        SettingsData.Instance._Pixelation = videoSettings._Pixelation;
     }
     public void LoadSettings() // Fetches settings to load them.
     {
@@ -143,6 +147,10 @@ public class SettingsMenuUIHandler : MonoBehaviour
         // Video Settings
         videoSettings._Fullscreen = SettingsData.Instance._Fullscreen;
         videoSettings._Resolution = SettingsData.Instance._Resolution;
+        videoSettings._Bloom = SettingsData.Instance._Bloom;
+        videoSettings._ChromaticAberration = SettingsData.Instance._ChromaticAberration;
+        videoSettings._Vignette = SettingsData.Instance._Vignette;
+        videoSettings._Pixelation = SettingsData.Instance._Pixelation;
         
         videoSettings.SetFullscreenMode(SettingsData.Instance._Fullscreen);
         videoSettings.SetResolution(SettingsData.Instance._Resolution);

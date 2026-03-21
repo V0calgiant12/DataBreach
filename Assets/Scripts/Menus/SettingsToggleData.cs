@@ -15,6 +15,18 @@ public class SettingsToggleData : MonoBehaviour
             case (1):
                 toggle.isOn = SettingsData.Instance._RunInBackground;
                 break;
+            case (2):
+                toggle.isOn = SettingsData.Instance._Bloom;
+                break;
+            case (3):
+                toggle.isOn = SettingsData.Instance._ChromaticAberration;
+                break;
+            case (4):
+                toggle.isOn = SettingsData.Instance._Vignette;
+                break;
+            case (5):
+                toggle.isOn = SettingsData.Instance._Pixelation;
+                break;
         }
     }
 }

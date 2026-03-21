@@ -35,6 +35,10 @@ public class SettingsData : MonoBehaviour
     [Header("Video")]
     public int _Fullscreen = 0;
     public int _Resolution = 2;
+    public bool _Bloom;
+    public bool _ChromaticAberration;
+    public bool _Vignette;
+    public bool _Pixelation;
     
     private void Awake()
     {
@@ -75,6 +79,10 @@ public class SettingsData : MonoBehaviour
         
         data._Fullscreen = _Fullscreen;
         data._Resolution = _Resolution;
+        data._Bloom =_Bloom;
+        data._ChromaticAberration =_ChromaticAberration;
+        data._Vignette =_Vignette;
+        data._Pixelation =_Pixelation;
 
         string json = JsonUtility.ToJson(data);
         File.WriteAllText(Application.persistentDataPath + "/settings.json", json);
@@ -113,6 +121,10 @@ public class SettingsData : MonoBehaviour
 
             _Fullscreen = data._Fullscreen;
             _Resolution = data._Resolution;
+            _Bloom = data._Bloom;
+            _ChromaticAberration = data._ChromaticAberration;
+            _Vignette = data._Vignette;
+            _Pixelation = data._Pixelation;
             
             Application.runInBackground = _RunInBackground;
             Debug.Log("Loaded settings from file!");
@@ -150,6 +162,10 @@ public class SettingsData : MonoBehaviour
 
         _Fullscreen = 0;
         _Resolution = 2;
+        _Bloom = true;
+        _ChromaticAberration = true;
+        _Vignette = true;
+        _Pixelation = true;
         
         Application.runInBackground = _RunInBackground;
     }
@@ -184,4 +200,8 @@ class SaveSettings // This class quite literally just stores variables so they c
     [Header("Video")]
     public int _Fullscreen = 0;
     public int _Resolution = 2;
+    public bool _Bloom;
+    public bool _ChromaticAberration;
+    public bool _Vignette;
+    public bool _Pixelation;
 }
