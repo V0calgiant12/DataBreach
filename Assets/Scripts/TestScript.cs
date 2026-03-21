@@ -11,7 +11,7 @@ public class TestScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey(SettingsData.Instance._InputAttack))
+        if (Input.GetKey(SettingsData.Instance._InputUp))
         {
             transform.position = new Vector2(transform.position.x, transform.position.y + 0.05f);
         }
