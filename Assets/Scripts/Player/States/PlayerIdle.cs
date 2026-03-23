@@ -11,8 +11,6 @@ public class PlayerIdle : PlayerAbstract
     public override void EnterState(PlayerStateManager player)
     {
         Debug.Log("Player Idle / Idle State");
-        GameObject Player = GameObject.Find("Player");
-        PlayerRb = Player.GetComponent<Rigidbody2D>();
     }
     public override void UpdateState(PlayerStateManager player)
     {
@@ -37,8 +35,12 @@ public class PlayerIdle : PlayerAbstract
         }
         if (Input.GetKeyDown(SettingsData.Instance._InputJump) && IsGrounded())
         {
-            Debug.Log("jump");
-            PlayerRb.linearVelocity = new Vector2(PlayerRb.linearVelocityX,3f);
+            Debug.Log("jump from idle");
+            PlayerRb.linearVelocity = new Vector2(PlayerRb.linearVelocityX, 10f);
+        }
+        if (!groundHit)
+        {
+            player.SwitchState(player.AirState);
         }
         Debug.Log(IsGrounded());
     }

@@ -8,23 +8,22 @@ public class PlayerStateManager : MonoBehaviour
     public PlayerIdle IdleState = new PlayerIdle();
     public PlayerSprinting SprintingState = new PlayerSprinting();
     public PlayerWalking WalkingState = new PlayerWalking();
-    public GroundedUpdater GroundedUpdater;
     //11:42 https://www.youtube.com/watch?v=Vt8aZDPzRjI
     void Start()
     {
         currentState = IdleState;
-        currentState.RunOnce(this);
         currentState.EnterState(this);
+        currentState.RunOnce(this);
     }
     void Update()
     {
         currentState.UpdateState(this);
-        GroundedUpdater.GroundedUpdate();
-        
+        currentState.RunOnce(this);
     }
     public void SwitchState(PlayerAbstract state)
     {
         currentState = state;
         state.EnterState(this);
     }
+    
 }

@@ -17,7 +17,8 @@ public abstract class PlayerAbstract
     public RaycastHit2D groundHit;
     public float playerSpeed = 10f;
     public float raycastDistance;
-    public static PlayerAbstract Instance;
+    public bool fakeSprintToggle;
+    public bool fakeCrouchToggle;
     // video I used for this: https://www.youtube.com/watch?v=lbB64oWbhuc
     public void Setup() 
     {
@@ -25,10 +26,12 @@ public abstract class PlayerAbstract
         Ground = LayerMask.GetMask("Ground");
         Player = GameObject.Find("Player");
         PlayerRb = Player.GetComponent<Rigidbody2D>();
+        fakeCrouchToggle = false;
+        fakeSprintToggle = false;
     }
     public bool IsGrounded()
     {
         Debug.Log("Checking for ground");
-        return groundHit = Physics2D.BoxCast(new Vector2(Player.transform.position.x, Player.transform.position.y -1), JumpBoxcastSize, 0f, Vector2.down, 1.2f, Ground);
+        return groundHit = Physics2D.BoxCast(new Vector2(Player.transform.position.x, Player.transform.position.y - 1), JumpBoxcastSize, 0f, Vector2.down, 0.10f, Ground);
     }
 }
