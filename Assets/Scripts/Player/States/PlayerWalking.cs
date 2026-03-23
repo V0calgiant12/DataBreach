@@ -13,10 +13,22 @@ public class PlayerWalking : PlayerAbstract
     }
     public override void UpdateState(PlayerStateManager player)
     {
-        if (Input.GetKey(SettingsData.Instance._InputSprint))
+        if (fakeSprintToggle)
         {
-            player.SwitchState(player.SprintingState);
+            if (Input.GetKeyDown(SettingsData.Instance._InputSprint))
+            {
+                sprintToggler = true;
+                player.SwitchState(player.SprintingState);
+            }
         }
+        else
+        {
+            if (Input.GetKey(SettingsData.Instance._InputSprint))
+            {
+                player.SwitchState(player.SprintingState);
+            }
+        }
+        
         if (Input.GetKeyDown(SettingsData.Instance._InputJump) && IsGrounded())
         {
             Debug.Log("jump from walking");

@@ -18,16 +18,17 @@ public abstract class PlayerAbstract
     public float playerSpeed = 10f;
     public float raycastDistance;
     public bool fakeSprintToggle;
+    public bool sprintToggler;
     public bool fakeCrouchToggle;
     // video I used for this: https://www.youtube.com/watch?v=lbB64oWbhuc
     public void Setup() 
     {
-        Debug.Log("Setup");
         Ground = LayerMask.GetMask("Ground");
         Player = GameObject.Find("Player");
         PlayerRb = Player.GetComponent<Rigidbody2D>();
         fakeCrouchToggle = false;
-        fakeSprintToggle = false;
+        fakeSprintToggle = true;
+        sprintToggler = false;
     }
     public bool IsGrounded()
     {
