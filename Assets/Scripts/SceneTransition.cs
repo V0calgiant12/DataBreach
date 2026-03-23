@@ -30,6 +30,7 @@ public class SceneTransition : MonoBehaviour
         _Transition.SetTrigger("Transition");
         yield return new WaitForSeconds(1);
         #if UNITY_EDITOR
+            renderFeatureToggler.DisableRenderFeatures();
             EditorApplication.ExitPlaymode();
         #else
             Application.Quit();
