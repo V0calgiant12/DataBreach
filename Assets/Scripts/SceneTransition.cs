@@ -8,6 +8,7 @@ using UnityEditor;
 public class SceneTransition : MonoBehaviour
 {
     public Animator _Transition;
+    [SerializeField] private RenderFeatureToggler renderFeatureToggler;
     public void TransitionToScene(int sceneNumber, float transitionTime)
     {
         StartCoroutine(LoadScene(sceneNumber, transitionTime));
@@ -17,6 +18,7 @@ public class SceneTransition : MonoBehaviour
         // NOTE: Transition time does not extend or shorten the fade animation. Fade animation is 1 second long. We can change this if we want later on.
         _Transition.SetTrigger("Transition"); 
         yield return new WaitForSeconds(transitionTime);
+        renderFeatureToggler.DisableRenderFeatures();
         SceneManager.LoadScene(levelIndex);
     }
     public void ExitButton()

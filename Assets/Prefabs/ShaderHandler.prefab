@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5049546687049599069}
   - component: {fileID: 8902927167227497983}
+  - component: {fileID: 2593754121918561581}
   m_Layer: 0
   m_Name: ShaderHandler
   m_TagString: Untagged
@@ -45,4 +46,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ShaderToggle
   shaderMaterial: {fileID: 2100000, guid: 4c683fc6bc2d87548a869699295c3659, type: 2}
-  renderer2D: {fileID: 11400000, guid: 424799608f7334c24bf367e4bbfa7f9a, type: 2}
+  renderFeatureToggler: {fileID: 2593754121918561581}
+--- !u!114 &2593754121918561581
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1329955393326078875}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 620d2245a20db4945aba57f5f67b5c3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RenderFeatureToggler
+  renderFeatures:
+  - feature: {fileID: -3307302968280700900, guid: 424799608f7334c24bf367e4bbfa7f9a, type: 2}
+  pipelineAsset: {fileID: 11400000, guid: 681886c5eb7344803b6206f758bf0b1c, type: 2}

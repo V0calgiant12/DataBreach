@@ -7,22 +7,26 @@ using UnityEngine.Rendering.Universal;
 public struct RenderFeatureToggle
 {
     public ScriptableRendererFeature feature;
-    public bool isEnabled;
 }
 
 [ExecuteAlways]
 public class RenderFeatureToggler : MonoBehaviour
 {
-    [SerializeField]
-    private List<RenderFeatureToggle> renderFeatures = new List<RenderFeatureToggle>();
-    [SerializeField]
-    private UniversalRenderPipelineAsset pipelineAsset;
+    [SerializeField] private List<RenderFeatureToggle> renderFeatures = new List<RenderFeatureToggle>();
+    [SerializeField] private UniversalRenderPipelineAsset pipelineAsset;
 
-    public void UpdateRenderFeatures()
+    public void EnableRenderFeatures()
     {
         foreach (RenderFeatureToggle toggleObj in renderFeatures)
         {
-            toggleObj.feature.SetActive(toggleObj.isEnabled);
+            toggleObj.feature.SetActive(true);
+        }
+    }
+    public void DisableRenderFeatures()
+    {
+        foreach (RenderFeatureToggle toggleObj in renderFeatures)
+        {
+            toggleObj.feature.SetActive(false);
         }
     }
 }

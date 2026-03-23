@@ -14,12 +14,13 @@ public class ShaderToggle : MonoBehaviour
         if (SettingsData.Instance._Pixelation)
         {
             Debug.Log("Shader On");
-            renderFeatureToggler.UpdateRenderFeatures();
+            renderFeatureToggler.EnableRenderFeatures();
             Shader.DisableKeyword(pixelShaderDisabled);
         }
         else
         {
             Debug.Log("Shader Off");
+            renderFeatureToggler.DisableRenderFeatures();
             Shader.EnableKeyword(pixelShaderDisabled);
         }
     }
