@@ -9,47 +9,48 @@ public override void RunOnce(PlayerStateManager player)
     public override void EnterState(PlayerStateManager player)
     {
         Debug.Log("Player is in the air / Air State");
+        FindPlayerObject();
+        playerSpeed = 7;
     }
     public override void UpdateState(PlayerStateManager player)
     {
+        FindPlayerObject();
         Debug.Log(IsGrounded());
-        if (!groundHit)
+
+        if (Input.GetKey(SettingsData.Instance._InputDown))
         {
-            if (Input.GetKey(SettingsData.Instance._InputDown))
+            PlayerRb.linearVelocity = new Vector2(PlayerRb.linearVelocityX, -10f);
+        }
+        if (Input.GetKeyDown(SettingsData.Instance._InputAttack))
+        {
+            Debug.Log("Attacking while In Air");
+        }
+        if (Input.GetKey(SettingsData.Instance._InputLeft) || Input.GetKey(SettingsData.Instance._InputRight))
+        {
+            if (Input.GetKey(SettingsData.Instance._InputRight))
             {
-                PlayerRb.linearVelocity = new Vector2(PlayerRb.linearVelocityX, -10f);
+                PlayerVelocity = new Vector2(playerSpeed, PlayerRb.linearVelocityY);
+                PlayerRb.linearVelocity = PlayerVelocity;// + OffsetVelocity;
             }
-            else
+            else if (Input.GetKey(SettingsData.Instance._InputLeft)) 
             {
-                if (Input.GetKeyDown(SettingsData.Instance._InputAttack))
-                {
-                Debug.Log("Attacking while In Air");
-                }
-                if (Input.GetKey(SettingsData.Instance._InputLeft) || Input.GetKey(SettingsData.Instance._InputRight))
-                {
-                    if (Input.GetKey(SettingsData.Instance._InputSprint))
-                    {
-                        player.SwitchState(player.SprintingState);
-                    }
-                else
-                    {
-                        player.SwitchState(player.WalkingState);
-                    }
-                }
-                if (Input.GetKeyDown(SettingsData.Instance._InputJump) && IsGrounded())
-                {
-                    Debug.Log("jump from idle");
-                    PlayerRb.linearVelocity = new Vector2(PlayerRb.linearVelocityX, 10f);
-                }
+                PlayerVelocity = new Vector2(-playerSpeed, PlayerRb.linearVelocityY);
+                PlayerRb.linearVelocity = PlayerVelocity;// + OffsetVelocity;
             }
         }
-        else
+        if (Input.GetKeyDown(SettingsData.Instance._InputJump) && IsGrounded())
+        {
+            Debug.Log("jump from idle");
+            PlayerRb.linearVelocity = new Vector2(PlayerRb.linearVelocityX, 10f);
+        }
+        if (IsGrounded())
         {
             player.SwitchState(player.IdleState);
         }
     }
-    //public override void OnCollisionEnter(PlayerStateManager player)
-    //{
-        
+    
+    //publi override void OnCollisionEnter(PlayerStateManager player)
+    //
+    
     //}
 }

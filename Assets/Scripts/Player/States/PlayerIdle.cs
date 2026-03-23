@@ -11,9 +11,11 @@ public class PlayerIdle : PlayerAbstract
     public override void EnterState(PlayerStateManager player)
     {
         Debug.Log("Player Idle / Idle State");
+        FindPlayerObject();
     }
     public override void UpdateState(PlayerStateManager player)
     {
+        FindPlayerObject();
         if (Input.GetKeyDown(SettingsData.Instance._InputAttack))
         {
             Debug.Log("Attacking while Idle");
@@ -33,16 +35,16 @@ public class PlayerIdle : PlayerAbstract
         {
             player.SwitchState(player.CrouchingState);
         }
-        if (Input.GetKeyDown(SettingsData.Instance._InputJump) && IsGrounded())
+        if (Input.GetKeyDown(SettingsData.Instance._InputJump))
         {
             Debug.Log("jump from idle");
             PlayerRb.linearVelocity = new Vector2(PlayerRb.linearVelocityX, 10f);
         }
-        if (!groundHit)
+        if (!IsGrounded())
         {
             player.SwitchState(player.AirState);
         }
-        Debug.Log(IsGrounded());
+        //Debug.Log(IsGrounded());
     }
 
 }

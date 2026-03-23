@@ -9,11 +9,13 @@ public class PlayerSprinting : PlayerAbstract
     public override void EnterState(PlayerStateManager player)
     {
         Debug.Log("Player is Sprinting / Sprinting State");
-    playerSpeed = 25f;
+        playerSpeed = 25f;
+        FindPlayerObject();
     }
     public override void UpdateState(PlayerStateManager player)
     {
-        if (fakeSprintToggle && sprintToggler)
+        FindPlayerObject();
+        if (fakeSprintToggle && sprinting)
         {
             if (Input.GetKey(SettingsData.Instance._InputLeft) || Input.GetKey(SettingsData.Instance._InputRight))
             {
@@ -27,9 +29,6 @@ public class PlayerSprinting : PlayerAbstract
                     PlayerVelocity = new Vector2(-playerSpeed, PlayerRb.linearVelocityY);
                     PlayerRb.linearVelocity = PlayerVelocity;// + OffsetVelocity;
                 }
-                sprintToggler = !sprintToggler;
-                
-
         }
         else if (Input.GetKey(SettingsData.Instance._InputLeft) || Input.GetKey(SettingsData.Instance._InputRight))
         {
@@ -71,7 +70,7 @@ public class PlayerSprinting : PlayerAbstract
             Debug.Log("jump from Sprinting");
             PlayerRb.linearVelocity = new Vector2(PlayerRb.linearVelocityX, 10f);
         }
-        if (!groundHit)
+        if (!IsGrounded())
         {
             player.SwitchState(player.AirState);
         }

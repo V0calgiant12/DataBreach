@@ -10,11 +10,13 @@ public class PlayerCrouching : PlayerAbstract
     {
         Debug.Log("Player is Crouching / Crouching State");
         playerSpeed = 5;
+        FindPlayerObject();
         //Switch back to idle after code is done running]
     }
     public override void UpdateState(PlayerStateManager player)
     {
-        if (!groundHit)
+        FindPlayerObject();
+        if (!IsGrounded())
         {
             player.SwitchState(player.AirState);
         }
