@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Goblin : MonoBehaviour
+public class Slime : MonoBehaviour
 {
 
     public Rigidbody2D enemyRb;
@@ -16,6 +16,6 @@ public class Goblin : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-         
+        
     }
 }
