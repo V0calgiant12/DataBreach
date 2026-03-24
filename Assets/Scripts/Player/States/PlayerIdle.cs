@@ -12,6 +12,7 @@ public class PlayerIdle : PlayerAbstract
     {
         Debug.Log("Player Idle / Idle State");
         FindPlayerObject();
+        fakeSprintToggle = true;
     }
     public override void UpdateState(PlayerStateManager player)
     {
@@ -20,7 +21,21 @@ public class PlayerIdle : PlayerAbstract
         {
             Debug.Log("Attacking while Idle");
         }
-        if (Input.GetKey(SettingsData.Instance._InputLeft) || Input.GetKey(SettingsData.Instance._InputRight))
+        if (fakeSprintToggle)
+        {
+            if (Input.GetKeyDown(SettingsData.Instance._InputSprint) && (Input.GetKey(SettingsData.Instance._InputLeft) || Input.GetKey(SettingsData.Instance._InputRight)))
+            {
+                player.SwitchState(player.SprintingState);
+            }
+            else
+            {
+                if (Input.GetKey(SettingsData.Instance._InputLeft) || Input.GetKey(SettingsData.Instance._InputRight))
+                {
+                    player.SwitchState(player.WalkingState);
+                }
+            }
+        }
+        else
         {
             if (Input.GetKey(SettingsData.Instance._InputSprint))
             {
@@ -28,7 +43,10 @@ public class PlayerIdle : PlayerAbstract
             }
             else
             {
-                player.SwitchState(player.WalkingState);
+                if (Input.GetKey(SettingsData.Instance._InputLeft) || Input.GetKey(SettingsData.Instance._InputRight))
+                {
+                    player.SwitchState(player.WalkingState);
+                }
             }
         }
         if (Input.GetKey(SettingsData.Instance._InputDown))

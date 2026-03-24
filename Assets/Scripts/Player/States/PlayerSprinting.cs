@@ -11,6 +11,10 @@ public class PlayerSprinting : PlayerAbstract
         Debug.Log("Player is Sprinting / Sprinting State");
         playerSpeed = 25f;
         FindPlayerObject();
+        fakeSprintToggle = true;
+        sprinting = true;
+        Debug.Log(fakeSprintToggle + " sprint toggle test");
+        Debug.Log(sprinting + " is sprinting");
     }
     public override void UpdateState(PlayerStateManager player)
     {
@@ -28,6 +32,11 @@ public class PlayerSprinting : PlayerAbstract
                 {
                     PlayerVelocity = new Vector2(-playerSpeed, PlayerRb.linearVelocityY);
                     PlayerRb.linearVelocity = PlayerVelocity;// + OffsetVelocity;
+                }
+                if (Input.GetKeyDown(SettingsData.Instance._InputSprint))
+                {
+                    sprinting = false;
+                    player.SwitchState(player.WalkingState);
                 }
         }
         else if (Input.GetKey(SettingsData.Instance._InputLeft) || Input.GetKey(SettingsData.Instance._InputRight))
