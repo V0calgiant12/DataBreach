@@ -50,7 +50,7 @@ public class PlayerWalking : PlayerAbstract
         if (Input.GetKeyDown(SettingsData.Instance._InputJump) && GroundCheck.Instance._IsGrounded)
         {
             Debug.Log("jump from walking");
-            PlayerRb.linearVelocity = new Vector2(PlayerRb.linearVelocityX, 10f);
+            PlayerRb.linearVelocity = new Vector2(PlayerRb.linearVelocityX, jumpStrength);
         }
         if (!GroundCheck.Instance._IsGrounded)
         {

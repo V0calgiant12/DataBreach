@@ -16,39 +16,47 @@ public override void RunOnce(PlayerStateManager player)
     {
         FindPlayerObject();
 
-        if (Input.GetKey(SettingsData.Instance._InputDown))
+        // Fast Falling
+        if (Input.GetKey(SettingsData.Instance._InputDown)) // Check for fast fall.
         {
-            PlayerRb.linearVelocity = new Vector2(PlayerRb.linearVelocityX, -10f);
+            PlayerRb.linearVelocity = new Vector2(PlayerRb.linearVelocityX, -jumpStrength * 2);
         }
-        if (Input.GetKeyDown(SettingsData.Instance._InputAttack))
+        
+        // Movement
+        moving = false;
+        if (Input.GetKey(SettingsData.Instance._InputRight)) // Moving Right
+        {
+            PlayerVelocity = new Vector2(playerSpeed, PlayerRb.linearVelocityY);
+            PlayerRb.linearVelocity = PlayerVelocity;// + OffsetVelocity;
+            moving = true;
+        }
+        else if (Input.GetKey(SettingsData.Instance._InputLeft)) // Moving left
+        {
+            PlayerVelocity = new Vector2(-playerSpeed, PlayerRb.linearVelocityY);
+            PlayerRb.linearVelocity = PlayerVelocity;// + OffsetVelocity;
+            moving = true;
+        }
+        if (!moving) // If not moving, set x velocity to 0;
+        {
+            PlayerRb.linearVelocityX = 0;
+        }
+
+        // Attacking
+        if (Input.GetKeyDown(SettingsData.Instance._InputAttack)) // Check for an attack.
         {
             Debug.Log("Attacking while In Air");
         }
-        if (Input.GetKey(SettingsData.Instance._InputLeft) || Input.GetKey(SettingsData.Instance._InputRight))
+
+        // Jumping
+        if (Input.GetKeyDown(SettingsData.Instance._InputJump) && doublJumpAvailable)
         {
-            if (Input.GetKey(SettingsData.Instance._InputRight))
-            {
-                PlayerVelocity = new Vector2(playerSpeed, PlayerRb.linearVelocityY);
-                PlayerRb.linearVelocity = PlayerVelocity;// + OffsetVelocity;
-            }
-            else if (Input.GetKey(SettingsData.Instance._InputLeft)) 
-            {
-                PlayerVelocity = new Vector2(-playerSpeed, PlayerRb.linearVelocityY);
-                PlayerRb.linearVelocity = PlayerVelocity;// + OffsetVelocity;
-            }
-        }
-        if (!moving)
-        {
-            PlayerRb.linearVelocityX = 0;
-            player.SwitchState(player.IdleState);
-        }
-        if (Input.GetKeyDown(SettingsData.Instance._InputJump) && GroundCheck.Instance._IsGrounded)
-        {
-            Debug.Log("jump from idle");
-            PlayerRb.linearVelocity = new Vector2(PlayerRb.linearVelocityX, 10f);
+            Debug.Log("jump in air");
+            PlayerRb.linearVelocity = new Vector2(PlayerRb.linearVelocityX, jumpStrength * 0.8f);
+            doublJumpAvailable = false;
         }
         if (GroundCheck.Instance._IsGrounded)
         {
+            doublJumpAvailable = true;
             player.SwitchState(player.IdleState);
         }
     }

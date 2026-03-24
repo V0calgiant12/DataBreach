@@ -38,7 +38,7 @@ public class PlayerIdle : PlayerAbstract
         if (Input.GetKeyDown(SettingsData.Instance._InputJump))
         {
             Debug.Log("jump from idle");
-            PlayerRb.linearVelocity = new Vector2(PlayerRb.linearVelocityX, 10f);
+            PlayerRb.linearVelocity = new Vector2(PlayerRb.linearVelocityX, jumpStrength);
         }
         if (!GroundCheck.Instance._IsGrounded)
         {
