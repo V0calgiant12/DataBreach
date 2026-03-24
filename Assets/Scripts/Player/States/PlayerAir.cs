@@ -63,6 +63,13 @@ public override void RunOnce(PlayerStateManager player)
             coyoteTimeCounter = 0;
         }
 
+        // Wall Check
+        //if (WallCheck.Instance._IsClinging && moving)
+        //{
+        //    doubleJumpAvailable = true;
+        //    player.SwitchState(player.WallClingState);
+        //}
+
         // Grounded Check
         if (GroundCheck.Instance._IsGrounded)
         {

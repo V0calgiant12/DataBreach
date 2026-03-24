@@ -8,6 +8,7 @@ public class PlayerStateManager : MonoBehaviour
     public PlayerIdle IdleState = new PlayerIdle();
     public PlayerSprinting SprintingState = new PlayerSprinting();
     public PlayerWalking WalkingState = new PlayerWalking();
+    public PlayerWallCling WallClingState = new PlayerWallCling();
     //11:42 https://www.youtube.com/watch?v=Vt8aZDPzRjI
     void Awake()
     {

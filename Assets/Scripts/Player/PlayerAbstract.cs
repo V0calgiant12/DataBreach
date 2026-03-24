@@ -17,12 +17,14 @@ public abstract class PlayerAbstract
     public float jumpStrength = 15f;
     public int jumpBufferCounter;
     public int coyoteTimeCounter;
+    public int lastWallJumpRight;
     public float raycastDistance;
     public bool fakeSprintToggle;
     public bool sprinting;
     public bool fakeCrouchToggle;
     public bool moving;
     public bool doubleJumpAvailable;
+    public bool currentWallSide;
     // video I used for this: https://www.youtube.com/watch?v=lbB64oWbhuc
     public void Setup() 
     {

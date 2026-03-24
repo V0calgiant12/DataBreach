@@ -12,6 +12,7 @@ public class PlayerIdle : PlayerAbstract
     {
         Debug.Log("Player Idle / Idle State");
         FindPlayerObject();
+        lastWallJumpRight = -1;
     }
     public override void UpdateState(PlayerStateManager player)
     {
