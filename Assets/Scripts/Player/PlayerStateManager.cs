@@ -8,7 +8,6 @@ public class PlayerStateManager : MonoBehaviour
     public PlayerIdle IdleState = new PlayerIdle();
     public PlayerSprinting SprintingState = new PlayerSprinting();
     public PlayerWalking WalkingState = new PlayerWalking();
-    public PlayerWallCling WallClingState = new PlayerWallCling();
     //11:42 https://www.youtube.com/watch?v=Vt8aZDPzRjI
     void Awake()
     {
@@ -28,6 +27,10 @@ public class PlayerStateManager : MonoBehaviour
         if(Input.GetKeyDown(SettingsData.Instance._InputJump) || SettingsData.Instance._UpToJump && Input.GetKeyDown(SettingsData.Instance._InputUp))
         {
             currentState.jumpBufferCounter = 5;
+        }
+        if (Input.GetKeyDown(SettingsData.Instance._InputSprint) && currentState.fakeSprintToggle)
+        {
+            currentState.sprinting = !currentState.sprinting;
         }
     }
     public void SwitchState(PlayerAbstract state)
