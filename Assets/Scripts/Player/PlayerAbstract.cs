@@ -15,12 +15,14 @@ public abstract class PlayerAbstract
     public RaycastHit2D groundHit;
     public float playerSpeed = 12f;
     public float jumpStrength = 15f;
+    public int jumpBufferCounter;
+    public int coyoteTimeCounter;
     public float raycastDistance;
     public bool fakeSprintToggle;
     public bool sprinting;
     public bool fakeCrouchToggle;
     public bool moving;
-    public bool doublJumpAvailable;
+    public bool doubleJumpAvailable;
     // video I used for this: https://www.youtube.com/watch?v=lbB64oWbhuc
     public void Setup() 
     {

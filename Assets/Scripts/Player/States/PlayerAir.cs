@@ -17,7 +17,7 @@ public override void RunOnce(PlayerStateManager player)
         FindPlayerObject();
 
         // Fast Falling
-        if (Input.GetKey(SettingsData.Instance._InputDown)) // Check for fast fall.
+        if (Input.GetKeyDown(SettingsData.Instance._InputDown)) // Check for fast fall.
         {
             PlayerRb.linearVelocity = new Vector2(PlayerRb.linearVelocityX, -jumpStrength * 2);
         }
@@ -47,16 +47,26 @@ public override void RunOnce(PlayerStateManager player)
             Debug.Log("Attacking while In Air");
         }
 
-        // Jumping
-        if (Input.GetKeyDown(SettingsData.Instance._InputJump) && doublJumpAvailable)
+        // Short Jumping
+        if((Input.GetKeyUp(SettingsData.Instance._InputJump) || SettingsData.Instance._UpToJump && Input.GetKeyUp(SettingsData.Instance._InputUp)) && PlayerRb.linearVelocity.y > 0)
+        {
+            PlayerRb.linearVelocity = new Vector2(PlayerRb.linearVelocityX, PlayerRb.linearVelocityY * 0.8f);
+        }
+
+        // Double Jumping
+        if ((Input.GetKeyDown(SettingsData.Instance._InputJump) || SettingsData.Instance._UpToJump && Input.GetKeyDown(SettingsData.Instance._InputUp)) && doubleJumpAvailable) // NOTE: Doesn't buffer the jump because we don't want the player to instantly use their double jump.
         {
             Debug.Log("jump in air");
             PlayerRb.linearVelocity = new Vector2(PlayerRb.linearVelocityX, jumpStrength * 0.8f);
-            doublJumpAvailable = false;
+            doubleJumpAvailable = false;
+            jumpBufferCounter = 0;
+            coyoteTimeCounter = 0;
         }
+
+        // Grounded Check
         if (GroundCheck.Instance._IsGrounded)
         {
-            doublJumpAvailable = true;
+            doubleJumpAvailable = true;
             player.SwitchState(player.IdleState);
         }
     }

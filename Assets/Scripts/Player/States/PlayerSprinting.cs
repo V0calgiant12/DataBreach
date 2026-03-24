@@ -65,12 +65,15 @@ public class PlayerSprinting : PlayerAbstract
                 player.SwitchState(player.IdleState);
             }
         }
-        if (Input.GetKeyDown(SettingsData.Instance._InputJump) && GroundCheck.Instance._IsGrounded)
+        if (jumpBufferCounter > 0)
         {
             Debug.Log("jump from Sprinting");
             PlayerRb.linearVelocity = new Vector2(PlayerRb.linearVelocityX, jumpStrength);
+            jumpBufferCounter = 0;
+            coyoteTimeCounter = 0;
+            player.SwitchState(player.AirState);
         }
-        if (!GroundCheck.Instance._IsGrounded)
+        if (!GroundCheck.Instance._IsGrounded && coyoteTimeCounter < 0)
         {
             player.SwitchState(player.AirState);
         }

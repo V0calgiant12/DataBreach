@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class PlayerStateManager : MonoBehaviour
 {
-    PlayerAbstract currentState;
+    public PlayerAbstract currentState;
     public PlayerAir AirState = new PlayerAir();
     public PlayerCrouching CrouchingState = new PlayerCrouching();
     public PlayerIdle IdleState = new PlayerIdle();
@@ -18,6 +18,16 @@ public class PlayerStateManager : MonoBehaviour
     void Update()
     {
         currentState.UpdateState(this);
+
+        // Counter countdowns
+        currentState.jumpBufferCounter -= 1;
+        currentState.coyoteTimeCounter -= 1;
+
+        // Set jump buffer if pressed
+        if(Input.GetKeyDown(SettingsData.Instance._InputJump) || SettingsData.Instance._UpToJump && Input.GetKeyDown(SettingsData.Instance._InputUp))
+        {
+            currentState.jumpBufferCounter = 5;
+        }
     }
     public void SwitchState(PlayerAbstract state)
     {
