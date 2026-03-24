@@ -26,6 +26,21 @@ public class SettingsMenuUIHandler : MonoBehaviour
         SettingsData.Instance.LoadSettings();
         LoadSettings(); // Loads from scene persistence
     }
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if(titleMenu != null)
+            {
+                BackButtonMainMenu();
+            }
+            else
+            {
+                BackButtonPauseMenu();
+            }
+            gameObject.SetActive(false);
+        }
+    }
     public void OnAwake() // Defaults to controls tab
     {
         controlsMenu.SetActive(true);
