@@ -3,7 +3,8 @@ using UnityEngine;
 
 public class PauseMenuManager : MonoBehaviour
 {
-    public GameObject _Canvas;
+    [SerializeField] private GameObject canvas;
+    [SerializeField] private GameObject settingsMenu;
     private SceneTransition sceneTransition;
     void Start()
     {
@@ -14,18 +15,27 @@ public class PauseMenuManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (!_Canvas.activeSelf)
+            if (!canvas.activeSelf)
             {
-                _Canvas.SetActive(true);
+                canvas.SetActive(true);
             }
             else
             {
-                _Canvas.SetActive(false);
+                canvas.SetActive(false);
             }
         }
     }
     public void MainMenuButton()
     {
         sceneTransition.TransitionToScene(0,1);
+    }
+    public void SettingsButton()
+    {
+        settingsMenu.SetActive(true);
+        canvas.SetActive(false);
+    }
+    public void ReturnButton()
+    {
+        canvas.SetActive(false);
     }
 }

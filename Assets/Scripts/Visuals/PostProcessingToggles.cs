@@ -7,6 +7,10 @@ public class PostProcessingToggles : MonoBehaviour
     [SerializeField] private Volume volume;
     void Start()
     {
+        UpdatePostProcessing();
+    }
+    public void UpdatePostProcessing()
+    {
         if(volume.profile.TryGet(out Bloom bloom))
         {
             if (SettingsData.Instance._Bloom)

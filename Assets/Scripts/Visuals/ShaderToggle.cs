@@ -10,6 +10,10 @@ public class ShaderToggle : MonoBehaviour
     public GlobalKeyword pixelShaderDisabled;
     void Start()
     {
+        UpdateShader();
+    }
+    public void UpdateShader()
+    {
         pixelShaderDisabled = GlobalKeyword.Create("_ENABLED");
         if (SettingsData.Instance._Pixelation)
         {

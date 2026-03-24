@@ -6,10 +6,12 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine.Audio;
+using Unity.VisualScripting;
 // 6 tabs: Spacing: 18.5, Hight: 50, Width: 150
 public class SettingsMenuUIHandler : MonoBehaviour
 {
     [SerializeField] private GameObject titleMenu;
+    [SerializeField] private GameObject pauseMenu;
     [SerializeField] private GameObject controlsMenu;
     [SerializeField] private GameObject audioMenu;
     [SerializeField] private GameObject gameMenu;
@@ -17,6 +19,8 @@ public class SettingsMenuUIHandler : MonoBehaviour
     [SerializeField] private KeybindsController keybinds; // The Keybinds Controller, has all settings under the controls tab in it.
     [SerializeField] private GameSettingsController gameSettings; // The Game Settings Controller, has all settings under the game tab in it.
     [SerializeField] private VideoSettingsController videoSettings; // The Video Settings Controller, has all settings under the video tab in it.
+    [SerializeField] private PostProcessingToggles postProcessingHandler;
+    [SerializeField] private ShaderToggle shaderHandler;
     void Start() // Loads settings on load, just incase the player doesn't go into the settings before playing.
     {
         SettingsData.Instance.LoadSettings();
@@ -59,11 +63,20 @@ public class SettingsMenuUIHandler : MonoBehaviour
         videoMenu.SetActive(true);
     }
 
-    public void BackButton() // Saves settings and switches back to main menu
+    public void BackButtonMainMenu() // Saves settings and switches back to main menu
     {
         SaveSettings(); // Saves for scene persistence
         SettingsData.Instance.SaveSettings(); // Saves for instance persistence
         titleMenu.SetActive(true);
+        gameObject.SetActive(false);
+    }
+    public void BackButtonPauseMenu() // Saves settings and switches back to pause menu
+    {
+        SaveSettings(); // Saves for scene persistence
+        SettingsData.Instance.SaveSettings(); // Saves for instance persistence
+        postProcessingHandler.UpdatePostProcessing();
+        shaderHandler.UpdateShader();
+        pauseMenu.SetActive(true);
         gameObject.SetActive(false);
     }
     private void SaveSettings() // Saves settings to be loaded upon reloading scene or game.
