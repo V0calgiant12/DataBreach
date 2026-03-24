@@ -16,11 +16,11 @@ public class PlayerCrouching : PlayerAbstract
     public override void UpdateState(PlayerStateManager player)
     {
         FindPlayerObject();
-        if (!IsGrounded())
+        if (!GroundCheck.Instance._IsGrounded)
         {
             player.SwitchState(player.AirState);
         }
-        if (Input.GetKeyDown(SettingsData.Instance._InputJump) && IsGrounded())
+        if (Input.GetKeyDown(SettingsData.Instance._InputJump) && GroundCheck.Instance._IsGrounded)
         {
             Debug.Log("jump from Crouching");
             PlayerRb.linearVelocity = new Vector2(PlayerRb.linearVelocityX, 10f);
@@ -47,7 +47,7 @@ public class PlayerCrouching : PlayerAbstract
                 player.SwitchState(player.IdleState);
             }
         }
-        Debug.Log(IsGrounded());
+        Debug.Log(GroundCheck.Instance._IsGrounded);
     }
     //public override void OnCollisionEnter(PlayerStateManager player)
     //{

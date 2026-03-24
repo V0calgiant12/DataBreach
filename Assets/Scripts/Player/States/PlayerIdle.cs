@@ -40,11 +40,11 @@ public class PlayerIdle : PlayerAbstract
             Debug.Log("jump from idle");
             PlayerRb.linearVelocity = new Vector2(PlayerRb.linearVelocityX, 10f);
         }
-        if (!IsGrounded())
+        if (!GroundCheck.Instance._IsGrounded)
         {
             player.SwitchState(player.AirState);
         }
-        //Debug.Log(IsGrounded());
+        //Debug.Log(GroundCheck.Instance._IsGrounded);
     }
 
 }

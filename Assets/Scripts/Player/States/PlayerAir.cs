@@ -15,7 +15,6 @@ public override void RunOnce(PlayerStateManager player)
     public override void UpdateState(PlayerStateManager player)
     {
         FindPlayerObject();
-        Debug.Log(IsGrounded());
 
         if (Input.GetKey(SettingsData.Instance._InputDown))
         {
@@ -38,12 +37,17 @@ public override void RunOnce(PlayerStateManager player)
                 PlayerRb.linearVelocity = PlayerVelocity;// + OffsetVelocity;
             }
         }
-        if (Input.GetKeyDown(SettingsData.Instance._InputJump) && IsGrounded())
+        if (!moving)
+        {
+            PlayerRb.linearVelocityX = 0;
+            player.SwitchState(player.IdleState);
+        }
+        if (Input.GetKeyDown(SettingsData.Instance._InputJump) && GroundCheck.Instance._IsGrounded)
         {
             Debug.Log("jump from idle");
             PlayerRb.linearVelocity = new Vector2(PlayerRb.linearVelocityX, 10f);
         }
-        if (IsGrounded())
+        if (GroundCheck.Instance._IsGrounded)
         {
             player.SwitchState(player.IdleState);
         }

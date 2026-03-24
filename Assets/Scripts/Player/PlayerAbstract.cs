@@ -36,7 +36,7 @@ public abstract class PlayerAbstract
     }
     public bool IsGrounded()
     {
-        return groundHit = Physics2D.BoxCast(new Vector2(Player.transform.position.x, Player.transform.position.y - 1.5f), JumpBoxcastSize, 0f, Vector2.down, 3f, Ground);
-        //Gizmos.DrawWireCube()
+        groundHit = Physics2D.BoxCast(new Vector2(Player.transform.position.x, Player.transform.position.y - 1.5f), JumpBoxcastSize, 0f, Vector2.down, 3f, Ground);
+        return(groundHit);
     }
 }

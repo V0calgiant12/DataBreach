@@ -15,7 +15,6 @@ public class PlayerWalking : PlayerAbstract
     public override void UpdateState(PlayerStateManager player)
     {
         FindPlayerObject();
-        Debug.Log(IsGrounded());
         if (fakeSprintToggle)
         {
             if (Input.GetKeyDown(SettingsData.Instance._InputSprint))
@@ -48,12 +47,12 @@ public class PlayerWalking : PlayerAbstract
             PlayerRb.linearVelocityX = 0;
             player.SwitchState(player.IdleState);
         }
-        if (Input.GetKeyDown(SettingsData.Instance._InputJump) && IsGrounded())
+        if (Input.GetKeyDown(SettingsData.Instance._InputJump) && GroundCheck.Instance._IsGrounded)
         {
             Debug.Log("jump from walking");
             PlayerRb.linearVelocity = new Vector2(PlayerRb.linearVelocityX, 10f);
         }
-        if (!IsGrounded())
+        if (!GroundCheck.Instance._IsGrounded)
         {
             PlayerRb.linearVelocityX = 0;
             player.SwitchState(player.AirState);
