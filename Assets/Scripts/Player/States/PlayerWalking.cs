@@ -11,14 +11,18 @@ public class PlayerWalking : PlayerAbstract
         Debug.Log("Player is Walking / Walking State");
         playerSpeed = 10;
         FindPlayerObject();
+        fakeSprintToggle = true;
     }
     public override void UpdateState(PlayerStateManager player)
     {
+        Debug.Log(fakeSprintToggle + " Pls work");
         FindPlayerObject();
         if (fakeSprintToggle)
         {
             if (Input.GetKeyDown(SettingsData.Instance._InputSprint))
             {
+                Debug.Log("is this even working?");
+                sprinting = true;
                 player.SwitchState(player.SprintingState);
             }
         }
