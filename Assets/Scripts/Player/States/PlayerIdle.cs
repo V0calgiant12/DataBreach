@@ -11,26 +11,17 @@ public class PlayerIdle : PlayerAbstract
     public override void EnterState(PlayerStateManager player)
     {
         Debug.Log("Player Idle / Idle State");
-        FindPlayerObject();
         lastWallJumpRight = -1;
     }
     public override void UpdateState(PlayerStateManager player)
     {
-        FindPlayerObject();
         if (Input.GetKeyDown(SettingsData.Instance._InputAttack))
         {
             Debug.Log("Attacking while Idle");
         }
         if (Input.GetKey(SettingsData.Instance._InputLeft) || Input.GetKey(SettingsData.Instance._InputRight))
         {
-            if (Input.GetKey(SettingsData.Instance._InputSprint))
-            {
-                player.SwitchState(player.SprintingState);
-            }
-            else
-            {
-                player.SwitchState(player.WalkingState);
-            }
+            player.SwitchState(player.WalkingState);
         }
         if (Input.GetKey(SettingsData.Instance._InputDown))
         {

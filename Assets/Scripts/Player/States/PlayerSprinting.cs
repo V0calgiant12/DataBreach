@@ -10,70 +10,39 @@ public class PlayerSprinting : PlayerAbstract
     {
         Debug.Log("Player is Sprinting / Sprinting State");
         playerSpeed = 25f;
-        FindPlayerObject();
-        fakeSprintToggle = true;
-        sprinting = true;
-        Debug.Log(fakeSprintToggle + " sprint toggle test");
-        Debug.Log(sprinting + " is sprinting");
+        Debug.Log(sprinting + " IN SPRINT STATE");
+        Debug.Log(fakeSprintToggle + " FAKE IN SPRINT");
     }
     public override void UpdateState(PlayerStateManager player)
     {
-        FindPlayerObject();
-        if (fakeSprintToggle && sprinting)
+        moving = false;
+        // sprint right
+        if (Input.GetKey(SettingsData.Instance._InputRight))
         {
-            if (Input.GetKey(SettingsData.Instance._InputLeft) || Input.GetKey(SettingsData.Instance._InputRight))
-            {
-                if (Input.GetKey(SettingsData.Instance._InputRight))
-                {
-                    PlayerVelocity = new Vector2(playerSpeed, PlayerRb.linearVelocityY);
-                    PlayerRb.linearVelocity = PlayerVelocity;// + OffsetVelocity;
-                }
-                if (Input.GetKey(SettingsData.Instance._InputLeft)) 
-                {
-                    PlayerVelocity = new Vector2(-playerSpeed, PlayerRb.linearVelocityY);
-                    PlayerRb.linearVelocity = PlayerVelocity;// + OffsetVelocity;
-                }
-                if (Input.GetKeyDown(SettingsData.Instance._InputSprint))
-                {
-                    sprinting = false;
-                    player.SwitchState(player.WalkingState);
-                }
+            PlayerVelocity = new Vector2(playerSpeed, PlayerRb.linearVelocityY);
+            PlayerRb.linearVelocity = PlayerVelocity;// + OffsetVelocity;
+            moving = true;
         }
-        else if (Input.GetKey(SettingsData.Instance._InputLeft) || Input.GetKey(SettingsData.Instance._InputRight))
+        // sprint left
+        if (Input.GetKey(SettingsData.Instance._InputLeft)) 
         {
-            player.SwitchState(player.WalkingState);
+            PlayerVelocity = new Vector2(-playerSpeed, PlayerRb.linearVelocityY);
+            PlayerRb.linearVelocity = PlayerVelocity;// + OffsetVelocity;
+            moving = true;
         }
-        else
+        // if not moving then go to idle
+        if (!moving)
         {
             PlayerRb.linearVelocityX = 0;
             player.SwitchState(player.IdleState);
         }
-        }
-        else
+        // if not sprinting go to walking 
+        //Debug.Log(sprinting + " sprint");
+        if (!sprinting && moving)
         {
-            if (Input.GetKey(SettingsData.Instance._InputSprint) && (Input.GetKey(SettingsData.Instance._InputLeft) || Input.GetKey(SettingsData.Instance._InputRight)))
-            {
-                if (Input.GetKey(SettingsData.Instance._InputRight))
-                {
-                    PlayerVelocity = new Vector2(playerSpeed, PlayerRb.linearVelocityY);
-                    PlayerRb.linearVelocity = PlayerVelocity;// + OffsetVelocity;
-                }
-            if (Input.GetKey(SettingsData.Instance._InputLeft)) 
-                {
-                    PlayerVelocity = new Vector2(-playerSpeed, PlayerRb.linearVelocityY);
-                    PlayerRb.linearVelocity = PlayerVelocity;// + OffsetVelocity;
-                }
-            }
-            else if (Input.GetKey(SettingsData.Instance._InputLeft) || Input.GetKey(SettingsData.Instance._InputRight))
-            {
-                player.SwitchState(player.WalkingState);
-            }
-            else
-            {
-                PlayerRb.linearVelocityX = 0;
-                player.SwitchState(player.IdleState);
-            }
+            player.SwitchState(player.WalkingState);
         }
+
         if (jumpBufferCounter > 0)
         {
             Debug.Log("jump from Sprinting");
@@ -86,7 +55,7 @@ public class PlayerSprinting : PlayerAbstract
         {
             player.SwitchState(player.AirState);
         }
-        Debug.Log(GroundCheck.Instance._IsGrounded);
+        //Debug.Log(GroundCheck.Instance._IsGrounded);
     }
     //public override void OnCollisionEnter(PlayerStateManager player)
     //{

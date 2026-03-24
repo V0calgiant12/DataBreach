@@ -10,29 +10,11 @@ public class PlayerWalking : PlayerAbstract
     {
         Debug.Log("Player is Walking / Walking State");
         playerSpeed = 10;
-        FindPlayerObject();
-        fakeSprintToggle = true;
+        Debug.Log(sprinting + " IN WALK STATE");
+        Debug.Log(fakeSprintToggle + " FAKE IN WALK");
     }
     public override void UpdateState(PlayerStateManager player)
     {
-        Debug.Log(fakeSprintToggle + " Pls work");
-        FindPlayerObject();
-        if (fakeSprintToggle)
-        {
-            if (Input.GetKeyDown(SettingsData.Instance._InputSprint))
-            {
-                Debug.Log("is this even working?");
-                sprinting = true;
-                player.SwitchState(player.SprintingState);
-            }
-        }
-        else
-        {
-            if (Input.GetKey(SettingsData.Instance._InputSprint))
-            {
-                player.SwitchState(player.SprintingState);
-            }
-        }
         moving = false;
         if (Input.GetKey(SettingsData.Instance._InputRight))
         {
@@ -63,6 +45,10 @@ public class PlayerWalking : PlayerAbstract
         {
             PlayerRb.linearVelocityX = 0;
             player.SwitchState(player.AirState);
+        }
+        if (sprinting)
+        {
+            player.SwitchState(player.SprintingState);
         }
 
         

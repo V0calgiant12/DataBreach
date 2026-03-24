@@ -9,12 +9,10 @@ public override void RunOnce(PlayerStateManager player)
     public override void EnterState(PlayerStateManager player)
     {
         Debug.Log("Player is in the air / Air State");
-        FindPlayerObject();
         playerSpeed = 7;
     }
     public override void UpdateState(PlayerStateManager player)
     {
-        FindPlayerObject();
 
         // Fast Falling
         if (Input.GetKeyDown(SettingsData.Instance._InputDown)) // Check for fast fall.

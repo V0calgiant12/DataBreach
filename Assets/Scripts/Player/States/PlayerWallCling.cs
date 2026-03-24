@@ -10,12 +10,10 @@ public class PlayerWallCling : PlayerAbstract
     public override void EnterState(PlayerStateManager player)
     {
         Debug.Log("Player is clinging to wall / Wall Cling State");
-        FindPlayerObject();
         playerSpeed = 7;
     }
     public override void UpdateState(PlayerStateManager player)
     {
-        FindPlayerObject();
         // Wall Slide
         PlayerRb.linearVelocity = new Vector2(0, -3);
 

@@ -11,7 +11,6 @@ public abstract class PlayerAbstract
     public Vector2 PlayerVelocity;
     public Vector2 OffsetVelocity;
     public Rigidbody2D PlayerRb;
-    public GameObject Player;
     public RaycastHit2D groundHit;
     public float playerSpeed = 12f;
     public float jumpStrength = 15f;
@@ -20,8 +19,8 @@ public abstract class PlayerAbstract
     public int lastWallJumpRight;
     public float raycastDistance;
     public bool fakeSprintToggle;
-    public bool sprinting;
-    public bool fakeCrouchToggle;
+    public bool sprinting = false;
+    public bool fakeCrouchToggle = true;
     public bool moving;
     public bool doubleJumpAvailable;
     public bool currentWallSide;
@@ -29,12 +28,5 @@ public abstract class PlayerAbstract
     public void Setup() 
     {
         fakeCrouchToggle = false;
-        fakeSprintToggle = true;
-        sprinting = false;
-    }
-    public void FindPlayerObject()
-    {
-        Player = GameObject.FindWithTag("Player");
-        PlayerRb = Player.GetComponent<Rigidbody2D>();
     }
 }
