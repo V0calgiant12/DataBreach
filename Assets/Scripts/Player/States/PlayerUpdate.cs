@@ -21,7 +21,6 @@ public class PlayerUpdate : PlayerAbstract
             player.playerData.jumpBufferCounter = 5;
         }
         // Toggle sprint
-        player.playerData.fakeSprintToggle = false;
         if (Input.GetKeyDown(SettingsData.Instance._InputSprint) && player.playerData.fakeSprintToggle)
         {
             Debug.Log("Toggle sprint " + player.playerData.fakeSprintToggle);

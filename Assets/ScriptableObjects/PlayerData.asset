@@ -12,17 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a1729c4832f69e4bb0a9c98f3d7c2f3, type: 3}
   m_Name: PlayerData
   m_EditorClassIdentifier: Assembly-CSharp::PlayerData
-  PlayerVelocity: {x: 0, y: 0}
   OffsetVelocity: {x: 0, y: 0}
   PlayerRb: {fileID: 0}
-  playerSpeed: 12
-  jumpStrength: 15
   jumpBufferCounter: 0
   coyoteTimeCounter: 0
-  lastWallJumpRight: 0
-  raycastDistance: 0
   fakeSprintToggle: 0
   sprinting: 0
   fakeCrouchToggle: 0
-  doubleJumpAvailable: 0
-  currentWallSide: 0
+  doubleJumpAvailable: 1
