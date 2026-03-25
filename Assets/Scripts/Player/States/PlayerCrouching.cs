@@ -16,24 +16,11 @@ public class PlayerCrouching : PlayerAbstract
     {
 
         // Crouch release check
-        if (player.playerData.fakeCrouchToggle)
+        if (!player.playerData.crouching)
         {
-            // Crouch toggle on
-            if (Input.GetKeyDown(SettingsData.Instance._InputDown))
-            {
-                player.SwitchState(player.IdleState);
-                return;
-            }
-        }
-        else
-        {
-            // Crouch toggle off
-            if (Input.GetKeyUp(SettingsData.Instance._InputDown))
-            {
-                player.SwitchState(player.IdleState);
-                return;
-                
-            }
+            // Leave crouch
+            player.SwitchState(player.IdleState);
+            return;
         }
 
         // Crouch walking

@@ -37,5 +37,28 @@ public class PlayerUpdate : PlayerAbstract
             Debug.Log("Let go of sprint " + player.playerData.fakeSprintToggle);
             player.playerData.sprinting = false;
         }
+
+        // Crouching
+        if (player.playerData.fakeCrouchToggle)
+        {
+            // Crouch toggle on
+            if (Input.GetKeyDown(SettingsData.Instance._InputDown))
+            {
+                player.playerData.crouching = !player.playerData.crouching;
+            }
+        }
+        else
+        {
+            // Crouch toggle on
+            if (Input.GetKeyDown(SettingsData.Instance._InputDown))
+            {
+                player.playerData.crouching = true;
+            }
+            // Crouch toggle off
+            if (Input.GetKeyUp(SettingsData.Instance._InputDown))
+            {
+                player.playerData.crouching = false;
+            }
+        }
     }
 }

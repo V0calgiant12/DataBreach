@@ -13,6 +13,7 @@ public class PlayerData : ScriptableObject
     public bool fakeSprintToggle;
     public bool sprinting;
     public bool fakeCrouchToggle;
+    public bool crouching;
     public bool doubleJumpAvailable;
     //public bool currentWallSide;
 }
