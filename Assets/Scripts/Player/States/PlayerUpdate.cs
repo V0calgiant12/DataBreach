@@ -18,7 +18,7 @@ public class PlayerUpdate : PlayerAbstract
         if(Input.GetKeyDown(SettingsData.Instance._InputJump) || SettingsData.Instance._UpToJump && Input.GetKeyDown(SettingsData.Instance._InputUp))
         {
             Debug.Log("Jump");
-            player.playerData.jumpBufferCounter = 5;
+            player.playerData.jumpBufferCounter = 10;
         }
         // Toggle sprint
         if (Input.GetKeyDown(SettingsData.Instance._InputSprint) && player.playerData.fakeSprintToggle)
