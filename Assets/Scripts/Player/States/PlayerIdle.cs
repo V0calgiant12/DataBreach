@@ -15,6 +15,7 @@ public class PlayerIdle : PlayerAbstract
     }
     public override void UpdateState(PlayerStateManager player)
     {
+        player.playerData.PlayerRb.linearVelocityX = 0;
         if (Input.GetKeyDown(SettingsData.Instance._InputAttack))
         {
             Debug.Log("Attacking while Idle");
