@@ -1,6 +1,5 @@
 using System.IO;
 using UnityEngine;
-using UnityEngine.Audio;
 
 public class SettingsData : MonoBehaviour
 {
@@ -22,12 +21,24 @@ public class SettingsData : MonoBehaviour
     public KeyCode _InputInteract = KeyCode.C; // 8
     public bool _UpToJump = false;
     [Header("Audio")]
-    public float _MasterVolume;
-    public float _MusicVolume;
-    public float _EffectsVolume;
-    public float _DialogueVolume;
+    public float _MasterVolume = 0.5f;
+    public float _MusicVolume = 0.5f;
+    public float _EffectsVolume = 0.5f;
+    public float _DialogueVolume = 0.5f;
     [Header("Game")]
     public bool _RunInBackground = true;
+    public bool _ToggleSprint = false;
+    public float _CameraZoom = 10;
+    public float _PlayerHue = 0;
+    public float _PlayerSaturation = 1;
+    public float _PlayerValue = 1;
+    [Header("Video")]
+    public int _Fullscreen = 0;
+    public int _Resolution = 2;
+    public bool _Bloom;
+    public bool _ChromaticAberration;
+    public bool _Vignette;
+    public bool _Pixelation;
     
     private void Awake()
     {
@@ -60,9 +71,22 @@ public class SettingsData : MonoBehaviour
         data._DialogueVolume = _DialogueVolume;
 
         data._RunInBackground = _RunInBackground;
+        data._ToggleSprint = _ToggleSprint;
+        data._CameraZoom = _CameraZoom;
+        data._PlayerHue = _PlayerHue;
+        data._PlayerSaturation = _PlayerSaturation;
+        data._PlayerValue = _PlayerValue;
+        
+        data._Fullscreen = _Fullscreen;
+        data._Resolution = _Resolution;
+        data._Bloom =_Bloom;
+        data._ChromaticAberration =_ChromaticAberration;
+        data._Vignette =_Vignette;
+        data._Pixelation =_Pixelation;
 
         string json = JsonUtility.ToJson(data);
         File.WriteAllText(Application.persistentDataPath + "/settings.json", json);
+        Debug.Log("Settings saved to file!");
     }
     public void LoadSettings() // Loads data from the JSON file.
     {
@@ -89,8 +113,61 @@ public class SettingsData : MonoBehaviour
             _DialogueVolume = data._DialogueVolume;
             
             _RunInBackground = data._RunInBackground;
-            UnityEditor.PlayerSettings.runInBackground = _RunInBackground;
+            _ToggleSprint = data._ToggleSprint;
+            _CameraZoom = data._CameraZoom;
+            _PlayerHue = data._PlayerHue;
+            _PlayerSaturation = data._PlayerSaturation;
+            _PlayerValue = data._PlayerValue;
+
+            _Fullscreen = data._Fullscreen;
+            _Resolution = data._Resolution;
+            _Bloom = data._Bloom;
+            _ChromaticAberration = data._ChromaticAberration;
+            _Vignette = data._Vignette;
+            _Pixelation = data._Pixelation;
+            
+            Application.runInBackground = _RunInBackground;
+            Debug.Log("Loaded settings from file!");
         }
+        else
+        {
+            NoFile();
+        }
+    }
+    private void NoFile()
+    {
+        Debug.Log("No settings file found! Falling back to default settings.");
+        
+        _InputLeft = KeyCode.LeftArrow;
+        _InputRight = KeyCode.RightArrow;
+        _InputUp = KeyCode.UpArrow;
+        _InputDown = KeyCode.DownArrow;
+        _InputJump = KeyCode.Space;
+        _InputSprint = KeyCode.X;
+        _InputAttack = KeyCode.Z;
+        _InputParry = KeyCode.V;
+        _InputInteract = KeyCode.C;
+        _UpToJump = false;
+        
+        _MasterVolume = 0.5f;
+        _MusicVolume = 0.5f;
+        _EffectsVolume = 0.5f;
+        _DialogueVolume = 0.5f;
+
+        _RunInBackground = true;
+        _CameraZoom = 10;
+        _PlayerHue = 0;
+        _PlayerSaturation = 1;
+        _PlayerValue = 1;
+
+        _Fullscreen = 0;
+        _Resolution = 2;
+        _Bloom = true;
+        _ChromaticAberration = true;
+        _Vignette = true;
+        _Pixelation = true;
+        
+        Application.runInBackground = _RunInBackground;
     }
 }
 
@@ -109,11 +186,22 @@ class SaveSettings // This class quite literally just stores variables so they c
     public KeyCode _InputInteract = KeyCode.C; // 8
     public bool _UpToJump = false;
     [Header("Audio")]
-    public float _MasterVolume;
-    public float _MusicVolume;
-    public float _EffectsVolume;
-    public float _DialogueVolume;
+    public float _MasterVolume = 0.5f;
+    public float _MusicVolume = 0.5f;
+    public float _EffectsVolume = 0.5f;
+    public float _DialogueVolume = 0.5f;
     [Header("Game")]
     public bool _RunInBackground = true;
-    
+    public bool _ToggleSprint = false;
+    public float _CameraZoom = 10;
+    public float _PlayerHue = 0;
+    public float _PlayerSaturation = 1;
+    public float _PlayerValue = 1;
+    [Header("Video")]
+    public int _Fullscreen = 0;
+    public int _Resolution = 2;
+    public bool _Bloom;
+    public bool _ChromaticAberration;
+    public bool _Vignette;
+    public bool _Pixelation;
 }

@@ -1,12 +1,7 @@
 using UnityEngine;
-using UnityEngine.EventSystems;
 using System.Collections;
-using UnityEngine.InputSystem.Controls;
-using Unity.VisualScripting;
-using System;
-using Mono.Cecil.Cil;
-using UnityEngine.InputSystem;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine.UI;
 
 public class KeybindsController : MonoBehaviour
@@ -24,6 +19,7 @@ public class KeybindsController : MonoBehaviour
     private KeyCode currentKeyDown;
     private string objectName;
     [SerializeField] private TextMeshProUGUI buttonText;
+    [SerializeField] private Button button;
     void Start() // Refreshes settings on load.
     {
         RefreshSettings();
@@ -36,6 +32,8 @@ public class KeybindsController : MonoBehaviour
     public void ListenForKey(SettingsButtonData data) // Initial function called when a button is pressed for rebinding. Has button data that is unique to each button.
     {
         buttonText = data._TextMesh;
+        button = data.GetComponent<Button>();
+        button.interactable = false;
         StartCoroutine(StartListeningForKey(data._SettingID));
     }
     private IEnumerator StartListeningForKey(int inputNumber) // Listens for the next key to be pressed and acts accordingly when it does.
@@ -72,17 +70,19 @@ public class KeybindsController : MonoBehaviour
                 break;
         }
         buttonText.text = "" + currentKeyDown;
+        //yield return new WaitUntil(()=> )); wait until mouse up
+        button.interactable = true;
     }
     public void ToggleSetting(SettingsToggleData data) // Handles when a setting is toggled
     {
         switch(data._ToggleID)
         {
             case(0): // Up to jump
-                _UpToJump = !_UpToJump;
+                _UpToJump = data.toggle.isOn;
                 break;
         }
     }
-    private void RefreshSettings() // Gets the saved settings and tells all other setting objects with the tag "ControlsMenu" to refresh their visuals, which is handled elsewhere.
+    public void RefreshSettings() // Gets the saved settings and tells all other setting objects with the tag "ControlsMenu" to refresh their visuals, which is handled elsewhere.
     {
         _InputLeft = SettingsData.Instance._InputLeft;
         _InputRight = SettingsData.Instance._InputRight;
