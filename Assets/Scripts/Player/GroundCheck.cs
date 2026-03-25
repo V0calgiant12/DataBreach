@@ -1,7 +1,8 @@
 using UnityEngine;
 
-public class GroundCheck : PlayerStateManager
+public class GroundCheck : MonoBehaviour
 {
+    public PlayerAbstract currentState;
     public static GroundCheck Instance;
     public bool _IsGrounded;
 
