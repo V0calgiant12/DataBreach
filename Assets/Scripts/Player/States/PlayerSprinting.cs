@@ -28,7 +28,7 @@ public class PlayerSprinting : PlayerAbstract
             player.playerData.PlayerRb.linearVelocity = PlayerVelocity;// + OffsetVelocity;
             moving = true;
         }
-        if (Input.GetKeyDown(SettingsData.Instance._InputDown))
+        if (player.playerData.crouching)
         {
             player.SwitchState(player.CrouchingState);
             return;

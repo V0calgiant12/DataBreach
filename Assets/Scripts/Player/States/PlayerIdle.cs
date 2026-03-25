@@ -24,7 +24,7 @@ public class PlayerIdle : PlayerAbstract
             player.SwitchState(player.WalkingState);
             return;
         }
-        if (Input.GetKeyDown(SettingsData.Instance._InputDown))
+        if (player.playerData.crouching)
         {
             player.SwitchState(player.CrouchingState);
             return;
