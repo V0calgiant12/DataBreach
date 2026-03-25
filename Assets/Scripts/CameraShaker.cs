@@ -26,4 +26,3 @@ public class CameraShaker : MonoBehaviour
         transform.localPosition = originalLocalPosition;
     }
 }
-
