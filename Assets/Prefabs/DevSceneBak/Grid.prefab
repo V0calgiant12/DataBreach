@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 5314082385013167790}
   m_Layer: 3
   m_Name: Tilemap
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -3070,8 +3070,8 @@ MonoBehaviour:
   m_ShadowMesh:
     m_Mesh: {fileID: 0}
     m_LocalBounds:
-      m_Center: {x: 0, y: -5, z: 0}
-      m_Extent: {x: 9, y: 2, z: 0}
+      m_Center: {x: -6, y: 6, z: 0}
+      m_Extent: {x: 24, y: 13, z: 0}
     m_EdgeProcessing: 1
     m_TrimEdge: 0
     m_FlipX: 0
