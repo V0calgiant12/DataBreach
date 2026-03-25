@@ -10,8 +10,6 @@ public class PlayerSprinting : PlayerAbstract
     {
         Debug.Log("Player is Sprinting / Sprinting State - " + player.playerData.sprinting);
         playerSpeed = 25f;
-        //Debug.Log(sprinting + " IN SPRINT STATE");
-        //Debug.Log(fakeSprintToggle + " FAKE IN SPRINT");
     }
     public override void UpdateState(PlayerStateManager player)
     {
