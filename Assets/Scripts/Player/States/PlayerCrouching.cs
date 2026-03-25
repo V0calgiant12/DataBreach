@@ -16,7 +16,7 @@ public class PlayerCrouching : PlayerAbstract
     {
 
         // Crouch release check
-        if (fakeCrouchToggle)
+        if (player.playerData.fakeCrouchToggle)
         {
             // Crouch toggle on
             if (Input.GetKeyDown(SettingsData.Instance._InputDown))
@@ -35,6 +35,7 @@ public class PlayerCrouching : PlayerAbstract
                 
             }
         }
+
         // Crouch walking
         moving = false;
         if (Input.GetKey(SettingsData.Instance._InputRight))
@@ -49,6 +50,11 @@ public class PlayerCrouching : PlayerAbstract
             player.playerData.PlayerRb.linearVelocity = PlayerVelocity;// + OffsetVelocity;
             moving = true;
         }
+        if (!moving)
+        {
+            player.playerData.PlayerRb.linearVelocityX = 0;
+        }
+
         // Jump check
         if (player.playerData.jumpBufferCounter > 0)
         {

@@ -10,7 +10,7 @@ public class PlayerIdle : PlayerAbstract
     }
     public override void EnterState(PlayerStateManager player)
     {
-        //Debug.Log("Player Idle / Idle State");
+        Debug.Log("Player Idle / Idle State");
         lastWallJumpRight = -1;
     }
     public override void UpdateState(PlayerStateManager player)
