@@ -9,7 +9,7 @@ public class TriggerShake : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.F))
         {
             // Start the coroutine on the CameraShaker instance
             StartCoroutine(cameraShaker.Shake(shakeDuration, shakeMagnitude));
