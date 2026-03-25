@@ -7,6 +7,7 @@ public class GameSettingsController : MonoBehaviour
     [Header("Toggles")]
     public bool _RunInBackground = true;
     public bool _ToggleSprint = false;
+    public bool _ToggleCrouch = false;
     [Header("Values")]
     public float _CameraZoom;
     public float _PlayerHue;
@@ -36,6 +37,9 @@ public class GameSettingsController : MonoBehaviour
         {
             case(1):
                 _ToggleSprint = data.dropdown.value == 1;
+                break;
+            case(3):
+                _ToggleCrouch = data.dropdown.value == 1;
                 break;
         }
     }

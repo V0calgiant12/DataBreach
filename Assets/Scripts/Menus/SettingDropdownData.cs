@@ -19,6 +19,9 @@ public class SettingDropdownData : MonoBehaviour
             case (2):
                 dropdown.value = SettingsData.Instance._Resolution;
                 break;
+            case (3):
+                dropdown.value = Convert.ToInt16(SettingsData.Instance._ToggleCrouch);
+                break;
         }
     }
 }

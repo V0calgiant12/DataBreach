@@ -24,8 +24,10 @@ public class PlayerStateManager : MonoBehaviour
     }
     void Awake()
     {
+        FindPlayerObject();
         currentState = IdleState;
         currentState.RunOnce(this);
+        GlobalUpdateState.EnterState(this);
         currentState.EnterState(this);
 
         // Move this to somewhere else later after merge.
@@ -53,5 +55,6 @@ public class PlayerStateManager : MonoBehaviour
     {
         playerData.PlayerRb = gameObject.GetComponent<Rigidbody2D>();
         playerData.collider = gameObject.GetComponent<BoxCollider2D>();
+        playerData.MainCamera = GameObject.Find("Main Camera");
     }
 }

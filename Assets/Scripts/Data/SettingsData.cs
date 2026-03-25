@@ -28,6 +28,7 @@ public class SettingsData : MonoBehaviour
     [Header("Game")]
     public bool _RunInBackground = true;
     public bool _ToggleSprint = false;
+    public bool _ToggleCrouch = false;
     public float _CameraZoom = 10;
     public float _PlayerHue = 0;
     public float _PlayerSaturation = 1;
@@ -72,6 +73,7 @@ public class SettingsData : MonoBehaviour
 
         data._RunInBackground = _RunInBackground;
         data._ToggleSprint = _ToggleSprint;
+        data._ToggleCrouch = _ToggleCrouch;
         data._CameraZoom = _CameraZoom;
         data._PlayerHue = _PlayerHue;
         data._PlayerSaturation = _PlayerSaturation;
@@ -114,6 +116,7 @@ public class SettingsData : MonoBehaviour
             
             _RunInBackground = data._RunInBackground;
             _ToggleSprint = data._ToggleSprint;
+            _ToggleCrouch = data._ToggleCrouch;
             _CameraZoom = data._CameraZoom;
             _PlayerHue = data._PlayerHue;
             _PlayerSaturation = data._PlayerSaturation;
@@ -193,6 +196,7 @@ class SaveSettings // This class quite literally just stores variables so they c
     [Header("Game")]
     public bool _RunInBackground = true;
     public bool _ToggleSprint = false;
+    public bool _ToggleCrouch = false;
     public float _CameraZoom = 10;
     public float _PlayerHue = 0;
     public float _PlayerSaturation = 1;
