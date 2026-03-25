@@ -26,6 +26,11 @@ public class PlayerWalking : PlayerAbstract
             player.playerData.PlayerRb.linearVelocity = PlayerVelocity;// + OffsetVelocity;
             moving = true;
         }
+        if (Input.GetKeyDown(SettingsData.Instance._InputDown))
+        {
+            player.SwitchState(player.CrouchingState);
+            return;
+        }
         if (!moving)
         {
             player.playerData.PlayerRb.linearVelocityX = 0;
