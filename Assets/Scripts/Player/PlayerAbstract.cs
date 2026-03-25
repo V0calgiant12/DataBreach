@@ -1,29 +1,16 @@
 using UnityEngine;
 
-public abstract class PlayerAbstract
+public class PlayerAbstract : MonoBehaviour
 {
-    // States
-    public abstract void EnterState(PlayerStateManager player);
-    public abstract void UpdateState(PlayerStateManager player);
-    //public abstract void OnCollisionEnter(PlayerStateManager player, Collision collision);
-    public abstract void RunOnce(PlayerStateManager player);
-
-    public Vector2 PlayerVelocity;
-    public Vector2 OffsetVelocity;
-    public float playerSpeed = 12f;
-    public float jumpStrength = 15f;
-    public int lastWallJumpRight;
-    public bool fakeCrouchToggle;
-    public bool moving;
-    public bool currentWallSide;
-    // video I used for this: https://www.youtube.com/watch?v=lbB64oWbhuc
-    public void Setup() 
-    {
-        //fakeCrouchToggle = true;
-    }
-    public void Update()
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    void Start()
     {
         
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
         
     }
 }
