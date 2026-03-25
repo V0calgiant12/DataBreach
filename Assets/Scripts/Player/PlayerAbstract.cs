@@ -19,7 +19,7 @@ public abstract class PlayerAbstract
     // video I used for this: https://www.youtube.com/watch?v=lbB64oWbhuc
     public void Setup() 
     {
-        fakeCrouchToggle = false;
+        fakeCrouchToggle = true;
     }
     public void Update()
     {

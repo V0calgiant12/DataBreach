@@ -35,7 +35,20 @@ public class PlayerCrouching : PlayerAbstract
                 
             }
         }
-
+        // Crouch walking
+        moving = false;
+        if (Input.GetKey(SettingsData.Instance._InputRight))
+        {
+            PlayerVelocity = new Vector2(playerSpeed, player.playerData.PlayerRb.linearVelocityY);
+            player.playerData.PlayerRb.linearVelocity = PlayerVelocity;// + OffsetVelocity;
+            moving = true;
+        }
+        if (Input.GetKey(SettingsData.Instance._InputLeft)) 
+        {
+            PlayerVelocity = new Vector2(-playerSpeed, player.playerData.PlayerRb.linearVelocityY);
+            player.playerData.PlayerRb.linearVelocity = PlayerVelocity;// + OffsetVelocity;
+            moving = true;
+        }
         // Jump check
         if (player.playerData.jumpBufferCounter > 0)
         {
