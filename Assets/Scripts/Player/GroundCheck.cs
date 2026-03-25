@@ -23,9 +23,9 @@ public class GroundCheck : MonoBehaviour
         if (other.gameObject.CompareTag("Ground"))
         {
             _IsGrounded = false;
-            if(PlayerStateManager.Instance.currentState.jumpBufferCounter < 0)
+            if(PlayerStateManager.Instance.playerData.jumpBufferCounter < 0)
             {
-                PlayerStateManager.Instance.currentState.coyoteTimeCounter = 15;
+                PlayerStateManager.Instance.playerData.coyoteTimeCounter = 15;
             }
         }
     }

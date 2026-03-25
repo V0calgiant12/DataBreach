@@ -37,18 +37,18 @@ public class PlayerCrouching : PlayerAbstract
         }
 
         // Jump check
-        if (jumpBufferCounter > 0)
+        if (player.playerData.jumpBufferCounter > 0)
         {
             Debug.Log("jump from Crouching");
-            PlayerRb.linearVelocity = new Vector2(PlayerRb.linearVelocityX, jumpStrength * 0.8f);
-            jumpBufferCounter = 0;
-            coyoteTimeCounter = 0;
+            player.playerData.PlayerRb.linearVelocity = new Vector2(player.playerData.PlayerRb.linearVelocityX, jumpStrength * 0.8f);
+            player.playerData.jumpBufferCounter = 0;
+            player.playerData.coyoteTimeCounter = 0;
             player.SwitchState(player.AirState);
             return;
         }
 
         // Check if grounded
-        if (!GroundCheck.Instance._IsGrounded && coyoteTimeCounter < 0)
+        if (!GroundCheck.Instance._IsGrounded && player.playerData.coyoteTimeCounter < 0)
         {
             player.SwitchState(player.AirState);
             return;

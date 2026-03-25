@@ -8,7 +8,7 @@ public class PlayerSprinting : PlayerAbstract
     }
     public override void EnterState(PlayerStateManager player)
     {
-        Debug.Log("Player is Sprinting / Sprinting State - " + sprinting);
+        Debug.Log("Player is Sprinting / Sprinting State - " + player.playerData.sprinting);
         playerSpeed = 25f;
         //Debug.Log(sprinting + " IN SPRINT STATE");
         //Debug.Log(fakeSprintToggle + " FAKE IN SPRINT");
@@ -19,42 +19,42 @@ public class PlayerSprinting : PlayerAbstract
         // sprint right
         if (Input.GetKey(SettingsData.Instance._InputRight))
         {
-            PlayerVelocity = new Vector2(playerSpeed, PlayerRb.linearVelocityY);
-            PlayerRb.linearVelocity = PlayerVelocity;// + OffsetVelocity;
+            PlayerVelocity = new Vector2(playerSpeed, player.playerData.PlayerRb.linearVelocityY);
+            player.playerData.PlayerRb.linearVelocity = PlayerVelocity;// + OffsetVelocity;
             moving = true;
         }
         // sprint left
         if (Input.GetKey(SettingsData.Instance._InputLeft)) 
         {
-            PlayerVelocity = new Vector2(-playerSpeed, PlayerRb.linearVelocityY);
-            PlayerRb.linearVelocity = PlayerVelocity;// + OffsetVelocity;
+            PlayerVelocity = new Vector2(-playerSpeed, player.playerData.PlayerRb.linearVelocityY);
+            player.playerData.PlayerRb.linearVelocity = PlayerVelocity;// + OffsetVelocity;
             moving = true;
         }
         // if not moving then go to idle
         if (!moving)
         {
-            PlayerRb.linearVelocityX = 0;
+            player.playerData.PlayerRb.linearVelocityX = 0;
             player.SwitchState(player.IdleState);
             return;
         }
         // if not sprinting go to walking 
-        if (sprinting == false)
+        if (player.playerData.sprinting == false)
         {
-            Debug.Log(sprinting);
+            Debug.Log(player.playerData.sprinting);
             player.SwitchState(player.WalkingState);
             return;
         }
 
-        if (jumpBufferCounter > 0)
+        if (player.playerData.jumpBufferCounter > 0)
         {
             Debug.Log("jump from Sprinting");
-            PlayerRb.linearVelocity = new Vector2(PlayerRb.linearVelocityX, jumpStrength);
-            jumpBufferCounter = 0;
-            coyoteTimeCounter = 0;
+            player.playerData.PlayerRb.linearVelocity = new Vector2(player.playerData.PlayerRb.linearVelocityX, jumpStrength);
+            player.playerData.jumpBufferCounter = 0;
+            player.playerData.coyoteTimeCounter = 0;
             player.SwitchState(player.AirState);
             return;
         }
-        if (!GroundCheck.Instance._IsGrounded && coyoteTimeCounter < 0)
+        if (!GroundCheck.Instance._IsGrounded && player.playerData.coyoteTimeCounter < 0)
         {
             player.SwitchState(player.AirState);
             return;

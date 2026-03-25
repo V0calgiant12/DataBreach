@@ -4,12 +4,14 @@ public class PlayerStateManager : MonoBehaviour
 {
     public PlayerAbstract currentState;
     public PlayerAir AirState = new PlayerAir();
+    public PlayerUpdate GlobalUpdateState = new PlayerUpdate();
     public PlayerCrouching CrouchingState = new PlayerCrouching();
     public PlayerIdle IdleState = new PlayerIdle();
     public PlayerSprinting SprintingState = new PlayerSprinting();
     public PlayerWalking WalkingState = new PlayerWalking();
     //11:42 https://www.youtube.com/watch?v=Vt8aZDPzRjI
     public static PlayerStateManager Instance;
+    public PlayerData playerData;
 
     void Start()
     {
@@ -33,7 +35,13 @@ public class PlayerStateManager : MonoBehaviour
     void Update()
     {
         currentState.UpdateState(this);
+        GlobalUpdateState.UpdateState(this);
         FindPlayerObject();
+
+        // Counter countdowns
+        playerData.jumpBufferCounter -= 1;
+        playerData.coyoteTimeCounter -= 1;
+
     }
     public void SwitchState(PlayerAbstract state)
     {
@@ -43,6 +51,6 @@ public class PlayerStateManager : MonoBehaviour
     
     public void FindPlayerObject()
     {
-        currentState.PlayerRb = gameObject.GetComponent<Rigidbody2D>();
+        playerData.PlayerRb = gameObject.GetComponent<Rigidbody2D>();
     }
 }

@@ -8,48 +8,46 @@ public class PlayerWalking : PlayerAbstract
     }
     public override void EnterState(PlayerStateManager player)
     {
-        Debug.Log("Player is Walking / Walking State - " + sprinting);
+        Debug.Log("Player is Walking / Walking State - " + player.playerData.sprinting);
         playerSpeed = 10;
-        //Debug.Log(sprinting + " IN WALK STATE");
-        //Debug.Log(fakeSprintToggle + " FAKE IN WALK");
     }
     public override void UpdateState(PlayerStateManager player)
     {
         moving = false;
         if (Input.GetKey(SettingsData.Instance._InputRight))
         {
-            PlayerVelocity = new Vector2(playerSpeed, PlayerRb.linearVelocityY);
-            PlayerRb.linearVelocity = PlayerVelocity;// + OffsetVelocity;
+            PlayerVelocity = new Vector2(playerSpeed, player.playerData.PlayerRb.linearVelocityY);
+            player.playerData.PlayerRb.linearVelocity = PlayerVelocity;// + OffsetVelocity;
             moving = true;
         }
         if (Input.GetKey(SettingsData.Instance._InputLeft)) 
         {
-            PlayerVelocity = new Vector2(-playerSpeed, PlayerRb.linearVelocityY);
-            PlayerRb.linearVelocity = PlayerVelocity;// + OffsetVelocity;
+            PlayerVelocity = new Vector2(-playerSpeed, player.playerData.PlayerRb.linearVelocityY);
+            player.playerData.PlayerRb.linearVelocity = PlayerVelocity;// + OffsetVelocity;
             moving = true;
         }
         if (!moving)
         {
-            PlayerRb.linearVelocityX = 0;
+            player.playerData.PlayerRb.linearVelocityX = 0;
             player.SwitchState(player.IdleState);
             return;
         }
-        if (jumpBufferCounter > 0)
+        if (player.playerData.jumpBufferCounter > 0)
         {
             Debug.Log("jump from walking");
-            PlayerRb.linearVelocity = new Vector2(PlayerRb.linearVelocityX, jumpStrength);
-            jumpBufferCounter = 0;
-            coyoteTimeCounter = 0;
+            player.playerData.PlayerRb.linearVelocity = new Vector2(player.playerData.PlayerRb.linearVelocityX, jumpStrength);
+            player.playerData.jumpBufferCounter = 0;
+            player.playerData.coyoteTimeCounter = 0;
             player.SwitchState(player.AirState);
             return;
         }
-        if (!GroundCheck.Instance._IsGrounded && coyoteTimeCounter < 0)
+        if (!GroundCheck.Instance._IsGrounded && player.playerData.coyoteTimeCounter < 0)
         {
-            PlayerRb.linearVelocityX = 0;
+            player.playerData.PlayerRb.linearVelocityX = 0;
             player.SwitchState(player.AirState);
             return;
         }
-        if (sprinting)
+        if (player.playerData.sprinting)
         {
             player.SwitchState(player.SprintingState);
             return;
