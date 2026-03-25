@@ -8,10 +8,10 @@ public class PlayerSprinting : PlayerAbstract
     }
     public override void EnterState(PlayerStateManager player)
     {
-        Debug.Log("Player is Sprinting / Sprinting State");
+        Debug.Log("Player is Sprinting / Sprinting State - " + sprinting);
         playerSpeed = 25f;
-        Debug.Log(sprinting + " IN SPRINT STATE");
-        Debug.Log(fakeSprintToggle + " FAKE IN SPRINT");
+        //Debug.Log(sprinting + " IN SPRINT STATE");
+        //Debug.Log(fakeSprintToggle + " FAKE IN SPRINT");
     }
     public override void UpdateState(PlayerStateManager player)
     {
@@ -35,12 +35,14 @@ public class PlayerSprinting : PlayerAbstract
         {
             PlayerRb.linearVelocityX = 0;
             player.SwitchState(player.IdleState);
+            return;
         }
         // if not sprinting go to walking 
-        //Debug.Log(sprinting + " sprint");
-        if (!sprinting && moving)
+        if (sprinting == false)
         {
+            Debug.Log(sprinting);
             player.SwitchState(player.WalkingState);
+            return;
         }
 
         if (jumpBufferCounter > 0)
@@ -50,15 +52,12 @@ public class PlayerSprinting : PlayerAbstract
             jumpBufferCounter = 0;
             coyoteTimeCounter = 0;
             player.SwitchState(player.AirState);
+            return;
         }
         if (!GroundCheck.Instance._IsGrounded && coyoteTimeCounter < 0)
         {
             player.SwitchState(player.AirState);
+            return;
         }
-        //Debug.Log(GroundCheck.Instance._IsGrounded);
     }
-    //public override void OnCollisionEnter(PlayerStateManager player)
-    //{
-        
-    //}
 }

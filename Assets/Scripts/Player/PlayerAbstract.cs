@@ -19,8 +19,8 @@ public abstract class PlayerAbstract
     public int lastWallJumpRight;
     public float raycastDistance;
     public bool fakeSprintToggle;
-    public bool sprinting = false;
-    public bool fakeCrouchToggle = true;
+    public bool sprinting;
+    public bool fakeCrouchToggle;
     public bool moving;
     public bool doubleJumpAvailable;
     public bool currentWallSide;
@@ -28,5 +28,37 @@ public abstract class PlayerAbstract
     public void Setup() 
     {
         fakeCrouchToggle = false;
+    }
+    public void Update()
+    {
+        Debug.Log("Sprinting - " + sprinting);
+        // Counter countdowns
+        jumpBufferCounter -= 1;
+        coyoteTimeCounter -= 1;
+
+        // Set jump buffer if pressed
+        if(Input.GetKeyDown(SettingsData.Instance._InputJump) || SettingsData.Instance._UpToJump && Input.GetKeyDown(SettingsData.Instance._InputUp))
+        {
+            Debug.Log("Jump");
+            jumpBufferCounter = 5;
+        }
+        // Toggle sprint
+        fakeSprintToggle = true;
+        if (Input.GetKeyDown(SettingsData.Instance._InputSprint) && fakeSprintToggle)
+        {
+            Debug.Log("Toggle sprint " + fakeSprintToggle);
+            sprinting = !sprinting;
+        }
+        // No toggle sprint
+        if (fakeSprintToggle == false && Input.GetKeyDown(SettingsData.Instance._InputSprint))
+        {
+            Debug.Log("Holding Sprint " + fakeSprintToggle);
+            sprinting = true;
+        }
+        else if (fakeSprintToggle == false && Input.GetKeyUp(SettingsData.Instance._InputSprint))
+        {
+            Debug.Log("Let go of sprint " + fakeSprintToggle);
+            sprinting = false;
+        }
     }
 }

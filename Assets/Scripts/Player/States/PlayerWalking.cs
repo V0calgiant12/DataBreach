@@ -8,10 +8,10 @@ public class PlayerWalking : PlayerAbstract
     }
     public override void EnterState(PlayerStateManager player)
     {
-        Debug.Log("Player is Walking / Walking State");
+        Debug.Log("Player is Walking / Walking State - " + sprinting);
         playerSpeed = 10;
-        Debug.Log(sprinting + " IN WALK STATE");
-        Debug.Log(fakeSprintToggle + " FAKE IN WALK");
+        //Debug.Log(sprinting + " IN WALK STATE");
+        //Debug.Log(fakeSprintToggle + " FAKE IN WALK");
     }
     public override void UpdateState(PlayerStateManager player)
     {
@@ -32,6 +32,7 @@ public class PlayerWalking : PlayerAbstract
         {
             PlayerRb.linearVelocityX = 0;
             player.SwitchState(player.IdleState);
+            return;
         }
         if (jumpBufferCounter > 0)
         {
@@ -40,21 +41,18 @@ public class PlayerWalking : PlayerAbstract
             jumpBufferCounter = 0;
             coyoteTimeCounter = 0;
             player.SwitchState(player.AirState);
+            return;
         }
         if (!GroundCheck.Instance._IsGrounded && coyoteTimeCounter < 0)
         {
             PlayerRb.linearVelocityX = 0;
             player.SwitchState(player.AirState);
+            return;
         }
         if (sprinting)
         {
             player.SwitchState(player.SprintingState);
+            return;
         }
-
-        
     }
-    //public override void OnCollisionEnter(PlayerStateManager player)
-    //{
-        
-    //}
 }

@@ -73,11 +73,7 @@ public override void RunOnce(PlayerStateManager player)
         {
             doubleJumpAvailable = true;
             player.SwitchState(player.IdleState);
+            return;
         }
     }
-    
-    //publi override void OnCollisionEnter(PlayerStateManager player)
-    //
-    
-    //}
 }

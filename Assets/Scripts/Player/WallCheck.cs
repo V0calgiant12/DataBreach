@@ -1,8 +1,7 @@
 using UnityEngine;
 
-public class WallCheck : PlayerStateManager
+public class WallCheck : MonoBehaviour
 {
-    
     public static WallCheck Instance;
     public bool _IsClinging;
     [SerializeField] private bool isRightSide;
@@ -19,11 +18,11 @@ public class WallCheck : PlayerStateManager
             _IsClinging = true;
             if (isRightSide)
             {
-                currentState.currentWallSide = true;
+                PlayerStateManager.Instance.currentState.currentWallSide = true;
             }
             else
             {
-                currentState.currentWallSide = false;
+                PlayerStateManager.Instance.currentState.currentWallSide = false;
             }
         }
     }

@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class GroundCheck : MonoBehaviour
 {
-    public PlayerAbstract currentState;
     public static GroundCheck Instance;
     public bool _IsGrounded;
 
@@ -24,9 +23,9 @@ public class GroundCheck : MonoBehaviour
         if (other.gameObject.CompareTag("Ground"))
         {
             _IsGrounded = false;
-            if(currentState.jumpBufferCounter < 0)
+            if(PlayerStateManager.Instance.currentState.jumpBufferCounter < 0)
             {
-                currentState.coyoteTimeCounter = 15;
+                PlayerStateManager.Instance.currentState.coyoteTimeCounter = 15;
             }
         }
     }

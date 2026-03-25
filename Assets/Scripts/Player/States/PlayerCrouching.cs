@@ -22,6 +22,7 @@ public class PlayerCrouching : PlayerAbstract
             if (Input.GetKeyDown(SettingsData.Instance._InputDown))
             {
                 player.SwitchState(player.IdleState);
+                return;
             }
         }
         else
@@ -30,10 +31,11 @@ public class PlayerCrouching : PlayerAbstract
             if (Input.GetKeyUp(SettingsData.Instance._InputDown))
             {
                 player.SwitchState(player.IdleState);
+                return;
                 
             }
         }
-        
+
         // Jump check
         if (jumpBufferCounter > 0)
         {
@@ -42,16 +44,14 @@ public class PlayerCrouching : PlayerAbstract
             jumpBufferCounter = 0;
             coyoteTimeCounter = 0;
             player.SwitchState(player.AirState);
+            return;
         }
 
         // Check if grounded
         if (!GroundCheck.Instance._IsGrounded && coyoteTimeCounter < 0)
         {
             player.SwitchState(player.AirState);
+            return;
         }
     }
-    //public override void OnCollisionEnter(PlayerStateManager player)
-    //{
-        
-    //}
 }

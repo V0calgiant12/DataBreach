@@ -10,7 +10,7 @@ public class PlayerIdle : PlayerAbstract
     }
     public override void EnterState(PlayerStateManager player)
     {
-        Debug.Log("Player Idle / Idle State");
+        //Debug.Log("Player Idle / Idle State");
         lastWallJumpRight = -1;
     }
     public override void UpdateState(PlayerStateManager player)
@@ -22,10 +22,12 @@ public class PlayerIdle : PlayerAbstract
         if (Input.GetKey(SettingsData.Instance._InputLeft) || Input.GetKey(SettingsData.Instance._InputRight))
         {
             player.SwitchState(player.WalkingState);
+            return;
         }
-        if (Input.GetKey(SettingsData.Instance._InputDown))
+        if (Input.GetKeyDown(SettingsData.Instance._InputDown))
         {
             player.SwitchState(player.CrouchingState);
+            return;
         }
         if (jumpBufferCounter > 0)
         {
@@ -34,12 +36,13 @@ public class PlayerIdle : PlayerAbstract
             jumpBufferCounter = 0;
             coyoteTimeCounter = 0;
             player.SwitchState(player.AirState);
+            return;
         }
         if (!GroundCheck.Instance._IsGrounded && coyoteTimeCounter < 0)
         {
             player.SwitchState(player.AirState);
+            return;
         }
-        //Debug.Log(GroundCheck.Instance._IsGrounded);
     }
 
 }
