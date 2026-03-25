@@ -18,13 +18,18 @@ public class PauseMenuManager : MonoBehaviour
         {
             if (!canvas.activeSelf)
             {
-                canvas.SetActive(true);
+                Pause();
             }
             else
             {
                 ReturnButton();
             }
         }
+    }
+    public void Pause()
+    {
+        canvas.SetActive(true);
+        Time.timeScale = 0;
     }
     public void MainMenuButton()
     {
@@ -39,5 +44,6 @@ public class PauseMenuManager : MonoBehaviour
     {
         playerColor.UpdateColor();
         canvas.SetActive(false);
+        Time.timeScale = 1;
     }
 }
