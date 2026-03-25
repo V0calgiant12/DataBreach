@@ -6,6 +6,7 @@ public class PlayerData : ScriptableObject
     
     public Vector2 OffsetVelocity;
     public Rigidbody2D PlayerRb;
+    public BoxCollider2D collider; 
     public int jumpBufferCounter;
     public int coyoteTimeCounter;
     //public int lastWallJumpRight;

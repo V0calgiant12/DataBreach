@@ -52,5 +52,6 @@ public class PlayerStateManager : MonoBehaviour
     public void FindPlayerObject()
     {
         playerData.PlayerRb = gameObject.GetComponent<Rigidbody2D>();
+        playerData.collider = gameObject.GetComponent<BoxCollider2D>();
     }
 }
