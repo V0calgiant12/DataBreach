@@ -28,6 +28,11 @@ public class PlayerSprinting : PlayerAbstract
             player.playerData.PlayerRb.linearVelocity = PlayerVelocity;// + OffsetVelocity;
             moving = true;
         }
+        if (Input.GetKeyDown(SettingsData.Instance._InputDown))
+        {
+            player.SwitchState(player.CrouchingState);
+            return;
+        }
         // if not moving then go to idle
         if (!moving)
         {
@@ -42,7 +47,6 @@ public class PlayerSprinting : PlayerAbstract
             player.SwitchState(player.WalkingState);
             return;
         }
-
         if (player.playerData.jumpBufferCounter > 0)
         {
             Debug.Log("jump from Sprinting");

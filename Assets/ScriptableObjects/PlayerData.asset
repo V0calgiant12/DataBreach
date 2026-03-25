@@ -14,9 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerData
   OffsetVelocity: {x: 0, y: 0}
   PlayerRb: {fileID: 0}
-  jumpBufferCounter: 0
-  coyoteTimeCounter: 0
-  fakeSprintToggle: 0
+  collider: {fileID: 0}
+  jumpBufferCounter: -15036
+  coyoteTimeCounter: 15
+  fakeSprintToggle: 1
   sprinting: 0
-  fakeCrouchToggle: 0
+  fakeCrouchToggle: 1
   doubleJumpAvailable: 1
