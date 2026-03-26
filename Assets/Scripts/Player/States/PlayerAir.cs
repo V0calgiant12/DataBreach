@@ -1,5 +1,5 @@
 using UnityEngine;
-
+using System.Collections;
 public class PlayerAir : PlayerAbstract
 {
 public override void RunOnce(PlayerStateManager player)
@@ -10,6 +10,7 @@ public override void RunOnce(PlayerStateManager player)
     {
         Debug.Log("Player is in the air / Air State");
         playerSpeed = 7;
+        shakeOnLand = false;
     }
     public override void UpdateState(PlayerStateManager player)
     {
@@ -17,7 +18,7 @@ public override void RunOnce(PlayerStateManager player)
         // Fast Falling
         if (Input.GetKeyDown(SettingsData.Instance._InputDown)) // Check for fast fall.
         {
-            player.playerData.PlayerRb.linearVelocity = new Vector2(player.playerData.PlayerRb.linearVelocityX, -jumpStrength * 2);
+            player.playerData.PlayerRb.linearVelocity = new Vector2(player.playerData.PlayerRb.linearVelocityX, -jumpStrength * 1.5f);
         }
         
         // Movement
@@ -67,10 +68,21 @@ public override void RunOnce(PlayerStateManager player)
         //    doubleJumpAvailable = true;
         //    player.SwitchState(player.WallClingState);
         //}
-
+        if(PlayerStateManager.Instance.playerData.PlayerRb.linearVelocityY < -40)
+        {
+            shakeOnLand = true;
+            Debug.Log(shakeOnLand);
+            shakeIntensityLvl = Mathf.Abs(PlayerStateManager.Instance.playerData.PlayerRb.linearVelocityY)/2 - 10;
+        }
+        
         // Grounded Check
         if (GroundCheck.Instance._IsGrounded)
         {
+            Debug.Log(shakeOnLand);
+            if(shakeOnLand)
+            {
+                TriggerShake.Instance.BurstShake(shakeIntensityLvl);
+            }
             player.playerData.doubleJumpAvailable = true;
             player.SwitchState(player.IdleState);
             return;
