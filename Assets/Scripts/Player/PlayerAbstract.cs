@@ -11,11 +11,13 @@ public abstract class PlayerAbstract
     public Vector2 PlayerVelocity;
     public Vector2 OffsetVelocity;
     public float playerSpeed = 12f;
-    public float jumpStrength = 20f;
+    public float jumpStrength = 18.5f;
+    public float shakeIntensityLvl;
     public int lastWallJumpRight;
     public bool fakeCrouchToggle;
     public bool moving;
     public bool currentWallSide;
+    public bool shakeOnLand;
     // video I used for this: https://www.youtube.com/watch?v=lbB64oWbhuc
     public void Setup() 
     {
