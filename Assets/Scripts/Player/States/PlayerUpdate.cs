@@ -24,6 +24,7 @@ public class PlayerUpdate : PlayerAbstract
             //Debug.Log("Jump");
             player.playerData.jumpBufferCounter = 10;
         }
+        
         // Toggle sprint
         if (Input.GetKeyDown(SettingsData.Instance._InputSprint) && SettingsData.Instance._ToggleSprint)
         {

@@ -56,6 +56,10 @@ public class PlayerCrouching : PlayerAbstract
         // Check if grounded
         if (!GroundCheck.Instance._IsGrounded && player.playerData.coyoteTimeCounter < 0)
         {
+            if(SettingsData.Instance._ToggleCrouch != true)
+            {
+                player.playerData.crouching = false;
+            }
             player.SwitchState(player.AirState);
             return;
         }

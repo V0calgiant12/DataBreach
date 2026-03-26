@@ -49,7 +49,7 @@ public override void RunOnce(PlayerStateManager player)
         // Short Jumping
         if((Input.GetKeyUp(SettingsData.Instance._InputJump) || SettingsData.Instance._UpToJump && Input.GetKeyUp(SettingsData.Instance._InputUp)) && player.playerData.PlayerRb.linearVelocity.y > 0)
         {
-            player.playerData.PlayerRb.linearVelocity = new Vector2(player.playerData.PlayerRb.linearVelocityX, player.playerData.PlayerRb.linearVelocityY * 0.8f);
+            player.playerData.PlayerRb.linearVelocity = new Vector2(player.playerData.PlayerRb.linearVelocityX, player.playerData.PlayerRb.linearVelocityY * 0.5f);
         }
 
         // Double Jumping
