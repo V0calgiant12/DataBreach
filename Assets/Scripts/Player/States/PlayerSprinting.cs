@@ -9,7 +9,7 @@ public class PlayerSprinting : PlayerAbstract
     public override void EnterState(PlayerStateManager player)
     {
         Debug.Log("Player is Sprinting / Sprinting State - " + player.playerData.sprinting);
-        playerSpeed = 25f;
+        playerSpeed = 15f;
     }
     public override void UpdateState(PlayerStateManager player)
     {

@@ -9,7 +9,7 @@ public class PlayerCrouching : PlayerAbstract
     public override void EnterState(PlayerStateManager player)
     {
         Debug.Log("Player is Crouching / Crouching State");
-        playerSpeed = 5;
+        playerSpeed = 3;
         //Switch back to idle after code is done running]
     }
     public override void UpdateState(PlayerStateManager player)
