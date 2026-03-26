@@ -12,18 +12,9 @@ public class PlayerStateManager : MonoBehaviour
     //11:42 https://www.youtube.com/watch?v=Vt8aZDPzRjI
     public static PlayerStateManager Instance;
     public PlayerData playerData;
-
     void Start()
     {
-        if(Instance != null)
-        {
-            Destroy(gameObject);
-            return;
-        }
         Instance = this;
-    }
-    void Awake()
-    {
         FindPlayerObject();
         currentState = IdleState;
         currentState.RunOnce(this);
