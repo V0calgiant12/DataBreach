@@ -3,8 +3,8 @@ using UnityEngine;
 // Example of how to call the shake effect from another script
 public class TriggerShake : MonoBehaviour
 {
-    public float shakeDuration = 30;
-    public float shakeMagnitude = 0f;
+    public int shakeDuration = 30;
+    public float shakeMagnitude = 5f;
 
     void Update()
     {

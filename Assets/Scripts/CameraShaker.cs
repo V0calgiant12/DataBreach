@@ -2,6 +2,12 @@ using System.Collections;
 using System.Numerics;
 using UnityEngine;
 
+/// <summary>
+/// This script is put in the Camera Location game object on the player.
+/// A camera shake can be activated from anywhere in any script using `StartCoroutine(CameraShaker.Instance.Shake(<int duration>, <float magnitude>));`.
+/// This script will then activate and begin shaking whatever object this script is attached to.
+/// Duration is in frames, magnitude has no measure associated with it.
+/// </summary>
 public class CameraShaker : MonoBehaviour
 {
     public static CameraShaker Instance;
@@ -12,7 +18,7 @@ public class CameraShaker : MonoBehaviour
         Instance = this;
     }
 
-    public IEnumerator Shake(float duration, float magnitude)
+    public IEnumerator Shake(int duration, float magnitude) // Duration is in frames.
     {
         UnityEngine.Vector3 originalLocalPosition = transform.localPosition;
         float elapsed = 0f;
@@ -23,15 +29,14 @@ public class CameraShaker : MonoBehaviour
             float x = Random.Range(-1f, 1f) * magnitude;
             float y = Random.Range(-1f, 1f) * magnitude;
 
-            transform.localPosition = UnityEngine.Vector3.SmoothDamp(transform.position, originalLocalPosition + new UnityEngine.Vector3(x, y, -10), ref Velocity, magnitude);
-            //transform.localPosition = originalLocalPosition + new Vector3(x, y, z);
+            transform.localPosition = originalLocalPosition + new UnityEngine.Vector3(x, y, -10);
 
-            elapsed += 1; // We are not using Time.deltaTime in this project
+            elapsed += 1; // We are not using Time.deltaTime in this project, so this counts up every frame.
 
             yield return null; // Wait until the next frame
         }
 
-        // Return the camera to its original local position
+        // Return the camera to its original local position after while loop is done.
         transform.localPosition = originalLocalPosition;
     }
 }
