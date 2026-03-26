@@ -11,7 +11,7 @@ public abstract class PlayerAbstract
     public Vector2 PlayerVelocity;
     public Vector2 OffsetVelocity;
     public float playerSpeed = 12f;
-    public float jumpStrength = 15f;
+    public float jumpStrength = 20f;
     public int lastWallJumpRight;
     public bool fakeCrouchToggle;
     public bool moving;

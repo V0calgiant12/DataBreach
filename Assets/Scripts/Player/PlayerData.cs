@@ -10,9 +10,7 @@ public class PlayerData : ScriptableObject
     public int jumpBufferCounter;
     public int coyoteTimeCounter;
     //public int lastWallJumpRight;
-    public bool fakeSprintToggle;
     public bool sprinting;
-    public bool fakeCrouchToggle;
     public bool crouching;
     public bool doubleJumpAvailable;
     //public bool currentWallSide;
