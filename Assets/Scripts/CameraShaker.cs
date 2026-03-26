@@ -7,6 +7,9 @@ using UnityEngine;
 /// A camera shake can be activated from anywhere in any script using `StartCoroutine(CameraShaker.Instance.Shake(<int duration>, <float magnitude>));`.
 /// This script will then activate and begin shaking whatever object this script is attached to.
 /// Duration is in frames, magnitude has no measure associated with it.
+/// 
+/// If it is not a monobehavior script, use TriggerShake.Instance.Shake(<int duration>, <float magnitude>)
+/// Same thing with an extra step.
 /// </summary>
 public class CameraShaker : MonoBehaviour
 {
@@ -20,6 +23,7 @@ public class CameraShaker : MonoBehaviour
 
     public IEnumerator Shake(int duration, float magnitude) // Duration is in frames.
     {
+        Debug.Log("Camera shake " + duration + " " + magnitude);
         UnityEngine.Vector3 originalLocalPosition = transform.localPosition;
         float elapsed = 0f;
 
@@ -28,6 +32,29 @@ public class CameraShaker : MonoBehaviour
             // Generate a random point inside a sphere and multiply by magnitude
             float x = Random.Range(-1f, 1f) * magnitude;
             float y = Random.Range(-1f, 1f) * magnitude;
+
+            transform.localPosition = originalLocalPosition + new UnityEngine.Vector3(x, y, -10);
+
+            elapsed += 1; // We are not using Time.deltaTime in this project, so this counts up every frame.
+
+            yield return null; // Wait until the next frame
+        }
+
+        // Return the camera to its original local position after while loop is done.
+        transform.localPosition = originalLocalPosition;
+    }
+
+    public IEnumerator BurstShake(float magnitude)
+    {
+        Debug.Log("Camera Burst Shake " + magnitude);
+        UnityEngine.Vector3 originalLocalPosition = transform.localPosition;
+        float elapsed = 0f;
+
+        while (elapsed < 5+ 0.2*magnitude)
+        {
+            // Generate a random point inside a sphere and multiply by magnitude
+            float x = Random.Range(-1f, 1.5f) * magnitude;
+            float y = Random.Range(-1f, 1.5f) * magnitude;
 
             transform.localPosition = originalLocalPosition + new UnityEngine.Vector3(x, y, -10);
 

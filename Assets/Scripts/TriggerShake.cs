@@ -1,17 +1,20 @@
 using UnityEngine;
-
-// Example of how to call the shake effect from another script
-public class TriggerShake : MonoBehaviour
+/// <summary>
+/// Used for when a script is a monobehavior that can't call the coroutine itself.
+/// </summary>
+public class TriggerShake : MonoBehaviour 
 {
-    public int shakeDuration = 30;
-    public float shakeMagnitude = 5f;
-
-    void Update()
+    public static TriggerShake Instance;
+    void Start() 
     {
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-            // Start the coroutine on the CameraShaker instance
-            StartCoroutine(CameraShaker.Instance.Shake(shakeDuration, shakeMagnitude));
-        }
+        Instance = this;
+    }
+    public void Shake(int duration,float magnitude)
+    {
+        StartCoroutine(CameraShaker.Instance.Shake(duration, magnitude));
+    }
+    public void BurstShake(float magnitude)
+    {
+        StartCoroutine(CameraShaker.Instance.BurstShake(magnitude));
     }
 }
