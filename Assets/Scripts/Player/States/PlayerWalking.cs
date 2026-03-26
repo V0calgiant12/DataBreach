@@ -9,7 +9,7 @@ public class PlayerWalking : PlayerAbstract
     public override void EnterState(PlayerStateManager player)
     {
         Debug.Log("Player is Walking / Walking State - " + player.playerData.sprinting);
-        playerSpeed = 10;
+        playerSpeed = 9;
     }
     public override void UpdateState(PlayerStateManager player)
     {
