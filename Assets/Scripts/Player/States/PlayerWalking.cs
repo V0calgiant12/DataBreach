@@ -59,5 +59,9 @@ public class PlayerWalking : PlayerAbstract
             player.SwitchState(player.SprintingState);
             return;
         }
+        if (PlayerStateManager.Instance.playerData.playerHealth <= 0)
+        {
+            player.SwitchState(player.DeadState);
+        }
     }
 }

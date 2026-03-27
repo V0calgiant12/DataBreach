@@ -89,5 +89,9 @@ public override void RunOnce(PlayerStateManager player)
             player.SwitchState(player.IdleState);
             return;
         }
+        if (PlayerStateManager.Instance.playerData.playerHealth <= 0)
+        {
+            player.SwitchState(player.DeadState);
+        }
     }
 }

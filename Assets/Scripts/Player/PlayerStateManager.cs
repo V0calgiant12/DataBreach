@@ -9,6 +9,7 @@ public class PlayerStateManager : MonoBehaviour
     public PlayerIdle IdleState = new PlayerIdle();
     public PlayerSprinting SprintingState = new PlayerSprinting();
     public PlayerWalking WalkingState = new PlayerWalking();
+    public PlayerDead DeadState = new PlayerDead();
     //11:42 https://www.youtube.com/watch?v=Vt8aZDPzRjI
     public static PlayerStateManager Instance;
     public PlayerData playerData;
