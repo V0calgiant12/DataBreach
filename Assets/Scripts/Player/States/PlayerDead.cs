@@ -12,6 +12,7 @@ public class PlayerDead : PlayerAbstract
     }
     public override void UpdateState(PlayerStateManager player)
     {
+        PlayerStateManager.Instance.playerData.anim.SetBool("dead", true);
         if (PlayerStateManager.Instance.playerData.playerHealth <= 0) 
         {
             Debug.Log("You Are Dead");

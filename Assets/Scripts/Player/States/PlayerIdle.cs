@@ -15,6 +15,8 @@ public class PlayerIdle : PlayerAbstract
     public override void UpdateState(PlayerStateManager player)
     {
         player.playerData.PlayerRb.linearVelocityX = 0;
+        PlayerStateManager.Instance.playerData.anim.SetBool("moving", false);
+        PlayerStateManager.Instance.playerData.anim.SetBool("sprinting", false);
         if (Input.GetKeyDown(SettingsData.Instance._InputAttack))
         {
             Debug.Log("Attacking while Idle");
@@ -22,6 +24,7 @@ public class PlayerIdle : PlayerAbstract
         if (Input.GetKey(SettingsData.Instance._InputLeft) || Input.GetKey(SettingsData.Instance._InputRight))
         {
             player.SwitchState(player.WalkingState);
+            PlayerStateManager.Instance.playerData.anim.SetBool("moving", true);
             return;
         }
         if (player.playerData.crouching)

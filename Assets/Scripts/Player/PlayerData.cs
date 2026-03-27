@@ -16,5 +16,6 @@ public class PlayerData : ScriptableObject
     public bool doubleJumpAvailable;
     public bool movementAllowed = true;
     public bool leftOrRight;
+    public Animator anim;
     //public bool currentWallSide;
 }

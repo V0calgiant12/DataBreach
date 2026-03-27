@@ -23993,7 +23993,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5581881700348225619, guid: bc91e9a72ce4630418ffe17757d8bca7, type: 3}
   m_PrefabInstance: {fileID: 8362731456138051618}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 954643284}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3e779d2374967ba44a6d795acf950545, type: 3}
@@ -25792,6 +25792,33 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1189874579808341789, guid: abbd79d3b280b254e955d27dc2c52e4d, type: 3}
   m_PrefabInstance: {fileID: 1629325647}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &954643284 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7503720962246340740, guid: bc91e9a72ce4630418ffe17757d8bca7, type: 3}
+  m_PrefabInstance: {fileID: 8362731456138051618}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &954643291
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 954643284}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: aa5f0f4769e66334abb69f5d5e351af8, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1001 &1038087758
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -37113,36 +37140,6 @@ Tilemap:
     m_Data: {fileID: 478264308, guid: 5ef54b6792847224a963972005af4127, type: 3}
   - m_RefCount: 8
     m_Data: {fileID: -435159236, guid: 5ef54b6792847224a963972005af4127, type: 3}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
   m_TileMatrixArray:
   - m_RefCount: 1090
     m_Data:
@@ -40485,7 +40482,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7503720962246340740, guid: bc91e9a72ce4630418ffe17757d8bca7, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 954643291}
   m_SourcePrefab: {fileID: 100100000, guid: bc91e9a72ce4630418ffe17757d8bca7, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
