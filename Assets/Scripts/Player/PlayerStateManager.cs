@@ -27,7 +27,10 @@ public class PlayerStateManager : MonoBehaviour
     }
     void Update()
     {
-        currentState.UpdateState(this);
+        if (playerData.movementAllowed)
+        {
+            currentState.UpdateState(this);
+        }
         GlobalUpdateState.UpdateState(this);
         FindPlayerObject();
 
