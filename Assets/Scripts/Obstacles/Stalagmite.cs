@@ -14,7 +14,7 @@ public class Stalagmite : MonoBehaviour
     {
         if(other.gameObject.CompareTag("Player"))
         {
-            StalagmiteRb.gravityScale = 1f;
+            StalagmiteRb.bodyType = RigidbodyType2D.Dynamic;
         }
         if(other.gameObject.CompareTag("Ground"))
         {
