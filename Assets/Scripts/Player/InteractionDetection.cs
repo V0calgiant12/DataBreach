@@ -17,9 +17,8 @@ public class InteractionDetection : MonoBehaviour
     {
         indicator.SetActive(true);
         if (Input.GetKeyDown(SettingsData.Instance._InputInteract))
-        {
+        { 
             InteractableData data = other.gameObject.GetComponent<InteractableData>();
-            indicator.transform.localPosition = new UnityEngine.Vector2(0,indicator.transform.localPosition.y + 1);
             Debug.Log(data._Id);
             switch (data._Id)
             {
