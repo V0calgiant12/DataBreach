@@ -6,6 +6,7 @@ public class SpikeDetect : MonoBehaviour
     void Start()
     {
         PlayerRb = gameObject.GetComponent<Rigidbody2D>();
+        playerData.movementAllowed = false;
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
