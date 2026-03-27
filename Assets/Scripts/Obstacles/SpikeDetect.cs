@@ -33,7 +33,7 @@ public class SpikeDetect : MonoBehaviour
         PlayerStateManager.Instance.playerData.playerHealth = PlayerStateManager.Instance.playerData.playerHealth - 1f;
         Debug.Log(PlayerStateManager.Instance.playerData.playerHealth);
         PlayerRb.linearVelocity = new Vector2(xLaunch, yLaunch);
-        yield return new WaitForSeconds(noMoving);
+        yield return new WaitUntil(() => GroundCheck.Instance._IsGrounded);
         PlayerStateManager.Instance.playerData.movementAllowed = true;
     }
 }
