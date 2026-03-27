@@ -65,9 +65,5 @@ public class PlayerCrouching : PlayerAbstract
             player.SwitchState(player.AirState);
             return;
         }
-        if (PlayerStateManager.Instance.playerData.playerHealth <= 0)
-        {
-            player.SwitchState(player.DeadState);
-        }
     }
 }
