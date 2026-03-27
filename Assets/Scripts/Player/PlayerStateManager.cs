@@ -22,9 +22,6 @@ public class PlayerStateManager : MonoBehaviour
         GlobalUpdateState.EnterState(this);
         currentState.EnterState(this);
 
-        // Move this to somewhere else later after merge.
-	    QualitySettings.vSyncCount = 1;
-	    Application.targetFrameRate = 60;
     }
     void Update()
     {
