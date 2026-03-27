@@ -9,11 +9,13 @@ public class PlayerStateManager : MonoBehaviour
     public PlayerIdle IdleState = new PlayerIdle();
     public PlayerSprinting SprintingState = new PlayerSprinting();
     public PlayerWalking WalkingState = new PlayerWalking();
+    public PlayerDead DeadState = new PlayerDead();
     //11:42 https://www.youtube.com/watch?v=Vt8aZDPzRjI
     public static PlayerStateManager Instance;
     public PlayerData playerData;
     void Start()
     {
+        playerData.playerHealth = 5f;
         Instance = this;
         FindPlayerObject();
         currentState = IdleState;
@@ -21,13 +23,13 @@ public class PlayerStateManager : MonoBehaviour
         GlobalUpdateState.EnterState(this);
         currentState.EnterState(this);
 
-        // Move this to somewhere else later after merge.
-	    QualitySettings.vSyncCount = 1;
-	    Application.targetFrameRate = 60;
     }
     void Update()
     {
-        currentState.UpdateState(this);
+        if (playerData.movementAllowed)
+        {
+            currentState.UpdateState(this);
+        }
         GlobalUpdateState.UpdateState(this);
         FindPlayerObject();
 

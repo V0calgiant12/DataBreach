@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b00045f12942b46c698459096c89274e, type: 3}
   m_Name: FullScreenPassRendererFeature
   m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.FullScreenPassRendererFeature
-  m_Active: 0
+  m_Active: 1
   injectionPoint: 550
   fetchColorBuffer: 1
   requirements: 0
-  passMaterial: {fileID: -876546973899608171, guid: 74cbbc69ea5918b448ecf5c47ff07eda, type: 3}
+  passMaterial: {fileID: 2100000, guid: 4c683fc6bc2d87548a869699295c3659, type: 2}
   passIndex: 0
   bindDepthStencilAttachment: 0
   m_Version: 1

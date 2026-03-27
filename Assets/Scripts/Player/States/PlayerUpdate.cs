@@ -11,6 +11,9 @@ public class PlayerUpdate : PlayerAbstract
         
         player.playerData.sprinting = false;
         player.playerData.crouching = false;
+        player.playerData.movementAllowed = true;
+        player.playerData.leftOrRight = true;
+        player.playerData.playerHealth = 5;
     }
     public override void UpdateState(PlayerStateManager player) // Update Function
     {
@@ -24,6 +27,7 @@ public class PlayerUpdate : PlayerAbstract
             //Debug.Log("Jump");
             player.playerData.jumpBufferCounter = 10;
         }
+        
         // Toggle sprint
         if (Input.GetKeyDown(SettingsData.Instance._InputSprint) && SettingsData.Instance._ToggleSprint)
         {
@@ -65,6 +69,11 @@ public class PlayerUpdate : PlayerAbstract
                 {
                     player.playerData.crouching = false;
                 }
+            }
+            if (PlayerStateManager.Instance.playerData.playerHealth <= 0)
+            {
+                player.SwitchState(player.DeadState);
+                return;
             }
         }
     }

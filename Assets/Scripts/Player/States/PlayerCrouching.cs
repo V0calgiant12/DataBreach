@@ -9,7 +9,7 @@ public class PlayerCrouching : PlayerAbstract
     public override void EnterState(PlayerStateManager player)
     {
         Debug.Log("Player is Crouching / Crouching State");
-        playerSpeed = 5;
+        playerSpeed = 3;
         //Switch back to idle after code is done running]
     }
     public override void UpdateState(PlayerStateManager player)
@@ -29,12 +29,14 @@ public class PlayerCrouching : PlayerAbstract
         {
             PlayerVelocity = new Vector2(playerSpeed, player.playerData.PlayerRb.linearVelocityY);
             player.playerData.PlayerRb.linearVelocity = PlayerVelocity;// + OffsetVelocity;
+            player.playerData.leftOrRight = true;
             moving = true;
         }
         if (Input.GetKey(SettingsData.Instance._InputLeft)) 
         {
             PlayerVelocity = new Vector2(-playerSpeed, player.playerData.PlayerRb.linearVelocityY);
             player.playerData.PlayerRb.linearVelocity = PlayerVelocity;// + OffsetVelocity;
+            player.playerData.leftOrRight = false;
             moving = true;
         }
         if (!moving)
@@ -56,6 +58,10 @@ public class PlayerCrouching : PlayerAbstract
         // Check if grounded
         if (!GroundCheck.Instance._IsGrounded && player.playerData.coyoteTimeCounter < 0)
         {
+            if(SettingsData.Instance._ToggleCrouch != true)
+            {
+                player.playerData.crouching = false;
+            }
             player.SwitchState(player.AirState);
             return;
         }

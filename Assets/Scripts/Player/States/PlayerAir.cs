@@ -27,12 +27,14 @@ public override void RunOnce(PlayerStateManager player)
         {
             PlayerVelocity = new Vector2(playerSpeed, player.playerData.PlayerRb.linearVelocityY);
             player.playerData.PlayerRb.linearVelocity = PlayerVelocity;// + OffsetVelocity;
+            player.playerData.leftOrRight = true;
             moving = true;
         }
         else if (Input.GetKey(SettingsData.Instance._InputLeft)) // Moving left
         {
             PlayerVelocity = new Vector2(-playerSpeed, player.playerData.PlayerRb.linearVelocityY);
             player.playerData.PlayerRb.linearVelocity = PlayerVelocity;// + OffsetVelocity;
+            player.playerData.leftOrRight = false;
             moving = true;
         }
         if (!moving) // If not moving, set x velocity to 0;
@@ -47,9 +49,9 @@ public override void RunOnce(PlayerStateManager player)
         }
 
         // Short Jumping
-        if((Input.GetKeyUp(SettingsData.Instance._InputJump) || SettingsData.Instance._UpToJump && Input.GetKeyUp(SettingsData.Instance._InputUp)) && player.playerData.PlayerRb.linearVelocity.y > 0)
+        if(!(Input.GetKey(SettingsData.Instance._InputJump) || SettingsData.Instance._UpToJump && Input.GetKey(SettingsData.Instance._InputUp)) && player.playerData.PlayerRb.linearVelocity.y > 0)
         {
-            player.playerData.PlayerRb.linearVelocity = new Vector2(player.playerData.PlayerRb.linearVelocityX, player.playerData.PlayerRb.linearVelocityY * 0.8f);
+            player.playerData.PlayerRb.linearVelocity = new Vector2(player.playerData.PlayerRb.linearVelocityX, player.playerData.PlayerRb.linearVelocityY * 0.5f);
         }
 
         // Double Jumping

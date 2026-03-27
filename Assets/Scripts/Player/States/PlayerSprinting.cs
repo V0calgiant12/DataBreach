@@ -9,7 +9,7 @@ public class PlayerSprinting : PlayerAbstract
     public override void EnterState(PlayerStateManager player)
     {
         Debug.Log("Player is Sprinting / Sprinting State - " + player.playerData.sprinting);
-        playerSpeed = 16f;
+        playerSpeed = 15f;
     }
     public override void UpdateState(PlayerStateManager player)
     {
@@ -19,6 +19,7 @@ public class PlayerSprinting : PlayerAbstract
         {
             PlayerVelocity = new Vector2(playerSpeed, player.playerData.PlayerRb.linearVelocityY);
             player.playerData.PlayerRb.linearVelocity = PlayerVelocity;// + OffsetVelocity;
+            player.playerData.leftOrRight = true;
             moving = true;
         }
         // sprint left
@@ -26,8 +27,10 @@ public class PlayerSprinting : PlayerAbstract
         {
             PlayerVelocity = new Vector2(-playerSpeed, player.playerData.PlayerRb.linearVelocityY);
             player.playerData.PlayerRb.linearVelocity = PlayerVelocity;// + OffsetVelocity;
+            player.playerData.leftOrRight = false;
             moving = true;
         }
+        // if crouching go to crouching
         if (player.playerData.crouching)
         {
             player.SwitchState(player.CrouchingState);

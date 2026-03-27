@@ -3,39 +3,41 @@ using UnityEngine;
 
 public class PlatformMover : MonoBehaviour
 {
+    public GameObject Player;
     public float platformSpeed = 1;
     public Rigidbody2D platformRb;
     public Transform pointA;
     public Transform pointB;
-    public float moveSpeed = 5f;
+    public float moveSpeed = 0.1f;
     [SerializeField] private Vector3 nextPos;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         platformRb = GetComponent<Rigidbody2D>();
+        Player = GameObject.FindGameObjectWithTag("Player");
         nextPos = pointB.position;
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         //Debug.Log(Vector2.Distance(transform.position, nextPos));
-        transform.position = Vector2.MoveTowards(transform.position, nextPos, moveSpeed * Time.deltaTime);
+        transform.position = Vector2.MoveTowards(transform.position, nextPos, moveSpeed);
         if (Vector2.Distance(transform.position, nextPos) < 0.01f)
         {
             nextPos = (nextPos == pointA.position) ? pointB.position : pointA.position;
         }
     }
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        if(collision.gameObject.CompareTag("Player"))
+        if(other.gameObject.CompareTag("GroundCheck"))
         {
-            collision.gameObject.transform.parent = transform;
+            Player.transform.parent = transform;
         }
     }
-    private void OnCollisionExit2D(Collision2D collision)
+    private void OnTriggerExit2D(Collider2D other)
     {
-        collision.gameObject.transform.parent = null;
+        Player.transform.parent = null;
     }
 }

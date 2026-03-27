@@ -9,7 +9,7 @@ public class PlayerWalking : PlayerAbstract
     public override void EnterState(PlayerStateManager player)
     {
         Debug.Log("Player is Walking / Walking State - " + player.playerData.sprinting);
-        playerSpeed = 9;
+        playerSpeed = 8;
     }
     public override void UpdateState(PlayerStateManager player)
     {
@@ -18,12 +18,14 @@ public class PlayerWalking : PlayerAbstract
         {
             PlayerVelocity = new Vector2(playerSpeed, player.playerData.PlayerRb.linearVelocityY);
             player.playerData.PlayerRb.linearVelocity = PlayerVelocity;// + OffsetVelocity;
+            player.playerData.leftOrRight = true;
             moving = true;
         }
         if (Input.GetKey(SettingsData.Instance._InputLeft)) 
         {
             PlayerVelocity = new Vector2(-playerSpeed, player.playerData.PlayerRb.linearVelocityY);
             player.playerData.PlayerRb.linearVelocity = PlayerVelocity;// + OffsetVelocity;
+            player.playerData.leftOrRight = false;
             moving = true;
         }
         if (player.playerData.crouching)
