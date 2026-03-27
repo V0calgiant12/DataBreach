@@ -19,6 +19,7 @@ public class PlayerSprinting : PlayerAbstract
         {
             PlayerVelocity = new Vector2(playerSpeed, player.playerData.PlayerRb.linearVelocityY);
             player.playerData.PlayerRb.linearVelocity = PlayerVelocity;// + OffsetVelocity;
+            player.playerData.leftOrRight = true;
             moving = true;
         }
         // sprint left
@@ -26,6 +27,7 @@ public class PlayerSprinting : PlayerAbstract
         {
             PlayerVelocity = new Vector2(-playerSpeed, player.playerData.PlayerRb.linearVelocityY);
             player.playerData.PlayerRb.linearVelocity = PlayerVelocity;// + OffsetVelocity;
+            player.playerData.leftOrRight = false;
             moving = true;
         }
         // if crouching go to crouching
@@ -61,6 +63,10 @@ public class PlayerSprinting : PlayerAbstract
         {
             player.SwitchState(player.AirState);
             return;
+        }
+        if (PlayerStateManager.Instance.playerData.playerHealth <= 0)
+        {
+            player.SwitchState(player.DeadState);
         }
     }
 }

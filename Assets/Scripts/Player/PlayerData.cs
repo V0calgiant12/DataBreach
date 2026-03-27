@@ -9,10 +9,12 @@ public class PlayerData : ScriptableObject
     public BoxCollider2D collider; 
     public int jumpBufferCounter;
     public int coyoteTimeCounter;
+    public float playerHealth = 5;
     //public int lastWallJumpRight;
     public bool sprinting;
     public bool crouching;
     public bool doubleJumpAvailable;
-    public bool movementAllowed;
+    public bool movementAllowed = true;
+    public bool leftOrRight;
     //public bool currentWallSide;
 }

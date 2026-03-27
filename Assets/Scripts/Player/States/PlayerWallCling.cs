@@ -49,5 +49,9 @@ public class PlayerWallCling : PlayerAbstract
             player.playerData.doubleJumpAvailable = true;
             player.SwitchState(player.IdleState);
         }
+        if (PlayerStateManager.Instance.playerData.playerHealth <= 0)
+        {
+            player.SwitchState(player.DeadState);
+        }
     }
 }
