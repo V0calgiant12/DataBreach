@@ -164,7 +164,7 @@ BoxCollider2D:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -8394,9 +8394,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1062736219}
   - component: {fileID: 1062736220}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Hitbox
-  m_TagString: Untagged
+  m_TagString: StalagmiteHitbox
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8429,7 +8429,7 @@ BoxCollider2D:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -8590,7 +8590,7 @@ GameObject:
   - component: {fileID: 1335186927}
   - component: {fileID: 1335186926}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: Stalagmite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8943,7 +8943,7 @@ BoxCollider2D:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 8
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0

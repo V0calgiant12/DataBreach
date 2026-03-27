@@ -4,7 +4,8 @@ public class Stalagmite : MonoBehaviour
 {
     public Rigidbody2D StalagmiteRb;
     public GameObject Collider;
-    public BoxCollider2D[] boxColliders;
+    public GameObject Hitbox;
+    public GameObject Trigger;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -15,11 +16,20 @@ public class Stalagmite : MonoBehaviour
         if(other.gameObject.CompareTag("Player"))
         {
             StalagmiteRb.bodyType = RigidbodyType2D.Dynamic;
+            Trigger.SetActive(false);
         }
         if(other.gameObject.CompareTag("Ground"))
         {
-            Debug.Log("Test");
             Collider.SetActive(true);
+        }
+    }
+    private void OnCollisionEnter2D(Collision2D collision) 
+    {
+        if(collision.gameObject.CompareTag("Player"))
+        {
+            PlayerStateManager.Instance.playerData.playerHealth = PlayerStateManager.Instance.playerData.playerHealth - 1f;
+            Debug.Log(PlayerStateManager.Instance.playerData.playerHealth);
+            Hitbox.SetActive(false);
         }
     }
     
