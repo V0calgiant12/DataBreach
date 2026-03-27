@@ -73,14 +73,14 @@ public override void RunOnce(PlayerStateManager player)
         if(PlayerStateManager.Instance.playerData.PlayerRb.linearVelocityY < -40)
         {
             shakeOnLand = true;
-            Debug.Log(shakeOnLand);
+            //Debug.Log(shakeOnLand);
             shakeIntensityLvl = Mathf.Abs(PlayerStateManager.Instance.playerData.PlayerRb.linearVelocityY)/2 - 10;
         }
         
         // Grounded Check
         if (GroundCheck.Instance._IsGrounded)
         {
-            Debug.Log(shakeOnLand);
+            //Debug.Log(shakeOnLand);
             if(shakeOnLand)
             {
                 TriggerShake.Instance.BurstShake(shakeIntensityLvl);
