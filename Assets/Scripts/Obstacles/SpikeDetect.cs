@@ -12,7 +12,8 @@ public class SpikeDetect : MonoBehaviour
         if(other.gameObject.CompareTag("Spikes"))
         {
             Debug.Log("Test");
-            PlayerRb.AddForce(new Vector2(Random.Range(1, 5), Random.Range(1, 5)), ForceMode2D.Impulse);
+            PlayerRb.linearVelocity = new Vector2(transform.position.x * 99, 1);
+            
         }
     }
 }

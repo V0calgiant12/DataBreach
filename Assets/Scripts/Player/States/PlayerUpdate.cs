@@ -11,6 +11,7 @@ public class PlayerUpdate : PlayerAbstract
         
         player.playerData.sprinting = false;
         player.playerData.crouching = false;
+        player.playerData.movementAllowed = true;
     }
     public override void UpdateState(PlayerStateManager player) // Update Function
     {

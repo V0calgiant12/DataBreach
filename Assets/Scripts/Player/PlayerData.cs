@@ -13,5 +13,6 @@ public class PlayerData : ScriptableObject
     public bool sprinting;
     public bool crouching;
     public bool doubleJumpAvailable;
+    public bool movementAllowed;
     //public bool currentWallSide;
 }
