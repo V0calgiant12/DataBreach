@@ -26,11 +26,11 @@ public class SpikeDetect : MonoBehaviour
             yLaunch = Random.Range(12, 20);
             PlayerStateManager.Instance.playerData.movementAllowed = false;
             StartCoroutine(noMovement(noMoving));
-            PlayerStateManager.Instance.playerData.playerHealth = PlayerStateManager.Instance.playerData.playerHealth - 1f;
         }
     }
     private IEnumerator noMovement(float noMoving)
     {
+        PlayerStateManager.Instance.playerData.playerHealth = PlayerStateManager.Instance.playerData.playerHealth - 1f;
         Debug.Log(PlayerStateManager.Instance.playerData.playerHealth);
         PlayerRb.linearVelocity = new Vector2(xLaunch, yLaunch);
         yield return new WaitForSeconds(noMoving);

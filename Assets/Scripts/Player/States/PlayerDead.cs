@@ -8,12 +8,13 @@ public class PlayerDead : PlayerAbstract
     }
     public override void EnterState(PlayerStateManager player)
     {
-        
+        PlayerStateManager.Instance.playerData.playerHealth = 0;
     }
     public override void UpdateState(PlayerStateManager player)
     {
         if (PlayerStateManager.Instance.playerData.playerHealth <= 0) 
         {
+            Debug.Log("You Are Dead");
             PlayerStateManager.Instance.playerData.playerHealth = 0;
             PlayerStateManager.Instance.playerData.movementAllowed = false;
         }

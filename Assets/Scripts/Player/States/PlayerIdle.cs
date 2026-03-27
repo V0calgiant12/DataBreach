@@ -11,7 +11,6 @@ public class PlayerIdle : PlayerAbstract
     public override void EnterState(PlayerStateManager player)
     {
         Debug.Log("Player Idle / Idle State");
-        Debug.Log(PlayerStateManager.Instance.playerData.playerHealth <= 0);
     }
     public override void UpdateState(PlayerStateManager player)
     {

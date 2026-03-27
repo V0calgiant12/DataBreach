@@ -15,6 +15,7 @@ public class PlayerStateManager : MonoBehaviour
     public PlayerData playerData;
     void Start()
     {
+        playerData.playerHealth = 5f;
         Instance = this;
         FindPlayerObject();
         currentState = IdleState;
