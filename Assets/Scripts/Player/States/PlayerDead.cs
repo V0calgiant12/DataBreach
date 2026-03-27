@@ -15,6 +15,7 @@ public class PlayerDead : PlayerAbstract
         if (PlayerStateManager.Instance.playerData.playerHealth <= 0) 
         {
             Debug.Log("You Are Dead");
+            player.playerData.PlayerRb.linearVelocity = new Vector2(0, 0);
             PlayerStateManager.Instance.playerData.playerHealth = 0;
             PlayerStateManager.Instance.playerData.movementAllowed = false;
         }

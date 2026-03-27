@@ -17,11 +17,11 @@ public class SpikeDetect : MonoBehaviour
         {
             if (!PlayerStateManager.Instance.playerData.leftOrRight)
             {
-                xLaunch = Random.Range(5, 15);
+                xLaunch = Random.Range(5, 10);
             }
             else
             {
-                xLaunch = Random.Range(-5, -15);
+                xLaunch = Random.Range(-5, -10);
             }
             yLaunch = Random.Range(12, 20);
             PlayerStateManager.Instance.playerData.movementAllowed = false;
