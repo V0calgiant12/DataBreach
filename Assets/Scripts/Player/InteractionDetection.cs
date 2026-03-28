@@ -7,7 +7,7 @@ public class InteractionDetection : MonoBehaviour
 
     void Start()
     {
-        
+        indicator.color = new Color(indicator.color.r,indicator.color.g,indicator.color.b, 0);
     }
     private void OnTriggerExit2D(Collider2D other)
     {
