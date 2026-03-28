@@ -17,4 +17,5 @@ public class PlayerData : ScriptableObject
     public bool movementAllowed = true;
     public bool leftOrRight;
     //public bool currentWallSide;
+    public bool interacting;
 }
