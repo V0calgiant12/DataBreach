@@ -40588,9 +40588,41 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4955203581812179183, guid: bc91e9a72ce4630418ffe17757d8bca7, type: 3}
+      propertyPath: indicator
+      value: 
+      objectReference: {fileID: 8362731456138051620}
+    - target: {fileID: 5541933165237060642, guid: bc91e9a72ce4630418ffe17757d8bca7, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.16
+      objectReference: {fileID: 0}
+    - target: {fileID: 5541933165237060642, guid: bc91e9a72ce4630418ffe17757d8bca7, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.16
+      objectReference: {fileID: 0}
+    - target: {fileID: 6208874275512664855, guid: bc91e9a72ce4630418ffe17757d8bca7, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7503720962246340740, guid: bc91e9a72ce4630418ffe17757d8bca7, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 8508971421575148354, guid: bc91e9a72ce4630418ffe17757d8bca7, type: 3}
+      propertyPath: m_Size.x
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8508971421575148354, guid: bc91e9a72ce4630418ffe17757d8bca7, type: 3}
+      propertyPath: m_Size.y
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8508971421575148354, guid: bc91e9a72ce4630418ffe17757d8bca7, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: c3eb06c096034534f9c20fb619f85aa1, type: 3}
+    - target: {fileID: 8508971421575148354, guid: bc91e9a72ce4630418ffe17757d8bca7, type: 3}
+      propertyPath: m_DrawMode
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8633000845752173388, guid: bc91e9a72ce4630418ffe17757d8bca7, type: 3}
       propertyPath: m_LocalPosition.x
@@ -40635,8 +40667,35 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6208874275512664855, guid: bc91e9a72ce4630418ffe17757d8bca7, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8362731456138051621}
   m_SourcePrefab: {fileID: 100100000, guid: bc91e9a72ce4630418ffe17757d8bca7, type: 3}
+--- !u!1 &8362731456138051619 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6208874275512664855, guid: bc91e9a72ce4630418ffe17757d8bca7, type: 3}
+  m_PrefabInstance: {fileID: 8362731456138051618}
+  m_PrefabAsset: {fileID: 0}
+--- !u!212 &8362731456138051620 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 8508971421575148354, guid: bc91e9a72ce4630418ffe17757d8bca7, type: 3}
+  m_PrefabInstance: {fileID: 8362731456138051618}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &8362731456138051621
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8362731456138051619}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e779d2374967ba44a6d795acf950545, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerColor
+  playerColor: {r: 0, g: 0, b: 0, a: 0}
+  sr: {fileID: 8362731456138051620}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

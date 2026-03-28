@@ -7,12 +7,11 @@ public class PlayerColor : MonoBehaviour
     [SerializeField] private SpriteRenderer sr;
     void Start()
     {
-        UpdateColor();
     }
 
-    public void UpdateColor()
+    void Update()
     {
         playerColor = UnityEngine.Color.HSVToRGB(SettingsData.Instance._PlayerHue, SettingsData.Instance._PlayerSaturation, SettingsData.Instance._PlayerValue);
-        sr.color = playerColor;
+        sr.color = new UnityEngine.Color(playerColor.r,playerColor.g,playerColor.b, sr.color.a);
     }
 }

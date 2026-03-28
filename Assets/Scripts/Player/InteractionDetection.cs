@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class InteractionDetection : MonoBehaviour 
 {
-    [SerializeField] private GameObject indicator;
+    [SerializeField] private SpriteRenderer indicator;
 
     void Start()
     {
@@ -11,11 +11,14 @@ public class InteractionDetection : MonoBehaviour
     }
     private void OnTriggerExit2D(Collider2D other)
     {
-        indicator.SetActive(false);
+        indicator.color = new Color(indicator.color.r,indicator.color.g,indicator.color.b, 0);
+    }
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        indicator.color = new Color(indicator.color.r,indicator.color.g,indicator.color.b, 1);
     }
     private void OnTriggerStay2D(Collider2D other)
     {
-        indicator.SetActive(true);
         if (Input.GetKeyDown(SettingsData.Instance._InputInteract))
         { 
             InteractableData data = other.gameObject.GetComponent<InteractableData>();

@@ -42,7 +42,6 @@ public class PauseMenuManager : MonoBehaviour
     }
     public void ReturnButton()
     {
-        playerColor.UpdateColor();
         canvas.SetActive(false);
         Time.timeScale = 1;
     }
