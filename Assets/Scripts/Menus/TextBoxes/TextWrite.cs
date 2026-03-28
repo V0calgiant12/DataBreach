@@ -47,25 +47,26 @@ public class TextWrite : MonoBehaviour
 
     IEnumerator Write()
     {
-        if(frame < 10)
+        while(frame < 30)
         {
-            characterNum = 0;
-            string output = "";
-            while(characterNum < _TextInput.Length)
-            {
-                output += _TextInput[characterNum];
-                text.text = output;
-                if(char.ToString(_TextInput[characterNum]) != " ")
-                {
-                    GameObject audioClone = Instantiate(prefab);
-                    audioClone.GetComponent<MenuAudioSource>().TextSound(this);
-                }
-                characterNum += 1;
-
-                yield return new WaitForFrames(_TextSpeed);
-            }
+            frame += 1;
+            yield return null;
         }
-        frame += 1;
+        characterNum = 0;
+        string output = "";
+        while(characterNum < _TextInput.Length)
+        {
+            output += _TextInput[characterNum];
+            text.text = output;
+            if(char.ToString(_TextInput[characterNum]) != " ")
+            {
+                GameObject audioClone = Instantiate(prefab);
+                audioClone.GetComponent<MenuAudioSource>().TextSound(this);
+            }
+            characterNum += 1;
+
+            yield return new WaitForFrames(_TextSpeed);
+        }
     }
 }
 public class WaitForFrames : CustomYieldInstruction
