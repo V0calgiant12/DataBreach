@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class PlayerCrouching : PlayerAbstract
 {
-    private int audioTimer = 0;
     public override void RunOnce(PlayerStateManager player)
     {
         Setup();

@@ -13,6 +13,7 @@ public class TextBoxAnimation : MonoBehaviour
     [SerializeField] private Animator animator;
     void Start()
     {
+        open = false;
         rectTransform.ForceUpdateRectTransforms();
     }
     public void Open()

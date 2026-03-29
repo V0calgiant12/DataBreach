@@ -1,11 +1,12 @@
 using UnityEngine;
 
-public class Stalagtite : MonoBehaviour
+public class StalagtiteTrigger : MonoBehaviour
 {
     public Rigidbody2D StalagmiteRb;
     public GameObject Collider;
     public GameObject Hitbox;
     public GameObject Trigger;
+    [SerializeField] private AudioSource audioSource;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -17,7 +18,7 @@ public class Stalagtite : MonoBehaviour
             PlayerStateManager.Instance.playerData.playerHealth = PlayerStateManager.Instance.playerData.playerHealth - 1f;
             Debug.Log("Stalagtite Damaged Player");
         }
-        if(other.gameObject.CompareTag("Ground") && gameObject.CompareTag("Hitbox"))
+        if((other.gameObject.CompareTag("Ground")||other.gameObject.CompareTag("Stone")) && gameObject.CompareTag("Hitbox"))
         {
             Hitbox.SetActive(false);
             Collider.SetActive(true);
@@ -29,6 +30,7 @@ public class Stalagtite : MonoBehaviour
             Trigger.SetActive(false);
             Collider.SetActive(false);
             Hitbox.SetActive(true);
+            audioSource.Play();
         }
     }
     private void OnCollisionEnter2D(Collision2D other) 
