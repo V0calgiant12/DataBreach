@@ -12,6 +12,7 @@ public class TextWrite : MonoBehaviour
     public string _TextInput;
     public int _TextSpeed;
     public AudioClip _TextSound;
+    public bool _Writing;
     [Header("References")]
     [SerializeField] private int characterNum;
     [SerializeField] private TextMeshProUGUI text;
@@ -47,6 +48,7 @@ public class TextWrite : MonoBehaviour
 
     IEnumerator Write()
     {
+        _Writing = true;
         while(frame < 30)
         {
             frame += 1;
@@ -57,16 +59,22 @@ public class TextWrite : MonoBehaviour
         while(characterNum < _TextInput.Length)
         {
             output += _TextInput[characterNum];
-            text.text = output;
             if(char.ToString(_TextInput[characterNum]) != " ")
             {
                 GameObject audioClone = Instantiate(prefab);
                 audioClone.GetComponent<MenuAudioSource>().TextSound(this);
             }
             characterNum += 1;
+            if (Input.GetKey(SettingsData.Instance._InputInteract))
+            {
+                output = _TextInput;
+                characterNum = _TextInput.Length;
+            }
+            text.text = output;
 
             yield return new WaitForFrames(_TextSpeed);
         }
+        _Writing = false;
     }
 }
 public class WaitForFrames : CustomYieldInstruction
