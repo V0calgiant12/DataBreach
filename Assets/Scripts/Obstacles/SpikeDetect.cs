@@ -4,7 +4,6 @@ using System.Collections;
 public class SpikeDetect : MonoBehaviour
 {
     public Rigidbody2D PlayerRb;
-    public float noMoving = 0.25f;
     public float xLaunch;
     public float yLaunch;
     void Start()
@@ -25,15 +24,7 @@ public class SpikeDetect : MonoBehaviour
             }
             yLaunch = Random.Range(12, 20);
             PlayerStateManager.Instance.playerData.movementAllowed = false;
-            StartCoroutine(noMovement(noMoving));
+            PlayerStateManager.Instance.DamagePlayer(xLaunch,yLaunch,120);
         }
-    }
-    private IEnumerator noMovement(float noMoving)
-    {
-        PlayerStateManager.Instance.playerData.playerHealth = PlayerStateManager.Instance.playerData.playerHealth - 1f;
-        Debug.Log(PlayerStateManager.Instance.playerData.playerHealth);
-        PlayerRb.linearVelocity = new Vector2(xLaunch, yLaunch);
-        yield return new WaitForSeconds(noMoving);
-        PlayerStateManager.Instance.playerData.movementAllowed = true;
     }
 }

@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class PlayerStateManager : MonoBehaviour
@@ -61,5 +62,23 @@ public class PlayerStateManager : MonoBehaviour
         playerData.audioSource = gameObject.GetComponent<PlayerSound>();
         playerData.collider = gameObject.GetComponent<BoxCollider2D>();
         playerData.MainCamera = GameObject.Find("Main Camera");
+    }
+    public void DamagePlayer(float xLaunch, float yLaunch,int timer)
+    {
+        playerData.playerHealth = playerData.playerHealth - 1f;
+        Debug.Log(playerData.playerHealth);
+        StartCoroutine(StunPlayer(xLaunch, yLaunch,timer));
+    }
+    private IEnumerator StunPlayer(float xLaunch, float yLaunch, int timer)
+    {
+        playerData.movementAllowed = false;
+        int elapsed = 0;
+        playerData.PlayerRb.linearVelocity = new Vector2(xLaunch, yLaunch);
+        while(!GroundCheck.Instance._IsGrounded || timer > elapsed)
+        {
+            elapsed += 1;
+            yield return null;
+        }
+        playerData.movementAllowed = true;
     }
 }
