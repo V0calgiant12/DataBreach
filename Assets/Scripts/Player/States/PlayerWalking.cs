@@ -54,6 +54,7 @@ public class PlayerWalking : PlayerAbstract
         }
         if (!GroundCheck.Instance._IsGrounded && player.playerData.coyoteTimeCounter < 0)
         {
+            player.playerData.audioSource.PlayGrassSound(player.playerData._GrassJump);
             player.playerData.PlayerRb.linearVelocityX = 0;
             player.SwitchState(player.AirState);
             return;

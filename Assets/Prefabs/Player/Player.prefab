@@ -304,7 +304,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.85, y: 0.1}
+  m_Size: {x: 0.85, y: 0.05}
   m_EdgeRadius: 0
 --- !u!114 &4323053229518001845
 MonoBehaviour:
@@ -520,6 +520,8 @@ GameObject:
   - component: {fileID: 5254595327118261300}
   - component: {fileID: 405897520248931599}
   - component: {fileID: 1040065690880391275}
+  - component: {fileID: 4649259202152044799}
+  - component: {fileID: 6383165355602986983}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -649,3 +651,38 @@ MonoBehaviour:
   noMoving: 1
   xLaunch: 0
   yLaunch: 0
+--- !u!95 &4649259202152044799
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7503720962246340740}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: aa5f0f4769e66334abb69f5d5e351af8, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &6383165355602986983
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7503720962246340740}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2556baf8be0d6f5408da01640da6cafb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerSound
+  prefab: {fileID: 8734533203902538695, guid: 21dd3930a865c1b43a4c893ead294474, type: 3}

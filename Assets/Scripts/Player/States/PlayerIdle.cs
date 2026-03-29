@@ -43,6 +43,7 @@ public class PlayerIdle : PlayerAbstract
         }
         if (!GroundCheck.Instance._IsGrounded && player.playerData.coyoteTimeCounter < 0)
         {
+            player.playerData.audioSource.PlayGrassSound(player.playerData._GrassJump);
             player.SwitchState(player.AirState);
             return;
         }

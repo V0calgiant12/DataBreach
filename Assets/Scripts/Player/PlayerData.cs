@@ -23,4 +23,5 @@ public class PlayerData : ScriptableObject
     [Header("Audio")]
     public AudioClip _GrassWalk;
     public AudioClip _GrassFall;
+    public AudioClip _GrassJump;
 }

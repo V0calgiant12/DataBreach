@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class PlayerCrouching : PlayerAbstract
 {
+    private int audioTimer = 0;
     public override void RunOnce(PlayerStateManager player)
     {
         Setup();
@@ -67,6 +68,7 @@ public class PlayerCrouching : PlayerAbstract
             {
                 player.playerData.crouching = false;
             }
+            player.playerData.audioSource.PlayGrassSound(player.playerData._GrassJump);
             player.SwitchState(player.AirState);
             return;
         }
