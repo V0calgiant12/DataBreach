@@ -11,7 +11,7 @@ public class PlayerSound : MonoBehaviour
     public void PlayGrassSound(AudioClip audio)
     {
         GameObject audioClone = Instantiate(prefab);
-        audioClone.GetComponent<PlayerAudioSource>().GrassSound(audio,0.7f);
+        audioClone.GetComponent<PlayerAudioSource>().GrassSound(audio,0.9f);
     }
     public void PlayStoneSound(AudioClip audio)
     {
