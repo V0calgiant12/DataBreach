@@ -6,6 +6,6 @@ public class MenuSound : MonoBehaviour
     public void PlaySound(AudioClip audio)
     {
         GameObject audioClone = Instantiate(prefab);
-        audioClone.GetComponent<MenuAudioSource>().MenuSound(audio);
+        audioClone.GetComponent<MenuAudioSource>().MenuSound(audio,1);
     }
 }

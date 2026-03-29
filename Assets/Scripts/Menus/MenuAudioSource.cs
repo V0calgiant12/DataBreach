@@ -13,8 +13,9 @@ public class MenuAudioSource : MonoBehaviour
         audioSource.Play();
         StartCoroutine(Delete());
     }
-    public void MenuSound(AudioClip audioClip)
+    public void MenuSound(AudioClip audioClip,float volume)
     {
+        audioSource.volume = volume;
         audioSource.outputAudioMixerGroup = audioMixer.FindMatchingGroups("Effects")[0];
         audioSource.clip = audioClip;
         audioSource.Play();
@@ -23,7 +24,7 @@ public class MenuAudioSource : MonoBehaviour
 
     IEnumerator Delete()
     {
-        yield return new WaitForSeconds(audioSource.clip.length);
+        yield return new WaitForSeconds(audioSource.clip.length+1);
         Destroy(gameObject);
     }
 }
