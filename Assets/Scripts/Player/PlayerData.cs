@@ -18,4 +18,5 @@ public class PlayerData : ScriptableObject
     public bool leftOrRight;
     public Animator anim;
     //public bool currentWallSide;
+    public bool interacting;
 }

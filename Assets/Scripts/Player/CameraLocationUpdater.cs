@@ -9,7 +9,7 @@ public class CameraLocationUpdater : MonoBehaviour
     {
         
     }
-    void LateUpdate()
+    void Update()
     {
         transform.position = new UnityEngine.Vector3(player.transform.position.x + rb.linearVelocityX/4, player.transform.position.y + rb.linearVelocityY/4, -10);
     }
