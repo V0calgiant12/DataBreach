@@ -24,7 +24,7 @@ public class MenuAudioSource : MonoBehaviour
 
     IEnumerator Delete()
     {
-        yield return new WaitForSeconds(audioSource.clip.length+1);
+        yield return new WaitForSeconds(audioSource.clip.length);
         Destroy(gameObject);
     }
 }
