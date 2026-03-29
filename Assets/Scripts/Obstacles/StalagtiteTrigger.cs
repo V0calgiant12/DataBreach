@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class StalagtiteTrigger : MonoBehaviour
@@ -15,8 +16,8 @@ public class StalagtiteTrigger : MonoBehaviour
     {
         if(other.gameObject.CompareTag("Player") && gameObject.CompareTag("Hitbox"))
         {
-            PlayerStateManager.Instance.playerData.playerHealth = PlayerStateManager.Instance.playerData.playerHealth - 1f;
-            Debug.Log("Stalagtite Damaged Player");
+            PlayerStateManager.Instance.DamagePlayer(10*(PlayerStateManager.Instance.playerData.leftOrRight ? -1 : 1), UnityEngine.Random.Range(6,10),60);
+            Debug.Log("Stalagtite Damaged Player " + Convert.ToInt16(PlayerStateManager.Instance.playerData.leftOrRight));
         }
         if((other.gameObject.CompareTag("Ground")||other.gameObject.CompareTag("Stone")) && gameObject.CompareTag("Hitbox"))
         {
@@ -30,7 +31,7 @@ public class StalagtiteTrigger : MonoBehaviour
             Trigger.SetActive(false);
             Collider.SetActive(false);
             Hitbox.SetActive(true);
-            audioSource.pitch = Random.Range(0.6f, 1.2f);
+            audioSource.pitch = UnityEngine.Random.Range(0.6f, 1.2f);
             audioSource.Play();
         }
     }
