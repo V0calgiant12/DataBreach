@@ -50,11 +50,11 @@ public class CameraShaker : MonoBehaviour
         UnityEngine.Vector3 originalLocalPosition = transform.localPosition;
         float elapsed = 0f;
 
-        while (elapsed < 5+ 0.2*magnitude)
+        while (elapsed < 5 + 0.5*magnitude)
         {
             // Generate a random point inside a sphere and multiply by magnitude
-            float x = Random.Range(-1f, 1.5f) * magnitude;
-            float y = Random.Range(-1f, 1.5f) * magnitude;
+            float x = Random.Range(-0.8f, 0.8f) * magnitude;
+            float y = Random.Range(-1.5f, 1f) * magnitude;
 
             transform.localPosition = originalLocalPosition + new UnityEngine.Vector3(x, y, -10);
 
