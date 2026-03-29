@@ -24,4 +24,10 @@ public class PlayerData : ScriptableObject
     public AudioClip _GrassWalk;
     public AudioClip _GrassFall;
     public AudioClip _GrassJump;
+    public AudioClip _StoneWalk;
+    public AudioClip _StoneFall;
+    public AudioClip _StoneJump;
+    public AudioClip _NormalFall;
+    public AudioClip _NormalJump;
+    public AudioClip _AirJump;
 }

@@ -15,6 +15,24 @@ public class PlayerAudioSource : MonoBehaviour
         audioSource.Play();
         StartCoroutine(Delete());
     }
+    public void JumpSound(AudioClip audioClip,float volume)
+    {
+        audioSource.pitch = Random.Range(0.7f,1.4f);
+        audioSource.volume = volume;
+        audioSource.outputAudioMixerGroup = audioMixer.FindMatchingGroups("Effects")[0];
+        audioSource.clip = audioClip;
+        audioSource.Play();
+        StartCoroutine(Delete());
+    }
+    public void StoneSound(AudioClip audioClip,float volume)
+    {
+        audioSource.pitch = Random.Range(0.6f,1.3f);
+        audioSource.volume = volume;
+        audioSource.outputAudioMixerGroup = audioMixer.FindMatchingGroups("Effects")[0];
+        audioSource.clip = audioClip;
+        audioSource.Play();
+        StartCoroutine(Delete());
+    }
 
     IEnumerator Delete()
     {

@@ -55,6 +55,15 @@ public class PlayerWalking : PlayerAbstract
             player.playerData.PlayerRb.linearVelocity = new Vector2(player.playerData.PlayerRb.linearVelocityX, jumpStrength);
             player.playerData.jumpBufferCounter = 0;
             player.playerData.coyoteTimeCounter = 0;
+            player.playerData.audioSource.PlayJumpSound(player.playerData._NormalJump);
+            if (GroundCheck.Instance._IsStone)
+            {
+                player.playerData.audioSource.PlayStoneSound(player.playerData._StoneJump);
+            }
+            else
+            {
+                player.playerData.audioSource.PlayGrassSound(player.playerData._GrassJump);
+            }
             player.SwitchState(player.AirState);
             return;
         }
@@ -72,9 +81,16 @@ public class PlayerWalking : PlayerAbstract
             PlayerStateManager.Instance.playerData.anim.SetBool("sprinting", true);
             return;
         }
-        if(audioTimer == 10)
+        if(audioTimer == 25)
         {
-            player.playerData.audioSource.PlayGrassSound(player.playerData._GrassWalk);
+            if (GroundCheck.Instance._IsStone)
+            {
+                player.playerData.audioSource.PlayStoneSound(player.playerData._StoneWalk);
+            }
+            else
+            {
+                player.playerData.audioSource.PlayGrassSound(player.playerData._GrassWalk);
+            }
             audioTimer = 0;
         }else
         {
