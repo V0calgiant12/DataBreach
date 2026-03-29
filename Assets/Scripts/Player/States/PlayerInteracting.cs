@@ -11,7 +11,6 @@ public class PlayerInteracting : PlayerAbstract
     {
         player.playerData.interacting = true;
         frame = 0;
-        Debug.Log("Interacting state");
     }
     public override void UpdateState(PlayerStateManager player) // Update Function
     {

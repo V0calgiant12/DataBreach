@@ -24,7 +24,7 @@ public class InteractionDetection : MonoBehaviour
         if (Input.GetKeyDown(SettingsData.Instance._InputInteract) && player.playerData.interacting == false)
         {
             InteractableData data = other.gameObject.GetComponent<InteractableData>();
-            Debug.Log(data._Id);
+            indicator.color = new Color(indicator.color.r,indicator.color.g,indicator.color.b, 0);
             switch (data._Id)
             {
                 case(0):
