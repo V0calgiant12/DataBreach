@@ -14,12 +14,15 @@ public class PlayerSprinting : PlayerAbstract
     public override void UpdateState(PlayerStateManager player)
     {
         moving = false;
+        PlayerStateManager.Instance.playerData.anim.SetBool("moving", false);
+        PlayerStateManager.Instance.playerData.anim.SetBool("sprinting", true);
         // sprint right
         if (Input.GetKey(SettingsData.Instance._InputRight))
         {
             PlayerVelocity = new Vector2(playerSpeed, player.playerData.PlayerRb.linearVelocityY);
             player.playerData.PlayerRb.linearVelocity = PlayerVelocity;// + OffsetVelocity;
             player.playerData.leftOrRight = true;
+            PlayerStateManager.Instance.playerData.anim.SetBool("moving", true);
             moving = true;
         }
         // sprint left
@@ -28,6 +31,7 @@ public class PlayerSprinting : PlayerAbstract
             PlayerVelocity = new Vector2(-playerSpeed, player.playerData.PlayerRb.linearVelocityY);
             player.playerData.PlayerRb.linearVelocity = PlayerVelocity;// + OffsetVelocity;
             player.playerData.leftOrRight = false;
+            PlayerStateManager.Instance.playerData.anim.SetBool("moving", true);
             moving = true;
         }
         // if crouching go to crouching
@@ -46,6 +50,7 @@ public class PlayerSprinting : PlayerAbstract
         // if not sprinting go to walking 
         if (player.playerData.sprinting == false)
         {
+            PlayerStateManager.Instance.playerData.anim.SetBool("sprinting", false);
             Debug.Log(player.playerData.sprinting);
             player.SwitchState(player.WalkingState);
             return;

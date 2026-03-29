@@ -19,6 +19,7 @@ public class PlayerWalking : PlayerAbstract
             PlayerVelocity = new Vector2(playerSpeed, player.playerData.PlayerRb.linearVelocityY);
             player.playerData.PlayerRb.linearVelocity = PlayerVelocity;// + OffsetVelocity;
             player.playerData.leftOrRight = true;
+            PlayerStateManager.Instance.playerData.anim.SetBool("moving", true);
             moving = true;
         }
         if (Input.GetKey(SettingsData.Instance._InputLeft)) 
@@ -26,6 +27,7 @@ public class PlayerWalking : PlayerAbstract
             PlayerVelocity = new Vector2(-playerSpeed, player.playerData.PlayerRb.linearVelocityY);
             player.playerData.PlayerRb.linearVelocity = PlayerVelocity;// + OffsetVelocity;
             player.playerData.leftOrRight = false;
+            PlayerStateManager.Instance.playerData.anim.SetBool("moving", true);
             moving = true;
         }
         if (player.playerData.crouching)
@@ -36,6 +38,7 @@ public class PlayerWalking : PlayerAbstract
         if (!moving)
         {
             player.playerData.PlayerRb.linearVelocityX = 0;
+            PlayerStateManager.Instance.playerData.anim.SetBool("moving", false);
             player.SwitchState(player.IdleState);
             return;
         }
@@ -57,6 +60,8 @@ public class PlayerWalking : PlayerAbstract
         if (player.playerData.sprinting)
         {
             player.SwitchState(player.SprintingState);
+            PlayerStateManager.Instance.playerData.anim.SetBool("moving", true);
+            PlayerStateManager.Instance.playerData.anim.SetBool("sprinting", true);
             return;
         }
     }

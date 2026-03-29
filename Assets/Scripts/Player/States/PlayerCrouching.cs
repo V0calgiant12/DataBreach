@@ -19,17 +19,21 @@ public class PlayerCrouching : PlayerAbstract
         if (!player.playerData.crouching)
         {
             // Leave crouch
+            PlayerStateManager.Instance.playerData.anim.SetBool("crouching", false);
             player.SwitchState(player.IdleState);
             return;
         }
 
         // Crouch walking
         moving = false;
+        PlayerStateManager.Instance.playerData.anim.SetBool("crouching", true);
+        PlayerStateManager.Instance.playerData.anim.SetBool("moving", false);
         if (Input.GetKey(SettingsData.Instance._InputRight))
         {
             PlayerVelocity = new Vector2(playerSpeed, player.playerData.PlayerRb.linearVelocityY);
             player.playerData.PlayerRb.linearVelocity = PlayerVelocity;// + OffsetVelocity;
             player.playerData.leftOrRight = true;
+            PlayerStateManager.Instance.playerData.anim.SetBool("moving", true);
             moving = true;
         }
         if (Input.GetKey(SettingsData.Instance._InputLeft)) 
@@ -37,6 +41,7 @@ public class PlayerCrouching : PlayerAbstract
             PlayerVelocity = new Vector2(-playerSpeed, player.playerData.PlayerRb.linearVelocityY);
             player.playerData.PlayerRb.linearVelocity = PlayerVelocity;// + OffsetVelocity;
             player.playerData.leftOrRight = false;
+            PlayerStateManager.Instance.playerData.anim.SetBool("moving", true);
             moving = true;
         }
         if (!moving)
