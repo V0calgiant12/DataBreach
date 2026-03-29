@@ -28064,6 +28064,19 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &954643297
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 954643284}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2556baf8be0d6f5408da01640da6cafb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerSound
+  prefab: {fileID: 8734533203902538695, guid: 21dd3930a865c1b43a4c893ead294474, type: 3}
 --- !u!1001 &1038087758
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -42813,6 +42826,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7503720962246340740, guid: bc91e9a72ce4630418ffe17757d8bca7, type: 3}
       insertIndex: -1
       addedObject: {fileID: 954643291}
+    - targetCorrespondingSourceObject: {fileID: 7503720962246340740, guid: bc91e9a72ce4630418ffe17757d8bca7, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 954643297}
   m_SourcePrefab: {fileID: 100100000, guid: bc91e9a72ce4630418ffe17757d8bca7, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

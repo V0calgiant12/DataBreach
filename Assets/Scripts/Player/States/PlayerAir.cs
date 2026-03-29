@@ -86,6 +86,7 @@ public override void RunOnce(PlayerStateManager player)
                 TriggerShake.Instance.BurstShake(shakeIntensityLvl);
             }
             player.playerData.doubleJumpAvailable = true;
+            player.playerData.audioSource.PlayGrassSound(player.playerData._GrassFall);
             player.SwitchState(player.IdleState);
             return;
         }

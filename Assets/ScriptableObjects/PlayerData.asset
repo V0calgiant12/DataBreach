@@ -16,8 +16,16 @@ MonoBehaviour:
   OffsetVelocity: {x: 0, y: 0}
   PlayerRb: {fileID: 0}
   collider: {fileID: 0}
-  jumpBufferCounter: 0
-  coyoteTimeCounter: 0
+  audioSource: {fileID: 0}
+  jumpBufferCounter: -342
+  coyoteTimeCounter: 15
+  playerHealth: 5
   sprinting: 0
   crouching: 0
   doubleJumpAvailable: 1
+  movementAllowed: 1
+  leftOrRight: 0
+  anim: {fileID: 0}
+  interacting: 0
+  _GrassWalk: {fileID: 8300000, guid: 0a7bcb5adf063a24da9d72f4dc0f02a0, type: 3}
+  _GrassFall: {fileID: 8300000, guid: 46a651f22e879ac4f9102ee15625f1e6, type: 3}
