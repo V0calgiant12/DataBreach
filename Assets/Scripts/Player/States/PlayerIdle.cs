@@ -38,12 +38,20 @@ public class PlayerIdle : PlayerAbstract
             player.playerData.PlayerRb.linearVelocity = new Vector2(player.playerData.PlayerRb.linearVelocityX, jumpStrength);
             player.playerData.jumpBufferCounter = 0;
             player.playerData.coyoteTimeCounter = 0;
+            player.playerData.audioSource.PlayJumpSound(player.playerData._NormalJump);
+            if (GroundCheck.Instance._IsStone)
+            {
+                player.playerData.audioSource.PlayStoneSound(player.playerData._StoneJump);
+            }
+            else
+            {
+                player.playerData.audioSource.PlayGrassSound(player.playerData._GrassJump);
+            }
             player.SwitchState(player.AirState);
             return;
         }
         if (!GroundCheck.Instance._IsGrounded && player.playerData.coyoteTimeCounter < 0)
         {
-            player.playerData.audioSource.PlayGrassSound(player.playerData._GrassJump);
             player.SwitchState(player.AirState);
             return;
         }

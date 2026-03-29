@@ -59,6 +59,7 @@ public override void RunOnce(PlayerStateManager player)
         if ((Input.GetKeyDown(SettingsData.Instance._InputJump) || SettingsData.Instance._UpToJump && Input.GetKeyDown(SettingsData.Instance._InputUp)) && player.playerData.doubleJumpAvailable) // NOTE: Doesn't buffer the jump because we don't want the player to instantly use their double jump.
         {
             Debug.Log("jump in air");
+            player.playerData.audioSource.PlayJumpSound(player.playerData._AirJump);
             player.playerData.PlayerRb.linearVelocity = new Vector2(player.playerData.PlayerRb.linearVelocityX, jumpStrength * 0.8f);
             player.playerData.doubleJumpAvailable = false;
             player.playerData.jumpBufferCounter = 0;
@@ -87,7 +88,15 @@ public override void RunOnce(PlayerStateManager player)
                 TriggerShake.Instance.BurstShake(shakeIntensityLvl);
             }
             player.playerData.doubleJumpAvailable = true;
-            player.playerData.audioSource.PlayGrassSound(player.playerData._GrassFall);
+            player.playerData.audioSource.PlayJumpSound(player.playerData._NormalFall);
+            if (GroundCheck.Instance._IsStone)
+            {
+                player.playerData.audioSource.PlayStoneSound(player.playerData._StoneFall);
+            }
+            else
+            {
+                player.playerData.audioSource.PlayGrassSound(player.playerData._GrassFall);
+            }
             player.SwitchState(player.IdleState);
             return;
         }

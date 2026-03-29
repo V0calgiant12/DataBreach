@@ -57,6 +57,15 @@ public class PlayerCrouching : PlayerAbstract
             player.playerData.PlayerRb.linearVelocity = new Vector2(player.playerData.PlayerRb.linearVelocityX, jumpStrength * 0.8f);
             player.playerData.jumpBufferCounter = 0;
             player.playerData.coyoteTimeCounter = 0;
+            player.playerData.audioSource.PlayJumpSound(player.playerData._NormalJump);
+            if (GroundCheck.Instance._IsStone)
+            {
+                player.playerData.audioSource.PlayStoneSound(player.playerData._StoneJump);
+            }
+            else
+            {
+                player.playerData.audioSource.PlayGrassSound(player.playerData._GrassJump);
+            }
             player.SwitchState(player.AirState);
             return;
         }
@@ -68,7 +77,6 @@ public class PlayerCrouching : PlayerAbstract
             {
                 player.playerData.crouching = false;
             }
-            player.playerData.audioSource.PlayGrassSound(player.playerData._GrassJump);
             player.SwitchState(player.AirState);
             return;
         }
