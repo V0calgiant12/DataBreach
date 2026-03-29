@@ -21,7 +21,7 @@ public class PlayerStateManager : MonoBehaviour
     }
     void Start()
     {
-        playerData.playerHealth = 5f;
+        playerData.playerHealth = 5;
         playerData.interacting = false;
         Instance = this;
         FindPlayerObject();
@@ -65,7 +65,7 @@ public class PlayerStateManager : MonoBehaviour
     }
     public void DamagePlayer(float xLaunch, float yLaunch,int timer)
     {
-        playerData.playerHealth = playerData.playerHealth - 1f;
+        playerData.playerHealth = playerData.playerHealth - 1;
         Debug.Log(playerData.playerHealth);
         StartCoroutine(StunPlayer(xLaunch*(playerData.leftOrRight ? -1 : 1), yLaunch,timer));
     }

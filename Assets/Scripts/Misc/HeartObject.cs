@@ -20,7 +20,7 @@ public class HeartObject : MonoBehaviour
     {
         if(other.gameObject.CompareTag("Player") && PlayerStateManager.Instance.playerData.playerHealth < 5)
         {
-            PlayerStateManager.Instance.playerData.playerHealth = PlayerStateManager.Instance.playerData.playerHealth + 1f;
+            PlayerStateManager.Instance.playerData.playerHealth = PlayerStateManager.Instance.playerData.playerHealth + 1;
             Debug.Log("Health up by 1, health is now " + PlayerStateManager.Instance.playerData.playerHealth);
             Destroy(gameObject);
         }

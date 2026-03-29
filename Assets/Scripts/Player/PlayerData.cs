@@ -10,7 +10,7 @@ public class PlayerData : ScriptableObject
     public PlayerSound audioSource;
     public int jumpBufferCounter;
     public int coyoteTimeCounter;
-    public float playerHealth = 5;
+    public int playerHealth = 5;
     //public int lastWallJumpRight;
     public bool sprinting;
     public bool crouching;
