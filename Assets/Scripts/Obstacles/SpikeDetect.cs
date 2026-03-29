@@ -14,14 +14,7 @@ public class SpikeDetect : MonoBehaviour
     {
         if(other.gameObject.CompareTag("Spikes"))
         {
-            if (!PlayerStateManager.Instance.playerData.leftOrRight)
-            {
-                xLaunch = Random.Range(5, 10);
-            }
-            else
-            {
-                xLaunch = Random.Range(-5, -10);
-            }
+            xLaunch = Random.Range(5, 10);
             yLaunch = Random.Range(12, 20);
             PlayerStateManager.Instance.playerData.movementAllowed = false;
             PlayerStateManager.Instance.DamagePlayer(xLaunch,yLaunch,120);

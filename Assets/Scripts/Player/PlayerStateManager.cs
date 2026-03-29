@@ -67,7 +67,7 @@ public class PlayerStateManager : MonoBehaviour
     {
         playerData.playerHealth = playerData.playerHealth - 1f;
         Debug.Log(playerData.playerHealth);
-        StartCoroutine(StunPlayer(xLaunch, yLaunch,timer));
+        StartCoroutine(StunPlayer(xLaunch*(playerData.leftOrRight ? -1 : 1), yLaunch,timer));
     }
     private IEnumerator StunPlayer(float xLaunch, float yLaunch, int timer)
     {
