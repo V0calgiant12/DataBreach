@@ -7,6 +7,7 @@ public class PlayerData : ScriptableObject
     public Vector2 OffsetVelocity;
     public Rigidbody2D PlayerRb;
     public BoxCollider2D collider; 
+    public PlayerSound audioSource;
     public int jumpBufferCounter;
     public int coyoteTimeCounter;
     public float playerHealth = 5;
@@ -19,4 +20,8 @@ public class PlayerData : ScriptableObject
     public Animator anim;
     //public bool currentWallSide;
     public bool interacting;
+    [Header("Audio")]
+    public AudioClip _GrassWalk;
+    public AudioClip _GrassFall;
+    public AudioClip _GrassJump;
 }

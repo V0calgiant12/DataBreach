@@ -15,15 +15,18 @@ public class PlayerInteracting : PlayerAbstract
     public override void UpdateState(PlayerStateManager player) // Update Function
     {
         player.playerData.PlayerRb.linearVelocity = new UnityEngine.Vector2(0,player.playerData.PlayerRb.linearVelocityY);
-        if(frame == 1)
+        if(frame > 10)
         {
-            if (Input.GetKeyDown(SettingsData.Instance._InputInteract))
+            if (Input.GetKeyDown(SettingsData.Instance._InputInteract) && TextWrite.Instance._Writing == false)
             {
                 player.playerData.interacting = false;
                 TextWrite.Instance.Close();
                 player.SwitchState(player.IdleState);
             }
         }
-        frame = 1;
+        else
+        {
+            frame += 1;
+        }
     }
 }

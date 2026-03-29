@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class PlayerSprinting : PlayerAbstract
 {
+    private int audioTimer = 0;
     public override void RunOnce(PlayerStateManager player)
     {
         Setup();
@@ -72,8 +73,17 @@ public class PlayerSprinting : PlayerAbstract
         }
         if (!GroundCheck.Instance._IsGrounded && player.playerData.coyoteTimeCounter < 0)
         {
+            player.playerData.audioSource.PlayGrassSound(player.playerData._GrassJump);
             player.SwitchState(player.AirState);
             return;
+        }
+        if(audioTimer == 5)
+        {
+            player.playerData.audioSource.PlayGrassSound(player.playerData._GrassWalk);
+            audioTimer = 0;
+        }else
+        {
+            audioTimer += 1;
         }
     }
 }

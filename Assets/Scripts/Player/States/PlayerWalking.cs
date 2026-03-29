@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class PlayerWalking : PlayerAbstract
 {
+    private int audioTimer = 0;
     public override void RunOnce(PlayerStateManager player)
     {
         Setup();
@@ -59,6 +60,7 @@ public class PlayerWalking : PlayerAbstract
         }
         if (!GroundCheck.Instance._IsGrounded && player.playerData.coyoteTimeCounter < 0)
         {
+            player.playerData.audioSource.PlayGrassSound(player.playerData._GrassJump);
             player.playerData.PlayerRb.linearVelocityX = 0;
             player.SwitchState(player.AirState);
             return;
@@ -69,6 +71,14 @@ public class PlayerWalking : PlayerAbstract
             PlayerStateManager.Instance.playerData.anim.SetBool("moving", true);
             PlayerStateManager.Instance.playerData.anim.SetBool("sprinting", true);
             return;
+        }
+        if(audioTimer == 10)
+        {
+            player.playerData.audioSource.PlayGrassSound(player.playerData._GrassWalk);
+            audioTimer = 0;
+        }else
+        {
+            audioTimer += 1;
         }
     }
 }

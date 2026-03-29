@@ -58,6 +58,7 @@ public class PlayerStateManager : MonoBehaviour
     {
         playerData.anim = GetComponent<Animator>(); 
         playerData.PlayerRb = gameObject.GetComponent<Rigidbody2D>();
+        playerData.audioSource = gameObject.GetComponent<PlayerSound>();
         playerData.collider = gameObject.GetComponent<BoxCollider2D>();
         playerData.MainCamera = GameObject.Find("Main Camera");
     }
