@@ -15,6 +15,7 @@ public class CameraShaker : MonoBehaviour
 {
     public static CameraShaker Instance;
     private UnityEngine.Vector3 Velocity = UnityEngine.Vector3.zero;
+    [SerializeField] private AudioSource audioSource;
 
     private void Awake()
     {
@@ -46,9 +47,11 @@ public class CameraShaker : MonoBehaviour
 
     public IEnumerator BurstShake(float magnitude)
     {
-        Debug.Log("Camera Burst Shake " + magnitude);
+        Debug.Log("Camera Burst Shake " + magnitude + ", pitch: " + magnitude * 0.05f);
         UnityEngine.Vector3 originalLocalPosition = transform.localPosition;
         float elapsed = 0f;
+        audioSource.pitch = 2.5f - (magnitude * 0.05f + Random.Range(-0.1f, 0.1f));
+        audioSource.Play();
 
         while (elapsed < 5 + 0.5*magnitude)
         {
