@@ -16,6 +16,7 @@ public class PlayerSprinting : PlayerAbstract
         moving = false;
         PlayerStateManager.Instance.playerData.anim.SetBool("moving", false);
         PlayerStateManager.Instance.playerData.anim.SetBool("sprinting", true);
+        PlayerStateManager.Instance.playerData.anim.SetBool("attacking", false);
         // sprint right
         if (Input.GetKey(SettingsData.Instance._InputRight))
         {
@@ -33,6 +34,11 @@ public class PlayerSprinting : PlayerAbstract
             player.playerData.leftOrRight = false;
             PlayerStateManager.Instance.playerData.anim.SetBool("moving", true);
             moving = true;
+        }
+        if ((Input.GetKeyDown(SettingsData.Instance._InputAttack)))
+        {
+            PlayerStateManager.Instance.playerData.anim.SetBool("attacking", true);
+            Debug.Log("Attacking while sprinting");
         }
         // if crouching go to crouching
         if (player.playerData.crouching)

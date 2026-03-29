@@ -14,6 +14,7 @@ public class PlayerWalking : PlayerAbstract
     public override void UpdateState(PlayerStateManager player)
     {
         moving = false;
+        PlayerStateManager.Instance.playerData.anim.SetBool("attacking", false);
         if (Input.GetKey(SettingsData.Instance._InputRight))
         {
             PlayerVelocity = new Vector2(playerSpeed, player.playerData.PlayerRb.linearVelocityY);
@@ -29,6 +30,11 @@ public class PlayerWalking : PlayerAbstract
             player.playerData.leftOrRight = false;
             PlayerStateManager.Instance.playerData.anim.SetBool("moving", true);
             moving = true;
+        }
+        if ((Input.GetKeyDown(SettingsData.Instance._InputAttack)))
+        {
+            PlayerStateManager.Instance.playerData.anim.SetBool("attacking", true);
+            Debug.Log("Attacking while walking");
         }
         if (player.playerData.crouching)
         {

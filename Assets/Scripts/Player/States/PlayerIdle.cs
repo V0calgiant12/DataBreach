@@ -1,6 +1,4 @@
-using JetBrains.Annotations;
 using UnityEngine;
-using UnityEngine.Tilemaps;
 
 public class PlayerIdle : PlayerAbstract
 {
@@ -17,8 +15,10 @@ public class PlayerIdle : PlayerAbstract
         player.playerData.PlayerRb.linearVelocityX = 0;
         PlayerStateManager.Instance.playerData.anim.SetBool("moving", false);
         PlayerStateManager.Instance.playerData.anim.SetBool("sprinting", false);
+        PlayerStateManager.Instance.playerData.anim.SetBool("attacking", false);
         if (Input.GetKeyDown(SettingsData.Instance._InputAttack))
         {
+            PlayerStateManager.Instance.playerData.anim.SetBool("attacking", true);
             Debug.Log("Attacking while Idle");
         }
         if (Input.GetKey(SettingsData.Instance._InputLeft) || Input.GetKey(SettingsData.Instance._InputRight))

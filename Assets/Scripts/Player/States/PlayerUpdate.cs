@@ -16,7 +16,7 @@ public class PlayerUpdate : PlayerAbstract
         player.playerData.playerHealth = 5;
     }
     public override void UpdateState(PlayerStateManager player) // Update Function
-    {
+    { 
         // Counter countdowns
         player.playerData.jumpBufferCounter -= 1;
         player.playerData.coyoteTimeCounter -= 1;

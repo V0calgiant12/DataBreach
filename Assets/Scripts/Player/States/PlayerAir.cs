@@ -14,7 +14,7 @@ public override void RunOnce(PlayerStateManager player)
     }
     public override void UpdateState(PlayerStateManager player)
     {
-
+        PlayerStateManager.Instance.playerData.anim.SetBool("attacking", false);
         // Fast Falling
         if (Input.GetKeyDown(SettingsData.Instance._InputDown)) // Check for fast fall.
         {
@@ -30,7 +30,7 @@ public override void RunOnce(PlayerStateManager player)
             player.playerData.leftOrRight = true;
             moving = true;
         }
-        else if (Input.GetKey(SettingsData.Instance._InputLeft)) // Moving left
+        if (Input.GetKey(SettingsData.Instance._InputLeft)) // Moving left
         {
             PlayerVelocity = new Vector2(-playerSpeed, player.playerData.PlayerRb.linearVelocityY);
             player.playerData.PlayerRb.linearVelocity = PlayerVelocity;// + OffsetVelocity;
@@ -45,6 +45,7 @@ public override void RunOnce(PlayerStateManager player)
         // Attacking
         if (Input.GetKeyDown(SettingsData.Instance._InputAttack)) // Check for an attack.
         {
+            PlayerStateManager.Instance.playerData.anim.SetBool("attacking", true);
             Debug.Log("Attacking while In Air");
         }
 
