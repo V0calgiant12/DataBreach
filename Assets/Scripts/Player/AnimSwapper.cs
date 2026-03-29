@@ -2,24 +2,28 @@ using UnityEngine;
 
 public class AnimSwapper : MonoBehaviour
 {
-    public GameObject AnimHolder;
-    public GameObject AirAnimHolder;
+    public RuntimeAnimatorController normalAnim;
+    public RuntimeAnimatorController airAnim;
     public Animator anim;
-    public Animator animAir;
     // Update is called once per frame
     void Start()
     {
-        anim = gameObject.AddComponent<Animator>();
+        anim = GetComponent<Animator>();
+        if (anim != null && normalAnim != null)
+        {
+            anim.runtimeAnimatorController = normalAnim;
+        }
     }
     void Update()
     {
         if (!GroundCheck.Instance._IsGrounded)
         {
-            anim = AirAnimHolder.GetComponent<Animator>();
+            anim.runtimeAnimatorController = airAnim;
         }
-        else
+        if (GroundCheck.Instance._IsGrounded)
         {
-            anim = AnimHolder.GetComponent<Animator>(); 
+            anim.runtimeAnimatorController = normalAnim;
+
         }
     }
 }

@@ -14,10 +14,14 @@ public override void RunOnce(PlayerStateManager player)
     }
     public override void UpdateState(PlayerStateManager player)
     {
-        PlayerStateManager.Instance.playerData.anim.SetBool("attacking", false);
+        PlayerStateManager.Instance.playerData.anim.SetBool("notGrounded", true);
+        PlayerStateManager.Instance.playerData.anim.SetBool("airJumping", false);
+        PlayerStateManager.Instance.playerData.anim.SetBool("falling", false);
+        PlayerStateManager.Instance.playerData.anim.SetBool("airAttacking", false);
         // Fast Falling
         if (Input.GetKeyDown(SettingsData.Instance._InputDown)) // Check for fast fall.
         {
+            PlayerStateManager.Instance.playerData.anim.SetBool("falling", true);
             player.playerData.PlayerRb.linearVelocity = new Vector2(player.playerData.PlayerRb.linearVelocityX, -jumpStrength * 1.5f);
         }
         
@@ -41,17 +45,26 @@ public override void RunOnce(PlayerStateManager player)
         {
             player.playerData.PlayerRb.linearVelocityX = 0;
         }
+        if (player.playerData.PlayerRb.linearVelocityY < 0) 
+        {
+            PlayerStateManager.Instance.playerData.anim.SetBool("falling", true);
+        }
 
         // Attacking
         if (Input.GetKeyDown(SettingsData.Instance._InputAttack)) // Check for an attack.
         {
-            PlayerStateManager.Instance.playerData.anim.SetBool("attacking", true);
+            PlayerStateManager.Instance.playerData.anim.SetBool("airAttacking", true);
             Debug.Log("Attacking while In Air");
+            if (player.playerData.PlayerRb.linearVelocityY < 0) 
+            {
+                PlayerStateManager.Instance.playerData.anim.SetBool("falling", true);
+            }
         }
 
         // Short Jumping
         if(!(Input.GetKey(SettingsData.Instance._InputJump) || SettingsData.Instance._UpToJump && Input.GetKey(SettingsData.Instance._InputUp)) && player.playerData.PlayerRb.linearVelocity.y > 0)
         {
+            PlayerStateManager.Instance.playerData.anim.SetBool("airJumping", true);
             player.playerData.PlayerRb.linearVelocity = new Vector2(player.playerData.PlayerRb.linearVelocityX, player.playerData.PlayerRb.linearVelocityY * 0.5f);
         }
 
@@ -59,6 +72,7 @@ public override void RunOnce(PlayerStateManager player)
         if ((Input.GetKeyDown(SettingsData.Instance._InputJump) || SettingsData.Instance._UpToJump && Input.GetKeyDown(SettingsData.Instance._InputUp)) && player.playerData.doubleJumpAvailable) // NOTE: Doesn't buffer the jump because we don't want the player to instantly use their double jump.
         {
             Debug.Log("jump in air");
+            PlayerStateManager.Instance.playerData.anim.SetBool("airJumping", true);
             player.playerData.PlayerRb.linearVelocity = new Vector2(player.playerData.PlayerRb.linearVelocityX, jumpStrength * 0.8f);
             player.playerData.doubleJumpAvailable = false;
             player.playerData.jumpBufferCounter = 0;
@@ -81,6 +95,7 @@ public override void RunOnce(PlayerStateManager player)
         // Grounded Check
         if (GroundCheck.Instance._IsGrounded)
         {
+            PlayerStateManager.Instance.playerData.anim.SetBool("notGrounded", false);
             //Debug.Log(shakeOnLand);
             if(shakeOnLand)
             {
