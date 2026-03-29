@@ -30,6 +30,7 @@ public class StalagtiteTrigger : MonoBehaviour
             Trigger.SetActive(false);
             Collider.SetActive(false);
             Hitbox.SetActive(true);
+            audioSource.pitch = Random.Range(0.6f, 1.2f);
             audioSource.Play();
         }
     }
