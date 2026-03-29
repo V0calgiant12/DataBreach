@@ -72,6 +72,7 @@ public override void RunOnce(PlayerStateManager player)
         if ((Input.GetKeyDown(SettingsData.Instance._InputJump) || SettingsData.Instance._UpToJump && Input.GetKeyDown(SettingsData.Instance._InputUp)) && player.playerData.doubleJumpAvailable) // NOTE: Doesn't buffer the jump because we don't want the player to instantly use their double jump.
         {
             Debug.Log("jump in air");
+            player.playerData.audioSource.PlayJumpSound(player.playerData._AirJump);
             PlayerStateManager.Instance.playerData.anim.SetBool("airJumping", true);
             player.playerData.PlayerRb.linearVelocity = new Vector2(player.playerData.PlayerRb.linearVelocityX, jumpStrength * 0.8f);
             player.playerData.doubleJumpAvailable = false;
