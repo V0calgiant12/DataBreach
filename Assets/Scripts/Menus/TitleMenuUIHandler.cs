@@ -20,9 +20,9 @@ public class TitleMenuUIHandler : MonoBehaviour
         settingsMenu.SetActive(false); // Set entire settings menu to not be awake
     }
 
-    public void NewSaveButton() // Starts a transition to the Dev scene
+    public void NewSaveButton() // Starts a transition to the Intro scene
     {
-        sceneTransition.TransitionToScene(1,1); // Dev scene, 1 second transition.
+        sceneTransition.TransitionToScene(2,1); // Intro scene, 1 second transition.
     }
     public void SettingsButton() // Switches to settings menu.
     {
