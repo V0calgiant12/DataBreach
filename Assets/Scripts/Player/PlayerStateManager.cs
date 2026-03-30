@@ -24,7 +24,7 @@ public class PlayerStateManager : MonoBehaviour
         down,
         dash,
         forwardAir,
-        BackAir,
+        backAir,
         downAir,
         upAir
     }
@@ -96,10 +96,36 @@ public class PlayerStateManager : MonoBehaviour
             }
         }
     }
-    public void Attack(float lag, AttackType attackType)
+    public void Attack(AttackType attackType)
     {
         playerData.movementAllowed = false;
-        playerData.attackTimer = lag;
+        switch (attackType)
+        {
+            case(AttackType.forward):
+                playerData.attackTimer = 1;
+                break;
+            case(AttackType.up):
+                playerData.attackTimer = 1;
+                break;
+            case(AttackType.down):
+                playerData.attackTimer = 1;
+                break;
+            case(AttackType.forwardAir):
+                playerData.attackTimer = 0;
+                break;
+            case(AttackType.backAir):
+                playerData.attackTimer = 0;
+                break;
+            case(AttackType.upAir):
+                playerData.attackTimer = 0;
+                break;
+            case(AttackType.downAir):
+                playerData.attackTimer = 0;
+                break;
+            case(AttackType.dash):
+                playerData.attackTimer = 1;
+                break;
+        } 
         Debug.Log(attackType);
         StartCoroutine(NoMovingWhileAttack(playerData.attackTimer));
     }

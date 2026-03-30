@@ -47,13 +47,29 @@ public class PlayerAir : PlayerAbstract
         moving = false;
         if (Input.GetKey(SettingsData.Instance._InputRight)) // Moving Right
         {
-            currentAttack = PlayerStateManager.AttackType.forwardAir;
+            if (player.playerData.leftOrRight)
+            {
+                currentAttack = PlayerStateManager.AttackType.forwardAir;
+            }
+            else
+            {
+                currentAttack = PlayerStateManager.AttackType.backAir;
+            }
+            
             PlayerVelocity = new Vector2(playerSpeed, player.playerData.PlayerRb.linearVelocityY);
             player.playerData.PlayerRb.linearVelocity = PlayerVelocity;// + OffsetVelocity;
             moving = true;
         }
         if (Input.GetKey(SettingsData.Instance._InputLeft)) // Moving left
         {
+            if (player.playerData.leftOrRight)
+            {
+                currentAttack = PlayerStateManager.AttackType.backAir;
+            }
+            else
+            {
+                currentAttack = PlayerStateManager.AttackType.forwardAir;
+            }
             currentAttack = PlayerStateManager.AttackType.forwardAir;
             PlayerVelocity = new Vector2(-playerSpeed, player.playerData.PlayerRb.linearVelocityY);
             player.playerData.PlayerRb.linearVelocity = PlayerVelocity;// + OffsetVelocity;
@@ -73,7 +89,7 @@ public class PlayerAir : PlayerAbstract
         {
             Debug.Log("Attacking while In Air");
             player.playerData.anim.SetBool("airAttacking", true);
-            player.Attack(0,currentAttack);
+            player.Attack(currentAttack);
             if (player.playerData.PlayerRb.linearVelocityY < 0) 
             {
                 player.playerData.anim.SetBool("falling", true);

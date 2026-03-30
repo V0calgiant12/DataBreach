@@ -21,7 +21,7 @@ public class PlayerIdle : PlayerAbstract
         player.playerData.anim.SetBool("attacking", false);
 
         // Check for Up Attack
-        if (Input.GetKey(SettingsData.Instance._InputDown))
+        if (Input.GetKey(SettingsData.Instance._InputUp))
         {
             currentAttack = PlayerStateManager.AttackType.up;
         }
@@ -31,7 +31,7 @@ public class PlayerIdle : PlayerAbstract
         {
             Debug.Log("Attacking while Idle");
             player.playerData.anim.SetBool("attacking", true);
-            player.Attack(60, currentAttack);
+            player.Attack(currentAttack);
         }
 
         // Movement

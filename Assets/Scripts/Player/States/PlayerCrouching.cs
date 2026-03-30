@@ -17,7 +17,7 @@ public class PlayerCrouching : PlayerAbstract
         // Down attack
         if (Input.GetKeyDown(SettingsData.Instance._InputAttack))
         {
-            player.Attack(60,PlayerStateManager.AttackType.down);
+            player.Attack(PlayerStateManager.AttackType.down);
         }
         // Crouch release check
         if (!player.playerData.crouching)

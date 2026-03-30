@@ -49,7 +49,7 @@ public class PlayerWalking : PlayerAbstract
         {
             Debug.Log("Attacking while walking");
             player.playerData.anim.SetBool("attacking", true);
-            player.Attack(60, currentAttack);
+            player.Attack(currentAttack);
         }
 
         // Crouch

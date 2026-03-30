@@ -40,7 +40,7 @@ public class PlayerSprinting : PlayerAbstract
         {
             Debug.Log("Attacking while sprinting");
             player.playerData.anim.SetBool("attacking", true);
-            player.Attack(60, PlayerStateManager.AttackType.dash);
+            player.Attack(PlayerStateManager.AttackType.dash);
         }
         // if crouching go to crouching
         if (player.playerData.crouching)
