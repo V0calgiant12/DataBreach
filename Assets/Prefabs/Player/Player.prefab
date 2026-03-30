@@ -426,6 +426,7 @@ GameObject:
   m_Component:
   - component: {fileID: 747315902740884033}
   - component: {fileID: 5785584775695434414}
+  - component: {fileID: 3753669743602200555}
   m_Layer: 6
   m_Name: CowlUpper
   m_TagString: Untagged
@@ -507,6 +508,20 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!114 &3753669743602200555
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3002662148971666817}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e779d2374967ba44a6d795acf950545, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerColor
+  playerColor: {r: 0, g: 0, b: 0, a: 0}
+  sr: {fileID: 5785584775695434414}
 --- !u!1 &3091217826850663621
 GameObject:
   m_ObjectHideFlags: 0
@@ -1450,6 +1465,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5096456565396554840}
   - component: {fileID: 3405211730306653904}
+  - component: {fileID: 997731397609083279}
   m_Layer: 6
   m_Name: CowlLower
   m_TagString: Untagged
@@ -1531,6 +1547,20 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!114 &997731397609083279
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6409143037036427711}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e779d2374967ba44a6d795acf950545, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerColor
+  playerColor: {r: 0, g: 0, b: 0, a: 0}
+  sr: {fileID: 3405211730306653904}
 --- !u!1 &7333209720509876743
 GameObject:
   m_ObjectHideFlags: 0
