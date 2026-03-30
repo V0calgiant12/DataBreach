@@ -31,14 +31,12 @@ public override void RunOnce(PlayerStateManager player)
         {
             PlayerVelocity = new Vector2(playerSpeed, player.playerData.PlayerRb.linearVelocityY);
             player.playerData.PlayerRb.linearVelocity = PlayerVelocity;// + OffsetVelocity;
-            player.playerData.leftOrRight = true;
             moving = true;
         }
         if (Input.GetKey(SettingsData.Instance._InputLeft)) // Moving left
         {
             PlayerVelocity = new Vector2(-playerSpeed, player.playerData.PlayerRb.linearVelocityY);
             player.playerData.PlayerRb.linearVelocity = PlayerVelocity;// + OffsetVelocity;
-            player.playerData.leftOrRight = false;
             moving = true;
         }
         if (!moving) // If not moving, set x velocity to 0;

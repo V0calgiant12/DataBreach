@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -15,6 +16,7 @@ public class PlayerStateManager : MonoBehaviour
     //11:42 https://www.youtube.com/watch?v=Vt8aZDPzRjI
     public static PlayerStateManager Instance;
     public PlayerData playerData;
+    public GameObject playerSprite;
     public void Intereact()
     {
         playerData.interacting = true;
@@ -43,7 +45,7 @@ public class PlayerStateManager : MonoBehaviour
         }
         GlobalUpdateState.UpdateState(this);
         FindPlayerObject();
-
+        playerSprite.transform.localScale = new Vector3(playerData.leftOrRight ? 1:-1,1,1);
         // Counter countdowns
         playerData.jumpBufferCounter -= 1;
         playerData.coyoteTimeCounter -= 1;
