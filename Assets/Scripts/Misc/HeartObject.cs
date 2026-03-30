@@ -23,6 +23,7 @@ public class HeartObject : MonoBehaviour
     {
         if(other.gameObject.CompareTag("Player") && PlayerStateManager.Instance.playerData.playerHealth < 5)
         {
+            Debug.Log(audioSource);
             audioSource.Play();
             PlayerStateManager.Instance.playerData.playerHealth = PlayerStateManager.Instance.playerData.playerHealth + 1;
             Debug.Log("Health up by 1, health is now " + PlayerStateManager.Instance.playerData.playerHealth);

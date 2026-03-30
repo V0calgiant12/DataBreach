@@ -11,6 +11,7 @@ public class PlayerData : ScriptableObject
     public int jumpBufferCounter;
     public int coyoteTimeCounter;
     public int playerHealth = 5;
+    public int iFrames;
     //public int lastWallJumpRight;
     public bool sprinting;
     public bool crouching;

@@ -65,9 +65,22 @@ public class PlayerStateManager : MonoBehaviour
     }
     public void DamagePlayer(float xLaunch, float yLaunch,int timer)
     {
-        playerData.playerHealth = playerData.playerHealth - 1;
-        Debug.Log(playerData.playerHealth);
-        StartCoroutine(StunPlayer(xLaunch*(playerData.leftOrRight ? -1 : 1), yLaunch,timer));
+        if (playerData.iFrames == 0)
+        {
+            playerData.playerHealth = playerData.playerHealth - 1;
+            Debug.Log(playerData.playerHealth);
+            StartCoroutine(StunPlayer(xLaunch*(playerData.leftOrRight ? -1 : 1), yLaunch,timer));
+        }
+        else
+        {
+            StartCoroutine(NoDamage(playerData.iFrames));
+        }
+    }
+    public void Attack()
+    {
+        playerData.movementAllowed = false;
+        playerData.attackTimer = 60f;
+        StartCoroutine(NoMovingWhileAttack(playerData.attackTimer));
     }
     public IEnumerator StunPlayer(float xLaunch, float yLaunch, int timer)
     {
@@ -81,11 +94,18 @@ public class PlayerStateManager : MonoBehaviour
         }
         playerData.movementAllowed = true;
     }
-    public void Attack()
+    public IEnumerator NoDamage(int iFrames)
     {
-        playerData.movementAllowed = false;
-        playerData.attackTimer = 60f;
-        StartCoroutine(NoMovingWhileAttack(playerData.attackTimer));
+        int elapsed = 0;
+        while (playerData.iFrames > elapsed)
+        {
+            playerData.PlayerRb.linearVelocityX = 0;
+            Debug.Log(elapsed);
+            elapsed += 1;
+            yield return null;
+        }
+        Debug.Log(playerData.iFrames + " auyfruywgquyrgwuygfuygwe");
+        playerData.iFrames = 0;
     }
     public IEnumerator NoMovingWhileAttack(float attackTimer)
     {
