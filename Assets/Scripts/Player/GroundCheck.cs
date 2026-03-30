@@ -13,7 +13,7 @@ public class GroundCheck : MonoBehaviour
     private void OnTriggerStay2D(Collider2D other)
     {
         //Debug.Log("Stay " + other.gameObject.CompareTag("Ground"));
-        if (other.gameObject.CompareTag("Ground")||other.gameObject.CompareTag("MovingPlatform")||other.gameObject.CompareTag("Spikes")||other.gameObject.CompareTag("Stone"))
+        if (other.gameObject.CompareTag("Ground")||other.gameObject.CompareTag("MovingPlatform")||other.gameObject.CompareTag("Stone"))
         {
             _IsGrounded = true;
         }
@@ -29,7 +29,7 @@ public class GroundCheck : MonoBehaviour
     private void OnTriggerExit2D(Collider2D other) 
     {
         //Debug.Log("Exit " + other.gameObject.CompareTag("Ground"));
-        if (other.gameObject.CompareTag("Ground")||other.gameObject.CompareTag("MovingPlatform")||other.gameObject.CompareTag("Spikes")||other.gameObject.CompareTag("Stone"))
+        if (other.gameObject.CompareTag("Ground")||other.gameObject.CompareTag("MovingPlatform")||other.gameObject.CompareTag("Stone"))
         {
             _IsGrounded = false;
             if(PlayerStateManager.Instance.playerData.jumpBufferCounter < 0)
