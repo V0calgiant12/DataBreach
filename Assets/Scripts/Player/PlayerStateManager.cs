@@ -71,9 +71,15 @@ public class PlayerStateManager : MonoBehaviour
             Debug.Log(playerData.playerHealth);
             StartCoroutine(StunPlayer(xLaunch*(playerData.leftOrRight ? -1 : 1), yLaunch,timer));
         }
-        else
+        while (playerData.iFrames > 0)
         {
-            StartCoroutine(NoDamage(playerData.iFrames));
+            Debug.Log(playerData.iFrames);
+            playerData.PlayerRb.linearVelocityX = 0;
+            playerData.iFrames -= 1;
+            if (playerData.iFrames < 0) 
+            {
+                playerData.iFrames = 0;
+            }
         }
     }
     public void Attack()
@@ -93,19 +99,6 @@ public class PlayerStateManager : MonoBehaviour
             yield return null;
         }
         playerData.movementAllowed = true;
-    }
-    public IEnumerator NoDamage(int iFrames)
-    {
-        int elapsed = 0;
-        while (playerData.iFrames > elapsed)
-        {
-            playerData.PlayerRb.linearVelocityX = 0;
-            Debug.Log(elapsed);
-            elapsed += 1;
-            yield return null;
-        }
-        Debug.Log(playerData.iFrames + " auyfruywgquyrgwuygfuygwe");
-        playerData.iFrames = 0;
     }
     public IEnumerator NoMovingWhileAttack(float attackTimer)
     {
