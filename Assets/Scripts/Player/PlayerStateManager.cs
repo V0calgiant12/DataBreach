@@ -100,6 +100,7 @@ public class PlayerStateManager : MonoBehaviour
     {
         playerData.movementAllowed = false;
         playerData.attackTimer = lag;
+        Debug.Log(attackType);
         StartCoroutine(NoMovingWhileAttack(playerData.attackTimer));
     }
     public IEnumerator StunPlayer(float xLaunch, float yLaunch, int timer)
