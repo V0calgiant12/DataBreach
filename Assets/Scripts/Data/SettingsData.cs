@@ -1,5 +1,6 @@
 using System.IO;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class SettingsData : MonoBehaviour
 {
@@ -40,6 +41,9 @@ public class SettingsData : MonoBehaviour
     public bool _ChromaticAberration;
     public bool _Vignette;
     public bool _Pixelation;
+
+    [Header("Not Settings")]
+    [SerializeField] private AudioMixer Mixer;
     
     private void Awake()
     {
@@ -113,6 +117,11 @@ public class SettingsData : MonoBehaviour
             _MusicVolume = data._MusicVolume;
             _EffectsVolume = data._EffectsVolume;
             _DialogueVolume = data._DialogueVolume;
+            
+            Mixer.SetFloat("MasterVolume",Mathf.Log10(_MasterVolume)*20);
+            Mixer.SetFloat("MusicVolume",Mathf.Log10(_MusicVolume)*20);
+            Mixer.SetFloat("EffectsVolume",Mathf.Log10(_EffectsVolume)*20);
+            Mixer.SetFloat("DialogueVolume",Mathf.Log10(_DialogueVolume)*20);
             
             _RunInBackground = data._RunInBackground;
             _ToggleSprint = data._ToggleSprint;
