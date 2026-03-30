@@ -70,11 +70,11 @@ public class PlayerStateManager : MonoBehaviour
             playerData.playerHealth = playerData.playerHealth - 1;
             Debug.Log(playerData.playerHealth);
             StartCoroutine(StunPlayer(xLaunch*(playerData.leftOrRight ? -1 : 1), yLaunch,timer));
+            playerData.iFrames = 60;
         }
         while (playerData.iFrames > 0)
         {
             Debug.Log(playerData.iFrames);
-            playerData.PlayerRb.linearVelocityX = 0;
             playerData.iFrames -= 1;
             if (playerData.iFrames < 0) 
             {

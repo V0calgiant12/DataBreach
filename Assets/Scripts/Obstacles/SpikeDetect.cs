@@ -16,7 +16,6 @@ public class SpikeDetect : MonoBehaviour
         {
             xLaunch = Random.Range(10, 15);
             yLaunch = Random.Range(12, 20);
-            PlayerStateManager.Instance.playerData.iFrames = 60;
             PlayerStateManager.Instance.playerData.movementAllowed = false;
             PlayerStateManager.Instance.DamagePlayer(xLaunch,yLaunch,120);
         }
