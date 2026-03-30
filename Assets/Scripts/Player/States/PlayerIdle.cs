@@ -13,7 +13,7 @@ public class PlayerIdle : PlayerAbstract
     }
     public override void UpdateState(PlayerStateManager player)
     {
-        currentAttack = PlayerStateManager.AttackType.forwardAir; // Default attack if nothing is inputed this frame.
+        currentAttack = PlayerStateManager.AttackType.forward; // Default attack if nothing is inputed this frame.
         
         player.playerData.PlayerRb.linearVelocityX = 0;
         player.playerData.anim.SetBool("moving", false);
@@ -23,7 +23,7 @@ public class PlayerIdle : PlayerAbstract
         // Check for Up Attack
         if (Input.GetKey(SettingsData.Instance._InputDown))
         {
-            currentAttack = PlayerStateManager.AttackType.upAir;
+            currentAttack = PlayerStateManager.AttackType.up;
         }
 
         // Attack

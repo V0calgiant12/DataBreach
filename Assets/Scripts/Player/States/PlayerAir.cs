@@ -3,6 +3,7 @@ using System.Collections;
 public class PlayerAir : PlayerAbstract
 {
     private PlayerStateManager.AttackType currentAttack;
+    private int downBuffer;
     public override void RunOnce(PlayerStateManager player)
     {
         Setup();
@@ -20,8 +21,13 @@ public class PlayerAir : PlayerAbstract
         player.playerData.anim.SetBool("airJumping", false);
         player.playerData.anim.SetBool("falling", false);
         player.playerData.anim.SetBool("airAttacking", false);
+        downBuffer -= 1;
         // Fast Falling
-        if (Input.GetKeyDown(SettingsData.Instance._InputDown)) // Check for fast fall.
+        if (Input.GetKeyDown(SettingsData.Instance._InputDown))
+        {
+            downBuffer = 10;
+        }
+        if (downBuffer > 0 && player.playerData.PlayerRb.linearVelocityY < 0) // Check for fast fall.
         {
             player.playerData.anim.SetBool("falling", true);
             player.playerData.PlayerRb.linearVelocity = new Vector2(player.playerData.PlayerRb.linearVelocityX, -jumpStrength * 1.5f);
@@ -32,7 +38,7 @@ public class PlayerAir : PlayerAbstract
             currentAttack = PlayerStateManager.AttackType.downAir;
         }
         // Check for Up Air
-        if (Input.GetKey(SettingsData.Instance._InputDown))
+        if (Input.GetKey(SettingsData.Instance._InputUp))
         {
             currentAttack = PlayerStateManager.AttackType.upAir;
         }

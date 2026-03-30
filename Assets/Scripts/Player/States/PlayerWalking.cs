@@ -19,7 +19,7 @@ public class PlayerWalking : PlayerAbstract
         // Check for Up Attack
         if (Input.GetKey(SettingsData.Instance._InputDown))
         {
-            currentAttack = PlayerStateManager.AttackType.upAir;
+            currentAttack = PlayerStateManager.AttackType.up;
         }
         
         // Moving
