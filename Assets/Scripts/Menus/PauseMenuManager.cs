@@ -5,6 +5,7 @@ public class PauseMenuManager : MonoBehaviour
 {
     [SerializeField] private GameObject canvas;
     [SerializeField] private GameObject settingsMenu;
+    [SerializeField] private PlayerColor playerColor;
     private SceneTransition sceneTransition;
     void Start()
     {
@@ -17,13 +18,18 @@ public class PauseMenuManager : MonoBehaviour
         {
             if (!canvas.activeSelf)
             {
-                canvas.SetActive(true);
+                Pause();
             }
             else
             {
-                canvas.SetActive(false);
+                ReturnButton();
             }
         }
+    }
+    public void Pause()
+    {
+        canvas.SetActive(true);
+        Time.timeScale = 0;
     }
     public void MainMenuButton()
     {
@@ -37,5 +43,6 @@ public class PauseMenuManager : MonoBehaviour
     public void ReturnButton()
     {
         canvas.SetActive(false);
+        Time.timeScale = 1;
     }
 }

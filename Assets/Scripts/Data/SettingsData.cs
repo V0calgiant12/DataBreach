@@ -1,5 +1,6 @@
 using System.IO;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class SettingsData : MonoBehaviour
 {
@@ -28,6 +29,7 @@ public class SettingsData : MonoBehaviour
     [Header("Game")]
     public bool _RunInBackground = true;
     public bool _ToggleSprint = false;
+    public bool _ToggleCrouch = false;
     public float _CameraZoom = 10;
     public float _PlayerHue = 0;
     public float _PlayerSaturation = 1;
@@ -39,6 +41,9 @@ public class SettingsData : MonoBehaviour
     public bool _ChromaticAberration;
     public bool _Vignette;
     public bool _Pixelation;
+
+    [Header("Not Settings")]
+    [SerializeField] private AudioMixer Mixer;
     
     private void Awake()
     {
@@ -72,6 +77,7 @@ public class SettingsData : MonoBehaviour
 
         data._RunInBackground = _RunInBackground;
         data._ToggleSprint = _ToggleSprint;
+        data._ToggleCrouch = _ToggleCrouch;
         data._CameraZoom = _CameraZoom;
         data._PlayerHue = _PlayerHue;
         data._PlayerSaturation = _PlayerSaturation;
@@ -112,8 +118,14 @@ public class SettingsData : MonoBehaviour
             _EffectsVolume = data._EffectsVolume;
             _DialogueVolume = data._DialogueVolume;
             
+            Mixer.SetFloat("MasterVolume",Mathf.Log10(_MasterVolume)*20);
+            Mixer.SetFloat("MusicVolume",Mathf.Log10(_MusicVolume)*20);
+            Mixer.SetFloat("EffectsVolume",Mathf.Log10(_EffectsVolume)*20);
+            Mixer.SetFloat("DialogueVolume",Mathf.Log10(_DialogueVolume)*20);
+            
             _RunInBackground = data._RunInBackground;
             _ToggleSprint = data._ToggleSprint;
+            _ToggleCrouch = data._ToggleCrouch;
             _CameraZoom = data._CameraZoom;
             _PlayerHue = data._PlayerHue;
             _PlayerSaturation = data._PlayerSaturation;
@@ -193,6 +205,7 @@ class SaveSettings // This class quite literally just stores variables so they c
     [Header("Game")]
     public bool _RunInBackground = true;
     public bool _ToggleSprint = false;
+    public bool _ToggleCrouch = false;
     public float _CameraZoom = 10;
     public float _PlayerHue = 0;
     public float _PlayerSaturation = 1;
