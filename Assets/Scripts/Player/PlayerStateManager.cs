@@ -93,7 +93,7 @@ public class PlayerStateManager : MonoBehaviour
         playerData.movementAllowed = false;
         int elapsed = 0;
         playerData.PlayerRb.linearVelocity = new Vector2(xLaunch, yLaunch);
-        while(GroundCheck.Instance._IsGrounded == false && timer > elapsed)
+        while(GroundCheck.Instance._IsGrounded == false && timer > elapsed && timer < 10)
         {
             elapsed += 1;
             yield return null;
