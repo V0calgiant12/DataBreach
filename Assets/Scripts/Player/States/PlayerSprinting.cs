@@ -36,10 +36,11 @@ public class PlayerSprinting : PlayerAbstract
             PlayerStateManager.Instance.playerData.anim.SetBool("moving", true);
             moving = true;
         }
-        if ((Input.GetKeyDown(SettingsData.Instance._InputAttack)))
+        if (Input.GetKeyDown(SettingsData.Instance._InputAttack))
         {
-            PlayerStateManager.Instance.playerData.anim.SetBool("attacking", true);
             Debug.Log("Attacking while sprinting");
+            PlayerStateManager.Instance.playerData.anim.SetBool("attacking", true);
+            PlayerStateManager.Instance.Attack();
         }
         // if crouching go to crouching
         if (player.playerData.crouching)

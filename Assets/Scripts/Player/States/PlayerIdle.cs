@@ -18,8 +18,9 @@ public class PlayerIdle : PlayerAbstract
         PlayerStateManager.Instance.playerData.anim.SetBool("attacking", false);
         if (Input.GetKeyDown(SettingsData.Instance._InputAttack))
         {
-            PlayerStateManager.Instance.playerData.anim.SetBool("attacking", true);
             Debug.Log("Attacking while Idle");
+            PlayerStateManager.Instance.playerData.anim.SetBool("attacking", true);
+            PlayerStateManager.Instance.Attack();
         }
         if (Input.GetKey(SettingsData.Instance._InputLeft) || Input.GetKey(SettingsData.Instance._InputRight))
         {

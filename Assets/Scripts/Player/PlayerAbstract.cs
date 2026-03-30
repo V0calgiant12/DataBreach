@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 public abstract class PlayerAbstract
 {
@@ -7,6 +8,7 @@ public abstract class PlayerAbstract
     public abstract void UpdateState(PlayerStateManager player);
     //public abstract void OnCollisionEnter(PlayerStateManager player, Collision collision);
     public abstract void RunOnce(PlayerStateManager player);
+    
 
     public Vector2 PlayerVelocity;
     public Vector2 OffsetVelocity;
@@ -19,6 +21,7 @@ public abstract class PlayerAbstract
     public bool currentWallSide;
     public bool shakeOnLand;
     // video I used for this: https://www.youtube.com/watch?v=lbB64oWbhuc
+    
     public void Setup() 
     {
         //fakeCrouchToggle = true;

@@ -32,10 +32,11 @@ public class PlayerWalking : PlayerAbstract
             PlayerStateManager.Instance.playerData.anim.SetBool("moving", true);
             moving = true;
         }
-        if ((Input.GetKeyDown(SettingsData.Instance._InputAttack)))
+        if (Input.GetKeyDown(SettingsData.Instance._InputAttack))
         {
+             Debug.Log("Attacking while walking");
             PlayerStateManager.Instance.playerData.anim.SetBool("attacking", true);
-            Debug.Log("Attacking while walking");
+            PlayerStateManager.Instance.Attack();
         }
         if (player.playerData.crouching)
         {

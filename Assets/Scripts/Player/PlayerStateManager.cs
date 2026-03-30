@@ -69,12 +69,29 @@ public class PlayerStateManager : MonoBehaviour
         Debug.Log(playerData.playerHealth);
         StartCoroutine(StunPlayer(xLaunch*(playerData.leftOrRight ? -1 : 1), yLaunch,timer));
     }
-    private IEnumerator StunPlayer(float xLaunch, float yLaunch, int timer)
+    public IEnumerator StunPlayer(float xLaunch, float yLaunch, int timer)
     {
         playerData.movementAllowed = false;
         int elapsed = 0;
         playerData.PlayerRb.linearVelocity = new Vector2(xLaunch, yLaunch);
         while(GroundCheck.Instance._IsGrounded == false && timer > elapsed)
+        {
+            elapsed += 1;
+            yield return null;
+        }
+        playerData.movementAllowed = true;
+    }
+    public void Attack()
+    {
+        playerData.movementAllowed = false;
+        playerData.attackTimer = 60f;
+        StartCoroutine(NoMovingWhileAttack(playerData.attackTimer));
+    }
+    public IEnumerator NoMovingWhileAttack(float attackTimer)
+    {
+        int elapsed = 0;
+        playerData.PlayerRb.linearVelocityX = 0;
+        while (attackTimer > elapsed)
         {
             elapsed += 1;
             yield return null;

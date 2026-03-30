@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class StalagtiteTrigger : MonoBehaviour
 {
@@ -7,7 +8,9 @@ public class StalagtiteTrigger : MonoBehaviour
     public GameObject Collider;
     public GameObject Hitbox;
     public GameObject Trigger;
-    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip _StalactiteGround;
+    [SerializeField] private AudioClip _StalactiteDetach;
+    public AudioSource audioSource;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -23,6 +26,7 @@ public class StalagtiteTrigger : MonoBehaviour
         {
             Hitbox.SetActive(false);
             Collider.SetActive(true);
+            audioSource.AudioClip = _StalactiteGround;
             StalagmiteRb.bodyType = RigidbodyType2D.Static;
         }
         if(other.gameObject.CompareTag("Player") && !gameObject.CompareTag("Hitbox"))
@@ -31,6 +35,7 @@ public class StalagtiteTrigger : MonoBehaviour
             Trigger.SetActive(false);
             Collider.SetActive(false);
             Hitbox.SetActive(true);
+            audioSource.AudioClip = _StalactiteDetach;
             audioSource.pitch = UnityEngine.Random.Range(0.6f, 1.2f);
             audioSource.Play();
         }
@@ -38,5 +43,5 @@ public class StalagtiteTrigger : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D other) 
     {
     }
-    
+
 }

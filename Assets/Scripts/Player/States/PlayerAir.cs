@@ -53,8 +53,9 @@ public override void RunOnce(PlayerStateManager player)
         // Attacking
         if (Input.GetKeyDown(SettingsData.Instance._InputAttack)) // Check for an attack.
         {
-            PlayerStateManager.Instance.playerData.anim.SetBool("airAttacking", true);
             Debug.Log("Attacking while In Air");
+            PlayerStateManager.Instance.playerData.anim.SetBool("airAttacking", true);
+            PlayerStateManager.Instance.Attack();
             if (player.playerData.PlayerRb.linearVelocityY < 0) 
             {
                 PlayerStateManager.Instance.playerData.anim.SetBool("falling", true);
