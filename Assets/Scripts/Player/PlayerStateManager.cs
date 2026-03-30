@@ -67,6 +67,7 @@ public class PlayerStateManager : MonoBehaviour
     {
         if (playerData.iFrames == 0)
         {
+            xLaunch = xLaunch * 500;
             playerData.playerHealth = playerData.playerHealth - 1;
             Debug.Log(playerData.playerHealth);
             StartCoroutine(StunPlayer(xLaunch*(playerData.leftOrRight ? -1 : 1), yLaunch,timer));
