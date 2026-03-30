@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "SlimeData", menuName = "ScriptableObjects/SlimeData")]
-public class PlayerData : ScriptableObject
+public class SlimeData : ScriptableObject
 {
     public enum State { Idle, Chase }
     public State currentState = State.Idle;
