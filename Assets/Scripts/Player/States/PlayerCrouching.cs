@@ -14,26 +14,30 @@ public class PlayerCrouching : PlayerAbstract
     }
     public override void UpdateState(PlayerStateManager player)
     {
-
+        // Down attack
+        if (Input.GetKeyDown(SettingsData.Instance._InputAttack))
+        {
+            player.Attack(60,PlayerStateManager.AttackType.down);
+        }
         // Crouch release check
         if (!player.playerData.crouching)
         {
             // Leave crouch
-            PlayerStateManager.Instance.playerData.anim.SetBool("crouching", false);
+            player.playerData.anim.SetBool("crouching", false);
             player.SwitchState(player.IdleState);
             return;
         }
 
         // Crouch walking
         moving = false;
-        PlayerStateManager.Instance.playerData.anim.SetBool("crouching", true);
-        PlayerStateManager.Instance.playerData.anim.SetBool("moving", false);
+        player.playerData.anim.SetBool("crouching", true);
+        player.playerData.anim.SetBool("moving", false);
         if (Input.GetKey(SettingsData.Instance._InputRight))
         {
             PlayerVelocity = new Vector2(playerSpeed, player.playerData.PlayerRb.linearVelocityY);
             player.playerData.PlayerRb.linearVelocity = PlayerVelocity;// + OffsetVelocity;
             player.playerData.leftOrRight = true;
-            PlayerStateManager.Instance.playerData.anim.SetBool("moving", true);
+            player.playerData.anim.SetBool("moving", true);
             moving = true;
         }
         if (Input.GetKey(SettingsData.Instance._InputLeft)) 
@@ -41,7 +45,7 @@ public class PlayerCrouching : PlayerAbstract
             PlayerVelocity = new Vector2(-playerSpeed, player.playerData.PlayerRb.linearVelocityY);
             player.playerData.PlayerRb.linearVelocity = PlayerVelocity;// + OffsetVelocity;
             player.playerData.leftOrRight = false;
-            PlayerStateManager.Instance.playerData.anim.SetBool("moving", true);
+            player.playerData.anim.SetBool("moving", true);
             moving = true;
         }
         if (!moving)

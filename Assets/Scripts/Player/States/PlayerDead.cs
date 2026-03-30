@@ -8,17 +8,17 @@ public class PlayerDead : PlayerAbstract
     }
     public override void EnterState(PlayerStateManager player)
     {
-        PlayerStateManager.Instance.playerData.playerHealth = 0;
+        player.playerData.playerHealth = 0;
     }
     public override void UpdateState(PlayerStateManager player)
     {
-        PlayerStateManager.Instance.playerData.anim.SetBool("dead", true);
-        if (PlayerStateManager.Instance.playerData.playerHealth <= 0) 
+        player.playerData.anim.SetBool("dead", true);
+        if (player.playerData.playerHealth <= 0) 
         {
             Debug.Log("You Are Dead");
             player.playerData.PlayerRb.linearVelocity = new Vector2(0, 0);
-            PlayerStateManager.Instance.playerData.playerHealth = 0;
-            PlayerStateManager.Instance.playerData.movementAllowed = false;
+            player.playerData.playerHealth = 0;
+            player.playerData.movementAllowed = false;
         }
     }
 }

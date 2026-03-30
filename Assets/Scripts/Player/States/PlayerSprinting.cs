@@ -15,16 +15,16 @@ public class PlayerSprinting : PlayerAbstract
     public override void UpdateState(PlayerStateManager player)
     {
         moving = false;
-        PlayerStateManager.Instance.playerData.anim.SetBool("moving", false);
-        PlayerStateManager.Instance.playerData.anim.SetBool("sprinting", true);
-        PlayerStateManager.Instance.playerData.anim.SetBool("attacking", false);
+        player.playerData.anim.SetBool("moving", false);
+        player.playerData.anim.SetBool("sprinting", true);
+        player.playerData.anim.SetBool("attacking", false);
         // sprint right
         if (Input.GetKey(SettingsData.Instance._InputRight))
         {
             PlayerVelocity = new Vector2(playerSpeed, player.playerData.PlayerRb.linearVelocityY);
             player.playerData.PlayerRb.linearVelocity = PlayerVelocity;// + OffsetVelocity;
             player.playerData.leftOrRight = true;
-            PlayerStateManager.Instance.playerData.anim.SetBool("moving", true);
+            player.playerData.anim.SetBool("moving", true);
             moving = true;
         }
         // sprint left
@@ -33,14 +33,14 @@ public class PlayerSprinting : PlayerAbstract
             PlayerVelocity = new Vector2(-playerSpeed, player.playerData.PlayerRb.linearVelocityY);
             player.playerData.PlayerRb.linearVelocity = PlayerVelocity;// + OffsetVelocity;
             player.playerData.leftOrRight = false;
-            PlayerStateManager.Instance.playerData.anim.SetBool("moving", true);
+            player.playerData.anim.SetBool("moving", true);
             moving = true;
         }
         if (Input.GetKeyDown(SettingsData.Instance._InputAttack))
         {
             Debug.Log("Attacking while sprinting");
-            PlayerStateManager.Instance.playerData.anim.SetBool("attacking", true);
-            PlayerStateManager.Instance.Attack();
+            player.playerData.anim.SetBool("attacking", true);
+            player.Attack(60, PlayerStateManager.AttackType.dash);
         }
         // if crouching go to crouching
         if (player.playerData.crouching)
@@ -58,11 +58,13 @@ public class PlayerSprinting : PlayerAbstract
         // if not sprinting go to walking 
         if (player.playerData.sprinting == false)
         {
-            PlayerStateManager.Instance.playerData.anim.SetBool("sprinting", false);
+            player.playerData.anim.SetBool("sprinting", false);
             Debug.Log(player.playerData.sprinting);
             player.SwitchState(player.WalkingState);
             return;
         }
+
+        // Jump
         if (player.playerData.jumpBufferCounter > 0)
         {
             Debug.Log("jump from Sprinting");
@@ -81,11 +83,15 @@ public class PlayerSprinting : PlayerAbstract
             player.SwitchState(player.AirState);
             return;
         }
+
+        // Grounded
         if (!GroundCheck.Instance._IsGrounded && player.playerData.coyoteTimeCounter < 0)
         {
             player.SwitchState(player.AirState);
             return;
         }
+
+        // Audio
         if(audioTimer == 15)
         {
             if (GroundCheck.Instance._IsStone)

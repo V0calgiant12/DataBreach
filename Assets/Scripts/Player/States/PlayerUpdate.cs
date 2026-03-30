@@ -70,7 +70,7 @@ public class PlayerUpdate : PlayerAbstract
                     player.playerData.crouching = false;
                 }
             }
-            if (PlayerStateManager.Instance.playerData.playerHealth <= 0)
+            if (player.playerData.playerHealth <= 0)
             {
                 player.SwitchState(player.DeadState);
                 return;

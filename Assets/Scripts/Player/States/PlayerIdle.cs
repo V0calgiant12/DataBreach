@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class PlayerIdle : PlayerAbstract
 {
+    private PlayerStateManager.AttackType currentAttack;
     public override void RunOnce(PlayerStateManager player)
     {
         Setup();
@@ -12,27 +13,43 @@ public class PlayerIdle : PlayerAbstract
     }
     public override void UpdateState(PlayerStateManager player)
     {
+        currentAttack = PlayerStateManager.AttackType.forwardAir; // Default attack if nothing is inputed this frame.
+        
         player.playerData.PlayerRb.linearVelocityX = 0;
-        PlayerStateManager.Instance.playerData.anim.SetBool("moving", false);
-        PlayerStateManager.Instance.playerData.anim.SetBool("sprinting", false);
-        PlayerStateManager.Instance.playerData.anim.SetBool("attacking", false);
+        player.playerData.anim.SetBool("moving", false);
+        player.playerData.anim.SetBool("sprinting", false);
+        player.playerData.anim.SetBool("attacking", false);
+
+        // Check for Up Attack
+        if (Input.GetKey(SettingsData.Instance._InputDown))
+        {
+            currentAttack = PlayerStateManager.AttackType.upAir;
+        }
+
+        // Attack
         if (Input.GetKeyDown(SettingsData.Instance._InputAttack))
         {
             Debug.Log("Attacking while Idle");
-            PlayerStateManager.Instance.playerData.anim.SetBool("attacking", true);
-            PlayerStateManager.Instance.Attack();
+            player.playerData.anim.SetBool("attacking", true);
+            player.Attack(60, currentAttack);
         }
+
+        // Movement
         if (Input.GetKey(SettingsData.Instance._InputLeft) || Input.GetKey(SettingsData.Instance._InputRight))
         {
             player.SwitchState(player.WalkingState);
-            PlayerStateManager.Instance.playerData.anim.SetBool("moving", true);
+            player.playerData.anim.SetBool("moving", true);
             return;
         }
+
+        // Crouching
         if (player.playerData.crouching)
         {
             player.SwitchState(player.CrouchingState);
             return;
         }
+
+        // Jumping
         if (player.playerData.jumpBufferCounter > 0)
         {
             Debug.Log("jump from idle");
@@ -51,6 +68,8 @@ public class PlayerIdle : PlayerAbstract
             player.SwitchState(player.AirState);
             return;
         }
+
+        // Grounded
         if (!GroundCheck.Instance._IsGrounded && player.playerData.coyoteTimeCounter < 0)
         {
             player.SwitchState(player.AirState);

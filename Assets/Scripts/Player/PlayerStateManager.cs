@@ -17,6 +17,17 @@ public class PlayerStateManager : MonoBehaviour
     public static PlayerStateManager Instance;
     public PlayerData playerData;
     public GameObject playerSprite;
+    public enum AttackType
+    {
+        forward,
+        up,
+        down,
+        dash,
+        forwardAir,
+        BackAir,
+        downAir,
+        upAir
+    }
     public void Intereact()
     {
         playerData.interacting = true;
@@ -85,10 +96,10 @@ public class PlayerStateManager : MonoBehaviour
             }
         }
     }
-    public void Attack()
+    public void Attack(float lag, AttackType attackType)
     {
         playerData.movementAllowed = false;
-        playerData.attackTimer = 60f;
+        playerData.attackTimer = lag;
         StartCoroutine(NoMovingWhileAttack(playerData.attackTimer));
     }
     public IEnumerator StunPlayer(float xLaunch, float yLaunch, int timer)

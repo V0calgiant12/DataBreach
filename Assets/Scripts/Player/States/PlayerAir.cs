@@ -2,7 +2,8 @@ using UnityEngine;
 using System.Collections;
 public class PlayerAir : PlayerAbstract
 {
-public override void RunOnce(PlayerStateManager player)
+    private PlayerStateManager.AttackType currentAttack;
+    public override void RunOnce(PlayerStateManager player)
     {
         Setup();
     }
@@ -14,27 +15,40 @@ public override void RunOnce(PlayerStateManager player)
     }
     public override void UpdateState(PlayerStateManager player)
     {
-        PlayerStateManager.Instance.playerData.anim.SetBool("notGrounded", true);
-        PlayerStateManager.Instance.playerData.anim.SetBool("airJumping", false);
-        PlayerStateManager.Instance.playerData.anim.SetBool("falling", false);
-        PlayerStateManager.Instance.playerData.anim.SetBool("airAttacking", false);
+        currentAttack = PlayerStateManager.AttackType.forwardAir; // Default attack if nothing is inputed this frame.
+        player.playerData.anim.SetBool("notGrounded", true);
+        player.playerData.anim.SetBool("airJumping", false);
+        player.playerData.anim.SetBool("falling", false);
+        player.playerData.anim.SetBool("airAttacking", false);
         // Fast Falling
         if (Input.GetKeyDown(SettingsData.Instance._InputDown)) // Check for fast fall.
         {
-            PlayerStateManager.Instance.playerData.anim.SetBool("falling", true);
+            player.playerData.anim.SetBool("falling", true);
             player.playerData.PlayerRb.linearVelocity = new Vector2(player.playerData.PlayerRb.linearVelocityX, -jumpStrength * 1.5f);
         }
+        // Check for Down Air
+        if (Input.GetKey(SettingsData.Instance._InputDown))
+        {
+            currentAttack = PlayerStateManager.AttackType.downAir;
+        }
+        // Check for Up Air
+        if (Input.GetKey(SettingsData.Instance._InputDown))
+        {
+            currentAttack = PlayerStateManager.AttackType.upAir;
+        }
         
-        // Movement
+        // Movement left/right and sets attack.
         moving = false;
         if (Input.GetKey(SettingsData.Instance._InputRight)) // Moving Right
         {
+            currentAttack = PlayerStateManager.AttackType.forwardAir;
             PlayerVelocity = new Vector2(playerSpeed, player.playerData.PlayerRb.linearVelocityY);
             player.playerData.PlayerRb.linearVelocity = PlayerVelocity;// + OffsetVelocity;
             moving = true;
         }
         if (Input.GetKey(SettingsData.Instance._InputLeft)) // Moving left
         {
+            currentAttack = PlayerStateManager.AttackType.forwardAir;
             PlayerVelocity = new Vector2(-playerSpeed, player.playerData.PlayerRb.linearVelocityY);
             player.playerData.PlayerRb.linearVelocity = PlayerVelocity;// + OffsetVelocity;
             moving = true;
@@ -45,25 +59,25 @@ public override void RunOnce(PlayerStateManager player)
         }
         if (player.playerData.PlayerRb.linearVelocityY < 0) 
         {
-            PlayerStateManager.Instance.playerData.anim.SetBool("falling", true);
+            player.playerData.anim.SetBool("falling", true);
         }
 
         // Attacking
         if (Input.GetKeyDown(SettingsData.Instance._InputAttack)) // Check for an attack.
         {
             Debug.Log("Attacking while In Air");
-            PlayerStateManager.Instance.playerData.anim.SetBool("airAttacking", true);
-            PlayerStateManager.Instance.Attack();
+            player.playerData.anim.SetBool("airAttacking", true);
+            player.Attack(0,currentAttack);
             if (player.playerData.PlayerRb.linearVelocityY < 0) 
             {
-                PlayerStateManager.Instance.playerData.anim.SetBool("falling", true);
+                player.playerData.anim.SetBool("falling", true);
             }
         }
 
         // Short Jumping
         if(!(Input.GetKey(SettingsData.Instance._InputJump) || SettingsData.Instance._UpToJump && Input.GetKey(SettingsData.Instance._InputUp)) && player.playerData.PlayerRb.linearVelocity.y > 0)
         {
-            PlayerStateManager.Instance.playerData.anim.SetBool("airJumping", true);
+            player.playerData.anim.SetBool("airJumping", true);
             player.playerData.PlayerRb.linearVelocity = new Vector2(player.playerData.PlayerRb.linearVelocityX, player.playerData.PlayerRb.linearVelocityY * 0.5f);
         }
 
@@ -72,7 +86,7 @@ public override void RunOnce(PlayerStateManager player)
         {
             Debug.Log("jump in air");
             player.playerData.audioSource.PlayJumpSound(player.playerData._AirJump);
-            PlayerStateManager.Instance.playerData.anim.SetBool("airJumping", true);
+            player.playerData.anim.SetBool("airJumping", true);
             player.playerData.PlayerRb.linearVelocity = new Vector2(player.playerData.PlayerRb.linearVelocityX, jumpStrength * 0.8f);
             player.playerData.doubleJumpAvailable = false;
             player.playerData.jumpBufferCounter = 0;
@@ -85,17 +99,17 @@ public override void RunOnce(PlayerStateManager player)
         //    doubleJumpAvailable = true;
         //    player.SwitchState(player.WallClingState);
         //}
-        if(PlayerStateManager.Instance.playerData.PlayerRb.linearVelocityY < -40)
+        if(player.playerData.PlayerRb.linearVelocityY < -40)
         {
             shakeOnLand = true;
             //Debug.Log(shakeOnLand);
-            shakeIntensityLvl = Mathf.Abs(PlayerStateManager.Instance.playerData.PlayerRb.linearVelocityY)/2 - 10;
+            shakeIntensityLvl = Mathf.Abs(player.playerData.PlayerRb.linearVelocityY)/2 - 10;
         }
         
         // Grounded Check
         if (GroundCheck.Instance._IsGrounded)
         {
-            PlayerStateManager.Instance.playerData.anim.SetBool("notGrounded", false);
+            player.playerData.anim.SetBool("notGrounded", false);
             //Debug.Log(shakeOnLand);
             if(shakeOnLand)
             {
