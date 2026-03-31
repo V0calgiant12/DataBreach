@@ -99,6 +99,14 @@ public class PlayerAir : PlayerAbstract
         // Short Jumping
         if(!(Input.GetKey(SettingsData.Instance._InputJump) || SettingsData.Instance._UpToJump && Input.GetKey(SettingsData.Instance._InputUp)) && player.playerData.PlayerRb.linearVelocity.y > 0)
         {
+            if (Input.GetKey(SettingsData.Instance._InputRight))
+            {
+                player.playerData.leftOrRight = true;
+            }
+            if (Input.GetKey(SettingsData.Instance._InputLeft))
+            {
+                player.playerData.leftOrRight = false;
+            }
             player.playerData.anim.SetBool("airJumping", true);
             player.playerData.PlayerRb.linearVelocity = new Vector2(player.playerData.PlayerRb.linearVelocityX, player.playerData.PlayerRb.linearVelocityY * 0.5f);
         }
