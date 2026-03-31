@@ -9,11 +9,6 @@ public class PlayerUpdate : PlayerAbstract
     {
         player.playerData.MainCamera.GetComponent<Camera>().orthographicSize = SettingsData.Instance._CameraZoom;
         
-        player.playerData.sprinting = false;
-        player.playerData.crouching = false;
-        player.playerData.movementAllowed = true;
-        player.playerData.leftOrRight = true;
-        player.playerData.playerHealth = 5;
     }
     public override void UpdateState(PlayerStateManager player) // Update Function
     { 

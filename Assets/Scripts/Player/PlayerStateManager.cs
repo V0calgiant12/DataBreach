@@ -34,6 +34,11 @@ public class PlayerStateManager : MonoBehaviour
     }
     void Start()
     {
+        playerData.sprinting = false;
+        playerData.leftOrRight = true;
+        playerData.crouching = false;
+        playerData.movementAllowed = true;
+        playerData.playerHealth = 5;
         playerData.playerHealth = 5;
         playerData.interacting = false;
         Instance = this;
