@@ -88,6 +88,7 @@ public class PlayerAir : PlayerAbstract
         if (Input.GetKeyDown(SettingsData.Instance._InputAttack)) // Check for an attack.
         {
             Debug.Log("Attacking while In Air");
+            player.playerData.audioSource.PlayPlayerAttackSound(player.playerData._PlayerAttack);
             player.playerData.anim.SetBool("airAttacking", true);
             player.Attack(currentAttack);
             if (player.playerData.PlayerRb.linearVelocityY < 0) 

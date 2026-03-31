@@ -82,6 +82,7 @@ public class PlayerStateManager : MonoBehaviour
         if (playerData.iFrames < 0 || overrideIFrames)
         {
             playerData.playerHealth = playerData.playerHealth - 1;
+            playerData.audioSource.PlayPlayerHitSound(playerData._PlayerHit);
             Debug.Log(playerData.playerHealth);
             StartCoroutine(StunPlayer(xLaunch*(playerData.leftOrRight ? -1 : 1), yLaunch,timer));
             playerData.iFrames = 120;

@@ -32,4 +32,7 @@ public class PlayerData : ScriptableObject
     public AudioClip _NormalFall;
     public AudioClip _NormalJump;
     public AudioClip _AirJump;
+    public AudioClip _PlayerHit;
+    public AudioClip _PlayerDeath;
+    public AudioClip _PlayerAttack;
 }
