@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class SlimeStateManager : MonoBehaviour
 {
-    public enum State { Idle, Chase }
+    public enum State { Idle, Chase, Dead}
     public State currentState = State.Idle;
 
     [Header("Jump Settings")]
@@ -18,10 +18,11 @@ public class SlimeStateManager : MonoBehaviour
     public Rigidbody2D slimeRb;
     public Transform player;
     public int jumpTimer;
+    public float slimeHealth = 1f;
     public bool isGrounded;
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private AudioSource audioSource2;
-    [SerializeField] private AudioSource audioSource3;
+    public AudioSource audioSource3;
     [SerializeField] private AudioSource audioSource4;
     public AudioClip _SlimeJump;
     public AudioClip _SlimeImpact;
@@ -55,6 +56,10 @@ public class SlimeStateManager : MonoBehaviour
             }
             jumpTimer = 0;
         }
+        if (slimeHealth == 0)
+        {
+            Debug.Log("Slime is dead");
+        }
     }
 
     void JumpTowardsPlayer()
@@ -63,13 +68,10 @@ public class SlimeStateManager : MonoBehaviour
         float direction = (player.position.x > transform.position.x) ? 1f : -1f;
         // Play slime jump sound
         audioSource.Play();
+        Debug.Log("jump");
         // Apply a diagonal "Hop" force
         Vector2 hopVector = new Vector2(direction * forwardForce, jumpForce);
         slimeRb.AddForce(hopVector, ForceMode2D.Impulse);
-        if (isGrounded)
-        {
-            audioSource2.Play();
-        }
     }
 
     // Basic ground check using collisions
@@ -78,6 +80,8 @@ public class SlimeStateManager : MonoBehaviour
         if (collision.gameObject.CompareTag("Ground")||collision.gameObject.CompareTag("Spikes")||collision.gameObject.CompareTag("MovingPlatform")||collision.gameObject.CompareTag("Stone"))
         {
             isGrounded = true;
+            audioSource2.Play();
+            Debug.Log("land");
         }
     }
 
