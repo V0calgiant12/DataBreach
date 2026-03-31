@@ -1741,10 +1741,10 @@ BoxCollider2D:
   m_Material: {fileID: 6200000, guid: d887694030d038c47b2fee3c7d0dbee7, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 2147484543
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 128
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -1814,6 +1814,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerStateManager
   playerData: {fileID: 11400000, guid: ef22878c3af9ca548a85988a7addec59, type: 2}
+  playerSprite: {fileID: 592267721215442143}
 --- !u!114 &1040065690880391275
 MonoBehaviour:
   m_ObjectHideFlags: 0

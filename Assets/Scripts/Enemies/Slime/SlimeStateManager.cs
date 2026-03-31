@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class SlimeStateManager : MonoBehaviour
@@ -8,7 +9,7 @@ public class SlimeStateManager : MonoBehaviour
     [Header("Jump Settings")]
     public float jumpForce = 5f;      // Upward power
     public float forwardForce = 3f;   // Horizontal power toward player
-    public float timeBetweenJumps = 1.5f;
+    public int timeBetweenJumps = 90;
 
     [Header("Detection")]
     public float detectionRange = 5f;
@@ -16,7 +17,7 @@ public class SlimeStateManager : MonoBehaviour
 
     public Rigidbody2D slimeRb;
     public Transform player;
-    public float jumpTimer;
+    public int jumpTimer;
     public bool isGrounded;
 
     void Start()
@@ -24,9 +25,13 @@ public class SlimeStateManager : MonoBehaviour
         slimeRb = GetComponent<Rigidbody2D>();
         // Ensure Gravity Scale is at least 1-2 so it falls back down!
         if (player == null) player = GameObject.FindGameObjectWithTag("Player").transform;
+        InvokeRepeating(nameof(SlimeUpdate),1.5f,1.5f);
     }
-
     void Update()
+    {
+        jumpTimer += 1;
+    }
+    private void SlimeUpdate()
     {
         float dist = Vector2.Distance(transform.position, player.position);
 
@@ -34,7 +39,6 @@ public class SlimeStateManager : MonoBehaviour
         currentState = (dist <= detectionRange) ? State.Chase : State.Idle;
 
         // Jump Logic
-        jumpTimer += Time.deltaTime;
         if (jumpTimer >= timeBetweenJumps && isGrounded)
         {
             if (currentState == State.Chase)
@@ -58,15 +62,22 @@ public class SlimeStateManager : MonoBehaviour
     // Basic ground check using collisions
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (((1 << collision.gameObject.layer) & groundLayer) != 0)
+        if (collision.gameObject.CompareTag("Ground")||collision.gameObject.CompareTag("Spikes")||collision.gameObject.CompareTag("MovingPlatform")||collision.gameObject.CompareTag("Stone"))
         {
             isGrounded = true;
+        }
+    }
+    void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            PlayerStateManager.Instance.DamagePlayer(Random.Range(10,15),Random.Range(5,10), 90);
         }
     }
 
     private void OnCollisionExit2D(Collision2D collision)
     {
-        if (((1 << collision.gameObject.layer) & groundLayer) != 0)
+        if (collision.gameObject.CompareTag("Ground")||collision.gameObject.CompareTag("Spikes")||collision.gameObject.CompareTag("MovingPlatform")||collision.gameObject.CompareTag("Stone"))
         {
             isGrounded = false;
         }
