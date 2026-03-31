@@ -80,7 +80,6 @@ public class PlayerStateManager : MonoBehaviour
     {
         if (playerData.iFrames == 0)
         {
-            xLaunch = xLaunch * 500;
             playerData.playerHealth = playerData.playerHealth - 1;
             Debug.Log(playerData.playerHealth);
             StartCoroutine(StunPlayer(xLaunch*(playerData.leftOrRight ? -1 : 1), yLaunch,timer));
@@ -134,7 +133,7 @@ public class PlayerStateManager : MonoBehaviour
         playerData.movementAllowed = false;
         int elapsed = 0;
         playerData.PlayerRb.linearVelocity = new Vector2(xLaunch, yLaunch);
-        while(GroundCheck.Instance._IsGrounded == false && timer > elapsed || timer < 10)
+        while(GroundCheck.Instance._IsGrounded == false && timer > elapsed || elapsed < 15)
         {
             elapsed += 1;
             yield return null;
