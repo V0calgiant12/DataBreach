@@ -22,7 +22,7 @@ public class PlatformMover : MonoBehaviour
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
         //Debug.Log(Vector2.Distance(transform.position, nextPos));
         transform.position = Vector2.MoveTowards(transform.position, nextPos, moveSpeed);
