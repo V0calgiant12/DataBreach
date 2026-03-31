@@ -9,7 +9,7 @@ public class SlimeDamage : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            PlayerStateManager.Instance.DamagePlayer(Random.Range(10,15),Random.Range(5,10), 90);
+            PlayerStateManager.Instance.DamagePlayer(Random.Range(10,15),Random.Range(5,10), 90, false);
         }
     }
 }

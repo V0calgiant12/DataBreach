@@ -60,6 +60,7 @@ public class PlayerStateManager : MonoBehaviour
         // Counter countdowns
         playerData.jumpBufferCounter -= 1;
         playerData.coyoteTimeCounter -= 1;
+        playerData.iFrames -= 1;
 
     }
     public void SwitchState(PlayerAbstract state)
@@ -76,23 +77,14 @@ public class PlayerStateManager : MonoBehaviour
         playerData.collider = gameObject.GetComponent<BoxCollider2D>();
         playerData.MainCamera = GameObject.Find("Main Camera");
     }
-    public void DamagePlayer(float xLaunch, float yLaunch,int timer)
+    public void DamagePlayer(float xLaunch, float yLaunch,int timer, bool overrideIFrames)
     {
-        if (playerData.iFrames == 0)
+        if (playerData.iFrames < 0 || overrideIFrames)
         {
             playerData.playerHealth = playerData.playerHealth - 1;
             Debug.Log(playerData.playerHealth);
             StartCoroutine(StunPlayer(xLaunch*(playerData.leftOrRight ? -1 : 1), yLaunch,timer));
-            playerData.iFrames = 60;
-        }
-        while (playerData.iFrames > 0)
-        {
-            Debug.Log(playerData.iFrames);
-            playerData.iFrames -= 1;
-            if (playerData.iFrames < 0) 
-            {
-                playerData.iFrames = 0;
-            }
+            playerData.iFrames = 120;
         }
     }
     public void Attack(AttackType attackType)
