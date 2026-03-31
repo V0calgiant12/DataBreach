@@ -58,7 +58,7 @@ public class SlimeStateManager : MonoBehaviour
         }
         if (slimeHealth == 0)
         {
-            Debug.Log("Slime is dead");
+            //Debug.Log("Slime is dead");
         }
     }
 
@@ -68,7 +68,7 @@ public class SlimeStateManager : MonoBehaviour
         float direction = (player.position.x > transform.position.x) ? 1f : -1f;
         // Play slime jump sound
         audioSource.Play();
-        Debug.Log("jump");
+        //Debug.Log("jump");
         // Apply a diagonal "Hop" force
         Vector2 hopVector = new Vector2(direction * forwardForce, jumpForce);
         slimeRb.AddForce(hopVector, ForceMode2D.Impulse);
@@ -81,7 +81,7 @@ public class SlimeStateManager : MonoBehaviour
         {
             isGrounded = true;
             audioSource2.Play();
-            Debug.Log("land");
+            //Debug.Log("land");
         }
     }
 
