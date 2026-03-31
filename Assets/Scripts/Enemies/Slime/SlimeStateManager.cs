@@ -19,6 +19,7 @@ public class SlimeStateManager : MonoBehaviour
     public Transform player;
     public int jumpTimer;
     public bool isGrounded;
+    [SerializeField] private AudioSource audioSource;
 
     void Start()
     {
@@ -54,7 +55,7 @@ public class SlimeStateManager : MonoBehaviour
         // Calculate direction to player (Left or Right)
         float direction = (player.position.x > transform.position.x) ? 1f : -1f;
         // Play slime jump sound
-        SlimeData.audioSource.PlaySlimeJumpSound(SlimeData._SlimeJump);
+        audioSource.Play();
         // Apply a diagonal "Hop" force
         Vector2 hopVector = new Vector2(direction * forwardForce, jumpForce);
         slimeRb.AddForce(hopVector, ForceMode2D.Impulse);
