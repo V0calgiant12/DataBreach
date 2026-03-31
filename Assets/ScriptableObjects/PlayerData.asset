@@ -17,16 +17,16 @@ MonoBehaviour:
   PlayerRb: {fileID: 0}
   collider: {fileID: 0}
   audioSource: {fileID: 0}
-  jumpBufferCounter: -522
+  jumpBufferCounter: -524
   coyoteTimeCounter: 15
-  playerHealth: 5
-  iFrames: 0
+  playerHealth: 0
+  iFrames: -59
   sprinting: 0
   crouching: 0
   doubleJumpAvailable: 1
-  movementAllowed: 1
-  leftOrRight: 1
-  attackTimer: 0
+  movementAllowed: 0
+  leftOrRight: 0
+  attackTimer: 1
   anim: {fileID: 0}
   interacting: 0
   _GrassWalk: {fileID: 8300000, guid: 0a7bcb5adf063a24da9d72f4dc0f02a0, type: 3}
@@ -38,6 +38,6 @@ MonoBehaviour:
   _NormalFall: {fileID: 8300000, guid: 8206f640d6e3caa429008322f62a0781, type: 3}
   _NormalJump: {fileID: 8300000, guid: 9f2334670d5b86e4dba364987a3c5a4a, type: 3}
   _AirJump: {fileID: 8300000, guid: b17471b81556df343be81d50ad9bf15c, type: 3}
-  _PlayerHit: {fileID: 8300000, guid: 83f348a89ab97344bbd06cde38531154, type: 3}
-  _PlayerDeath: {fileID: 0}
-  _PlayerAttack: {fileID: 8300000, guid: 919593a918b2a5743b48cc2623563a68, type: 3}
+  _PlayerHit: {fileID: 8300000, guid: 8b5dff43d380ce64f88cac621a2ac22f, type: 3}
+  _PlayerDeath: {fileID: 8300000, guid: 976094d299c0b534e9bd1f2c10707c6e, type: 3}
+  _PlayerAttack: {fileID: 8300000, guid: b935ba125fdf1f445b2c02af83e856da, type: 3}

@@ -17,4 +17,6 @@ public class SlimeData : ScriptableObject
     private Transform player;
     private float jumpTimer;
     private bool isGrounded;
+    public SlimeSound audioSource;
+    public AudioClip _SlimeJump;
 }
