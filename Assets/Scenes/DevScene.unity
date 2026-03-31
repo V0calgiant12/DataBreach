@@ -40161,6 +40161,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 681707922}
   m_CullTransparentMesh: 1
+--- !u!82 &753420844 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 1921390955554284192, guid: ebf449af77b04e845b5d1ae6cee19403, type: 3}
+  m_PrefabInstance: {fileID: 2766451595670034107}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &791860846
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -66849,6 +66854,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Para-Slime
       objectReference: {fileID: 0}
+    - target: {fileID: 8380787885653382398, guid: ebf449af77b04e845b5d1ae6cee19403, type: 3}
+      propertyPath: audioSource3
+      value: 
+      objectReference: {fileID: 753420844}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
