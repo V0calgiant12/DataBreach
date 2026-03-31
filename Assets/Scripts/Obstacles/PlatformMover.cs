@@ -4,6 +4,7 @@ using UnityEngine;
 public class PlatformMover : MonoBehaviour
 {
     public GameObject Player;
+    public GameObject Slime;
     public float platformSpeed = 1;
     public Rigidbody2D platformRb;
     public Transform pointA;
@@ -16,6 +17,7 @@ public class PlatformMover : MonoBehaviour
     {
         platformRb = GetComponent<Rigidbody2D>();
         Player = GameObject.FindGameObjectWithTag("Player");
+        Slime = GameObject.FindGameObjectWithTag("Slime");
         nextPos = pointB.position;
     }
 
@@ -35,9 +37,14 @@ public class PlatformMover : MonoBehaviour
         {
             Player.transform.parent = transform;
         }
+        if(other.gameObject.CompareTag("SlimeTrigger"))
+        {
+            Slime.transform.parent = transform;
+        }
     }
     private void OnTriggerExit2D(Collider2D other)
     {
         Player.transform.parent = null;
+        Slime.transform.parent = null;
     }
 }
