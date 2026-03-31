@@ -48,6 +48,7 @@ public class PlayerWalking : PlayerAbstract
         if (Input.GetKeyDown(SettingsData.Instance._InputAttack))
         {
             Debug.Log("Attacking while walking");
+            player.playerData.audioSource.PlayPlayerAttackSound(player.playerData._PlayerAttack);
             player.playerData.anim.SetBool("attacking", true);
             player.Attack(currentAttack);
         }

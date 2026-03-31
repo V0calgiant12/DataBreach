@@ -39,6 +39,7 @@ public class PlayerSprinting : PlayerAbstract
         if (Input.GetKeyDown(SettingsData.Instance._InputAttack))
         {
             Debug.Log("Attacking while sprinting");
+            player.playerData.audioSource.PlayPlayerAttackSound(player.playerData._PlayerAttack);
             player.playerData.anim.SetBool("attacking", true);
             player.Attack(PlayerStateManager.AttackType.dash);
         }

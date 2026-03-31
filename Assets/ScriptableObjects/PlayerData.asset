@@ -20,11 +20,13 @@ MonoBehaviour:
   jumpBufferCounter: -522
   coyoteTimeCounter: 15
   playerHealth: 5
+  iFrames: 0
   sprinting: 0
   crouching: 0
   doubleJumpAvailable: 1
   movementAllowed: 1
   leftOrRight: 1
+  attackTimer: 0
   anim: {fileID: 0}
   interacting: 0
   _GrassWalk: {fileID: 8300000, guid: 0a7bcb5adf063a24da9d72f4dc0f02a0, type: 3}
@@ -36,3 +38,6 @@ MonoBehaviour:
   _NormalFall: {fileID: 8300000, guid: 8206f640d6e3caa429008322f62a0781, type: 3}
   _NormalJump: {fileID: 8300000, guid: 9f2334670d5b86e4dba364987a3c5a4a, type: 3}
   _AirJump: {fileID: 8300000, guid: b17471b81556df343be81d50ad9bf15c, type: 3}
+  _PlayerHit: {fileID: 8300000, guid: 83f348a89ab97344bbd06cde38531154, type: 3}
+  _PlayerDeath: {fileID: 0}
+  _PlayerAttack: {fileID: 8300000, guid: 919593a918b2a5743b48cc2623563a68, type: 3}

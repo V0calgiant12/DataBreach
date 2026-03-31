@@ -30,6 +30,7 @@ public class PlayerIdle : PlayerAbstract
         if (Input.GetKeyDown(SettingsData.Instance._InputAttack))
         {
             Debug.Log("Attacking while Idle");
+            player.playerData.audioSource.PlayPlayerAttackSound(player.playerData._PlayerAttack);
             player.playerData.anim.SetBool("attacking", true);
             player.Attack(currentAttack);
         }

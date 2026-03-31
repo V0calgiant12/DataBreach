@@ -17,6 +17,7 @@ public class PlayerCrouching : PlayerAbstract
         // Down attack
         if (Input.GetKeyDown(SettingsData.Instance._InputAttack))
         {
+            player.playerData.audioSource.PlayPlayerAttackSound(player.playerData._PlayerAttack);
             player.Attack(PlayerStateManager.AttackType.down);
         }
         // Crouch release check
