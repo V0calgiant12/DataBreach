@@ -6,12 +6,12 @@ public class PlayerSound : MonoBehaviour
     public void PlayJumpSound(AudioClip audio)
     {
         GameObject audioClone = Instantiate(prefab);
-        audioClone.GetComponent<PlayerAudioSource>().JumpSound(audio,0.7f);
+        audioClone.GetComponent<PlayerAudioSource>().JumpSound(audio,1f);
     }
     public void PlayGrassSound(AudioClip audio)
     {
         GameObject audioClone = Instantiate(prefab);
-        audioClone.GetComponent<PlayerAudioSource>().GrassSound(audio,0.9f);
+        audioClone.GetComponent<PlayerAudioSource>().GrassSound(audio,0.8f);
     }
     public void PlayStoneSound(AudioClip audio)
     {
