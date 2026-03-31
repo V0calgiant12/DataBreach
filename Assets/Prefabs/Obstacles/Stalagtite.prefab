@@ -17,7 +17,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1228185631193351710
 Transform:
   m_ObjectHideFlags: 0
@@ -77,7 +77,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.5, y: 1}
   m_EdgeRadius: 0
 --- !u!50 &8704252516064307898
 Rigidbody2D:
@@ -229,7 +229,10 @@ MonoBehaviour:
   Collider: {fileID: 2671669778738227143}
   Hitbox: {fileID: 7391128039705364989}
   Trigger: {fileID: 5278600094845802158}
+  _StalactiteGround: {fileID: 0}
+  _StalactiteDetach: {fileID: 0}
   audioSource: {fileID: 3207345941509981788}
+  audioSource2: {fileID: 0}
 --- !u!1 &6271156301276086668
 GameObject:
   m_ObjectHideFlags: 0
@@ -372,7 +375,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1, y: 1.5}
+  m_Size: {x: 0.6, y: 1.5}
   m_EdgeRadius: 0
 --- !u!50 &1064318398792073163
 Rigidbody2D:
@@ -514,7 +517,10 @@ MonoBehaviour:
   Collider: {fileID: 2671669778738227143}
   Hitbox: {fileID: 7391128039705364989}
   Trigger: {fileID: 5278600094845802158}
+  _StalactiteGround: {fileID: 0}
+  _StalactiteDetach: {fileID: 0}
   audioSource: {fileID: 3207345941509981788}
+  audioSource2: {fileID: 0}
 --- !u!1 &9120588367307259411
 GameObject:
   m_ObjectHideFlags: 0
@@ -540,13 +546,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9120588367307259411}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 1, w: 0}
-  m_LocalPosition: {x: 0, y: 0.07, z: 0}
-  m_LocalScale: {x: 1, y: 1.5, z: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1641376023483015430}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1487666146239282395
 SpriteRenderer:
   serializedVersion: 2
@@ -596,7 +602,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 75f5f34dc1b5347e0b8351032682f224, type: 3}
+  m_Sprite: {fileID: 21300000, guid: bc182bcf36b387f4c95f21fd459cb43a, type: 3}
   m_Color: {r: 0.7423906, g: 0.7792088, b: 0.7830189, a: 1}
   m_FlipX: 0
   m_FlipY: 0

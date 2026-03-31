@@ -8,7 +8,6 @@ public class EffectAudioSource : MonoBehaviour
     [SerializeField] private AudioMixer audioMixer;
     public void HeartSound(AudioClip audioClip,float volume)
     {
-        audioSource.pitch = Random.Range(0.8f,1.5f);
         audioSource.volume = volume;
         audioSource.outputAudioMixerGroup = audioMixer.FindMatchingGroups("Effects")[0];
         audioSource.clip = audioClip;
