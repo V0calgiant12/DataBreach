@@ -20,6 +20,13 @@ public class SlimeStateManager : MonoBehaviour
     public int jumpTimer;
     public bool isGrounded;
     [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioSource audioSource2;
+    [SerializeField] private AudioSource audioSource3;
+    [SerializeField] private AudioSource audioSource4;
+    public AudioClip _SlimeJump;
+    public AudioClip _SlimeImpact;
+    public AudioClip _SlimeAttack;
+    public AudioClip _SlimeDeath;
 
     void Start()
     {
@@ -59,6 +66,10 @@ public class SlimeStateManager : MonoBehaviour
         // Apply a diagonal "Hop" force
         Vector2 hopVector = new Vector2(direction * forwardForce, jumpForce);
         slimeRb.AddForce(hopVector, ForceMode2D.Impulse);
+        if (isGrounded)
+        {
+            audioSource2.Play();
+        }
     }
 
     // Basic ground check using collisions
