@@ -8,11 +8,18 @@ public class ParaSlime : MonoBehaviour
     public Transform pointB;
     public float moveSpeed = 0.1f;
     [SerializeField] private Vector3 nextPos;
+    [SerializeField] private AudioSource audioSource;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         nextPos = pointB.position;
+        InvokeRepeating(nameof(PlaySound),0.5f,0.5f);
+    }
+    private void PlaySound()
+    {
+        audioSource.pitch = Random.Range(0.7f,1.3f);
+        audioSource.Play();
     }
 
     // Update is called once per frame
