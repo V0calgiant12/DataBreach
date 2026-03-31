@@ -15,6 +15,15 @@ public class PlayerDead : PlayerAbstract
         player.playerData.anim.SetBool("dead", true);
         if (player.playerData.playerHealth <= 0) 
         {
+            //player.playerData.oneOrTwo = Random.Range(0, 1);
+            //if (player.playerData.oneOrTwo == 0)
+            //{
+                //player.playerData.audioSource.PlayPlayerDeathSound(player.playerData._PlayerDeath);
+            //}
+            //if (player.playerData.oneOrTwo == 1)
+            //{
+                //player.playerData.audioSource.PlayPlayerDeathSound(player.playerData._PlayerDeath2);
+            //}
             player.playerData.audioSource.PlayPlayerDeathSound(player.playerData._PlayerDeath);
             Debug.Log("You Are Dead");
             player.playerData.PlayerRb.linearVelocity = new Vector2(0, 0);

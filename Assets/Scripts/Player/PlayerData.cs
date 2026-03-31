@@ -12,6 +12,7 @@ public class PlayerData : ScriptableObject
     public int coyoteTimeCounter;
     public int playerHealth = 5;
     public int iFrames;
+    //public int oneOrTwo;
     //public int lastWallJumpRight;
     public bool sprinting;
     public bool crouching;
@@ -34,5 +35,6 @@ public class PlayerData : ScriptableObject
     public AudioClip _AirJump;
     public AudioClip _PlayerHit;
     public AudioClip _PlayerDeath;
-    public AudioClip _PlayerAttack;
+    public AudioClip _PlayerDeath2;
+    //public AudioClip _PlayerAttack;
 }

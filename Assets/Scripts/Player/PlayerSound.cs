@@ -28,6 +28,11 @@ public class PlayerSound : MonoBehaviour
         GameObject audioClone = Instantiate(prefab);
         audioClone.GetComponent<PlayerAudioSource>().PlayerDeathSound(audio,1f);
     }
+    //public void PlayPlayerDeathSound2(AudioClip audio)
+    //{
+        //GameObject audioClone = Instantiate(prefab);
+        //audioClone.GetComponent<PlayerAudioSource>().PlayerDeathSound2(audio,1f);
+    //}
     public void PlayPlayerAttackSound(AudioClip audio)
     {
         GameObject audioClone = Instantiate(prefab);
