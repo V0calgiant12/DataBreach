@@ -6,6 +6,6 @@ public class SlimeSound : MonoBehaviour
     public void PlaySlimeJumpSound(AudioClip audio)
         {
             GameObject audioClone = Instantiate(prefab);
-            audioClone.GetComponent<PlayerAudioSource>().PlayerAttackSound(audio,1f);
+            audioClone.GetComponent<SlimeAudioSource>().SlimeJumpSound(audio,1f);
         }
 }
