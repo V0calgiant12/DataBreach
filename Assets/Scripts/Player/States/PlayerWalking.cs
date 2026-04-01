@@ -29,7 +29,7 @@ public class PlayerWalking : PlayerAbstract
         {
             currentAttack = PlayerStateManager.AttackType.forward;
             PlayerVelocity = new Vector2(playerSpeed, player.playerData.PlayerRb.linearVelocityY);
-            player.playerData.PlayerRb.linearVelocity = PlayerVelocity;// + OffsetVelocity;
+            player.playerData.PlayerRb.linearVelocity = PlayerVelocity + player.playerData.OffsetVelocity;
             player.playerData.leftOrRight = true;
             player.playerData.anim.SetBool("moving", true);
             moving = true;
@@ -38,7 +38,7 @@ public class PlayerWalking : PlayerAbstract
         {
             currentAttack = PlayerStateManager.AttackType.forward;
             PlayerVelocity = new Vector2(-playerSpeed, player.playerData.PlayerRb.linearVelocityY);
-            player.playerData.PlayerRb.linearVelocity = PlayerVelocity;// + OffsetVelocity;
+            player.playerData.PlayerRb.linearVelocity = PlayerVelocity + player.playerData.OffsetVelocity;
             player.playerData.leftOrRight = false;
             player.playerData.anim.SetBool("moving", true);
             moving = true;

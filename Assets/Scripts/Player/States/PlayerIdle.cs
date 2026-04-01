@@ -15,7 +15,7 @@ public class PlayerIdle : PlayerAbstract
     {
         currentAttack = PlayerStateManager.AttackType.forward; // Default attack if nothing is inputed this frame.
         
-        player.playerData.PlayerRb.linearVelocityX = 0;
+        player.playerData.PlayerRb.linearVelocity = new Vector2(0,player.playerData.PlayerRb.linearVelocityY) + player.playerData.OffsetVelocity;
         player.playerData.anim.SetBool("moving", false);
         player.playerData.anim.SetBool("sprinting", false);
         player.playerData.anim.SetBool("attacking", false);

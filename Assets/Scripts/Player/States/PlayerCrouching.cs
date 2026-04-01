@@ -1,3 +1,4 @@
+
 using UnityEngine;
 
 public class PlayerCrouching : PlayerAbstract
@@ -36,7 +37,7 @@ public class PlayerCrouching : PlayerAbstract
         if (Input.GetKey(SettingsData.Instance._InputRight))
         {
             PlayerVelocity = new Vector2(playerSpeed, player.playerData.PlayerRb.linearVelocityY);
-            player.playerData.PlayerRb.linearVelocity = PlayerVelocity;// + OffsetVelocity;
+            player.playerData.PlayerRb.linearVelocity = PlayerVelocity + player.playerData.OffsetVelocity;
             player.playerData.leftOrRight = true;
             player.playerData.anim.SetBool("moving", true);
             moving = true;
@@ -44,14 +45,14 @@ public class PlayerCrouching : PlayerAbstract
         if (Input.GetKey(SettingsData.Instance._InputLeft)) 
         {
             PlayerVelocity = new Vector2(-playerSpeed, player.playerData.PlayerRb.linearVelocityY);
-            player.playerData.PlayerRb.linearVelocity = PlayerVelocity;// + OffsetVelocity;
+            player.playerData.PlayerRb.linearVelocity = PlayerVelocity + player.playerData.OffsetVelocity;
             player.playerData.leftOrRight = false;
             player.playerData.anim.SetBool("moving", true);
             moving = true;
         }
         if (!moving)
         {
-            player.playerData.PlayerRb.linearVelocityX = 0;
+            player.playerData.PlayerRb.linearVelocity = new Vector2(0,player.playerData.PlayerRb.linearVelocityY) + player.playerData.OffsetVelocity;
         }
 
         // Jump check

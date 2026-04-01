@@ -22,7 +22,7 @@ public class PlayerSprinting : PlayerAbstract
         if (Input.GetKey(SettingsData.Instance._InputRight))
         {
             PlayerVelocity = new Vector2(playerSpeed, player.playerData.PlayerRb.linearVelocityY);
-            player.playerData.PlayerRb.linearVelocity = PlayerVelocity;// + OffsetVelocity;
+            player.playerData.PlayerRb.linearVelocity = PlayerVelocity + player.playerData.OffsetVelocity;
             player.playerData.leftOrRight = true;
             player.playerData.anim.SetBool("moving", true);
             moving = true;
@@ -31,7 +31,7 @@ public class PlayerSprinting : PlayerAbstract
         if (Input.GetKey(SettingsData.Instance._InputLeft)) 
         {
             PlayerVelocity = new Vector2(-playerSpeed, player.playerData.PlayerRb.linearVelocityY);
-            player.playerData.PlayerRb.linearVelocity = PlayerVelocity;// + OffsetVelocity;
+            player.playerData.PlayerRb.linearVelocity = PlayerVelocity + player.playerData.OffsetVelocity;
             player.playerData.leftOrRight = false;
             player.playerData.anim.SetBool("moving", true);
             moving = true;

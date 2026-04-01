@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Numerics;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -36,11 +35,20 @@ public class PlatformMover : MonoBehaviour
         currentSpeed = new UnityEngine.Vector2((nextPos.x - transform.position.x)/moveSpeed,(nextPos.y - transform.position.y)/moveSpeed);
         while(UnityEngine.Vector2.Distance(transform.position,nextPos) > 1)
         {
-            Debug.Log(UnityEngine.Vector2.Distance(transform.position,nextPos));
+            //Debug.Log(UnityEngine.Vector2.Distance(transform.position,nextPos));
             platformRb.linearVelocityX = currentSpeed.x;
             platformRb.linearVelocityY = currentSpeed.y;
             yield return null;
         }
+    }
+    private void OnTriggerStay2D(Collider2D other)
+    {
+        if(other.gameObject.CompareTag("GroundCheck"))
+        {
+            Player.transform.parent = transform;
+            PlayerStateManager.Instance.playerData.OffsetVelocity = platformRb.linearVelocity;
+        }
+        
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -69,6 +77,7 @@ public class PlatformMover : MonoBehaviour
         if(other.gameObject.CompareTag("GroundCheck"))
         {
             Player.transform.parent = null;
+            PlayerStateManager.Instance.playerData.OffsetVelocity = new Vector2(0,0);
         }
         if(other.gameObject.CompareTag("SlimeTrigger"))
         {
