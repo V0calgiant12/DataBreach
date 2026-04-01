@@ -40,6 +40,7 @@ public class PlayerStateManager : MonoBehaviour
         playerData.movementAllowed = true;
         playerData.playerHealth = 5;
         playerData.playerHealth = 5;
+        playerData.OffsetVelocity = new Vector2(0,0);
         playerData.interacting = false;
         Instance = this;
         FindPlayerObject();
