@@ -16,5 +16,6 @@ public class SlimeData : ScriptableObject
     private Rigidbody2D slimeRb;
     private Transform player;
     private float jumpTimer;
+    public int slimeHealth;
     private bool isGrounded;
 }
