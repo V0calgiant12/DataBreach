@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 public class Sawblade : MonoBehaviour
 {
@@ -8,13 +9,14 @@ public class Sawblade : MonoBehaviour
     public bool sawbladeDirection;
     public bool playerDetected;
     public float sawbladeSpeed = 55f;
+    public float upDistance = 1f;
+    private float elapsed;
     public GameObject DetectPlayerLeft;
     public GameObject DetectPlayerRight;
     public GameObject SawbladeHitbox;
-    public GameObject WallDetectLeft;
-    public GameObject WallDetectRight;
     public Rigidbody2D sawbladeRb;
     public Vector2 SawbladeVelocity;
+    public Vector2 goUp;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -27,14 +29,13 @@ public class Sawblade : MonoBehaviour
             DetectPlayerRight.SetActive(false);
         }
         sawbladeRb = GetComponent<Rigidbody2D>();
-        WallDetectLeft.SetActive(false);
-        WallDetectRight.SetActive(false);
         playerDetected = false;
     }
 
     // Update is called once per frame
     void Update()
     {
+        sawbladeRb.linearVelocity = SawbladeVelocity;
         // I plan on making it so that it starts in the ground and then pops up when the player in in a certain range (probably like double whatever slimes chase range is)
         // You would also have to be around the same y-level as it for it to trigger
         // After detecting a wall within a few tiles, depending if its going right or left, it will slowly go back into the ground (Slowly but not too slow for it to end up hitting the wall) and be deleted
@@ -44,12 +45,10 @@ public class Sawblade : MonoBehaviour
             if (sawbladeDirection)
             {
                 SawbladeVelocity = new Vector2(sawbladeSpeed, sawbladeRb.linearVelocityY);
-                sawbladeRb.linearVelocity = SawbladeVelocity;
             }
             if (!sawbladeDirection)
             {
-                SawbladeVelocity = new Vector2(-sawbladeSpeed, sawbladeRb.linearVelocityY);
-                sawbladeRb.linearVelocity = SawbladeVelocity;
+                SawbladeVelocity = new Vector2(-sawbladeSpeed, 0);
             }
         }
         
@@ -61,19 +60,22 @@ public class Sawblade : MonoBehaviour
             Debug.Log("Player Detected");
             
             DetectPlayerRight.SetActive(false);
-            WallDetectLeft.SetActive(true);
-            WallDetectRight.SetActive(true);
-            SawbladeUp();
-            playerDetected = true;
+            StartCoroutine(SawbladeUp());
         }
-        if (other.gameObject.CompareTag("Ground") && playerDetected)
-        {
-            Debug.Log("Saw test");
-            // Start to go back underground
-        }
+
     }
-    void SawbladeUp()
+    public IEnumerator SawbladeUp()
     {
-        
+        elapsed = 0;
+        while (upDistance > elapsed)
+        {
+            elapsed += 0.01f;
+            SawbladeVelocity =  new Vector2(-sawbladeSpeed, sawbladeRb.linearVelocityY + elapsed);
+            Debug.Log(sawbladeRb.linearVelocityY + elapsed);
+            yield return null;
+        }
+        SawbladeVelocity = new Vector2(-sawbladeSpeed, 0);
+        playerDetected = true;
+        Debug.Log("Done going up");
     }
 }
