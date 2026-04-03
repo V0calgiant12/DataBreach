@@ -8,15 +8,17 @@ public class Sawblade : MonoBehaviour
     // Set this to whatever direction you need it to go before using it
     public bool sawbladeDirection;
     public bool playerDetected;
+    public bool sawUp;
     public float sawbladeSpeed = 55f;
-    public float upDistance = 1f;
+    public float upDistance = .75f;
     private float elapsed;
+    public GameObject WallDetectLeft;
+    public GameObject WallDetectRight;
     public GameObject DetectPlayerLeft;
     public GameObject DetectPlayerRight;
     public GameObject SawbladeHitbox;
     public Rigidbody2D sawbladeRb;
     public Vector2 SawbladeVelocity;
-    public Vector2 goUp;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -28,8 +30,11 @@ public class Sawblade : MonoBehaviour
         {
             DetectPlayerRight.SetActive(false);
         }
+        WallDetectLeft.SetActive(false);
+        WallDetectRight.SetActive(false);
         sawbladeRb = GetComponent<Rigidbody2D>();
         playerDetected = false;
+        sawUp = false;
     }
 
     // Update is called once per frame
@@ -44,7 +49,7 @@ public class Sawblade : MonoBehaviour
         {
             if (sawbladeDirection)
             {
-                SawbladeVelocity = new Vector2(sawbladeSpeed, sawbladeRb.linearVelocityY);
+                SawbladeVelocity = new Vector2(sawbladeSpeed, 0);
             }
             if (!sawbladeDirection)
             {
@@ -55,10 +60,10 @@ public class Sawblade : MonoBehaviour
     }
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("Player"))
+        if (other.gameObject.CompareTag("Player") && (!playerDetected))
         {
             Debug.Log("Player Detected");
-            
+            DetectPlayerLeft.SetActive(false);
             DetectPlayerRight.SetActive(false);
             StartCoroutine(SawbladeUp());
         }
@@ -69,13 +74,23 @@ public class Sawblade : MonoBehaviour
         elapsed = 0;
         while (upDistance > elapsed)
         {
-            elapsed += 0.01f;
-            SawbladeVelocity =  new Vector2(-sawbladeSpeed, sawbladeRb.linearVelocityY + elapsed);
-            Debug.Log(sawbladeRb.linearVelocityY + elapsed);
+            elapsed += 0.05f;
+            if (sawbladeDirection)
+            {
+                SawbladeVelocity =  new Vector2(sawbladeSpeed, sawbladeRb.linearVelocityY + elapsed);
+            }
+            if (!sawbladeDirection)
+            {
+                SawbladeVelocity =  new Vector2(-sawbladeSpeed, sawbladeRb.linearVelocityY + elapsed);
+            }
+            //Debug.Log(sawbladeRb.linearVelocityY + elapsed);
             yield return null;
         }
         SawbladeVelocity = new Vector2(-sawbladeSpeed, 0);
         playerDetected = true;
+        WallDetectLeft.SetActive(true);
+        WallDetectRight.SetActive(true);
+        sawUp = true;
         Debug.Log("Done going up");
     }
 }
