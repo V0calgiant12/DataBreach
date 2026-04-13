@@ -15,12 +15,6 @@ public class SawbladeWallDetect : MonoBehaviour
         WallDetectLeft = SawbladeRef.WallDetectLeft;
         WallDetectRight = SawbladeRef.WallDetectRight;
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("Ground"))
@@ -45,7 +39,7 @@ public class SawbladeWallDetect : MonoBehaviour
                 SawbladeRef.SawbladeVelocity =  new Vector2(-SawbladeRef.sawbladeSpeed, SawbladeRef.sawbladeRb.linearVelocityY + elapsed);
             }
             yield return null;
-            Destroy(Sawblade);
         }
+        Destroy(Sawblade);
     }
 }

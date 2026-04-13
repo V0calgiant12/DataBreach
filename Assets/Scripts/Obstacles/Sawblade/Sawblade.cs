@@ -9,7 +9,7 @@ public class Sawblade : MonoBehaviour
     public bool sawbladeDirection;
     public bool playerDetected;
     public bool sawUp;
-    public float sawbladeSpeed = 55f;
+    public float sawbladeSpeed = 10f;
     public float upDistance = .75f;
     private float elapsed;
     public GameObject WallDetectLeft;
@@ -86,7 +86,14 @@ public class Sawblade : MonoBehaviour
             //Debug.Log(sawbladeRb.linearVelocityY + elapsed);
             yield return null;
         }
-        SawbladeVelocity = new Vector2(-sawbladeSpeed, 0);
+        if (sawbladeDirection)
+        {
+            SawbladeVelocity = new Vector2(sawbladeSpeed, 0);
+        }
+        if (!sawbladeDirection)
+        {
+            SawbladeVelocity = new Vector2(-sawbladeSpeed, 0);
+        }
         playerDetected = true;
         WallDetectLeft.SetActive(true);
         WallDetectRight.SetActive(true);
