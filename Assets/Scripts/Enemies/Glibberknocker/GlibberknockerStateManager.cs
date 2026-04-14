@@ -1,46 +1,108 @@
 using UnityEngine;
 
+
 public class GlibberknockerStateManager : MonoBehaviour
 {
+    [Header("Movement & Gravity")]
+    public float moveSpeed = 4f;
+    public float patrolRange = 10f;
+    public float chaseRange = 20f;
 
-    public Rigidbody2D glibberknockerRb;
+    [Header("Combat")]
+    public float attackRange = 4f;
+    public float attackRate = 0.5f;
+    private float nextAttackTime = 0f;
+
+
+    [Header("References")]
     public Transform player;
-    public bool isGrounded;
-    public float glibberknockerHealth = 5f;
 
-    [Header("Detection")]
-    public float detectionRange = 5f;
-    public LayerMask groundLayer;
+    private Rigidbody2D glibberknockerRb;
+    private Vector2 startPosition;
+    private float patrolTargetX;
+    private SpriteRenderer spriteRenderer;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+
     void Start()
     {
         glibberknockerRb = GetComponent<Rigidbody2D>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        startPosition = transform.position;
+        SetNewPatrolTarget();
 
-        if (player == null) player = GameObject.FindGameObjectWithTag("Player").transform;
+        // Ensure the glibberknocker doesn't tip over like a domino
+        glibberknockerRb.constraints = RigidbodyConstraints2D.FreezeRotation;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    void FixedUpdate()
     {
-        if (collision.gameObject.CompareTag("Ground") || collision.gameObject.CompareTag("Spikes") || collision.gameObject.CompareTag("MovingPlatform") || collision.gameObject.CompareTag("Stone"))
+        float distanceToPlayer = Vector2.Distance(transform.position, player.position);
+
+
+        if (distanceToPlayer <= attackRange)
         {
-            isGrounded = true;
-            //Debug.Log("grounded");
+            StopMovement();
+            TryAttack();
+        }
+        else if (distanceToPlayer <= chaseRange)
+        {
+            Move(player.position.x > transform.position.x ? 1 : -1);
+        }
+        else
+        {
+            Patrol();
         }
     }
 
-    private void OnCollisionExit2D(Collision2D collision)
+
+    void Patrol()
     {
-        if (collision.gameObject.CompareTag("Ground") || collision.gameObject.CompareTag("Spikes") || collision.gameObject.CompareTag("MovingPlatform") || collision.gameObject.CompareTag("Stone"))
+        float direction = patrolTargetX > transform.position.x ? 1 : -1;
+        Move(direction);
+
+
+        if (Mathf.Abs(transform.position.x - patrolTargetX) < 0.5f)
         {
-            isGrounded = false;
+            SetNewPatrolTarget();
         }
     }
+
+
+    void Move(float direction)
+    {
+        // We only change the X velocity. Gravity handles the Y velocity.
+        glibberknockerRb.linearVelocity = new Vector2(direction * moveSpeed, glibberknockerRb.linearVelocity.y);
+
+        // Flip sprite
+        spriteRenderer.flipX = direction < 0;
+    }
+
+
+    void StopMovement()
+    {
+        glibberknockerRb.linearVelocity = new Vector2(0, glibberknockerRb.linearVelocity.y);
+    }
+
+
+    void TryAttack()
+    {
+        if (Time.time >= nextAttackTime)
+        {
+            Debug.Log("glibberknocker Swings!");
+            // ADD: animator.SetTrigger("Attack");
+            nextAttackTime = Time.time + attackRate;
+        }
+    }
+
+
+    void SetNewPatrolTarget()
+    {
+        patrolTargetX = startPosition.x + Random.Range(-patrolRange, patrolRange);
+    }
+
+
 
 }
+
+
