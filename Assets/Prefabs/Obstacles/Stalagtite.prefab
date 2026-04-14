@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1228185631193351710}
   - component: {fileID: 3549686502712173665}
   - component: {fileID: 8704252516064307898}
+  - component: {fileID: 568060369582190232}
   m_Layer: 3
   m_Name: Collider
   m_TagString: Stone
@@ -106,6 +107,103 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
+--- !u!82 &568060369582190232
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2671669778738227143}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: -1693032528215722064, guid: 246f48f13ca5833448ea181663ec054d, type: 2}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 8300000, guid: d3c208c49ea89144bbdfccd7e0ec20a7, type: 3}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &5278600094845802158
 GameObject:
   m_ObjectHideFlags: 0
@@ -229,8 +327,8 @@ MonoBehaviour:
   Collider: {fileID: 2671669778738227143}
   Hitbox: {fileID: 7391128039705364989}
   Trigger: {fileID: 5278600094845802158}
-  _StalactiteGround: {fileID: 0}
-  _StalactiteDetach: {fileID: 0}
+  _StalactiteGround: {fileID: 8300000, guid: d3c208c49ea89144bbdfccd7e0ec20a7, type: 3}
+  _StalactiteDetach: {fileID: 8300000, guid: 22b037545e835bf44813e67289f5835d, type: 3}
   audioSource: {fileID: 3207345941509981788}
   audioSource2: {fileID: 0}
 --- !u!1 &6271156301276086668
@@ -517,10 +615,10 @@ MonoBehaviour:
   Collider: {fileID: 2671669778738227143}
   Hitbox: {fileID: 7391128039705364989}
   Trigger: {fileID: 5278600094845802158}
-  _StalactiteGround: {fileID: 0}
-  _StalactiteDetach: {fileID: 0}
+  _StalactiteGround: {fileID: 8300000, guid: d3c208c49ea89144bbdfccd7e0ec20a7, type: 3}
+  _StalactiteDetach: {fileID: 8300000, guid: 22b037545e835bf44813e67289f5835d, type: 3}
   audioSource: {fileID: 3207345941509981788}
-  audioSource2: {fileID: 0}
+  audioSource2: {fileID: 568060369582190232}
 --- !u!1 &9120588367307259411
 GameObject:
   m_ObjectHideFlags: 0
@@ -532,7 +630,7 @@ GameObject:
   - component: {fileID: 3042787976135953805}
   - component: {fileID: 1487666146239282395}
   m_Layer: 0
-  m_Name: Triangle
+  m_Name: Visual
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -598,9 +696,9 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: -690482411
+  m_SortingLayer: 2
+  m_SortingOrder: 10
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: bc182bcf36b387f4c95f21fd459cb43a, type: 3}
   m_Color: {r: 0.7423906, g: 0.7792088, b: 0.7830189, a: 1}
