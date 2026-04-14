@@ -1,23 +1,23 @@
 using UnityEngine;
 
 
-public class GoblinStateManager : MonoBehaviour
+public class GlibberknockerStateManager : MonoBehaviour
 {
     [Header("Movement & Gravity")]
-    public float moveSpeed = 3f;
-    public float patrolRange = 5f;
-    public float chaseRange = 7f;
+    public float moveSpeed = 4f;
+    public float patrolRange = 10f;
+    public float chaseRange = 20f;
 
     [Header("Combat")]
-    public float attackRange = 1.5f;
-    public float attackRate = 1.5f;
+    public float attackRange = 4f;
+    public float attackRate = 0.5f;
     private float nextAttackTime = 0f;
 
 
     [Header("References")]
     public Transform player;
 
-    private Rigidbody2D goblinRb;
+    private Rigidbody2D glibberknockerRb;
     private Vector2 startPosition;
     private float patrolTargetX;
     private SpriteRenderer spriteRenderer;
@@ -25,13 +25,13 @@ public class GoblinStateManager : MonoBehaviour
 
     void Start()
     {
-        goblinRb = GetComponent<Rigidbody2D>();
+        glibberknockerRb = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         startPosition = transform.position;
         SetNewPatrolTarget();
 
-        // Ensure the goblin doesn't tip over like a domino
-        goblinRb.constraints = RigidbodyConstraints2D.FreezeRotation;
+        // Ensure the glibberknocker doesn't tip over like a domino
+        glibberknockerRb.constraints = RigidbodyConstraints2D.FreezeRotation;
     }
 
 
@@ -72,7 +72,7 @@ public class GoblinStateManager : MonoBehaviour
     void Move(float direction)
     {
         // We only change the X velocity. Gravity handles the Y velocity.
-        goblinRb.linearVelocity = new Vector2(direction * moveSpeed, goblinRb.linearVelocity.y);
+        glibberknockerRb.linearVelocity = new Vector2(direction * moveSpeed, glibberknockerRb.linearVelocity.y);
 
         // Flip sprite
         spriteRenderer.flipX = direction < 0;
@@ -81,7 +81,7 @@ public class GoblinStateManager : MonoBehaviour
 
     void StopMovement()
     {
-        goblinRb.linearVelocity = new Vector2(0, goblinRb.linearVelocity.y);
+        glibberknockerRb.linearVelocity = new Vector2(0, glibberknockerRb.linearVelocity.y);
     }
 
 
@@ -89,7 +89,7 @@ public class GoblinStateManager : MonoBehaviour
     {
         if (Time.time >= nextAttackTime)
         {
-            Debug.Log("Goblin Swings!");
+            Debug.Log("glibberknocker Swings!");
             // ADD: animator.SetTrigger("Attack");
             nextAttackTime = Time.time + attackRate;
         }

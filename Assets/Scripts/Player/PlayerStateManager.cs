@@ -28,7 +28,7 @@ public class PlayerStateManager : MonoBehaviour
         downAir,
         upAir
     }
-    public void Intereact()
+    public void Interact()
     {
         playerData.interacting = true;
     }
