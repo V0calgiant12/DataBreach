@@ -28,7 +28,7 @@ public class InteractionDetection : MonoBehaviour
             switch (data._Id)
             {
                 case(0):
-                    player.Intereact();
+                    player.Interact();
                     TextWrite.Instance.textBox.Open();
                     TextWrite.Instance.WriteText(other.gameObject.GetComponent<TextData>());
                     break;
