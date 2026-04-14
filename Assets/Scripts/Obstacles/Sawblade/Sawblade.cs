@@ -8,7 +8,6 @@ public class Sawblade : MonoBehaviour
     // Set this to whatever direction you need it to go before using it
     public bool sawbladeDirection;
     public bool playerDetected;
-    public bool sawUp;
     public float sawbladeSpeed = 10f;
     public float upDistance = .75f;
     private float elapsed;
@@ -34,7 +33,6 @@ public class Sawblade : MonoBehaviour
         WallDetectRight.SetActive(false);
         sawbladeRb = GetComponent<Rigidbody2D>();
         playerDetected = false;
-        sawUp = false;
     }
 
     // Update is called once per frame
@@ -97,7 +95,6 @@ public class Sawblade : MonoBehaviour
         playerDetected = true;
         WallDetectLeft.SetActive(true);
         WallDetectRight.SetActive(true);
-        sawUp = true;
         Debug.Log("Done going up");
     }
 }

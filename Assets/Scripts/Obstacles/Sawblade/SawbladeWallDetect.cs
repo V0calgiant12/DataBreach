@@ -7,7 +7,7 @@ public class SawbladeWallDetect : MonoBehaviour
     public GameObject WallDetectLeft;
     public GameObject WallDetectRight;
     public GameObject Sawblade;
-    private float elapsed;
+    [SerializeField] private float elapsed;
     public float downDistance = -1f;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
