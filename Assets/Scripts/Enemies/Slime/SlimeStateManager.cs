@@ -32,6 +32,7 @@ public class SlimeStateManager : MonoBehaviour
     void Start()
     {
         slimeRb = GetComponent<Rigidbody2D>();
+        slimeHealth = 1;
         // Ensure Gravity Scale is at least 1-2 so it falls back down!
         if (player == null) player = GameObject.FindGameObjectWithTag("Player").transform;
         InvokeRepeating(nameof(SlimeUpdate),1.5f,1.5f);
@@ -56,9 +57,10 @@ public class SlimeStateManager : MonoBehaviour
             }
             jumpTimer = 0;
         }
-        if (slimeHealth == 0)
+        if (slimeHealth <= 0)
         {
-            //Debug.Log("Slime is dead");
+            Destroy(gameObject);
+            Debug.Log("slime is dead");
         }
     }
 

@@ -100,6 +100,13 @@ public class PlayerAir : PlayerAbstract
         // Short Jumping
         if(!(Input.GetKey(SettingsData.Instance._InputJump) || SettingsData.Instance._UpToJump && Input.GetKey(SettingsData.Instance._InputUp)) && player.playerData.PlayerRb.linearVelocity.y > 0)
         {
+            player.playerData.anim.SetBool("airJumping", true);
+            player.playerData.PlayerRb.linearVelocity = new Vector2(player.playerData.PlayerRb.linearVelocityX, player.playerData.PlayerRb.linearVelocityY * 0.5f);
+        }
+
+        // Double Jumping
+        if ((Input.GetKeyDown(SettingsData.Instance._InputJump) || SettingsData.Instance._UpToJump && Input.GetKeyDown(SettingsData.Instance._InputUp)) && player.playerData.doubleJumpAvailable) // NOTE: Doesn't buffer the jump because we don't want the player to instantly use their double jump.
+        {
             if (Input.GetKey(SettingsData.Instance._InputRight))
             {
                 player.playerData.leftOrRight = true;
@@ -108,13 +115,6 @@ public class PlayerAir : PlayerAbstract
             {
                 player.playerData.leftOrRight = false;
             }
-            player.playerData.anim.SetBool("airJumping", true);
-            player.playerData.PlayerRb.linearVelocity = new Vector2(player.playerData.PlayerRb.linearVelocityX, player.playerData.PlayerRb.linearVelocityY * 0.5f);
-        }
-
-        // Double Jumping
-        if ((Input.GetKeyDown(SettingsData.Instance._InputJump) || SettingsData.Instance._UpToJump && Input.GetKeyDown(SettingsData.Instance._InputUp)) && player.playerData.doubleJumpAvailable) // NOTE: Doesn't buffer the jump because we don't want the player to instantly use their double jump.
-        {
             Debug.Log("jump in air");
             player.playerData.audioSource.PlayJumpSound(player.playerData._AirJump);
             player.playerData.anim.SetBool("airJumping", true);
