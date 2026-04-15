@@ -185,7 +185,7 @@ MonoBehaviour:
   SawbladeRef: {fileID: 1511437586265839643}
   WallDetectLeft: {fileID: 5011760525257951760}
   WallDetectRight: {fileID: 1628579019866660479}
-  Sawblade: {fileID: 8161239930239065778}
+  SawbladeGameObject: {fileID: 8161239930239065778}
   elapsed: 0
   downDistance: -1
 --- !u!1 &3963887607564240012
@@ -360,7 +360,7 @@ MonoBehaviour:
   SawbladeRef: {fileID: 1511437586265839643}
   WallDetectLeft: {fileID: 5011760525257951760}
   WallDetectRight: {fileID: 1628579019866660479}
-  Sawblade: {fileID: 8161239930239065778}
+  SawbladeGameObject: {fileID: 8161239930239065778}
   elapsed: 0
   downDistance: -1
 --- !u!1 &8161239930239065778
@@ -450,7 +450,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: -690482411
-  m_SortingLayer: 2
+  m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
@@ -511,7 +511,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55295a0829dd2634896dfd9b6568e04c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Sawblade
-  sawbladeDirection: 0
+  SawbladeDirection: 0
   playerDetected: 0
   sawbladeSpeed: 10
   upDistance: 0.85
