@@ -3,14 +3,16 @@ using System.Collections;
 
 public class Sawblade : MonoBehaviour
 {
-    // If this is false, then it will go left
-    // If this is true, then it will go right
-    // Set this to whatever direction you need it to go before using it
-    public bool sawbladeDirection;
-    public bool playerDetected;
+    [Header("Sawblade Settings:")]
     public float sawbladeSpeed = 10f;
-    public float upDistance = .75f;
-    private float elapsed;
+    public float upDistance = .85f;
+    public enum LeftRight
+    {
+        Left,
+        Right,
+    }
+    public LeftRight SawbladeDirection;
+    [Header("Sawblade References:")]
     public GameObject WallDetectLeft;
     public GameObject WallDetectRight;
     public GameObject DetectPlayerLeft;
@@ -18,14 +20,17 @@ public class Sawblade : MonoBehaviour
     public GameObject SawbladeHitbox;
     public Rigidbody2D sawbladeRb;
     public Vector2 SawbladeVelocity;
+    [SerializeField] private float elapsed;
+    private bool playerDetected;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        if (sawbladeDirection)
+        if (SawbladeDirection == LeftRight.Right)
         {
             DetectPlayerLeft.SetActive(false);
         }
-        if (!sawbladeDirection)
+        if (SawbladeDirection == LeftRight.Left)
         {
             DetectPlayerRight.SetActive(false);
         }
@@ -39,17 +44,13 @@ public class Sawblade : MonoBehaviour
     void Update()
     {
         sawbladeRb.linearVelocity = SawbladeVelocity;
-        // I plan on making it so that it starts in the ground and then pops up when the player in in a certain range (probably like double whatever slimes chase range is)
-        // You would also have to be around the same y-level as it for it to trigger
-        // After detecting a wall within a few tiles, depending if its going right or left, it will slowly go back into the ground (Slowly but not too slow for it to end up hitting the wall) and be deleted
-        // (or we could make it go back and forth but I personally think we shouldn't do that)
         if (playerDetected)
         {
-            if (sawbladeDirection)
+            if (SawbladeDirection == LeftRight.Right)
             {
                 SawbladeVelocity = new Vector2(sawbladeSpeed, 0);
             }
-            if (!sawbladeDirection)
+            if (SawbladeDirection == LeftRight.Left)
             {
                 SawbladeVelocity = new Vector2(-sawbladeSpeed, 0);
             }
@@ -67,28 +68,28 @@ public class Sawblade : MonoBehaviour
         }
 
     }
-    public IEnumerator SawbladeUp()
+    private IEnumerator SawbladeUp()
     {
         elapsed = 0;
         while (upDistance > elapsed)
         {
             elapsed += 0.05f;
-            if (sawbladeDirection)
+            if (SawbladeDirection == LeftRight.Right)
             {
                 SawbladeVelocity =  new Vector2(sawbladeSpeed, sawbladeRb.linearVelocityY + elapsed);
             }
-            if (!sawbladeDirection)
+            if (SawbladeDirection == LeftRight.Left)
             {
                 SawbladeVelocity =  new Vector2(-sawbladeSpeed, sawbladeRb.linearVelocityY + elapsed);
             }
             //Debug.Log(sawbladeRb.linearVelocityY + elapsed);
             yield return null;
         }
-        if (sawbladeDirection)
+        if (SawbladeDirection == LeftRight.Right)
         {
             SawbladeVelocity = new Vector2(sawbladeSpeed, 0);
         }
-        if (!sawbladeDirection)
+        if (SawbladeDirection == LeftRight.Left)
         {
             SawbladeVelocity = new Vector2(-sawbladeSpeed, 0);
         }
