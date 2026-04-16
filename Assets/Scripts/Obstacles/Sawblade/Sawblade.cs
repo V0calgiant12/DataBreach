@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using UnityEngine.Audio;
 
 public class Sawblade : MonoBehaviour
 {
@@ -20,6 +21,7 @@ public class Sawblade : MonoBehaviour
     public GameObject SawbladeHitbox;
     public Rigidbody2D sawbladeRb;
     public Vector2 SawbladeVelocity;
+    public AudioSource SawbladeAudioSource;
     [SerializeField] private float elapsed;
     private bool playerDetected;
 
@@ -64,6 +66,7 @@ public class Sawblade : MonoBehaviour
             Debug.Log("Player Detected");
             DetectPlayerLeft.SetActive(false);
             DetectPlayerRight.SetActive(false);
+            SawbladeAudioSource.Play();
             StartCoroutine(SawbladeUp());
         }
 
