@@ -23,6 +23,7 @@ public class Sawblade : MonoBehaviour
     public Vector2 SawbladeVelocity;
     public AudioSource SawbladeAudioSource;
     [SerializeField] private float elapsed;
+    public float SawbladeSpinVolume;
     private bool playerDetected;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -46,6 +47,7 @@ public class Sawblade : MonoBehaviour
     void Update()
     {
         sawbladeRb.linearVelocity = SawbladeVelocity;
+        SawbladeAudioSource.volume = SawbladeSpinVolume;
         if (playerDetected)
         {
             if (SawbladeDirection == LeftRight.Right)
@@ -74,8 +76,10 @@ public class Sawblade : MonoBehaviour
     private IEnumerator SawbladeUp()
     {
         elapsed = 0;
+        SawbladeSpinVolume = 0f;
         while (upDistance > elapsed)
         {
+            SawbladeSpinVolume += 0.05f;
             elapsed += 0.05f;
             if (SawbladeDirection == LeftRight.Right)
             {
@@ -91,14 +95,14 @@ public class Sawblade : MonoBehaviour
         if (SawbladeDirection == LeftRight.Right)
         {
             SawbladeVelocity = new Vector2(sawbladeSpeed, 0);
+            WallDetectRight.SetActive(true);
         }
         if (SawbladeDirection == LeftRight.Left)
         {
             SawbladeVelocity = new Vector2(-sawbladeSpeed, 0);
+            WallDetectLeft.SetActive(true);
         }
         playerDetected = true;
-        WallDetectLeft.SetActive(true);
-        WallDetectRight.SetActive(true);
         Debug.Log("Done going up");
     }
 }
