@@ -13,9 +13,10 @@ using UnityEngine;
 /// </summary>
 public class CameraShaker : MonoBehaviour
 {
-    public static CameraShaker Instance;
-    private UnityEngine.Vector3 Velocity = UnityEngine.Vector3.zero;
+    [Header("Camera Shaker References:")]
     [SerializeField] private AudioSource audioSource;
+    private UnityEngine.Vector3 Velocity = UnityEngine.Vector3.zero;
+    public static CameraShaker Instance;
 
     private void Awake()
     {

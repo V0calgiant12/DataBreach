@@ -3,10 +3,13 @@ using UnityEngine;
 
 public class ParaSlime : MonoBehaviour
 {
+    [Header("Para Slime Settings:")]
     public float platformSpeed = 1;
+    public float moveSpeed = 0.1f;
+    [Header("Para Slime References:")]
     public Transform pointA;
     public Transform pointB;
-    public float moveSpeed = 0.1f;
+    
     [SerializeField] private Vector3 nextPos;
     [SerializeField] private AudioSource audioSource;
 

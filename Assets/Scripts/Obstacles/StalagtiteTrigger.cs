@@ -5,6 +5,7 @@ using System.Collections;
 
 public class StalagtiteTrigger : MonoBehaviour
 {
+    [Header("Stalagtite References:")]
     public Rigidbody2D StalagmiteRb;
     public GameObject Collider;
     public GameObject Hitbox;

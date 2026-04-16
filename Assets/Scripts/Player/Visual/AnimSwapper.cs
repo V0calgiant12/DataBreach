@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class AnimSwapper : MonoBehaviour
 {
+    [Header("Player Animator References:")]
     public RuntimeAnimatorController normalAnim;
     public RuntimeAnimatorController airAnim;
     public Animator anim;

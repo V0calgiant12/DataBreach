@@ -4,6 +4,7 @@ using UnityEngine.Audio;
 
 public class EffectAudioSource : MonoBehaviour
 {
+    [Header("Effect Audio Source References:")]
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private AudioMixer audioMixer;
     public void HeartSound(AudioClip audioClip,float volume)

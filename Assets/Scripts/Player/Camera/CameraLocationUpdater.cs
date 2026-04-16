@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class CameraLocationUpdater : MonoBehaviour 
 {
+    [Header("Camera Location Updater References:")]
     [SerializeField] private GameObject player;
     [SerializeField] private Rigidbody2D rb;
     void Start()

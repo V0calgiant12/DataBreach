@@ -7,6 +7,7 @@ using UnityEngine.UI;
 
 public class CutsceneManager : MonoBehaviour
 {
+    [Header("Cutscene Manager References:")]
     [SerializeField] private Image panel1;
     [SerializeField] private Image panel2;
     [SerializeField] private Image panel3;

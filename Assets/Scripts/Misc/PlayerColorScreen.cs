@@ -4,6 +4,7 @@ using UnityEngine.UI;
 
 public class PlayerColorScreen : MonoBehaviour 
 {
+    [Header("Player Color Screen References:")]
     [SerializeField] private UnityEngine.Color playerColor;
     [SerializeField] private Image image;
     [SerializeField] private Image parentImage;

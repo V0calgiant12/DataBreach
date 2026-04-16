@@ -4,13 +4,15 @@ using UnityEngine;
 
 public class PlatformMover : MonoBehaviour
 {
+    [Header("Moving Platform Settings:")]
+    public float platformSpeed = 1;
+    public float moveSpeed = 0.1f;
+    [Header("Moving Platform References:")]
     public GameObject Player;
     public GameObject Slime;
-    public float platformSpeed = 1;
     public Rigidbody2D platformRb;
     public Transform pointA;
     public Transform pointB;
-    public float moveSpeed = 0.1f;
     private UnityEngine.Vector2 currentSpeed;
     [SerializeField] private UnityEngine.Vector2 nextPos;
 

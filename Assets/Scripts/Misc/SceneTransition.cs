@@ -7,6 +7,7 @@ using UnityEditor;
 
 public class SceneTransition : MonoBehaviour
 {
+    [Header("Scene Transition References:")]
     public Animator _Transition;
     [SerializeField] private RenderFeatureToggler renderFeatureToggler;
     public void TransitionToScene(int sceneNumber, float transitionTime)

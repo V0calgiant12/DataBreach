@@ -4,9 +4,12 @@ using UnityEngine;
 
 public class BitAI : MonoBehaviour
 {
+    [Header("Bit Settings:")]
+    public float moveSpeed;
+    [Header("Bit References:")]
     [SerializeField] private GameObject player;
     [SerializeField] private Rigidbody2D rb;
-    public float moveSpeed;
+    
     void Start()
     {
         StartCoroutine(MoveTowardsPlayer());

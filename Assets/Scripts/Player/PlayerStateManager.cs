@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerStateManager : MonoBehaviour
 {
+    [Header("Player State Manager References:")]
     public PlayerAbstract currentState;
     public PlayerAir AirState = new PlayerAir();
     public PlayerUpdate GlobalUpdateState = new PlayerUpdate();

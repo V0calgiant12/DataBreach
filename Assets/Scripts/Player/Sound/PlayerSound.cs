@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class PlayerSound : MonoBehaviour
 {
+    [Header("Player Sound References:")]
     [SerializeField] private GameObject prefab;
     public void PlayJumpSound(AudioClip audio)
     {

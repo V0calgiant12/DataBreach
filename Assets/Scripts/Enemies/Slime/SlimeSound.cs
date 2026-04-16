@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class SlimeSound : MonoBehaviour
 {
+    [Header("Slime Sound References:")]
     [SerializeField] private GameObject prefab;
     public void PlaySlimeJumpSound(AudioClip audio)
         {

@@ -4,6 +4,7 @@ using UnityEngine.Audio;
 
 public class PlayerAudioSource : MonoBehaviour
 {
+    [Header("Player Audio Source References:")]
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private AudioMixer audioMixer;
     public void GrassSound(AudioClip audioClip,float volume)

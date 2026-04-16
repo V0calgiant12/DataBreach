@@ -3,6 +3,7 @@ using System.Collections;
 
 public class SpikeDetect : MonoBehaviour
 {
+    [Header("Spike References:")]
     public Rigidbody2D PlayerRb;
     void Start()
     {
