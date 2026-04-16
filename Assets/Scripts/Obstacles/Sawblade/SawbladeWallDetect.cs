@@ -21,7 +21,7 @@ public class SawbladeWallDetect : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("Ground") || other.gameObject.CompareTag("Stone"))
+        if (other.gameObject.CompareTag("Ground") && !other.gameObject.CompareTag("Spikes") || other.gameObject.CompareTag("Stone"))
         {
             Debug.Log("Saw ground test");
             StartCoroutine(SawbladeDown());
@@ -30,10 +30,12 @@ public class SawbladeWallDetect : MonoBehaviour
     private IEnumerator SawbladeDown()
     {
         elapsed = 0;
+        SawbladeRef.SawbladeSpinVolume = 1;
         while (downDistance < elapsed)
         {
             elapsed -= 0.05f;
-            Debug.Log(elapsed);
+            SawbladeRef.SawbladeSpinVolume -= 0.05f;
+            Debug.Log(SawbladeRef.SawbladeSpinVolume);
             if (SawbladeRef.SawbladeDirection == Sawblade.LeftRight.Right)
             {
                 SawbladeRef.SawbladeVelocity =  new Vector2(SawbladeRef.sawbladeSpeed, SawbladeRef.sawbladeRb.linearVelocityY + elapsed);
