@@ -4,6 +4,7 @@ using UnityEngine.Audio;
 
 public class SlimeAudioSource : MonoBehaviour
 {
+    [Header("Slime Audio Source References:")]
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private AudioMixer audioMixer;
     public void SlimeJumpSound(AudioClip audioClip,float volume)

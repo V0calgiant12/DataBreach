@@ -3,6 +3,10 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "PlayerData", menuName = "ScriptableObjects/PlayerData")]
 public class PlayerData : ScriptableObject
 {
+    [Header("Player Data Settings:")]
+    public int playerHealth = 5;
+    public float attackTimer = 0f;
+    [Header("Player Data References:")]
     public GameObject MainCamera;
     public Vector2 OffsetVelocity;
     public Rigidbody2D PlayerRb;
@@ -10,7 +14,6 @@ public class PlayerData : ScriptableObject
     public PlayerSound audioSource;
     public int jumpBufferCounter;
     public int coyoteTimeCounter;
-    public int playerHealth = 5;
     public int iFrames;
     //public int oneOrTwo;
     //public int lastWallJumpRight;
@@ -19,7 +22,6 @@ public class PlayerData : ScriptableObject
     public bool doubleJumpAvailable;
     public bool movementAllowed = true;
     public bool leftOrRight;
-    public float attackTimer = 0f;
     public Animator anim;
     //public bool currentWallSide;
     public bool interacting;

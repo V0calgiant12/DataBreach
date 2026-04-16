@@ -2,9 +2,11 @@ using UnityEngine;
 
 public class GroundCheck : MonoBehaviour
 {
-    public static GroundCheck Instance;
+    [Header("Ground Check References:")]
+    
     public bool _IsGrounded;
     public bool _IsStone;
+    public static GroundCheck Instance;
 
     void Start()
     {

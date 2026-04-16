@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class EffectSound : MonoBehaviour
 {
+    [Header("Effect Sound References:")]
     [SerializeField] private GameObject prefab;
     public void HeartSound(AudioClip audio)
     {

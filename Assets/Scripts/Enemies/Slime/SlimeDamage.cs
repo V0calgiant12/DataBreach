@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class SlimeDamage : MonoBehaviour
 {
+    [Header("Slime Damage References:")]
     public Rigidbody2D slimeRb;
     public AudioSource audioSource3;
 

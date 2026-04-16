@@ -3,7 +3,9 @@ using UnityEngine;
 
 public class PlayerColor : MonoBehaviour 
 {
+    [Header("Player Color Settings:")]
     [SerializeField] private UnityEngine.Color playerColor;
+    [Header("Player Color References:")]
     [SerializeField] private SpriteRenderer sr;
     void Start()
     {

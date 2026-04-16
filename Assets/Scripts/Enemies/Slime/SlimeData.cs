@@ -5,12 +5,14 @@ public class SlimeData : ScriptableObject
 {
     public enum State { Idle, Chase }
     public State currentState = State.Idle;
-
+    [Header("Slime Settings:")]
     public float jumpForce = 5f;      
     public float forwardForce = 3f;  
     public float timeBetweenJumps = 1.5f;
 
     public float detectionRange = 5f;
+    [Header("Slime References:")]
+
     public LayerMask groundLayer;
 
     private Rigidbody2D slimeRb;

@@ -3,11 +3,13 @@ using UnityEngine.Audio;
 
 public class HeartObject : MonoBehaviour
 {
+    [Header("Heart Powerup Settings:")]
     public float bobbingSpeed = 2f;
     public float bobbingHeight = 0.5f;
-    private Vector2 startPos;
+    [Header("Heart Powerup References:")]
     [SerializeField] private EffectSound audioSource;
     [SerializeField] private AudioClip heartObtainSound;
+    private Vector2 startPos;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
