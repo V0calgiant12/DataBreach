@@ -14,10 +14,6 @@ public class StalagtiteTrigger : MonoBehaviour
     [SerializeField] private AudioClip _StalactiteDetach;
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private AudioSource audioSource2;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-    }
     private void OnTriggerEnter2D(Collider2D other)
     {
         if(other.gameObject.CompareTag("Player") && gameObject.CompareTag("Hitbox"))
