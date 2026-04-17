@@ -18,7 +18,7 @@ public class StalagtiteTrigger : MonoBehaviour
     {
         if(other.gameObject.CompareTag("Player") && gameObject.CompareTag("Hitbox"))
         {
-            PlayerStateManager.Instance.DamagePlayer(10, UnityEngine.Random.Range(6,10),60,false);
+            PlayerStateManager.Instance.DamagePlayer(10, UnityEngine.Random.Range(6,10),60,false,transform.position.x,false);
             Debug.Log("Stalagtite Damaged Player " + Convert.ToInt16(PlayerStateManager.Instance.playerData.leftOrRight));
         }
         if((other.gameObject.CompareTag("Ground")||other.gameObject.CompareTag("Stone")) && gameObject.CompareTag("Hitbox"))

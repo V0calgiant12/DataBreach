@@ -84,14 +84,21 @@ public class PlayerStateManager : MonoBehaviour
         playerData.collider = gameObject.GetComponent<BoxCollider2D>();
         playerData.MainCamera = GameObject.Find("Main Camera");
     }
-    public void DamagePlayer(float xLaunch, float yLaunch,int timer, bool overrideIFrames)
+    public void DamagePlayer(float xLaunch, float yLaunch,int timer, bool overrideIFrames, float damageSourceX, bool nonDirectional)
     {
         if (playerData.iFrames < 0 || overrideIFrames)
         {
             playerData.playerHealth = playerData.playerHealth - 1;
             playerData.audioSource.PlayPlayerHitSound(playerData._PlayerHit);
-            Debug.Log(playerData.playerHealth);
-            StartCoroutine(StunPlayer(xLaunch*(playerData.leftOrRight ? -1 : 1), yLaunch,timer));
+            //Debug.Log(playerData.playerHealth);
+            if (nonDirectional)
+            {
+                StartCoroutine(StunPlayer(xLaunch*(playerData.leftOrRight ? -1 : 1), yLaunch,timer));
+            }
+            else
+            {
+                StartCoroutine(StunPlayer(xLaunch*(transform.position.x <= damageSourceX ? -1 : 1), yLaunch,timer));
+            }
             playerData.iFrames = 120;
         }
     }
