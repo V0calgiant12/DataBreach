@@ -15,11 +15,13 @@ public class SlimeStateManager : MonoBehaviour
     public float detectionRange = 5f;
     public LayerMask groundLayer;
 
+    [Header("Slime References")]
     public Rigidbody2D slimeRb;
     public Transform player;
     public int jumpTimer;
     public float slimeHealth = 1f;
     public bool isGrounded;
+    public bool slimeLeftOrRight;
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private AudioSource audioSource2;
     public AudioSource audioSource3;
@@ -68,6 +70,15 @@ public class SlimeStateManager : MonoBehaviour
     {
         // Calculate direction to player (Left or Right)
         float direction = (player.position.x > transform.position.x) ? 1f : -1f;
+        // if slimeLeftOrRight is true, then it's facing right, otherwise it's facing left
+        if (direction == 1f)
+        {
+            slimeLeftOrRight = true;
+        }
+        if (direction == -1f)
+        {
+            slimeLeftOrRight = false;
+        }
         // Play slime jump sound
         audioSource.Play();
         //Debug.Log("jump");

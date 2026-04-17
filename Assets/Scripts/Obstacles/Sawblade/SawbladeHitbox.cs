@@ -7,7 +7,7 @@ public class SawbladeHitbox : MonoBehaviour
     {
         if(other.gameObject.CompareTag("Player")) 
         {
-            PlayerStateManager.Instance.DamagePlayer(10, Random.Range(6,10),60,false);
+            PlayerStateManager.Instance.DamagePlayer(10, Random.Range(6,10),60,false,transform.position.x,false);
         }
     }
 }
