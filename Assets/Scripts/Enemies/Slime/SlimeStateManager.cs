@@ -16,6 +16,7 @@ public class SlimeStateManager : MonoBehaviour
     public LayerMask groundLayer;
 
     [Header("Slime References")]
+    public GameObject slimeTrigger;
     public Rigidbody2D slimeRb;
     public Transform player;
     public int jumpTimer;
@@ -31,13 +32,29 @@ public class SlimeStateManager : MonoBehaviour
     public AudioClip _SlimeAttack;
     public AudioClip _SlimeDeath;
 
+    void Awake()
+    {
+        slimeTrigger.SetActive(false);
+    }
     void Start()
     {
         slimeRb = GetComponent<Rigidbody2D>();
         slimeHealth = 1;
+        StartCoroutine(DelayStart());
         // Ensure Gravity Scale is at least 1-2 so it falls back down!
         if (player == null) player = GameObject.FindGameObjectWithTag("Player").transform;
         InvokeRepeating(nameof(SlimeUpdate),1.5f,1.5f);
+    }
+    public IEnumerator DelayStart()
+    {
+        int elapsed = 0;
+        while (elapsed <= 60)
+        {
+            elapsed += 1;
+        }
+        yield return null;
+        slimeTrigger.SetActive(true);
+        
     }
     void Update()
     {
