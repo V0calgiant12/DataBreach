@@ -18,7 +18,7 @@ public class CameraLocationUpdater : MonoBehaviour
     void Update()
     {
         cameraWidth = mainCamera.orthographicSize * mainCamera.aspect;
-        Debug.Log(transform.position.x + cameraWidth);
+        //Debug.Log(transform.position.x + cameraWidth);
         transform.position = new UnityEngine.Vector3(player.transform.position.x + rb.linearVelocityX/4, player.transform.position.y + rb.linearVelocityY/4, -10);
         if(limitX != float.NaN && MathF.Abs(limitX) < transform.position.x + cameraWidth)
         {
