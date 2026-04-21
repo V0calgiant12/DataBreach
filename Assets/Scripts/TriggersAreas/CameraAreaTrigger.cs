@@ -9,7 +9,7 @@ public class CameraAreaTrigger : MonoBehaviour
     {
         if (other.gameObject.CompareTag("MainCamera"))
         {
-            Debug.Log("Entered Transition Area");
+            Debug.Log("Entered Camera Area");
             CameraLocationUpdater cameraLocation = other.gameObject.GetComponent<CameraLocationUpdater>();
             cameraLocation.limitX = limitX;
         }

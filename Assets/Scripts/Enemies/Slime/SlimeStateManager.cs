@@ -43,7 +43,9 @@ public class SlimeStateManager : MonoBehaviour
         StartCoroutine(DelayStart());
         // Ensure Gravity Scale is at least 1-2 so it falls back down!
         if (player == null) player = GameObject.FindGameObjectWithTag("Player").transform;
-        InvokeRepeating(nameof(SlimeUpdate),1.5f,1.5f);
+        float scaleOffset = Random.Range(0.8f, 1.3f);
+        transform.localScale = new Vector3(scaleOffset,scaleOffset,scaleOffset);
+        InvokeRepeating(nameof(SlimeUpdate),1.5f,1.5f+Random.Range(0.0f, 0.5f));
     }
     public IEnumerator DelayStart()
     {
@@ -117,21 +119,6 @@ public class SlimeStateManager : MonoBehaviour
         if (collision.gameObject.CompareTag("Ground")||collision.gameObject.CompareTag("Spikes")||collision.gameObject.CompareTag("MovingPlatform")||collision.gameObject.CompareTag("Stone"))
         {
             isGrounded = false;
-        }
-    }
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.gameObject.CompareTag("Player"))
-        {
-            currentState = State.Chase;
-        }
-    }
-
-    private void OnTriggerExit2D(Collision2D other)
-    {
-        if (other.gameObject.CompareTag("Player"))
-        {
-            currentState = State.Idle;
         }
     }
 }
