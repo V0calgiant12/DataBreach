@@ -64,6 +64,9 @@ public class SlimeStateManager : MonoBehaviour
     {
         float dist = Vector2.Distance(transform.position, player.position);
 
+        // Simple State Switch
+        currentState = (dist <= detectionRange) ? State.Chase : State.Idle;
+
         // Jump Logic
         if (jumpTimer >= timeBetweenJumps && isGrounded)
         {
@@ -117,21 +120,6 @@ public class SlimeStateManager : MonoBehaviour
         if (collision.gameObject.CompareTag("Ground")||collision.gameObject.CompareTag("Spikes")||collision.gameObject.CompareTag("MovingPlatform")||collision.gameObject.CompareTag("Stone"))
         {
             isGrounded = false;
-        }
-    }
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.gameObject.CompareTag("Player"))
-        {
-            currentState = State.Chase;
-        }
-    }
-
-    private void OnTriggerExit2D(Collision2D other)
-    {
-        if (other.gameObject.CompareTag("Player"))
-        {
-            currentState = State.Idle;
         }
     }
 }
