@@ -35,7 +35,6 @@ public class SawbladeWallDetect : MonoBehaviour
         {
             elapsed -= 0.05f;
             SawbladeRef.SawbladeSpinVolume -= 0.05f;
-            Debug.Log(SawbladeRef.SawbladeSpinVolume);
             if (SawbladeRef.SawbladeDirection == Sawblade.LeftRight.Right)
             {
                 SawbladeRef.SawbladeVelocity =  new Vector2(SawbladeRef.sawbladeSpeed, SawbladeRef.sawbladeRb.linearVelocityY + elapsed);
