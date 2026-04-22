@@ -44,7 +44,7 @@ public class PlatformMover : MonoBehaviour
             yield return null;
         }
     }
-    private void OnTriggerStay2D (Collider2D other)
+    private void OnTriggerStay2D(Collider2D other)
     {
         if(other.gameObject.CompareTag("GroundCheck"))
         {
@@ -52,7 +52,7 @@ public class PlatformMover : MonoBehaviour
         }
         if(other.gameObject.CompareTag("EnemyTrigger"))
         {
-            
+            //add enemy stuff later
         }
     }
     private void OnTriggerEnter2D(Collider2D other)
