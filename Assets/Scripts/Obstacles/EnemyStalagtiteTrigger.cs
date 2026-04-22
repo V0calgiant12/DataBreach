@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.Audio;
 using System.Collections;
 
-public class StalagtiteTrigger : MonoBehaviour
+public class EnemyStalagtiteTrigger : MonoBehaviour
 {
     [Header("Stalagtite References:")]
     public Rigidbody2D StalagmiteRb;
@@ -15,18 +15,10 @@ public class StalagtiteTrigger : MonoBehaviour
     [SerializeField] private AudioSource audioSource;
     private void OnTriggerEnter2D(Collider2D other)
     {
-        // Damage Player
-        if(other.gameObject.CompareTag("Player") && gameObject.CompareTag("Hitbox"))
-        {
-            PlayerStateManager.Instance.DamagePlayer(10, UnityEngine.Random.Range(6,10),60,false,transform.position.x,false);
-            //Debug.Log("Stalagtite Damaged Player " + Convert.ToInt16(PlayerStateManager.Instance.playerData.leftOrRight));
-        }
-        // Damage enemy
         if(other.gameObject.CompareTag("EnemyHurtbox") && gameObject.CompareTag("Hitbox"))
         {
             other.GetComponent<EnemyHit>().DamageEnemy(10, 10, UnityEngine.Random.Range(6,10),transform.position.x);
         }
-        // Detect ground
         if((other.gameObject.CompareTag("Ground")||other.gameObject.CompareTag("Stone")) && gameObject.CompareTag("Hitbox"))
         {
             audioSource.clip = _StalactiteGround;
@@ -35,8 +27,7 @@ public class StalagtiteTrigger : MonoBehaviour
             Collider.SetActive(true);
             StalagmiteRb.bodyType = RigidbodyType2D.Static;
         }
-        // Detect Player
-        if(other.gameObject.CompareTag("Player") && !gameObject.CompareTag("Hitbox"))
+        if(other.gameObject.CompareTag("EnemyHurtbox") && !gameObject.CompareTag("Hitbox"))
         {
             StalagmiteRb.bodyType = RigidbodyType2D.Dynamic;
             Trigger.SetActive(false);

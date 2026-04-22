@@ -12,7 +12,6 @@ public class SlimeStateManager : MonoBehaviour
     public int timeBetweenJumps = 90;
 
     [Header("Detection")]
-    public float detectionRange = 5f;
     public LayerMask groundLayer;
 
     [Header("Slime References")]
@@ -20,7 +19,6 @@ public class SlimeStateManager : MonoBehaviour
     public Rigidbody2D slimeRb;
     public Transform player;
     public int jumpTimer;
-    public float slimeHealth = 1f;
     public bool isGrounded;
     public bool slimeLeftOrRight;
     [SerializeField] private AudioSource audioSource;
@@ -39,7 +37,6 @@ public class SlimeStateManager : MonoBehaviour
     void Start()
     {
         slimeRb = GetComponent<Rigidbody2D>();
-        slimeHealth = 1;
         StartCoroutine(DelayStart());
         // Ensure Gravity Scale is at least 1-2 so it falls back down!
         if (player == null) player = GameObject.FindGameObjectWithTag("Player").transform;
@@ -74,11 +71,6 @@ public class SlimeStateManager : MonoBehaviour
                 JumpTowardsPlayer();
             }
             jumpTimer = 0;
-        }
-        if (slimeHealth <= 0)
-        {
-            Destroy(gameObject);
-            Debug.Log("slime is dead");
         }
     }
 

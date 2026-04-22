@@ -81,8 +81,8 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -405566945
+  m_SortingLayer: 5
   m_SortingOrder: 50
   m_MaskInteraction: 0
   m_Sprite: {fileID: 6552428614829903414, guid: 1100c44c90e732142adc6eff5f3e402c, type: 3}
@@ -170,9 +170,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfa809a50486e744eb7bd8fac03bcf98, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BitAI
+  moveSpeed: 1.2
   player: {fileID: 0}
   rb: {fileID: 5290098960536404355}
-  moveSpeed: 1.2
 --- !u!1 &8339709187638341504
 GameObject:
   m_ObjectHideFlags: 0
@@ -225,7 +225,7 @@ MonoBehaviour:
   m_Intensity: 0.5
   m_LightVolumeIntensity: 0.1
   m_LightVolumeEnabled: 1
-  m_ApplyToSortingLayers: 00000000
+  m_ApplyToSortingLayers: 000000009f7e373e09b38071d153f3f921cb8d3d53aab67d1f8ad3e7f5ef8e53f1418098
   m_LightCookieSprite: {fileID: 0}
   m_DeprecatedPointLightCookieSprite: {fileID: 0}
   m_LightOrder: 0

@@ -13,13 +13,15 @@ TagManager:
   - GameMenu
   - ControlsMenu
   - Slime
-  - SlimeTrigger
   - MovingPlatform
   - PointB
   - PointA
   - Hitbox
   - Glibberknocker
   - Mud
+  - EnemyHurtbox
+  - Goblin
+  - EnemyTrigger
   layers:
   - Default
   - TransparentFX
@@ -54,8 +56,32 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Backdrop
+    uniqueID: 1401876469
+    locked: 0
+  - name: Background
+    uniqueID: 2558542321
+    locked: 0
+  - name: Interactables
+    uniqueID: 1904259849
+    locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Enemies
+    uniqueID: 1032702753
+    locked: 0
+  - name: Player
+    uniqueID: 4193473489
+    locked: 0
+  - name: Obstacles
+    uniqueID: 2109123155
+    locked: 0
+  - name: Ground
+    uniqueID: 1043824287
+    locked: 0
+  - name: Byte
+    uniqueID: 3889400351
     locked: 0
   m_RenderingLayers:
   - Default

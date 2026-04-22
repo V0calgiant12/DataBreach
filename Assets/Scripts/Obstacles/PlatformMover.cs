@@ -13,8 +13,9 @@ public class PlatformMover : MonoBehaviour
     public Rigidbody2D platformRb;
     public Transform pointA;
     public Transform pointB;
-    private UnityEngine.Vector2 currentSpeed;
-    [SerializeField] private UnityEngine.Vector2 nextPos;
+    public Transform platform;
+    private Vector2 currentSpeed;
+    [SerializeField] private Vector2 nextPos;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -23,7 +24,7 @@ public class PlatformMover : MonoBehaviour
         Player = GameObject.FindGameObjectWithTag("Player");
         Slime = GameObject.FindGameObjectWithTag("Slime");
         nextPos = pointB.position;
-        currentSpeed = new UnityEngine.Vector2(1,1);
+        currentSpeed = new Vector2(1,1);
         StartCoroutine(MoveTowardsPoint());
     }
 
@@ -34,17 +35,24 @@ public class PlatformMover : MonoBehaviour
     }
     private IEnumerator MoveTowardsPoint()
     {
-        currentSpeed = new UnityEngine.Vector2((nextPos.x - transform.position.x)/moveSpeed,(nextPos.y - transform.position.y)/moveSpeed);
-        while(UnityEngine.Vector2.Distance(transform.position,nextPos) > 1)
+        currentSpeed = new Vector2((nextPos.x - transform.position.x)/moveSpeed,(nextPos.y - transform.position.y)/moveSpeed);
+        while(Vector2.Distance(transform.position,nextPos) > 1)
         {
             //Debug.Log(UnityEngine.Vector2.Distance(transform.position,nextPos));
             platformRb.linearVelocityX = currentSpeed.x;
             platformRb.linearVelocityY = currentSpeed.y;
-            if(Player.transform.parent != null)
-            {
-                PlayerStateManager.Instance.playerData.OffsetVelocity = platformRb.linearVelocity;
-            }
             yield return null;
+        }
+    }
+    private void OnTriggerStay2D(Collider2D other)
+    {
+        if(other.gameObject.CompareTag("GroundCheck"))
+        {
+            PlayerStateManager.Instance.playerData.OffsetVelocity.x = platformRb.linearVelocity.x;
+        }
+        if(other.gameObject.CompareTag("EnemyTrigger"))
+        {
+            //add enemy stuff later
         }
     }
     private void OnTriggerEnter2D(Collider2D other)
@@ -60,14 +68,7 @@ public class PlatformMover : MonoBehaviour
             StartCoroutine(MoveTowardsPoint());
         }
 
-        if(other.gameObject.CompareTag("GroundCheck"))
-        {
-            Player.transform.parent = transform;
-        }
-        if(other.gameObject.CompareTag("SlimeTrigger"))
-        {
-            Slime.transform.parent = transform;
-        }
+       
     }
     private void OnTriggerExit2D(Collider2D other)
     {
@@ -76,9 +77,9 @@ public class PlatformMover : MonoBehaviour
             Player.transform.parent = null;
             PlayerStateManager.Instance.playerData.OffsetVelocity = new Vector2(0,0);
         }
-        if(other.gameObject.CompareTag("SlimeTrigger"))
+        if(other.gameObject.CompareTag("EnemyTrigger"))
         {
-            Slime.transform.parent = null;
+            other.gameObject.transform.parent = null;
         }
     }
 }

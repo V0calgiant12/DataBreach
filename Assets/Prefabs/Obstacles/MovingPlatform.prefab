@@ -82,13 +82,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7ca3531a9994d149823b972ef689423, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlatformMover
+  platformSpeed: 1
+  moveSpeed: 5
   Player: {fileID: 0}
   Slime: {fileID: 0}
-  platformSpeed: 1
   platformRb: {fileID: 3483393341903011612}
   pointA: {fileID: 1609728366882718882}
   pointB: {fileID: 6992543821256178064}
-  moveSpeed: 5
+  platform: {fileID: 792373018149614413}
   nextPos: {x: 0, y: 0}
 --- !u!50 &3483393341903011612
 Rigidbody2D:
@@ -156,12 +157,12 @@ BoxCollider2D:
     border: {x: 1.5, y: 0, z: 1.5, w: 0}
     pivot: {x: 0.5, y: 0.5}
     oldSize: {x: 4, y: 2}
-    newSize: {x: 4, y: 2}
+    newSize: {x: 7, y: 2}
     adaptiveTilingThreshold: 0
     drawMode: 2
     adaptiveTiling: 1
   m_AutoTiling: 0
-  m_Size: {x: 3, y: 1}
+  m_Size: {x: 6, y: 1}
   m_EdgeRadius: 0
 --- !u!114 &1852762260603785715
 MonoBehaviour:
@@ -183,7 +184,7 @@ MonoBehaviour:
   m_CastsShadows: 1
   m_SelfShadows: 0
   m_AlphaCutoff: 0.1
-  m_ApplyToSortingLayers: 000000002f5e5255272fcb23b9b53edbd3c88dfcfbc2ac9d
+  m_ApplyToSortingLayers: f5ef8e53f141809809b380710000000021cb8d3dd153f3f91513d8d6
   m_ShapePath:
   - {x: -0.5, y: -0.5, z: 0}
   - {x: -0.5, y: 0.5, z: 0}
@@ -199,7 +200,7 @@ MonoBehaviour:
     m_Mesh: {fileID: 0}
     m_LocalBounds:
       m_Center: {x: 0, y: 0, z: 0}
-      m_Extent: {x: 1.5, y: 0.5, z: 0}
+      m_Extent: {x: 3, y: 0.5, z: 0}
     m_EdgeProcessing: 1
     m_TrimEdge: 0
     m_FlipX: 0
@@ -505,8 +506,8 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: -1649622277
-  m_SortingLayer: 6
+  m_SortingLayerID: 1043824287
+  m_SortingLayer: 4
   m_SortingOrder: 10
   m_MaskInteraction: 0
   m_Sprite: {fileID: 2695397407002535339, guid: 6c9810f2ae6eb8640874f4e29d5de096, type: 3}
