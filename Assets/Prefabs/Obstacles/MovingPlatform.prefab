@@ -89,6 +89,7 @@ MonoBehaviour:
   platformRb: {fileID: 3483393341903011612}
   pointA: {fileID: 1609728366882718882}
   pointB: {fileID: 6992543821256178064}
+  platform: {fileID: 0}
   nextPos: {x: 0, y: 0}
 --- !u!50 &3483393341903011612
 Rigidbody2D:
@@ -156,7 +157,7 @@ BoxCollider2D:
     border: {x: 1.5, y: 0, z: 1.5, w: 0}
     pivot: {x: 0.5, y: 0.5}
     oldSize: {x: 4, y: 2}
-    newSize: {x: 4, y: 2}
+    newSize: {x: 7, y: 2}
     adaptiveTilingThreshold: 0
     drawMode: 2
     adaptiveTiling: 1
@@ -183,7 +184,7 @@ MonoBehaviour:
   m_CastsShadows: 1
   m_SelfShadows: 0
   m_AlphaCutoff: 0.1
-  m_ApplyToSortingLayers: f5ef8e53f141809809b380710000000021cb8d3dd153f3f953aab67d9f7e373e1f8ad3e7
+  m_ApplyToSortingLayers: f5ef8e53f141809809b380710000000021cb8d3dd153f3f91513d8d6
   m_ShapePath:
   - {x: -0.5, y: -0.5, z: 0}
   - {x: -0.5, y: 0.5, z: 0}
