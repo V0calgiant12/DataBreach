@@ -29,6 +29,7 @@ public class Sawblade : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        // Depending on the sawblades dircection its set to, it will set the opposite player detector to false
         if (SawbladeDirection == LeftRight.Right)
         {
             DetectPlayerLeft.SetActive(false);
@@ -47,7 +48,9 @@ public class Sawblade : MonoBehaviour
     void Update()
     {
         sawbladeRb.linearVelocity = SawbladeVelocity;
+        // Sets the sounds volume to the audio sources volume
         SawbladeAudioSource.volume = SawbladeSpinVolume;
+        // Depending on the sawblades direction its set to, it will go that direction
         if (playerDetected)
         {
             if (SawbladeDirection == LeftRight.Right)
@@ -63,6 +66,7 @@ public class Sawblade : MonoBehaviour
     }
     void OnTriggerEnter2D(Collider2D other)
     {
+        // If the player isnt already detected and the player goes into the player detector trigger, it will set the player detects to false, play the sawblade cutting sound on loop, and start a coroutine
         if (other.gameObject.CompareTag("Player") && (!playerDetected))
         {
             Debug.Log("Player Detected");
@@ -75,7 +79,9 @@ public class Sawblade : MonoBehaviour
     }
     private IEnumerator SawbladeUp()
     {
+        // elapsed is a timer that goes until the sawblade goes the correct y height
         elapsed = 0;
+        // SawbladeSpinVolume is for fading in and out the volume over time
         SawbladeSpinVolume = 0f;
         while (upDistance > elapsed)
         {
@@ -92,6 +98,7 @@ public class Sawblade : MonoBehaviour
             //Debug.Log(sawbladeRb.linearVelocityY + elapsed);
             yield return null;
         }
+        // Enables the wall detects depending on what direction the sawblade is set to
         if (SawbladeDirection == LeftRight.Right)
         {
             SawbladeVelocity = new Vector2(sawbladeSpeed, 0);
