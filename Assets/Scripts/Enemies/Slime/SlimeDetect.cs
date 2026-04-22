@@ -6,11 +6,8 @@ public class SlimeDetect : MonoBehaviour
     [SerializeField] private Rigidbody2D rb;
     void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log("TEST");
-        Debug.Log(other.gameObject);
         if (other.gameObject.CompareTag("Player"))
         {
-            Debug.Log("TriggerEnter");
             slime.currentState = SlimeStateManager.State.Chase;
         }
     }
@@ -18,7 +15,6 @@ public class SlimeDetect : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            Debug.Log("TriggerExit");
             slime.currentState = SlimeStateManager.State.Idle;
         }
     }
