@@ -10,7 +10,14 @@ public class CameraLocationUpdater : MonoBehaviour
     [SerializeField] private Rigidbody2D rb;
     private Camera mainCamera;
     public float limitX = float.NaN;
-    private float cameraWidth;
+    public bool flippable = false;
+    public enum Side
+    {
+        Left,
+        Right
+    }
+    public Side side;
+    [SerializeField] private float cameraWidth;
     void Start()
     {
         mainCamera = GameObject.Find("Main Camera").GetComponent<Camera>();
@@ -20,9 +27,16 @@ public class CameraLocationUpdater : MonoBehaviour
         cameraWidth = mainCamera.orthographicSize * mainCamera.aspect;
         //Debug.Log(transform.position.x + cameraWidth);
         transform.position = new UnityEngine.Vector3(player.transform.position.x + rb.linearVelocityX/4, player.transform.position.y + rb.linearVelocityY/4, -10);
-        if(limitX != float.NaN && MathF.Abs(limitX) < transform.position.x + cameraWidth)
+        if(limitX != float.NaN)
         {
-            transform.position = new UnityEngine.Vector3(limitX - cameraWidth, transform.position.y, -10);
+            if(side == Side.Right && limitX < transform.position.x + cameraWidth)
+            {
+                transform.position = new UnityEngine.Vector3(limitX - cameraWidth, transform.position.y, -10);
+            }
+            else if(side == Side.Left && limitX > transform.position.x - cameraWidth)
+            {
+                transform.position = new UnityEngine.Vector3(limitX + cameraWidth, transform.position.y, -10);
+            }
         }
     }
 }
