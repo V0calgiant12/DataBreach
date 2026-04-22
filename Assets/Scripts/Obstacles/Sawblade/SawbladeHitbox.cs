@@ -9,10 +9,10 @@ public class SawbladeHitbox : MonoBehaviour
         {
             PlayerStateManager.Instance.DamagePlayer(10, Random.Range(6,10),60,false,transform.position.x,false);
         }
-        if(other.gameObject.CompareTag("Slime"))
+        if(other.gameObject.CompareTag("EnemyHurtbox"))
         {
-            Debug.Log("test");
-            other.GetComponent<EnemyHit>().DamageEnemy(1, 10, Random.Range(6,10),transform.position.x);
+            Debug.Log(other.gameObject);
+            other.gameObject.GetComponent<EnemyHit>().DamageEnemy(1, 15, Random.Range(8,10),transform.position.x);
         }
     }
 }
