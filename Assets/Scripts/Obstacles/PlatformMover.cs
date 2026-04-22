@@ -41,10 +41,6 @@ public class PlatformMover : MonoBehaviour
             //Debug.Log(UnityEngine.Vector2.Distance(transform.position,nextPos));
             platformRb.linearVelocityX = currentSpeed.x;
             platformRb.linearVelocityY = currentSpeed.y;
-            if(Player.transform.parent != null)
-            {
-                PlayerStateManager.Instance.playerData.OffsetVelocity.x = platformRb.linearVelocity.x;
-            }
             yield return null;
         }
     }
@@ -52,11 +48,11 @@ public class PlatformMover : MonoBehaviour
     {
         if(other.gameObject.CompareTag("GroundCheck"))
         {
-            Player.transform.parent = platform.transform;
+            PlayerStateManager.Instance.playerData.OffsetVelocity.x = platformRb.linearVelocity.x;
         }
         if(other.gameObject.CompareTag("EnemyTrigger"))
         {
-            other.gameObject.transform.parent = platform.transform;
+            
         }
     }
     private void OnTriggerEnter2D(Collider2D other)
