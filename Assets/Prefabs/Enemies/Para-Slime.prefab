@@ -523,7 +523,7 @@ GameObject:
   - component: {fileID: 1397095602104771013}
   m_Layer: 7
   m_Name: Hurtbox
-  m_TagString: Untagged
+  m_TagString: EnemyHurtbox
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -608,10 +608,10 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 320
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 2147484607
+    m_Bits: 2147548863
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0

@@ -81,9 +81,9 @@ public class PlatformMover : MonoBehaviour
             Player.transform.parent = null;
             PlayerStateManager.Instance.playerData.OffsetVelocity = new Vector2(0,0);
         }
-        if(other.gameObject.CompareTag("SlimeTrigger"))
+        if(other.gameObject.CompareTag("EnemyTrigger"))
         {
-            Slime.transform.parent = null;
+            other.gameObject.transform.parent = null;
         }
     }
 }
