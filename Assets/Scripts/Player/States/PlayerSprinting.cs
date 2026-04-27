@@ -10,10 +10,10 @@ public class PlayerSprinting : PlayerAbstract
     public override void EnterState(PlayerStateManager player)
     {
         Debug.Log("Player is Sprinting / Sprinting State - " + player.playerData.sprinting);
-        //playerSpeed = 15f * MudDetect.mudSpeedMulti;
     }
     public override void UpdateState(PlayerStateManager player)
     {
+        playerSpeed = 15f * PlayerStateManager.Instance.playerData.mudSpeedMulti;
         moving = false;
         player.playerData.anim.SetBool("moving", false);
         player.playerData.anim.SetBool("sprinting", true);
@@ -69,7 +69,7 @@ public class PlayerSprinting : PlayerAbstract
         if (player.playerData.jumpBufferCounter > 0)
         {
             Debug.Log("jump from Sprinting");
-            player.playerData.PlayerRb.linearVelocity = new Vector2(player.playerData.PlayerRb.linearVelocityX, jumpStrength);
+            player.playerData.PlayerRb.linearVelocity = new Vector2(player.playerData.PlayerRb.linearVelocityX, jumpStrength * PlayerStateManager.Instance.playerData.mudJumpMulti);
             player.playerData.jumpBufferCounter = 0;
             player.playerData.coyoteTimeCounter = 0;
             player.playerData.audioSource.PlayJumpSound(player.playerData._NormalJump);
