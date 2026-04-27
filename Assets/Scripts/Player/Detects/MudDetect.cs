@@ -4,8 +4,7 @@ public class MudDetect : MonoBehaviour
 {
     [Header("Mud References:")]
     public Rigidbody2D PlayerRb;
-    public float mudSpeedMulti;
-    public float mudJumpMulti;
+    
     void Start()
     {
         PlayerRb = gameObject.GetComponent<Rigidbody2D>();
@@ -15,11 +14,13 @@ public class MudDetect : MonoBehaviour
     {
         if(other.gameObject.CompareTag("Mud"))
         {   
-            mudSpeedMulti = 0.5f;
+            PlayerStateManager.Instance.playerData.mudSpeedMulti = 0.6f;
+            PlayerStateManager.Instance.playerData.mudJumpMulti = 0.6f;
         }
         else
         {
-            mudSpeedMulti = 1f;
+            PlayerStateManager.Instance.playerData.mudSpeedMulti = 1f;
+            PlayerStateManager.Instance.playerData.mudJumpMulti = 1f;
         }
     }
 }

@@ -6,6 +6,8 @@ public class PlayerData : ScriptableObject
     [Header("Player Data Settings:")]
     public int playerHealth = 5;
     public float attackTimer = 0f;
+    public float mudSpeedMulti;
+    public float mudJumpMulti;
     [Header("Player Data References:")]
     public GameObject MainCamera;
     public Vector2 OffsetVelocity;

@@ -10,11 +10,11 @@ public class PlayerCrouching : PlayerAbstract
     public override void EnterState(PlayerStateManager player)
     {
         Debug.Log("Player is Crouching / Crouching State");
-        playerSpeed = 3;
-        //Switch back to idle after code is done running]
+        //Switch back to idle after code is done running
     }
     public override void UpdateState(PlayerStateManager player)
     {
+        playerSpeed = 3 * PlayerStateManager.Instance.playerData.mudSpeedMulti;
         // Down attack
         if (Input.GetKeyDown(SettingsData.Instance._InputAttack))
         {
@@ -59,7 +59,7 @@ public class PlayerCrouching : PlayerAbstract
         if (player.playerData.jumpBufferCounter > 0)
         {
             Debug.Log("jump from Crouching");
-            player.playerData.PlayerRb.linearVelocity = new Vector2(player.playerData.PlayerRb.linearVelocityX, jumpStrength * 0.8f);
+            player.playerData.PlayerRb.linearVelocity = new Vector2(player.playerData.PlayerRb.linearVelocityX, jumpStrength * 0.8f * PlayerStateManager.Instance.playerData.mudJumpMulti);
             player.playerData.jumpBufferCounter = 0;
             player.playerData.coyoteTimeCounter = 0;
             player.playerData.audioSource.PlayJumpSound(player.playerData._NormalJump);

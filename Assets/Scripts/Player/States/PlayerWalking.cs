@@ -11,10 +11,10 @@ public class PlayerWalking : PlayerAbstract
     public override void EnterState(PlayerStateManager player)
     {
         Debug.Log("Player is Walking / Walking State - " + player.playerData.sprinting);
-        playerSpeed = 8;
     }
     public override void UpdateState(PlayerStateManager player)
     {
+        playerSpeed = 8 * PlayerStateManager.Instance.playerData.mudSpeedMulti;
         currentAttack  = PlayerStateManager.AttackType.forward; // Default to forward attack if nothing is inputed this frame.
         // Check for Up Attack
         if (Input.GetKey(SettingsData.Instance._InputDown))
@@ -73,7 +73,7 @@ public class PlayerWalking : PlayerAbstract
         if (player.playerData.jumpBufferCounter > 0)
         {
             Debug.Log("jump from walking");
-            player.playerData.PlayerRb.linearVelocity = new Vector2(player.playerData.PlayerRb.linearVelocityX, jumpStrength);
+            player.playerData.PlayerRb.linearVelocity = new Vector2(player.playerData.PlayerRb.linearVelocityX, jumpStrength * PlayerStateManager.Instance.playerData.mudJumpMulti);
             player.playerData.jumpBufferCounter = 0;
             player.playerData.coyoteTimeCounter = 0;
             player.playerData.audioSource.PlayJumpSound(player.playerData._NormalJump);
