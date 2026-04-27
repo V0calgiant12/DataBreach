@@ -2,23 +2,28 @@ using UnityEngine;
 
 public class PressurePlatePress : MonoBehaviour
 {
-    public GameObject DartShooter;
-    public GameObject Boulder;
-    public DartShooter DartShooterRef;
-    public Boulder BoulderRef;
+    //change Object1 and Object to things that the pressure plate activate
+    public GameObject Object;
+    public GameObject Object1;
+    //public DartShooter ObjectRef;
+    //public Boulder Object1Ref;
     private void OnTriggerEnter2D(Collider2D other)
     {
         if(other.gameObject.CompareTag("Player"))
         {
             Debug.Log("Player detected by pressure plate");
-            if(transform.parent.CompareTag("DartShooter"))
+            //Make sure to use the right tag for the object(s) you are using
+            if(transform.parent.CompareTag("Object"))
             {
-                DartShooterRef.ShootDarts();
+                //call a function from the object you are activating
+                //ObjectRef.ShootDarts();
                 Debug.Log("Dart Shooter");
             }
-            if(transform.parent.CompareTag("Boulder"))
+            //Make sure to use the right tag for the object(s) you are using
+            if(transform.parent.CompareTag("Object1"))
             {
-                BoulderRef.RollBoulder();
+                //call a function from the object you are activating
+                //Object1Ref.RollBoulder();
                 Debug.Log("Boulder");
             }
             
