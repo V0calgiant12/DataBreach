@@ -1,5 +1,74 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &413927164297424870
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2145798986899743862}
+  - component: {fileID: 3802804208463508774}
+  - component: {fileID: 7314373836156029469}
+  m_Layer: 10
+  m_Name: Hurtbox
+  m_TagString: EnemyHurtbox
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2145798986899743862
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 413927164297424870}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 1641376023483015430}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &3802804208463508774
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 413927164297424870}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 1024
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.5, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &7314373836156029469
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 413927164297424870}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a48d5eaedc6712d4894c3e1dd91a6063, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyHit
+  ParentObject: {fileID: 6271156301276086668}
+  rb: {fileID: 7862003289902813592}
+  health: 1
 --- !u!1 &2671669778738227143
 GameObject:
   m_ObjectHideFlags: 0
@@ -11,7 +80,8 @@ GameObject:
   - component: {fileID: 1228185631193351710}
   - component: {fileID: 3549686502712173665}
   - component: {fileID: 8704252516064307898}
-  m_Layer: 3
+  - component: {fileID: 5039945351669169979}
+  m_Layer: 10
   m_Name: Collider
   m_TagString: Stone
   m_Icon: {fileID: 0}
@@ -106,6 +176,103 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
+--- !u!82 &5039945351669169979
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2671669778738227143}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: -1693032528215722064, guid: 246f48f13ca5833448ea181663ec054d, type: 2}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 8300000, guid: d3c208c49ea89144bbdfccd7e0ec20a7, type: 3}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &5278600094845802158
 GameObject:
   m_ObjectHideFlags: 0
@@ -118,7 +285,7 @@ GameObject:
   - component: {fileID: 6655858827845674133}
   - component: {fileID: 1215365105861865242}
   - component: {fileID: 8169358516326343163}
-  m_Layer: 8
+  m_Layer: 10
   m_Name: Trigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -243,8 +410,8 @@ GameObject:
   - component: {fileID: 1641376023483015430}
   - component: {fileID: 7862003289902813592}
   - component: {fileID: 694354313636809589}
-  m_Layer: 0
-  m_Name: Stalagtite
+  m_Layer: 10
+  m_Name: Stalagmite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -267,6 +434,7 @@ Transform:
   - {fileID: 6549925569839828548}
   - {fileID: 1228185631193351710}
   - {fileID: 3042787976135953805}
+  - {fileID: 2145798986899743862}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &7862003289902813592
@@ -405,7 +573,7 @@ GameObject:
   - component: {fileID: 4436947923574971470}
   - component: {fileID: 1064318398792073163}
   - component: {fileID: 941218188586590271}
-  m_Layer: 8
+  m_Layer: 10
   m_Name: Hitbox
   m_TagString: Hitbox
   m_Icon: {fileID: 0}
@@ -516,8 +684,8 @@ MonoBehaviour:
   Collider: {fileID: 2671669778738227143}
   Hitbox: {fileID: 7391128039705364989}
   Trigger: {fileID: 5278600094845802158}
-  _StalactiteGround: {fileID: 8300000, guid: 46cf2693ad35806449dbd982bc5488ca, type: 3}
-  _StalactiteDetach: {fileID: 8300000, guid: 8de5f9a6ee59a184fab42c993e517d1f, type: 3}
+  _StalactiteGround: {fileID: 8300000, guid: d3c208c49ea89144bbdfccd7e0ec20a7, type: 3}
+  _StalactiteDetach: {fileID: 8300000, guid: 22b037545e835bf44813e67289f5835d, type: 3}
   audioSource: {fileID: 694354313636809589}
 --- !u!1 &9120588367307259411
 GameObject:
@@ -529,7 +697,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3042787976135953805}
   - component: {fileID: 1487666146239282395}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Visual
   m_TagString: Untagged
   m_Icon: {fileID: 0}
