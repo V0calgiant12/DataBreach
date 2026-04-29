@@ -79,7 +79,7 @@ public class PlatformMover : MonoBehaviour
         }
         if(other.gameObject.CompareTag("EnemyTrigger"))
         {
-            other.gameObject.transform.parent = null;
+            //other.gameObject.transform.parent = null;
         }
     }
 }
