@@ -12,7 +12,7 @@ public class SpikeDetect : MonoBehaviour
     {
         if(other.gameObject.CompareTag("Spikes"))
         {   
-            PlayerStateManager.Instance.DamagePlayer(Random.Range(7, 10),18,120,true,transform.position.x,true);
+            PlayerStateManager.Instance.DamagePlayer(Random.Range(7, 10),18,150,true,transform.position.x,true);
         }
     }
 }
