@@ -146,8 +146,9 @@ public class PlayerStateManager : MonoBehaviour
             elapsed += 1;
             if(playerData.ricochet == true)
             {
+                Debug.Log("Ricochet " + SideCheck.Instance.collided, SideCheck.Instance.collided);
                 yLaunch = yLaunch/2;
-                playerData.PlayerRb.linearVelocity = new Vector2(playerData.PlayerRb.linearVelocity.x * -1, playerData.PlayerRb.linearVelocity.y + yLaunch);
+                playerData.PlayerRb.linearVelocity = new Vector2((playerData.PlayerRb.linearVelocity.x * -1 * 1.2f) + 1, playerData.PlayerRb.linearVelocity.y + yLaunch);
                 playerData.ricochet = false;
             }
             yield return null;
