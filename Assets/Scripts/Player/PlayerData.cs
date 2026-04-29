@@ -14,18 +14,16 @@ public class PlayerData : ScriptableObject
     public Rigidbody2D PlayerRb;
     public BoxCollider2D collider; 
     public PlayerSound audioSource;
+    public Animator anim;
     public int jumpBufferCounter;
     public int coyoteTimeCounter;
     public int iFrames;
-    //public int oneOrTwo;
-    //public int lastWallJumpRight;
     public bool sprinting;
     public bool crouching;
     public bool doubleJumpAvailable;
     public bool movementAllowed = true;
     public bool leftOrRight;
-    public Animator anim;
-    //public bool currentWallSide;
+    public bool ricochet;
     public bool interacting;
     [Header("Audio")]
     public AudioClip _GrassWalk;
@@ -39,6 +37,5 @@ public class PlayerData : ScriptableObject
     public AudioClip _AirJump;
     public AudioClip _PlayerHit;
     public AudioClip _PlayerDeath;
-    //public AudioClip _PlayerDeath2;
     public AudioClip _PlayerAttack;
 }

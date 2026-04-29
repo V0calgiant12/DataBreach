@@ -61,6 +61,7 @@ public class PlayerStateManager : MonoBehaviour
         {
             currentState.UpdateState(this);
         }
+        
         GlobalUpdateState.UpdateState(this);
         FindPlayerObject();
         playerSprite.transform.localScale = new Vector3(playerData.leftOrRight ? 1:-1,1,1);
@@ -143,6 +144,12 @@ public class PlayerStateManager : MonoBehaviour
         while(GroundCheck.Instance._IsGrounded == false && timer > elapsed || elapsed < 15)
         {
             elapsed += 1;
+            if(playerData.ricochet == true)
+            {
+                yLaunch = yLaunch/2;
+                playerData.PlayerRb.linearVelocity = new Vector2(playerData.PlayerRb.linearVelocity.x * -1, playerData.PlayerRb.linearVelocity.y + yLaunch);
+                playerData.ricochet = false;
+            }
             yield return null;
         }
         playerData.movementAllowed = true;

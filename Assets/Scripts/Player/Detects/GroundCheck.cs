@@ -30,7 +30,6 @@ public class GroundCheck : MonoBehaviour
     }
     private void OnTriggerExit2D(Collider2D other) 
     {
-        //Debug.Log("Exit " + other.gameObject.CompareTag("Ground"));
         if (other.gameObject.CompareTag("Ground")||other.gameObject.CompareTag("MovingPlatform")||other.gameObject.CompareTag("Stone"))
         {
             _IsGrounded = false;
