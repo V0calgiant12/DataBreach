@@ -14,7 +14,6 @@ public class PlayerStateManager : MonoBehaviour
     public PlayerWalking WalkingState = new PlayerWalking();
     public PlayerDead DeadState = new PlayerDead();
     public PlayerInteracting InteractingState = new PlayerInteracting();
-    //11:42 https://www.youtube.com/watch?v=Vt8aZDPzRjI
     public static PlayerStateManager Instance;
     public PlayerData playerData;
     public GameObject playerSprite;
