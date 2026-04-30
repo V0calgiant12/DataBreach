@@ -18,7 +18,6 @@ public class PlayerIdle : PlayerAbstract
         player.playerData.PlayerRb.linearVelocity = new Vector2(0,player.playerData.PlayerRb.linearVelocityY) + player.playerData.OffsetVelocity;
         player.playerData.anim.SetBool("moving", false);
         player.playerData.anim.SetBool("sprinting", false);
-        player.playerData.anim.SetBool("attacking", false);
 
         // Check for Up Attack
         if (Input.GetKey(SettingsData.Instance._InputUp))

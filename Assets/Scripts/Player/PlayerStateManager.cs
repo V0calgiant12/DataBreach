@@ -48,6 +48,8 @@ public class PlayerStateManager : MonoBehaviour
         currentState.RunOnce(this);
         GlobalUpdateState.EnterState(this);
         currentState.EnterState(this);
+        
+        playerData.anim.SetBool("attacking", false);
 
     }
     void Update()
