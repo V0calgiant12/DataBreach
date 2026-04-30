@@ -13,8 +13,8 @@ public class TriggerShake : MonoBehaviour
     {
         StartCoroutine(CameraShaker.Instance.Shake(duration, magnitude));
     }
-    public void BurstShake(float magnitude)
+    public void BurstShake(float magnitude,float lengthMult)
     {
-        StartCoroutine(CameraShaker.Instance.BurstShake(magnitude));
+        StartCoroutine(CameraShaker.Instance.BurstShake(magnitude,lengthMult));
     }
 }
