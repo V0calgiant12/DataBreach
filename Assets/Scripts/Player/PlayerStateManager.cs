@@ -145,12 +145,10 @@ public class PlayerStateManager : MonoBehaviour
             elapsed += 1;
             if(playerData.ricochet == true)
             {
-                //Debug.Log("Ricochet " + SideCheck.Instance.collided, SideCheck.Instance.collided);
-                Debug.Log(timer + " " + elapsed);
-                yLaunch = yLaunch/2;
-                playerData.PlayerRb.linearVelocity = new Vector2((playerData.PlayerRb.linearVelocity.x + ((playerData.PlayerRb.linearVelocity.x >= 0 ? 0.5f : -0.5f) * xLaunch) ) * -1, playerData.PlayerRb.linearVelocity.y + yLaunch);
+                playerData.PlayerRb.linearVelocity = new Vector2(-playerData.PlayerRb.linearVelocity.x + ((playerData.PlayerRb.linearVelocity.x >= 0 ? -1.2f : 1.2f) * xLaunch), playerData.PlayerRb.linearVelocity.y + yLaunch * 0.25f);
                 playerData.ricochet = false;
-                timer += 90;
+                TriggerShake.Instance.BurstShake(MathF.Abs(playerData.PlayerRb.linearVelocity.x),2);
+                timer += 60;
             }
             yield return null;
         }
