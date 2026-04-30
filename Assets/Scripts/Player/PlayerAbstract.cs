@@ -16,7 +16,6 @@ public abstract class PlayerAbstract
     public float jumpStrength = 18.5f;
     public float shakeIntensityLvl;
     public int lastWallJumpRight;
-    public bool fakeCrouchToggle;
     public bool moving;
     public bool currentWallSide;
     public bool shakeOnLand;
@@ -24,7 +23,6 @@ public abstract class PlayerAbstract
     
     public void Setup() 
     {
-        //fakeCrouchToggle = true;
     }
     public void Update()
     {
