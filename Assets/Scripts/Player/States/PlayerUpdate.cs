@@ -42,34 +42,31 @@ public class PlayerUpdate : PlayerAbstract
         }
 
         // Crouching
-        if (GroundCheck.Instance._IsGrounded)
+        if (SettingsData.Instance._ToggleCrouch)
         {
-            if (SettingsData.Instance._ToggleCrouch)
+            // Crouch toggle on
+            if (Input.GetKeyDown(SettingsData.Instance._InputDown))
             {
-                // Crouch toggle on
-                if (Input.GetKeyDown(SettingsData.Instance._InputDown))
-                {
-                    player.playerData.crouching = !player.playerData.crouching;
-                }
+                player.playerData.crouching = !player.playerData.crouching;
             }
-            else
+        }
+        else
+        {
+            // Crouch toggle on
+            if (SettingsData.Instance._ToggleCrouch == false && Input.GetKeyDown(SettingsData.Instance._InputDown))
             {
-                // Crouch toggle on
-                if (SettingsData.Instance._ToggleCrouch == false && Input.GetKeyDown(SettingsData.Instance._InputDown))
-                {
-                    player.playerData.crouching = true;
-                }
-                // Crouch toggle off
-                if (SettingsData.Instance._ToggleCrouch == false && Input.GetKeyUp(SettingsData.Instance._InputDown))
-                {
-                    player.playerData.crouching = false;
-                }
+                player.playerData.crouching = true;
             }
-            if (player.playerData.playerHealth <= 0)
+            // Crouch toggle off
+            if (SettingsData.Instance._ToggleCrouch == false && Input.GetKeyUp(SettingsData.Instance._InputDown))
             {
-                player.SwitchState(player.DeadState);
-                return;
+                player.playerData.crouching = false;
             }
+        }
+        if (player.playerData.playerHealth <= 0)
+        {
+            player.SwitchState(player.DeadState);
+            return;
         }
     }
 }
