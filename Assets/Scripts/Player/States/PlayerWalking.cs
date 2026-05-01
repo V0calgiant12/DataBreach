@@ -16,12 +16,6 @@ public class PlayerWalking : PlayerAbstract
     {
         playerSpeed = 8 * PlayerStateManager.Instance.playerData.mudSpeedMulti;
         currentAttack  = PlayerStateManager.AttackType.forward; // Default to forward attack if nothing is inputed this frame.
-
-        // Check for Up Attack
-        if (Input.GetKey(SettingsData.Instance._InputDown))
-        {
-            currentAttack = PlayerStateManager.AttackType.up;
-        }
         
         // Moving
         moving = false;
@@ -43,6 +37,12 @@ public class PlayerWalking : PlayerAbstract
             player.playerData.leftOrRight = false;
             player.playerData.anim.SetBool("moving", true);
             moving = true;
+        }
+
+        // Check for Up Attack
+        if (Input.GetKey(SettingsData.Instance._InputUp))
+        {
+            currentAttack = PlayerStateManager.AttackType.up;
         }
 
         // Attack

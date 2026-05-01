@@ -15,10 +15,15 @@ public class EnemyHit : MonoBehaviour
     [Header("Stats")]
     [Tooltip("Default health values: Slime 3, Para-Slimes 1, Goblin 5, Gliberknocker 6")]
     public int health = 1;
+    private int trackedHealth = 1;
     public bool knockbackImmune = false;
+    private void Start()
+    {
+        trackedHealth = health;
+    }
     private void Update() 
     {
-        if (health <= 0)
+        if (trackedHealth <= 0)
         {
             Destroy(ParentObject);
         }
@@ -33,7 +38,7 @@ public class EnemyHit : MonoBehaviour
     public void DamageEnemy(int damage, float xLaunch, float yLaunch, float damageSourceX)
     {
         //Debug.Log("Damaged Enemy for " + damage + " damage.");
-        if(health != 1)
+        if(trackedHealth != 1)
         {
             audioSource.EnemySound(hitSound,volume);
         }
@@ -45,6 +50,6 @@ public class EnemyHit : MonoBehaviour
         {
             rb.linearVelocity = new Vector2(xLaunch*(transform.position.x <= damageSourceX ? -1 : 1), yLaunch);
         }
-        health -= damage;
+        trackedHealth -= damage;
     }
 }
