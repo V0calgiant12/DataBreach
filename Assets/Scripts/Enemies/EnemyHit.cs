@@ -7,12 +7,15 @@ public class EnemyHit : MonoBehaviour
 {
     [SerializeField] private GameObject ParentObject;
     [SerializeField] private Rigidbody2D rb;
+    [Header("Audio")]
     [SerializeField] private EffectSound audioSource;
     [SerializeField] private AudioClip hitSound;
     [SerializeField] private AudioClip deathSound;
-    [SerializeField] private float volume;
+    [SerializeField] private float volume = 1;
+    [Header("Stats")]
     [Tooltip("Default health values: Slime 3, Para-Slimes 1, Goblin 5, Gliberknocker 6")]
     public int health = 1;
+    public bool knockbackImmune = false;
     private void Update() 
     {
         if (health <= 0)
@@ -38,7 +41,10 @@ public class EnemyHit : MonoBehaviour
         {
             audioSource.EnemySound(deathSound,volume);
         }
-        rb.linearVelocity = new Vector2(xLaunch*(transform.position.x <= damageSourceX ? -1 : 1), yLaunch);
+        if (!knockbackImmune)
+        {
+            rb.linearVelocity = new Vector2(xLaunch*(transform.position.x <= damageSourceX ? -1 : 1), yLaunch);
+        }
         health -= damage;
     }
 }

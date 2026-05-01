@@ -210,7 +210,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a667a26981cea94380769adee02304f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SlimeDamage
-  slimeRb: {fileID: 7042285182028837934}
+  rb: {fileID: 0}
   audioSource3: {fileID: 1921390955554284192}
 --- !u!1 &1172246738268572851
 GameObject:
@@ -521,6 +521,7 @@ GameObject:
   - component: {fileID: 2543807154972978904}
   - component: {fileID: 7735234664607809060}
   - component: {fileID: 1397095602104771013}
+  - component: {fileID: 8582808800498537180}
   m_Layer: 7
   m_Name: Hurtbox
   m_TagString: EnemyHurtbox
@@ -630,7 +631,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyHit
   ParentObject: {fileID: 6655625841267738903}
   rb: {fileID: 7735234664607809060}
+  audioSource: {fileID: 8582808800498537180}
+  hitSound: {fileID: 8300000, guid: 807bd5152a662ed4a9241939b4fef32d, type: 3}
+  deathSound: {fileID: 8300000, guid: 0709a445dfc22cb4d8de281c203077b7, type: 3}
+  volume: 1
   health: 1
+  knockbackImmune: 0
+--- !u!114 &8582808800498537180
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2324381608879170708}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ecd83e99770e60a4cb88f27c07e3179e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EffectSound
+  prefab: {fileID: 8734533203902538695, guid: b546d70ed2a00174299d1366a75185f3, type: 3}
 --- !u!1 &3179652239516339653
 GameObject:
   m_ObjectHideFlags: 0

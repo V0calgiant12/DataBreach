@@ -12,6 +12,6 @@ public class EffectSound : MonoBehaviour
     public void EnemySound(AudioClip audio,float volume)
     {
         GameObject audioClone = Instantiate(prefab);
-        audioClone.GetComponent<EffectAudioSource>().EenemySound(audio,volume);
+        audioClone.GetComponent<EffectAudioSource>().EnemySound(audio,volume);
     }
 }
