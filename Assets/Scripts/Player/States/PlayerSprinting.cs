@@ -10,21 +10,20 @@ public class PlayerSprinting : PlayerAbstract
     public override void EnterState(PlayerStateManager player)
     {
         Debug.Log("Player is Sprinting / Sprinting State - " + player.playerData.sprinting);
+        player.playerData.anim.SetBool("moving", true);
+        player.playerData.anim.SetBool("sprinting", true);
     }
     public override void UpdateState(PlayerStateManager player)
     {
         playerSpeed = 15f * PlayerStateManager.Instance.playerData.mudSpeedMulti;
         moving = false;
-        player.playerData.anim.SetBool("moving", false);
-        player.playerData.anim.SetBool("sprinting", true);
-        player.playerData.anim.SetBool("attacking", false);
+
         // sprint right
         if (Input.GetKey(SettingsData.Instance._InputRight))
         {
             PlayerVelocity = new Vector2(playerSpeed, player.playerData.PlayerRb.linearVelocityY);
             player.playerData.PlayerRb.linearVelocity = PlayerVelocity + player.playerData.OffsetVelocity;
             player.playerData.leftOrRight = true;
-            player.playerData.anim.SetBool("moving", true);
             moving = true;
         }
         // sprint left
@@ -33,16 +32,15 @@ public class PlayerSprinting : PlayerAbstract
             PlayerVelocity = new Vector2(-playerSpeed, player.playerData.PlayerRb.linearVelocityY);
             player.playerData.PlayerRb.linearVelocity = PlayerVelocity + player.playerData.OffsetVelocity;
             player.playerData.leftOrRight = false;
-            player.playerData.anim.SetBool("moving", true);
             moving = true;
         }
+
+        // Attacking
         if (Input.GetKeyDown(SettingsData.Instance._InputAttack))
         {
-            Debug.Log("Attacking while sprinting");
-            player.playerData.audioSource.PlayPlayerAttackSound(player.playerData._PlayerAttack);
-            player.playerData.anim.SetBool("attacking", true);
             player.Attack(PlayerStateManager.AttackType.dash);
         }
+
         // if crouching go to crouching
         if (player.playerData.crouching)
         {

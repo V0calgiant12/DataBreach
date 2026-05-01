@@ -17,10 +17,7 @@ public class PlayerAir : PlayerAbstract
     public override void UpdateState(PlayerStateManager player)
     {
         currentAttack = PlayerStateManager.AttackType.forwardAir; // Default attack if nothing is inputed this frame.
-        player.playerData.anim.SetBool("notGrounded", true);
-        player.playerData.anim.SetBool("airJumping", false);
-        player.playerData.anim.SetBool("falling", false);
-        player.playerData.anim.SetBool("airAttacking", false);
+
         downBuffer -= 1;
         // Fast Falling
         if (Input.GetKeyDown(SettingsData.Instance._InputDown))
@@ -32,6 +29,7 @@ public class PlayerAir : PlayerAbstract
             player.playerData.anim.SetBool("falling", true);
             player.playerData.PlayerRb.linearVelocity = new Vector2(player.playerData.PlayerRb.linearVelocityX, -jumpStrength * 1.5f);
         }
+
         // Check for Down Air
         if (Input.GetKey(SettingsData.Instance._InputDown))
         {
@@ -87,9 +85,6 @@ public class PlayerAir : PlayerAbstract
         // Attacking
         if (Input.GetKeyDown(SettingsData.Instance._InputAttack)) // Check for an attack.
         {
-            Debug.Log("Attacking while In Air");
-            player.playerData.audioSource.PlayPlayerAttackSound(player.playerData._PlayerAttack);
-            player.playerData.anim.SetBool("airAttacking", true);
             player.Attack(currentAttack);
             if (player.playerData.PlayerRb.linearVelocityY < 0) 
             {
@@ -140,7 +135,6 @@ public class PlayerAir : PlayerAbstract
         // Grounded Check
         if (GroundCheck.Instance._IsGrounded)
         {
-            player.playerData.anim.SetBool("notGrounded", false);
             //Debug.Log(shakeOnLand);
             if(shakeOnLand)
             {

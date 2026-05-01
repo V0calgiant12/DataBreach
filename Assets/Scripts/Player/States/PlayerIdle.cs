@@ -10,14 +10,15 @@ public class PlayerIdle : PlayerAbstract
     public override void EnterState(PlayerStateManager player)
     {
         Debug.Log("Player Idle / Idle State");
+        player.playerData.anim.SetBool("moving", false);
+        player.playerData.anim.SetBool("sprinting", false);
     }
     public override void UpdateState(PlayerStateManager player)
     {
         currentAttack = PlayerStateManager.AttackType.forward; // Default attack if nothing is inputed this frame.
         
         player.playerData.PlayerRb.linearVelocity = new Vector2(0,player.playerData.PlayerRb.linearVelocityY) + player.playerData.OffsetVelocity;
-        player.playerData.anim.SetBool("moving", false);
-        player.playerData.anim.SetBool("sprinting", false);
+        
 
         // Check for Up Attack
         if (Input.GetKey(SettingsData.Instance._InputUp))
@@ -28,9 +29,6 @@ public class PlayerIdle : PlayerAbstract
         // Attack
         if (Input.GetKeyDown(SettingsData.Instance._InputAttack))
         {
-            Debug.Log("Attacking while Idle");
-            player.playerData.audioSource.PlayPlayerAttackSound(player.playerData._PlayerAttack);
-            player.playerData.anim.SetBool("attacking", true);
             player.Attack(currentAttack);
         }
 

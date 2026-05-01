@@ -16,6 +16,13 @@ public class EnemyHit : MonoBehaviour
             Destroy(ParentObject);
         }
     }
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("PlayerHitbox"))
+        {
+            DamageEnemy(1,15,10,other.transform.position.x);
+        }
+    }
     public void DamageEnemy(int damage, float xLaunch, float yLaunch, float damageSourceX)
     {
         //Debug.Log("Damaged Enemy for " + damage + " damage.");

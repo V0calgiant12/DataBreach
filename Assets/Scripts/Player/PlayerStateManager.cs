@@ -50,6 +50,8 @@ public class PlayerStateManager : MonoBehaviour
         currentState.EnterState(this);
         
         playerData.anim.SetBool("attacking", false);
+        playerData.anim.SetBool("moving", false);
+        playerData.anim.SetBool("sprinting", false);
 
     }
     void Update()
@@ -106,36 +108,46 @@ public class PlayerStateManager : MonoBehaviour
     }
     public void Attack(AttackType attackType)
     {
-        playerData.movementAllowed = false;
+        playerData.anim.SetBool("attacking", true);
+        playerData.audioSource.PlayPlayerAttackSound(playerData._PlayerAttack);
         switch (attackType)
         {
             case(AttackType.forward):
                 playerData.attackTimer = 1;
+                playerData.anim.SetInteger("attackId",0);
                 break;
             case(AttackType.up):
                 playerData.attackTimer = 1;
+                playerData.anim.SetInteger("attackId",1);
                 break;
             case(AttackType.down):
                 playerData.attackTimer = 1;
+                playerData.anim.SetInteger("attackId",3);
                 break;
             case(AttackType.forwardAir):
                 playerData.attackTimer = 0;
+                playerData.anim.SetInteger("attackId",0);
                 break;
             case(AttackType.backAir):
                 playerData.attackTimer = 0;
+                playerData.anim.SetInteger("attackId",2);
                 break;
             case(AttackType.upAir):
                 playerData.attackTimer = 0;
+                playerData.anim.SetInteger("attackId",1);
                 break;
             case(AttackType.downAir):
                 playerData.attackTimer = 0;
+                playerData.anim.SetInteger("attackId",4);
                 break;
             case(AttackType.dash):
                 playerData.attackTimer = 1;
+                playerData.movementAllowed = false;
+                playerData.anim.SetInteger("attackId",5);
+                StartCoroutine(NoMovingWhileAttack(playerData.attackTimer));
                 break;
-        } 
+        }
         Debug.Log(attackType);
-        StartCoroutine(NoMovingWhileAttack(playerData.attackTimer));
     }
     public IEnumerator StunPlayer(float xLaunch, float yLaunch, int timer)
     {

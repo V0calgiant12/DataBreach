@@ -16,6 +16,7 @@ public class PlayerWalking : PlayerAbstract
     {
         playerSpeed = 8 * PlayerStateManager.Instance.playerData.mudSpeedMulti;
         currentAttack  = PlayerStateManager.AttackType.forward; // Default to forward attack if nothing is inputed this frame.
+
         // Check for Up Attack
         if (Input.GetKey(SettingsData.Instance._InputDown))
         {
@@ -47,9 +48,6 @@ public class PlayerWalking : PlayerAbstract
         // Attack
         if (Input.GetKeyDown(SettingsData.Instance._InputAttack))
         {
-            Debug.Log("Attacking while walking");
-            player.playerData.audioSource.PlayPlayerAttackSound(player.playerData._PlayerAttack);
-            player.playerData.anim.SetBool("attacking", true);
             player.Attack(currentAttack);
         }
 

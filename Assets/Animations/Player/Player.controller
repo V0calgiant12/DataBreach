@@ -90,7 +90,7 @@ AnimatorStateMachine:
   m_ChildStates:
   - serializedVersion: 1
     m_State: {fileID: -4708516266394636482}
-    m_Position: {x: -50, y: -520, z: 0}
+    m_Position: {x: -120, y: -520, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 7931087512192942501}
     m_Position: {x: 160, y: -560, z: 0}
@@ -227,12 +227,24 @@ AnimatorController:
     m_Mask: {fileID: 0}
     m_Motions: []
     m_Behaviours: []
-    m_BlendingMode: 1
+    m_BlendingMode: 0
     m_SyncedLayerIndex: -1
-    m_DefaultWeight: 0
+    m_DefaultWeight: 1
     m_IKPass: 0
     m_SyncedLayerAffectsTiming: 0
     m_Controller: {fileID: 9100000}
+--- !u!114 &82245286564799470
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cee2e6d732ae29f4a821cfbf7e1a5223, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AttackEnd
 --- !u!1102 &3943542200444531336
 AnimatorState:
   serializedVersion: 6
@@ -272,7 +284,8 @@ AnimatorState:
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 8348506678915494625}
-  m_StateMachineBehaviours: []
+  m_StateMachineBehaviours:
+  - {fileID: 82245286564799470}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1

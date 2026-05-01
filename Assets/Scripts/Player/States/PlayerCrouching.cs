@@ -15,12 +15,13 @@ public class PlayerCrouching : PlayerAbstract
     public override void UpdateState(PlayerStateManager player)
     {
         playerSpeed = 3 * PlayerStateManager.Instance.playerData.mudSpeedMulti;
+        
         // Down attack
         if (Input.GetKeyDown(SettingsData.Instance._InputAttack))
         {
-            player.playerData.audioSource.PlayPlayerAttackSound(player.playerData._PlayerAttack);
             player.Attack(PlayerStateManager.AttackType.down);
         }
+
         // Crouch release check
         if (!player.playerData.crouching)
         {
