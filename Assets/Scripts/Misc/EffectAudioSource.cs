@@ -25,7 +25,10 @@ public class EffectAudioSource : MonoBehaviour
     }
     IEnumerator Delete()
     {
-        yield return new WaitForSeconds(audioSource.clip.length);
+        if(audioSource.clip != null)
+        {
+            yield return new WaitForSeconds(audioSource.clip.length);
+        }
         Destroy(gameObject);
     }
 }
