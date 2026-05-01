@@ -10,6 +10,7 @@ public class PlayerCrouching : PlayerAbstract
     public override void EnterState(PlayerStateManager player)
     {
         Debug.Log("Player is Crouching / Crouching State");
+        player.playerData.anim.SetBool("crouching", true);
         //Switch back to idle after code is done running
     }
     public override void UpdateState(PlayerStateManager player)
@@ -33,7 +34,6 @@ public class PlayerCrouching : PlayerAbstract
 
         // Crouch walking
         moving = false;
-        player.playerData.anim.SetBool("crouching", true);
         player.playerData.anim.SetBool("moving", false);
         if (Input.GetKey(SettingsData.Instance._InputRight))
         {

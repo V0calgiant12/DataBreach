@@ -38,7 +38,7 @@ AnimatorStateTransition:
     m_ConditionEvent: attacking
     m_EventTreshold: 0
   - m_ConditionMode: 6
-    m_ConditionEvent: attackDir
+    m_ConditionEvent: attackId
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 7931087512192942501}
@@ -202,7 +202,13 @@ AnimatorController:
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 9100000}
-  - m_Name: attackDir
+  - m_Name: falling
+    m_Type: 4
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 9100000}
+  - m_Name: attackId
     m_Type: 3
     m_DefaultFloat: 0
     m_DefaultInt: 0

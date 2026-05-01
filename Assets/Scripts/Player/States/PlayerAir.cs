@@ -26,7 +26,6 @@ public class PlayerAir : PlayerAbstract
         }
         if (downBuffer > 0 && player.playerData.PlayerRb.linearVelocityY < 0) // Check for fast fall.
         {
-            player.playerData.anim.SetBool("falling", true);
             player.playerData.PlayerRb.linearVelocity = new Vector2(player.playerData.PlayerRb.linearVelocityX, -jumpStrength * 1.5f);
         }
 
@@ -86,16 +85,11 @@ public class PlayerAir : PlayerAbstract
         if (Input.GetKeyDown(SettingsData.Instance._InputAttack)) // Check for an attack.
         {
             player.Attack(currentAttack);
-            if (player.playerData.PlayerRb.linearVelocityY < 0) 
-            {
-                player.playerData.anim.SetBool("falling", true);
-            }
         }
 
         // Short Jumping
         if(!(Input.GetKey(SettingsData.Instance._InputJump) || SettingsData.Instance._UpToJump && Input.GetKey(SettingsData.Instance._InputUp)) && player.playerData.PlayerRb.linearVelocity.y > 0)
         {
-            player.playerData.anim.SetBool("airJumping", true);
             player.playerData.PlayerRb.linearVelocity = new Vector2(player.playerData.PlayerRb.linearVelocityX, player.playerData.PlayerRb.linearVelocityY * 0.5f);
         }
 
@@ -112,7 +106,7 @@ public class PlayerAir : PlayerAbstract
             }
             Debug.Log("jump in air");
             player.playerData.audioSource.PlayJumpSound(player.playerData._AirJump);
-            player.playerData.anim.SetBool("airJumping", true);
+            player.playerData.anim.SetBool("jumping", true);
             player.playerData.PlayerRb.linearVelocity = new Vector2(player.playerData.PlayerRb.linearVelocityX, jumpStrength * 0.8f);
             player.playerData.doubleJumpAvailable = false;
             player.playerData.jumpBufferCounter = 0;

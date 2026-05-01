@@ -2561,7 +2561,6 @@ GameObject:
   - component: {fileID: 405897520248931599}
   - component: {fileID: 1040065690880391275}
   - component: {fileID: 6500149941911911826}
-  - component: {fileID: 4900323242142598802}
   - component: {fileID: 6383165355602986983}
   - component: {fileID: 5286028048835201690}
   m_Layer: 6
@@ -2706,21 +2705,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MudDetect
   PlayerRb: {fileID: 5254595327118261300}
---- !u!114 &4900323242142598802
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7503720962246340740}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7b695bc5af552af4c921f2b36f5d6849, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::AnimSwapper
-  normalAnim: {fileID: 9100000, guid: aa5f0f4769e66334abb69f5d5e351af8, type: 2}
-  airAnim: {fileID: 9100000, guid: 2647f9ca94e984f4d893ff4baddced2f, type: 2}
-  anim: {fileID: 5286028048835201690}
 --- !u!114 &6383165355602986983
 MonoBehaviour:
   m_ObjectHideFlags: 0
