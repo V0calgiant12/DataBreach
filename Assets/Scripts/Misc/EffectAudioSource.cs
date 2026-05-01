@@ -15,6 +15,14 @@ public class EffectAudioSource : MonoBehaviour
         audioSource.Play();
         StartCoroutine(Delete());
     }
+    public void EnemySound(AudioClip audioClip,float volume)
+    {
+        audioSource.volume = volume;
+        audioSource.outputAudioMixerGroup = audioMixer.FindMatchingGroups("Effects")[0];
+        audioSource.clip = audioClip;
+        audioSource.Play();
+        StartCoroutine(Delete());
+    }
     IEnumerator Delete()
     {
         yield return new WaitForSeconds(audioSource.clip.length);

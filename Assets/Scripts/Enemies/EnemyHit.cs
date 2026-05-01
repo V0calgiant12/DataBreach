@@ -7,6 +7,10 @@ public class EnemyHit : MonoBehaviour
 {
     [SerializeField] private GameObject ParentObject;
     [SerializeField] private Rigidbody2D rb;
+    [SerializeField] private EffectSound audioSource;
+    [SerializeField] private AudioClip hitSound;
+    [SerializeField] private AudioClip deathSound;
+    [SerializeField] private float volume;
     [Tooltip("Default health values: Slime 3, Para-Slimes 1, Goblin 5, Gliberknocker 6")]
     public int health = 1;
     private void Update() 
@@ -20,12 +24,20 @@ public class EnemyHit : MonoBehaviour
     {
         if (other.gameObject.CompareTag("PlayerHitbox"))
         {
-            DamageEnemy(1,15,10,other.transform.position.x);
+            DamageEnemy(1,10,10,other.transform.position.x);
         }
     }
     public void DamageEnemy(int damage, float xLaunch, float yLaunch, float damageSourceX)
     {
         //Debug.Log("Damaged Enemy for " + damage + " damage.");
+        if(health != 1)
+        {
+            audioSource.EnemySound(hitSound,volume);
+        }
+        else
+        {
+            audioSource.EnemySound(deathSound,volume);
+        }
         rb.linearVelocity = new Vector2(xLaunch*(transform.position.x <= damageSourceX ? -1 : 1), yLaunch);
         health -= damage;
     }
