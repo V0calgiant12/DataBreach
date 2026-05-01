@@ -3,13 +3,14 @@ using UnityEngine;
 public class AirGustPush : MonoBehaviour
 {
     public GroundCheck GroundCheckRef;
-    public GameObject Player;
-    public Rigidbody2D PlayerRb;
-    void OnTriggerStay2D(Collider2D other)
+    public void OnTriggerStay2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("Player") && !GroundCheckRef._IsGrounded)
+        Debug.Log("test", other.gameObject);
+        if (other.gameObject.CompareTag("Player"))
         {
-            //filler bc I gotta go
+            Debug.Log("test");
+            Debug.Log(other.gameObject.GetComponent<ForceManager>());
+            other.gameObject.GetComponent<ForceManager>().AddForce(0f, 5f, true);
         }
     }
 }
