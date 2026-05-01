@@ -29,16 +29,6 @@ public class PlayerAir : PlayerAbstract
             player.playerData.PlayerRb.linearVelocity = new Vector2(player.playerData.PlayerRb.linearVelocityX, -jumpStrength * 1.5f);
         }
 
-        // Check for Down Air
-        if (Input.GetKey(SettingsData.Instance._InputDown))
-        {
-            currentAttack = PlayerStateManager.AttackType.downAir;
-        }
-        // Check for Up Air
-        if (Input.GetKey(SettingsData.Instance._InputUp))
-        {
-            currentAttack = PlayerStateManager.AttackType.upAir;
-        }
         
         // Movement left/right and sets attack.
         moving = false;
@@ -79,6 +69,17 @@ public class PlayerAir : PlayerAbstract
         if (player.playerData.PlayerRb.linearVelocityY < 0) 
         {
             player.playerData.anim.SetBool("falling", true);
+        }
+        
+        // Check for Down Air
+        if (Input.GetKey(SettingsData.Instance._InputDown))
+        {
+            currentAttack = PlayerStateManager.AttackType.downAir;
+        }
+        // Check for Up Air
+        if (Input.GetKey(SettingsData.Instance._InputUp))
+        {
+            currentAttack = PlayerStateManager.AttackType.upAir;
         }
 
         // Attacking
