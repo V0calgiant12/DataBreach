@@ -1,10 +1,10 @@
 using System.Collections;
 using UnityEngine;
 
-public class SlimeDamage : MonoBehaviour
+public class ContactDamage : MonoBehaviour
 {
-    [Header("Slime Damage References:")]
-    public Rigidbody2D slimeRb;
+    [Header("References:")]
+    public Rigidbody2D rb;
     public AudioSource audioSource3;
 
     void OnTriggerEnter2D(Collider2D collision)
