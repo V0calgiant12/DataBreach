@@ -25,6 +25,7 @@ public class PlayerData : ScriptableObject
     public bool leftOrRight;
     public bool ricochet;
     public bool interacting;
+    public bool inAirGust;
     [Header("Audio")]
     public AudioClip _GrassWalk;
     public AudioClip _GrassFall;

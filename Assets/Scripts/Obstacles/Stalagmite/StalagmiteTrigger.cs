@@ -1,7 +1,5 @@
-using System;
 using UnityEngine;
 using UnityEngine.Audio;
-using System.Collections;
 
 public class StalagtiteTrigger : MonoBehaviour
 {

@@ -62,9 +62,11 @@ public class PlayerAir : PlayerAbstract
             player.playerData.PlayerRb.linearVelocity = PlayerVelocity;// + OffsetVelocity;
             moving = true;
         }
-        if (!moving) // If not moving, set x velocity to 0;
+        if (Input.GetKeyUp(SettingsData.Instance._InputRight) || Input.GetKeyUp(SettingsData.Instance._InputLeft)) // If not moving, set x velocity to 0;
         {
-            player.playerData.PlayerRb.linearVelocityX = 0;
+            {
+                player.playerData.PlayerRb.linearVelocityX = 0;
+            }
         }
         if (player.playerData.PlayerRb.linearVelocityY < 0) 
         {
@@ -89,7 +91,8 @@ public class PlayerAir : PlayerAbstract
         }
 
         // Short Jumping
-        if(!(Input.GetKey(SettingsData.Instance._InputJump) || SettingsData.Instance._UpToJump && Input.GetKey(SettingsData.Instance._InputUp)) && player.playerData.PlayerRb.linearVelocity.y > 0)
+
+        if(!(Input.GetKey(SettingsData.Instance._InputJump) || SettingsData.Instance._UpToJump && Input.GetKey(SettingsData.Instance._InputUp)) && player.playerData.PlayerRb.linearVelocity.y > 0 && !player.playerData.inAirGust)
         {
             player.playerData.PlayerRb.linearVelocity = new Vector2(player.playerData.PlayerRb.linearVelocityX, player.playerData.PlayerRb.linearVelocityY * 0.5f);
         }
