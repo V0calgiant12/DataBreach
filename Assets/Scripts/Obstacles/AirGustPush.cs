@@ -12,12 +12,12 @@ public class AirGustPush : MonoBehaviour
     }
     public void OnTriggerStay2D(Collider2D other)
     {
-        PlayerDataRef.inAirGust = true;
         if (other.gameObject.CompareTag("Player") && !GroundCheckRef._IsGrounded)
         {
+            PlayerDataRef.inAirGust = true;
             other.gameObject.GetComponent<ForceManager>().AddForce(0f, GustStrength, other);
         }
-        if (other.gameObject.CompareTag("Slime") && !SlimeStateManagerRef.isGrounded)
+        if (other.gameObject.CompareTag("Slime"))
         {
             other.gameObject.GetComponent<ForceManager>().AddForce(0f, GustStrength, other);
         }

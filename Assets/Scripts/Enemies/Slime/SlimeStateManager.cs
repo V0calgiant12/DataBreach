@@ -42,7 +42,7 @@ public class SlimeStateManager : MonoBehaviour
         if (player == null) player = GameObject.FindGameObjectWithTag("Player").transform;
         float scaleOffset = Random.Range(0.8f, 1.3f);
         transform.localScale = new Vector3(scaleOffset,scaleOffset,scaleOffset);
-        InvokeRepeating(nameof(SlimeUpdate),1.5f,1.5f+Random.Range(0.0f, 0.5f));
+        InvokeRepeating(nameof(SlimeUpdate), 1.5f, 1.5f+Random.Range(0.0f, 0.5f));
     }
     public IEnumerator DelayStart()
     {
