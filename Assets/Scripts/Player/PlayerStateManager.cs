@@ -38,8 +38,6 @@ public class PlayerStateManager : MonoBehaviour
         playerData.leftOrRight = true;
         playerData.crouching = false;
         playerData.movementAllowed = true;
-        playerData.playerHealth = 5;
-        playerData.playerHealth = 5;
         playerData.OffsetVelocity = new Vector2(0,0);
         playerData.interacting = false;
         Instance = this;
@@ -164,7 +162,7 @@ public class PlayerStateManager : MonoBehaviour
             {
                 playerData.PlayerRb.linearVelocity = new Vector2(-playerData.PlayerRb.linearVelocity.x + ((playerData.PlayerRb.linearVelocity.x >= 0 ? -1.2f : 1.2f) * xLaunch), playerData.PlayerRb.linearVelocity.y + yLaunch * 0.25f);
                 playerData.ricochet = false;
-                TriggerShake.Instance.BurstShake(MathF.Abs(playerData.PlayerRb.linearVelocity.x),2);
+                TriggerShake.Instance.BurstShake(elapsed/2,2);
                 timer += 60;
             }
             yield return null;

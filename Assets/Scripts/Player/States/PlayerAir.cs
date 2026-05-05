@@ -71,6 +71,7 @@ public class PlayerAir : PlayerAbstract
         if (player.playerData.PlayerRb.linearVelocityY < 0) 
         {
             player.playerData.anim.SetBool("falling", true);
+            player.playerData.inAirGust = false;
         }
         
         // Check for Down Air
