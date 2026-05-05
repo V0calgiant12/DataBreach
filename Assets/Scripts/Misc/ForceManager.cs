@@ -7,8 +7,9 @@ public class ForceManager : MonoBehaviour
     public void AddForce(float xForce, float yForce, Collider2D other)
     {
         Debug.Log("adding force");
-        rb.linearVelocity = new Vector2(xForce, yForce + rb.linearVelocityY);
-        if (rb.linearVelocityY <= 0)
+        rb = other.GetComponent<Rigidbody2D>();
+        rb.linearVelocity = new Vector2(rb.linearVelocityX, yForce + rb.linearVelocityY);
+        if (rb.linearVelocityY <= 0 && other.gameObject.CompareTag("Player"))
         {
             PlayerDataRef.inAirGust = false;
         }
