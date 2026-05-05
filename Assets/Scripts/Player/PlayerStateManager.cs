@@ -91,6 +91,7 @@ public class PlayerStateManager : MonoBehaviour
     {
         if (playerData.iFrames < 0 || overrideIFrames)
         {
+            TriggerShake.Instance.BurstShake(3,2);
             playerData.playerHealth = playerData.playerHealth - 1;
             playerData.audioSource.PlayPlayerHitSound(playerData._PlayerHit);
             //Debug.Log(playerData.playerHealth);
