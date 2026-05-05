@@ -9,7 +9,8 @@ public class GameData : MonoBehaviour
     /// Next, add the variable to be saved and loaded in their respective functions.
     /// </summary>
     public static GameData Instance;
-
+    [SerializeField] private PlayerData playerData;
+// Need level ID 
     private void Awake()
     {
         if(Instance != null)
@@ -25,6 +26,7 @@ public class GameData : MonoBehaviour
         SaveData data = new SaveData();
 
         //data.variable = variable;
+        data.playerHealth = playerData.playerHealth;
 
         string json = JsonUtility.ToJson(data);
         File.WriteAllText(Application.persistentDataPath + "/gameData.json", json);
@@ -40,6 +42,7 @@ public class GameData : MonoBehaviour
             SaveData data = JsonUtility.FromJson<SaveData>(json);
             
             //variable = data.variable;
+            playerData.playerHealth = data.playerHealth;
         }
     }
     
@@ -48,7 +51,7 @@ public class GameData : MonoBehaviour
 [System.Serializable]
 class SaveData // This class quite literally just stores variables so they can be saved.
 {
-    
+    public int playerHealth;
 }
 
 public class WaitForFrames : CustomYieldInstruction
