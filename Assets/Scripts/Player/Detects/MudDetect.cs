@@ -17,8 +17,11 @@ public class MudDetect : MonoBehaviour
             PlayerStateManager.Instance.playerData.mudSpeedMulti = 0.6f;
             PlayerStateManager.Instance.playerData.mudJumpMulti = 0.6f;
         }
-        else
-        {
+    }
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if(other.gameObject.CompareTag("Mud"))
+        {   
             PlayerStateManager.Instance.playerData.mudSpeedMulti = 1f;
             PlayerStateManager.Instance.playerData.mudJumpMulti = 1f;
         }
