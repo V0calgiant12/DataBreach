@@ -38,6 +38,7 @@ public class PlayerStateManager : MonoBehaviour
         playerData.leftOrRight = true;
         playerData.crouching = false;
         playerData.movementAllowed = true;
+        playerData.playerHealth = 5;
         playerData.OffsetVelocity = new Vector2(0,0);
         playerData.interacting = false;
         Instance = this;
