@@ -163,7 +163,7 @@ public class PlayerStateManager : MonoBehaviour
             {
                 playerData.PlayerRb.linearVelocity = new Vector2(-playerData.PlayerRb.linearVelocity.x + ((playerData.PlayerRb.linearVelocity.x >= 0 ? -1.2f : 1.2f) * xLaunch), playerData.PlayerRb.linearVelocity.y + yLaunch * 0.25f);
                 playerData.ricochet = false;
-                TriggerShake.Instance.BurstShake(elapsed/2,2);
+                TriggerShake.Instance.BurstShake(-1*MathF.Cos(playerData.PlayerRb.linearVelocityX/2)+(1+elapsed/25),2);
                 timer += 60;
             }
             yield return null;
