@@ -167,6 +167,11 @@ public class PlayerStateManager : MonoBehaviour
                 TriggerShake.Instance.BurstShake(-1*MathF.Cos(playerData.PlayerRb.linearVelocityX/2)+(2+elapsed/25),2);
                 timer += 60;
             }
+            if(playerData.pickUpHeart)
+            {
+                playerData.PlayerRb.linearVelocity = new Vector2(0, 0);
+                playerData.pickUpHeart = false;
+            }
             yield return null;
         }
         playerData.movementAllowed = true;

@@ -12,6 +12,7 @@ public class PlayerDead : PlayerAbstract
     }
     public override void UpdateState(PlayerStateManager player)
     {
+        Debug.Log(player.playerData.playerHealth);
         player.playerData.anim.SetBool("dead", true);
         if (player.playerData.playerHealth <= 0) 
         {
@@ -20,6 +21,13 @@ public class PlayerDead : PlayerAbstract
             player.playerData.PlayerRb.linearVelocity = new Vector2(0, 0);
             player.playerData.playerHealth = 0;
             player.playerData.movementAllowed = false;
+        }
+        if (player.playerData.playerHealth >= 1)
+        {
+            player.playerData.playerHealth = 1;
+            Debug.Log(player.playerData.playerHealth);
+            player.playerData.movementAllowed = true;
+            player.SwitchState(player.IdleState);
         }
     }
 }
