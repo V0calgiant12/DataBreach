@@ -24,10 +24,23 @@ public class SceneTransition : MonoBehaviour
         SceneManager.LoadScene(levelIndex);
         switch (levelIndex)
         {
+            case(levelIndex == 3):
+                // current level to 1
+                
             case(levelIndex == 4):
-                // whatever the game data variable is for the current level to 2
+                // current level to 2
+       
             case(levelIndex == 5):
-                // whatever the game data variable is for the current level to 3
+                //  current level to 3
+       
+            case(levelIndex == 6):
+                // current level to 4
+        
+            case(levelIndex == 7):
+                // current level to 5
+       
+            case(levelIndex == 8):
+                // current level to 6
         }
     }
     public void ExitButton()
