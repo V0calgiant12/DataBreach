@@ -22,6 +22,13 @@ public class SceneTransition : MonoBehaviour
         yield return new WaitForSeconds(transitionTime);
         renderFeatureToggler.DisableRenderFeatures();
         SceneManager.LoadScene(levelIndex);
+        switch (levelIndex)
+        {
+            case(levelIndex == 4):
+                // whatever the game data variable is for the current level to 2
+            case(levelIndex == 5):
+                // whatever the game data variable is for the current level to 3
+        }
     }
     public void ExitButton()
     {

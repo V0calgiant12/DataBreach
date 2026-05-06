@@ -32,6 +32,13 @@ public class PlayerIdle : PlayerAbstract
             player.Attack(currentAttack);
         }
 
+        // Grounded
+        if (!GroundCheck.Instance._IsGrounded)
+        {
+            player.SwitchState(player.AirState);
+            return;
+        }
+
         // Movement
         if (Input.GetKey(SettingsData.Instance._InputLeft) || Input.GetKey(SettingsData.Instance._InputRight))
         {
@@ -63,13 +70,6 @@ public class PlayerIdle : PlayerAbstract
             {
                 player.playerData.audioSource.PlayGrassSound(player.playerData._GrassJump);
             }
-            player.SwitchState(player.AirState);
-            return;
-        }
-
-        // Grounded
-        if (!GroundCheck.Instance._IsGrounded && player.playerData.coyoteTimeCounter < 0)
-        {
             player.SwitchState(player.AirState);
             return;
         }
