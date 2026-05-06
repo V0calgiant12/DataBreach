@@ -16,6 +16,7 @@ public class PlayerDead : PlayerAbstract
         player.playerData.anim.SetBool("dead", true);
         if (player.playerData.playerHealth <= 0) 
         {
+            player.playerData.playerDead = true;
             player.playerData.audioSource.PlayPlayerDeathSound(player.playerData._PlayerDeath);
             Debug.Log("You Are Dead");
             player.playerData.PlayerRb.linearVelocity = new Vector2(0, 0);
@@ -24,6 +25,7 @@ public class PlayerDead : PlayerAbstract
         }
         if (player.playerData.playerHealth >= 1)
         {
+            player.playerData.playerDead = false;
             player.playerData.playerHealth = 1;
             Debug.Log(player.playerData.playerHealth);
             player.playerData.movementAllowed = true;
