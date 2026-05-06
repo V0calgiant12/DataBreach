@@ -24,10 +24,24 @@ public class SceneTransition : MonoBehaviour
         SceneManager.LoadScene(levelIndex);
         switch (levelIndex)
         {
-            case(levelIndex == 4):
-                // whatever the game data variable is for the current level to 2
-            case(levelIndex == 5):
-                // whatever the game data variable is for the current level to 3
+            case(3):
+                // current level to 1 (Plains)
+                break;
+            case(4):
+                // current level to 2 (Forest)
+                break;
+            case(5):
+                //  current level to 3 (Mountains)
+                break;
+            case(6):
+                // current level to 4 (Quarry)
+                break;
+            case(7):
+                // current level to 5 (Deep Forest)
+                break;
+            case(8):
+                // current level to 6 (Corrupted Plains)
+                break;
         }
     }
     public void ExitButton()
