@@ -45,7 +45,7 @@ public class PlayerAudioSource : MonoBehaviour
     }
     public void PlayerDeathSound(AudioClip audioClip,float volume)
     {
-        audioSource.pitch = Random.Range(0.6f,1.3f);
+        audioSource.pitch = 1;
         audioSource.volume = volume;
         audioSource.outputAudioMixerGroup = audioMixer.FindMatchingGroups("Effects")[0];
         audioSource.clip = audioClip;
