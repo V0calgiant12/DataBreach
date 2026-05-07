@@ -26,6 +26,8 @@ public class EnemyHit : MonoBehaviour
     {
         if (trackedHealth <= 0)
         {
+            audioSource.EnemySound(deathSound,volume);
+            Instantiate(particlePrefab, gameObject.transform.position, gameObject.transform.rotation);
             Destroy(ParentObject);
         }
     }
@@ -42,11 +44,6 @@ public class EnemyHit : MonoBehaviour
         if(trackedHealth != 1)
         {
             audioSource.EnemySound(hitSound,volume);
-        }
-        else
-        {
-            Instantiate(particlePrefab, gameObject.transform.position, gameObject.transform.rotation);
-            audioSource.EnemySound(deathSound,volume);
         }
         if (!knockbackImmune)
         {
