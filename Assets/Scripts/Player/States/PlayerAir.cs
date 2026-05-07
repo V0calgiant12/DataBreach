@@ -57,7 +57,6 @@ public class PlayerAir : PlayerAbstract
             {
                 currentAttack = PlayerStateManager.AttackType.forwardAir;
             }
-            currentAttack = PlayerStateManager.AttackType.forwardAir;
             PlayerVelocity = new Vector2(-playerSpeed, player.playerData.PlayerRb.linearVelocityY);
             player.playerData.PlayerRb.linearVelocity = PlayerVelocity;// + OffsetVelocity;
             moving = true;
