@@ -24,8 +24,8 @@ public class CameraAreaTrigger : MonoBehaviour
         {
             Debug.Log("Exited Camera Area");
             CameraLocationUpdater cameraLocation = other.gameObject.GetComponent<CameraLocationUpdater>();
-            cameraLocation.limitX = limitX = float.NaN;
-            cameraLocation.limitY = limitY = float.NaN;
+            cameraLocation.limitX = float.NaN;
+            cameraLocation.limitY = float.NaN;
         }
     }
 }
