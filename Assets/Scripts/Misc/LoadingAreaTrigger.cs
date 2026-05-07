@@ -1,0 +1,28 @@
+using UnityEngine;
+
+public class LoadingAreaTrigger : MonoBehaviour
+{
+    [SerializeField] private GameObject ObjectsAndEnemies;
+    [SerializeField] private GameObject Grid;
+    void Start()
+    {
+        ObjectsAndEnemies.SetActive(false);
+        Grid.SetActive(false);
+    }
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("RealCamera"))
+        {
+            ObjectsAndEnemies.SetActive(true);
+            Grid.SetActive(true);   
+        }
+    }
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("RealCamera"))
+        {
+            ObjectsAndEnemies.SetActive(false);
+            Grid.SetActive(false);   
+        }
+    }
+}
