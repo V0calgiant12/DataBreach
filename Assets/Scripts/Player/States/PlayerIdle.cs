@@ -15,6 +15,7 @@ public class PlayerIdle : PlayerAbstract
     }
     public override void UpdateState(PlayerStateManager player)
     {
+        player.playerData.pickUpHeart = false;
         currentAttack = PlayerStateManager.AttackType.forward; // Default attack if nothing is inputed this frame.
         
         player.playerData.PlayerRb.linearVelocity = new Vector2(0,player.playerData.PlayerRb.linearVelocityY) + player.playerData.OffsetVelocity;
