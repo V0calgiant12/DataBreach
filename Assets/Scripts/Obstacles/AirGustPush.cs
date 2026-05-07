@@ -14,8 +14,11 @@ public class AirGustPush : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player") && !GroundCheckRef._IsGrounded)
         {
-            PlayerDataRef.inAirGust = true;
-            other.gameObject.GetComponent<ForceManager>().AddForce(0f, GustStrength, other);
+            if (!Input.GetKey(SettingsData.Instance._InputDown))
+            {
+                PlayerDataRef.inAirGust = true;
+                other.gameObject.GetComponent<ForceManager>().AddForce(0f, GustStrength, other);
+            }
         }
         if (other.gameObject.CompareTag("Slime"))
         {
