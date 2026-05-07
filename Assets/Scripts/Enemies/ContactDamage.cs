@@ -4,7 +4,6 @@ using UnityEngine;
 public class ContactDamage : MonoBehaviour
 {
     [Header("References:")]
-    public Rigidbody2D rb;
     public AudioSource audioSource3;
 
     void OnTriggerEnter2D(Collider2D collision)
