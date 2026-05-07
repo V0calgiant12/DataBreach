@@ -7,6 +7,7 @@ public class EnemyHit : MonoBehaviour
 {
     [SerializeField] private GameObject ParentObject;
     [SerializeField] private Rigidbody2D rb;
+    [SerializeField] private GameObject particlePrefab;
     [Header("Audio")]
     [SerializeField] private EffectSound audioSource;
     [SerializeField] private AudioClip hitSound;
@@ -44,6 +45,7 @@ public class EnemyHit : MonoBehaviour
         }
         else
         {
+            Instantiate(particlePrefab, gameObject.transform.position, gameObject.transform.rotation);
             audioSource.EnemySound(deathSound,volume);
         }
         if (!knockbackImmune)

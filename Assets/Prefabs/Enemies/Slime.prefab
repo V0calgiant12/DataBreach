@@ -530,6 +530,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyHit
   ParentObject: {fileID: 8027678710126338495}
   rb: {fileID: 7965548649738066340}
+  particlePrefab: {fileID: 2489886994720635918, guid: b6f49d710ad50454195d5f99b91a9ce7, type: 3}
   audioSource: {fileID: 4140950964649096466}
   hitSound: {fileID: 8300000, guid: 807bd5152a662ed4a9241939b4fef32d, type: 3}
   deathSound: {fileID: 8300000, guid: 0709a445dfc22cb4d8de281c203077b7, type: 3}
@@ -742,12 +743,12 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 0
-  slimeTrigger: {fileID: 2882446880090637605}
-  slimeRb: {fileID: 7965548649738066340}
-  player: {fileID: 0}
   jumpTimer: 0
   isGrounded: 0
   slimeLeftOrRight: 0
+  slimeTrigger: {fileID: 2882446880090637605}
+  slimeRb: {fileID: 7965548649738066340}
+  player: {fileID: 0}
   audioSource: {fileID: 8440598479110921148}
   audioSource2: {fileID: 3644040386111231335}
   audioSource3: {fileID: 0}

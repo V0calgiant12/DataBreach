@@ -94,9 +94,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyHit
   ParentObject: {fileID: 6271156301276086668}
   rb: {fileID: 7862003289902813592}
+  particlePrefab: {fileID: 469266653561010877, guid: 10705ee75d410684cbfc0b6d717e941f, type: 3}
   audioSource: {fileID: 1281590913369525869}
   hitSound: {fileID: 8300000, guid: 8de5f9a6ee59a184fab42c993e517d1f, type: 3}
-  deathSound: {fileID: 0}
+  deathSound: {fileID: 8300000, guid: 05f4d0c824519f14895754f8b8cc81bb, type: 3}
   volume: 1
   health: 1
   knockbackImmune: 1

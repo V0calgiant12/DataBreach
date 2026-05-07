@@ -5,7 +5,7 @@ public class ParticleTimer : MonoBehaviour
     private int timer;
     void Stat()
     {
-        timer == 180;
+        timer = 180;
     }
     private void Update()
     {

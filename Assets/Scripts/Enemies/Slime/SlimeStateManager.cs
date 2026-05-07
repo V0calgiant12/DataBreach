@@ -14,13 +14,15 @@ public class SlimeStateManager : MonoBehaviour
     [Header("Detection")]
     public LayerMask groundLayer;
 
-    [Header("Slime References")]
-    public GameObject slimeTrigger;
-    public Rigidbody2D slimeRb;
-    public Transform player;
+    [Header("Variables")]
     public int jumpTimer;
     public bool isGrounded;
     public bool slimeLeftOrRight;
+
+    [Header("References")]
+    public GameObject slimeTrigger;
+    public Rigidbody2D slimeRb;
+    public Transform player;
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private AudioSource audioSource2;
     public AudioSource audioSource3;
