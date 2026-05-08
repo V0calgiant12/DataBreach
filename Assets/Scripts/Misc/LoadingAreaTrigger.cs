@@ -11,8 +11,10 @@ public class LoadingAreaTrigger : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
+        Debug.Log(other.gameObject + " entered loading.", this);
         if (other.gameObject.CompareTag("RealCamera"))
         {
+            Debug.Log("Loading Area.", this);
             ObjectsAndEnemies.SetActive(true);
             Grid.SetActive(true);   
         }
