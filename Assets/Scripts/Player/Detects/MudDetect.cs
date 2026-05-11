@@ -1,10 +1,9 @@
 using UnityEngine;
-using UnityEngine.Audio;
+
 public class MudDetect : MonoBehaviour
 {
     [Header("Mud References:")]
     public Rigidbody2D PlayerRb;
-    public AudioClip MudWalk;
     
     void Start()
     {
