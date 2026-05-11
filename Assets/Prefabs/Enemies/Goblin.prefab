@@ -132,9 +132,10 @@ GameObject:
   m_Component:
   - component: {fileID: 5545517829087980707}
   - component: {fileID: 304053629889301611}
+  - component: {fileID: 2117123893202507322}
   m_Layer: 7
-  m_Name: Trigger
-  m_TagString: SlimeTrigger
+  m_Name: Wall Trigger
+  m_TagString: EnemyTrigger
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -167,10 +168,10 @@ BoxCollider2D:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 65343
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 192
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -188,7 +189,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: -0.5}
+  m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -198,8 +199,22 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.85, y: 0.005}
+  m_Size: {x: 2.5, y: 1.8}
   m_EdgeRadius: 0
+--- !u!114 &2117123893202507322
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1757185450536414579}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 617f149ec4682bf43a82fbd56df8a052, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyWallTrigger
+  Goblin: {fileID: 6513856301564140633}
+  wallCollision: 0
 --- !u!1 &6513856301564140633
 GameObject:
   m_ObjectHideFlags: 0
@@ -236,6 +251,7 @@ Transform:
   - {fileID: 1480663127249593138}
   - {fileID: 22887469053066372}
   - {fileID: 5545517829087980707}
+  - {fileID: 8616769836109744896}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &7254043820816501747
@@ -287,7 +303,7 @@ SpriteRenderer:
   m_SortingLayer: 1
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: -9095717837082945937, guid: 207ee8102dd4143d288186ef0be518ee, type: 3}
+  m_Sprite: {fileID: -2871887797121950970, guid: b0db07839528c954abab8b8bf72ea972, type: 3}
   m_Color: {r: 0.59268147, g: 0.764151, b: 0.34242615, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -313,7 +329,7 @@ Rigidbody2D:
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_GravityScale: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 2100a2afc1a1b2a4dbd7e7ae29213083, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 8
@@ -323,7 +339,7 @@ Rigidbody2D:
   m_Interpolate: 1
   m_SleepingMode: 1
   m_CollisionDetection: 1
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!61 &4046557635185863519
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -340,7 +356,7 @@ BoxCollider2D:
     m_Bits: 8
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 192
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -362,7 +378,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 2}
+    oldSize: {x: 1.7142857, y: 2.2857141}
     newSize: {x: 1, y: 2}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -382,12 +398,116 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea7152a5352e0854b817c8ef49e6df0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GoblinStateManager
-  moveSpeed: 7
+  moveSpeed: 5
   patrolRange: 5
-  chaseRange: 14
+  chaseRange: 10
+  jumpForce: 16
+  forwardForce: 2
+  goblinLeftOrRight: 0
   attackRange: 1.5
   attackRate: 1.5
   player: {fileID: 0}
+  EnemyGroundCheck: {fileID: 1577367954537911280}
+  EnemyWallTrigger: {fileID: 0}
+  isGrounded: 0
+  wallCollision: 0
+  isStone: 0
+  groundTrigger: {fileID: 7442416221429492074}
+  wallTrigger: {fileID: 1757185450536414579}
+  playerTooHigh: 20
+--- !u!1 &7442416221429492074
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8616769836109744896}
+  - component: {fileID: 668230609353442249}
+  - component: {fileID: 1577367954537911280}
+  m_Layer: 7
+  m_Name: Ground Trigger
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8616769836109744896
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7442416221429492074}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8954715020954207807}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &668230609353442249
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7442416221429492074}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 8
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 503
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: -0.0000009536743, y: -1.041575}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 1.0350094, y: 0.14223194}
+  m_EdgeRadius: 0
+--- !u!114 &1577367954537911280
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7442416221429492074}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65a6011952dcd4e40bb46e388e90e2a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyGroundCheck
+  isGrounded: 0
+  _IsStone: 0
 --- !u!1 &8555635040291792720
 GameObject:
   m_ObjectHideFlags: 0
@@ -399,7 +519,8 @@ GameObject:
   - component: {fileID: 22887469053066372}
   - component: {fileID: 1000387079244345588}
   - component: {fileID: 1937713231986982703}
-  m_Layer: 7
+  - component: {fileID: 1805409108835384688}
+  m_Layer: 0
   m_Name: Hitbox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -494,3 +615,16 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &1805409108835384688
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8555635040291792720}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c72d657f60c1b1c499668575f24885e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GoblinDamage
+  goblinRb: {fileID: 1000387079244345588}
