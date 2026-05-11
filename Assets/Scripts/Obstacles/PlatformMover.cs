@@ -23,8 +23,8 @@ public class PlatformMover : MonoBehaviour
         platformRb = GetComponent<Rigidbody2D>();
         Player = GameObject.FindGameObjectWithTag("Player");
         Slime = GameObject.FindGameObjectWithTag("Slime");
-        nextPos = pointB.position;
         currentSpeed = new Vector2(1,1);
+        nextPos = pointB.position;
         StartCoroutine(MoveTowardsPoint());
     }
 

@@ -4,7 +4,7 @@ public class LoadingAreaTrigger : MonoBehaviour
 {
     [SerializeField] private GameObject ObjectsAndEnemies;
     [SerializeField] private GameObject Grid;
-    void Start()
+    void Awake()
     {
         ObjectsAndEnemies.SetActive(false);
         Grid.SetActive(false);
