@@ -4,9 +4,10 @@ using UnityEngine;
 public class GlibberknockerStateManager : MonoBehaviour
 {
     [Header("Movement & Gravity")]
-    public float moveSpeed = 4f;
-    public float patrolRange = 10f;
+    public float moveSpeed = 2f;
+    public float patrolRange = 5f;
     public float chaseRange = 20f;
+    public float jumpForce = 16f;
 
     [Header("Combat")]
     public float attackRange = 4f;
@@ -101,7 +102,10 @@ public class GlibberknockerStateManager : MonoBehaviour
         patrolTargetX = startPosition.x + Random.Range(-patrolRange, patrolRange);
     }
 
-
+    void Jump()
+    {
+        //glibberknockerRb.angularVelocity = new Vector2(glibberknockerRb.angularVelocity.x, jumpForce);
+    }
 
 }
 
