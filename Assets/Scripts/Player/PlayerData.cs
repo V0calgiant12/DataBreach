@@ -10,6 +10,7 @@ public class PlayerData : ScriptableObject
     public float mudJumpMulti;
     [Header("Player Data References:")]
     public GameObject MainCamera;
+    public GameObject DeathTransition;
     public Vector2 OffsetVelocity;
     public Rigidbody2D PlayerRb;
     public BoxCollider2D collider; 
