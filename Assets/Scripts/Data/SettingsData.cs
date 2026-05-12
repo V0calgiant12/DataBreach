@@ -37,6 +37,7 @@ public class SettingsData : MonoBehaviour
     [Header("Video")]
     public int _Fullscreen = 0;
     public int _Resolution = 2;
+    public int _LightQuality = 4;
     public bool _Bloom;
     public bool _ChromaticAberration;
     public bool _Vignette;
@@ -85,6 +86,7 @@ public class SettingsData : MonoBehaviour
         
         data._Fullscreen = _Fullscreen;
         data._Resolution = _Resolution;
+        data._LightQuality = _LightQuality;
         data._Bloom =_Bloom;
         data._ChromaticAberration =_ChromaticAberration;
         data._Vignette =_Vignette;
@@ -133,6 +135,7 @@ public class SettingsData : MonoBehaviour
 
             _Fullscreen = data._Fullscreen;
             _Resolution = data._Resolution;
+            _LightQuality = data._LightQuality;
             _Bloom = data._Bloom;
             _ChromaticAberration = data._ChromaticAberration;
             _Vignette = data._Vignette;
@@ -174,6 +177,7 @@ public class SettingsData : MonoBehaviour
 
         _Fullscreen = 0;
         _Resolution = 2;
+        _LightQuality = 4;
         _Bloom = true;
         _ChromaticAberration = true;
         _Vignette = true;
@@ -213,6 +217,7 @@ class SaveSettings // This class quite literally just stores variables so they c
     [Header("Video")]
     public int _Fullscreen = 0;
     public int _Resolution = 2;
+    public int _LightQuality = 4;
     public bool _Bloom;
     public bool _ChromaticAberration;
     public bool _Vignette;

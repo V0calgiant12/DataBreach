@@ -1,12 +1,15 @@
 using System;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Rendering.Universal;
 
 public class VideoSettingsController : MonoBehaviour
 {
     [SerializeField] private GameObject videoMenu;
+    [SerializeField] private Renderer2DData renderer2D;
     public int _Fullscreen;
     public int _Resolution;
+    public int _LightQuality;
     public bool _Bloom;
     public bool _ChromaticAberration;
     public bool _Vignette;
@@ -68,6 +71,32 @@ public class VideoSettingsController : MonoBehaviour
                 break;
         }
     }
+    public void SetLightQuality(int res)
+    {
+        switch (res)
+        {
+            case(0): // Ultra High 1.0
+            
+                renderer2D.m_LightRenderTextureScale = 1.0f;
+                break;
+            case(1): // Very High 0.85
+                renderer2D.m_LightRenderTextureScale = 0.85f;
+                break;
+            case(2): // High 0.70
+                renderer2D.m_LightRenderTextureScale = 0.70f;
+                break;
+            case(3): // Medium 0.50
+                renderer2D.m_LightRenderTextureScale = 0.50f;
+                break;
+            case(4): // Low 0.32
+                renderer2D.m_LightRenderTextureScale = 0.32f;
+                break;
+            case(5): // Very Low 0.16
+            
+                renderer2D.m_LightRenderTextureScale = 0.16f;
+                break;
+        }
+    }
     
     public void DropdownSetting(SettingDropdownData data)
     {
@@ -83,6 +112,7 @@ public class VideoSettingsController : MonoBehaviour
                 break;
         }
     }
+    
     public void ToggleSetting(SettingsToggleData data)
     {
         switch(data._ToggleID)
