@@ -66,7 +66,6 @@ public class SlimeStateManager : MonoBehaviour
     private void SlimeUpdate()
     {
         float dist = Vector2.Distance(transform.position, player.position);
-        Debug.Log(mudJumpMulti);
         // Jump Logic
         if (jumpTimer >= timeBetweenJumps && isGrounded)
         {

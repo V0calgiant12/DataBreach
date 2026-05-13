@@ -198,7 +198,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a667a26981cea94380769adee02304f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SlimeDamage
-  rb: {fileID: 0}
   audioSource3: {fileID: 4986386367766769081}
 --- !u!82 &4986386367766769081
 AudioSource:
@@ -566,6 +565,7 @@ GameObject:
   - component: {fileID: 2061067415103168959}
   - component: {fileID: 8440598479110921148}
   - component: {fileID: 3644040386111231335}
+  - component: {fileID: 5601684875710946543}
   m_Layer: 7
   m_Name: Slime
   m_TagString: Slime
@@ -738,7 +738,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SlimeStateManager
   currentState: 0
   jumpForce: 15.2
+  mudJumpMulti: 1
   forwardForce: 4
+  mudSpeedMulti: 1
   timeBetweenJumps: 1
   groundLayer:
     serializedVersion: 2
@@ -965,3 +967,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &5601684875710946543
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8027678710126338495}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 510388b6cc4a4ba4ba3cd773aa053522, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MudDetect
+  SlimeStateManagerRef: {fileID: 0}
+  Player: {fileID: 0}
+  Slime: {fileID: 8027678710126338495}
+  PlayerRb: {fileID: 0}
