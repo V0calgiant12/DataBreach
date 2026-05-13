@@ -14,7 +14,7 @@ public class PlatformMover : MonoBehaviour
     public Transform pointA;
     public Transform pointB;
     public Transform platform;
-    private Vector2 currentSpeed;
+    [SerializeField] private Vector2 currentSpeed;
     [SerializeField] private Vector2 nextPos;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
