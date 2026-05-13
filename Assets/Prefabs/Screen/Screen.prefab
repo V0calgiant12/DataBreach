@@ -1114,12 +1114,12 @@ GameObject:
   - component: {fileID: 959049383515274967}
   - component: {fileID: 885809298641616577}
   m_Layer: 5
-  m_Name: Image
+  m_Name: DeathTransitionImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &5697209043574305022
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1136,8 +1136,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -487.5, y: -312}
-  m_SizeDelta: {x: -975, y: -624}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &738714879894545412
 CanvasRenderer:
@@ -1160,7 +1160,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0.03137255, g: 0.15294118, b: 0.9607843, a: 0}
+  m_Color: {r: 0.03137255, g: 0.15294118, b: 0.9607843, a: 1}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1

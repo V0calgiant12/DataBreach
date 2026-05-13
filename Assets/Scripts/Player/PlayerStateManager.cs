@@ -53,7 +53,8 @@ public class PlayerStateManager : MonoBehaviour
         playerData.anim.SetBool("moving", false);
         playerData.anim.SetBool("sprinting", false);
 
-        playerData.DeathTransition.SetActive(false);
+        playerData.DeathTransitionImage = GameObject.Find("DeathTransitionImage");
+        playerData.DeathTransitionImage.SetActive(false);
 
     }
     void Update()
@@ -89,7 +90,6 @@ public class PlayerStateManager : MonoBehaviour
         playerData.audioSource = gameObject.GetComponent<PlayerSound>();
         playerData.collider = gameObject.GetComponent<BoxCollider2D>();
         playerData.MainCamera = GameObject.Find("Main Camera");
-        playerData.DeathTransition = GameObject.Find("DeathTransition");
     }
     public void DamagePlayer(float xLaunch, float yLaunch,int timer, bool overrideIFrames, float damageSourceX, bool nonDirectional)
     {

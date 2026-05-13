@@ -12,20 +12,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a1729c4832f69e4bb0a9c98f3d7c2f3, type: 3}
   m_Name: PlayerData
   m_EditorClassIdentifier: Assembly-CSharp::PlayerData
-  playerHealth: 5
+  playerHealth: 3
   attackTimer: 0
   mudSpeedMulti: 1
   mudJumpMulti: 1
   MainCamera: {fileID: 0}
-  DeathTransition: {fileID: 0}
+  DeathTransitionImage: {fileID: 0}
   OffsetVelocity: {x: 0, y: 0}
   PlayerRb: {fileID: 0}
   collider: {fileID: 0}
   audioSource: {fileID: 0}
   anim: {fileID: 0}
-  jumpBufferCounter: -3858
+  jumpBufferCounter: -733
   coyoteTimeCounter: 15
-  iFrames: -1734
+  iFrames: -1975
   sprinting: 0
   crouching: 0
   doubleJumpAvailable: 1
