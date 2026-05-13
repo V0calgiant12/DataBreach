@@ -8,7 +8,9 @@ public class SlimeStateManager : MonoBehaviour
 
     [Header("Jump Settings")]
     public float jumpForce = 5f;      // Upward power
-    public float forwardForce = 3f;   // Horizontal power toward player
+    public float mudJumpMulti = 1f;
+    public float forwardForce = 1f;   // Horizontal power toward player
+    public float mudSpeedMulti = 1f;
     public int timeBetweenJumps = 90;
 
     [Header("Detection")]
@@ -64,7 +66,6 @@ public class SlimeStateManager : MonoBehaviour
     private void SlimeUpdate()
     {
         float dist = Vector2.Distance(transform.position, player.position);
-
         // Jump Logic
         if (jumpTimer >= timeBetweenJumps && isGrounded)
         {
@@ -93,7 +94,7 @@ public class SlimeStateManager : MonoBehaviour
         audioSource.Play();
         //Debug.Log("jump");
         // Apply a diagonal "Hop" force
-        Vector2 hopVector = new Vector2(direction * forwardForce, jumpForce);
+        Vector2 hopVector = new Vector2(direction * forwardForce * mudSpeedMulti, jumpForce * mudJumpMulti);
         slimeRb.AddForce(hopVector, ForceMode2D.Impulse);
     }
 
