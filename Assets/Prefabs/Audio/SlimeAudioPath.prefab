@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5641863804983799307}
   - component: {fileID: 6636076406305025290}
-  - component: {fileID: 5271140063663773101}
+  - component: {fileID: 4275739373335309843}
   m_Layer: 5
   m_Name: SlimeAudioPath
   m_TagString: Untagged
@@ -42,7 +42,7 @@ AudioSource:
   m_GameObject: {fileID: 8734533203902538695}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 7612312991518874184, guid: 246f48f13ca5833448ea181663ec054d, type: 2}
+  OutputAudioMixerGroup: {fileID: -1693032528215722064, guid: 246f48f13ca5833448ea181663ec054d, type: 2}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 1
@@ -130,7 +130,7 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &5271140063663773101
+--- !u!114 &4275739373335309843
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -139,8 +139,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 8734533203902538695}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3f8b66535fb591d4f9d4c71e39312596, type: 3}
+  m_Script: {fileID: 11500000, guid: 1329332d183d5d2498b34e48394982cb, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerAudioSource
+  m_EditorClassIdentifier: Assembly-CSharp::SlimeAudioSource
   audioSource: {fileID: 6636076406305025290}
   audioMixer: {fileID: 24100000, guid: 246f48f13ca5833448ea181663ec054d, type: 2}

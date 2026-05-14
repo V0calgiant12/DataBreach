@@ -563,9 +563,9 @@ GameObject:
   - component: {fileID: 7965548649738066340}
   - component: {fileID: 3052226611263945404}
   - component: {fileID: 2061067415103168959}
+  - component: {fileID: 5601684875710946543}
   - component: {fileID: 8440598479110921148}
   - component: {fileID: 3644040386111231335}
-  - component: {fileID: 5601684875710946543}
   m_Layer: 7
   m_Name: Slime
   m_TagString: Slime
@@ -753,8 +753,6 @@ MonoBehaviour:
   player: {fileID: 0}
   audioSource: {fileID: 8440598479110921148}
   audioSource2: {fileID: 3644040386111231335}
-  audioSource3: {fileID: 0}
-  audioSource4: {fileID: 0}
   _SlimeJump: {fileID: 8300000, guid: 29af98eb4f9e0df4d97c2163a4d84cdb, type: 3}
   _SlimeImpact: {fileID: 8300000, guid: 35ee2d919fad96a469e7f79092bb6691, type: 3}
   _SlimeAttack: {fileID: 8300000, guid: 807bd5152a662ed4a9241939b4fef32d, type: 3}
@@ -771,8 +769,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3319696bd4fbe2241a944ab0d8fb086a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ForceManager
-  PlayerDataRef: {fileID: 0}
+  PlayerDataRef: {fileID: 11400000, guid: ef22878c3af9ca548a85988a7addec59, type: 2}
   rb: {fileID: 0}
+--- !u!114 &5601684875710946543
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8027678710126338495}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 510388b6cc4a4ba4ba3cd773aa053522, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MudDetect
+  SlimeStateManagerRef: {fileID: 0}
+  Player: {fileID: 0}
+  Slime: {fileID: 8027678710126338495}
+  PlayerRb: {fileID: 0}
 --- !u!82 &8440598479110921148
 AudioSource:
   m_ObjectHideFlags: 0
@@ -967,19 +981,3 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &5601684875710946543
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8027678710126338495}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 510388b6cc4a4ba4ba3cd773aa053522, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::MudDetect
-  SlimeStateManagerRef: {fileID: 0}
-  Player: {fileID: 0}
-  Slime: {fileID: 8027678710126338495}
-  PlayerRb: {fileID: 0}

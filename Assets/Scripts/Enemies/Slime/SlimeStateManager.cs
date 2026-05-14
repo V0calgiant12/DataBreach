@@ -27,8 +27,6 @@ public class SlimeStateManager : MonoBehaviour
     public Transform player;
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private AudioSource audioSource2;
-    public AudioSource audioSource3;
-    [SerializeField] private AudioSource audioSource4;
     public AudioClip _SlimeJump;
     public AudioClip _SlimeImpact;
     public AudioClip _SlimeAttack;
@@ -43,7 +41,10 @@ public class SlimeStateManager : MonoBehaviour
         slimeRb = GetComponent<Rigidbody2D>();
         StartCoroutine(DelayStart());
         // Ensure Gravity Scale is at least 1-2 so it falls back down!
-        if (player == null) player = GameObject.FindGameObjectWithTag("Player").transform;
+        if (player == null)
+        {
+            player = GameObject.FindGameObjectWithTag("Player").transform;
+        }
         float scaleOffset = Random.Range(0.8f, 1.3f);
         transform.localScale = new Vector3(scaleOffset,scaleOffset,scaleOffset);
         InvokeRepeating(nameof(SlimeUpdate), 1.5f, 1.5f+Random.Range(0.0f, 0.5f));
