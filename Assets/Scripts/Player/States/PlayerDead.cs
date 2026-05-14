@@ -8,7 +8,6 @@ public class PlayerDead : PlayerAbstract
     }
     public override void EnterState(PlayerStateManager player)
     {
-        player.playerData.playerHealth = 0;
     }
     public override void UpdateState(PlayerStateManager player)
     {
