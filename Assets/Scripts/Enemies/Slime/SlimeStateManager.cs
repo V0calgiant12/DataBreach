@@ -20,6 +20,7 @@ public class SlimeStateManager : MonoBehaviour
     public int jumpTimer;
     public bool isGrounded;
     public bool slimeLeftOrRight;
+    public bool slimeSizeable = true;
 
     [Header("References")]
     public GameObject slimeTrigger;
@@ -45,8 +46,11 @@ public class SlimeStateManager : MonoBehaviour
         {
             player = GameObject.FindGameObjectWithTag("Player").transform;
         }
-        float scaleOffset = Random.Range(0.8f, 1.3f);
-        transform.localScale = new Vector3(scaleOffset,scaleOffset,scaleOffset);
+        if (slimeSizeable)
+        {
+            float scaleOffset = Random.Range(0.8f, 1.3f);
+            transform.localScale = new Vector3(scaleOffset,scaleOffset,scaleOffset);
+        }
         InvokeRepeating(nameof(SlimeUpdate), 1.5f, 1.5f+Random.Range(0.0f, 0.5f));
     }
     public IEnumerator DelayStart()

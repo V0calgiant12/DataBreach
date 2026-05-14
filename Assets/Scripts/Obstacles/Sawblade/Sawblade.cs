@@ -5,9 +5,10 @@ using UnityEngine.Audio;
 public class Sawblade : MonoBehaviour
 {
     [Header("Sawblade Settings:")]
-    public float sawbladeTime = 1f;
+    public int sawbladeTime = 60;
     public float activeDistance = 10f;
-    public float upDistance = .85f;
+    public float upDistance = 1f;
+    public int upTime = 15;
     public enum LeftRight
     {
         Left,
@@ -55,7 +56,7 @@ public class Sawblade : MonoBehaviour
             DetectPlayerLeft.SetActive(false);
             DetectPlayerRight.SetActive(false);
             SawbladeAudioSource.Play();
-            StartCoroutine(Move());
+            //StartCoroutine(Move());
             StartCoroutine(SawbladeUp());
         }
 
@@ -63,15 +64,21 @@ public class Sawblade : MonoBehaviour
     private IEnumerator SawbladeUp()
     {
         float startingY = transform.localPosition.y;
-        // elapsed is a timer that goes until the sawblade goes the correct y height
-        float distance = 0;
         // SawbladeSpinVolume is for fading in and out the volume over time
+        int elapsed = 0;
+        bool moving = false;
         SawbladeSpinVolume = 0f;
-        while (upDistance > distance)
+        while (upDistance > transform.localPosition.y)
         {
+            elapsed += 1;
             SawbladeSpinVolume += 0.05f;
-            distance += 0.1f;
-            transform.localPosition = new Vector2(transform.localPosition.x, startingY + distance*sawbladeTime);
+            transform.localPosition = new Vector2(transform.localPosition.x, upDistance/upTime * elapsed + startingY); // d=r/t, r=d*t
+            //Debug.Log("UpTime: " + upTime + " UpDist: " + upDistance + " Elapsed: " + elapsed + " StartingY: " + startingY + " Combined: " + (upDistance/upTime * elapsed + startingY));
+            if(transform.localPosition.y >= upDistance / 2 && !moving)
+            {
+                moving = true;
+                StartCoroutine(Move());
+            }
             yield return null;
         }
         playerDetected = true;
@@ -79,40 +86,37 @@ public class Sawblade : MonoBehaviour
     private IEnumerator Move()
     {
         float startX = transform.localPosition.x;
-        if(SawbladeDirection == LeftRight.Right)
+        int elapsedM = 0;
+        while(elapsedM < sawbladeTime - upTime/2)
         {
-            while(transform.localPosition.x < (activeDistance - (.15 * activeDistance/sawbladeTime)) * ((SawbladeDirection == LeftRight.Right) ? 1f : -1f) + startX)
-            {
-                sawbladeRb.linearVelocity = new Vector2(activeDistance/sawbladeTime * ((SawbladeDirection == LeftRight.Right) ? 1f : -1f),sawbladeRb.linearVelocityY);
-                yield return null;
-            }
-        }
-        if(SawbladeDirection == LeftRight.Left)
-        {
-            while(transform.localPosition.x > (activeDistance - (.15 * activeDistance/sawbladeTime)) * ((SawbladeDirection == LeftRight.Right) ? 1f : -1f) + startX)
-            {
-                sawbladeRb.linearVelocity = new Vector2(activeDistance/sawbladeTime * ((SawbladeDirection == LeftRight.Right) ? 1f : -1f),sawbladeRb.linearVelocityY);
-                yield return null;
-            }
+            elapsedM += 1;
+            transform.localPosition = new Vector2(activeDistance/sawbladeTime * ((SawbladeDirection == LeftRight.Right) ? 1f : -1f)* elapsedM + startX,transform.localPosition.y);
+            Debug.Log(elapsedM + " 1");
+            yield return null;
         }
         StartCoroutine(SawbladeDown());
+        while(elapsedM < sawbladeTime)
+        {
+            elapsedM += 1;
+            transform.localPosition = new Vector2(activeDistance/sawbladeTime * ((SawbladeDirection == LeftRight.Right) ? 1f : -1f)* elapsedM + startX,transform.localPosition.y);
+            Debug.Log(elapsedM + " 2");
+            yield return null;
+        }
+        
     }
     public IEnumerator SawbladeDown()
     {
         Debug.Log("Starting Down");
         float startingY = transform.localPosition.y;
-        // elapsed is a timer that goes until the sawblade goes the correct y height
-        float distance = 0;
-        while (upDistance > distance)
+        int elapsed = 0;
+        while (0 < transform.localPosition.y)
         {
-            Debug.Log("Going Down");
-            distance += 0.1f;
+            elapsed += 1;
             SawbladeSpinVolume -= 0.05f;
-            transform.localPosition = new Vector2(transform.localPosition.x, startingY - distance*sawbladeTime);
-            //Debug.Log(sawbladeRb.linearVelocityY + elapsed);
+            transform.localPosition = new Vector2(transform.localPosition.x, -1 * upDistance/upTime * elapsed + startingY);
+            //Debug.Log("UpTime: " + upTime + " UpDist: " + upDistance + " Elapsed: " + elapsed + " StartingY: " + startingY + " Combined: " + (-1*upDistance/upTime * elapsed + startingY));
             yield return null;
         }
         Destroy(gameObject);
-        Debug.Log("Down");
     }
 }
