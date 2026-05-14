@@ -148,6 +148,10 @@ public class PlayerAir : PlayerAbstract
             {
                 player.playerData.audioSource.PlayGrassSound(player.playerData._GrassFall);
             }
+            if(player.playerData.anim.GetInteger("attackId") == 2 && player.playerData.anim.GetBool("attacking"))
+            {
+                player.playerData.anim.SetBool("attacking", false);
+            }
             player.SwitchState(player.IdleState);
             return;
         }
