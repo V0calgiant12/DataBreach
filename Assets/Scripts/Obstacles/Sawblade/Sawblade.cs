@@ -8,7 +8,7 @@ public class Sawblade : MonoBehaviour
     public int sawbladeTime = 60;
     public float activeDistance = 10f;
     public float upDistance = 1f;
-    public int upTime = 15;
+    public int upTime = 20;
     public enum LeftRight
     {
         Left,
