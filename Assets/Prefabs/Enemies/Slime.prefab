@@ -568,7 +568,7 @@ GameObject:
   - component: {fileID: 3644040386111231335}
   m_Layer: 7
   m_Name: Slime
-  m_TagString: Slime
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -770,7 +770,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ForceManager
   PlayerDataRef: {fileID: 11400000, guid: ef22878c3af9ca548a85988a7addec59, type: 2}
-  rb: {fileID: 0}
+  rb: {fileID: 7965548649738066340}
 --- !u!114 &5601684875710946543
 MonoBehaviour:
   m_ObjectHideFlags: 0

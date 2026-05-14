@@ -105,7 +105,7 @@ GameObject:
   - component: {fileID: 8380787885653382398}
   m_Layer: 7
   m_Name: Hitbox
-  m_TagString: Slime
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -210,7 +210,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a667a26981cea94380769adee02304f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SlimeDamage
-  rb: {fileID: 0}
   audioSource3: {fileID: 1921390955554284192}
 --- !u!1 &1172246738268572851
 GameObject:
