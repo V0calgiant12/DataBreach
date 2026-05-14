@@ -50,7 +50,7 @@ public class Sawblade : MonoBehaviour
     void OnTriggerEnter2D(Collider2D other)
     {
         // If the player isnt already detected and the player goes into the player detector trigger, it will set the player detects to false, play the sawblade cutting sound on loop, and start a coroutine
-        if (other.gameObject.CompareTag("Player") && (!playerDetected))
+        if ((other.gameObject.CompareTag("Player") || other.gameObject.CompareTag("Enemy")) && (!playerDetected))
         {
             DetectPlayerLeft.SetActive(false);
             DetectPlayerRight.SetActive(false);
