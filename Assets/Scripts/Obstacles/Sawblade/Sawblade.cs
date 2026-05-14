@@ -16,8 +16,6 @@ public class Sawblade : MonoBehaviour
     public LeftRight SawbladeDirection;
     [Header("Sawblade References:")]
     [SerializeField] private GameObject sprite;
-    public GameObject WallDetectLeft;
-    public GameObject WallDetectRight;
     public GameObject DetectPlayerLeft;
     public GameObject DetectPlayerRight;
     public GameObject SawbladeHitbox;
@@ -38,8 +36,6 @@ public class Sawblade : MonoBehaviour
         {
             DetectPlayerRight.SetActive(false);
         }
-        WallDetectLeft.SetActive(false);
-        WallDetectRight.SetActive(false);
         sawbladeRb = GetComponent<Rigidbody2D>();
         playerDetected = false;
     }
@@ -78,24 +74,26 @@ public class Sawblade : MonoBehaviour
             transform.localPosition = new Vector2(transform.localPosition.x, startingY + distance*sawbladeTime);
             yield return null;
         }
-        // Enables the wall detects depending on what direction the sawblade is set to
-        if (SawbladeDirection == LeftRight.Right)
-        {
-            WallDetectRight.SetActive(true);
-        }
-        if (SawbladeDirection == LeftRight.Left)
-        {
-            WallDetectLeft.SetActive(true);
-        }
         playerDetected = true;
     }
     private IEnumerator Move()
     {
         float startX = transform.localPosition.x;
-        while(transform.localPosition.x < (activeDistance - (.15 * activeDistance/sawbladeTime)) * ((SawbladeDirection == LeftRight.Right) ? 1f : -1f) + startX)
+        if(SawbladeDirection == LeftRight.Right)
         {
-            sawbladeRb.linearVelocity = new Vector2(activeDistance/sawbladeTime,sawbladeRb.linearVelocityY);
-            yield return null;
+            while(transform.localPosition.x < (activeDistance - (.15 * activeDistance/sawbladeTime)) * ((SawbladeDirection == LeftRight.Right) ? 1f : -1f) + startX)
+            {
+                sawbladeRb.linearVelocity = new Vector2(activeDistance/sawbladeTime * ((SawbladeDirection == LeftRight.Right) ? 1f : -1f),sawbladeRb.linearVelocityY);
+                yield return null;
+            }
+        }
+        if(SawbladeDirection == LeftRight.Left)
+        {
+            while(transform.localPosition.x > (activeDistance - (.15 * activeDistance/sawbladeTime)) * ((SawbladeDirection == LeftRight.Right) ? 1f : -1f) + startX)
+            {
+                sawbladeRb.linearVelocity = new Vector2(activeDistance/sawbladeTime * ((SawbladeDirection == LeftRight.Right) ? 1f : -1f),sawbladeRb.linearVelocityY);
+                yield return null;
+            }
         }
         StartCoroutine(SawbladeDown());
     }

@@ -20,7 +20,7 @@ public class AirGustPush : MonoBehaviour
                 other.gameObject.GetComponent<ForceManager>().AddForce(0f, GustStrength, other);
             }
         }
-        if (other.gameObject.CompareTag("Slime"))
+        if (other.gameObject.CompareTag("Enemy"))
         {
             other.gameObject.GetComponent<ForceManager>().AddForce(0f, GustStrength, other);
         }
