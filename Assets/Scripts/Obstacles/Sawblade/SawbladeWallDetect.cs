@@ -24,27 +24,7 @@ public class SawbladeWallDetect : MonoBehaviour
         if (other.gameObject.CompareTag("Ground") && !other.gameObject.CompareTag("Spikes") || other.gameObject.CompareTag("Stone"))
         {
             Debug.Log("Saw ground test");
-            StartCoroutine(SawbladeDown());
+            StartCoroutine(SawbladeRef.SawbladeDown());
         }
-    }
-    private IEnumerator SawbladeDown()
-    {
-        elapsed = 0;
-        SawbladeRef.SawbladeSpinVolume = 1;
-        while (downDistance < elapsed)
-        {
-            elapsed -= 0.05f;
-            SawbladeRef.SawbladeSpinVolume -= 0.05f;
-            if (SawbladeRef.SawbladeDirection == Sawblade.LeftRight.Right)
-            {
-                SawbladeRef.SawbladeVelocity =  new Vector2(SawbladeRef.sawbladeSpeed, SawbladeRef.sawbladeRb.linearVelocityY + elapsed);
-            }
-            if (SawbladeRef.SawbladeDirection == Sawblade.LeftRight.Left)
-            {
-                SawbladeRef.SawbladeVelocity =  new Vector2(-SawbladeRef.sawbladeSpeed, SawbladeRef.sawbladeRb.linearVelocityY + elapsed);
-            }
-            yield return null;
-        }
-        Destroy(SawbladeGameObject);
     }
 }
