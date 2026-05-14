@@ -19,8 +19,6 @@ public class PlayerDead : PlayerAbstract
             player.playerData.audioSource.PlayPlayerDeathSound(player.playerData._PlayerDeath);
             player.playerData.DeathTransitionImage.SetActive(true);
             Debug.Log("You Are Dead");
-            player.playerData.PlayerRb.linearVelocity = new Vector2(0, 0);
-            player.playerData.playerHealth = 0;
             player.playerData.movementAllowed = false;
         }
         if (player.playerData.playerHealth >= 1)
