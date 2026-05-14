@@ -2390,7 +2390,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: -101493807
   m_SortingLayer: 2
-  m_SortingOrder: 9
+  m_SortingOrder: 7
   m_MaskInteraction: 0
   m_Sprite: {fileID: -3753825769889500098, guid: 5522efa1ac0a7b64b8b685c35cccd446, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -2613,6 +2613,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 510388b6cc4a4ba4ba3cd773aa053522, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MudDetect
+  SlimeStateManagerRef: {fileID: 0}
+  Player: {fileID: 7503720962246340740}
+  Slime: {fileID: 0}
   PlayerRb: {fileID: 5254595327118261300}
 --- !u!114 &6383165355602986983
 MonoBehaviour:
