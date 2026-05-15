@@ -58,7 +58,7 @@ public class SlimeStateManager : MonoBehaviour
         int elapsed = 0;
         while (elapsed <= 60)
         {
-            elapsed += 1;
+            elapsed += Time.timeScale == 1 ? 1 : 0;
         }
         yield return null;
         slimeTrigger.SetActive(true);

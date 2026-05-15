@@ -70,8 +70,8 @@ public class Sawblade : MonoBehaviour
         SawbladeSpinVolume = 0f;
         while (upDistance > transform.localPosition.y)
         {
-            elapsed += 1;
-            SawbladeSpinVolume += 0.05f;
+            elapsed += Time.timeScale == 1 ? 1 : 0;
+            SawbladeSpinVolume += Time.timeScale == 1 ? 0.05 : 0;
             transform.localPosition = new Vector2(transform.localPosition.x, upDistance/upTime * elapsed + startingY); // d=r/t, r=d*t
             //Debug.Log("UpTime: " + upTime + " UpDist: " + upDistance + " Elapsed: " + elapsed + " StartingY: " + startingY + " Combined: " + (upDistance/upTime * elapsed + startingY));
             if(transform.localPosition.y >= upDistance / 2 && !moving)
@@ -89,17 +89,15 @@ public class Sawblade : MonoBehaviour
         int elapsedM = 0;
         while(elapsedM < sawbladeTime - upTime/2)
         {
-            elapsedM += 1;
+            elapsedM += Time.timeScale == 1 ? 1 : 0;
             transform.localPosition = new Vector2(activeDistance/sawbladeTime * ((SawbladeDirection == LeftRight.Right) ? 1f : -1f)* elapsedM + startX,transform.localPosition.y);
-            Debug.Log(elapsedM + " 1");
             yield return null;
         }
         StartCoroutine(SawbladeDown());
         while(elapsedM < sawbladeTime)
         {
-            elapsedM += 1;
+            elapsedM += Time.timeScale == 1 ? 1 : 0;
             transform.localPosition = new Vector2(activeDistance/sawbladeTime * ((SawbladeDirection == LeftRight.Right) ? 1f : -1f)* elapsedM + startX,transform.localPosition.y);
-            Debug.Log(elapsedM + " 2");
             yield return null;
         }
         
@@ -111,8 +109,8 @@ public class Sawblade : MonoBehaviour
         int elapsed = 0;
         while (0 < transform.localPosition.y)
         {
-            elapsed += 1;
-            SawbladeSpinVolume -= 0.05f;
+            elapsed += Time.timeScale == 1 ? 1 : 0;
+            SawbladeSpinVolume -= Time.timeScale == 1 ? -0.05 : 0;
             transform.localPosition = new Vector2(transform.localPosition.x, -1 * upDistance/upTime * elapsed + startingY);
             //Debug.Log("UpTime: " + upTime + " UpDist: " + upDistance + " Elapsed: " + elapsed + " StartingY: " + startingY + " Combined: " + (-1*upDistance/upTime * elapsed + startingY));
             yield return null;

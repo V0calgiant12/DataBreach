@@ -72,9 +72,9 @@ public class PlayerStateManager : MonoBehaviour
         FindPlayerObject();
         playerSprite.transform.localScale = new Vector3(playerData.leftOrRight ? 1:-1,1,1);
         // Counter countdowns
-        playerData.jumpBufferCounter -= 1;
-        playerData.coyoteTimeCounter -= 1;
-        playerData.iFrames -= 1;
+        playerData.jumpBufferCounter -= Time.timeScale == 1 ? 1 : 0;
+        playerData.coyoteTimeCounter -= Time.timeScale == 1 ? 1 : 0;
+        playerData.iFrames -= Time.timeScale == 1 ? 1 : 0;
         playerData.anim.SetInteger("iframes", playerData.iFrames);
 
     }
@@ -183,7 +183,7 @@ public class PlayerStateManager : MonoBehaviour
         playerData.PlayerRb.linearVelocity = new Vector2(xLaunch, yLaunch);
         while(GroundCheck.Instance._IsGrounded == false && timer > elapsed || elapsed < 15)
         {
-            elapsed += 1;
+            elapsed += Time.timeScale == 1 ? 1 : 0;
             if(playerData.ricochet == true)
             {
                 playerData.PlayerRb.linearVelocity = new Vector2(-playerData.PlayerRb.linearVelocity.x + ((playerData.PlayerRb.linearVelocity.x >= 0 ? -1.2f : 1.2f) * xLaunch), playerData.PlayerRb.linearVelocity.y + yLaunch * 0.25f);
@@ -221,7 +221,7 @@ public class PlayerStateManager : MonoBehaviour
             while (attackTimer > elapsed)
             {
                 playerData.PlayerRb.linearVelocityX = playerData.PlayerRb.linearVelocityX * 0.75f;
-                elapsed += 1;
+                elapsed += Time.timeScale == 1 ? 1 : 0;
                 yield return null;
             }
         }

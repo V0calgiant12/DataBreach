@@ -30,7 +30,7 @@ public class FlashEffect : MonoBehaviour
         while (time > elapsed)
         {
             //sr.color = new UnityEngine.Color(1,1,1,1);
-            elapsed += 1;
+            elapsed += Time.timeScale == 1 ? 1 : 0;
             yield return null;
         }
         whiteFlashing = false;
@@ -45,8 +45,8 @@ public class FlashEffect : MonoBehaviour
         {
             //sr.color = new UnityEngine.Color(1,1,1,(visible < 5) ? 1 : 0);
             sr.material = (visible < 5) ? invulMat : whiteFlashing ? hitMat : litMat;
-            elapsed += 1;
-            visible += 1;
+            elapsed += Time.timeScale == 1 ? 1 : 0;
+            visible += Time.timeScale == 1 ? 1 : 0;
             if(visible == 10)
             {
                 visible = 0;
