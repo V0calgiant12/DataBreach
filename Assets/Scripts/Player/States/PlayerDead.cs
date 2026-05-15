@@ -16,6 +16,7 @@ public class PlayerDead : PlayerAbstract
         if (player.playerData.playerHealth <= 0) 
         {
             player.playerData.playerDead = true;
+            player.playerData.PlayerRb.linearVelocityX = 0;
             player.playerData.audioSource.PlayPlayerDeathSound(player.playerData._PlayerDeath);
             player.playerData.DeathTransitionImage.SetActive(true);
             Debug.Log("You Are Dead");
