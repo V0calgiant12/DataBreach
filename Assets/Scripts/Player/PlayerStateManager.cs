@@ -83,7 +83,6 @@ public class PlayerStateManager : MonoBehaviour
         currentState = state;
         state.EnterState(this);
     }
-    
     public void FindPlayerObject()
     {
         playerData.anim = GetComponent<Animator>(); 
@@ -96,6 +95,7 @@ public class PlayerStateManager : MonoBehaviour
     {
         if (playerData.iFrames < 0 || overrideIFrames)
         {
+            //PlayerFlash(1);
             playerData.anim.SetBool("hit", true);
             TriggerShake.Instance.BurstShake(3,2);
             playerData.playerHealth = playerData.playerHealth - 1;
@@ -110,6 +110,7 @@ public class PlayerStateManager : MonoBehaviour
                 StartCoroutine(StunPlayer(xLaunch*(transform.position.x <= damageSourceX ? -1 : 1), yLaunch,timer));
             }
             playerData.iFrames = 120;
+            PlayerFlash(2);
         }
     }
     public void Attack(AttackType attackType)
@@ -148,6 +149,28 @@ public class PlayerStateManager : MonoBehaviour
                     break;
             }
             Debug.Log(attackType);
+        }
+    }
+
+    public void PlayerFlash(int type)
+    {
+        GameObject[] playerSprites = GameObject.FindGameObjectsWithTag("PlayerSprite"); // Puts all player sprite objects in a list.
+        int index = 0;
+        if(type == 1) // White Flash
+        {
+            while (index <= playerSprites.Length - 1) // Repeats for every game object.
+            {
+                playerSprites[index].SendMessage("WhiteFlash");
+                index += 1;
+            }
+        }
+        else if(type == 2) // Invulnerable Flash
+        {
+            while (index <= playerSprites.Length - 1) // Repeats for every game object.
+            {
+                playerSprites[index].SendMessage("InvulnerableFlash", playerData.iFrames);
+                index += 1;
+            }
         }
     }
     public IEnumerator StunPlayer(float xLaunch, float yLaunch, int timer)
