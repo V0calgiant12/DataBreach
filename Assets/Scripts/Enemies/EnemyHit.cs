@@ -8,6 +8,7 @@ public class EnemyHit : MonoBehaviour
     [SerializeField] private GameObject ParentObject;
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private GameObject particlePrefab;
+    private FlashEffect flashEffect;
     [Header("Audio")]
     [SerializeField] private EffectSound audioSource;
     [SerializeField] private AudioClip hitSound;
@@ -21,6 +22,7 @@ public class EnemyHit : MonoBehaviour
     private void Start()
     {
         trackedHealth = health;
+        flashEffect = ParentObject.GetComponent<FlashEffect>();
     }
     private void Update() 
     {
@@ -35,6 +37,7 @@ public class EnemyHit : MonoBehaviour
     {
         if (other.gameObject.CompareTag("PlayerHitbox"))
         {
+            TriggerShake.Instance.BurstShake(1,2);
             DamageEnemy(1,10,10,other.transform.position.x);
         }
     }
@@ -44,6 +47,7 @@ public class EnemyHit : MonoBehaviour
         if(trackedHealth != 1)
         {
             audioSource.EnemySound(hitSound,volume);
+            flashEffect.WhiteFlash();
         }
         if (!knockbackImmune)
         {

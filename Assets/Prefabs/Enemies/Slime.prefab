@@ -559,6 +559,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1686045731412870238}
   - component: {fileID: 8138196810457526105}
+  - component: {fileID: 3109816407341969098}
   - component: {fileID: 2883953345099817571}
   - component: {fileID: 7965548649738066340}
   - component: {fileID: 3052226611263945404}
@@ -651,6 +652,21 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!114 &3109816407341969098
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8027678710126338495}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 286cfaf23cb44bd449274e11cdda359a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FlashEffect
+  litMat: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  hitMat: {fileID: 2100000, guid: 5e8f634f15c94414f938b14f9b17e980, type: 2}
+  invulMat: {fileID: -876546973899608171, guid: 8d593483cc60e0e4296896ed1c6f4b89, type: 3}
 --- !u!61 &2883953345099817571
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -748,6 +764,7 @@ MonoBehaviour:
   jumpTimer: 0
   isGrounded: 1
   slimeLeftOrRight: 0
+  slimeSizeable: 1
   slimeTrigger: {fileID: 2882446880090637605}
   slimeRb: {fileID: 7965548649738066340}
   player: {fileID: 0}
