@@ -21,6 +21,7 @@ public class SlimeStateManager : MonoBehaviour
     public bool isGrounded;
     public bool slimeLeftOrRight;
     public bool slimeSizeable = true;
+    public bool noSlimeSound;
 
     [Header("References")]
     public GameObject slimeTrigger;
@@ -35,6 +36,8 @@ public class SlimeStateManager : MonoBehaviour
 
     void Awake()
     {
+        noSlimeSound = true;
+        StartCoroutine(DelayStart2());
         slimeTrigger.SetActive(false);
     }
     void Start()
@@ -62,7 +65,17 @@ public class SlimeStateManager : MonoBehaviour
         }
         yield return null;
         slimeTrigger.SetActive(true);
-        
+    }
+    public IEnumerator DelayStart2()
+    {
+        noSlimeSound = true;
+        int elapsed = 0;
+        while (elapsed <= 999)
+        {
+            elapsed += Time.timeScale == 1 ? 1 : 0;
+        }
+        yield return null;
+        noSlimeSound = false;
     }
     void Update()
     {
@@ -96,7 +109,10 @@ public class SlimeStateManager : MonoBehaviour
             slimeLeftOrRight = false;
         }
         // Play slime jump sound
-        audioSource.Play();
+        if(!noSlimeSound)
+        {
+            audioSource.Play();
+        }
         //Debug.Log("jump");
         // Apply a diagonal "Hop" force
         Vector2 hopVector = new Vector2(direction * forwardForce * mudSpeedMulti, jumpForce * mudJumpMulti);
