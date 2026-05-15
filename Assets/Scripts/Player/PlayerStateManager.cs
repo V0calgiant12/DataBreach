@@ -205,11 +205,12 @@ public class PlayerStateManager : MonoBehaviour
     public IEnumerator NoMovingWhileAttack(float attackTimer)
     {
         int elapsed = 0;
+        playerData.anim.SetBool("moving", false);
         if(attackTimer == 0)
         {
             playerData.PlayerRb.linearVelocityX = 50 * ((playerData.PlayerRb.linearVelocityX > 0) ? 1 : -1);
             playerData.iFrames = Mathf.Abs(Mathf.FloorToInt(playerData.PlayerRb.linearVelocityX/0.8f))-30; // t=d/r, t=velocity/0.8f since velocity is multiplied by 0.8f every frame
-            while (MathF.Abs(playerData.PlayerRb.linearVelocityX) > 0.5f)
+            while (MathF.Abs(playerData.PlayerRb.linearVelocityX) > 1f)
             {
                 playerData.PlayerRb.linearVelocityX = playerData.PlayerRb.linearVelocityX * 0.8f;
                 yield return null;
@@ -225,7 +226,7 @@ public class PlayerStateManager : MonoBehaviour
                 yield return null;
             }
         }
-        
+        currentState = IdleState;
         playerData.anim.SetBool("attacking", false);
         playerData.movementAllowed = true;
     }
