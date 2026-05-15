@@ -75,6 +75,7 @@ public class PlayerStateManager : MonoBehaviour
         playerData.jumpBufferCounter -= 1;
         playerData.coyoteTimeCounter -= 1;
         playerData.iFrames -= 1;
+        playerData.anim.SetInteger("iframes", playerData.iFrames);
 
     }
     public void SwitchState(PlayerAbstract state)
@@ -95,6 +96,7 @@ public class PlayerStateManager : MonoBehaviour
     {
         if (playerData.iFrames < 0 || overrideIFrames)
         {
+            playerData.anim.SetBool("hit", true);
             TriggerShake.Instance.BurstShake(3,2);
             playerData.playerHealth = playerData.playerHealth - 1;
             playerData.audioSource.PlayPlayerHitSound(playerData._PlayerHit);
@@ -119,38 +121,30 @@ public class PlayerStateManager : MonoBehaviour
             switch (attackType)
             {
                 case(AttackType.forward):
-                    playerData.attackTimer = 0;
                     playerData.anim.SetInteger("attackId",0);
                     break;
                 case(AttackType.up):
-                    playerData.attackTimer = 0;
                     playerData.anim.SetInteger("attackId",1);
                     break;
                 case(AttackType.down):
-                    playerData.attackTimer = 0;
                     playerData.anim.SetInteger("attackId",3);
                     break;
                 case(AttackType.forwardAir):
-                    playerData.attackTimer = 0;
                     playerData.anim.SetInteger("attackId",0);
                     break;
                 case(AttackType.backAir):
-                    playerData.attackTimer = 0;
                     playerData.anim.SetInteger("attackId",2);
                     break;
                 case(AttackType.upAir):
-                    playerData.attackTimer = 0;
                     playerData.anim.SetInteger("attackId",1);
                     break;
                 case(AttackType.downAir):
-                    playerData.attackTimer = 0;
                     playerData.anim.SetInteger("attackId",4);
                     break;
                 case(AttackType.dash):
-                    playerData.attackTimer = 1;
                     playerData.movementAllowed = false;
                     playerData.anim.SetInteger("attackId",5);
-                    StartCoroutine(NoMovingWhileAttack(playerData.attackTimer));
+                    StartCoroutine(NoMovingWhileAttack(0));
                     break;
             }
             Debug.Log(attackType);
@@ -178,17 +172,33 @@ public class PlayerStateManager : MonoBehaviour
             }
             yield return null;
         }
+        playerData.anim.SetBool("hit", false);
         playerData.movementAllowed = true;
     }
     public IEnumerator NoMovingWhileAttack(float attackTimer)
     {
         int elapsed = 0;
-        playerData.PlayerRb.linearVelocityX = 0;
-        while (attackTimer > elapsed)
+        if(attackTimer == 0)
         {
-            elapsed += 1;
-            yield return null;
+            playerData.PlayerRb.linearVelocityX = 50 * ((playerData.PlayerRb.linearVelocityX > 0) ? 1 : -1);
+            while (MathF.Abs(playerData.PlayerRb.linearVelocityX) > 0.5f)
+            {
+                playerData.PlayerRb.linearVelocityX = playerData.PlayerRb.linearVelocityX * 0.8f;
+                yield return null;
+            }
         }
+        else
+        {
+            
+            while (attackTimer > elapsed)
+            {
+                playerData.PlayerRb.linearVelocityX = playerData.PlayerRb.linearVelocityX * 0.75f;
+                elapsed += 1;
+                yield return null;
+            }
+        }
+        
+        playerData.anim.SetBool("attacking", false);
         playerData.movementAllowed = true;
     }
 }

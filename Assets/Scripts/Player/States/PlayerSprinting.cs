@@ -10,8 +10,9 @@ public class PlayerSprinting : PlayerAbstract
     public override void EnterState(PlayerStateManager player)
     {
         Debug.Log("Player is Sprinting / Sprinting State - " + player.playerData.sprinting);
-        player.playerData.anim.SetBool("moving", true);
         player.playerData.anim.SetBool("sprinting", true);
+        player.playerData.anim.SetBool("walking", false);
+        player.playerData.anim.SetBool("moving", true);
     }
     public override void UpdateState(PlayerStateManager player)
     {
@@ -19,7 +20,7 @@ public class PlayerSprinting : PlayerAbstract
         moving = false;
 
         // sprint right
-        if (Input.GetKey(SettingsData.Instance._InputRight))
+        if (Input.GetKey(SettingsData.Instance._InputRight) && player.playerData.movementAllowed)
         {
             PlayerVelocity = new Vector2(playerSpeed, player.playerData.PlayerRb.linearVelocityY);
             player.playerData.PlayerRb.linearVelocity = PlayerVelocity + player.playerData.OffsetVelocity;
@@ -27,7 +28,7 @@ public class PlayerSprinting : PlayerAbstract
             moving = true;
         }
         // sprint left
-        if (Input.GetKey(SettingsData.Instance._InputLeft)) 
+        if (Input.GetKey(SettingsData.Instance._InputLeft) && player.playerData.movementAllowed)
         {
             PlayerVelocity = new Vector2(-playerSpeed, player.playerData.PlayerRb.linearVelocityY);
             player.playerData.PlayerRb.linearVelocity = PlayerVelocity + player.playerData.OffsetVelocity;
@@ -67,6 +68,7 @@ public class PlayerSprinting : PlayerAbstract
         if (player.playerData.jumpBufferCounter > 0)
         {
             Debug.Log("jump from Sprinting");
+            player.playerData.anim.SetBool("sprinting", false);
             player.playerData.PlayerRb.linearVelocity = new Vector2(player.playerData.PlayerRb.linearVelocityX, jumpStrength * PlayerStateManager.Instance.playerData.mudJumpMulti);
             player.playerData.jumpBufferCounter = 0;
             player.playerData.coyoteTimeCounter = 0;
