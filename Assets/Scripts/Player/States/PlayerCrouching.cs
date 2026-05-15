@@ -73,6 +73,7 @@ public class PlayerCrouching : PlayerAbstract
                 player.playerData.audioSource.PlayGrassSound(player.playerData._GrassJump);
             }
             player.SwitchState(player.AirState);
+            player.playerData.anim.SetBool("crouching", false);
             return;
         }
 
@@ -84,6 +85,7 @@ public class PlayerCrouching : PlayerAbstract
                 player.playerData.crouching = false;
             }
             player.SwitchState(player.AirState);
+            player.playerData.anim.SetBool("crouching", false);
             return;
         }
     }

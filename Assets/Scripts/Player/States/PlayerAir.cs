@@ -13,6 +13,16 @@ public class PlayerAir : PlayerAbstract
         Debug.Log("Player is in the air / Air State");
         playerSpeed = 7;
         shakeOnLand = false;
+        if (player.playerData.PlayerRb.linearVelocityY > 0) 
+        {
+            player.playerData.anim.SetBool("falling", false);
+            player.playerData.anim.SetBool("jumping", true);
+        }
+        if (player.playerData.PlayerRb.linearVelocityY < 0) 
+        {
+            player.playerData.anim.SetBool("falling", true);
+            player.playerData.anim.SetBool("jumping", false);
+        }
     }
     public override void UpdateState(PlayerStateManager player)
     {
@@ -27,6 +37,7 @@ public class PlayerAir : PlayerAbstract
         if (downBuffer > 0 && player.playerData.PlayerRb.linearVelocityY < 0) // Check for fast fall.
         {
             player.playerData.PlayerRb.linearVelocity = new Vector2(player.playerData.PlayerRb.linearVelocityX, -jumpStrength * 1.5f);
+            downBuffer = 0;
         }
 
         
@@ -70,6 +81,7 @@ public class PlayerAir : PlayerAbstract
         if (player.playerData.PlayerRb.linearVelocityY < 0) 
         {
             player.playerData.anim.SetBool("falling", true);
+            player.playerData.anim.SetBool("jumping", false);
             player.playerData.inAirGust = false;
         }
         
@@ -153,6 +165,8 @@ public class PlayerAir : PlayerAbstract
                 player.playerData.anim.SetBool("attacking", false);
             }
             player.SwitchState(player.IdleState);
+            player.playerData.anim.SetBool("falling", false);
+            player.playerData.anim.SetBool("jumping", false);
             return;
         }
     }
