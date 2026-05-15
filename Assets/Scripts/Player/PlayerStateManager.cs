@@ -141,6 +141,10 @@ public class PlayerStateManager : MonoBehaviour
                     playerData.anim.SetInteger("attackId",1);
                     break;
                 case(AttackType.downAir):
+                    if(playerData.PlayerRb.linearVelocityY < -5)
+                    {
+                        playerData.PlayerRb.linearVelocity = new Vector2(playerData.PlayerRb.linearVelocityX, -5f);
+                    }
                     playerData.anim.SetInteger("attackId",4);
                     break;
                 case(AttackType.dash):
