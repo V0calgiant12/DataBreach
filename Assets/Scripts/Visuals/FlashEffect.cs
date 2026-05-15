@@ -7,6 +7,7 @@ public class FlashEffect : MonoBehaviour
     [SerializeField] private Material litMat;
     [SerializeField] private Material hitMat;
     [SerializeField] private Material invulMat;
+    private bool whiteFlashing = false;
     void Start()
     {
         sr = GetComponent<SpriteRenderer>();
@@ -25,12 +26,14 @@ public class FlashEffect : MonoBehaviour
     {
         sr.material = hitMat;
         int elapsed = 0;
+        whiteFlashing = true;
         while (time > elapsed)
         {
             //sr.color = new UnityEngine.Color(1,1,1,1);
             elapsed += 1;
             yield return null;
         }
+        whiteFlashing = false;
         sr.material = litMat;
     }
     IEnumerator InvulnerableFlashAnimation(int time)
@@ -41,7 +44,7 @@ public class FlashEffect : MonoBehaviour
         while (time > elapsed)
         {
             //sr.color = new UnityEngine.Color(1,1,1,(visible < 5) ? 1 : 0);
-            sr.material = (visible < 5) ? invulMat : (elapsed < 15) ? hitMat : litMat;
+            sr.material = (visible < 5) ? invulMat : whiteFlashing ? hitMat : litMat;
             elapsed += 1;
             visible += 1;
             if(visible == 10)

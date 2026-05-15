@@ -110,6 +110,7 @@ public class PlayerStateManager : MonoBehaviour
                 StartCoroutine(StunPlayer(xLaunch*(transform.position.x <= damageSourceX ? -1 : 1), yLaunch,timer));
             }
             playerData.iFrames = 120;
+            PlayerFlash(1);
             PlayerFlash(2);
         }
     }
@@ -158,6 +159,7 @@ public class PlayerStateManager : MonoBehaviour
         int index = 0;
         if(type == 1) // White Flash
         {
+            Debug.Log("White Flash");
             while (index <= playerSprites.Length - 1) // Repeats for every game object.
             {
                 playerSprites[index].SendMessage("WhiteFlash");
@@ -166,6 +168,7 @@ public class PlayerStateManager : MonoBehaviour
         }
         else if(type == 2) // Invulnerable Flash
         {
+            Debug.Log("Invulnerable Flash");
             while (index <= playerSprites.Length - 1) // Repeats for every game object.
             {
                 playerSprites[index].SendMessage("InvulnerableFlash", playerData.iFrames);
@@ -183,10 +186,10 @@ public class PlayerStateManager : MonoBehaviour
             elapsed += 1;
             if(playerData.ricochet == true)
             {
-                PlayerFlash(1);
                 playerData.PlayerRb.linearVelocity = new Vector2(-playerData.PlayerRb.linearVelocity.x + ((playerData.PlayerRb.linearVelocity.x >= 0 ? -1.2f : 1.2f) * xLaunch), playerData.PlayerRb.linearVelocity.y + yLaunch * 0.25f);
                 playerData.ricochet = false;
                 TriggerShake.Instance.BurstShake(-1*MathF.Cos(playerData.PlayerRb.linearVelocityX/2)+(2+elapsed/25),2);
+                PlayerFlash(1);
                 timer += 30;
             }
             if(playerData.pickUpHeart)
@@ -205,6 +208,7 @@ public class PlayerStateManager : MonoBehaviour
         if(attackTimer == 0)
         {
             playerData.PlayerRb.linearVelocityX = 50 * ((playerData.PlayerRb.linearVelocityX > 0) ? 1 : -1);
+            playerData.iFrames = Mathf.Abs(Mathf.FloorToInt(playerData.PlayerRb.linearVelocityX/0.8f))-30; // t=d/r, t=velocity/0.8f since velocity is multiplied by 0.8f every frame
             while (MathF.Abs(playerData.PlayerRb.linearVelocityX) > 0.5f)
             {
                 playerData.PlayerRb.linearVelocityX = playerData.PlayerRb.linearVelocityX * 0.8f;
