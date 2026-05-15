@@ -31,7 +31,10 @@ public class PlatformMover : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //Debug.Log(Vector2.Distance(transform.position, nextPos));
+        if(platformRb.linearVelocityX == 0)
+        {
+            StartCoroutine(MoveTowardsPoint());
+        }
     }
     private IEnumerator MoveTowardsPoint()
     {
