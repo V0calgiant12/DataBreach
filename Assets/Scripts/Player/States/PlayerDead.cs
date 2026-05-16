@@ -12,10 +12,15 @@ public class PlayerDead : PlayerAbstract
     public override void UpdateState(PlayerStateManager player)
     {
         Debug.Log(player.playerData.playerHealth);
-        player.playerData.anim.SetBool("dead", true);
         if (player.playerData.playerHealth <= 0) 
         {
             player.playerData.playerDead = true;
+            player.playerData.anim.SetBool("dead", true);
+            player.playerData.anim.SetBool("moving", false);
+            player.playerData.anim.SetBool("sprinting", false);
+            player.playerData.anim.SetBool("jumping", false);
+            player.playerData.anim.SetBool("falling", false);
+            player.playerData.anim.SetBool("crouching", false);
             player.playerData.PlayerRb.linearVelocityX = 0;
             player.playerData.audioSource.PlayPlayerDeathSound(player.playerData._PlayerDeath);
             player.playerData.DeathTransitionImage.SetActive(true);
