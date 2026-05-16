@@ -30,14 +30,9 @@ public class PlayerAir : PlayerAbstract
 
         downBuffer -= 1;
         // Fast Falling
-        if (Input.GetKeyDown(SettingsData.Instance._InputDown))
-        {
-            downBuffer = 10;
-        }
-        if (downBuffer > 0 && player.playerData.PlayerRb.linearVelocityY < 0) // Check for fast fall.
+        if (Input.GetKeyDown(SettingsData.Instance._InputDown) && player.playerData.PlayerRb.linearVelocityY < 0)
         {
             player.playerData.PlayerRb.linearVelocity = new Vector2(player.playerData.PlayerRb.linearVelocityX, -jumpStrength * 1.5f);
-            downBuffer = 0;
         }
 
         

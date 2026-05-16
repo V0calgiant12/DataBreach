@@ -53,7 +53,7 @@ public class PlayerUpdate : PlayerAbstract
         else
         {
             // Crouch toggle on
-            if (SettingsData.Instance._ToggleCrouch == false && Input.GetKeyDown(SettingsData.Instance._InputDown))
+            if (SettingsData.Instance._ToggleCrouch == false && Input.GetKey(SettingsData.Instance._InputDown))
             {
                 player.playerData.crouching = true;
             }
