@@ -14,7 +14,7 @@ public class SpikeDetect : MonoBehaviour
         {   
             if (PlayerStateManager.Instance.playerData.playerDead == false)
             {
-                PlayerStateManager.Instance.DamagePlayer(Random.Range(7, 10),18,150,true,transform.position.x,true);
+                PlayerStateManager.Instance.DamagePlayer(Random.Range(7, 10),18,130,true,transform.position.x,true);
             }
         }
     }

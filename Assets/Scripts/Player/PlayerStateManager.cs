@@ -194,7 +194,7 @@ public class PlayerStateManager : MonoBehaviour
                 playerData.ricochet = false;
                 TriggerShake.Instance.BurstShake(-1*MathF.Cos(playerData.PlayerRb.linearVelocityX/2)+(2+elapsed/25),2);
                 PlayerFlash(1);
-                timer += 30;
+                timer += 15;
             }
             if(playerData.pickUpHeart)
             {
