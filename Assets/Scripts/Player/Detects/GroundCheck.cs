@@ -6,6 +6,7 @@ public class GroundCheck : MonoBehaviour
     
     public bool _IsGrounded;
     public bool _IsStone;
+    public bool _InCutscene = false;
     public static GroundCheck Instance;
 
     void Start()
@@ -33,14 +34,20 @@ public class GroundCheck : MonoBehaviour
         if (other.gameObject.CompareTag("Ground")||other.gameObject.CompareTag("MovingPlatform")||other.gameObject.CompareTag("Stone"))
         {
             _IsGrounded = false;
-            if(PlayerStateManager.Instance.playerData.jumpBufferCounter < 0)
+            if (_InCutscene)
             {
-                PlayerStateManager.Instance.playerData.coyoteTimeCounter = 15;
+                if(PlayerStateManager.Instance.playerData.jumpBufferCounter < 0)
+                {
+                    PlayerStateManager.Instance.playerData.coyoteTimeCounter = 15;
+                }
             }
         }
-        if (other.gameObject.CompareTag("Stone") && PlayerStateManager.Instance.playerData.coyoteTimeCounter < 0)
+        if (_InCutscene)
         {
-            _IsStone = false;
+            if (other.gameObject.CompareTag("Stone") && PlayerStateManager.Instance.playerData.coyoteTimeCounter < 0)
+            {
+                _IsStone = false;
+            }
         }
     }
 }

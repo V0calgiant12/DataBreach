@@ -24,6 +24,7 @@ public class TextWrite : MonoBehaviour
     void Start()
     {
         Instance = this;
+        text.text = "";
     }
     public void Close()
     {
@@ -32,9 +33,12 @@ public class TextWrite : MonoBehaviour
     }
     void Update()
     {
-        if(PlayerStateManager.Instance.playerData.interacting == false)
+        if(GameObject.Find("Player").GetComponent<PlayerStateManager>() != null)
         {
-            text.text = "";
+            if(PlayerStateManager.Instance.playerData.interacting == false)
+            {
+                text.text = "";
+            }
         }
     }
     public void WriteText(TextData data)
