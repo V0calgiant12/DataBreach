@@ -34,7 +34,7 @@ public class GroundCheck : MonoBehaviour
         if (other.gameObject.CompareTag("Ground")||other.gameObject.CompareTag("MovingPlatform")||other.gameObject.CompareTag("Stone"))
         {
             _IsGrounded = false;
-            if (_InCutscene)
+            if (!_InCutscene)
             {
                 if(PlayerStateManager.Instance.playerData.jumpBufferCounter < 0)
                 {
@@ -42,7 +42,7 @@ public class GroundCheck : MonoBehaviour
                 }
             }
         }
-        if (_InCutscene)
+        if (!_InCutscene)
         {
             if (other.gameObject.CompareTag("Stone") && PlayerStateManager.Instance.playerData.coyoteTimeCounter < 0)
             {

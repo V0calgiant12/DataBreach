@@ -18,7 +18,6 @@ public class CutsceneManager : MonoBehaviour
     public int maxScene;
     void Start()
     {
-        currentScene = 1;
         inputTimer = 0;
         HideInputMethod();
         ProgressCutscene();
@@ -57,6 +56,7 @@ public class CutsceneManager : MonoBehaviour
     }
     public void ProgressCutscene()
     {
+        currentScene += 1;
         switch (currentScene)
         {
             case(1):
