@@ -19,6 +19,7 @@ public class EnemyHit : MonoBehaviour
     public int health = 1;
     private int trackedHealth = 1;
     public bool knockbackImmune = false;
+    public bool invulnerable = false;
     private void Start()
     {
         trackedHealth = health;
@@ -38,7 +39,15 @@ public class EnemyHit : MonoBehaviour
         if (other.gameObject.CompareTag("PlayerHitbox"))
         {
             TriggerShake.Instance.BurstShake(1,2);
-            DamageEnemy(1,10,10,other.transform.position.x);
+            if (!invulnerable)
+            {
+                DamageEnemy(1,10,10,other.transform.position.x);
+            }
+            else
+            {
+                audioSource.EnemySound(hitSound,volume);
+                flashEffect.WhiteFlash();
+            }
         }
     }
     public void DamageEnemy(int damage, float xLaunch, float yLaunch, float damageSourceX)
