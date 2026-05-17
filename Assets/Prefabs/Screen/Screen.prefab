@@ -723,7 +723,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 238537496446361273, guid: 246f48f13ca5833448ea181663ec054d, type: 2}
   m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 8300000, guid: c1d36f88b944c674aab0b5c221c67dca, type: 3}
+  m_Resource: {fileID: 8300000, guid: d3c860cb520812948bbcaee11883b550, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -799,7 +799,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 1
+      value: 0
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -2871,10 +2871,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4952594601428661746, guid: 25c7467804d17754cb7aa4fed6238251, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5776734633029368003, guid: 25c7467804d17754cb7aa4fed6238251, type: 3}
-      propertyPath: m_Color.a
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6413109323917032218, guid: 25c7467804d17754cb7aa4fed6238251, type: 3}
