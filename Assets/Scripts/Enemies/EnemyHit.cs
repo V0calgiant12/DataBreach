@@ -8,7 +8,7 @@ public class EnemyHit : MonoBehaviour
     [SerializeField] private GameObject ParentObject;
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private GameObject particlePrefab;
-    private FlashEffect flashEffect;
+    [SerializeField] private FlashEffect flashEffect;
     [Header("Audio")]
     [SerializeField] private EffectSound audioSource;
     [SerializeField] private AudioClip hitSound;
@@ -23,7 +23,10 @@ public class EnemyHit : MonoBehaviour
     private void Start()
     {
         trackedHealth = health;
-        flashEffect = ParentObject.GetComponent<FlashEffect>();
+        if(flashEffect == null)
+        {
+            flashEffect = ParentObject.GetComponent<FlashEffect>();
+        }
     }
     private void Update() 
     {

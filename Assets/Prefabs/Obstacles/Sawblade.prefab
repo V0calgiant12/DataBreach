@@ -258,6 +258,8 @@ GameObject:
   - component: {fileID: 7709447181374123199}
   - component: {fileID: 1058676648088992508}
   - component: {fileID: 7245936207604523437}
+  - component: {fileID: 2768925449370639041}
+  - component: {fileID: 3133644454548173911}
   - component: {fileID: 1168737744056301480}
   - component: {fileID: 2876216839205939040}
   m_Layer: 10
@@ -346,6 +348,42 @@ MonoBehaviour:
   sawbladeRb: {fileID: 1168737744056301480}
   SawbladeAudioSource: {fileID: 2876216839205939040}
   SawbladeSpinVolume: 0
+--- !u!114 &2768925449370639041
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4852414782968120626}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a48d5eaedc6712d4894c3e1dd91a6063, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyHit
+  ParentObject: {fileID: 4852414782968120626}
+  rb: {fileID: 1168737744056301480}
+  particlePrefab: {fileID: 0}
+  flashEffect: {fileID: 2476309736813669732}
+  audioSource: {fileID: 3133644454548173911}
+  hitSound: {fileID: 8300000, guid: c426778c5b2d53b43b5b8abb4a1ec5b6, type: 3}
+  deathSound: {fileID: 0}
+  volume: 1
+  health: 9999
+  knockbackImmune: 1
+  invulnerable: 1
+--- !u!114 &3133644454548173911
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4852414782968120626}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ecd83e99770e60a4cb88f27c07e3179e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EffectSound
+  prefab: {fileID: 8734533203902538695, guid: b546d70ed2a00174299d1366a75185f3, type: 3}
 --- !u!50 &1168737744056301480
 Rigidbody2D:
   serializedVersion: 5
@@ -571,6 +609,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4566118200794730017}
   - component: {fileID: 8948847402140519024}
+  - component: {fileID: 2476309736813669732}
   m_Layer: 10
   m_Name: Visual
   m_TagString: Untagged
@@ -652,6 +691,21 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!114 &2476309736813669732
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7099314801633141336}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 286cfaf23cb44bd449274e11cdda359a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FlashEffect
+  litMat: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  hitMat: {fileID: 2100000, guid: 5e8f634f15c94414f938b14f9b17e980, type: 2}
+  invulMat: {fileID: -876546973899608171, guid: 8d593483cc60e0e4296896ed1c6f4b89, type: 3}
 --- !u!1 &8843430309987587775
 GameObject:
   m_ObjectHideFlags: 0
