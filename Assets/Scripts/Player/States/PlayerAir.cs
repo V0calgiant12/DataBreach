@@ -3,7 +3,6 @@ using System.Collections;
 public class PlayerAir : PlayerAbstract
 {
     private PlayerStateManager.AttackType currentAttack;
-    private int downBuffer;
     public override void RunOnce(PlayerStateManager player)
     {
         Setup();
@@ -15,6 +14,7 @@ public class PlayerAir : PlayerAbstract
         shakeOnLand = false;
         if (player.playerData.PlayerRb.linearVelocityY > 0) 
         {
+            player.StartCoroutine(player.WaitUntilNotJumping());
             player.playerData.anim.SetBool("falling", false);
             player.playerData.anim.SetBool("jumping", true);
         }
@@ -28,7 +28,6 @@ public class PlayerAir : PlayerAbstract
     {
         currentAttack = PlayerStateManager.AttackType.forwardAir; // Default attack if nothing is inputed this frame.
 
-        downBuffer -= 1;
         // Fast Falling
         if (Input.GetKeyDown(SettingsData.Instance._InputDown) && player.playerData.PlayerRb.linearVelocityY < 0)
         {
@@ -99,7 +98,7 @@ public class PlayerAir : PlayerAbstract
 
         // Short Jumping
 
-        if(!(Input.GetKey(SettingsData.Instance._InputJump) || SettingsData.Instance._UpToJump && Input.GetKey(SettingsData.Instance._InputUp)) && player.playerData.PlayerRb.linearVelocity.y > 0 && !player.playerData.inAirGust)
+        if(!(Input.GetKey(SettingsData.Instance._InputJump) || SettingsData.Instance._UpToJump && Input.GetKey(SettingsData.Instance._InputUp)) && player.playerData.PlayerRb.linearVelocity.y > 0 && !player.playerData.inAirGust && player.isJumping)
         {
             player.playerData.PlayerRb.linearVelocity = new Vector2(player.playerData.PlayerRb.linearVelocityX, player.playerData.PlayerRb.linearVelocityY * 0.5f);
         }
@@ -116,6 +115,7 @@ public class PlayerAir : PlayerAbstract
                 player.playerData.leftOrRight = false;
             }
             Debug.Log("jump in air");
+            player.StartCoroutine(player.WaitUntilNotJumping());
             player.playerData.audioSource.PlayJumpSound(player.playerData._AirJump);
             player.playerData.anim.SetBool("jumping", true);
             player.playerData.PlayerRb.linearVelocity = new Vector2(player.playerData.PlayerRb.linearVelocityX, jumpStrength * 0.8f);

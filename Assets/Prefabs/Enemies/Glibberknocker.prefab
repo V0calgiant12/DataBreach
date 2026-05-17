@@ -88,7 +88,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9136334426839993919}
   - component: {fileID: 3078397374667499531}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: WallTrigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -277,7 +277,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyHit
   ParentObject: {fileID: 6993799946302136320}
   rb: {fileID: 6837587335085718206}
+  particlePrefab: {fileID: 0}
+  audioSource: {fileID: 0}
+  hitSound: {fileID: 0}
+  deathSound: {fileID: 0}
+  volume: 1
   health: 6
+  knockbackImmune: 0
 --- !u!1 &6993799946302136320
 GameObject:
   m_ObjectHideFlags: 0
@@ -297,7 +303,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &231952747906280969
 Transform:
   m_ObjectHideFlags: 0

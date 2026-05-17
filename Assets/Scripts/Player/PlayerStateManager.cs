@@ -17,6 +17,7 @@ public class PlayerStateManager : MonoBehaviour
     public static PlayerStateManager Instance;
     public PlayerData playerData;
     public GameObject playerSprite;
+    public bool isJumping;
     public enum AttackType
     {
         forward,
@@ -233,5 +234,11 @@ public class PlayerStateManager : MonoBehaviour
         currentState = IdleState;
         playerData.anim.SetBool("attacking", false);
         playerData.movementAllowed = true;
+    }
+    public IEnumerator WaitUntilNotJumping()
+    {
+        isJumping = true;
+        yield return new WaitUntil(() => playerData.PlayerRb.linearVelocityY < 0);
+        isJumping = false;
     }
 }

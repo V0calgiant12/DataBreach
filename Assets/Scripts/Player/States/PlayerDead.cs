@@ -12,7 +12,15 @@ public class PlayerDead : PlayerAbstract
     public override void UpdateState(PlayerStateManager player)
     {
         Debug.Log(player.playerData.playerHealth);
-        if (player.playerData.playerHealth <= 0) 
+        if (player.playerData.playerHealth >= 1)
+        {
+            player.playerData.playerDead = false;
+            player.playerData.playerHealth = 1;
+            Debug.Log(player.playerData.playerHealth);
+            player.playerData.movementAllowed = true;
+            player.SwitchState(player.IdleState);
+        }
+        else if (player.playerData.playerHealth <= 0 && !player.playerData.playerDead) 
         {
             player.playerData.playerDead = true;
             player.playerData.anim.SetBool("dead", true);
@@ -26,14 +34,6 @@ public class PlayerDead : PlayerAbstract
             player.playerData.DeathTransitionImage.SetActive(true);
             Debug.Log("You Are Dead");
             player.playerData.movementAllowed = false;
-        }
-        if (player.playerData.playerHealth >= 1)
-        {
-            player.playerData.playerDead = false;
-            player.playerData.playerHealth = 1;
-            Debug.Log(player.playerData.playerHealth);
-            player.playerData.movementAllowed = true;
-            player.SwitchState(player.IdleState);
         }
     }
 }
