@@ -41,8 +41,9 @@ public class EnemyHit : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("PlayerHitbox"))
+        if (other.gameObject.CompareTag("PlayerHitbox") && iFrames < 0)
         {
+            iFrames = 15;
             TriggerShake.Instance.BurstShake(1,2);
             if (!invulnerable)
             {
