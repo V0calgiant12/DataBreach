@@ -54,8 +54,7 @@ public class PlayerStateManager : MonoBehaviour
         playerData.anim.SetBool("moving", false);
         playerData.anim.SetBool("sprinting", false);
 
-        playerData.DeathTransitionImage = GameObject.Find("DeathTransitionImage");
-        playerData.DeathTransitionImage.SetActive(false);
+        playerData.ScreenCanvas = GameObject.Find("Screen").GetComponent<Animator>();
 
     }
     void Update()
@@ -64,12 +63,16 @@ public class PlayerStateManager : MonoBehaviour
         {
             SwitchState(InteractingState);
         }
+
         if (playerData.movementAllowed)
         {
-            currentState.UpdateState(this);
+            currentState.UpdateState(this); // Update function for current active state.
         }
-        
-        GlobalUpdateState.UpdateState(this);
+        if (!playerData.playerDead)
+        {
+            GlobalUpdateState.UpdateState(this); // Update function for the Update state.
+        }
+
         FindPlayerObject();
         playerSprite.transform.localScale = new Vector3(playerData.leftOrRight ? 1:-1,1,1);
         // Counter countdowns

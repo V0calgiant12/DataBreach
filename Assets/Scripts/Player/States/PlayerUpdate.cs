@@ -63,7 +63,7 @@ public class PlayerUpdate : PlayerAbstract
                 player.playerData.crouching = false;
             }
         }
-        if (player.playerData.playerHealth <= 0)
+        if (player.playerData.playerHealth <= 0 && GroundCheck.Instance._IsGrounded)
         {
             player.SwitchState(player.DeadState);
             return;
