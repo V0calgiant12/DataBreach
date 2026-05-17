@@ -18,6 +18,7 @@ public class EnemyHit : MonoBehaviour
     [Tooltip("Default health values: Slime 3, Para-Slimes 1, Goblin 5, Gliberknocker 6")]
     public int health = 1;
     private int trackedHealth = 1;
+    private int iFrames = 0;
     public bool knockbackImmune = false;
     public bool invulnerable = false;
     private void Start()
@@ -30,6 +31,7 @@ public class EnemyHit : MonoBehaviour
     }
     private void Update() 
     {
+        iFrames -= 1;
         if (trackedHealth <= 0)
         {
             audioSource.EnemySound(deathSound,volume);
@@ -50,6 +52,7 @@ public class EnemyHit : MonoBehaviour
             {
                 audioSource.EnemySound(hitSound,volume);
                 flashEffect.WhiteFlash();
+                Instantiate(particlePrefab, gameObject.transform.position, gameObject.transform.rotation);
             }
         }
     }
