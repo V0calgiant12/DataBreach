@@ -91,7 +91,10 @@ public class SettingsMenuUIHandler : MonoBehaviour
         SettingsData.Instance.SaveSettings(); // Saves for instance persistence
         postProcessingHandler.UpdatePostProcessing();
         shaderHandler.UpdateShader();
-        PlayerStateManager.Instance.GlobalUpdateState.EnterState(PlayerStateManager.Instance);
+        if(GameObject.Find("Player") != null  && GameObject.Find("Player").GetComponent<PlayerStateManager>() != null)
+        {
+            PlayerStateManager.Instance.GlobalUpdateState.EnterState(PlayerStateManager.Instance);
+        }
         pauseMenu.SetActive(true);
         gameObject.SetActive(false);
     }

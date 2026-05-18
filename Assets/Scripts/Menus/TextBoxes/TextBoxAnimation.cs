@@ -7,7 +7,7 @@ public class TextBoxAnimation : MonoBehaviour
     //Vector2(0.976999998,0.349999994)
     [Header("Peramiters")]
     public float _OpenSpeed;
-    [SerializeField] private bool open = false;
+    public bool open = false;
     [Header("References")]
     [SerializeField] private RectTransform rectTransform;
     [SerializeField] private Animator animator;

@@ -20,6 +20,8 @@ public class SlimeStateManager : MonoBehaviour
     public int jumpTimer;
     public bool isGrounded;
     public bool slimeLeftOrRight;
+    public bool slimeSizeable = true;
+    public bool noSlimeSound;
 
     [Header("References")]
     public GameObject slimeTrigger;
@@ -27,8 +29,6 @@ public class SlimeStateManager : MonoBehaviour
     public Transform player;
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private AudioSource audioSource2;
-    public AudioSource audioSource3;
-    [SerializeField] private AudioSource audioSource4;
     public AudioClip _SlimeJump;
     public AudioClip _SlimeImpact;
     public AudioClip _SlimeAttack;
@@ -36,6 +36,8 @@ public class SlimeStateManager : MonoBehaviour
 
     void Awake()
     {
+        noSlimeSound = true;
+        StartCoroutine(DelayStart2());
         slimeTrigger.SetActive(false);
     }
     void Start()
@@ -43,9 +45,15 @@ public class SlimeStateManager : MonoBehaviour
         slimeRb = GetComponent<Rigidbody2D>();
         StartCoroutine(DelayStart());
         // Ensure Gravity Scale is at least 1-2 so it falls back down!
-        if (player == null) player = GameObject.FindGameObjectWithTag("Player").transform;
-        float scaleOffset = Random.Range(0.8f, 1.3f);
-        transform.localScale = new Vector3(scaleOffset,scaleOffset,scaleOffset);
+        if (player == null)
+        {
+            player = GameObject.FindGameObjectWithTag("Player").transform;
+        }
+        if (slimeSizeable)
+        {
+            float scaleOffset = Random.Range(0.8f, 1.3f);
+            transform.localScale = new Vector3(scaleOffset,scaleOffset,scaleOffset);
+        }
         InvokeRepeating(nameof(SlimeUpdate), 1.5f, 1.5f+Random.Range(0.0f, 0.5f));
     }
     public IEnumerator DelayStart()
@@ -53,11 +61,21 @@ public class SlimeStateManager : MonoBehaviour
         int elapsed = 0;
         while (elapsed <= 60)
         {
-            elapsed += 1;
+            elapsed += Time.timeScale == 1 ? 1 : 0;
         }
         yield return null;
         slimeTrigger.SetActive(true);
-        
+    }
+    public IEnumerator DelayStart2()
+    {
+        noSlimeSound = true;
+        int elapsed = 0;
+        while (elapsed <= 999)
+        {
+            elapsed += Time.timeScale == 1 ? 1 : 0;
+        }
+        yield return null;
+        noSlimeSound = false;
     }
     void Update()
     {
@@ -91,7 +109,10 @@ public class SlimeStateManager : MonoBehaviour
             slimeLeftOrRight = false;
         }
         // Play slime jump sound
-        audioSource.Play();
+        if(!noSlimeSound)
+        {
+            audioSource.Play();
+        }
         //Debug.Log("jump");
         // Apply a diagonal "Hop" force
         Vector2 hopVector = new Vector2(direction * forwardForce * mudSpeedMulti, jumpForce * mudJumpMulti);

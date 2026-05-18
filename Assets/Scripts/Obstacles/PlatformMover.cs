@@ -22,7 +22,7 @@ public class PlatformMover : MonoBehaviour
     {
         platformRb = GetComponent<Rigidbody2D>();
         Player = GameObject.FindGameObjectWithTag("Player");
-        Slime = GameObject.FindGameObjectWithTag("Slime");
+        Slime = GameObject.FindGameObjectWithTag("Enemy");
         currentSpeed = new Vector2(1,1);
         nextPos = pointB.position;
         StartCoroutine(MoveTowardsPoint());
@@ -31,7 +31,10 @@ public class PlatformMover : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //Debug.Log(Vector2.Distance(transform.position, nextPos));
+        if(platformRb.linearVelocityX == 0)
+        {
+            StartCoroutine(MoveTowardsPoint());
+        }
     }
     private IEnumerator MoveTowardsPoint()
     {

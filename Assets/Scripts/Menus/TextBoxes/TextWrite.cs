@@ -5,6 +5,7 @@ using System.Collections;
 using System;
 using UnityEngine.TextCore.Text;
 using Unity.Collections;
+using Unity.VisualScripting;
 
 public class TextWrite : MonoBehaviour
 {
@@ -24,6 +25,7 @@ public class TextWrite : MonoBehaviour
     void Start()
     {
         Instance = this;
+        text.text = "";
     }
     public void Close()
     {
@@ -32,7 +34,14 @@ public class TextWrite : MonoBehaviour
     }
     void Update()
     {
-        if(PlayerStateManager.Instance.playerData.interacting == false)
+        if(GameObject.Find("Player").GetComponent<PlayerStateManager>() != null)
+        {
+            if(PlayerStateManager.Instance.playerData.interacting == false)
+            {
+                text.text = "";
+            }
+        }
+        else if (!CutsceneManager.Instance.textIsOpen)
         {
             text.text = "";
         }
@@ -48,6 +57,7 @@ public class TextWrite : MonoBehaviour
 
     IEnumerator Write()
     {
+        textBox.Open();
         _Writing = true;
         while(frame < 30)
         {

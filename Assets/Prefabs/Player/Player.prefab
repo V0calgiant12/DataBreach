@@ -11,9 +11,10 @@ GameObject:
   - component: {fileID: 3711344123180627544}
   - component: {fileID: 1356338612937764909}
   - component: {fileID: 7155591354628672708}
+  - component: {fileID: 7474177311817489072}
   m_Layer: 6
   m_Name: Upper
-  m_TagString: Untagged
+  m_TagString: PlayerSprite
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -146,6 +147,21 @@ MonoBehaviour:
     - rid: 3476702126088912988
       type: {class: ShadowShape2DProvider_SpriteRenderer, ns: UnityEngine.Rendering.Universal, asm: Unity.RenderPipelines.Universal.2D.Runtime}
       data: 
+--- !u!114 &7474177311817489072
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 582063357693864573}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 286cfaf23cb44bd449274e11cdda359a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FlashEffect
+  litMat: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  hitMat: {fileID: 2100000, guid: 5e8f634f15c94414f938b14f9b17e980, type: 2}
+  invulMat: {fileID: -876546973899608171, guid: 8d593483cc60e0e4296896ed1c6f4b89, type: 3}
 --- !u!1 &592267721215442143
 GameObject:
   m_ObjectHideFlags: 0
@@ -207,9 +223,10 @@ GameObject:
   - component: {fileID: 884398644439654906}
   - component: {fileID: 2704091925033773701}
   - component: {fileID: 2289439312515013944}
+  - component: {fileID: 5209289938570148293}
   m_Layer: 6
   m_Name: Lower
-  m_TagString: Untagged
+  m_TagString: PlayerSprite
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -341,6 +358,21 @@ MonoBehaviour:
     - rid: 3476702126088912982
       type: {class: ShadowShape2DProvider_SpriteRenderer, ns: UnityEngine.Rendering.Universal, asm: Unity.RenderPipelines.Universal.2D.Runtime}
       data: 
+--- !u!114 &5209289938570148293
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 608438172997018662}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 286cfaf23cb44bd449274e11cdda359a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FlashEffect
+  litMat: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  hitMat: {fileID: 2100000, guid: 5e8f634f15c94414f938b14f9b17e980, type: 2}
+  invulMat: {fileID: -876546973899608171, guid: 8d593483cc60e0e4296896ed1c6f4b89, type: 3}
 --- !u!1 &2456492346519355782
 GameObject:
   m_ObjectHideFlags: 0
@@ -458,9 +490,10 @@ GameObject:
   - component: {fileID: 4823777895355263187}
   - component: {fileID: 1125421049241756130}
   - component: {fileID: 1096793760629431894}
+  - component: {fileID: 1702288520270930674}
   m_Layer: 6
   m_Name: Upper
-  m_TagString: Untagged
+  m_TagString: PlayerSprite
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -593,6 +626,21 @@ MonoBehaviour:
     - rid: 3476702126088912983
       type: {class: ShadowShape2DProvider_SpriteRenderer, ns: UnityEngine.Rendering.Universal, asm: Unity.RenderPipelines.Universal.2D.Runtime}
       data: 
+--- !u!114 &1702288520270930674
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2554273723287393884}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 286cfaf23cb44bd449274e11cdda359a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FlashEffect
+  litMat: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  hitMat: {fileID: 2100000, guid: 5e8f634f15c94414f938b14f9b17e980, type: 2}
+  invulMat: {fileID: -876546973899608171, guid: 8d593483cc60e0e4296896ed1c6f4b89, type: 3}
 --- !u!1 &3002662148971666817
 GameObject:
   m_ObjectHideFlags: 0
@@ -605,9 +653,10 @@ GameObject:
   - component: {fileID: 5785584775695434414}
   - component: {fileID: 3753669743602200555}
   - component: {fileID: 6456436341933679702}
+  - component: {fileID: 2051141349998661635}
   m_Layer: 6
   m_Name: CowlUpper
-  m_TagString: Untagged
+  m_TagString: PlayerSprite
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -674,7 +723,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: -101493807
   m_SortingLayer: 2
-  m_SortingOrder: 7
+  m_SortingOrder: 6
   m_MaskInteraction: 0
   m_Sprite: {fileID: -3032162042332094954, guid: 500b06ae95caca0428a8a7b6cbb8b7e7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -753,6 +802,21 @@ MonoBehaviour:
     - rid: 3476702126088912991
       type: {class: ShadowShape2DProvider_SpriteRenderer, ns: UnityEngine.Rendering.Universal, asm: Unity.RenderPipelines.Universal.2D.Runtime}
       data: 
+--- !u!114 &2051141349998661635
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3002662148971666817}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 286cfaf23cb44bd449274e11cdda359a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FlashEffect
+  litMat: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  hitMat: {fileID: 2100000, guid: 5e8f634f15c94414f938b14f9b17e980, type: 2}
+  invulMat: {fileID: -876546973899608171, guid: 8d593483cc60e0e4296896ed1c6f4b89, type: 3}
 --- !u!1 &3091217826850663621
 GameObject:
   m_ObjectHideFlags: 0
@@ -885,9 +949,10 @@ GameObject:
   - component: {fileID: 6053308237839511085}
   - component: {fileID: 6831017210657651023}
   - component: {fileID: 2600397512295010332}
+  - component: {fileID: 9145537984979452950}
   m_Layer: 6
   m_Name: Upper
-  m_TagString: Untagged
+  m_TagString: PlayerSprite
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1020,6 +1085,21 @@ MonoBehaviour:
     - rid: 3476702126088912985
       type: {class: ShadowShape2DProvider_SpriteRenderer, ns: UnityEngine.Rendering.Universal, asm: Unity.RenderPipelines.Universal.2D.Runtime}
       data: 
+--- !u!114 &9145537984979452950
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3311957019887603269}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 286cfaf23cb44bd449274e11cdda359a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FlashEffect
+  litMat: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  hitMat: {fileID: 2100000, guid: 5e8f634f15c94414f938b14f9b17e980, type: 2}
+  invulMat: {fileID: -876546973899608171, guid: 8d593483cc60e0e4296896ed1c6f4b89, type: 3}
 --- !u!1 &3328888384297280316
 GameObject:
   m_ObjectHideFlags: 0
@@ -1114,6 +1194,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GroundCheck
   _IsGrounded: 0
   _IsStone: 0
+  _InCutscene: 0
 --- !u!50 &5815840524265208408
 Rigidbody2D:
   serializedVersion: 5
@@ -1152,9 +1233,10 @@ GameObject:
   - component: {fileID: 2310604255177253215}
   - component: {fileID: 5723038306598496700}
   - component: {fileID: 3968457508829746360}
+  - component: {fileID: 7624398257191605174}
   m_Layer: 6
   m_Name: Lower
-  m_TagString: Untagged
+  m_TagString: PlayerSprite
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1286,6 +1368,21 @@ MonoBehaviour:
     - rid: 3476702126088912984
       type: {class: ShadowShape2DProvider_SpriteRenderer, ns: UnityEngine.Rendering.Universal, asm: Unity.RenderPipelines.Universal.2D.Runtime}
       data: 
+--- !u!114 &7624398257191605174
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3338007297544165330}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 286cfaf23cb44bd449274e11cdda359a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FlashEffect
+  litMat: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  hitMat: {fileID: 2100000, guid: 5e8f634f15c94414f938b14f9b17e980, type: 2}
+  invulMat: {fileID: -876546973899608171, guid: 8d593483cc60e0e4296896ed1c6f4b89, type: 3}
 --- !u!1 &3721252047866402423
 GameObject:
   m_ObjectHideFlags: 0
@@ -1329,6 +1426,7 @@ GameObject:
   - component: {fileID: 3351453552943749178}
   - component: {fileID: 3844491182297727025}
   - component: {fileID: 5100887227340702211}
+  - component: {fileID: 2163903218432607255}
   m_Layer: 6
   m_Name: Hitbox
   m_TagString: PlayerHitbox
@@ -1370,10 +1468,10 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 1152
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64383
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
@@ -1391,10 +1489,10 @@ BoxCollider2D:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 1152
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64383
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -1424,6 +1522,19 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.8, y: 1.7}
   m_EdgeRadius: 0
+--- !u!114 &2163903218432607255
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4237030351694169499}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7fce31759ab973241837faa8f4f6d4dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PogoCheck
+  playerData: {fileID: 11400000, guid: ef22878c3af9ca548a85988a7addec59, type: 2}
 --- !u!1 &4246410500961111546
 GameObject:
   m_ObjectHideFlags: 0
@@ -1467,9 +1578,10 @@ GameObject:
   - component: {fileID: 1640594121543435949}
   - component: {fileID: 561423135144589971}
   - component: {fileID: 1231233410395797254}
+  - component: {fileID: 6741645757764838664}
   m_Layer: 6
   m_Name: Torso
-  m_TagString: Untagged
+  m_TagString: PlayerSprite
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1602,6 +1714,21 @@ MonoBehaviour:
     - rid: 3476702126088912993
       type: {class: ShadowShape2DProvider_SpriteRenderer, ns: UnityEngine.Rendering.Universal, asm: Unity.RenderPipelines.Universal.2D.Runtime}
       data: 
+--- !u!114 &6741645757764838664
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4639141908566768723}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 286cfaf23cb44bd449274e11cdda359a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FlashEffect
+  litMat: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  hitMat: {fileID: 2100000, guid: 5e8f634f15c94414f938b14f9b17e980, type: 2}
+  invulMat: {fileID: -876546973899608171, guid: 8d593483cc60e0e4296896ed1c6f4b89, type: 3}
 --- !u!1 &5473778018341672638
 GameObject:
   m_ObjectHideFlags: 0
@@ -1613,9 +1740,10 @@ GameObject:
   - component: {fileID: 364793614989704657}
   - component: {fileID: 5828065214602437611}
   - component: {fileID: 7289357085692485624}
+  - component: {fileID: 4299549794988163433}
   m_Layer: 6
   m_Name: Head
-  m_TagString: Untagged
+  m_TagString: PlayerSprite
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1683,7 +1811,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: -101493807
   m_SortingLayer: 2
-  m_SortingOrder: 6
+  m_SortingOrder: 5
   m_MaskInteraction: 0
   m_Sprite: {fileID: -202930504356754545, guid: efdfd8e1ec6dc644b85f2bac1c24e12b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -1748,6 +1876,21 @@ MonoBehaviour:
     - rid: 3476702126088912992
       type: {class: ShadowShape2DProvider_SpriteRenderer, ns: UnityEngine.Rendering.Universal, asm: Unity.RenderPipelines.Universal.2D.Runtime}
       data: 
+--- !u!114 &4299549794988163433
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5473778018341672638}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 286cfaf23cb44bd449274e11cdda359a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FlashEffect
+  litMat: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  hitMat: {fileID: 2100000, guid: 5e8f634f15c94414f938b14f9b17e980, type: 2}
+  invulMat: {fileID: -876546973899608171, guid: 8d593483cc60e0e4296896ed1c6f4b89, type: 3}
 --- !u!1 &6208874275512664855
 GameObject:
   m_ObjectHideFlags: 0
@@ -2128,9 +2271,10 @@ GameObject:
   - component: {fileID: 3405211730306653904}
   - component: {fileID: 997731397609083279}
   - component: {fileID: 8773118257574520936}
+  - component: {fileID: 3834181232565610537}
   m_Layer: 6
   m_Name: CowlLower
-  m_TagString: Untagged
+  m_TagString: PlayerSprite
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2276,6 +2420,21 @@ MonoBehaviour:
     - rid: 3476702126088912989
       type: {class: ShadowShape2DProvider_SpriteRenderer, ns: UnityEngine.Rendering.Universal, asm: Unity.RenderPipelines.Universal.2D.Runtime}
       data: 
+--- !u!114 &3834181232565610537
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6409143037036427711}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 286cfaf23cb44bd449274e11cdda359a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FlashEffect
+  litMat: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  hitMat: {fileID: 2100000, guid: 5e8f634f15c94414f938b14f9b17e980, type: 2}
+  invulMat: {fileID: -876546973899608171, guid: 8d593483cc60e0e4296896ed1c6f4b89, type: 3}
 --- !u!1 &7333209720509876743
 GameObject:
   m_ObjectHideFlags: 0
@@ -2320,9 +2479,10 @@ GameObject:
   - component: {fileID: 2417645196299196322}
   - component: {fileID: 7994382238139951335}
   - component: {fileID: 3409923584567921645}
+  - component: {fileID: 7805860456932168794}
   m_Layer: 6
   m_Name: Sword
-  m_TagString: Untagged
+  m_TagString: PlayerSprite
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2390,7 +2550,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: -101493807
   m_SortingLayer: 2
-  m_SortingOrder: 9
+  m_SortingOrder: 7
   m_MaskInteraction: 0
   m_Sprite: {fileID: -3753825769889500098, guid: 5522efa1ac0a7b64b8b685c35cccd446, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -2455,6 +2615,21 @@ MonoBehaviour:
     - rid: 3476702126088912986
       type: {class: ShadowShape2DProvider_SpriteRenderer, ns: UnityEngine.Rendering.Universal, asm: Unity.RenderPipelines.Universal.2D.Runtime}
       data: 
+--- !u!114 &7805860456932168794
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7369230764578894720}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 286cfaf23cb44bd449274e11cdda359a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FlashEffect
+  litMat: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  hitMat: {fileID: 2100000, guid: 5e8f634f15c94414f938b14f9b17e980, type: 2}
+  invulMat: {fileID: -876546973899608171, guid: 8d593483cc60e0e4296896ed1c6f4b89, type: 3}
 --- !u!1 &7503720962246340740
 GameObject:
   m_ObjectHideFlags: 0
@@ -2588,6 +2763,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerStateManager
   playerData: {fileID: 11400000, guid: ef22878c3af9ca548a85988a7addec59, type: 2}
   playerSprite: {fileID: 592267721215442143}
+  isJumping: 0
 --- !u!114 &1040065690880391275
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2613,6 +2789,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 510388b6cc4a4ba4ba3cd773aa053522, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MudDetect
+  SlimeStateManagerRef: {fileID: 0}
+  Player: {fileID: 7503720962246340740}
+  Slime: {fileID: 0}
   PlayerRb: {fileID: 5254595327118261300}
 --- !u!114 &6383165355602986983
 MonoBehaviour:
@@ -2796,9 +2975,10 @@ GameObject:
   - component: {fileID: 2982709320883513098}
   - component: {fileID: 2823518064009853281}
   - component: {fileID: 2900778757188072929}
+  - component: {fileID: 6051436907817362488}
   m_Layer: 6
   m_Name: Lower
-  m_TagString: Untagged
+  m_TagString: PlayerSprite
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2931,3 +3111,18 @@ MonoBehaviour:
     - rid: 3476702126088912987
       type: {class: ShadowShape2DProvider_SpriteRenderer, ns: UnityEngine.Rendering.Universal, asm: Unity.RenderPipelines.Universal.2D.Runtime}
       data: 
+--- !u!114 &6051436907817362488
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8812374909004544429}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 286cfaf23cb44bd449274e11cdda359a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FlashEffect
+  litMat: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  hitMat: {fileID: 2100000, guid: 5e8f634f15c94414f938b14f9b17e980, type: 2}
+  invulMat: {fileID: -876546973899608171, guid: 8d593483cc60e0e4296896ed1c6f4b89, type: 3}

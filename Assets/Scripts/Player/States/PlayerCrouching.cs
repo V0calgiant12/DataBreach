@@ -60,7 +60,7 @@ public class PlayerCrouching : PlayerAbstract
         if (player.playerData.jumpBufferCounter > 0)
         {
             Debug.Log("jump from Crouching");
-            player.playerData.PlayerRb.linearVelocity = new Vector2(player.playerData.PlayerRb.linearVelocityX, jumpStrength * 0.8f * PlayerStateManager.Instance.playerData.mudJumpMulti);
+            player.playerData.PlayerRb.linearVelocity = new Vector2(player.playerData.PlayerRb.linearVelocityX, jumpStrength * PlayerStateManager.Instance.playerData.mudJumpMulti);
             player.playerData.jumpBufferCounter = 0;
             player.playerData.coyoteTimeCounter = 0;
             player.playerData.audioSource.PlayJumpSound(player.playerData._NormalJump);
@@ -73,6 +73,7 @@ public class PlayerCrouching : PlayerAbstract
                 player.playerData.audioSource.PlayGrassSound(player.playerData._GrassJump);
             }
             player.SwitchState(player.AirState);
+            player.playerData.anim.SetBool("crouching", false);
             return;
         }
 
@@ -84,6 +85,7 @@ public class PlayerCrouching : PlayerAbstract
                 player.playerData.crouching = false;
             }
             player.SwitchState(player.AirState);
+            player.playerData.anim.SetBool("crouching", false);
             return;
         }
     }

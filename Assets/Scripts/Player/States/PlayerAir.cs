@@ -3,7 +3,6 @@ using System.Collections;
 public class PlayerAir : PlayerAbstract
 {
     private PlayerStateManager.AttackType currentAttack;
-    private int downBuffer;
     public override void RunOnce(PlayerStateManager player)
     {
         Setup();
@@ -13,18 +12,24 @@ public class PlayerAir : PlayerAbstract
         Debug.Log("Player is in the air / Air State");
         playerSpeed = 7;
         shakeOnLand = false;
+        if (player.playerData.PlayerRb.linearVelocityY > 0) 
+        {
+            player.StartCoroutine(player.WaitUntilNotJumping());
+            player.playerData.anim.SetBool("falling", false);
+            player.playerData.anim.SetBool("jumping", true);
+        }
+        if (player.playerData.PlayerRb.linearVelocityY < 0) 
+        {
+            player.playerData.anim.SetBool("falling", true);
+            player.playerData.anim.SetBool("jumping", false);
+        }
     }
     public override void UpdateState(PlayerStateManager player)
     {
         currentAttack = PlayerStateManager.AttackType.forwardAir; // Default attack if nothing is inputed this frame.
 
-        downBuffer -= 1;
         // Fast Falling
-        if (Input.GetKeyDown(SettingsData.Instance._InputDown))
-        {
-            downBuffer = 10;
-        }
-        if (downBuffer > 0 && player.playerData.PlayerRb.linearVelocityY < 0) // Check for fast fall.
+        if (Input.GetKeyDown(SettingsData.Instance._InputDown) && player.playerData.PlayerRb.linearVelocityY < 0)
         {
             player.playerData.PlayerRb.linearVelocity = new Vector2(player.playerData.PlayerRb.linearVelocityX, -jumpStrength * 1.5f);
         }
@@ -70,6 +75,7 @@ public class PlayerAir : PlayerAbstract
         if (player.playerData.PlayerRb.linearVelocityY < 0) 
         {
             player.playerData.anim.SetBool("falling", true);
+            player.playerData.anim.SetBool("jumping", false);
             player.playerData.inAirGust = false;
         }
         
@@ -92,7 +98,7 @@ public class PlayerAir : PlayerAbstract
 
         // Short Jumping
 
-        if(!(Input.GetKey(SettingsData.Instance._InputJump) || SettingsData.Instance._UpToJump && Input.GetKey(SettingsData.Instance._InputUp)) && player.playerData.PlayerRb.linearVelocity.y > 0 && !player.playerData.inAirGust)
+        if(!(Input.GetKey(SettingsData.Instance._InputJump) || SettingsData.Instance._UpToJump && Input.GetKey(SettingsData.Instance._InputUp)) && player.playerData.PlayerRb.linearVelocity.y > 0 && !player.playerData.inAirGust && player.isJumping)
         {
             player.playerData.PlayerRb.linearVelocity = new Vector2(player.playerData.PlayerRb.linearVelocityX, player.playerData.PlayerRb.linearVelocityY * 0.5f);
         }
@@ -109,6 +115,7 @@ public class PlayerAir : PlayerAbstract
                 player.playerData.leftOrRight = false;
             }
             Debug.Log("jump in air");
+            player.StartCoroutine(player.WaitUntilNotJumping());
             player.playerData.audioSource.PlayJumpSound(player.playerData._AirJump);
             player.playerData.anim.SetBool("jumping", true);
             player.playerData.PlayerRb.linearVelocity = new Vector2(player.playerData.PlayerRb.linearVelocityX, jumpStrength * 0.8f);
@@ -148,7 +155,13 @@ public class PlayerAir : PlayerAbstract
             {
                 player.playerData.audioSource.PlayGrassSound(player.playerData._GrassFall);
             }
+            if((player.playerData.anim.GetInteger("attackId") == 2 || player.playerData.anim.GetInteger("attackId") == 4) && player.playerData.anim.GetBool("attacking"))
+            {
+                player.playerData.anim.SetBool("attacking", false);
+            }
             player.SwitchState(player.IdleState);
+            player.playerData.anim.SetBool("falling", false);
+            player.playerData.anim.SetBool("jumping", false);
             return;
         }
     }

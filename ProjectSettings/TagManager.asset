@@ -12,7 +12,7 @@ TagManager:
   - VideoMenu
   - GameMenu
   - ControlsMenu
-  - Slime
+  - Enemy
   - MovingPlatform
   - PointB
   - PointA
@@ -25,6 +25,7 @@ TagManager:
   - SlimeTrigger
   - PlayerHitbox
   - RealCamera
+  - PlayerSprite
   layers:
   - Default
   - TransparentFX
@@ -79,6 +80,9 @@ TagManager:
     locked: 0
   - name: Obstacles
     uniqueID: 2109123155
+    locked: 0
+  - name: Particles
+    uniqueID: 349710059
     locked: 0
   - name: Ground
     uniqueID: 1043824287

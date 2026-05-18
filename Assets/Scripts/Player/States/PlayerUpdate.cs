@@ -53,7 +53,7 @@ public class PlayerUpdate : PlayerAbstract
         else
         {
             // Crouch toggle on
-            if (SettingsData.Instance._ToggleCrouch == false && Input.GetKeyDown(SettingsData.Instance._InputDown))
+            if (SettingsData.Instance._ToggleCrouch == false && Input.GetKey(SettingsData.Instance._InputDown))
             {
                 player.playerData.crouching = true;
             }
@@ -63,7 +63,7 @@ public class PlayerUpdate : PlayerAbstract
                 player.playerData.crouching = false;
             }
         }
-        if (player.playerData.playerHealth <= 0)
+        if (player.playerData.playerHealth <= 0 && GroundCheck.Instance._IsGrounded)
         {
             player.SwitchState(player.DeadState);
             return;

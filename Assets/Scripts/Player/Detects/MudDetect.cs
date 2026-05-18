@@ -21,7 +21,7 @@ public class MudDetect : MonoBehaviour
             PlayerStateManager.Instance.playerData.mudSpeedMulti = 0.6f;
             PlayerStateManager.Instance.playerData.mudJumpMulti = 0.6f;
         }
-        if(other.gameObject.CompareTag("Mud") && gameObject.CompareTag("Slime"))
+        if(other.gameObject.CompareTag("Mud") && gameObject.CompareTag("Enemy"))
         {
             SlimeStateManagerRef = gameObject.GetComponent<SlimeStateManager>();
             SlimeStateManagerRef.mudSpeedMulti = 0.6f;
@@ -35,7 +35,7 @@ public class MudDetect : MonoBehaviour
             PlayerStateManager.Instance.playerData.mudSpeedMulti = 1f;
             PlayerStateManager.Instance.playerData.mudJumpMulti = 1f;
         }
-        if(other.gameObject.CompareTag("Mud") && gameObject.CompareTag("Slime"))
+        if(other.gameObject.CompareTag("Mud") && gameObject.CompareTag("Enemy"))
         {
             SlimeStateManagerRef = gameObject.GetComponent<SlimeStateManager>();
             SlimeStateManagerRef.mudSpeedMulti = 1f;

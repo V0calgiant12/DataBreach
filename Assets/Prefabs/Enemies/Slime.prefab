@@ -256,7 +256,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -308,7 +308,7 @@ GameObject:
   - component: {fileID: 3184228514001556632}
   - component: {fileID: 8979614139567092629}
   - component: {fileID: 5320649373894438044}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: FollowArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -559,16 +559,17 @@ GameObject:
   m_Component:
   - component: {fileID: 1686045731412870238}
   - component: {fileID: 8138196810457526105}
+  - component: {fileID: 3109816407341969098}
   - component: {fileID: 2883953345099817571}
   - component: {fileID: 7965548649738066340}
   - component: {fileID: 3052226611263945404}
   - component: {fileID: 2061067415103168959}
+  - component: {fileID: 5601684875710946543}
   - component: {fileID: 8440598479110921148}
   - component: {fileID: 3644040386111231335}
-  - component: {fileID: 5601684875710946543}
   m_Layer: 7
   m_Name: Slime
-  m_TagString: Slime
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -651,6 +652,21 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!114 &3109816407341969098
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8027678710126338495}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 286cfaf23cb44bd449274e11cdda359a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FlashEffect
+  litMat: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  hitMat: {fileID: 2100000, guid: 5e8f634f15c94414f938b14f9b17e980, type: 2}
+  invulMat: {fileID: -876546973899608171, guid: 8d593483cc60e0e4296896ed1c6f4b89, type: 3}
 --- !u!61 &2883953345099817571
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -737,7 +753,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SlimeStateManager
   currentState: 0
-  jumpForce: 15.2
+  jumpForce: 16
   mudJumpMulti: 1
   forwardForce: 4
   mudSpeedMulti: 1
@@ -748,13 +764,12 @@ MonoBehaviour:
   jumpTimer: 0
   isGrounded: 1
   slimeLeftOrRight: 0
+  slimeSizeable: 1
   slimeTrigger: {fileID: 2882446880090637605}
   slimeRb: {fileID: 7965548649738066340}
   player: {fileID: 0}
   audioSource: {fileID: 8440598479110921148}
   audioSource2: {fileID: 3644040386111231335}
-  audioSource3: {fileID: 0}
-  audioSource4: {fileID: 0}
   _SlimeJump: {fileID: 8300000, guid: 29af98eb4f9e0df4d97c2163a4d84cdb, type: 3}
   _SlimeImpact: {fileID: 8300000, guid: 35ee2d919fad96a469e7f79092bb6691, type: 3}
   _SlimeAttack: {fileID: 8300000, guid: 807bd5152a662ed4a9241939b4fef32d, type: 3}
@@ -771,8 +786,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3319696bd4fbe2241a944ab0d8fb086a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ForceManager
-  PlayerDataRef: {fileID: 0}
-  rb: {fileID: 0}
+  PlayerDataRef: {fileID: 11400000, guid: ef22878c3af9ca548a85988a7addec59, type: 2}
+  rb: {fileID: 7965548649738066340}
+--- !u!114 &5601684875710946543
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8027678710126338495}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 510388b6cc4a4ba4ba3cd773aa053522, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MudDetect
+  SlimeStateManagerRef: {fileID: 0}
+  Player: {fileID: 0}
+  Slime: {fileID: 8027678710126338495}
+  PlayerRb: {fileID: 0}
 --- !u!82 &8440598479110921148
 AudioSource:
   m_ObjectHideFlags: 0
@@ -830,7 +861,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -927,7 +958,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -967,19 +998,3 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &5601684875710946543
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8027678710126338495}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 510388b6cc4a4ba4ba3cd773aa053522, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::MudDetect
-  SlimeStateManagerRef: {fileID: 0}
-  Player: {fileID: 0}
-  Slime: {fileID: 8027678710126338495}
-  PlayerRb: {fileID: 0}

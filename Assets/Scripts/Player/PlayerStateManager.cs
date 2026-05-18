@@ -17,6 +17,7 @@ public class PlayerStateManager : MonoBehaviour
     public static PlayerStateManager Instance;
     public PlayerData playerData;
     public GameObject playerSprite;
+    public bool isJumping;
     public enum AttackType
     {
         forward,
@@ -53,8 +54,7 @@ public class PlayerStateManager : MonoBehaviour
         playerData.anim.SetBool("moving", false);
         playerData.anim.SetBool("sprinting", false);
 
-        playerData.DeathTransitionImage = GameObject.Find("DeathTransitionImage");
-        playerData.DeathTransitionImage.SetActive(false);
+        playerData.ScreenCanvas = GameObject.Find("Screen").GetComponent<Animator>();
 
     }
     void Update()
@@ -63,18 +63,23 @@ public class PlayerStateManager : MonoBehaviour
         {
             SwitchState(InteractingState);
         }
+
         if (playerData.movementAllowed)
         {
-            currentState.UpdateState(this);
+            currentState.UpdateState(this); // Update function for current active state.
         }
-        
-        GlobalUpdateState.UpdateState(this);
+        if (!playerData.playerDead)
+        {
+            GlobalUpdateState.UpdateState(this); // Update function for the Update state.
+        }
+
         FindPlayerObject();
         playerSprite.transform.localScale = new Vector3(playerData.leftOrRight ? 1:-1,1,1);
         // Counter countdowns
-        playerData.jumpBufferCounter -= 1;
-        playerData.coyoteTimeCounter -= 1;
-        playerData.iFrames -= 1;
+        playerData.jumpBufferCounter -= Time.timeScale == 1 ? 1 : 0;
+        playerData.coyoteTimeCounter -= Time.timeScale == 1 ? 1 : 0;
+        playerData.iFrames -= Time.timeScale == 1 ? 1 : 0;
+        playerData.anim.SetInteger("iframes", playerData.iFrames);
 
     }
     public void SwitchState(PlayerAbstract state)
@@ -82,7 +87,6 @@ public class PlayerStateManager : MonoBehaviour
         currentState = state;
         state.EnterState(this);
     }
-    
     public void FindPlayerObject()
     {
         playerData.anim = GetComponent<Animator>(); 
@@ -95,6 +99,8 @@ public class PlayerStateManager : MonoBehaviour
     {
         if (playerData.iFrames < 0 || overrideIFrames)
         {
+            //PlayerFlash(1);
+            playerData.anim.SetBool("hit", true);
             TriggerShake.Instance.BurstShake(3,2);
             playerData.playerHealth = playerData.playerHealth - 1;
             playerData.audioSource.PlayPlayerHitSound(playerData._PlayerHit);
@@ -108,6 +114,8 @@ public class PlayerStateManager : MonoBehaviour
                 StartCoroutine(StunPlayer(xLaunch*(transform.position.x <= damageSourceX ? -1 : 1), yLaunch,timer));
             }
             playerData.iFrames = 120;
+            PlayerFlash(1);
+            PlayerFlash(2);
         }
     }
     public void Attack(AttackType attackType)
@@ -119,41 +127,61 @@ public class PlayerStateManager : MonoBehaviour
             switch (attackType)
             {
                 case(AttackType.forward):
-                    playerData.attackTimer = 0;
                     playerData.anim.SetInteger("attackId",0);
                     break;
                 case(AttackType.up):
-                    playerData.attackTimer = 0;
                     playerData.anim.SetInteger("attackId",1);
                     break;
                 case(AttackType.down):
-                    playerData.attackTimer = 0;
                     playerData.anim.SetInteger("attackId",3);
                     break;
                 case(AttackType.forwardAir):
-                    playerData.attackTimer = 0;
                     playerData.anim.SetInteger("attackId",0);
                     break;
                 case(AttackType.backAir):
-                    playerData.attackTimer = 0;
                     playerData.anim.SetInteger("attackId",2);
                     break;
                 case(AttackType.upAir):
-                    playerData.attackTimer = 0;
                     playerData.anim.SetInteger("attackId",1);
                     break;
                 case(AttackType.downAir):
-                    playerData.attackTimer = 0;
+                    if(playerData.PlayerRb.linearVelocityY < -5)
+                    {
+                        playerData.PlayerRb.linearVelocity = new Vector2(playerData.PlayerRb.linearVelocityX, -5f);
+                    }
                     playerData.anim.SetInteger("attackId",4);
                     break;
                 case(AttackType.dash):
-                    playerData.attackTimer = 1;
                     playerData.movementAllowed = false;
                     playerData.anim.SetInteger("attackId",5);
-                    StartCoroutine(NoMovingWhileAttack(playerData.attackTimer));
+                    StartCoroutine(NoMovingWhileAttack(0));
                     break;
             }
             Debug.Log(attackType);
+        }
+    }
+
+    public void PlayerFlash(int type)
+    {
+        GameObject[] playerSprites = GameObject.FindGameObjectsWithTag("PlayerSprite"); // Puts all player sprite objects in a list.
+        int index = 0;
+        if(type == 1) // White Flash
+        {
+            Debug.Log("White Flash");
+            while (index <= playerSprites.Length - 1) // Repeats for every game object.
+            {
+                playerSprites[index].SendMessage("WhiteFlash");
+                index += 1;
+            }
+        }
+        else if(type == 2) // Invulnerable Flash
+        {
+            Debug.Log("Invulnerable Flash");
+            while (index <= playerSprites.Length - 1) // Repeats for every game object.
+            {
+                playerSprites[index].SendMessage("InvulnerableFlash", playerData.iFrames);
+                index += 1;
+            }
         }
     }
     public IEnumerator StunPlayer(float xLaunch, float yLaunch, int timer)
@@ -163,13 +191,14 @@ public class PlayerStateManager : MonoBehaviour
         playerData.PlayerRb.linearVelocity = new Vector2(xLaunch, yLaunch);
         while(GroundCheck.Instance._IsGrounded == false && timer > elapsed || elapsed < 15)
         {
-            elapsed += 1;
+            elapsed += Time.timeScale == 1 ? 1 : 0;
             if(playerData.ricochet == true)
             {
                 playerData.PlayerRb.linearVelocity = new Vector2(-playerData.PlayerRb.linearVelocity.x + ((playerData.PlayerRb.linearVelocity.x >= 0 ? -1.2f : 1.2f) * xLaunch), playerData.PlayerRb.linearVelocity.y + yLaunch * 0.25f);
                 playerData.ricochet = false;
                 TriggerShake.Instance.BurstShake(-1*MathF.Cos(playerData.PlayerRb.linearVelocityX/2)+(2+elapsed/25),2);
-                timer += 30;
+                PlayerFlash(1);
+                timer += 15;
             }
             if(playerData.pickUpHeart)
             {
@@ -178,17 +207,41 @@ public class PlayerStateManager : MonoBehaviour
             }
             yield return null;
         }
+        playerData.anim.SetBool("hit", false);
         playerData.movementAllowed = true;
     }
     public IEnumerator NoMovingWhileAttack(float attackTimer)
     {
         int elapsed = 0;
-        playerData.PlayerRb.linearVelocityX = 0;
-        while (attackTimer > elapsed)
+        playerData.anim.SetBool("moving", false);
+        if(attackTimer == 0)
         {
-            elapsed += 1;
-            yield return null;
+            playerData.PlayerRb.linearVelocityX = 50 * ((playerData.PlayerRb.linearVelocityX > 0) ? 1 : -1);
+            playerData.iFrames = Mathf.Abs(Mathf.FloorToInt(playerData.PlayerRb.linearVelocityX/0.8f))-30; // t=d/r, t=velocity/0.8f since velocity is multiplied by 0.8f every frame
+            while (MathF.Abs(playerData.PlayerRb.linearVelocityX) > 1f)
+            {
+                playerData.PlayerRb.linearVelocityX = playerData.PlayerRb.linearVelocityX * 0.8f;
+                yield return null;
+            }
         }
+        else
+        {
+            
+            while (attackTimer > elapsed)
+            {
+                playerData.PlayerRb.linearVelocityX = playerData.PlayerRb.linearVelocityX * 0.75f;
+                elapsed += Time.timeScale == 1 ? 1 : 0;
+                yield return null;
+            }
+        }
+        currentState = IdleState;
+        playerData.anim.SetBool("attacking", false);
         playerData.movementAllowed = true;
+    }
+    public IEnumerator WaitUntilNotJumping()
+    {
+        isJumping = true;
+        yield return new WaitUntil(() => playerData.PlayerRb.linearVelocityY < 0);
+        isJumping = false;
     }
 }
