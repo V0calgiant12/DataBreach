@@ -1194,6 +1194,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GroundCheck
   _IsGrounded: 0
   _IsStone: 0
+  _InCutscene: 0
 --- !u!50 &5815840524265208408
 Rigidbody2D:
   serializedVersion: 5
@@ -1425,6 +1426,7 @@ GameObject:
   - component: {fileID: 3351453552943749178}
   - component: {fileID: 3844491182297727025}
   - component: {fileID: 5100887227340702211}
+  - component: {fileID: 2163903218432607255}
   m_Layer: 6
   m_Name: Hitbox
   m_TagString: PlayerHitbox
@@ -1466,10 +1468,10 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 1152
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64383
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
@@ -1487,10 +1489,10 @@ BoxCollider2D:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 1152
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64383
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -1520,6 +1522,19 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.8, y: 1.7}
   m_EdgeRadius: 0
+--- !u!114 &2163903218432607255
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4237030351694169499}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7fce31759ab973241837faa8f4f6d4dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PogoCheck
+  playerData: {fileID: 11400000, guid: ef22878c3af9ca548a85988a7addec59, type: 2}
 --- !u!1 &4246410500961111546
 GameObject:
   m_ObjectHideFlags: 0
@@ -2748,6 +2763,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerStateManager
   playerData: {fileID: 11400000, guid: ef22878c3af9ca548a85988a7addec59, type: 2}
   playerSprite: {fileID: 592267721215442143}
+  isJumping: 0
 --- !u!114 &1040065690880391275
 MonoBehaviour:
   m_ObjectHideFlags: 0
