@@ -121,7 +121,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyHit
   ParentObject: {fileID: 6513856301564140633}
   rb: {fileID: 2570967485816106170}
+  particlePrefab: {fileID: 0}
+  audioSource: {fileID: 0}
+  hitSound: {fileID: 0}
+  deathSound: {fileID: 0}
+  volume: 1
   health: 5
+  knockbackImmune: 0
 --- !u!1 &1757185450536414579
 GameObject:
   m_ObjectHideFlags: 0
@@ -133,7 +139,7 @@ GameObject:
   - component: {fileID: 5545517829087980707}
   - component: {fileID: 304053629889301611}
   - component: {fileID: 2117123893202507322}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Wall Trigger
   m_TagString: EnemyTrigger
   m_Icon: {fileID: 0}
@@ -311,7 +317,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 2}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_SpriteSortPoint: 0
 --- !u!50 &3763291612955310094
 Rigidbody2D:
@@ -426,7 +432,7 @@ GameObject:
   - component: {fileID: 8616769836109744896}
   - component: {fileID: 668230609353442249}
   - component: {fileID: 1577367954537911280}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Ground Trigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}

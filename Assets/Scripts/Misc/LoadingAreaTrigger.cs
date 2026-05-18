@@ -2,6 +2,14 @@ using UnityEngine;
 
 public class LoadingAreaTrigger : MonoBehaviour
 {
+    /// <summary>
+    /// This to check when not working:
+    /// - Check that the variables are assigned to the right objects.
+    /// - Check that the trigger areas are set to actually be triggers and not colliders.
+    /// - Check that the trigger areas are set to the Trigger layer.
+    /// - Check that the triggers ignore everything that isn't the Camera layer, Both Box Colliders and Rigidbodies.
+    /// </summary>
+    /// <returns></returns>
     [SerializeField] private GameObject ObjectsAndEnemies;
     [SerializeField] private GameObject Grid;
     void Awake()

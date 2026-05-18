@@ -1,13 +1,14 @@
 using System;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class MainMenuParallax : MonoBehaviour
 {
     [SerializeField] private RectTransform rectTransform;
-    [SerializeField] private float swayX = 0;
-    [SerializeField] private bool swayXDir = false;
-    [SerializeField] private float swayY = 0;
-    [SerializeField] private bool swayYDir = false;
+    private float swayX = 0;
+    private bool swayXDir = false;
+    private float swayY = 0;
+    private bool swayYDir = false;
     public float parallaxValue;
     public float offsetX;
     public float offsetY;

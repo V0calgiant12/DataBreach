@@ -8,7 +8,7 @@ public class EnemyHit : MonoBehaviour
     [SerializeField] private GameObject ParentObject;
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private GameObject particlePrefab;
-    private FlashEffect flashEffect;
+    [SerializeField] private FlashEffect flashEffect;
     [Header("Audio")]
     [SerializeField] private EffectSound audioSource;
     [SerializeField] private AudioClip hitSound;
@@ -18,14 +18,20 @@ public class EnemyHit : MonoBehaviour
     [Tooltip("Default health values: Slime 3, Para-Slimes 1, Goblin 5, Gliberknocker 6")]
     public int health = 1;
     private int trackedHealth = 1;
+    private int iFrames = 0;
     public bool knockbackImmune = false;
+    public bool invulnerable = false;
     private void Start()
     {
         trackedHealth = health;
-        flashEffect = ParentObject.GetComponent<FlashEffect>();
+        if(flashEffect == null)
+        {
+            flashEffect = ParentObject.GetComponent<FlashEffect>();
+        }
     }
     private void Update() 
     {
+        iFrames -= 1;
         if (trackedHealth <= 0)
         {
             audioSource.EnemySound(deathSound,volume);
@@ -35,10 +41,20 @@ public class EnemyHit : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("PlayerHitbox"))
+        if (other.gameObject.CompareTag("PlayerHitbox") && iFrames < 0)
         {
+            iFrames = 15;
             TriggerShake.Instance.BurstShake(1,2);
-            DamageEnemy(1,10,10,other.transform.position.x);
+            if (!invulnerable)
+            {
+                DamageEnemy(1,10,10,other.transform.position.x);
+            }
+            else
+            {
+                audioSource.EnemySound(hitSound,volume);
+                flashEffect.WhiteFlash();
+                Instantiate(particlePrefab, gameObject.transform.position, gameObject.transform.rotation);
+            }
         }
     }
     public void DamageEnemy(int damage, float xLaunch, float yLaunch, float damageSourceX)

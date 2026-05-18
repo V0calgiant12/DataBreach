@@ -3,32 +3,39 @@ using UnityEngine;
 public class PlayerDead : PlayerAbstract
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
+    private int pixelation = 550;
     public override void RunOnce(PlayerStateManager player)
     {
     }
     public override void EnterState(PlayerStateManager player)
     {
+        pixelation = 550;
+        Debug.Log(player.playerData.playerHealth);
+        player.playerData.movementAllowed = false;
+        player.playerData.playerDead = true;
+        player.playerData.anim.SetBool("dead", true);
+        player.playerData.anim.SetBool("moving", false);
+        player.playerData.anim.SetBool("sprinting", false);
+        player.playerData.anim.SetBool("jumping", false);
+        player.playerData.anim.SetBool("falling", false);
+        player.playerData.anim.SetBool("crouching", false);
+        player.playerData.PlayerRb.linearVelocityX = 0;
+        player.playerData.audioSource.PlayPlayerDeathSound(player.playerData._PlayerDeath);
+        player.playerData.ScreenCanvas.SetTrigger("Death");
+        Debug.Log("You Are Dead");
     }
     public override void UpdateState(PlayerStateManager player)
     {
-        Debug.Log(player.playerData.playerHealth);
-        player.playerData.anim.SetBool("dead", true);
-        if (player.playerData.playerHealth <= 0) 
+        if(pixelation > 10)
         {
-            player.playerData.playerDead = true;
-            player.playerData.PlayerRb.linearVelocityX = 0;
-            player.playerData.audioSource.PlayPlayerDeathSound(player.playerData._PlayerDeath);
-            player.playerData.DeathTransitionImage.SetActive(true);
-            Debug.Log("You Are Dead");
-            player.playerData.movementAllowed = false;
+            pixelation -= 5;
+            player.playerData.pixelationMat.SetFloat("_Pixelation", pixelation);
+            
+            Debug.Log(player.playerData.pixelationMat.GetFloat("_Pixelation"));
         }
-        if (player.playerData.playerHealth >= 1)
+        else
         {
-            player.playerData.playerDead = false;
-            player.playerData.playerHealth = 1;
-            Debug.Log(player.playerData.playerHealth);
-            player.playerData.movementAllowed = true;
-            player.SwitchState(player.IdleState);
+            player.playerData.pixelationMat.SetFloat("_Pixelation", 550);
         }
     }
 }

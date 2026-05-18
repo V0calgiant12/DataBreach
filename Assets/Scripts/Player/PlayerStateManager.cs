@@ -17,6 +17,7 @@ public class PlayerStateManager : MonoBehaviour
     public static PlayerStateManager Instance;
     public PlayerData playerData;
     public GameObject playerSprite;
+    public bool isJumping;
     public enum AttackType
     {
         forward,
@@ -53,8 +54,7 @@ public class PlayerStateManager : MonoBehaviour
         playerData.anim.SetBool("moving", false);
         playerData.anim.SetBool("sprinting", false);
 
-        playerData.DeathTransitionImage = GameObject.Find("DeathTransitionImage");
-        playerData.DeathTransitionImage.SetActive(false);
+        playerData.ScreenCanvas = GameObject.Find("Screen").GetComponent<Animator>();
 
     }
     void Update()
@@ -63,12 +63,16 @@ public class PlayerStateManager : MonoBehaviour
         {
             SwitchState(InteractingState);
         }
+
         if (playerData.movementAllowed)
         {
-            currentState.UpdateState(this);
+            currentState.UpdateState(this); // Update function for current active state.
         }
-        
-        GlobalUpdateState.UpdateState(this);
+        if (!playerData.playerDead)
+        {
+            GlobalUpdateState.UpdateState(this); // Update function for the Update state.
+        }
+
         FindPlayerObject();
         playerSprite.transform.localScale = new Vector3(playerData.leftOrRight ? 1:-1,1,1);
         // Counter countdowns
@@ -141,6 +145,10 @@ public class PlayerStateManager : MonoBehaviour
                     playerData.anim.SetInteger("attackId",1);
                     break;
                 case(AttackType.downAir):
+                    if(playerData.PlayerRb.linearVelocityY < -5)
+                    {
+                        playerData.PlayerRb.linearVelocity = new Vector2(playerData.PlayerRb.linearVelocityX, -5f);
+                    }
                     playerData.anim.SetInteger("attackId",4);
                     break;
                 case(AttackType.dash):
@@ -190,7 +198,7 @@ public class PlayerStateManager : MonoBehaviour
                 playerData.ricochet = false;
                 TriggerShake.Instance.BurstShake(-1*MathF.Cos(playerData.PlayerRb.linearVelocityX/2)+(2+elapsed/25),2);
                 PlayerFlash(1);
-                timer += 30;
+                timer += 15;
             }
             if(playerData.pickUpHeart)
             {
@@ -229,5 +237,11 @@ public class PlayerStateManager : MonoBehaviour
         currentState = IdleState;
         playerData.anim.SetBool("attacking", false);
         playerData.movementAllowed = true;
+    }
+    public IEnumerator WaitUntilNotJumping()
+    {
+        isJumping = true;
+        yield return new WaitUntil(() => playerData.PlayerRb.linearVelocityY < 0);
+        isJumping = false;
     }
 }
