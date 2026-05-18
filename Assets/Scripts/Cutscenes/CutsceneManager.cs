@@ -97,7 +97,7 @@ public class CutsceneManager : MonoBehaviour
     }
     private void EndCutscene()
     {
-        sceneTransition.TransitionToScene(1,2);
+        sceneTransition.TransitionToScene(2,2);
     }
     private void Text(int number)
     {

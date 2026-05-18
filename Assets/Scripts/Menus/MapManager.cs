@@ -12,9 +12,19 @@ public class MapManager : MonoBehaviour
     public void Forest()
     {
         audioSource.Play();
-        sceneTransition.TransitionToScene(4,1);
+        sceneTransition.TransitionToScene(3,1);
     }
     public void Mountains()
+    {
+        audioSource.Play();
+        sceneTransition.TransitionToScene(4,1);
+    }
+    public void DeepForest()
+    {
+        audioSource.Play();
+        sceneTransition.TransitionToScene(5,1);
+    }
+    public void Quarry()
     {
         audioSource.Play();
         sceneTransition.TransitionToScene(5,1);

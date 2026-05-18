@@ -22,7 +22,7 @@ public class TitleMenuUIHandler : MonoBehaviour
 
     public void NewSaveButton() // Starts a transition to the Intro scene
     {
-        sceneTransition.TransitionToScene(2,1); // Intro scene, 1 second transition.
+        sceneTransition.TransitionToScene(1,1); // Intro scene, 1 second transition.
     }
     public void SettingsButton() // Switches to settings menu.
     {
