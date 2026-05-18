@@ -143,14 +143,14 @@ public class CutsceneManager : MonoBehaviour
         float elapsed = 0;
         while (walking)
         {
-            inputTimer = -500;
+            inputTimer = -100;
             playerRb.linearVelocityX = 8;
             yield return null;
         }
         elapsed = 0;
         while (elapsed != 60)
         {
-            inputTimer = -500;
+            inputTimer = -100;
             elapsed += 1;
             yield return null;
         }
@@ -161,7 +161,7 @@ public class CutsceneManager : MonoBehaviour
         int elapsed = 0;
         while (elapsed != 500)
         {
-            inputTimer = -500;
+            inputTimer = -100;
             playerRb.linearVelocityX = 8;
             elapsed += 1;
             yield return null;
@@ -173,7 +173,7 @@ public class CutsceneManager : MonoBehaviour
         while(delay > elapsed)
         {
             elapsed += 1;
-            inputTimer = -500;
+            inputTimer = -100;
             yield return null;
         }
         TextWrite.Instance.WriteText(textData);
@@ -184,7 +184,7 @@ public class CutsceneManager : MonoBehaviour
         while(delay2 > elapsed)
         {
             elapsed += 1;
-            inputTimer = -500;
+            inputTimer = -100;
             yield return null;
         }
         ProgressCutscene();
