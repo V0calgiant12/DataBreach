@@ -32,6 +32,18 @@ public class GameData : MonoBehaviour
         File.WriteAllText(Application.persistentDataPath + "/gameData.json", json);
         
     }
+    public bool SaveExists()
+    {
+        string path = Application.persistentDataPath + "/gameData.json";
+        if (File.Exists(path)) // Checks to see if the file even exists.
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
 
     public void LoadData() // Loads data from the JSON file.
     {
