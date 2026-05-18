@@ -4,7 +4,7 @@ using UnityEngine;
 public class GameData : MonoBehaviour
 {
     /// <summary>
-    /// This script handels
+    /// This script handles saving data for the game
     /// To add a new saved variable, first add it to this class, SettingsData, then add it to the SaveData class.
     /// Next, add the variable to be saved and loaded in their respective functions.
     /// </summary>
@@ -55,6 +55,7 @@ public class GameData : MonoBehaviour
             
             //variable = data.variable;
             playerData.playerHealth = data.playerHealth;
+            Debug.Log("Data Exists");
         }
     }
     
