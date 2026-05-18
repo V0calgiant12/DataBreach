@@ -31,7 +31,8 @@ public class EnemyHit : MonoBehaviour
     }
     private void Update() 
     {
-        iFrames -= 1;
+
+        iFrames -= (Time.timeScale == 1) ? 1 : 0;
         if (trackedHealth <= 0)
         {
             audioSource.EnemySound(deathSound,volume);
