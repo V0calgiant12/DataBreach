@@ -15,6 +15,7 @@ public class CutsceneManager : MonoBehaviour
     [SerializeField] private TextData textData;
     [SerializeField] private AudioClip bitSound;
     [SerializeField] private AudioClip playerSound;
+    public bool walking;
     public static CutsceneManager Instance;
 
     private int inputTimer;
@@ -138,12 +139,12 @@ public class CutsceneManager : MonoBehaviour
     }
     private IEnumerator Walk1()
     {
-        int elapsed = 0;
-        while (elapsed != 295)
+        walking = true;
+        float elapsed = 0;
+        while (walking)
         {
             inputTimer = -500;
             playerRb.linearVelocityX = 8;
-            elapsed += 1;
             yield return null;
         }
         elapsed = 0;
