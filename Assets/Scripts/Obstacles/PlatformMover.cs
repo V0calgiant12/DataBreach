@@ -31,7 +31,7 @@ public class PlatformMover : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(platformRb.linearVelocity == new Vector2(0,0))
+        if(platformRb.linearVelocityX == 0 && platformRb.linearVelocityY == 0)
         {
             StartCoroutine(MoveTowardsPoint());
         }
