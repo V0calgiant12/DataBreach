@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using UnityEditor.MPE;
 using UnityEngine;
 
 public class PlayerStateManager : MonoBehaviour
@@ -123,7 +124,7 @@ public class PlayerStateManager : MonoBehaviour
     }
     public void Attack(AttackType attackType)
     {
-        if(playerData.anim.GetBool("attacking") != true)
+        if(playerData.anim.GetBool("attacking") != true && playerData.movementAllowed)
         {
             playerData.anim.SetBool("attacking", true);
             playerData.audioSource.PlayPlayerAttackSound(playerData._PlayerAttack);
@@ -220,10 +221,16 @@ public class PlayerStateManager : MonoBehaviour
         {
             playerData.PlayerRb.linearVelocityX = 50 * ((playerData.PlayerRb.linearVelocityX > 0) ? 1 : -1);
             playerData.iFrames = Mathf.Abs(Mathf.FloorToInt(playerData.PlayerRb.linearVelocityX/0.8f))-40; // t=d/r, t=velocity/0.8f since velocity is multiplied by 0.8f every frame
-            while (MathF.Abs(playerData.PlayerRb.linearVelocityX) > 1f)
+            while (MathF.Abs(playerData.PlayerRb.linearVelocityX) > 1f || elapsed > 120)
             {
+                elapsed += Time.timeScale == 1 ? 1 : 0;
                 playerData.PlayerRb.linearVelocityX = playerData.PlayerRb.linearVelocityX * 0.8f;
                 yield return null;
+            }
+            elapsed = 0;
+            while(elapsed > 5)
+            {
+                elapsed += Time.timeScale == 1 ? 1 : 0;
             }
         }
         else
@@ -238,6 +245,7 @@ public class PlayerStateManager : MonoBehaviour
         }
         currentState = IdleState;
         playerData.anim.SetBool("attacking", false);
+        
         playerData.movementAllowed = true;
     }
     public IEnumerator WaitUntilNotJumping()

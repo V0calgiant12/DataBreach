@@ -47,6 +47,7 @@ public class PlayerSprinting : PlayerAbstract
         if (player.playerData.crouching)
         {
             player.SwitchState(player.CrouchingState);
+            player.currentState.UpdateState(player);
             return;
         }
         // if not moving then go to idle
@@ -54,6 +55,7 @@ public class PlayerSprinting : PlayerAbstract
         {
             player.playerData.PlayerRb.linearVelocityX = 0;
             player.SwitchState(player.IdleState);
+            player.currentState.UpdateState(player);
             return;
         }
         // if not sprinting go to walking 
@@ -62,6 +64,7 @@ public class PlayerSprinting : PlayerAbstract
             player.playerData.anim.SetBool("sprinting", false);
             Debug.Log(player.playerData.sprinting);
             player.SwitchState(player.WalkingState);
+            player.currentState.UpdateState(player);
             return;
         }
 
@@ -83,6 +86,7 @@ public class PlayerSprinting : PlayerAbstract
                 player.playerData.audioSource.PlayGrassSound(player.playerData._GrassJump);
             }
             player.SwitchState(player.AirState);
+            player.currentState.UpdateState(player);
             return;
         }
 
@@ -90,6 +94,7 @@ public class PlayerSprinting : PlayerAbstract
         if (!GroundCheck.Instance._IsGrounded && player.playerData.coyoteTimeCounter < 0)
         {
             player.SwitchState(player.AirState);
+            player.currentState.UpdateState(player);
             return;
         }
 

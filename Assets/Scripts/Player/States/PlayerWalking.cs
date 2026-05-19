@@ -46,6 +46,18 @@ public class PlayerWalking : PlayerAbstract
         {
             currentAttack = PlayerStateManager.AttackType.up;
         }
+        
+        // Sprinting (placed in this weird spot because of a bug. Yes, I know, it looks ugly here now.)
+        if (player.playerData.sprinting)
+        {
+            currentAttack = PlayerStateManager.AttackType.dash;
+            player.SwitchState(player.SprintingState);
+            player.playerData.anim.SetBool("moving", true);
+            player.playerData.anim.SetBool("walking", false);
+            player.playerData.anim.SetBool("sprinting", true);
+            player.currentState.UpdateState(player);
+            return;
+        }
 
         // Attack
         if (Input.GetKeyDown(SettingsData.Instance._InputAttack))
@@ -67,6 +79,7 @@ public class PlayerWalking : PlayerAbstract
             player.playerData.anim.SetBool("moving", false);
             player.playerData.anim.SetBool("walking", false);
             player.SwitchState(player.IdleState);
+            player.currentState.UpdateState(player);
             return;
         }
 
@@ -88,6 +101,7 @@ public class PlayerWalking : PlayerAbstract
                 player.playerData.audioSource.PlayGrassSound(player.playerData._GrassJump);
             }
             player.SwitchState(player.AirState);
+            player.currentState.UpdateState(player);
             return;
         }
 
@@ -97,16 +111,7 @@ public class PlayerWalking : PlayerAbstract
             player.playerData.audioSource.PlayGrassSound(player.playerData._GrassJump);
             player.playerData.PlayerRb.linearVelocityX = 0;
             player.SwitchState(player.AirState);
-            return;
-        }
-
-        // Sprinting
-        if (player.playerData.sprinting)
-        {
-            player.SwitchState(player.SprintingState);
-            player.playerData.anim.SetBool("moving", true);
-            player.playerData.anim.SetBool("walking", false);
-            player.playerData.anim.SetBool("sprinting", true);
+            player.currentState.UpdateState(player);
             return;
         }
 
