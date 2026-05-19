@@ -56,27 +56,27 @@ public class EnemyHit : MonoBehaviour
                 {
                     case(0):
                         // Forward attacks (0)
-                        DamageEnemy(1,10,10,other.transform.position.x,1);
+                        DamageEnemy(1,10,10,other.transform.position.x);
                         break;
                     case(1):
                         // Up attacks (1)
-                        DamageEnemy(1,10,10,other.transform.position.x,0.1f);
+                        DamageEnemy(1,0.1f,30,other.transform.position.x);
                         break;
                     case(2):
                         // Backward attacks (2)
-                        DamageEnemy(1,10,10,other.transform.position.x,1);
+                        DamageEnemy(1,10,10,other.transform.position.x);
                         break;
                     case(3):
                         // Down attacks (3)
-                        DamageEnemy(1,10,-10,other.transform.position.x,0.1f);
+                        DamageEnemy(1,20,-10,other.transform.position.x);
                         break;
                     case(4):
                         // Down air attacks (4)
-                        DamageEnemy(1,10,-10,other.transform.position.x,0.1f);
+                        DamageEnemy(1,0.1f,-10,other.transform.position.x);
                         break;
                     case(5):
                         // Dash attacks (5)
-                        DamageEnemy(1,10,10,other.transform.position.x,1);
+                        DamageEnemy(1,10,10,other.transform.position.x);
                         break;
                 }
             }
@@ -88,7 +88,7 @@ public class EnemyHit : MonoBehaviour
             }
         }
     }
-    public void DamageEnemy(int damage, float xLaunch, float yLaunch, float damageSourceX, float upOrDownMulti)
+    public void DamageEnemy(int damage, float xLaunch, float yLaunch, float damageSourceX)
     {
         //Debug.Log("Damaged Enemy for " + damage + " damage.");
         if(trackedHealth != 1)
@@ -98,7 +98,7 @@ public class EnemyHit : MonoBehaviour
         }
         if (!knockbackImmune)
         {
-            rb.linearVelocity = new Vector2(xLaunch*(transform.position.x <= damageSourceX ? -1 : 1)*upOrDownMulti, yLaunch);
+            rb.linearVelocity = new Vector2(xLaunch*(transform.position.x <= damageSourceX ? -1 : 1), yLaunch);
         }
         trackedHealth -= damage;
     }

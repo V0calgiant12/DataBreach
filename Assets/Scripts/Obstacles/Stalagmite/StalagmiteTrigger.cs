@@ -22,7 +22,7 @@ public class StalagtiteTrigger : MonoBehaviour
         // Damage enemy
         if(other.gameObject.CompareTag("EnemyHurtbox") && gameObject.CompareTag("Hitbox"))
         {
-            other.GetComponent<EnemyHit>().DamageEnemy(10, 10, UnityEngine.Random.Range(6,10),transform.position.x,1);
+            other.GetComponent<EnemyHit>().DamageEnemy(10, 10, UnityEngine.Random.Range(6,10),transform.position.x);
         }
         // Detect ground
         if((other.gameObject.CompareTag("Ground")||other.gameObject.CompareTag("Stone")) && gameObject.CompareTag("Hitbox"))

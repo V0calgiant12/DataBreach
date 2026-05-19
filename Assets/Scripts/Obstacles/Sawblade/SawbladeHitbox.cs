@@ -14,7 +14,7 @@ public class SawbladeHitbox : MonoBehaviour
         if(other.gameObject.CompareTag("EnemyHurtbox"))
         {
             Debug.Log(other.gameObject);
-            other.gameObject.GetComponent<EnemyHit>().DamageEnemy(1, 15, Random.Range(8,10),transform.position.x,1);
+            other.gameObject.GetComponent<EnemyHit>().DamageEnemy(1, 15, Random.Range(8,10),transform.position.x);
         }
     }
 }
