@@ -2790,9 +2790,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MudDetect
   SlimeStateManagerRef: {fileID: 0}
-  Player: {fileID: 7503720962246340740}
-  Slime: {fileID: 0}
-  PlayerRb: {fileID: 5254595327118261300}
+  playerAudioSource: {fileID: 6383165355602986983}
+  otherAudioSource: {fileID: 0}
+  mudLand: {fileID: 8300000, guid: 4a21d881f0d8ccc4d9996c9f1bc7b306, type: 3}
+  mudJump: {fileID: 8300000, guid: c2ee8e27bf31df4468ac9e25fb811960, type: 3}
 --- !u!114 &6383165355602986983
 MonoBehaviour:
   m_ObjectHideFlags: 0

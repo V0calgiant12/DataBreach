@@ -29,6 +29,7 @@ public class PlayerData : ScriptableObject
     public bool inAirGust;
     public bool pickUpHeart;
     public bool playerDead;
+    public bool inMud;
     [Header("Audio")]
     public AudioClip _GrassWalk;
     public AudioClip _GrassFall;
@@ -42,4 +43,5 @@ public class PlayerData : ScriptableObject
     public AudioClip _PlayerHit;
     public AudioClip _PlayerDeath;
     public AudioClip _PlayerAttack;
+    public AudioClip[] _MudWalk;
 }

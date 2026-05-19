@@ -52,18 +52,18 @@ public class PlayerAudioSource : MonoBehaviour
         audioSource.Play();
         StartCoroutine(Delete());
     }
-    //public void PlayerDeathSound2(AudioClip audioClip,float volume)
-    //{
-        //audioSource.pitch = Random.Range(0.6f,1.3f);
-        //audioSource.volume = volume;
-        //audioSource.outputAudioMixerGroup = audioMixer.FindMatchingGroups("Effects")[0];
-        //audioSource.clip = audioClip;
-        //audioSource.Play();
-        //StartCoroutine(Delete());
-    //}
     public void PlayerAttackSound(AudioClip audioClip,float volume)
     {
         audioSource.pitch = Random.Range(0.6f,1.3f);
+        audioSource.volume = volume;
+        audioSource.outputAudioMixerGroup = audioMixer.FindMatchingGroups("Effects")[0];
+        audioSource.clip = audioClip;
+        audioSource.Play();
+        StartCoroutine(Delete());
+    }
+    public void MudSound(AudioClip audioClip,float volume)
+    {
+        audioSource.pitch = Random.Range(0.8f,1.2f);
         audioSource.volume = volume;
         audioSource.outputAudioMixerGroup = audioMixer.FindMatchingGroups("Effects")[0];
         audioSource.clip = audioClip;

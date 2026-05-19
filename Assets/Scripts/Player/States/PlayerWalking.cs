@@ -11,6 +11,7 @@ public class PlayerWalking : PlayerAbstract
     public override void EnterState(PlayerStateManager player)
     {
         Debug.Log("Player is Walking / Walking State - " + player.playerData.sprinting);
+        audioTimer = 0;
     }
     public override void UpdateState(PlayerStateManager player)
     {
@@ -111,18 +112,26 @@ public class PlayerWalking : PlayerAbstract
         }
 
         // Audio
-        if(audioTimer == 25)
+        if(audioTimer == 11)
         {
-            if (GroundCheck.Instance._IsStone)
+            if (!player.playerData.inMud)
             {
-                player.playerData.audioSource.PlayStoneSound(player.playerData._StoneWalk);
+                if (GroundCheck.Instance._IsStone)
+                {
+                    player.playerData.audioSource.PlayStoneSound(player.playerData._StoneWalk);
+                }
+                else
+                {
+                    player.playerData.audioSource.PlayGrassSound(player.playerData._GrassWalk);
+                }
             }
             else
             {
-                player.playerData.audioSource.PlayGrassSound(player.playerData._GrassWalk);
+                player.playerData.audioSource.PlayMudSound(player.playerData._MudWalk[0]);
             }
             audioTimer = 0;
-        }else
+        }
+        else
         {
             audioTimer += 1;
         }

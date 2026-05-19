@@ -163,7 +163,6 @@ public class PlayerStateManager : MonoBehaviour
             Debug.Log(attackType);
         }
     }
-
     public void PlayerFlash(int type)
     {
         GameObject[] playerSprites = GameObject.FindGameObjectsWithTag("PlayerSprite"); // Puts all player sprite objects in a list.

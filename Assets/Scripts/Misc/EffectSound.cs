@@ -14,4 +14,14 @@ public class EffectSound : MonoBehaviour
         GameObject audioClone = Instantiate(prefab);
         audioClone.GetComponent<EffectAudioSource>().EnemySound(audio,volume);
     }
+    public void PlaySlimeJumpSound(AudioClip audio)
+    {
+        GameObject audioClone = Instantiate(prefab);
+        audioClone.GetComponent<EffectAudioSource>().SlimeJumpSound(audio,1f);
+    }
+    public void PlayMudSound(AudioClip audio)
+    {
+        GameObject audioClone = Instantiate(prefab);
+        audioClone.GetComponent<EffectAudioSource>().MudSound(audio,1f);
+    }
 }

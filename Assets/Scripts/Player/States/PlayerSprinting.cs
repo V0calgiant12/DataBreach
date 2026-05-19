@@ -10,6 +10,7 @@ public class PlayerSprinting : PlayerAbstract
     public override void EnterState(PlayerStateManager player)
     {
         Debug.Log("Player is Sprinting / Sprinting State - " + player.playerData.sprinting);
+        audioTimer = 3;
         player.playerData.anim.SetBool("sprinting", true);
         player.playerData.anim.SetBool("walking", false);
         player.playerData.anim.SetBool("moving", true);
@@ -93,18 +94,26 @@ public class PlayerSprinting : PlayerAbstract
         }
 
         // Audio
-        if(audioTimer == 15)
+        if(audioTimer == 9)
         {
-            if (GroundCheck.Instance._IsStone)
+            if (!player.playerData.inMud)
             {
-                player.playerData.audioSource.PlayStoneSound(player.playerData._StoneWalk);
+                if (GroundCheck.Instance._IsStone)
+                {
+                    player.playerData.audioSource.PlayStoneSound(player.playerData._StoneWalk);
+                }
+                else
+                {
+                    player.playerData.audioSource.PlayGrassSound(player.playerData._GrassWalk);
+                }
             }
             else
             {
-                player.playerData.audioSource.PlayGrassSound(player.playerData._GrassWalk);
+                player.playerData.audioSource.PlayMudSound(player.playerData._MudWalk[0]);
             }
             audioTimer = 0;
-        }else
+        }
+        else
         {
             audioTimer += 1;
         }

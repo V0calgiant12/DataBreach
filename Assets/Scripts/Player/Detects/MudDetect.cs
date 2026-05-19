@@ -4,13 +4,25 @@ public class MudDetect : MonoBehaviour
 {
     [Header("Mud References:")]
     public SlimeStateManager SlimeStateManagerRef;
-    public GameObject Player;
-    public GameObject Slime;
-    public Rigidbody2D PlayerRb;
+    [SerializeField] private PlayerSound playerAudioSource;
+    [SerializeField] private EffectSound otherAudioSource;
+    [SerializeField] private AudioClip mudLand;
+    [SerializeField] private AudioClip mudJump;
     
     void Start()
     {
-        PlayerRb = gameObject.GetComponent<Rigidbody2D>();
+    }
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if(other.gameObject.CompareTag("Mud") && gameObject.CompareTag("Player"))
+        {
+            playerAudioSource.PlayMudSound(mudLand);
+            gameObject.GetComponent<PlayerStateManager>().playerData.inMud = true;
+        }
+        if(other.gameObject.CompareTag("Mud") && gameObject.CompareTag("Enemy"))
+        {
+            otherAudioSource.PlayMudSound(mudLand);
+        }
     }
 
     private void OnTriggerStay2D(Collider2D other)
@@ -32,11 +44,14 @@ public class MudDetect : MonoBehaviour
     {
         if(other.gameObject.CompareTag("Mud") && gameObject.CompareTag("Player"))
         {   
+            playerAudioSource.PlayMudSound(mudJump);
             PlayerStateManager.Instance.playerData.mudSpeedMulti = 1f;
             PlayerStateManager.Instance.playerData.mudJumpMulti = 1f;
+            gameObject.GetComponent<PlayerStateManager>().playerData.inMud = false;
         }
         if(other.gameObject.CompareTag("Mud") && gameObject.CompareTag("Enemy"))
         {
+            otherAudioSource.PlayMudSound(mudJump);
             SlimeStateManagerRef = gameObject.GetComponent<SlimeStateManager>();
             SlimeStateManagerRef.mudSpeedMulti = 1f;
             SlimeStateManagerRef.mudJumpMulti = 1f;
