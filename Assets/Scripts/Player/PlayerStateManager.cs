@@ -40,7 +40,10 @@ public class PlayerStateManager : MonoBehaviour
         playerData.crouching = false;
         playerData.movementAllowed = true;
         playerData.playerDead = false;
-        playerData.playerHealth = 5;
+        if(playerData.playerHealth == 0)
+        {
+            playerData.playerHealth = 5;
+        }
         playerData.OffsetVelocity = new Vector2(0,0);
         playerData.interacting = false;
         Instance = this;

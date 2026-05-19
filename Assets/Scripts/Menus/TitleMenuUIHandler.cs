@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEditor;
+using UnityEditorInternal;
 
 public class TitleMenuUIHandler : MonoBehaviour
 {
@@ -29,10 +30,11 @@ public class TitleMenuUIHandler : MonoBehaviour
     }
     public void ContinueButton()
     {
-        Debug.Log("TEst continue button");
+        Debug.Log("Test continue button");
         if(GameData.Instance.SaveExists())
         {
             GameData.Instance.LoadData();
+            sceneTransition.TransitionToScene(GameData.Instance._SceneId,1);
         }
     }
     public void SettingsButton() // Switches to settings menu.

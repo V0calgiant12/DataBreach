@@ -10,6 +10,8 @@ public class GameData : MonoBehaviour
     /// </summary>
     public static GameData Instance;
     [SerializeField] private PlayerData playerData;
+    [Header("Save Data")]
+    public int _SceneId;
 // Need level ID 
     private void Awake()
     {
@@ -20,17 +22,6 @@ public class GameData : MonoBehaviour
         }
         Instance = this;
         DontDestroyOnLoad(gameObject);
-    }
-    public void SaveData() // Saves data to a JSON file.
-    {
-        SaveData data = new SaveData();
-
-        //data.variable = variable;
-        data.playerHealth = playerData.playerHealth;
-
-        string json = JsonUtility.ToJson(data);
-        File.WriteAllText(Application.persistentDataPath + "/gameData.json", json);
-        
     }
     public bool SaveExists()
     {
@@ -44,6 +35,18 @@ public class GameData : MonoBehaviour
             return false;
         }
     }
+    public void SaveData() // Saves data to a JSON file.
+    {
+        SaveData data = new SaveData();
+
+        //data.variable = variable;
+        data._PlayerHealth = playerData.playerHealth;
+        data._SceneId = _SceneId;
+
+        string json = JsonUtility.ToJson(data);
+        File.WriteAllText(Application.persistentDataPath + "/gameData.json", json);
+        
+    }
 
     public void LoadData() // Loads data from the JSON file.
     {
@@ -54,7 +57,8 @@ public class GameData : MonoBehaviour
             SaveData data = JsonUtility.FromJson<SaveData>(json);
             
             //variable = data.variable;
-            playerData.playerHealth = data.playerHealth;
+            playerData.playerHealth = data._PlayerHealth;
+            _SceneId = data._SceneId;
             Debug.Log("Data Exists");
         }
     }
@@ -64,7 +68,8 @@ public class GameData : MonoBehaviour
 [System.Serializable]
 class SaveData // This class quite literally just stores variables so they can be saved.
 {
-    public int playerHealth;
+    public int _PlayerHealth;
+    public int _SceneId;
 }
 
 public class WaitForFrames : CustomYieldInstruction
