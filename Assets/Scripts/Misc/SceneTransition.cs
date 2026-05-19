@@ -22,27 +22,6 @@ public class SceneTransition : MonoBehaviour
         yield return new WaitForSeconds(transitionTime);
         renderFeatureToggler.DisableRenderFeatures();
         SceneManager.LoadScene(levelIndex);
-        switch (levelIndex)
-        {
-            case(3):
-                // current level to 1 (Plains)
-                break;
-            case(4):
-                // current level to 2 (Forest)
-                break;
-            case(5):
-                //  current level to 3 (Mountains)
-                break;
-            case(6):
-                // current level to 4 (Quarry)
-                break;
-            case(7):
-                // current level to 5 (Deep Forest)
-                break;
-            case(8):
-                // current level to 6 (Corrupted Plains)
-                break;
-        }
     }
     public void ExitButton()
     {

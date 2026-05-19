@@ -17,7 +17,7 @@ public class EnemyStalagtiteTrigger : MonoBehaviour
     {
         if(other.gameObject.CompareTag("EnemyHurtbox") && gameObject.CompareTag("Hitbox"))
         {
-            other.GetComponent<EnemyHit>().DamageEnemy(10, 10, UnityEngine.Random.Range(6,10),transform.position.x);
+            other.GetComponent<EnemyHit>().DamageEnemy(10, 10, UnityEngine.Random.Range(6,10),transform.position.x,1);
         }
         if((other.gameObject.CompareTag("Ground")||other.gameObject.CompareTag("Stone")) && gameObject.CompareTag("Hitbox"))
         {
