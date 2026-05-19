@@ -20,7 +20,6 @@ public class PlayerWalking : PlayerAbstract
         
         // Moving
         moving = false;
-        player.playerData.anim.SetBool("attacking", false);
         if (Input.GetKey(SettingsData.Instance._InputRight) && player.playerData.movementAllowed)
         {
             currentAttack = PlayerStateManager.AttackType.forward;
