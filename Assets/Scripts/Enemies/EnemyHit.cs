@@ -6,6 +6,7 @@ using UnityEngine;
 public class EnemyHit : MonoBehaviour
 {
     [SerializeField] private GameObject ParentObject;
+    [SerializeField] private PlayerStateManager playerStateManager;
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private GameObject particlePrefab;
     [SerializeField] private FlashEffect flashEffect;
@@ -21,13 +22,16 @@ public class EnemyHit : MonoBehaviour
     private int iFrames = 0;
     public bool knockbackImmune = false;
     public bool invulnerable = false;
+    
     private void Start()
     {
+        playerStateManager = GameObject.Find("Player").GetComponent<PlayerStateManager>();
         trackedHealth = health;
         if(flashEffect == null)
         {
             flashEffect = ParentObject.GetComponent<FlashEffect>();
         }
+        
     }
     private void Update() 
     {
@@ -48,7 +52,33 @@ public class EnemyHit : MonoBehaviour
             TriggerShake.Instance.BurstShake(1,2);
             if (!invulnerable)
             {
-                DamageEnemy(1,10,10,other.transform.position.x);
+                switch (playerStateManager.playerData.anim.GetInteger("attackId"))
+                {
+                    case(0):
+                        // Forward attacks (0)
+                        DamageEnemy(1,10,10,other.transform.position.x,1);
+                        break;
+                    case(1):
+                        // Up attacks (1)
+                        DamageEnemy(1,10,10,other.transform.position.x,0.1f);
+                        break;
+                    case(2):
+                        // Backward attacks (2)
+                        DamageEnemy(1,10,10,other.transform.position.x,1);
+                        break;
+                    case(3):
+                        // Down attacks (3)
+                        DamageEnemy(1,10,-10,other.transform.position.x,0.1f);
+                        break;
+                    case(4):
+                        // Down air attacks (4)
+                        DamageEnemy(1,10,-10,other.transform.position.x,0.1f);
+                        break;
+                    case(5):
+                        // Dash attacks (5)
+                        DamageEnemy(1,10,10,other.transform.position.x,1);
+                        break;
+                }
             }
             else
             {
@@ -58,7 +88,7 @@ public class EnemyHit : MonoBehaviour
             }
         }
     }
-    public void DamageEnemy(int damage, float xLaunch, float yLaunch, float damageSourceX)
+    public void DamageEnemy(int damage, float xLaunch, float yLaunch, float damageSourceX, float upOrDownMulti)
     {
         //Debug.Log("Damaged Enemy for " + damage + " damage.");
         if(trackedHealth != 1)
@@ -68,7 +98,7 @@ public class EnemyHit : MonoBehaviour
         }
         if (!knockbackImmune)
         {
-            rb.linearVelocity = new Vector2(xLaunch*(transform.position.x <= damageSourceX ? -1 : 1), yLaunch);
+            rb.linearVelocity = new Vector2(xLaunch*(transform.position.x <= damageSourceX ? -1 : 1)*upOrDownMulti, yLaunch);
         }
         trackedHealth -= damage;
     }

@@ -41,7 +41,7 @@ public class PlayerStateManager : MonoBehaviour
         playerData.crouching = false;
         playerData.movementAllowed = true;
         playerData.playerDead = false;
-        if(playerData.playerHealth == 0)
+        if(playerData.playerHealth <= 0)
         {
             playerData.playerHealth = 5;
         }
