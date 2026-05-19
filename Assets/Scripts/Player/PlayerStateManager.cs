@@ -219,7 +219,7 @@ public class PlayerStateManager : MonoBehaviour
         if(attackTimer == 0)
         {
             playerData.PlayerRb.linearVelocityX = 50 * ((playerData.PlayerRb.linearVelocityX > 0) ? 1 : -1);
-            playerData.iFrames = Mathf.Abs(Mathf.FloorToInt(playerData.PlayerRb.linearVelocityX/0.8f))-30; // t=d/r, t=velocity/0.8f since velocity is multiplied by 0.8f every frame
+            playerData.iFrames = Mathf.Abs(Mathf.FloorToInt(playerData.PlayerRb.linearVelocityX/0.8f))-40; // t=d/r, t=velocity/0.8f since velocity is multiplied by 0.8f every frame
             while (MathF.Abs(playerData.PlayerRb.linearVelocityX) > 1f)
             {
                 playerData.PlayerRb.linearVelocityX = playerData.PlayerRb.linearVelocityX * 0.8f;
