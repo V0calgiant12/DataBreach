@@ -12,6 +12,7 @@ public class EffectAudioSource : MonoBehaviour
         audioSource.volume = volume;
         audioSource.outputAudioMixerGroup = audioMixer.FindMatchingGroups("Effects")[0];
         audioSource.clip = audioClip;
+        audioSource.spatialBlend = 0;
         audioSource.Play();
         StartCoroutine(Delete());
     }
@@ -20,15 +21,17 @@ public class EffectAudioSource : MonoBehaviour
         audioSource.volume = volume;
         audioSource.outputAudioMixerGroup = audioMixer.FindMatchingGroups("Effects")[0];
         audioSource.clip = audioClip;
+        audioSource.spatialBlend = 1;
         audioSource.Play();
         StartCoroutine(Delete());
     }
     public void SlimeJumpSound(AudioClip audioClip,float volume)
     {
-        audioSource.pitch = Random.Range(0.6f,1.3f);
+        audioSource.pitch = Random.Range(0.7f,1.3f);
         audioSource.volume = volume;
         audioSource.outputAudioMixerGroup = audioMixer.FindMatchingGroups("Effects")[0];
         audioSource.clip = audioClip;
+        audioSource.spatialBlend = 1;
         audioSource.Play();
         StartCoroutine(Delete());
     }
@@ -38,6 +41,7 @@ public class EffectAudioSource : MonoBehaviour
         audioSource.volume = volume;
         audioSource.outputAudioMixerGroup = audioMixer.FindMatchingGroups("Effects")[0];
         audioSource.clip = audioClip;
+        audioSource.spatialBlend = 1;
         audioSource.Play();
         StartCoroutine(Delete());
     }
