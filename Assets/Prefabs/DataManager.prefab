@@ -46,6 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DataManager
   playerData: {fileID: 11400000, guid: ef22878c3af9ca548a85988a7addec59, type: 2}
+  _SceneId: 0
 --- !u!114 &7583426883660505662
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -76,11 +77,12 @@ MonoBehaviour:
   _ToggleSprint: 0
   _ToggleCrouch: 0
   _CameraZoom: 10
-  _PlayerHue: 0
-  _PlayerSaturation: 1
-  _PlayerValue: 1
+  _PlayerHue: 0.03577745
+  _PlayerSaturation: 0.7988939
+  _PlayerValue: 0.6081146
   _Fullscreen: 0
   _Resolution: 2
+  _LightQuality: 4
   _Bloom: 0
   _ChromaticAberration: 0
   _Vignette: 0

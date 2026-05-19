@@ -171,9 +171,9 @@ public class SettingsData : MonoBehaviour
 
         _RunInBackground = true;
         _CameraZoom = 10;
-        _PlayerHue = 0;
-        _PlayerSaturation = 1;
-        _PlayerValue = 1;
+        _PlayerHue = 0.03577745f;
+        _PlayerSaturation = 0.7988939f;
+        _PlayerValue = 0.6081146f;
 
         _Fullscreen = 0;
         _Resolution = 2;
@@ -211,9 +211,9 @@ class SaveSettings // This class quite literally just stores variables so they c
     public bool _ToggleSprint = false;
     public bool _ToggleCrouch = false;
     public float _CameraZoom = 10;
-    public float _PlayerHue = 0;
-    public float _PlayerSaturation = 1;
-    public float _PlayerValue = 1;
+    public float _PlayerHue = 0.03577745f;
+    public float _PlayerSaturation = 0.7988939f;
+    public float _PlayerValue = 0.6081146f;
     [Header("Video")]
     public int _Fullscreen = 0;
     public int _Resolution = 2;
