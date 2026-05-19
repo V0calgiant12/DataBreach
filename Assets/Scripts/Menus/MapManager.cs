@@ -22,11 +22,11 @@ public class MapManager : MonoBehaviour
     public void DeepForest()
     {
         audioSource.Play();
-        sceneTransition.TransitionToScene(5,1);
+        sceneTransition.TransitionToScene(11,1);
     }
     public void Quarry()
     {
         audioSource.Play();
-        sceneTransition.TransitionToScene(5,1);
+        sceneTransition.TransitionToScene(11,1);
     }
 }
