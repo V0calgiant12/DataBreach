@@ -60,23 +60,23 @@ public class EnemyHit : MonoBehaviour
                         break;
                     case(1):
                         // Up attacks (1)
-                        DamageEnemy(1,0.1f,30,other.transform.position.x);
+                        DamageEnemy(1,2,30,other.transform.position.x);
                         break;
                     case(2):
                         // Backward attacks (2)
-                        DamageEnemy(1,10,10,other.transform.position.x);
+                        DamageEnemy(1,7,10,other.transform.position.x);
                         break;
                     case(3):
                         // Down attacks (3)
-                        DamageEnemy(1,20,-10,other.transform.position.x);
+                        DamageEnemy(1,8,5,other.transform.position.x);
                         break;
                     case(4):
                         // Down air attacks (4)
-                        DamageEnemy(1,0.1f,-10,other.transform.position.x);
+                        DamageEnemy(1,8,5,other.transform.position.x);
                         break;
                     case(5):
                         // Dash attacks (5)
-                        DamageEnemy(1,10,10,other.transform.position.x);
+                        DamageEnemy(1,15,8,other.transform.position.x);
                         break;
                 }
             }
