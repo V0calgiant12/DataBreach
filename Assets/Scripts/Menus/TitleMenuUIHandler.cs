@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 public class TitleMenuUIHandler : MonoBehaviour
 {
     [SerializeField] private GameObject settingsMenu;
+    [SerializeField] private PlayerData playerData;
     [SerializeField] private SettingsMenuUIHandler settingsHandler;
     private SceneTransition sceneTransition;
     void Start()
@@ -24,6 +25,7 @@ public class TitleMenuUIHandler : MonoBehaviour
 
     public void NewSaveButton() // Starts a transition to the Intro scene
     {
+        playerData.playerHealth = 5;
         sceneTransition.TransitionToScene(1,1); // Intro scene, 1 second transition.
     }
     public void ContinueButton()
