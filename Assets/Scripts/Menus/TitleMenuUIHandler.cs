@@ -9,6 +9,7 @@ public class TitleMenuUIHandler : MonoBehaviour
     [SerializeField] private GameObject settingsMenu;
     [SerializeField] private PlayerData playerData;
     [SerializeField] private SettingsMenuUIHandler settingsHandler;
+    [SerializeField] private GameObject ContinueFade;
     private SceneTransition sceneTransition;
     void Start()
     {
@@ -20,6 +21,7 @@ public class TitleMenuUIHandler : MonoBehaviour
         if(GameData.Instance.SaveExists())
         {
             GameData.Instance.LoadData();
+            ContinueFade.SetActive(false);
         }
     }
 
