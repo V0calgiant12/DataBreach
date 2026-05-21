@@ -1,7 +1,6 @@
 using UnityEngine;
 using System.Collections;
 using NUnit.Framework.Internal.Filters;
-using Unity.VisualScripting;
 public class PlayerAir : PlayerAbstract
 {
     private PlayerStateManager.AttackType currentAttack;
@@ -14,7 +13,6 @@ public class PlayerAir : PlayerAbstract
         Debug.Log("Player is in the air / Air State");
         playerSpeed = 7;
         shakeOnLand = false;
-        player.playerData.fastFallCounter = 0;
         if (player.playerData.PlayerRb.linearVelocityY > 0) 
         {
             player.StartCoroutine(player.WaitUntilNotJumping());
@@ -30,6 +28,28 @@ public class PlayerAir : PlayerAbstract
     public override void UpdateState(PlayerStateManager player)
     {
         currentAttack = PlayerStateManager.AttackType.forwardAir; // Default attack if nothing is inputed this frame.
+        if (fakeFastFallToggle)
+        {
+            if (Input.GetKeyDown(SettingsData.Instance._InputDown))
+            {
+                player.playerData.fastFallCounter += 1;
+                if (player.playerData.fastFallCounter >= 2)
+                {
+                    player.playerData.fastFallCounter = 0;
+                    player.playerData.PlayerRb.linearVelocity = new Vector2(player.playerData.PlayerRb.linearVelocityX, -jumpStrength * 1.5f);
+                }
+            }
+        }
+        else
+        {
+            // Fast Falling
+            if (Input.GetKeyDown(SettingsData.Instance._InputDown) && player.playerData.PlayerRb.linearVelocityY < 0)
+            {
+                player.playerData.PlayerRb.linearVelocity = new Vector2(player.playerData.PlayerRb.linearVelocityX, -jumpStrength * 1.5f);
+            }
+        }
+        
+
         
         // Movement left/right and sets attack.
         moving = false;
