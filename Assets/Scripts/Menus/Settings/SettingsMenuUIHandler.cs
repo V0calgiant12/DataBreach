@@ -128,6 +128,7 @@ public class SettingsMenuUIHandler : MonoBehaviour
         SettingsData.Instance._RunInBackground = gameSettings._RunInBackground;
         SettingsData.Instance._ToggleSprint = gameSettings._ToggleSprint;
         SettingsData.Instance._ToggleCrouch = gameSettings._ToggleCrouch;
+        SettingsData.Instance._DoubleTapFastFall = gameSettings._DoubleTapFastFall;
         SettingsData.Instance._CameraZoom = gameSettings._CameraZoom;
         SettingsData.Instance._PlayerHue = gameSettings._PlayerHue;
         SettingsData.Instance._PlayerSaturation = gameSettings._PlayerSaturation;
@@ -173,6 +174,7 @@ public class SettingsMenuUIHandler : MonoBehaviour
         gameSettings._RunInBackground = SettingsData.Instance._RunInBackground;
         gameSettings._ToggleSprint = SettingsData.Instance._ToggleSprint;
         gameSettings._ToggleCrouch = SettingsData.Instance._ToggleCrouch;
+        gameSettings._DoubleTapFastFall = SettingsData.Instance._DoubleTapFastFall;
         gameSettings._CameraZoom = SettingsData.Instance._CameraZoom;
         gameSettings._PlayerHue = SettingsData.Instance._PlayerHue;
         gameSettings._PlayerSaturation = SettingsData.Instance._PlayerSaturation;
