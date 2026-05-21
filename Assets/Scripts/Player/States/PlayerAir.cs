@@ -35,7 +35,7 @@ public class PlayerAir : PlayerAbstract
             if (Input.GetKeyDown(SettingsData.Instance._InputDown))
             {
                 player.playerData.fastFallCounter = 15;
-                if (player.playerData.fastFallCounter >= 0 && Input.GetKeyDown(SettingsData.Instance._InputDown))
+                if (player.playerData.fastFallCounter > 0 && Input.GetKeyDown(SettingsData.Instance._InputDown))
                 {
                     player.playerData.fastFallCounter = 0;
                     player.playerData.PlayerRb.linearVelocity = new Vector2(player.playerData.PlayerRb.linearVelocityX, -jumpStrength * 1.5f);
