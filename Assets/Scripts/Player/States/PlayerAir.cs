@@ -13,6 +13,7 @@ public class PlayerAir : PlayerAbstract
         Debug.Log("Player is in the air / Air State");
         playerSpeed = 7;
         shakeOnLand = false;
+        player.playerData.fastFallCounter = 0;
         if (player.playerData.PlayerRb.linearVelocityY > 0) 
         {
             player.StartCoroutine(player.WaitUntilNotJumping());
@@ -28,8 +29,8 @@ public class PlayerAir : PlayerAbstract
     public override void UpdateState(PlayerStateManager player)
     {
         currentAttack = PlayerStateManager.AttackType.forwardAir; // Default attack if nothing is inputed this frame.
-        if (fakeFastFallToggle)
-        {
+        //if (fakeFastFallToggle)
+        //{
             if (Input.GetKeyDown(SettingsData.Instance._InputDown))
             {
                 player.playerData.fastFallCounter += 1;
@@ -39,15 +40,15 @@ public class PlayerAir : PlayerAbstract
                     player.playerData.PlayerRb.linearVelocity = new Vector2(player.playerData.PlayerRb.linearVelocityX, -jumpStrength * 1.5f);
                 }
             }
-        }
-        else
-        {
+        //}
+        //else
+        //{
             // Fast Falling
-            if (Input.GetKeyDown(SettingsData.Instance._InputDown) && player.playerData.PlayerRb.linearVelocityY < 0)
-            {
-                player.playerData.PlayerRb.linearVelocity = new Vector2(player.playerData.PlayerRb.linearVelocityX, -jumpStrength * 1.5f);
-            }
-        }
+            //if (Input.GetKeyDown(SettingsData.Instance._InputDown) && player.playerData.PlayerRb.linearVelocityY < 0)
+            //{
+                //player.playerData.PlayerRb.linearVelocity = new Vector2(player.playerData.PlayerRb.linearVelocityX, -jumpStrength * 1.5f);
+            //}
+        //}
         
 
         
@@ -175,6 +176,7 @@ public class PlayerAir : PlayerAbstract
             {
                 player.playerData.anim.SetBool("attacking", false);
             }
+            player.playerData.fastFallCounter = 0;
             player.SwitchState(player.IdleState);
             player.playerData.anim.SetBool("falling", false);
             player.playerData.anim.SetBool("jumping", false);

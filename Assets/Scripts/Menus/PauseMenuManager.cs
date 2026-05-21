@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class PauseMenuManager : MonoBehaviour
 {
+    [SerializeField] private PlayerData playerData;
     [SerializeField] private GameObject canvas;
     [SerializeField] private GameObject settingsMenu;
     [SerializeField] private PlayerColor playerColor;
@@ -14,6 +15,10 @@ public class PauseMenuManager : MonoBehaviour
 
     void Update()
     {
+        if (!playerData.playerDead)
+        {
+            //filler
+        }
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (!canvas.activeSelf)
