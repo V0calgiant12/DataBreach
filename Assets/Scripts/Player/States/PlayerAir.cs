@@ -37,7 +37,7 @@ public class PlayerAir : PlayerAbstract
                 player.playerData.PlayerRb.linearVelocity = new Vector2(player.playerData.PlayerRb.linearVelocityX, -jumpStrength * 1.5f);
                 player.playerData.fastFallCounter = 0;
             }
-            else
+            else if (!SettingsData.Instance._DoubleTapFastFall)
             {
                 player.playerData.PlayerRb.linearVelocity = new Vector2(player.playerData.PlayerRb.linearVelocityX, -jumpStrength * 1.5f);
             }
