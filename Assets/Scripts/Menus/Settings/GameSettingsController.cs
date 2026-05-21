@@ -25,10 +25,14 @@ public class GameSettingsController : MonoBehaviour
     {
         switch(data._ToggleID)
         {
-            //case 0 taken by Up To Jump in controls menu
+            // Case 0 taken by Up To Jump in controls menu
             case(1): // Run in background
                 _RunInBackground = data.toggle.isOn;
                 Application.runInBackground = _RunInBackground;
+                break;
+            // Cases 2-5 taken up by Video Settings
+            case(6): // Double Tap Fast Fall
+                _DoubleTapFastFall = data.toggle.isOn;
                 break;
         }
     }
