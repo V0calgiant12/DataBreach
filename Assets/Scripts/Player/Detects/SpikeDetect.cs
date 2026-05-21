@@ -14,7 +14,7 @@ public class SpikeDetect : MonoBehaviour
         {   
             if (PlayerStateManager.Instance.playerData.playerHealth > 0)
             {
-                PlayerStateManager.Instance.DamagePlayer(Random.Range(7, 10),18,130,true,transform.position.x,true);
+                PlayerStateManager.Instance.DamagePlayer(Random.Range(9, 14),20,60,true,transform.position.x,true);
             }
         }
     }
