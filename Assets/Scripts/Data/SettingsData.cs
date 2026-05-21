@@ -30,6 +30,7 @@ public class SettingsData : MonoBehaviour
     public bool _RunInBackground = true;
     public bool _ToggleSprint = false;
     public bool _ToggleCrouch = false;
+    public bool _DoubleTapFastFall = true;
     public float _CameraZoom = 10;
     public float _PlayerHue = 0;
     public float _PlayerSaturation = 1;
@@ -79,6 +80,7 @@ public class SettingsData : MonoBehaviour
         data._RunInBackground = _RunInBackground;
         data._ToggleSprint = _ToggleSprint;
         data._ToggleCrouch = _ToggleCrouch;
+        data._DoubleTapFastFall = _DoubleTapFastFall;
         data._CameraZoom = _CameraZoom;
         data._PlayerHue = _PlayerHue;
         data._PlayerSaturation = _PlayerSaturation;
@@ -128,6 +130,7 @@ public class SettingsData : MonoBehaviour
             _RunInBackground = data._RunInBackground;
             _ToggleSprint = data._ToggleSprint;
             _ToggleCrouch = data._ToggleCrouch;
+            _DoubleTapFastFall = data._DoubleTapFastFall;
             _CameraZoom = data._CameraZoom;
             _PlayerHue = data._PlayerHue;
             _PlayerSaturation = data._PlayerSaturation;
@@ -170,6 +173,7 @@ public class SettingsData : MonoBehaviour
         _DialogueVolume = 0.5f;
 
         _RunInBackground = true;
+        _DoubleTapFastFall = true;
         _CameraZoom = 10;
         _PlayerHue = 0.02601013f;
         _PlayerSaturation = 0.6430919f;
@@ -210,6 +214,7 @@ class SaveSettings // This class quite literally just stores variables so they c
     public bool _RunInBackground = true;
     public bool _ToggleSprint = false;
     public bool _ToggleCrouch = false;
+    public bool _DoubleTapFastFall = true;
     public float _CameraZoom = 10;
     public float _PlayerHue = 0.02601013f;
     public float _PlayerSaturation = 0.6430919f;

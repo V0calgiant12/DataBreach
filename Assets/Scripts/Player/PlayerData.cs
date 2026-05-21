@@ -5,6 +5,7 @@ public class PlayerData : ScriptableObject
 {
     [Header("Player Data Settings:")]
     public int playerHealth = 5;
+    public int fastFallCounter;
     public float mudSpeedMulti;
     public float mudJumpMulti;
     [Header("Player Data References:")]

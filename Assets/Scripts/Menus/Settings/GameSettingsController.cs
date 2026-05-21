@@ -8,6 +8,7 @@ public class GameSettingsController : MonoBehaviour
     public bool _RunInBackground = true;
     public bool _ToggleSprint = false;
     public bool _ToggleCrouch = false;
+    public bool _DoubleTapFastFall = true;
     [Header("Values")]
     public float _CameraZoom;
     public float _PlayerHue;
