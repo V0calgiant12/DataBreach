@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: PlayerData
   m_EditorClassIdentifier: Assembly-CSharp::PlayerData
   playerHealth: 5
+  fastFallCounter: 0
   mudSpeedMulti: 1
   mudJumpMulti: 1
   MainCamera: {fileID: 0}
@@ -23,13 +24,13 @@ MonoBehaviour:
   audioSource: {fileID: 0}
   anim: {fileID: 0}
   pixelationMat: {fileID: 2100000, guid: 4c683fc6bc2d87548a869699295c3659, type: 2}
-  jumpBufferCounter: -3194
+  jumpBufferCounter: -2172
   coyoteTimeCounter: 15
-  iFrames: -1508
-  sprinting: 0
+  iFrames: -1153
+  sprinting: 1
   crouching: 0
   doubleJumpAvailable: 1
-  movementAllowed: 1
+  movementAllowed: 0
   leftOrRight: 1
   ricochet: 0
   interacting: 0
