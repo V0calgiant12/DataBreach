@@ -30,10 +30,6 @@ public class PlayerAir : PlayerAbstract
     {
         player.playerData.fastFallCounter -= 1;
         // Fast Falling
-        if (SettingsData.Instance._DoubleTapFastFall && Input.GetKeyDown(SettingsData.Instance._InputDown))
-        {
-            player.playerData.fastFallCounter = 45;
-        }
         if (Input.GetKeyDown(SettingsData.Instance._InputDown) && player.playerData.PlayerRb.linearVelocityY < 0)
         {
             if (SettingsData.Instance._DoubleTapFastFall && player.playerData.fastFallCounter > 0)
@@ -45,6 +41,10 @@ public class PlayerAir : PlayerAbstract
             {
                 player.playerData.PlayerRb.linearVelocity = new Vector2(player.playerData.PlayerRb.linearVelocityX, -jumpStrength * 1.5f);
             }
+        }
+        if (SettingsData.Instance._DoubleTapFastFall && Input.GetKeyDown(SettingsData.Instance._InputDown))
+        {
+            player.playerData.fastFallCounter = 45;
         }
         
 
