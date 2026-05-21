@@ -40,6 +40,16 @@ public class SettingsMenuUIHandler : MonoBehaviour
             }
             gameObject.SetActive(false);
         }
+        if(Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.R))
+        {
+            SettingsData.Instance.NoFile();
+            LoadSettings();
+            keybinds.RefreshSettings();
+            gameSettings.RefreshSettings();
+            videoSettings.RefreshSettings();
+            ControlsButton();
+
+        }
     }
     public void OnAwake() // Defaults to controls tab
     {

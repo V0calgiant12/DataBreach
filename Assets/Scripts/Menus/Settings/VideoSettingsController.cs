@@ -133,7 +133,7 @@ public class VideoSettingsController : MonoBehaviour
                 break;
         }
     }
-    private void RefreshSettings() // Gets the saved settings and tells all other setting objects with the tag "GameMenu" to refresh their visuals, which is handled elsewhere.
+    public void RefreshSettings() // Gets the saved settings and tells all other setting objects with the tag "GameMenu" to refresh their visuals, which is handled elsewhere.
     {
         GameObject[] videoMenuItems = GameObject.FindGameObjectsWithTag("VideoMenu"); // Puts all game menu objects in a list.
         int index = 0;

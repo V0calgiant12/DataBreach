@@ -152,7 +152,7 @@ public class SettingsData : MonoBehaviour
             NoFile();
         }
     }
-    private void NoFile()
+    public void NoFile()
     {
         Debug.Log("No settings file found! Falling back to default settings.");
         

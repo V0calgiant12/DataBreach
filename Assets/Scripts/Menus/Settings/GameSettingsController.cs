@@ -71,10 +71,10 @@ public class GameSettingsController : MonoBehaviour
         data.slider.value = data._DefaultValue;
         SliderSetting(data);
     }
-    private void RefreshSettings() // Gets the saved settings and tells all other setting objects with the tag "GameMenu" to refresh their visuals, which is handled elsewhere.
+    public void RefreshSettings() // Gets the saved settings and tells all other setting objects with the tag "GameMenu" to refresh their visuals, which is handled elsewhere.
     {
         _RunInBackground = SettingsData.Instance._RunInBackground;
-
+        
         GameObject[] gameMenuItems = GameObject.FindGameObjectsWithTag("GameMenu"); // Puts all game menu objects in a list.
         int index = 0;
         while (index <= gameMenuItems.Length - 1) // Repeats for every game object.
