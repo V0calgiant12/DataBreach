@@ -28,27 +28,28 @@ public class PlayerAir : PlayerAbstract
     }
     public override void UpdateState(PlayerStateManager player)
     {
+        player.playerData.fastFallCounter -= 1;
         currentAttack = PlayerStateManager.AttackType.forwardAir; // Default attack if nothing is inputed this frame.
-        //if (fakeFastFallToggle)
-        //{
+        if (SettingsData.Instance._DoubleTapFastFall)
+        {
             if (Input.GetKeyDown(SettingsData.Instance._InputDown))
             {
-                player.playerData.fastFallCounter += 1;
-                if (player.playerData.fastFallCounter >= 2)
+                player.playerData.fastFallCounter = 15;
+                if (player.playerData.fastFallCounter > 0 && Input.GetKeyDown(SettingsData.Instance._InputDown))
                 {
                     player.playerData.fastFallCounter = 0;
                     player.playerData.PlayerRb.linearVelocity = new Vector2(player.playerData.PlayerRb.linearVelocityX, -jumpStrength * 1.5f);
                 }
             }
-        //}
-        //else
-        //{
+        }
+        else
+        {
             // Fast Falling
-            //if (Input.GetKeyDown(SettingsData.Instance._InputDown) && player.playerData.PlayerRb.linearVelocityY < 0)
-            //{
-                //player.playerData.PlayerRb.linearVelocity = new Vector2(player.playerData.PlayerRb.linearVelocityX, -jumpStrength * 1.5f);
-            //}
-        //}
+            if (Input.GetKeyDown(SettingsData.Instance._InputDown) && player.playerData.PlayerRb.linearVelocityY < 0)
+            {
+                player.playerData.PlayerRb.linearVelocity = new Vector2(player.playerData.PlayerRb.linearVelocityX, -jumpStrength * 1.5f);
+            }
+        }
         
 
         
