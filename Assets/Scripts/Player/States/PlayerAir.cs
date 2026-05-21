@@ -29,23 +29,19 @@ public class PlayerAir : PlayerAbstract
     public override void UpdateState(PlayerStateManager player)
     {
         player.playerData.fastFallCounter -= 1;
-        currentAttack = PlayerStateManager.AttackType.forwardAir; // Default attack if nothing is inputed this frame.
-        if (SettingsData.Instance._DoubleTapFastFall)
+        // Fast Falling
+        if (SettingsData.Instance._DoubleTapFastFall && Input.GetKeyDown(SettingsData.Instance._InputDown))
         {
-            if (Input.GetKeyDown(SettingsData.Instance._InputDown))
-            {
-                player.playerData.fastFallCounter = 15;
-                if (player.playerData.fastFallCounter > 0 && Input.GetKeyDown(SettingsData.Instance._InputDown))
-                {
-                    player.playerData.fastFallCounter = 0;
-                    player.playerData.PlayerRb.linearVelocity = new Vector2(player.playerData.PlayerRb.linearVelocityX, -jumpStrength * 1.5f);
-                }
-            }
+            player.playerData.fastFallCounter = 45;
         }
-        else
+        if (Input.GetKeyDown(SettingsData.Instance._InputDown) && player.playerData.PlayerRb.linearVelocityY < 0)
         {
-            // Fast Falling
-            if (Input.GetKeyDown(SettingsData.Instance._InputDown) && player.playerData.PlayerRb.linearVelocityY < 0)
+            if (SettingsData.Instance._DoubleTapFastFall && player.playerData.fastFallCounter > 0)
+            {
+                player.playerData.PlayerRb.linearVelocity = new Vector2(player.playerData.PlayerRb.linearVelocityX, -jumpStrength * 1.5f);
+                player.playerData.fastFallCounter = 0;
+            }
+            else
             {
                 player.playerData.PlayerRb.linearVelocity = new Vector2(player.playerData.PlayerRb.linearVelocityX, -jumpStrength * 1.5f);
             }
