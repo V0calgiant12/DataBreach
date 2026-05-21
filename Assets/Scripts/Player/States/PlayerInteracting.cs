@@ -11,6 +11,11 @@ public class PlayerInteracting : PlayerAbstract
     {
         player.playerData.interacting = true;
         frame = 0;
+        player.playerData.anim.SetBool("moving", false);
+        player.playerData.anim.SetBool("walking", false);
+        player.playerData.anim.SetBool("sprinting", false);
+        player.playerData.anim.SetBool("falling", false);
+        player.playerData.anim.SetBool("jumping", false);
     }
     public override void UpdateState(PlayerStateManager player) // Update Function
     {
