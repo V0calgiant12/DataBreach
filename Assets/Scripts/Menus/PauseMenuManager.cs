@@ -15,11 +15,7 @@ public class PauseMenuManager : MonoBehaviour
 
     void Update()
     {
-        if (!playerData.playerDead)
-        {
-            //filler
-        }
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape) && !playerData.playerDead)
         {
             if (!canvas.activeSelf)
             {
