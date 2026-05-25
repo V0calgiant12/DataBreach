@@ -68,18 +68,29 @@ public class TextWrite : MonoBehaviour
         string output = "";
         while(characterNum < _TextInput.Length)
         {
-            output += _TextInput[characterNum];
             if(char.ToString(_TextInput[characterNum]) != " ")
             {
                 GameObject audioClone = Instantiate(prefab);
                 audioClone.GetComponent<MenuAudioSource>().TextSound(this);
             }
-            characterNum += 1;
             if (Input.GetKey(SettingsData.Instance._InputInteract))
             {
                 output = _TextInput;
                 characterNum = _TextInput.Length;
             }
+            if(char.ToString(_TextInput[characterNum]) == "<" && char.ToString(_TextInput[characterNum+1]) == "b" && char.ToString(_TextInput[characterNum+2]) == "r" && char.ToString(_TextInput[characterNum+3]) == ">")
+            {
+                output += _TextInput[characterNum];
+                characterNum += 1;
+                output += _TextInput[characterNum];
+                characterNum += 1;
+                output += _TextInput[characterNum];
+                characterNum += 1;
+                output += _TextInput[characterNum];
+                characterNum += 1;
+            }
+            output += _TextInput[characterNum];
+            characterNum += 1;
             text.text = output;
 
             yield return new WaitForFrames(_TextSpeed);
