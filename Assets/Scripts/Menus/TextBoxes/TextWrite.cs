@@ -87,12 +87,12 @@ public class TextWrite : MonoBehaviour
             }
             output += _TextInput[characterNum];
             characterNum += 1;
-            text.text = output;
             if (Input.GetKey(SettingsData.Instance._InputInteract))
             {
                 output = _TextInput;
                 characterNum = _TextInput.Length;
             }
+            text.text = output;
 
             yield return new WaitForFrames(_TextSpeed);
         }
