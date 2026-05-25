@@ -6,7 +6,7 @@ using UnityEngine;
 public class EnemyHit : MonoBehaviour
 {
     [SerializeField] private GameObject ParentObject;
-    [SerializeField] private PlayerStateManager playerStateManager;
+    private PlayerStateManager playerStateManager;
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private GameObject particlePrefab;
     [SerializeField] private FlashEffect flashEffect;
