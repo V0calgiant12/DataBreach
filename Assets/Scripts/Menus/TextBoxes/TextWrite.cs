@@ -6,6 +6,7 @@ using System;
 using UnityEngine.TextCore.Text;
 using Unity.Collections;
 using Unity.VisualScripting;
+using System.Timers;
 
 public class TextWrite : MonoBehaviour
 {
@@ -65,36 +66,41 @@ public class TextWrite : MonoBehaviour
             yield return null;
         }
         characterNum = 0;
+        int waitTime = 0;
         string output = "";
         while(characterNum < _TextInput.Length)
         {
-            if(char.ToString(_TextInput[characterNum]) != " ")
+            if(waitTime == 0)
             {
-                GameObject audioClone = Instantiate(prefab);
-                audioClone.GetComponent<MenuAudioSource>().TextSound(this);
+                waitTime = _TextSpeed;
+                if(!char.IsWhiteSpace(_TextInput[characterNum]) && char.ToString(_TextInput[characterNum]) != "<" && char.ToString(_TextInput[characterNum]) != ">")
+                {
+                    GameObject audioClone = Instantiate(prefab);
+                    audioClone.GetComponent<MenuAudioSource>().TextSound(this);
+                }
+                if(char.ToString(_TextInput[characterNum]) == "<" && char.ToString(_TextInput[characterNum+1]) == "b" && char.ToString(_TextInput[characterNum+2]) == "r" && char.ToString(_TextInput[characterNum+3]) == ">")
+                {
+                    output += _TextInput[characterNum];
+                    characterNum += 1;
+                    output += _TextInput[characterNum];
+                    characterNum += 1;
+                    output += _TextInput[characterNum];
+                    characterNum += 1;
+                    output += _TextInput[characterNum];
+                    characterNum += 1;
+                    waitTime = _TextSpeed * 3;
+                }
+                output += _TextInput[characterNum];
+                characterNum += 1;
+                if (Input.GetKey(SettingsData.Instance._InputInteract))
+                {
+                    output = _TextInput;
+                    characterNum = _TextInput.Length;
+                }
+                text.text = output;
             }
-            if(char.ToString(_TextInput[characterNum]) == "<" && char.ToString(_TextInput[characterNum+1]) == "b" && char.ToString(_TextInput[characterNum+2]) == "r" && char.ToString(_TextInput[characterNum+3]) == ">")
-            {
-                output += _TextInput[characterNum];
-                characterNum += 1;
-                output += _TextInput[characterNum];
-                characterNum += 1;
-                output += _TextInput[characterNum];
-                characterNum += 1;
-                output += _TextInput[characterNum];
-                characterNum += 1;
-                yield return new WaitForFrames(_TextSpeed*3);
-            }
-            output += _TextInput[characterNum];
-            characterNum += 1;
-            if (Input.GetKey(SettingsData.Instance._InputInteract))
-            {
-                output = _TextInput;
-                characterNum = _TextInput.Length;
-            }
-            text.text = output;
-
-            yield return new WaitForFrames(_TextSpeed);
+            waitTime -= Time.timeScale == 1 ? 1 : 0;
+            yield return null;
         }
         _Writing = false;
     }
