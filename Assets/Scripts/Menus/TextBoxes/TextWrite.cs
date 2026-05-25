@@ -42,7 +42,7 @@ public class TextWrite : MonoBehaviour
                 text.text = "";
             }
         }
-        else if (!CutsceneManager.Instance.textIsOpen)
+        else if (!IntroCutsceneManager.Instance.textIsOpen)
         {
             text.text = "";
         }

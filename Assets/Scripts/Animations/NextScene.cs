@@ -3,7 +3,7 @@ public class NextScene : StateMachineBehaviour
 {
     public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        CutsceneManager cutsceneManager = GameObject.Find("Cutscene").GetComponent<CutsceneManager>();
+        IntroCutsceneManager cutsceneManager = GameObject.Find("Cutscene").GetComponent<IntroCutsceneManager>();
         cutsceneManager.ProgressCutscene();
     }
 }

@@ -4,6 +4,6 @@ public class WalkTrigger : MonoBehaviour
 {
     void OnTriggerEnter2D(Collider2D other)
     {
-        CutsceneManager.Instance.walking = false;
+        IntroCutsceneManager.Instance.walking = false;
     }
 }

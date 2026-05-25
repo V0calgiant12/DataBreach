@@ -5,7 +5,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class CutsceneManager : MonoBehaviour
+public class IntroCutsceneManager : MonoBehaviour
 {
     [Header("Cutscene Manager References:")]
     [SerializeField] private Animator anim;
@@ -16,7 +16,7 @@ public class CutsceneManager : MonoBehaviour
     [SerializeField] private AudioClip bitSound;
     [SerializeField] private AudioClip playerSound;
     public bool walking;
-    public static CutsceneManager Instance;
+    public static IntroCutsceneManager Instance;
 
     private int inputTimer;
     [SerializeField] private int currentScene;
