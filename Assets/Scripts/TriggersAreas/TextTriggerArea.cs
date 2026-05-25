@@ -27,7 +27,7 @@ public class TextTriggerArea : MonoBehaviour
             if (HealPlayer)
             {
                 audioSource.Play();
-                PlayerStateManager.Instance.playerData.playerHealth += 1;
+                PlayerStateManager.Instance.playerData.playerHealth = 5;
             }
         }
     }
