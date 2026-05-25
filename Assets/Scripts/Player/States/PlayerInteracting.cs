@@ -14,6 +14,7 @@ public class PlayerInteracting : PlayerAbstract
         player.playerData.anim.SetBool("moving", false);
         player.playerData.anim.SetBool("walking", false);
         player.playerData.anim.SetBool("sprinting", false);
+        player.playerData.anim.SetBool("crouching", false);
         player.playerData.anim.SetBool("falling", false);
         player.playerData.anim.SetBool("jumping", false);
     }
