@@ -98,7 +98,7 @@ public class PlayerStateManager : MonoBehaviour
         playerData.collider = gameObject.GetComponent<BoxCollider2D>();
         playerData.MainCamera = GameObject.Find("Main Camera");
     }
-    public void DamagePlayer(float xLaunch, float yLaunch,int timer, bool overrideIFrames, float damageSourceX, bool nonDirectional)
+    public void DamagePlayer(float xLaunch, float yLaunch, int timer, bool overrideIFrames, float damageSourceX, bool nonDirectional)
     {
         if (playerData.iFrames < 0 || overrideIFrames)
         {
