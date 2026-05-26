@@ -5,6 +5,7 @@ public class TutorialCutsceneManager : MonoBehaviour
 {
     
     [Header("Cutscene Manager References:")]
+    public GameObject InvisbleWall;
     [SerializeField] private Animator anim;
     [SerializeField] private Animator screen;
     [SerializeField] private AudioSource audioSource;
@@ -29,6 +30,7 @@ public class TutorialCutsceneManager : MonoBehaviour
         switch (currentScene)
         {
             case(1):
+                InvisbleWall.SetActive(true);
                 TriggerShake.Instance.BurstShake(1,1,false);
                 audioSource.clip = shake1;
                 audioSource.Play();
