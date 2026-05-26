@@ -104,7 +104,7 @@ public class PlayerStateManager : MonoBehaviour
         {
             //PlayerFlash(1);
             playerData.anim.SetBool("hit", true);
-            TriggerShake.Instance.BurstShake(3,2);
+            TriggerShake.Instance.BurstShake(3,2,true);
             playerData.playerHealth = playerData.playerHealth - 1;
             playerData.audioSource.PlayPlayerHitSound(playerData._PlayerHit);
             //Debug.Log(playerData.playerHealth);
@@ -198,7 +198,7 @@ public class PlayerStateManager : MonoBehaviour
             {
                 playerData.PlayerRb.linearVelocity = new Vector2(-playerData.PlayerRb.linearVelocity.x + ((playerData.PlayerRb.linearVelocity.x >= 0 ? -1.2f : 1.2f) * xLaunch), playerData.PlayerRb.linearVelocity.y + yLaunch * 0.25f);
                 playerData.ricochet = false;
-                TriggerShake.Instance.BurstShake(-1*MathF.Cos(playerData.PlayerRb.linearVelocityX/2)+(2+elapsed/25),2);
+                TriggerShake.Instance.BurstShake(-1*MathF.Cos(playerData.PlayerRb.linearVelocityX/2)+(2+elapsed/25),2,true);
                 PlayerFlash(1);
                 timer += 15;
             }

@@ -49,7 +49,7 @@ public class EnemyHit : MonoBehaviour
         if (other.gameObject.CompareTag("PlayerHitbox") && iFrames < 0)
         {
             iFrames = 15;
-            TriggerShake.Instance.BurstShake(1,2);
+            TriggerShake.Instance.BurstShake(1,2,false);
             if (!invulnerable)
             {
                 switch (playerStateManager.playerData.anim.GetInteger("attackId"))

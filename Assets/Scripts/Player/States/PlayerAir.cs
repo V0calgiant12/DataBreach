@@ -157,7 +157,7 @@ public class PlayerAir : PlayerAbstract
             //Debug.Log(shakeOnLand);
             if(shakeOnLand)
             {
-                TriggerShake.Instance.BurstShake(shakeIntensityLvl,1);
+                TriggerShake.Instance.BurstShake(shakeIntensityLvl,1,true);
             }
             player.playerData.doubleJumpAvailable = true;
             player.playerData.audioSource.PlayJumpSound(player.playerData._NormalFall);

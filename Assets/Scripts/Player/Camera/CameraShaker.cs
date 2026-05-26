@@ -46,13 +46,16 @@ public class CameraShaker : MonoBehaviour
         transform.localPosition = originalLocalPosition;
     }
 
-    public IEnumerator BurstShake(float magnitude, float lengthMult)
+    public IEnumerator BurstShake(float magnitude, float lengthMult, bool playSound)
     {
         Debug.Log("Camera Burst Shake " + magnitude + ", pitch: " + magnitude * 0.05f);
         UnityEngine.Vector3 originalLocalPosition = transform.localPosition;
         float elapsed = 0f;
-        audioSource.pitch = 2.5f - (magnitude * 0.05f + Random.Range(-0.1f, 0.1f));
-        audioSource.Play();
+        if (playSound)
+        {
+            audioSource.pitch = 2.5f - (magnitude * 0.05f + Random.Range(-0.1f, 0.1f));
+            audioSource.Play();
+        }
 
         while (elapsed < 5 + 0.5*magnitude*lengthMult)
         {
