@@ -106,25 +106,25 @@ public class IntroCutsceneManager : MonoBehaviour
         switch (number)
         {
             case(1):
-                textData._TextInput = "It doesn't seem like it's awake yet...";
+                textData._TextInput = "You found the bit, but it doesn't seem like it's awake yet...";
                 textData._TextSpeed = 3;
                 textData._TextSound = bitSound;
                 StartCoroutine(WaitUntilTextCloses(30,60));
                 break;
             case(2):
-                textData._TextInput = "It's flying around in a panic! It seems like something bad may have happened...";
+                textData._TextInput = "It woke up! It seems to be confused and panicked about where it is.";
                 textData._TextSpeed = 3;
                 textData._TextSound = bitSound;
                 StartCoroutine(WaitUntilTextCloses(200,30));
                 break;
             case(3):
-                textData._TextInput = "It seems like it's trying to ask you for something, so you ask if it needs help.";
+                textData._TextInput = "It seems glad to see you! You ask if it needs help getting back to where it came from.";
                 textData._TextSpeed = 3;
                 textData._TextSound = bitSound;
                 StartCoroutine(WaitUntilTextCloses(240,60));
                 break;
             case(4):
-                textData._TextInput = "You agree to help it. Since you were already heading East, you ask if the problem is that way.";
+                textData._TextInput = "You agree to help it and ask if the destination is to the East.";
                 textData._TextSpeed = 3;
                 textData._TextSound = bitSound;
                 StartCoroutine(WaitUntilTextCloses(240,60));
