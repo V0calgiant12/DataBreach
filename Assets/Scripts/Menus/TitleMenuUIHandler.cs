@@ -28,7 +28,7 @@ public class TitleMenuUIHandler : MonoBehaviour
     public void NewSaveButton() // Starts a transition to the Intro scene
     {
         playerData.playerHealth = 5;
-        sceneTransition.TransitionToScene(1,1); // Intro scene, 1 second transition.
+        sceneTransition.TransitionToScene(13,1); // Intro scene, 1 second transition.
     }
     public void ContinueButton()
     {
@@ -36,7 +36,7 @@ public class TitleMenuUIHandler : MonoBehaviour
         if(GameData.Instance.SaveExists())
         {
             GameData.Instance.LoadData();
-            sceneTransition.TransitionToScene(GameData.Instance._SceneId,13);
+            sceneTransition.TransitionToScene(GameData.Instance._SceneId,1);
         }
     }
     public void SettingsButton() // Switches to settings menu.
