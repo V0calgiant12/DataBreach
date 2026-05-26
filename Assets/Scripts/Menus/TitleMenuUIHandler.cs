@@ -36,7 +36,7 @@ public class TitleMenuUIHandler : MonoBehaviour
         if(GameData.Instance.SaveExists())
         {
             GameData.Instance.LoadData();
-            sceneTransition.TransitionToScene(GameData.Instance._SceneId,1);
+            sceneTransition.TransitionToScene(GameData.Instance._SceneId,13);
         }
     }
     public void SettingsButton() // Switches to settings menu.
