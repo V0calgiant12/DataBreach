@@ -49,14 +49,16 @@ public class TutorialCutsceneManager : MonoBehaviour
                 StartCoroutine(WaitForFrames(150));
                 break;
             case(4):
+                PlayerStateManager.Instance.Interact();
                 TriggerShake.Instance.BurstShake(4,2,false);
                 anim.SetInteger("Scene", 4);
                 alarm.Play();
                 audioSource.clip = shake2;
                 audioSource.Play();
-                StartCoroutine(WaitUntilTextCloses(120,60));
+                StartCoroutine(WaitUntilTextCloses(120,60,false));
                 break;
             case(5):
+                PlayerStateManager.Instance.Interact();
                 anim.SetInteger("Scene", 5);
                 audioSource.clip = rapidExplosion;
                 audioSource.Play();
@@ -64,7 +66,7 @@ public class TutorialCutsceneManager : MonoBehaviour
                 break;
         }
     }
-    private IEnumerator WaitUntilTextCloses(int delay, int delay2)
+    private IEnumerator WaitUntilTextCloses(int delay, int delay2, bool allowMovementAfter)
     {
         int elapsed = 0;
         while(delay > elapsed)
@@ -76,6 +78,10 @@ public class TutorialCutsceneManager : MonoBehaviour
         yield return new WaitUntil(() => !TextWrite.Instance._Writing && Input.GetKeyDown(SettingsData.Instance._InputInteract));
         TextWrite.Instance.Close();
         textIsOpen = false;
+        if (!allowMovementAfter)
+        {
+            PlayerStateManager.Instance.Interact();
+        }
         elapsed = 0;
         while(delay2 > elapsed)
         {
