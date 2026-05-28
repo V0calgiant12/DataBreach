@@ -57,6 +57,8 @@ public class PlayerStateManager : MonoBehaviour
         playerData.anim.SetBool("moving", false);
         playerData.anim.SetBool("sprinting", false);
 
+        playerData.pixelationMat.SetFloat("_Pixelation", 550);
+
         playerData.ScreenCanvas = GameObject.Find("Screen").GetComponent<Animator>();
 
     }
