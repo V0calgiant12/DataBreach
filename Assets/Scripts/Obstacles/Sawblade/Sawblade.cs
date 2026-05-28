@@ -71,7 +71,7 @@ public class Sawblade : MonoBehaviour
         while (upDistance > transform.localPosition.y)
         {
             elapsed += Time.timeScale == 1 ? 1 : 0;
-            SawbladeSpinVolume += Time.timeScale == 1 ? 0.05f : 0;
+            SawbladeSpinVolume += Time.timeScale == 1 ? upDistance/upTime : 0;
             transform.localPosition = new Vector2(transform.localPosition.x, upDistance/upTime * elapsed + startingY); // d=r/t, r=d*t
             //Debug.Log("UpTime: " + upTime + " UpDist: " + upDistance + " Elapsed: " + elapsed + " StartingY: " + startingY + " Combined: " + (upDistance/upTime * elapsed + startingY));
             if(transform.localPosition.y >= upDistance / 2 && !moving)
@@ -110,7 +110,7 @@ public class Sawblade : MonoBehaviour
         while (0 < transform.localPosition.y)
         {
             elapsed += Time.timeScale == 1 ? 1 : 0;
-            SawbladeSpinVolume -= Time.timeScale == 1 ? -0.05f : 0;
+            SawbladeSpinVolume -= Time.timeScale == 1 ? upDistance/upTime : 0;
             transform.localPosition = new Vector2(transform.localPosition.x, -1 * upDistance/upTime * elapsed + startingY);
             //Debug.Log("UpTime: " + upTime + " UpDist: " + upDistance + " Elapsed: " + elapsed + " StartingY: " + startingY + " Combined: " + (-1*upDistance/upTime * elapsed + startingY));
             yield return null;
