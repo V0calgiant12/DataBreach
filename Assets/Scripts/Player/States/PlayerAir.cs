@@ -25,7 +25,7 @@ public class PlayerAir : PlayerAbstract
             player.playerData.anim.SetBool("falling", true);
             player.playerData.anim.SetBool("jumping", false);
         }
-        player.transform.position = new Vector2(player.transform.position.x, player.transform.position.y + 0.01f);
+        player.transform.position = new Vector2(player.transform.position.x, player.transform.position.y + 0.5f);
     }
     public override void UpdateState(PlayerStateManager player)
     {
