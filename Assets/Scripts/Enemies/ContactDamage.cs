@@ -4,6 +4,7 @@ using UnityEngine;
 public class ContactDamage : MonoBehaviour
 {
     [SerializeField] private bool StopAtOneHp = false;
+    [SerializeField] private Vector2 knockback;
 
     void OnTriggerStay2D(Collider2D collision)
     {
@@ -11,7 +12,7 @@ public class ContactDamage : MonoBehaviour
         {
             if(!StopAtOneHp || StopAtOneHp && PlayerStateManager.Instance.playerData.playerHealth != 1)
             {
-                PlayerStateManager.Instance.DamagePlayer(Random.Range(10,15),Random.Range(5,10), 90, false, transform.position.x, false);
+                PlayerStateManager.Instance.DamagePlayer(knockback.x, knockback.y, 30, false, transform.position.x, false);
             }
         }
     }

@@ -210,7 +210,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a667a26981cea94380769adee02304f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SlimeDamage
-  audioSource3: {fileID: 1921390955554284192}
+  StopAtOneHp: 0
+  knockback: {x: 7, y: 10}
 --- !u!1 &1172246738268572851
 GameObject:
   m_ObjectHideFlags: 0
@@ -631,12 +632,14 @@ MonoBehaviour:
   ParentObject: {fileID: 6655625841267738903}
   rb: {fileID: 7735234664607809060}
   particlePrefab: {fileID: 2489886994720635918, guid: b6f49d710ad50454195d5f99b91a9ce7, type: 3}
+  flashEffect: {fileID: 0}
   audioSource: {fileID: 8582808800498537180}
   hitSound: {fileID: 8300000, guid: 807bd5152a662ed4a9241939b4fef32d, type: 3}
   deathSound: {fileID: 8300000, guid: 0709a445dfc22cb4d8de281c203077b7, type: 3}
   volume: 1
   health: 1
   knockbackImmune: 0
+  invulnerable: 0
 --- !u!114 &8582808800498537180
 MonoBehaviour:
   m_ObjectHideFlags: 0

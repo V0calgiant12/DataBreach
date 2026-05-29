@@ -62,7 +62,7 @@ public class PlayerStateManager : MonoBehaviour
         playerData.ScreenCanvas = GameObject.Find("Screen").GetComponent<Animator>();
 
     }
-    void FixedUpdate()
+    void LateUpdate()
     {
         if (playerData.interacting && currentState != InteractingState)
         {
@@ -198,7 +198,7 @@ public class PlayerStateManager : MonoBehaviour
             elapsed += Time.timeScale == 1 ? 1 : 0;
             if(playerData.ricochet == true)
             {
-                playerData.PlayerRb.linearVelocity = new Vector2(-playerData.PlayerRb.linearVelocity.x + ((playerData.PlayerRb.linearVelocity.x >= 0 ? -1.2f : 1.2f) * xLaunch), playerData.PlayerRb.linearVelocity.y + yLaunch * 0.25f);
+                playerData.PlayerRb.linearVelocity = new Vector2(-playerData.PlayerRb.linearVelocity.x + ((playerData.PlayerRb.linearVelocity.x >= 0 ? -1.1f : 1.1f) * xLaunch), playerData.PlayerRb.linearVelocity.y + yLaunch * 0.25f);
                 playerData.ricochet = false;
                 TriggerShake.Instance.BurstShake(-1*MathF.Cos(playerData.PlayerRb.linearVelocityX/2)+(2+elapsed/25),2,true);
                 PlayerFlash(1);

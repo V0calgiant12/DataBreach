@@ -198,7 +198,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a667a26981cea94380769adee02304f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SlimeDamage
-  audioSource3: {fileID: 4986386367766769081}
+  StopAtOneHp: 0
+  knockback: {x: 5, y: 5}
 --- !u!82 &4986386367766769081
 AudioSource:
   m_ObjectHideFlags: 0
