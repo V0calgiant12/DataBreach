@@ -18,11 +18,11 @@ public class CameraUpdater : MonoBehaviour
     IEnumerator RunFrameTwo()
     {
         int elapsed = 0;
-        elapsed += 1;
-        if(elapsed != 2)
+        while(elapsed <= 2)
         {
+            elapsed += 1;
+            transform.position = cameraLoc.transform.position;
             yield return null;
         }
-        transform.position = cameraLoc.transform.position;
     }
 }
