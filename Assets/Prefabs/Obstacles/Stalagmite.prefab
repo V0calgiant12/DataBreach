@@ -95,12 +95,14 @@ MonoBehaviour:
   ParentObject: {fileID: 6271156301276086668}
   rb: {fileID: 7862003289902813592}
   particlePrefab: {fileID: 469266653561010877, guid: 10705ee75d410684cbfc0b6d717e941f, type: 3}
+  flashEffect: {fileID: 0}
   audioSource: {fileID: 1281590913369525869}
   hitSound: {fileID: 8300000, guid: 8de5f9a6ee59a184fab42c993e517d1f, type: 3}
   deathSound: {fileID: 8300000, guid: 05f4d0c824519f14895754f8b8cc81bb, type: 3}
   volume: 1
   health: 1
   knockbackImmune: 1
+  invulnerable: 0
 --- !u!114 &1281590913369525869
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -423,7 +425,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: -1693032528215722064, guid: 246f48f13ca5833448ea181663ec054d, type: 2}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -526,7 +528,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6549925569839828548
 Transform:
   m_ObjectHideFlags: 0
