@@ -7,7 +7,7 @@ public class CameraUpdater : MonoBehaviour
     private Vector3 Velocity = Vector3.zero;
     void Start()
     {
-	    QualitySettings.vSyncCount = 0;
+	    QualitySettings.vSyncCount = 1;
 	    Application.targetFrameRate = 60;
         StartCoroutine(RunFrameTwo());
     }
