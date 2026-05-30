@@ -10,7 +10,7 @@ public class PlayerDead : PlayerAbstract
     public override void EnterState(PlayerStateManager player)
     {
         pixelation = 550;
-        Debug.Log(player.playerData.playerHealth);
+        player.playerData.pixelationMat.SetFloat("_Pixelation", 550);
         player.playerData.movementAllowed = false;
         player.playerData.playerDead = true;
         player.playerData.anim.SetBool("dead", true);
@@ -31,11 +31,11 @@ public class PlayerDead : PlayerAbstract
             pixelation -= 5;
             player.playerData.pixelationMat.SetFloat("_Pixelation", pixelation);
             
-            Debug.Log(player.playerData.pixelationMat.GetFloat("_Pixelation"));
         }
         else
         {
             player.playerData.pixelationMat.SetFloat("_Pixelation", 550);
         }
+        Debug.Log(player.playerData.pixelationMat.GetFloat("_Pixelation") + " " + pixelation);
     }
 }

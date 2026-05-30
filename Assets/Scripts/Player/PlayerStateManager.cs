@@ -62,14 +62,14 @@ public class PlayerStateManager : MonoBehaviour
         playerData.ScreenCanvas = GameObject.Find("Screen").GetComponent<Animator>();
 
     }
-    void LateUpdate()
+    void Update()
     {
         if (playerData.interacting && currentState != InteractingState)
         {
             SwitchState(InteractingState);
         }
 
-        if (playerData.movementAllowed)
+        if (playerData.movementAllowed || playerData.playerDead)
         {
             currentState.UpdateState(this); // Update function for current active state.
         }
