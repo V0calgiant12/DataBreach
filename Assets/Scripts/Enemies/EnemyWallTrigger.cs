@@ -4,17 +4,16 @@ public class EnemyWallTrigger : MonoBehaviour
 {
 
     public static EnemyWallTrigger instance;
-    public GameObject Goblin;
+    public GameObject ParentObject;
     public bool wallCollision;
 
-    void Start()
-    {
-       // stateManager = GetComponent<GoblinStateManager>();
-    }
     void OnTriggerEnter2D(Collider2D other)
     {
         wallCollision = true;
-        Debug.Log("wall collision");
+        if(ParentObject.gameObject.name == "Goblin")
+        {
+            ParentObject.GetComponent<GoblinStateManager>().WallCollision();
+        }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
