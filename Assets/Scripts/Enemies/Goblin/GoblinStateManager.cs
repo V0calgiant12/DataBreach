@@ -58,19 +58,6 @@ public class GoblinStateManager : MonoBehaviour
         currentState.UpdateState(this);
     }
 
-    void Patrol()
-    {
-        float direction = patrolTargetX > transform.position.x ? 1 : -1;
-        //Move(direction);
-
-
-        if (Mathf.Abs(transform.position.x - patrolTargetX) < 0.5f)
-        {
-            // New Patrol Target
-            patrolTargetX = originPos.x + Random.Range(-patrolRange, patrolRange);
-        }
-    }
-
 
     public void Jump()
     {
