@@ -8,7 +8,7 @@ public class GoblinChasing : GoblinAbstract
     }
     public override void EnterState(GoblinStateManager goblin)
     {
-
+        goblin.wallTrigger.size = new Vector2(2f, goblin.wallTrigger.size.y);
     }
     public override void UpdateState(GoblinStateManager goblin)
     {

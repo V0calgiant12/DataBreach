@@ -222,7 +222,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1.1, y: 1.25}
+  m_Size: {x: 1.5, y: 1.25}
   m_EdgeRadius: 0
 --- !u!114 &2117123893202507322
 MonoBehaviour:
@@ -534,13 +534,15 @@ MonoBehaviour:
   jumpForce: 16
   forwardForce: 2
   leftOrRight: 0
+  touchingWall: 0
   playerInRange: 0
   attackRate: 1.5
-  goblinRb: {fileID: 0}
+  goblinRb: {fileID: 3763291612955310094}
+  wallTrigger: {fileID: 304053629889301611}
   originPos: {x: 0, y: 0}
   patrolTargetX: 0
   spriteRenderer: {fileID: 6497677798941356824}
-  EnemyGroundCheck: {fileID: 1577367954537911280}
+  groundCheck: {fileID: 1577367954537911280}
 --- !u!1 &7310709849131945283
 GameObject:
   m_ObjectHideFlags: 0
@@ -680,7 +682,7 @@ Transform:
   m_GameObject: {fileID: 7442416221429492074}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.05, z: 0}
+  m_LocalPosition: {x: 0, y: -1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -720,7 +722,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.0000009536743, y: -1.041575}
+  m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -730,7 +732,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1.0350094, y: 0.14223194}
+  m_Size: {x: 0.95, y: 0.15}
   m_EdgeRadius: 0
 --- !u!114 &1577367954537911280
 MonoBehaviour:

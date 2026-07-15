@@ -7,7 +7,7 @@ public class EnemyWallTrigger : MonoBehaviour
     public GameObject ParentObject;
     public bool wallCollision;
 
-    void OnTriggerEnter2D(Collider2D other)
+    void OnTriggerStay2D(Collider2D other)
     {
         wallCollision = true;
         if(ParentObject.gameObject.name == "Goblin")
@@ -19,5 +19,9 @@ public class EnemyWallTrigger : MonoBehaviour
     private void OnTriggerExit2D(Collider2D collision)
     {
         wallCollision = false;
+        if(ParentObject.gameObject.name == "Goblin")
+        {
+            ParentObject.GetComponent<GoblinStateManager>().touchingWall = false;
+        }
     }
 }

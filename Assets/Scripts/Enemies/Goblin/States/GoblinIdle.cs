@@ -9,11 +9,12 @@ public class GoblinIdle : GoblinAbstract
     }
     public override void EnterState(GoblinStateManager goblin)
     {
-        idleTime = 30;
+        idleTime = Random.Range(15,45);
+        goblin.wallTrigger.size = new Vector2(1.5f, goblin.wallTrigger.size.y);
     }
     public override void UpdateState(GoblinStateManager goblin)
     {
-        idleTime -= 1;
+        idleTime -=  Time.timeScale == 1 ? 1 : 0;;
         goblin.goblinRb.linearVelocityX = 0;
 
         if(idleTime == 0){

@@ -15,15 +15,16 @@ public class GoblinPatrolling : GoblinAbstract
     public override void UpdateState(GoblinStateManager goblin)
     {
         float direction = patrolTargetX > goblin.transform.position.x ? 1 : -1;
-        
+
         // Walk forward (direction dependant) 
         goblin.goblinRb.linearVelocity = new Vector2(direction * goblin.moveSpeed/2, goblin.goblinRb.linearVelocity.y);
 
 
-        if (Mathf.Abs(goblin.transform.position.x - patrolTargetX) < 0.5f)
+        if (Mathf.Abs(goblin.transform.position.x - patrolTargetX) < 0.1f)
         {
             // New Patrol Target
-            patrolTargetX = goblin.originPos.x + Random.Range(-goblin.patrolRange, goblin.patrolRange);
+            patrolTargetX = goblin.originPos.x + Mathf.Floor(Random.Range(-goblin.patrolRange, goblin.patrolRange)) + 0.5f;
+            goblin.SwitchState(goblin.IdleState);
         }
     }
 }

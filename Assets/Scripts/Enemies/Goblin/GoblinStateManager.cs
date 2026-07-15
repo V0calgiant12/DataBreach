@@ -1,4 +1,6 @@
 using Unity.VisualScripting;
+using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -20,6 +22,7 @@ public class GoblinStateManager : MonoBehaviour
     public float jumpForce = 16f;
     public float forwardForce = 2f;
     public bool leftOrRight;
+    public bool touchingWall = false;
 
 
     [Header("Combat")]
@@ -29,16 +32,15 @@ public class GoblinStateManager : MonoBehaviour
 
     [Header("References")]
     public Rigidbody2D goblinRb;
+    public BoxCollider2D wallTrigger;
     public Vector2 originPos;
     public float patrolTargetX;
     [SerializeField] private SpriteRenderer spriteRenderer;
-    public EnemyGroundCheck EnemyGroundCheck;
+    public EnemyGroundCheck groundCheck;
 
     void Start()
     {
-        goblinRb = GetComponent<Rigidbody2D>();
         originPos = transform.position;
-        
         
         currentState = IdleState;
         currentState.RunOnce(this);
@@ -59,17 +61,46 @@ public class GoblinStateManager : MonoBehaviour
     }
 
 
-    public void Jump()
+    public IEnumerator Jump()
     {
-        leftOrRight = (PlayerStateManager.Instance.transform.position.x > transform.position.x) ? true : false;
+        if (groundCheck._IsGrounded)
+        {
+            leftOrRight = (PlayerStateManager.Instance.transform.position.x > transform.position.x) ? true : false;
 
-        goblinRb.linearVelocity = new Vector2((leftOrRight == true ? -1 : 1) * forwardForce, jumpForce);
-        //goblinRb.linearVelocityY = 50;
+            goblinRb.linearVelocity = new Vector2((leftOrRight == true ? -1 : 1) * forwardForce, jumpForce);
+            int elapsed = 0;
+            while(elapsed != 5)
+            {
+                elapsed += Time.timeScale == 1 ? 1 : 0;
+                if(elapsed == 5)
+                {
+                    StartCoroutine(ShortJump());
+                }
+                yield return null;
+            }
+        }
+    }
+    public IEnumerator ShortJump()
+    {
+        int elapsed = 0;
+        while(!groundCheck._IsGrounded)
+        {
+            if (!touchingWall && goblinRb.linearVelocityY > 0)
+            {
+                elapsed += Time.timeScale == 1 ? 1 : 0;
+                if(elapsed > 5)
+                {
+                    goblinRb.linearVelocity = new Vector2(goblinRb.linearVelocityX, goblinRb.linearVelocityY * 0.5f);
+                }
+            }
+            yield return null;
+        }
     }
     public void WallCollision()
     {
         Debug.Log("Wall Collision");
-        Jump();
+        touchingWall = true;
+        StartCoroutine(Jump());
     }
 }
 
