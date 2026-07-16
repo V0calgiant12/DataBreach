@@ -7,6 +7,7 @@ public class OreTermiteManager : MonoBehaviour
 {
     [Header("References")]
     [SerializeField] private Animator animator;
+    [SerializeField] private EnemyPoximityTrigger warning;
     [Header("Stats")]
     public bool extended;
     public bool playerInTrigger;
@@ -14,9 +15,18 @@ public class OreTermiteManager : MonoBehaviour
     {
         
     }
-    void Update()
+    void FixedUpdate()
     {
-        
+        if (warning.trigger && warning.playerDetected)
+        {
+            animator.SetBool("Prepare",true);
+            warning.trigger = false;
+        }
+        if (warning.trigger && !warning.playerDetected)
+        {
+            animator.SetBool("Prepare",false);
+            warning.trigger = false;
+        }
     }
     public void Stab()
     {
