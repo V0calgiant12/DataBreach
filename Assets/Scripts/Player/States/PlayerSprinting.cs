@@ -9,7 +9,7 @@ public class PlayerSprinting : PlayerAbstract
     }
     public override void EnterState(PlayerStateManager player)
     {
-        Debug.Log("Player is Sprinting / Sprinting State - " + player.playerData.sprinting);
+        //Debug.Log("Player is Sprinting / Sprinting State - " + player.playerData.sprinting);
         audioTimer = 3;
         player.playerData.anim.SetBool("sprinting", true);
         player.playerData.anim.SetBool("walking", false);

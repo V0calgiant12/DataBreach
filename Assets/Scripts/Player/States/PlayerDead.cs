@@ -36,6 +36,6 @@ public class PlayerDead : PlayerAbstract
         {
             player.playerData.pixelationMat.SetFloat("_Pixelation", 550);
         }
-        Debug.Log(player.playerData.pixelationMat.GetFloat("_Pixelation") + " " + pixelation);
+        //Debug.Log(player.playerData.pixelationMat.GetFloat("_Pixelation") + " " + pixelation);
     }
 }

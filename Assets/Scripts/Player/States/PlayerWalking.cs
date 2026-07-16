@@ -10,7 +10,7 @@ public class PlayerWalking : PlayerAbstract
     }
     public override void EnterState(PlayerStateManager player)
     {
-        Debug.Log("Player is Walking / Walking State - " + player.playerData.sprinting);
+        //Debug.Log("Player is Walking / Walking State - " + player.playerData.sprinting);
         audioTimer = 0;
     }
     public override void UpdateState(PlayerStateManager player)

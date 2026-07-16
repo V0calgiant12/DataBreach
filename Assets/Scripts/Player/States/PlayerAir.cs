@@ -10,7 +10,7 @@ public class PlayerAir : PlayerAbstract
     }
     public override void EnterState(PlayerStateManager player)
     {
-        Debug.Log("Player is in the air / Air State");
+        //Debug.Log("Player is in the air / Air State");
         playerSpeed = 7;
         shakeOnLand = false;
         player.playerData.fastFallCounter = 0;

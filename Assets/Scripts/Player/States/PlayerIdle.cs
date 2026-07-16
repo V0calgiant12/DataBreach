@@ -9,7 +9,7 @@ public class PlayerIdle : PlayerAbstract
     }
     public override void EnterState(PlayerStateManager player)
     {
-        Debug.Log("Player Idle / Idle State");
+        //Debug.Log("Player Idle / Idle State");
         player.playerData.anim.SetBool("moving", false);
         player.playerData.anim.SetBool("sprinting", false);
     }

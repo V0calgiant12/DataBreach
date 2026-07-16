@@ -9,7 +9,7 @@ public class PlayerCrouching : PlayerAbstract
     }
     public override void EnterState(PlayerStateManager player)
     {
-        Debug.Log("Player is Crouching / Crouching State");
+        //Debug.Log("Player is Crouching / Crouching State");
         player.playerData.anim.SetBool("crouching", true);
         //Switch back to idle after code is done running
     }
