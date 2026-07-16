@@ -129,8 +129,10 @@ MonoBehaviour:
   deathSound: {fileID: 8300000, guid: 0709a445dfc22cb4d8de281c203077b7, type: 3}
   volume: 1
   health: 5
+  iFrames: 0
   knockbackImmune: 0
   invulnerable: 0
+  damageTaken: 0
 --- !u!114 &1003367167366328723
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -657,7 +659,6 @@ MonoBehaviour:
   forwardForce: 2
   leftOrRight: 0
   touchingWall: 0
-  playerInRange: 0
   attackCD: 60
   currentAtkCd: 0
   goblinRb: {fileID: 3763291612955310094}
@@ -667,6 +668,7 @@ MonoBehaviour:
   spriteRenderer: {fileID: 6497677798941356824}
   groundCheck: {fileID: 1577367954537911280}
   attackRange: {fileID: 1830197730717535922}
+  enemyHit: {fileID: 5031553706785026353}
 --- !u!1 &7310709849131945283
 GameObject:
   m_ObjectHideFlags: 0
