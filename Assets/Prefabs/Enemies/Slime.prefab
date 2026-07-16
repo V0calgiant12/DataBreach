@@ -537,8 +537,12 @@ MonoBehaviour:
   deathSound: {fileID: 8300000, guid: 0709a445dfc22cb4d8de281c203077b7, type: 3}
   volume: 1
   health: 3
+  knockbackReduction: 1
   knockbackImmune: 0
   invulnerable: 0
+  iFrames: 0
+  _DamageTaken: 0
+  _LastKnockbackTaken: {x: 0, y: 0}
 --- !u!114 &4140950964649096466
 MonoBehaviour:
   m_ObjectHideFlags: 0

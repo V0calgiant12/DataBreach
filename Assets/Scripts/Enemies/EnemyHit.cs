@@ -21,17 +21,22 @@ public class EnemyHit : MonoBehaviour
     [Header("Stats")]
     [Tooltip("Default health values: Slime 3, Para-Slimes 1, Goblin 5, Gliberknocker 6")]
     public int health = 1;
-    private int trackedHealth = 1;
-    [SerializeField] private int iFrames = 0;
+    [SerializeField] private float knockbackReduction = 1;
     public bool knockbackImmune = false;
     public bool invulnerable = false;
-    
+
     [Header("Stored Info")]
+    [SerializeField] private int iFrames = 0;
+    [SerializeField] private int trackedHealth = 1;
     public bool _DamageTaken = false;
     public Vector2 _LastKnockbackTaken;
     
     private void Start()
     {
+        if(knockbackReduction == 0)
+        {
+            knockbackReduction = 1;
+        }
         playerStateManager = GameObject.Find("Player").GetComponent<PlayerStateManager>();
         trackedHealth = health;
         if(flashEffect == null)
@@ -115,7 +120,7 @@ public class EnemyHit : MonoBehaviour
         }
         if (!knockbackImmune)
         {
-            _LastKnockbackTaken = new Vector2(xLaunch*(transform.position.x <= damageSourceX ? -1 : 1), yLaunch);
+            _LastKnockbackTaken = new Vector2(xLaunch*(transform.position.x <= damageSourceX ? -1 : 1)/knockbackReduction, yLaunch/knockbackReduction);
             rb.linearVelocity = _LastKnockbackTaken;
         }
         trackedHealth -= damage;
