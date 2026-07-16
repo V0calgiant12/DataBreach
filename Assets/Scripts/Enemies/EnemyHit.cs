@@ -19,9 +19,10 @@ public class EnemyHit : MonoBehaviour
     [Tooltip("Default health values: Slime 3, Para-Slimes 1, Goblin 5, Gliberknocker 6")]
     public int health = 1;
     private int trackedHealth = 1;
-    private int iFrames = 0;
+    [SerializeField] private int iFrames = 0;
     public bool knockbackImmune = false;
     public bool invulnerable = false;
+    public bool damageTaken = false;
     
     private void Start()
     {
@@ -35,12 +36,18 @@ public class EnemyHit : MonoBehaviour
     }
     private void Update() 
     {
-
         iFrames -= (Time.timeScale == 1) ? 1 : 0;
+        if (iFrames <= 0)
+        {
+            damageTaken = false;
+        }
         if (trackedHealth <= 0)
         {
             audioSource.EnemySound(deathSound,volume);
-            Instantiate(particlePrefab, gameObject.transform.position, gameObject.transform.rotation);
+            if(particlePrefab != null)
+            {
+                Instantiate(particlePrefab, gameObject.transform.position, gameObject.transform.rotation);
+            }
             Destroy(ParentObject);
         }
     }
@@ -49,6 +56,7 @@ public class EnemyHit : MonoBehaviour
         if (other.gameObject.CompareTag("PlayerHitbox") && iFrames < 0)
         {
             iFrames = 15;
+            damageTaken = true;
             TriggerShake.Instance.BurstShake(1,2,false);
             if (!invulnerable)
             {
@@ -84,7 +92,10 @@ public class EnemyHit : MonoBehaviour
             {
                 audioSource.EnemySound(hitSound,volume);
                 flashEffect.WhiteFlash();
-                Instantiate(particlePrefab, gameObject.transform.position, gameObject.transform.rotation);
+                if(particlePrefab != null)
+                {
+                    Instantiate(particlePrefab, gameObject.transform.position, gameObject.transform.rotation);
+                }
             }
         }
     }

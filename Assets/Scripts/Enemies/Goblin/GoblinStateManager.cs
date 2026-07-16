@@ -9,11 +9,12 @@ public class GoblinStateManager : MonoBehaviour
 {
     [Header("States")]
     public GoblinAbstract currentState;
-    public GoblinAir AirState = new GoblinAir();
+    public GoblinAttack AttackState = new GoblinAttack();
     public GoblinUpdate GlobalUpdateState = new GoblinUpdate();
     public GoblinIdle IdleState = new GoblinIdle();
     public GoblinPatrolling PatrollingState = new GoblinPatrolling();
     public GoblinChasing ChasingState = new GoblinChasing();
+    public GoblinHurt HurtState = new GoblinHurt();
 
     [Header("Movement & Gravity")]
     public float moveSpeed = 3f;
@@ -26,8 +27,8 @@ public class GoblinStateManager : MonoBehaviour
 
 
     [Header("Combat")]
-    public bool playerInRange = false;
-    public float attackRate = 1.5f;
+    public int attackCD = 60;
+    public int currentAtkCd = 0;
 
 
     [Header("References")]
@@ -37,6 +38,8 @@ public class GoblinStateManager : MonoBehaviour
     public float patrolTargetX;
     [SerializeField] private SpriteRenderer spriteRenderer;
     public EnemyGroundCheck groundCheck;
+    public EnemyAttackRange attackRange;
+    public EnemyHit enemyHit;
 
     void Start()
     {
@@ -58,12 +61,16 @@ public class GoblinStateManager : MonoBehaviour
     void Update()
     {
         currentState.UpdateState(this);
+        if(currentState != HurtState)
+        {
+            GlobalUpdateState.UpdateState(this);
+        }
     }
 
 
     public IEnumerator Jump()
     {
-        if (groundCheck._IsGrounded)
+        if (groundCheck._IsGrounded && currentState != AttackState)
         {
             leftOrRight = (PlayerStateManager.Instance.transform.position.x > transform.position.x) ? true : false;
 
@@ -90,7 +97,7 @@ public class GoblinStateManager : MonoBehaviour
                 elapsed += Time.timeScale == 1 ? 1 : 0;
                 if(elapsed > 5)
                 {
-                    goblinRb.linearVelocity = new Vector2(goblinRb.linearVelocityX, goblinRb.linearVelocityY * 0.5f);
+                    goblinRb.linearVelocity = new Vector2(goblinRb.linearVelocityX, goblinRb.linearVelocityY * 0.8f);
                 }
             }
             yield return null;
