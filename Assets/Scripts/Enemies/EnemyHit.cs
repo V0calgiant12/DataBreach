@@ -5,16 +5,19 @@ using UnityEngine;
 /// </summary>
 public class EnemyHit : MonoBehaviour
 {
+    [Header("References")]
     [SerializeField] private GameObject ParentObject;
     private PlayerStateManager playerStateManager;
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private GameObject particlePrefab;
     [SerializeField] private FlashEffect flashEffect;
+
     [Header("Audio")]
     [SerializeField] private EffectSound audioSource;
     [SerializeField] private AudioClip hitSound;
     [SerializeField] private AudioClip deathSound;
     [SerializeField] private float volume = 1;
+
     [Header("Stats")]
     [Tooltip("Default health values: Slime 3, Para-Slimes 1, Goblin 5, Gliberknocker 6")]
     public int health = 1;
@@ -22,7 +25,10 @@ public class EnemyHit : MonoBehaviour
     [SerializeField] private int iFrames = 0;
     public bool knockbackImmune = false;
     public bool invulnerable = false;
-    public bool damageTaken = false;
+    
+    [Header("Stored Info")]
+    public bool _DamageTaken = false;
+    public Vector2 _LastKnockbackTaken;
     
     private void Start()
     {
@@ -39,7 +45,7 @@ public class EnemyHit : MonoBehaviour
         iFrames -= (Time.timeScale == 1) ? 1 : 0;
         if (iFrames <= 0)
         {
-            damageTaken = false;
+            _DamageTaken = false;
         }
         if (trackedHealth <= 0)
         {
@@ -56,7 +62,7 @@ public class EnemyHit : MonoBehaviour
         if (other.gameObject.CompareTag("PlayerHitbox") && iFrames < 0)
         {
             iFrames = 15;
-            damageTaken = true;
+            _DamageTaken = true;
             TriggerShake.Instance.BurstShake(1,2,false);
             if (!invulnerable)
             {
@@ -109,7 +115,8 @@ public class EnemyHit : MonoBehaviour
         }
         if (!knockbackImmune)
         {
-            rb.linearVelocity = new Vector2(xLaunch*(transform.position.x <= damageSourceX ? -1 : 1), yLaunch);
+            _LastKnockbackTaken = new Vector2(xLaunch*(transform.position.x <= damageSourceX ? -1 : 1), yLaunch);
+            rb.linearVelocity = _LastKnockbackTaken;
         }
         trackedHealth -= damage;
     }

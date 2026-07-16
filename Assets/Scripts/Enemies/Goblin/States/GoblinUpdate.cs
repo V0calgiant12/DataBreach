@@ -16,7 +16,7 @@ public class GoblinUpdate : GoblinAbstract
         {
             goblin.SwitchState(goblin.AttackState);
         }
-        if (goblin.enemyHit.damageTaken)
+        if (goblin.enemyHit._DamageTaken)
         {
             goblin.SwitchState(goblin.HurtState);
         }
