@@ -15,8 +15,12 @@ public class OreTermiteManager : MonoBehaviour
     {
         
     }
-    void FixedUpdate()
+    void Update()
     {
+        if (animator.GetInteger("Stage") == 0)
+        {
+            extended = false;
+        }
         if (warning.trigger && warning.playerDetected)
         {
             animator.SetBool("Prepare",true);
@@ -43,7 +47,6 @@ public class OreTermiteManager : MonoBehaviour
             if(elapsed >= 100 && !playerInTrigger)
             {
                 animator.SetInteger("Stage",3);
-                extended = false;
             }
             yield return null;
         }
