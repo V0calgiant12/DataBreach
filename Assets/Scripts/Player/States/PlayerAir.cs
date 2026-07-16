@@ -128,7 +128,7 @@ public class PlayerAir : PlayerAbstract
             {
                 player.playerData.leftOrRight = false;
             }
-            Debug.Log("jump in air");
+            //Debug.Log("jump in air");
             player.StartCoroutine(player.WaitUntilNotJumping());
             player.playerData.audioSource.PlayJumpSound(player.playerData._AirJump);
             player.playerData.anim.SetBool("jumping", true);

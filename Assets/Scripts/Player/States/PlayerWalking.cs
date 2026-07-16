@@ -86,7 +86,7 @@ public class PlayerWalking : PlayerAbstract
         // Jump
         if (player.playerData.jumpBufferCounter > 0)
         {
-            Debug.Log("jump from walking");
+            //Debug.Log("jump from walking");
             player.playerData.anim.SetBool("walking", false);
             player.playerData.PlayerRb.linearVelocity = new Vector2(player.playerData.PlayerRb.linearVelocityX, jumpStrength * PlayerStateManager.Instance.playerData.mudJumpMulti);
             player.playerData.jumpBufferCounter = 0;
