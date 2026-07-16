@@ -78,7 +78,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 5, y: 8}
+  m_Size: {x: 6, y: 8}
   m_EdgeRadius: 0
 --- !u!50 &8986014591378946922
 Rigidbody2D:
@@ -189,7 +189,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 1}
+  m_Offset: {x: 0, y: 1.4}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -199,7 +199,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1, y: 4.5}
+  m_Size: {x: 1.2, y: 5.5}
   m_EdgeRadius: 0
 --- !u!50 &1275602420846178124
 Rigidbody2D:
@@ -513,6 +513,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ContactDamage
   StopAtOneHp: 0
   knockback: {x: 10, y: 15}
+  rotationDependant: 1
 --- !u!1 &6542258419141373513
 GameObject:
   m_ObjectHideFlags: 0

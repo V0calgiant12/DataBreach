@@ -9,6 +9,6 @@ public class NextStage : StateMachineBehaviour
         {
             animator.SetInteger("Stage",0);
         }
-        Debug.Log(animator.GetInteger("Stage"));
+        //Debug.Log(animator.GetInteger("Stage"));
     }
 }

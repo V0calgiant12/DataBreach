@@ -110,11 +110,11 @@ public class PlayerStateManager : MonoBehaviour
             playerData.playerHealth = playerData.playerHealth - 1;
             playerData.audioSource.PlayPlayerHitSound(playerData._PlayerHit);
             //Debug.Log(playerData.playerHealth);
-            if (nonDirectional)
+            if (nonDirectional) // Non-Directional (based on player direction)
             {
                 StartCoroutine(StunPlayer(xLaunch*(playerData.leftOrRight ? -1 : 1), yLaunch,timer));
             }
-            else
+            else // Directional (based on where the hit came from)
             {
                 StartCoroutine(StunPlayer(xLaunch*(transform.position.x <= damageSourceX ? -1 : 1), yLaunch,timer));
             }
@@ -162,7 +162,7 @@ public class PlayerStateManager : MonoBehaviour
                     StartCoroutine(NoMovingWhileAttack(0));
                     break;
             }
-            Debug.Log(attackType);
+            //Debug.Log(attackType);
         }
     }
     public void PlayerFlash(int type)
