@@ -17,7 +17,7 @@ public class SideCheck : MonoBehaviour
         collided = other.gameObject;
         if (other.gameObject.CompareTag("Ground")||other.gameObject.CompareTag("MovingPlatform")||other.gameObject.CompareTag("Stone"))
         {
-            playerData.ricochet = true;
+            playerData.ricochet = gameObject.name== "LeftSide" ? 1:2;
         }
         if (other.gameObject.CompareTag("Stone"))
         {
@@ -33,7 +33,7 @@ public class SideCheck : MonoBehaviour
         collided = other.gameObject;
         if (other.gameObject.CompareTag("Ground")||other.gameObject.CompareTag("MovingPlatform")||other.gameObject.CompareTag("Stone"))
         {
-            playerData.ricochet = false;
+            playerData.ricochet = 0;
         }
     }
 }

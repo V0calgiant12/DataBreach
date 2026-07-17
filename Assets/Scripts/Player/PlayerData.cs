@@ -20,12 +20,12 @@ public class PlayerData : ScriptableObject
     public int jumpBufferCounter;
     public int coyoteTimeCounter;
     public int iFrames;
+    public int ricochet;
     public bool sprinting;
     public bool crouching;
     public bool doubleJumpAvailable;
     public bool movementAllowed = true;
     public bool leftOrRight;
-    public bool ricochet;
     public bool interacting;
     public bool inAirGust;
     public bool pickUpHeart;

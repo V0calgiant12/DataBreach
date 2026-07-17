@@ -190,17 +190,20 @@ public class PlayerStateManager : MonoBehaviour
     }
     public IEnumerator StunPlayer(float xLaunch, float yLaunch, int timer)
     {
-        Debug.Log(xLaunch);
         playerData.movementAllowed = false;
         int elapsed = 0;
         playerData.PlayerRb.linearVelocity = new Vector2(xLaunch, yLaunch);
         while(GroundCheck.Instance._IsGrounded == false && timer > elapsed || elapsed < 15)
         {
             elapsed += Time.timeScale == 1 ? 1 : 0;
-            if(playerData.ricochet == true)
+            if(playerData.ricochet > 0)
             {
-                playerData.PlayerRb.linearVelocity = new Vector2(-playerData.PlayerRb.linearVelocity.x + ((playerData.PlayerRb.linearVelocity.x >= 0 ? -1.1f : 1.1f) * xLaunch), playerData.PlayerRb.linearVelocity.y + yLaunch * 0.25f);
-                playerData.ricochet = false;
+                //-playerData.PlayerRb.linearVelocity.x + ((playerData.ricochet == 1 ? -1.1f : 1.1f) * xLaunch)
+                //Mathf.Abs(playerData.PlayerRb.linearVelocity.x) * (playerData.ricochet == 1 ? -0.9f : 0.9f)
+                Debug.Log(playerData.PlayerRb.linearVelocity);
+                playerData.PlayerRb.linearVelocity = new Vector2(Mathf.Abs(playerData.PlayerRb.linearVelocity.x) * (playerData.ricochet == 1 ? -0.9f : 0.9f), playerData.PlayerRb.linearVelocity.y + yLaunch * 0.25f);
+                Debug.Log(playerData.PlayerRb.linearVelocity);
+                playerData.ricochet = 0;
                 TriggerShake.Instance.BurstShake(-1*MathF.Cos(playerData.PlayerRb.linearVelocityX/2)+(2+elapsed/25),2,true);
                 PlayerFlash(1);
                 timer += 15;
