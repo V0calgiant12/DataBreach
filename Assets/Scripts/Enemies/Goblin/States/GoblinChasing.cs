@@ -16,6 +16,6 @@ public class GoblinChasing : GoblinAbstract
         float direction = PlayerStateManager.Instance.transform.position.x > goblin.transform.position.x ? 1 : -1;
 
         // Walk forward (direction dependant) 
-        goblin.goblinRb.linearVelocity = new Vector2(direction * goblin.moveSpeed, goblin.goblinRb.linearVelocity.y);
+        goblin.goblinRb.linearVelocity = new Vector2(direction * goblin.moveSpeed * goblin.mudSpeedMulti, goblin.goblinRb.linearVelocity.y);
     }
 }

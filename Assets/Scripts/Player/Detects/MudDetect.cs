@@ -3,7 +3,6 @@ using UnityEngine;
 public class MudDetect : MonoBehaviour
 {
     [Header("Mud References:")]
-    public SlimeStateManager SlimeStateManagerRef;
     [SerializeField] private PlayerSound playerAudioSource;
     [SerializeField] private EffectSound otherAudioSource;
     [SerializeField] private AudioClip mudLand;
@@ -35,9 +34,21 @@ public class MudDetect : MonoBehaviour
         }
         if(other.gameObject.CompareTag("Mud") && gameObject.CompareTag("Enemy"))
         {
-            SlimeStateManagerRef = gameObject.GetComponent<SlimeStateManager>();
-            SlimeStateManagerRef.mudSpeedMulti = 0.6f;
-            SlimeStateManagerRef.mudJumpMulti = 0.6f;
+            switch(gameObject.name)
+            {
+                case("Slime"):
+                    SlimeStateManager SlimeStateManagerRef;
+                    SlimeStateManagerRef = gameObject.GetComponent<SlimeStateManager>();
+                    SlimeStateManagerRef.mudSpeedMulti = 0.6f;
+                    SlimeStateManagerRef.mudJumpMulti = 0.6f;
+                    break;
+                case("Goblin"):
+                    GoblinStateManager goblinStateManager;
+                    goblinStateManager = gameObject.GetComponent<GoblinStateManager>();
+                    goblinStateManager.mudSpeedMulti = 0.7f;
+                    goblinStateManager.mudJumpMulti = 0.75f;
+                    break;
+            }
         }
     }
     private void OnTriggerExit2D(Collider2D other)
@@ -52,9 +63,21 @@ public class MudDetect : MonoBehaviour
         if(other.gameObject.CompareTag("Mud") && gameObject.CompareTag("Enemy"))
         {
             otherAudioSource.PlayMudSound(mudJump);
-            SlimeStateManagerRef = gameObject.GetComponent<SlimeStateManager>();
-            SlimeStateManagerRef.mudSpeedMulti = 1f;
-            SlimeStateManagerRef.mudJumpMulti = 1f;
+            switch(gameObject.name)
+            {
+                case("Slime"):
+                    SlimeStateManager SlimeStateManagerRef;
+                    SlimeStateManagerRef = gameObject.GetComponent<SlimeStateManager>();
+                    SlimeStateManagerRef.mudSpeedMulti = 1f;
+                    SlimeStateManagerRef.mudJumpMulti = 1f;
+                    break;
+                case("Goblin"):
+                    GoblinStateManager goblinStateManager;
+                    goblinStateManager = gameObject.GetComponent<GoblinStateManager>();
+                    goblinStateManager.mudSpeedMulti = 1f;
+                    goblinStateManager.mudJumpMulti = 1f;
+                    break;
+            }
         }
     }
 }

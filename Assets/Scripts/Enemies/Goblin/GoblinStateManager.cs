@@ -18,9 +18,11 @@ public class GoblinStateManager : MonoBehaviour
 
     [Header("Movement & Gravity")]
     public float moveSpeed = 3f;
+    public float mudSpeedMulti = 1f;
     public float patrolRange = 5f;
     public float chaseRange = 7f;
     public float jumpForce = 16f;
+    public float mudJumpMulti = 1f;
     public float forwardForce = 2f;
     public bool leftOrRight;
     public bool touchingWall = false;
@@ -74,7 +76,7 @@ public class GoblinStateManager : MonoBehaviour
         {
             leftOrRight = (PlayerStateManager.Instance.transform.position.x > transform.position.x) ? true : false;
 
-            goblinRb.linearVelocity = new Vector2((leftOrRight == true ? -1 : 1) * forwardForce, jumpForce);
+            goblinRb.linearVelocity = new Vector2((leftOrRight == true ? -1 : 1) * forwardForce, jumpForce * mudJumpMulti);
             int elapsed = 0;
             while(elapsed != 5)
             {

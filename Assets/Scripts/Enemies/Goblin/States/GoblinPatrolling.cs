@@ -17,7 +17,7 @@ public class GoblinPatrolling : GoblinAbstract
         float direction = patrolTargetX > goblin.transform.position.x ? 1 : -1;
 
         // Walk forward (direction dependant) 
-        goblin.goblinRb.linearVelocity = new Vector2(direction * goblin.moveSpeed/2, goblin.goblinRb.linearVelocity.y);
+        goblin.goblinRb.linearVelocity = new Vector2(direction * goblin.moveSpeed/2 * goblin.mudSpeedMulti, goblin.goblinRb.linearVelocity.y);
 
 
         if (Mathf.Abs(goblin.transform.position.x - patrolTargetX) < 0.1f)
