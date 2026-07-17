@@ -212,6 +212,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SlimeDamage
   StopAtOneHp: 0
   knockback: {x: 7, y: 10}
+  rotationDependant: 0
 --- !u!1 &1172246738268572851
 GameObject:
   m_ObjectHideFlags: 0
@@ -348,11 +349,11 @@ AudioSource:
   Spatialize: 0
   SpatializePostEffects: 0
   Priority: 128
-  DopplerLevel: 1
-  MinDistance: 2
-  MaxDistance: 20
+  DopplerLevel: 0
+  MinDistance: 20
+  MaxDistance: 35
   Pan2D: 0
-  rolloffMode: 0
+  rolloffMode: 2
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0
@@ -366,17 +367,17 @@ AudioSource:
       outSlope: 0
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
+      inWeight: 0
+      outWeight: 0.43543312
     - serializedVersion: 3
       time: 1
       value: 0
-      inSlope: 0
-      outSlope: 0
+      inSlope: -3.089727
+      outSlope: -3.089727
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
+      inWeight: 0.20015427
+      outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
@@ -401,6 +402,15 @@ AudioSource:
     - serializedVersion: 3
       time: 0
       value: 0
+      inSlope: 0.5461787
+      outSlope: 0.5461787
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.17816092
+    - serializedVersion: 3
+      time: 1
+      value: 0.29614258
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -415,13 +425,22 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 1
+      value: 1.0042648
       inSlope: 0
       outSlope: 0
       tangentMode: 0
       weightedMode: 0
       inWeight: 0.33333334
       outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0.79961586
+      inSlope: -0.33976042
+      outSlope: -0.33976042
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.14942527
+      outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
@@ -642,6 +661,7 @@ MonoBehaviour:
   knockbackImmune: 0
   invulnerable: 0
   iFrames: 0
+  trackedHealth: 1
   _DamageTaken: 0
   _LastKnockbackTaken: {x: 0, y: 0}
 --- !u!114 &8582808800498537180

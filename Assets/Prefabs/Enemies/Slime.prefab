@@ -200,6 +200,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SlimeDamage
   StopAtOneHp: 0
   knockback: {x: 5, y: 5}
+  rotationDependant: 0
 --- !u!82 &4986386367766769081
 AudioSource:
   m_ObjectHideFlags: 0
@@ -212,7 +213,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: -1693032528215722064, guid: 246f48f13ca5833448ea181663ec054d, type: 2}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: 807bd5152a662ed4a9241939b4fef32d, type: 3}
-  m_PlayOnAwake: 0
+  m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -220,11 +221,11 @@ AudioSource:
   Spatialize: 0
   SpatializePostEffects: 0
   Priority: 128
-  DopplerLevel: 1
-  MinDistance: 1
+  DopplerLevel: 0
+  MinDistance: 20
   MaxDistance: 30
   Pan2D: 0
-  rolloffMode: 0
+  rolloffMode: 2
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0
@@ -238,17 +239,17 @@ AudioSource:
       outSlope: 0
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
+      inWeight: 0
+      outWeight: 0.43543312
     - serializedVersion: 3
       time: 1
       value: 0
-      inSlope: 0
-      outSlope: 0
+      inSlope: -3.089727
+      outSlope: -3.089727
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
+      inWeight: 0.20015427
+      outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
@@ -273,6 +274,15 @@ AudioSource:
     - serializedVersion: 3
       time: 0
       value: 0
+      inSlope: 0.5461787
+      outSlope: 0.5461787
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.17816092
+    - serializedVersion: 3
+      time: 1
+      value: 0.29614258
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -287,13 +297,22 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 1
+      value: 1.0042648
       inSlope: 0
       outSlope: 0
       tangentMode: 0
       weightedMode: 0
       inWeight: 0.33333334
       outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0.79961586
+      inSlope: -0.33976042
+      outSlope: -0.33976042
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.14942527
+      outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
@@ -541,6 +560,7 @@ MonoBehaviour:
   knockbackImmune: 0
   invulnerable: 0
   iFrames: 0
+  trackedHealth: 1
   _DamageTaken: 0
   _LastKnockbackTaken: {x: 0, y: 0}
 --- !u!114 &4140950964649096466
@@ -899,7 +919,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 510388b6cc4a4ba4ba3cd773aa053522, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MudDetect
-  SlimeStateManagerRef: {fileID: 3052226611263945404}
   playerAudioSource: {fileID: 0}
   otherAudioSource: {fileID: 4140950964649096466}
   mudLand: {fileID: 8300000, guid: 4a21d881f0d8ccc4d9996c9f1bc7b306, type: 3}

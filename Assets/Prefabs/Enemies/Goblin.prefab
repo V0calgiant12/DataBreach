@@ -542,6 +542,7 @@ GameObject:
   - component: {fileID: 3763291612955310094}
   - component: {fileID: 4046557635185863519}
   - component: {fileID: 3713570006817236553}
+  - component: {fileID: 7740921418326878260}
   m_Layer: 7
   m_Name: Goblin
   m_TagString: Enemy
@@ -656,9 +657,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GoblinStateManager
   moveSpeed: 5
+  mudSpeedMulti: 1
   patrolRange: 6
   chaseRange: 10
   jumpForce: 16
+  mudJumpMulti: 1
   forwardForce: 2
   leftOrRight: 0
   touchingWall: 0
@@ -672,6 +675,22 @@ MonoBehaviour:
   groundCheck: {fileID: 1577367954537911280}
   attackRange: {fileID: 1830197730717535922}
   enemyHit: {fileID: 5031553706785026353}
+--- !u!114 &7740921418326878260
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6513856301564140633}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 510388b6cc4a4ba4ba3cd773aa053522, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MudDetect
+  playerAudioSource: {fileID: 0}
+  otherAudioSource: {fileID: 1003367167366328723}
+  mudLand: {fileID: 8300000, guid: 4a21d881f0d8ccc4d9996c9f1bc7b306, type: 3}
+  mudJump: {fileID: 8300000, guid: c2ee8e27bf31df4468ac9e25fb811960, type: 3}
 --- !u!1 &7310709849131945283
 GameObject:
   m_ObjectHideFlags: 0
