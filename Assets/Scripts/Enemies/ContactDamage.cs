@@ -18,7 +18,7 @@ public class ContactDamage : MonoBehaviour
                 appliedKnockback = knockback;
                 if (rotationDependant)
                 {
-                    Debug.Log(transform.eulerAngles.z);
+                    //Debug.Log(transform.eulerAngles.z);
                     switch (transform.eulerAngles.z)
                     {
                         case (0):

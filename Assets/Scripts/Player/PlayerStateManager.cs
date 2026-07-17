@@ -190,6 +190,7 @@ public class PlayerStateManager : MonoBehaviour
     }
     public IEnumerator StunPlayer(float xLaunch, float yLaunch, int timer)
     {
+        Debug.Log(xLaunch);
         playerData.movementAllowed = false;
         int elapsed = 0;
         playerData.PlayerRb.linearVelocity = new Vector2(xLaunch, yLaunch);
