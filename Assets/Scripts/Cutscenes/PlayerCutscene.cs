@@ -9,7 +9,7 @@ public class PlayerCutscene : MonoBehaviour
     {
         if (GroundCheck.Instance._IsGrounded)
         {
-            if(Mathf.Abs(playerRb.linearVelocityX) > 0)
+            if(Mathf.Abs(playerRb.linearVelocityX) >= 0.1)
             {
                 anim.SetBool("moving",true);
                 if(Mathf.Abs(playerRb.linearVelocityX) > 8)
