@@ -47,7 +47,8 @@ public class PlayerAir : PlayerAbstract
             player.playerData.fastFallCounter = 45;
         }
         
-
+        // Default to Forward Air if nothing else is inputed. (If anything else is inputed, this will be overwritten.)
+        currentAttack = PlayerStateManager.AttackType.forwardAir;
         
         // Movement left/right and sets attack.
         moving = false;
