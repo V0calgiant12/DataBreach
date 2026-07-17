@@ -101,8 +101,13 @@ MonoBehaviour:
   deathSound: {fileID: 8300000, guid: 05f4d0c824519f14895754f8b8cc81bb, type: 3}
   volume: 1
   health: 1
+  knockbackReduction: 1
   knockbackImmune: 1
   invulnerable: 0
+  iFrames: 0
+  trackedHealth: 1
+  _DamageTaken: 0
+  _LastKnockbackTaken: {x: 0, y: 0}
 --- !u!114 &1281590913369525869
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -234,7 +239,7 @@ GameObject:
   - component: {fileID: 6655858827845674133}
   - component: {fileID: 1215365105861865242}
   - component: {fileID: 8169358516326343163}
-  m_Layer: 10
+  m_Layer: 8
   m_Name: Trigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
