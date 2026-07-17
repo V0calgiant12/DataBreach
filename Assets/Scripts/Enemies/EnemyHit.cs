@@ -105,7 +105,7 @@ public class EnemyHit : MonoBehaviour
                 flashEffect.WhiteFlash();
                 if(particlePrefab != null)
                 {
-                    Instantiate(particlePrefab, gameObject.transform.position, gameObject.transform.rotation);
+                    Instantiate(particlePrefab, GameObject.Find("HitPoint").transform.position, gameObject.transform.rotation);
                 }
             }
         }

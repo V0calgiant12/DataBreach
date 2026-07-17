@@ -2501,6 +2501,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3351453552943749178}
+  - {fileID: 1362888685320453963}
   m_Father: {fileID: 2982709320883513098}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -105}
 --- !u!212 &7994382238139951335
@@ -2843,6 +2844,37 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ForceManager
   PlayerDataRef: {fileID: 11400000, guid: ef22878c3af9ca548a85988a7addec59, type: 2}
   rb: {fileID: 5254595327118261300}
+--- !u!1 &8579786395192038802
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1362888685320453963}
+  m_Layer: 6
+  m_Name: HitPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1362888685320453963
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8579786395192038802}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.2499996, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2417645196299196322}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8803401173055547854
 GameObject:
   m_ObjectHideFlags: 0
