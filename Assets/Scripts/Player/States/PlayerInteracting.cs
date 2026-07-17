@@ -25,9 +25,9 @@ public class PlayerInteracting : PlayerAbstract
         {
             if (Input.GetKeyDown(SettingsData.Instance._InputInteract) && TextWrite.Instance._Writing == false)
             {
-                player.playerData.interacting = false;
-                TextWrite.Instance.Close();
-                player.SwitchState(player.IdleState);
+                //player.playerData.interacting = false;
+                //TextWrite.Instance.Close();
+                //player.SwitchState(player.IdleState);
             }
         }
         else

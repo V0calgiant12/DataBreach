@@ -103,5 +103,22 @@ public class TextWrite : MonoBehaviour
             yield return null;
         }
         _Writing = false;
+        if(GameObject.Find("Player").GetComponent<PlayerStateManager>() != null)
+        {
+            StartCoroutine(ReadyToClose());
+        }
+    }
+    private IEnumerator ReadyToClose()
+    {
+        while (textBox.open)
+        {
+            if (Input.GetKeyDown(SettingsData.Instance._InputInteract) && _Writing == false)
+            {
+                PlayerStateManager.Instance.playerData.interacting = false;
+                Close();
+                PlayerStateManager.Instance.SwitchState(PlayerStateManager.Instance.IdleState);
+            }
+            yield return null;
+        }
     }
 }
