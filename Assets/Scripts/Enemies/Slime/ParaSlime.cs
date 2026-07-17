@@ -22,7 +22,6 @@ public class ParaSlime : MonoBehaviour
     private void PlaySound()
     {
         audioSource.pitch = Random.Range(0.7f,1.3f);
-        audioSource.Play();
     }
 
     // Update is called once per frame
