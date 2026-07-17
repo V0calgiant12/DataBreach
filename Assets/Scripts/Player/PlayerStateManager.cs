@@ -201,7 +201,7 @@ public class PlayerStateManager : MonoBehaviour
                 //-playerData.PlayerRb.linearVelocity.x + ((playerData.ricochet == 1 ? -1.1f : 1.1f) * xLaunch)
                 //Mathf.Abs(playerData.PlayerRb.linearVelocity.x) * (playerData.ricochet == 1 ? -0.9f : 0.9f)
                 Debug.Log(playerData.PlayerRb.linearVelocity);
-                playerData.PlayerRb.linearVelocity = new Vector2(Mathf.Abs(playerData.PlayerRb.linearVelocity.x) * (playerData.ricochet == 1 ? -0.9f : 0.9f), playerData.PlayerRb.linearVelocity.y + yLaunch * 0.25f);
+                playerData.PlayerRb.linearVelocity = new Vector2(Mathf.Abs(playerData.PlayerRb.linearVelocity.x) * (playerData.ricochet == 2 ? -0.9f : 0.9f), playerData.PlayerRb.linearVelocity.y + yLaunch * 0.25f);
                 Debug.Log(playerData.PlayerRb.linearVelocity);
                 playerData.ricochet = 0;
                 TriggerShake.Instance.BurstShake(-1*MathF.Cos(playerData.PlayerRb.linearVelocityX/2)+(2+elapsed/25),2,true);
