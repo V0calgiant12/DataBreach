@@ -60,7 +60,7 @@ public class TextWrite : MonoBehaviour
     {
         textBox.Open();
         _Writing = true;
-        while(frame < 30)
+        while(frame < 40) // Delay before beginning to write.
         {
             frame += 1;
             yield return null;
