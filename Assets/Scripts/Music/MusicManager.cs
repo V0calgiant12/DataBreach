@@ -15,7 +15,6 @@ public class MusicManager : MonoBehaviour
     void Start()
     {
         ChangeInstruments(instrumentsActive);
-        FadeInCaller(120);
     }
     public void FadeOutCaller(int speed)
     {
@@ -44,6 +43,8 @@ public class MusicManager : MonoBehaviour
     private IEnumerator FadeIn(int speed)
     {
         int index = 0;
+        Debug.Log(children[0]);
+        Debug.Log(children[1]);
         while (index <= children.Length-1)
         {
             children[index].FadeInCaller(speed);

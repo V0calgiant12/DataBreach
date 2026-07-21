@@ -7,12 +7,11 @@ public class MusicChild : MonoBehaviour
 {
     [Header("References")]
     [SerializeField] private AudioSource audioSource;
-    private float maxVol;
+    [SerializeField] private float maxVol;
     public bool active = true;
-    private void Start()
+    private void Awake()
     {
         maxVol = audioSource.volume;
-        StartCoroutine(FadeIn(60));
         audioSource.volume = 0;
     }
     public void FadeOutCaller(int speed)
@@ -29,7 +28,7 @@ public class MusicChild : MonoBehaviour
     public void Activate()
     {
         active = true;
-        StartCoroutine(FadeIn(60));
+        StartCoroutine(FadeIn(120));
     }
     public void Deactivate()
     {
@@ -51,6 +50,7 @@ public class MusicChild : MonoBehaviour
     {
         if (active)
         {
+            Debug.Log("fading in",this);
             float currentVol = audioSource.volume;
             while (audioSource.volume < maxVol)
             {
