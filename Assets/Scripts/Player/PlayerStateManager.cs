@@ -29,6 +29,10 @@ public class PlayerStateManager : MonoBehaviour
         downAir,
         upAir
     }
+    void Awake()
+    {
+        Instance = this;
+    }
     public void Interact()
     {
         playerData.interacting = true;
@@ -46,7 +50,6 @@ public class PlayerStateManager : MonoBehaviour
         }
         playerData.OffsetVelocity = new Vector2(0,0);
         playerData.interacting = false;
-        Instance = this;
         FindPlayerObject();
         currentState = IdleState;
         currentState.RunOnce(this);

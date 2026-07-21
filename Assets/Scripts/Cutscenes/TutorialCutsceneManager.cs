@@ -8,6 +8,7 @@ public class TutorialCutsceneManager : MonoBehaviour
     public GameObject InvisbleWall;
     [SerializeField] private Animator anim;
     [SerializeField] private Animator screen;
+    [SerializeField] private MusicManager music;
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private AudioSource alarm;
     [SerializeField] private AudioClip shake1;
@@ -21,7 +22,7 @@ public class TutorialCutsceneManager : MonoBehaviour
         {
             PlayerStateManager.Instance.Interact();
             ProgressCutscene();
-            screen.SetTrigger("AudioOut");
+            music.FadeOutCaller(60);
         }
     }
     private void ProgressCutscene()
