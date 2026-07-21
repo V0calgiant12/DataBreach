@@ -9,6 +9,7 @@ public class MenuAudioSource : MonoBehaviour
     public void TextSound(TextWrite data)
     {
         audioSource.outputAudioMixerGroup = audioMixer.FindMatchingGroups("Dialogue")[0];
+        audioSource.bypassReverbZones = false;
         audioSource.clip = data._TextSound;
         audioSource.Play();
         StartCoroutine(Delete());
@@ -17,6 +18,7 @@ public class MenuAudioSource : MonoBehaviour
     {
         audioSource.volume = volume;
         audioSource.outputAudioMixerGroup = audioMixer.FindMatchingGroups("Effects")[0];
+        audioSource.bypassReverbZones = true;
         audioSource.clip = audioClip;
         audioSource.Play();
         StartCoroutine(Delete());
