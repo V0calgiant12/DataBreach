@@ -15,8 +15,6 @@ public class PlayerInteracting : PlayerAbstract
         player.playerData.anim.SetBool("walking", false);
         player.playerData.anim.SetBool("sprinting", false);
         player.playerData.anim.SetBool("crouching", false);
-        player.playerData.anim.SetBool("falling", false);
-        player.playerData.anim.SetBool("jumping", false);
     }
     public override void UpdateState(PlayerStateManager player) // Update Function
     {
@@ -33,6 +31,18 @@ public class PlayerInteracting : PlayerAbstract
         else
         {
             frame += 1;
+        }
+        
+        // Falling Animation
+        if (player.playerData.PlayerRb.linearVelocityY < 0) 
+        {
+            player.playerData.anim.SetBool("falling", true);
+            player.playerData.anim.SetBool("jumping", false);
+        }
+        if (GroundCheck.Instance._IsGrounded)
+        {
+            player.playerData.anim.SetBool("falling", false);
+            player.playerData.anim.SetBool("jumping", false);
         }
     }
 }
