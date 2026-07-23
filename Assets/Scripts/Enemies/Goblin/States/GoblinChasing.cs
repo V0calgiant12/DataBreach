@@ -19,7 +19,10 @@ public class GoblinChasing : GoblinAbstract
         
         goblin.spriteHolder.transform.localScale = new Vector3(direction,1,1);
 
-        // Walk forward (direction dependant) 
-        goblin.goblinRb.linearVelocity = new Vector2(direction * goblin.moveSpeed * goblin.mudSpeedMulti, goblin.goblinRb.linearVelocity.y);
+        // Walk forward (direction dependant)
+        if(Mathf.Abs(PlayerStateManager.Instance.transform.position.x - goblin.transform.position.x) > 0.5)
+        {
+            goblin.goblinRb.linearVelocity = new Vector2(direction * goblin.moveSpeed * goblin.mudSpeedMulti, goblin.goblinRb.linearVelocity.y);
+        }
     }
 }
