@@ -71,7 +71,7 @@ public class EnemyHit : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("PlayerHitbox") && iFrames < 0)
+        if (other.gameObject.CompareTag("PlayerHitbox") && iFrames < 0 && trackedHealth > 0)
         {
             iFrames = 15;
             _DamageTaken = true;
