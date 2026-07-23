@@ -143,7 +143,7 @@ public class GoblinStateManager : MonoBehaviour
     {
         if(audioCooldown <= 0)
         {
-            audioSource.EnemySound(audio,vol);
+            audioSource.EnemySound(audio,vol,1);
         }
         audioCooldown = 15;
     }

@@ -482,6 +482,7 @@ MonoBehaviour:
   knockbackReduction: {x: 1, y: 1}
   knockbackImmune: 1
   invulnerable: 1
+  immediatelDestroyOnDeath: 1
   iFrames: 0
   trackedHealth: 1
   _DamageTaken: 0
@@ -527,6 +528,7 @@ GameObject:
   - component: {fileID: 166234474400165080}
   - component: {fileID: 2370982694501029569}
   - component: {fileID: 3226693589704347797}
+  - component: {fileID: 2451745124300125019}
   m_Layer: 0
   m_Name: 0OreTermite
   m_TagString: Untagged
@@ -589,8 +591,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::OreTermiteManager
   animator: {fileID: 2370982694501029569}
   warning: {fileID: 7174304028978141120}
+  audioSource: {fileID: 2451745124300125019}
+  otReady: {fileID: 8300000, guid: 7528bef051879ee4ebe7db3a3f79bb1d, type: 3}
+  otAttack: {fileID: 8300000, guid: e6d7075f669c50641b9af5f62d37c1fa, type: 3}
+  otCancel: {fileID: 8300000, guid: 9e332bc4e1859fc468c586f2531c159e, type: 3}
   extended: 0
   playerInTrigger: 0
+--- !u!114 &2451745124300125019
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6542258419141373513}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ecd83e99770e60a4cb88f27c07e3179e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EffectSound
+  prefab: {fileID: 8734533203902538695, guid: b546d70ed2a00174299d1366a75185f3, type: 3}
 --- !u!1 &9022721693836470490
 GameObject:
   m_ObjectHideFlags: 0

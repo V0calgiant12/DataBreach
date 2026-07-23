@@ -8,6 +8,11 @@ public class OreTermiteManager : MonoBehaviour
     [Header("References")]
     [SerializeField] private Animator animator;
     [SerializeField] private EnemyPoximityTrigger warning;
+    [SerializeField] private EffectSound audioSource;
+    [SerializeField] private AudioClip otReady;
+    [SerializeField] private AudioClip otAttack;
+    [SerializeField] private AudioClip otCancel;
+
     [Header("Stats")]
     public bool extended;
     public bool playerInTrigger;
@@ -23,17 +28,23 @@ public class OreTermiteManager : MonoBehaviour
         }
         if (warning.trigger && warning.playerDetected)
         {
+            audioSource.EnemySound(otReady,1,Random.Range(0.9f,1.1f));
             animator.SetBool("Prepare",true);
             warning.trigger = false;
         }
         if (warning.trigger && !warning.playerDetected)
         {
+            if (!extended)
+            {
+                audioSource.EnemySound(otCancel,1,Random.Range(0.9f,1.1f));
+            }
             animator.SetBool("Prepare",false);
             warning.trigger = false;
         }
     }
     public void Stab()
     {
+        audioSource.EnemySound(otAttack,1,1);
         extended = true;
         animator.SetInteger("Stage",1);
         StartCoroutine(Retract());
