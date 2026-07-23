@@ -13,6 +13,7 @@ public class GoblinDead : GoblinAbstract
         goblin.anim.SetBool("dead", true);
         goblin.goblinRb.linearVelocityX = 0;
         goblin.goblinRb.linearVelocityY = 0;
+        goblin.audioSource.EnemySound(goblin.goblinDeath,1);
     }
     public override void UpdateState(GoblinStateManager goblin)
     {

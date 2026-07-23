@@ -32,6 +32,7 @@ public class GoblinStateManager : MonoBehaviour
     [Header("Combat")]
     public int attackCD = 60;
     public int currentAtkCd = 0;
+    private int audioCooldown = 0;
 
 
     [Header("References")]
@@ -45,6 +46,14 @@ public class GoblinStateManager : MonoBehaviour
     public EnemyGroundCheck groundCheck;
     public EnemyAttackRange attackRange;
     public EnemyHit enemyHit;
+    public EffectSound audioSource;
+
+    [Header("Audio")]
+    public AudioClip goblinDeath;
+    public AudioClip goblinReady;
+    public AudioClip goblinAttack;
+    public AudioClip goblinAggro;
+    public AudioClip goblinDeaggro;
 
     void Start()
     {
@@ -68,6 +77,7 @@ public class GoblinStateManager : MonoBehaviour
 
     void Update()
     {
+        audioCooldown -= Time.timeScale == 1 ? 1:0;
         currentState.UpdateState(this);
         if(enemyHit.trackedHealth != 0)
         {
@@ -128,6 +138,14 @@ public class GoblinStateManager : MonoBehaviour
         Debug.Log("Wall Collision");
         touchingWall = true;
         StartCoroutine(Jump());
+    }
+    public void PlaySound(AudioClip audio, float vol)
+    {
+        if(audioCooldown <= 0)
+        {
+            audioSource.EnemySound(audio,vol);
+        }
+        audioCooldown = 15;
     }
     public void Kill()
     {

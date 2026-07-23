@@ -10,6 +10,7 @@ public class GoblinChasing : GoblinAbstract
     {
         goblin.wallTrigger.size = new Vector2(2f, goblin.wallTrigger.size.y);
         goblin.anim.SetBool("moving", true);
+        goblin.anim.SetBool("attacking", false);
         goblin.anim.SetBool("sprinting", true);
     }
     public override void UpdateState(GoblinStateManager goblin)
