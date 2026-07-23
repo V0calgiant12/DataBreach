@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 /// <summary>
 /// This handels enemies taking damage. They will automatically take damage from a player's attack hitbox.
@@ -21,7 +22,7 @@ public class EnemyHit : MonoBehaviour
     [Header("Stats")]
     [Tooltip("Default health values: Slime 3, Para-Slimes 1, Goblin 5, Gliberknocker 6")]
     public int health = 1;
-    [SerializeField] private float knockbackReduction = 1;
+    [SerializeField] private Vector2 knockbackReduction = new Vector2(1,1);
     public bool knockbackImmune = false;
     public bool invulnerable = false;
 
@@ -30,12 +31,17 @@ public class EnemyHit : MonoBehaviour
     [SerializeField] private int trackedHealth = 1;
     public bool _DamageTaken = false;
     public Vector2 _LastKnockbackTaken;
+    [SerializeField] private GameObject[] sprites;
     
     private void Start()
     {
-        if(knockbackReduction == 0)
+        if(knockbackReduction.x == 0)
         {
-            knockbackReduction = 1;
+            knockbackReduction.x = 1;
+        }
+        if(knockbackReduction.y == 0)
+        {
+            knockbackReduction.y = 1;
         }
         playerStateManager = GameObject.Find("Player").GetComponent<PlayerStateManager>();
         trackedHealth = health;
@@ -116,13 +122,36 @@ public class EnemyHit : MonoBehaviour
         if(trackedHealth != 1)
         {
             audioSource.EnemySound(hitSound,volume);
-            flashEffect.WhiteFlash();
+            AdvancedFlash(1);
         }
         if (!knockbackImmune)
         {
-            _LastKnockbackTaken = new Vector2(xLaunch*(transform.position.x <= damageSourceX ? -1 : 1)/knockbackReduction, yLaunch/knockbackReduction);
+            _LastKnockbackTaken = new Vector2(xLaunch*(transform.position.x <= damageSourceX ? -1 : 1)/knockbackReduction.x, yLaunch/knockbackReduction.y);
             rb.linearVelocity = _LastKnockbackTaken;
         }
         trackedHealth -= damage;
+    }
+    
+    public void AdvancedFlash(int type)
+    {
+        int index = 0;
+        if(type == 1) // White Flash
+        {
+            Debug.Log("White Flash");
+            while (index <= sprites.Length - 1) // Repeats for every game object.
+            {
+                sprites[index].SendMessage("WhiteFlash");
+                index += 1;
+            }
+        }
+        else if(type == 2) // Invulnerable Flash
+        {
+            Debug.Log("Invulnerable Flash");
+            while (index <= sprites.Length - 1) // Repeats for every game object.
+            {
+                sprites[index].SendMessage("InvulnerableFlash", iFrames);
+                index += 1;
+            }
+        }
     }
 }

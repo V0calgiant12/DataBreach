@@ -225,6 +225,7 @@ GameObject:
   - component: {fileID: 1939691134458299253}
   - component: {fileID: 1441861567795638056}
   - component: {fileID: 7360652377769179095}
+  - component: {fileID: 8176816787592996751}
   m_Layer: 7
   m_Name: Slime
   m_TagString: Untagged
@@ -382,6 +383,21 @@ MonoBehaviour:
     - rid: 3476702126088912995
       type: {class: ShadowShape2DProvider_SpriteRenderer, ns: UnityEngine.Rendering.Universal, asm: Unity.RenderPipelines.Universal.2D.Runtime}
       data: 
+--- !u!114 &8176816787592996751
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1172246738268572851}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 286cfaf23cb44bd449274e11cdda359a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FlashEffect
+  litMat: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  hitMat: {fileID: -876546973899608171, guid: 04ff3f43c4ea13f4788fa89a12d1af52, type: 3}
+  invulMat: {fileID: -876546973899608171, guid: 8d593483cc60e0e4296896ed1c6f4b89, type: 3}
 --- !u!1 &1946797180756222299
 GameObject:
   m_ObjectHideFlags: 0
@@ -689,13 +705,15 @@ MonoBehaviour:
   deathSound: {fileID: 8300000, guid: 0709a445dfc22cb4d8de281c203077b7, type: 3}
   volume: 1
   health: 1
-  knockbackReduction: 1
+  knockbackReduction: {x: 1, y: 1}
   knockbackImmune: 0
   invulnerable: 0
   iFrames: 0
   trackedHealth: 1
   _DamageTaken: 0
   _LastKnockbackTaken: {x: 0, y: 0}
+  sprites:
+  - {fileID: 1172246738268572851}
 --- !u!114 &8582808800498537180
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -479,13 +479,15 @@ MonoBehaviour:
   deathSound: {fileID: 0}
   volume: 1
   health: 1
-  knockbackReduction: 1
+  knockbackReduction: {x: 1, y: 1}
   knockbackImmune: 1
   invulnerable: 1
   iFrames: 0
   trackedHealth: 1
   _DamageTaken: 0
   _LastKnockbackTaken: {x: 0, y: 0}
+  sprites:
+  - {fileID: 1533193037024283550}
 --- !u!114 &3254211686096761963
 MonoBehaviour:
   m_ObjectHideFlags: 0

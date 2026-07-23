@@ -236,13 +236,24 @@ MonoBehaviour:
   deathSound: {fileID: 8300000, guid: 0709a445dfc22cb4d8de281c203077b7, type: 3}
   volume: 1
   health: 5
-  knockbackReduction: 2
+  knockbackReduction: {x: 2, y: 1.5}
   knockbackImmune: 0
   invulnerable: 0
   iFrames: 0
   trackedHealth: 1
   _DamageTaken: 0
   _LastKnockbackTaken: {x: 0, y: 0}
+  sprites:
+  - {fileID: 971672496696027966}
+  - {fileID: 271766210963508442}
+  - {fileID: 3839997730405317921}
+  - {fileID: 5770597331717565841}
+  - {fileID: 5749773664412985649}
+  - {fileID: 6925086431995727968}
+  - {fileID: 7926024009332553170}
+  - {fileID: 6122358838147383771}
+  - {fileID: 8880149967690665996}
+  - {fileID: 9164615886530114477}
 --- !u!114 &1003367167366328723
 MonoBehaviour:
   m_ObjectHideFlags: 0
