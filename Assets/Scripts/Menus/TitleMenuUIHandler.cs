@@ -32,7 +32,12 @@ public class TitleMenuUIHandler : MonoBehaviour
     }
     public void ContinueButton()
     {
-        Debug.Log("Test continue button");
+        if(Input.GetKey(KeyCode.F3))
+        {
+            GameData.Instance.LoadData();
+            sceneTransition.TransitionToScene(14,1);
+            return;
+        }
         if(GameData.Instance.SaveExists())
         {
             GameData.Instance.LoadData();
