@@ -9,6 +9,8 @@ public class GoblinHurt : GoblinAbstract
     public override void EnterState(GoblinStateManager goblin)
     {
         goblin.goblinRb.linearVelocity = goblin.enemyHit._LastKnockbackTaken;
+        goblin.anim.SetBool("hit", true);
+        Debug.Log("hurtstate");
     }
     public override void UpdateState(GoblinStateManager goblin)
     {
@@ -16,6 +18,7 @@ public class GoblinHurt : GoblinAbstract
 
         if (!goblin.enemyHit._DamageTaken && goblin.groundCheck._IsGrounded)
         {
+            goblin.anim.SetBool("hit", false);
             if(goblin.currentAtkCd != 0)
             {
                 goblin.SwitchState(goblin.AttackState);

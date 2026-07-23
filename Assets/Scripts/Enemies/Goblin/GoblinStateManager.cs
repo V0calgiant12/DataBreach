@@ -36,6 +36,8 @@ public class GoblinStateManager : MonoBehaviour
     [Header("References")]
     public Rigidbody2D goblinRb;
     public BoxCollider2D wallTrigger;
+    public Animator anim;
+    public GameObject spriteHolder;
     public Vector2 originPos;
     public float patrolTargetX;
     [SerializeField] private SpriteRenderer spriteRenderer;
@@ -67,6 +69,10 @@ public class GoblinStateManager : MonoBehaviour
         {
             GlobalUpdateState.UpdateState(this);
         }
+        if (groundCheck._IsGrounded)
+        {
+            anim.SetBool("falling", false);
+        }
     }
 
 
@@ -78,6 +84,7 @@ public class GoblinStateManager : MonoBehaviour
 
             goblinRb.linearVelocity = new Vector2((leftOrRight == true ? -1 : 1) * forwardForce, jumpForce * mudJumpMulti);
             int elapsed = 0;
+            anim.SetBool("jumping", true);
             while(elapsed != 5)
             {
                 elapsed += Time.timeScale == 1 ? 1 : 0;

@@ -11,6 +11,8 @@ public class GoblinIdle : GoblinAbstract
     {
         idleTime = Random.Range(15,45);
         goblin.wallTrigger.size = new Vector2(1.5f, goblin.wallTrigger.size.y);
+        goblin.anim.SetBool("moving", false);
+        goblin.anim.SetBool("sprinting", false);
     }
     public override void UpdateState(GoblinStateManager goblin)
     {
