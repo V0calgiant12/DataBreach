@@ -58,8 +58,11 @@ public class GoblinStateManager : MonoBehaviour
     
     public void SwitchState(GoblinAbstract state)
     {
-        currentState = state;
-        state.EnterState(this);
+        if(currentState != state)
+        {
+            currentState = state;
+            state.EnterState(this);
+        }
     }
 
 
@@ -125,6 +128,10 @@ public class GoblinStateManager : MonoBehaviour
         Debug.Log("Wall Collision");
         touchingWall = true;
         StartCoroutine(Jump());
+    }
+    public void Kill()
+    {
+        Destroy(gameObject);
     }
     
 }
