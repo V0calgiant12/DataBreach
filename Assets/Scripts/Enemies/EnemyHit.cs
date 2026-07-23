@@ -25,6 +25,7 @@ public class EnemyHit : MonoBehaviour
     [SerializeField] private Vector2 knockbackReduction = new Vector2(1,1);
     public bool knockbackImmune = false;
     public bool invulnerable = false;
+    public bool immediatelDestroyOnDeath = true;
 
     [Header("Stored Info")]
     [SerializeField] private int iFrames = 0;
@@ -58,7 +59,7 @@ public class EnemyHit : MonoBehaviour
         {
             _DamageTaken = false;
         }
-        if (trackedHealth <= 0)
+        if (trackedHealth <= 0 && immediatelDestroyOnDeath) // IF immediatelyDestroyOnDeath is false, we assume it's handeled elsewhere as it's likely a State Machine handeling it.
         {
             audioSource.EnemySound(deathSound,volume);
             if(particlePrefab != null)
