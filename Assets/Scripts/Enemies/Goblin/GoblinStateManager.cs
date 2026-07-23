@@ -15,6 +15,7 @@ public class GoblinStateManager : MonoBehaviour
     public GoblinPatrolling PatrollingState = new GoblinPatrolling();
     public GoblinChasing ChasingState = new GoblinChasing();
     public GoblinHurt HurtState = new GoblinHurt();
+    public GoblinDead DeadState = new GoblinDead();
 
     [Header("Movement & Gravity")]
     public float moveSpeed = 3f;
@@ -65,20 +66,27 @@ public class GoblinStateManager : MonoBehaviour
     void Update()
     {
         currentState.UpdateState(this);
-        if(currentState != HurtState)
+        if(enemyHit.trackedHealth != 0)
         {
-            GlobalUpdateState.UpdateState(this);
+            if(currentState != HurtState)
+            {
+                GlobalUpdateState.UpdateState(this);
+            }
+            if (groundCheck._IsGrounded)
+            {
+                anim.SetBool("falling", false);
+            }
         }
-        if (groundCheck._IsGrounded)
+        else
         {
-            anim.SetBool("falling", false);
+            SwitchState(DeadState);
         }
     }
 
 
     public IEnumerator Jump()
     {
-        if (groundCheck._IsGrounded && currentState != AttackState)
+        if (groundCheck._IsGrounded && currentState != AttackState && currentState != DeadState)
         {
             leftOrRight = (PlayerStateManager.Instance.transform.position.x > transform.position.x) ? true : false;
 
@@ -118,6 +126,7 @@ public class GoblinStateManager : MonoBehaviour
         touchingWall = true;
         StartCoroutine(Jump());
     }
+    
 }
 
 

@@ -29,7 +29,7 @@ public class EnemyHit : MonoBehaviour
 
     [Header("Stored Info")]
     [SerializeField] private int iFrames = 0;
-    [SerializeField] private int trackedHealth = 1;
+    public int trackedHealth = 1;
     public bool _DamageTaken = false;
     public Vector2 _LastKnockbackTaken;
     [SerializeField] private GameObject[] sprites;
