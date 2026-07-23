@@ -28,7 +28,10 @@ public class OreTermiteManager : MonoBehaviour
         }
         if (warning.trigger && warning.playerDetected)
         {
-            audioSource.EnemySound(otReady,1,Random.Range(0.9f,1.1f));
+            if (!extended)
+            {
+                audioSource.EnemySound(otReady,1,Random.Range(0.9f,1.1f));
+            }
             animator.SetBool("Prepare",true);
             warning.trigger = false;
         }
