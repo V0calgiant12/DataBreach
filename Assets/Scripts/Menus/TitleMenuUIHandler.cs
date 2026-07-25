@@ -27,11 +27,13 @@ public class TitleMenuUIHandler : MonoBehaviour
 
     public void NewSaveButton() // Starts a transition to the Intro scene
     {
+        playerData.lastCheckpoint = new Vector2(0,0);
         playerData.playerHealth = 5;
         sceneTransition.TransitionToScene(13,1); // Intro scene, 1 second transition.
     }
     public void ContinueButton()
     {
+        playerData.lastCheckpoint = new Vector2(0,0);
         if(Input.GetKey(KeyCode.F3))
         {
             GameData.Instance.LoadData();
