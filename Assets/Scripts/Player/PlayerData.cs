@@ -3,12 +3,26 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "PlayerData", menuName = "ScriptableObjects/PlayerData")]
 public class PlayerData : ScriptableObject
 {
-    [Header("Player Data Settings:")]
+    [Header("Info")]
     public int playerHealth = 5;
-    public int fastFallCounter;
+    public int fastFallCounter = 0;
+    public int jumpBufferCounter = 0;
+    public int coyoteTimeCounter = 0;
+    public int iFrames = 0;
+    public int ricochet = 0;
     public float mudSpeedMulti;
     public float mudJumpMulti;
-    [Header("Player Data References:")]
+    public bool sprinting = false;
+    public bool crouching = false;
+    public bool doubleJumpAvailable = true;
+    public bool movementAllowed = true;
+    public bool leftOrRight = false;
+    public bool interacting = false;
+    public bool inAirGust = false;
+    public bool pickUpHeart = false;
+    public bool playerDead = false;
+    public bool inMud = false;
+    [Header("References")]
     public GameObject MainCamera;
     public Animator ScreenCanvas;
     public Vector2 OffsetVelocity;
@@ -17,20 +31,6 @@ public class PlayerData : ScriptableObject
     public PlayerSound audioSource;
     public Animator anim;
     public Material pixelationMat;
-    public int jumpBufferCounter;
-    public int coyoteTimeCounter;
-    public int iFrames;
-    public int ricochet;
-    public bool sprinting;
-    public bool crouching;
-    public bool doubleJumpAvailable;
-    public bool movementAllowed = true;
-    public bool leftOrRight;
-    public bool interacting;
-    public bool inAirGust;
-    public bool pickUpHeart;
-    public bool playerDead;
-    public bool inMud;
     [Header("Audio")]
     public AudioClip _GrassWalk;
     public AudioClip _GrassFall;

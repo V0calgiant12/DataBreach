@@ -21,8 +21,12 @@ public class CameraUpdater : MonoBehaviour
         while(elapsed <= 2)
         {
             elapsed += 1;
-            transform.position = cameraLoc.transform.position;
+            GoToPlayer();
             yield return null;
         }
+    }
+    public void GoToPlayer()
+    {
+        transform.position = cameraLoc.transform.position;
     }
 }
