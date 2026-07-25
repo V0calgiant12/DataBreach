@@ -32,6 +32,7 @@ public class PlayerStateManager : MonoBehaviour
     void Awake()
     {
         Instance = this;
+        GoToCheckpoint();
     }
     public void Interact()
     {
@@ -64,6 +65,13 @@ public class PlayerStateManager : MonoBehaviour
 
         playerData.ScreenCanvas = GameObject.Find("Screen").GetComponent<Animator>();
 
+    }
+    private void GoToCheckpoint()
+    {
+        if(playerData.lastCheckpoint != new Vector2(0,0))
+        {
+            transform.position = playerData.lastCheckpoint;
+        }
     }
     void LateUpdate()
     {
