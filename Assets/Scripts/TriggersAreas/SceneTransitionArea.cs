@@ -11,6 +11,7 @@ public class SceneTransitionArea : MonoBehaviour
         {
             Debug.Log("Entered Transition Area");
             sceneTransition.TransitionToScene(sceneId, 1);
+            PlayerStateManager.Instance.playerData.lastCheckpoint = new Vector2(0,0);
             playerData.movementAllowed = false;
         }
     }
