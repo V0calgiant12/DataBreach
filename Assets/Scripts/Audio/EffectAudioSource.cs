@@ -16,13 +16,13 @@ public class EffectAudioSource : MonoBehaviour
         audioSource.Play();
         StartCoroutine(Delete());
     }
-    public void EnemySound(AudioClip audioClip,float volume, float pitch)
+    public void PlaySound(AudioClip audioClip,float volume, float pitch, float spatialBlend)
     {
         audioSource.volume = volume;
         audioSource.pitch = pitch;
         audioSource.outputAudioMixerGroup = audioMixer.FindMatchingGroups("Effects")[0];
         audioSource.clip = audioClip;
-        audioSource.spatialBlend = 1;
+        audioSource.spatialBlend = spatialBlend;
         audioSource.Play();
         StartCoroutine(Delete());
     }

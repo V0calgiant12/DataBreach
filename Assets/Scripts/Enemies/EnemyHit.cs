@@ -61,7 +61,7 @@ public class EnemyHit : MonoBehaviour
         }
         if (trackedHealth <= 0 && immediatelDestroyOnDeath) // IF immediatelyDestroyOnDeath is false, we assume it's handeled elsewhere as it's likely a State Machine handeling it.
         {
-            audioSource.EnemySound(deathSound,volume,1);
+            audioSource.PlaySound(deathSound,volume,1,1);
             if(particlePrefab != null)
             {
                 Instantiate(particlePrefab, gameObject.transform.position, gameObject.transform.rotation);
@@ -108,7 +108,7 @@ public class EnemyHit : MonoBehaviour
             }
             else
             {
-                audioSource.EnemySound(hitSound,volume,1);
+                audioSource.PlaySound(hitSound,volume,1,1);
                 flashEffect.WhiteFlash();
                 if(particlePrefab != null)
                 {
@@ -122,7 +122,7 @@ public class EnemyHit : MonoBehaviour
         //Debug.Log("Damaged Enemy for " + damage + " damage.");
         if(trackedHealth != 1)
         {
-            audioSource.EnemySound(hitSound,volume,1);
+            audioSource.PlaySound(hitSound,volume,1,1);
             AdvancedFlash(1);
         }
         if (!knockbackImmune)
