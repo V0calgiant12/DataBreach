@@ -2,8 +2,18 @@ using UnityEngine;
 
 public class CheckpointTrigger : MonoBehaviour
 {
-    void OnTriggerEnter2D(Collider2D collision)
+    [SerializeField] private GameObject particle;
+    bool used;
+    void OnTriggerEnter2D(Collider2D other)
     {
-        PlayerStateManager.Instance.playerData.lastCheckpoint = transform.position;
+        if (other.CompareTag("Player"))
+        {
+            if(!used && PlayerStateManager.Instance.playerData.lastCheckpoint != new Vector2(transform.position.x, transform.position.y))
+            {
+                //used = true;
+                Instantiate(particle,PlayerStateManager.Instance.transform.position,transform.rotation);
+                PlayerStateManager.Instance.playerData.lastCheckpoint = transform.position;
+            }
+        }
     }
 }

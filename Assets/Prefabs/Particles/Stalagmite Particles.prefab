@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2326167561082831114}
   - component: {fileID: 6999079966587441646}
   - component: {fileID: 8934586433333702690}
-  - component: {fileID: 7060891228525371097}
+  - component: {fileID: 4139294112522487156}
   m_Layer: 0
   m_Name: Stalagmite Particles
   m_TagString: Untagged
@@ -4861,7 +4861,7 @@ ParticleSystemRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 349710059
-  m_SortingLayer: 6
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_RenderMode: 0
@@ -4895,7 +4895,7 @@ ParticleSystemRenderer:
   m_MeshWeighting1: 1
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
---- !u!114 &7060891228525371097
+--- !u!114 &4139294112522487156
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4904,7 +4904,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 469266653561010877}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dd41029c8d5815f438950271184064ec, type: 3}
+  m_Script: {fileID: 11500000, guid: a033649c57f73964fbb5b3fbd0798e76, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ParticleTimer
-  maxTime: 180
+  m_EditorClassIdentifier: Assembly-CSharp::DeleteAfterTime
+  time: 180
+  pausable: 1

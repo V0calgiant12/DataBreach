@@ -12,22 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a1729c4832f69e4bb0a9c98f3d7c2f3, type: 3}
   m_Name: PlayerData
   m_EditorClassIdentifier: Assembly-CSharp::PlayerData
-  playerHealth: 5
+  playerHealth: 4
   fastFallCounter: 0
+  jumpBufferCounter: -326
+  coyoteTimeCounter: 15
+  iFrames: -941
+  ricochet: 0
   mudSpeedMulti: 1
   mudJumpMulti: 1
-  MainCamera: {fileID: 0}
-  ScreenCanvas: {fileID: 0}
-  OffsetVelocity: {x: 0, y: 0}
-  PlayerRb: {fileID: 0}
-  collider: {fileID: 0}
-  audioSource: {fileID: 0}
-  anim: {fileID: 0}
-  pixelationMat: {fileID: 2100000, guid: 4c683fc6bc2d87548a869699295c3659, type: 2}
-  jumpBufferCounter: -478
-  coyoteTimeCounter: 15
-  iFrames: -8004
-  ricochet: 0
   sprinting: 0
   crouching: 0
   doubleJumpAvailable: 1
@@ -38,6 +30,15 @@ MonoBehaviour:
   pickUpHeart: 0
   playerDead: 0
   inMud: 0
+  lastCheckpoint: {x: 0, y: 0}
+  MainCamera: {fileID: 0}
+  ScreenCanvas: {fileID: 0}
+  OffsetVelocity: {x: 0, y: 0}
+  PlayerRb: {fileID: 0}
+  collider: {fileID: 0}
+  audioSource: {fileID: 0}
+  anim: {fileID: 0}
+  pixelationMat: {fileID: 2100000, guid: 4c683fc6bc2d87548a869699295c3659, type: 2}
   _GrassWalk: {fileID: 8300000, guid: 0a7bcb5adf063a24da9d72f4dc0f02a0, type: 3}
   _GrassFall: {fileID: 8300000, guid: 46a651f22e879ac4f9102ee15625f1e6, type: 3}
   _GrassJump: {fileID: 8300000, guid: 6be5f03a7ae371945ba45091fdd2967a, type: 3}
