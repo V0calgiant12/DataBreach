@@ -15,7 +15,14 @@ public class CameraAreaTrigger : MonoBehaviour
             cameraLocation.limitX = limitX == 0 ? limitX = float.NaN : limitX;
             cameraLocation.limitY = limitY == 0 ? limitY = float.NaN : limitY;
             cameraLocation.flippable = flippable;
-            cameraLocation.side = side;
+            if(side == CameraLocationUpdater.Side.Left || side == CameraLocationUpdater.Side.Right)
+            {
+                cameraLocation.side1 = side;
+            }
+            else
+            {
+                cameraLocation.side2 = side;
+            }
         }
     }
     private void OnTriggerExit2D(Collider2D other)

@@ -18,7 +18,8 @@ public class CameraLocationUpdater : MonoBehaviour
         Top,
         Bottom
     }
-    public Side side;
+    public Side side1;
+    public Side side2;
     [SerializeField] private float cameraWidth;
     [SerializeField] private float cameraHeight;
     void Start()
@@ -33,22 +34,22 @@ public class CameraLocationUpdater : MonoBehaviour
         transform.position = new UnityEngine.Vector3(player.transform.position.x + rb.linearVelocityX/4, player.transform.position.y + rb.linearVelocityY/4, -10);
         if(limitX != float.NaN)
         {
-            if(side == Side.Right && limitX < transform.position.x + cameraWidth)
+            if(side1 == Side.Right && limitX < transform.position.x + cameraWidth)
             {
                 transform.position = new UnityEngine.Vector3(limitX - cameraWidth, transform.position.y, -10);
             }
-            else if(side == Side.Left && limitX > transform.position.x - cameraWidth)
+            else if(side1 == Side.Left && limitX > transform.position.x - cameraWidth)
             {
                 transform.position = new UnityEngine.Vector3(limitX + cameraWidth, transform.position.y, -10);
             }
         }
         if(limitY != float.NaN)
         {
-            if(side == Side.Top && limitY < transform.position.y + cameraHeight)
+            if(side2 == Side.Top && limitY < transform.position.y + cameraHeight)
             {
                 transform.position = new UnityEngine.Vector3(transform.position.x, limitY - cameraHeight, -10);
             }
-            else if(side == Side.Bottom && limitY > transform.position.y - cameraHeight)
+            else if(side2 == Side.Bottom && limitY > transform.position.y - cameraHeight)
             {
                 transform.position = new UnityEngine.Vector3(transform.position.x, limitY + cameraHeight, -10);
             }
