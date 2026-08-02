@@ -155,6 +155,7 @@ public class IntroCutsceneManager : MonoBehaviour
             yield return null;
         }
         playerAnim.SetTrigger("standUp");
+        playerAnim.SetBool("lookAround",true);
         elapsed = 0;
         while (elapsed != 260)
         {
@@ -162,7 +163,7 @@ public class IntroCutsceneManager : MonoBehaviour
             elapsed += 1;
             yield return null;
         }
-        playerAnim.SetBool("lookAround",true);
+        // lookAround should technically be here but has to be above because of timing.
         elapsed = 0;
         while (elapsed != 90)
         {
