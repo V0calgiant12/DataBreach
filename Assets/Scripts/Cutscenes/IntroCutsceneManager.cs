@@ -67,10 +67,15 @@ public class IntroCutsceneManager : MonoBehaviour
                 StartCoroutine(Fall1());
                 break;
             case(2):
+                Text(1);
                 break;
             case(3):
+                playerAnim.SetBool("lookAround",false);
+                Text(2);
                 break;
             case(4):
+                StartCoroutine(Walk());
+                Text(3);
                 break;
             case(5):
                 break;
@@ -95,34 +100,22 @@ public class IntroCutsceneManager : MonoBehaviour
         switch (number)
         {
             case(1):
-                textData._TextInput = "You found the bit, but it doesn't seem like it's awake yet...";
+                textData._TextInput = "The bit doesn't seem to be anywhere around here...";
                 textData._TextSpeed = 3;
                 textData._TextSound = bitSound;
                 StartCoroutine(WaitUntilTextCloses(30,60));
                 break;
             case(2):
-                textData._TextInput = "It woke up! It seems to be confused and panicked about where it is.";
+                textData._TextInput = "Maybe it's further up ahead.";
                 textData._TextSpeed = 3;
                 textData._TextSound = bitSound;
                 StartCoroutine(WaitUntilTextCloses(200,30));
                 break;
             case(3):
-                textData._TextInput = "It seems glad to see you! You ask if it needs help getting back to where it came from.";
+                textData._TextInput = "Let's hope this new world wasn't affected by whatever happened before...";
                 textData._TextSpeed = 3;
                 textData._TextSound = bitSound;
                 StartCoroutine(WaitUntilTextCloses(240,60));
-                break;
-            case(4):
-                textData._TextInput = "You agree to help it and ask if the destination is to the East.";
-                textData._TextSpeed = 3;
-                textData._TextSound = bitSound;
-                StartCoroutine(WaitUntilTextCloses(240,60));
-                break;
-            case(5):
-                textData._TextInput = "So the two of you set off on a journey. Maybe you can ask some locals what they know about the Eastern land of Vandros along your way.";
-                textData._TextSpeed = 3;
-                textData._TextSound = bitSound;
-                StartCoroutine(WaitUntilTextCloses(30,0));
                 break;
         }
     }
@@ -162,9 +155,32 @@ public class IntroCutsceneManager : MonoBehaviour
             elapsed += 1;
             yield return null;
         }
+        elapsed = 0;
+        while (elapsed != 500)
+        {
+            inputTimer = -100;
+            elapsed += 1;
+            yield return null;
+        }
+        playerAnim.SetTrigger("standUp");
+        elapsed = 0;
+        while (elapsed != 200)
+        {
+            inputTimer = -100;
+            elapsed += 1;
+            yield return null;
+        }
+        playerAnim.SetBool("lookAround",true);
+        elapsed = 0;
+        while (elapsed != 90)
+        {
+            inputTimer = -100;
+            elapsed += 1;
+            yield return null;
+        }
         ProgressCutscene();
     }
-    private IEnumerator Walk2()
+    private IEnumerator Walk()
     {
         int elapsed = 0;
         while (elapsed != 500)
