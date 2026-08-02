@@ -136,21 +136,21 @@ public class IntroCutsceneManager : MonoBehaviour
         playerAnim.SetBool("attacking",true);
         elapsed = 0;
         float playerFallingVelocity = 0;
-        while (elapsed != 60)
+        while (elapsed != 85)
         {
             if(elapsed == 26)
             {
                 playerFallingVelocity = playerRb.linearVelocityY;
             }
-            if(27 <= elapsed && elapsed <= 47)
+            if(27 <= elapsed && elapsed <= 62)
             {
                 playerRb.linearVelocityY = 0;
             }
-            if(elapsed == 40)
+            if(elapsed == 27)
             {
                 anim.SetTrigger("Break");
             }
-            if(elapsed == 48)
+            if(elapsed == 63)
             {
                 playerRb.linearVelocityY = playerFallingVelocity;
             }
