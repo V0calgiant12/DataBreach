@@ -9,7 +9,7 @@ public class ParticleCollisionAudio : MonoBehaviour
     {
         if (collisions < 10)
         {
-            audioSource.PlaySound(landSound, 0.1f,Random.Range(0.9f,1.1f),0.5f);
+            audioSource.PlaySound(landSound, 0.15f,Random.Range(1.5f,1.8f),0f);
             collisions += 1;
         }
     }

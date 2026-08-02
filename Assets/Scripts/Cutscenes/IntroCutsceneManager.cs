@@ -14,6 +14,7 @@ public class IntroCutsceneManager : MonoBehaviour
     [SerializeField] private SceneTransition sceneTransition;
     public Rigidbody2D playerRb;
     [SerializeField] private TextData textData;
+    [SerializeField] private AudioSource fallingWind;
     [SerializeField] private AudioClip bitSound;
     [SerializeField] private AudioClip playerSound;
     public bool falling;
@@ -45,6 +46,8 @@ public class IntroCutsceneManager : MonoBehaviour
         {
             ShowInputMethod();
         }
+
+        //fallingWind.pitch = 6/playerRb.linearVelocityY-3;
     }
     private void ShowInputMethod()
     {
@@ -141,6 +144,7 @@ public class IntroCutsceneManager : MonoBehaviour
             if(elapsed == 26)
             {
                 playerFallingVelocity = playerRb.linearVelocityY;
+                fallingWind.Stop();
             }
             if(27 <= elapsed && elapsed <= 62)
             {
