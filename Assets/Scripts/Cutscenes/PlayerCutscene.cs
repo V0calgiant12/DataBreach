@@ -9,6 +9,7 @@ public class PlayerCutscene : MonoBehaviour
     {
         if (GroundCheck.Instance._IsGrounded)
         {
+            anim.SetBool("falling", false);
             if(Mathf.Abs(playerRb.linearVelocityX) >= 0.1)
             {
                 anim.SetBool("moving",true);
@@ -27,6 +28,10 @@ public class PlayerCutscene : MonoBehaviour
             {
                 anim.SetBool("moving", false);
             }
+        }
+        else
+        {
+            anim.SetBool("falling", true);
         }
     }
 }

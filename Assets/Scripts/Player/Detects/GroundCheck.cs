@@ -13,6 +13,13 @@ public class GroundCheck : MonoBehaviour
     {
         Instance = this;
     }
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (_InCutscene && other.gameObject.CompareTag("Ground"))
+        {
+            TriggerShake.Instance.BurstShake(15,1,true);
+        }
+    }
     private void OnTriggerStay2D(Collider2D other)
     {
         //Debug.Log("Stay " + other.gameObject.CompareTag("Ground"));

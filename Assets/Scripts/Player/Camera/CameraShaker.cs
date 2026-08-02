@@ -54,6 +54,7 @@ public class CameraShaker : MonoBehaviour
         if (playSound)
         {
             audioSource.pitch = 2.5f - (magnitude * 0.05f + Random.Range(-0.1f, 0.1f));
+            audioSource.volume = magnitude * 0.05f;
             audioSource.Play();
         }
 

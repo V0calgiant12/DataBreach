@@ -9,13 +9,14 @@ public class IntroCutsceneManager : MonoBehaviour
 {
     [Header("Cutscene Manager References:")]
     [SerializeField] private Animator anim;
+    [SerializeField] private Animator playerAnim;
     [SerializeField] private TextMeshProUGUI inputText;
     [SerializeField] private SceneTransition sceneTransition;
-    [SerializeField] private Rigidbody2D playerRb;
+    public Rigidbody2D playerRb;
     [SerializeField] private TextData textData;
     [SerializeField] private AudioClip bitSound;
     [SerializeField] private AudioClip playerSound;
-    public bool walking;
+    public bool falling;
     public static IntroCutsceneManager Instance;
 
     private int inputTimer;
@@ -59,37 +60,22 @@ public class IntroCutsceneManager : MonoBehaviour
         switch (currentScene)
         {
             case(1):
-                anim.SetInteger("Scene",1); // Walking
-                StartCoroutine(Walk1());
+                playerRb.linearVelocityY = -30;
+                StartCoroutine(Fall1());
                 break;
             case(2):
-                anim.SetInteger("Scene",2); // See bit
-                StartCoroutine(WaitForFrames(120));
                 break;
             case(3):
-                anim.SetInteger("Scene",3); // Bit isn't awake
-                Text(1);
                 break;
             case(4):
-                anim.SetInteger("Scene",4); // Bit wakes up
-                Text(2);
                 break;
             case(5):
-                anim.SetInteger("Scene",5); // Bit notices you
-                Text(3);
                 break;
             case(6):
-                anim.SetInteger("Scene",6); // Bit says yes
-                Text(4);
                 break;
             case(7):
-                anim.SetInteger("Scene",7); // Bit says yes
-                StartCoroutine(WaitForFrames(60*3));
                 break;
             case(8):
-                anim.SetInteger("Scene",8); // Bit says yes
-                StartCoroutine(Walk2());
-                Text(5);
                 break;
             case(9):
                 EndCutscene();
@@ -137,19 +123,37 @@ public class IntroCutsceneManager : MonoBehaviour
                 break;
         }
     }
-    private IEnumerator Walk1()
+    private IEnumerator Fall1()
     {
-        walking = true;
+        falling = true;
         float elapsed = 0;
-        while (walking)
+        while (falling)
         {
             inputTimer = -100;
-            playerRb.linearVelocityX = 8;
             yield return null;
         }
+        playerAnim.SetInteger("attackId",10);
+        playerAnim.SetBool("attacking",true);
         elapsed = 0;
+        float playerFallingVelocity = 0;
         while (elapsed != 60)
         {
+            if(elapsed == 26)
+            {
+                playerFallingVelocity = playerRb.linearVelocityY;
+            }
+            if(27 <= elapsed && elapsed <= 47)
+            {
+                playerRb.linearVelocityY = 0;
+            }
+            if(elapsed == 40)
+            {
+                anim.SetTrigger("Break");
+            }
+            if(elapsed == 48)
+            {
+                playerRb.linearVelocityY = playerFallingVelocity;
+            }
             inputTimer = -100;
             elapsed += 1;
             yield return null;
