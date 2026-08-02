@@ -7,8 +7,8 @@ public class CameraAreaTrigger : MonoBehaviour
     [SerializeField] private bool flippable;
     [SerializeField] private bool resetOnExit = true;
     [SerializeField] private bool detectPlayer = false;
-    [SerializeField] private CameraLocationUpdater.Side HorizontalSide;
-    [SerializeField] private CameraLocationUpdater.Side VerticalSide;
+    [SerializeField] private CameraLocationUpdater.Side HorizontalSide = CameraLocationUpdater.Side.Left;
+    [SerializeField] private CameraLocationUpdater.Side VerticalSide = CameraLocationUpdater.Side.Bottom;
 
     private void OnTriggerEnter2D(Collider2D other)
     {
