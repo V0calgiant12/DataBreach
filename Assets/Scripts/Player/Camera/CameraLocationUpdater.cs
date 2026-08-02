@@ -16,10 +16,11 @@ public class CameraLocationUpdater : MonoBehaviour
         Left,
         Right,
         Top,
-        Bottom
+        Bottom,
+        None
     }
-    public Side side1;
-    public Side side2;
+    public Side HorizontalSide = Side.None;
+    public Side VerticalSide = Side.None;
     [SerializeField] private float cameraWidth;
     [SerializeField] private float cameraHeight;
     void Start()
@@ -32,26 +33,42 @@ public class CameraLocationUpdater : MonoBehaviour
         cameraHeight = mainCamera.orthographicSize;
         //Debug.Log(transform.position.x + cameraWidth);
         transform.position = new UnityEngine.Vector3(player.transform.position.x + rb.linearVelocityX/4, player.transform.position.y + rb.linearVelocityY/4, -10);
-        if(limitX != float.NaN)
+        if(HorizontalSide != Side.None && limitX != float.NaN)
         {
-            if(side1 == Side.Right && limitX < transform.position.x + cameraWidth)
+            if(HorizontalSide == Side.Right && limitX < transform.position.x + cameraWidth)
             {
                 transform.position = new UnityEngine.Vector3(limitX - cameraWidth, transform.position.y, -10);
+                if(player.transform.position.x > limitX && flippable)
+                {
+                    VerticalSide = Side.Left;
+                }
             }
-            else if(side1 == Side.Left && limitX > transform.position.x - cameraWidth)
+            else if(HorizontalSide == Side.Left && limitX > transform.position.x - cameraWidth)
             {
                 transform.position = new UnityEngine.Vector3(limitX + cameraWidth, transform.position.y, -10);
+                if(player.transform.position.x < limitX && flippable)
+                {
+                    VerticalSide = Side.Right;
+                }
             }
         }
-        if(limitY != float.NaN)
+        if(VerticalSide != Side.None && limitY != float.NaN)
         {
-            if(side2 == Side.Top && limitY < transform.position.y + cameraHeight)
+            if(VerticalSide == Side.Top && limitY < transform.position.y + cameraHeight)
             {
                 transform.position = new UnityEngine.Vector3(transform.position.x, limitY - cameraHeight, -10);
+                if(player.transform.position.y > limitY && flippable)
+                {
+                    VerticalSide = Side.Bottom;
+                }
             }
-            else if(side2 == Side.Bottom && limitY > transform.position.y - cameraHeight)
+            else if(VerticalSide == Side.Bottom && limitY > transform.position.y - cameraHeight)
             {
                 transform.position = new UnityEngine.Vector3(transform.position.x, limitY + cameraHeight, -10);
+                if(player.transform.position.y < limitY && flippable)
+                {
+                    VerticalSide = Side.Top;
+                }
             }
         }
     }

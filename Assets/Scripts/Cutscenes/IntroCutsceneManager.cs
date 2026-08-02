@@ -78,14 +78,6 @@ public class IntroCutsceneManager : MonoBehaviour
                 Text(3);
                 break;
             case(5):
-                break;
-            case(6):
-                break;
-            case(7):
-                break;
-            case(8):
-                break;
-            case(9):
                 EndCutscene();
                 break;
         }
@@ -147,7 +139,7 @@ public class IntroCutsceneManager : MonoBehaviour
             {
                 anim.SetTrigger("Break");
             }
-            if(elapsed == 63)
+            if(63 <= elapsed && elapsed <= 70)
             {
                 playerRb.linearVelocityY = playerFallingVelocity;
             }
@@ -164,7 +156,7 @@ public class IntroCutsceneManager : MonoBehaviour
         }
         playerAnim.SetTrigger("standUp");
         elapsed = 0;
-        while (elapsed != 200)
+        while (elapsed != 260)
         {
             inputTimer = -100;
             elapsed += 1;
@@ -183,13 +175,14 @@ public class IntroCutsceneManager : MonoBehaviour
     private IEnumerator Walk()
     {
         int elapsed = 0;
-        while (elapsed != 500)
+        while (elapsed != 400)
         {
             inputTimer = -100;
             playerRb.linearVelocityX = 8;
             elapsed += 1;
             yield return null;
         }
+        anim.SetTrigger("FadeOut");
     }
     private IEnumerator WaitUntilTextCloses(int delay, int delay2)
     {
