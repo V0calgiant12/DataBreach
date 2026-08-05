@@ -31,6 +31,9 @@ public class UserInput : MonoBehaviour
         }
         Instance = this;
         DontDestroyOnLoad(gameObject);
+
+        _playerInput = GetComponent<PlayerInput>();
+        SetupInputActions();
     }
     private void SetupInputActions()
     {

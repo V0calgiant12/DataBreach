@@ -15,7 +15,7 @@ public class PauseMenuManager : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape) && !playerData.playerDead)
+        if (UserInput.Instance.MenuInput && !playerData.playerDead)
         {
             if (!canvas.activeSelf)
             {

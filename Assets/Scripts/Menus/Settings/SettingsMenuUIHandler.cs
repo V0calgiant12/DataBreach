@@ -36,7 +36,7 @@ public class SettingsMenuUIHandler : MonoBehaviour
     }
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (UserInput.Instance.MenuInput)
         {
             if(titleMenu != null)
             {
