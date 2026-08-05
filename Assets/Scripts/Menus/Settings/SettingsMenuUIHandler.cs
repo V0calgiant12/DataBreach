@@ -21,6 +21,14 @@ public class SettingsMenuUIHandler : MonoBehaviour
     [SerializeField] private VideoSettingsController videoSettings; // The Video Settings Controller, has all settings under the video tab in it.
     [SerializeField] private PostProcessingToggles postProcessingHandler;
     [SerializeField] private ShaderToggle shaderHandler;
+    public enum Menus
+    {
+        Controls,
+        Audio,
+        Game,
+        Video
+    }
+    public Menus CurrentMenu = Menus.Controls;
     void Start() // Loads settings on load, just incase the player doesn't go into the settings before playing.
     {
         SettingsData.Instance.LoadSettings();
@@ -53,6 +61,7 @@ public class SettingsMenuUIHandler : MonoBehaviour
     }
     public void OnAwake() // Defaults to controls tab
     {
+        CurrentMenu = Menus.Controls;
         controlsMenu.SetActive(true);
         audioMenu.SetActive(false);
         gameMenu.SetActive(false);
@@ -60,6 +69,7 @@ public class SettingsMenuUIHandler : MonoBehaviour
     }
     public void ControlsButton() // Switches to controls tab
     {
+        CurrentMenu = Menus.Controls;
         audioMenu.SetActive(false);
         gameMenu.SetActive(false);
         videoMenu.SetActive(false);
@@ -67,6 +77,7 @@ public class SettingsMenuUIHandler : MonoBehaviour
     }
     public void AudioButton() // Switches to audio tab
     {
+        CurrentMenu = Menus.Audio;
         controlsMenu.SetActive(false);
         gameMenu.SetActive(false);
         videoMenu.SetActive(false);
@@ -74,6 +85,7 @@ public class SettingsMenuUIHandler : MonoBehaviour
     }
     public void GameButton() // Switches to game tab
     {
+        CurrentMenu = Menus.Game;
         controlsMenu.SetActive(false);
         audioMenu.SetActive(false);
         videoMenu.SetActive(false);
@@ -81,6 +93,7 @@ public class SettingsMenuUIHandler : MonoBehaviour
     }
     public void VideoButton() // Switches to game tab
     {
+        CurrentMenu = Menus.Video;
         controlsMenu.SetActive(false);
         audioMenu.SetActive(false);
         videoMenu.SetActive(true);
@@ -132,7 +145,10 @@ public class SettingsMenuUIHandler : MonoBehaviour
             audioMenuItems[index].SendMessage("SaveSettings");
             index += 1;
         }
-        audioMenu.SetActive(false);
+        if(CurrentMenu != Menus.Audio)
+        {
+            audioMenu.SetActive(false);
+        }
 
         // Game Settings
         SettingsData.Instance._RunInBackground = gameSettings._RunInBackground;
