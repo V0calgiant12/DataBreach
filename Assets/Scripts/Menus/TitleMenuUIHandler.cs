@@ -1,15 +1,12 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class TitleMenuUIHandler : MonoBehaviour
 {
     [SerializeField] private GameObject settingsMenu;
     [SerializeField] private PlayerData playerData;
     [SerializeField] private SettingsMenuUIHandler settingsHandler;
-    [SerializeField] private GameObject ContinueFade;
+    [SerializeField] private Button ContinueButtonObj;
     private SceneTransition sceneTransition;
     void Start()
     {
@@ -21,7 +18,7 @@ public class TitleMenuUIHandler : MonoBehaviour
         if(GameData.Instance.SaveExists())
         {
             GameData.Instance.LoadData();
-            ContinueFade.SetActive(false);
+            ContinueButtonObj.interactable = true;
         }
     }
 

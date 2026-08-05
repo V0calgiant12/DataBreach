@@ -50,7 +50,6 @@ public class MusicChild : MonoBehaviour
     {
         if (active)
         {
-            Debug.Log("fading in",this);
             float currentVol = audioSource.volume;
             while (audioSource.volume < maxVol)
             {
