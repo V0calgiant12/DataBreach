@@ -5,6 +5,7 @@ using UnityEngine.InputSystem;
 using System;
 using TMPro;
 
+#pragma warning disable 864121
 public class MenuNavigationController : MonoBehaviour
 {
     [SerializeField] private GameObject DefaultSelected;
@@ -18,6 +19,7 @@ public class MenuNavigationController : MonoBehaviour
     private Toggle toggle;
     private Slider slider;
     private TMP_Dropdown dropdown;
+    private Toggle subDropdown;
     private enum ButtonType
     {
         Button,
@@ -82,7 +84,7 @@ public class MenuNavigationController : MonoBehaviour
         {
             childLocalPosition = new Vector2(childLocalPosition.x,childLocalPosition.y-200);
         }
-        scrollRect.content.localPosition = new Vector2(0, 0 + (viewportLocalPosition.y + (childLocalPosition.y / -scrollDivide)-2f));
+        scrollRect.content.localPosition = new Vector2(scrollRect.content.localPosition.x, 0 + (viewportLocalPosition.y + (childLocalPosition.y / -scrollDivide)-2f));
     }
     void LateUpdate()
     {
@@ -103,13 +105,16 @@ public class MenuNavigationController : MonoBehaviour
             case (ButtonType.Dropdown):
                 DropdownUpdate();
                 break;
+            case (ButtonType.SubDropdown):
+                SubDropdownUpdate();
+                break;
             
         }
-        if (UserInput.Instance.RightMenuInput && NextMenuButton != null)
+        if (UserInput.Instance.RightMenuInput && NextMenuButton != null && buttonType != ButtonType.SubDropdown)
         {
             NextMenuButton.onClick.Invoke();
         }
-        if (UserInput.Instance.LeftMenuInput && LastMenuButton != null)
+        if (UserInput.Instance.LeftMenuInput && LastMenuButton != null && buttonType != ButtonType.SubDropdown)
         {
             LastMenuButton.onClick.Invoke();
         }
@@ -215,6 +220,22 @@ public class MenuNavigationController : MonoBehaviour
         }
         if (UserInput.Instance.SubmitInput)
         {
+            buttonType = ButtonType.SubDropdown;
+            dropdown.Show();
+        }
+    }
+    void SubDropdownUpdate()
+    {
+        if (UserInput.Instance.CancelInput && backButton != null)
+        {
+            dropdown.Hide();
+            buttonType = ButtonType.Dropdown;
+            Select();
+        }
+        if (UserInput.Instance.SubmitInput)
+        {
+            dropdown.Hide();
+            buttonType = ButtonType.Dropdown;
             Select();
         }
     }
