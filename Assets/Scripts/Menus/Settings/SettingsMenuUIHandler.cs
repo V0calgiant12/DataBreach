@@ -21,6 +21,7 @@ public class SettingsMenuUIHandler : MonoBehaviour
     [SerializeField] private VideoSettingsController videoSettings; // The Video Settings Controller, has all settings under the video tab in it.
     [SerializeField] private PostProcessingToggles postProcessingHandler;
     [SerializeField] private ShaderToggle shaderHandler;
+    [SerializeField] private Animator tabsAnim;
     public enum Menus
     {
         Controls,
@@ -70,6 +71,7 @@ public class SettingsMenuUIHandler : MonoBehaviour
     public void ControlsButton() // Switches to controls tab
     {
         CurrentMenu = Menus.Controls;
+        tabsAnim.SetTrigger("Controls");
         audioMenu.SetActive(false);
         gameMenu.SetActive(false);
         videoMenu.SetActive(false);
@@ -78,6 +80,7 @@ public class SettingsMenuUIHandler : MonoBehaviour
     public void AudioButton() // Switches to audio tab
     {
         CurrentMenu = Menus.Audio;
+        tabsAnim.SetTrigger("Audio");
         controlsMenu.SetActive(false);
         gameMenu.SetActive(false);
         videoMenu.SetActive(false);
@@ -86,6 +89,7 @@ public class SettingsMenuUIHandler : MonoBehaviour
     public void GameButton() // Switches to game tab
     {
         CurrentMenu = Menus.Game;
+        tabsAnim.SetTrigger("Game");
         controlsMenu.SetActive(false);
         audioMenu.SetActive(false);
         videoMenu.SetActive(false);
@@ -94,6 +98,7 @@ public class SettingsMenuUIHandler : MonoBehaviour
     public void VideoButton() // Switches to game tab
     {
         CurrentMenu = Menus.Video;
+        tabsAnim.SetTrigger("Video");
         controlsMenu.SetActive(false);
         audioMenu.SetActive(false);
         videoMenu.SetActive(true);
