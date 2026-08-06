@@ -23,6 +23,7 @@ public class TextWrite : MonoBehaviour
     public static TextWrite Instance;
 
     private int frame = 0;
+    private int inputBuffer = 0;
     void Start()
     {
         Instance = this;
@@ -35,6 +36,10 @@ public class TextWrite : MonoBehaviour
     }
     void Update()
     {
+        if ((UserInput.Instance.KeyDownInteract || UserInput.Instance.KeyDownAttack) && Time.timeScale == 1 && _Writing)
+        {
+            inputBuffer = 20;
+        }
         if(GameObject.Find("Player").GetComponent<PlayerStateManager>() != null)
         {
             if(PlayerStateManager.Instance.playerData.interacting == false)
@@ -46,6 +51,8 @@ public class TextWrite : MonoBehaviour
         {
             text.text = "";
         }
+
+        inputBuffer -= Time.timeScale == 1 ? 1:0;
     }
     public void WriteText(TextData data)
     {
@@ -92,8 +99,9 @@ public class TextWrite : MonoBehaviour
                 }
                 output += _TextInput[characterNum];
                 characterNum += 1;
-                if (Input.GetKey(SettingsData.Instance._InputInteract))
+                if (inputBuffer > 0)
                 {
+                    inputBuffer = 0;
                     output = _TextInput;
                     characterNum = _TextInput.Length;
                 }
@@ -112,7 +120,7 @@ public class TextWrite : MonoBehaviour
     {
         while (textBox.open)
         {
-            if (Input.GetKeyDown(SettingsData.Instance._InputInteract) && _Writing == false)
+            if ((UserInput.Instance.KeyDownInteract||UserInput.Instance.KeyDownAttack) && _Writing == false)
             {
                 PlayerStateManager.Instance.playerData.interacting = false;
                 Close();

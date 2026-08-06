@@ -8,6 +8,8 @@ public class UserInput : MonoBehaviour
     [Header("References")]
     private PlayerInput _playerInput;
     private InputAction _moveAction;
+    private InputAction _upAction;
+    private InputAction _crouchAction;
     private InputAction _jumpAction;
     private InputAction _attackAction;
     private InputAction _sprintAction;
@@ -21,7 +23,11 @@ public class UserInput : MonoBehaviour
 
     [Header("Game Controls")]
     public Vector2 MovementInput {get; private set;}
+    public bool KeyDownUpInput {get; private set;}
+    public bool KeyUpMovement {get; private set;}
+    public bool KeyDownCrouch {get; private set;}
     public bool KeyDownJump {get; private set;}
+    public bool KeyHeldDownJump {get; private set;}
     public bool KeyDownAttack {get; private set;}
     public bool KeyDownSprint {get; private set;}
     public bool KeyHeldDownSprint {get; private set;}
@@ -68,6 +74,8 @@ public class UserInput : MonoBehaviour
     {
         // Game Controls
         _moveAction = _playerInput.actions["Move"];
+        _upAction = _playerInput.actions["UpInput"];
+        _crouchAction = _playerInput.actions["Crouch"];
         _jumpAction = _playerInput.actions["Jump"];
         _attackAction = _playerInput.actions["Attack"];
         _sprintAction = _playerInput.actions["Sprint"];
@@ -94,22 +102,25 @@ public class UserInput : MonoBehaviour
                 currentController = ControllerSchemes.Controller;
                 break;
         }
-        joystickName = Gamepad.current.displayName.ToString();
-        if(Gamepad.current.displayName.ToLower().Contains("switch")||Gamepad.current.displayName.ToLower().Contains("wireless gamepad"))
+        if(Gamepad.current != null)
         {
-            controllerType = ControllerTypes.Switch;
-            return;
-        }
-        else if(Gamepad.current.displayName.ToLower().Contains("xbox"))
-        {
-            controllerType = ControllerTypes.Xbox;
-            return;
-        }
-        else if(Gamepad.current.displayName.ToLower().Contains("playstation"))
-        {
-            controllerType = ControllerTypes.PS;
-            return;
-        }
+            joystickName = Gamepad.current.displayName.ToString();
+            if(Gamepad.current.displayName.ToLower().Contains("switch")||Gamepad.current.displayName.ToLower().Contains("wireless gamepad"))
+            {
+                controllerType = ControllerTypes.Switch;
+                return;
+            }
+            else if(Gamepad.current.displayName.ToLower().Contains("xbox"))
+            {
+                controllerType = ControllerTypes.Xbox;
+                return;
+            }
+            else if(Gamepad.current.displayName.ToLower().Contains("playstation"))
+            {
+                controllerType = ControllerTypes.PS;
+                return;
+            }
+            }
         else
         {
             controllerType = ControllerTypes.KBM;
@@ -120,7 +131,11 @@ public class UserInput : MonoBehaviour
     {
         // Game Controls
         MovementInput = _moveAction.ReadValue<Vector2>();
+        KeyDownUpInput = _upAction.WasPressedThisFrame();
+        KeyUpMovement = _moveAction.WasReleasedThisFrame();
+        KeyDownCrouch = _crouchAction.WasPressedThisFrame();
         KeyDownJump = _jumpAction.WasPressedThisFrame();
+        KeyHeldDownJump = _jumpAction.IsPressed();
         KeyDownAttack = _attackAction.WasPressedThisFrame();
         KeyHeldDownSprint = _sprintAction.IsPressed();
         KeyDownSprint = _sprintAction.WasPressedThisFrame();

@@ -24,9 +24,9 @@ public class InteractionDetection : MonoBehaviour
     }
     void FixedUpdate()
     {
-        if (interactable)
+        if (interactable && player.playerData.interactingCooldown < 0)
         {
-            if (Input.GetKeyDown(SettingsData.Instance._InputInteract) && player.playerData.interacting == false)
+            if (UserInput.Instance.KeyDownInteract && player.playerData.interacting == false)
             {
                 InteractableData data = colliderOther.gameObject.GetComponent<InteractableData>();
                 indicator.color = new Color(indicator.color.r,indicator.color.g,indicator.color.b, 0);

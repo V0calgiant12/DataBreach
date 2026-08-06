@@ -6,6 +6,7 @@ public abstract class PlayerAbstract
     // States
     public abstract void EnterState(PlayerStateManager player);
     public abstract void UpdateState(PlayerStateManager player);
+    public abstract void LateUpdateState(PlayerStateManager player);
     //public abstract void OnCollisionEnter(PlayerStateManager player, Collision collision);
     public abstract void RunOnce(PlayerStateManager player);
     

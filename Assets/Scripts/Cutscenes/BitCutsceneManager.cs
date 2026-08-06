@@ -33,7 +33,7 @@ public class BitCutsceneManager : MonoBehaviour
     }
     void Update()
     {
-        if (Input.GetKeyDown(SettingsData.Instance._InputInteract) && inputTimer > 100)
+        if ((UserInput.Instance.KeyDownInteract||UserInput.Instance.KeyDownAttack) && inputTimer > 100)
         {
             HideInputMethod();
             inputTimer = 0;
@@ -195,7 +195,7 @@ public class BitCutsceneManager : MonoBehaviour
             yield return null;
         }
         TextWrite.Instance.WriteText(textData);
-        yield return new WaitUntil(() => !TextWrite.Instance._Writing && Input.GetKeyDown(SettingsData.Instance._InputInteract));
+        yield return new WaitUntil(() => !TextWrite.Instance._Writing && (UserInput.Instance.KeyDownInteract||UserInput.Instance.KeyDownAttack));
         TextWrite.Instance.Close();
         textIsOpen = false;
         elapsed = 0;

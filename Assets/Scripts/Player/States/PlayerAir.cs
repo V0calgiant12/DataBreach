@@ -25,12 +25,17 @@ public class PlayerAir : PlayerAbstract
             player.playerData.anim.SetBool("falling", true);
             player.playerData.anim.SetBool("jumping", false);
         }
+        
+        if(PlayerStateManager.Instance.playerData.jumpBufferCounter < -5)
+        {
+            PlayerStateManager.Instance.playerData.coyoteTimeCounter = 15;
+        }
     }
     public override void UpdateState(PlayerStateManager player)
     {
         player.playerData.fastFallCounter -= 1;
         // Fast Falling
-        if (Input.GetKeyDown(SettingsData.Instance._InputDown) && player.playerData.PlayerRb.linearVelocityY < 0)
+        if (UserInput.Instance.KeyDownCrouch && player.playerData.PlayerRb.linearVelocityY < 0)
         {
             if (SettingsData.Instance._DoubleTapFastFall && player.playerData.fastFallCounter > 0)
             {
@@ -42,7 +47,7 @@ public class PlayerAir : PlayerAbstract
                 player.playerData.PlayerRb.linearVelocity = new Vector2(player.playerData.PlayerRb.linearVelocityX, -jumpStrength * 1.5f);
             }
         }
-        if (SettingsData.Instance._DoubleTapFastFall && Input.GetKeyDown(SettingsData.Instance._InputDown))
+        if (SettingsData.Instance._DoubleTapFastFall && UserInput.Instance.KeyDownCrouch)
         {
             player.playerData.fastFallCounter = 45;
         }
@@ -52,7 +57,7 @@ public class PlayerAir : PlayerAbstract
         
         // Movement left/right and sets attack.
         moving = false;
-        if (Input.GetKey(SettingsData.Instance._InputRight)) // Moving Right
+        if (UserInput.Instance.MovementInput.x > 0.25f) // Moving Right
         {
             if (player.playerData.leftOrRight)
             {
@@ -67,7 +72,7 @@ public class PlayerAir : PlayerAbstract
             player.playerData.PlayerRb.linearVelocity = PlayerVelocity;// + OffsetVelocity;
             moving = true;
         }
-        if (Input.GetKey(SettingsData.Instance._InputLeft)) // Moving left
+        if (UserInput.Instance.MovementInput.x < -0.25f) // Moving left
         {
             if (player.playerData.leftOrRight)
             {
@@ -81,7 +86,7 @@ public class PlayerAir : PlayerAbstract
             player.playerData.PlayerRb.linearVelocity = PlayerVelocity;// + OffsetVelocity;
             moving = true;
         }
-        if (Input.GetKeyUp(SettingsData.Instance._InputRight) || Input.GetKeyUp(SettingsData.Instance._InputLeft)) // If not moving, set x velocity to 0;
+        if (UserInput.Instance.MovementInput.x < 0.25f && UserInput.Instance.MovementInput.x > -0.25f) // If not moving, set x velocity to 0;
         {
             {
                 player.playerData.PlayerRb.linearVelocityX = 0;
@@ -95,37 +100,38 @@ public class PlayerAir : PlayerAbstract
         }
         
         // Check for Down Air
-        if (Input.GetKey(SettingsData.Instance._InputDown))
+        if (UserInput.Instance.MovementInput.y < -0.5f)
         {
             currentAttack = PlayerStateManager.AttackType.downAir;
         }
         // Check for Up Air
-        if (Input.GetKey(SettingsData.Instance._InputUp))
+        if (UserInput.Instance.MovementInput.y > 0.5f)
         {
             currentAttack = PlayerStateManager.AttackType.upAir;
         }
 
         // Attacking
-        if (Input.GetKeyDown(SettingsData.Instance._InputAttack)) // Check for an attack.
+        if (UserInput.Instance.KeyDownAttack) // Check for an attack.
         {
             player.Attack(currentAttack);
         }
 
         // Short Jumping
 
-        if(!(Input.GetKey(SettingsData.Instance._InputJump) || SettingsData.Instance._UpToJump && Input.GetKey(SettingsData.Instance._InputUp)) && player.playerData.PlayerRb.linearVelocity.y > 0 && !player.playerData.inAirGust && player.isJumping)
+        if(!(UserInput.Instance.KeyHeldDownJump || SettingsData.Instance._UpToJump && UserInput.Instance.MovementInput.y > 0.5f) && player.playerData.PlayerRb.linearVelocity.y > 0 && !player.playerData.inAirGust && player.isJumping)
         {
             player.playerData.PlayerRb.linearVelocity = new Vector2(player.playerData.PlayerRb.linearVelocityX, player.playerData.PlayerRb.linearVelocityY * 0.5f);
         }
 
         // Double Jumping
-        if ((Input.GetKeyDown(SettingsData.Instance._InputJump) || SettingsData.Instance._UpToJump && Input.GetKeyDown(SettingsData.Instance._InputUp)) && player.playerData.doubleJumpAvailable) // NOTE: Doesn't buffer the jump because we don't want the player to instantly use their double jump.
+        if (player.playerData.jumpBufferCounter > 0 && player.playerData.doubleJumpAvailable && player.playerData.coyoteTimeCounter < 0) // NOTE: Doesn't buffer the jump because we don't want the player to instantly use their double jump.
         {
-            if (Input.GetKey(SettingsData.Instance._InputRight))
+            player.playerData.jumpBufferCounter = 0;
+            if (UserInput.Instance.MovementInput.x > 0.25f)
             {
                 player.playerData.leftOrRight = true;
             }
-            if (Input.GetKey(SettingsData.Instance._InputLeft))
+            if (UserInput.Instance.MovementInput.x < -0.25f)
             {
                 player.playerData.leftOrRight = false;
             }
@@ -135,7 +141,6 @@ public class PlayerAir : PlayerAbstract
             player.playerData.anim.SetBool("jumping", true);
             player.playerData.PlayerRb.linearVelocity = new Vector2(player.playerData.PlayerRb.linearVelocityX, jumpStrength * 0.8f);
             player.playerData.doubleJumpAvailable = false;
-            player.playerData.jumpBufferCounter = 0;
             player.playerData.coyoteTimeCounter = 0;
         }
 
@@ -150,6 +155,24 @@ public class PlayerAir : PlayerAbstract
             shakeOnLand = true;
             //Debug.Log(shakeOnLand);
             shakeIntensityLvl = Mathf.Abs(player.playerData.PlayerRb.linearVelocityY)/2 - 10;
+        }
+
+        // Grounded Jump check for Coyote time.
+        if (player.playerData.jumpBufferCounter > 0 && player.playerData.coyoteTimeCounter > 0)
+        {
+            player.playerData.anim.SetBool("walking", false);
+            player.playerData.PlayerRb.linearVelocity = new Vector2(player.playerData.PlayerRb.linearVelocityX, jumpStrength * PlayerStateManager.Instance.playerData.mudJumpMulti);
+            player.playerData.jumpBufferCounter = 0;
+            player.playerData.coyoteTimeCounter = 0;
+            player.playerData.audioSource.PlayJumpSound(player.playerData._NormalJump);
+            if (GroundCheck.Instance._IsStone)
+            {
+                player.playerData.audioSource.PlayStoneSound(player.playerData._StoneJump);
+            }
+            else
+            {
+                player.playerData.audioSource.PlayGrassSound(player.playerData._GrassJump);
+            }
         }
         
         // Grounded Check
@@ -180,5 +203,9 @@ public class PlayerAir : PlayerAbstract
             player.playerData.anim.SetBool("jumping", false);
             return;
         }
+    }
+    public override void LateUpdateState(PlayerStateManager player)
+    {
+        
     }
 }

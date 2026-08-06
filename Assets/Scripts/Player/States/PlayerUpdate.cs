@@ -12,30 +12,29 @@ public class PlayerUpdate : PlayerAbstract
     }
     public override void UpdateState(PlayerStateManager player) // Update Function
     { 
-        // Counter countdowns
-        player.playerData.jumpBufferCounter -= 1;
-        player.playerData.coyoteTimeCounter -= 1;
+        Debug.Log(UserInput.Instance.KeyDownAttack + " Attack");
+        Debug.Log(UserInput.Instance.KeyDownUpInput + " Up");
 
         // Set jump buffer if pressed
-        if(Input.GetKeyDown(SettingsData.Instance._InputJump) || SettingsData.Instance._UpToJump && Input.GetKeyDown(SettingsData.Instance._InputUp))
+        if(UserInput.Instance.KeyDownJump || SettingsData.Instance._UpToJump && UserInput.Instance.KeyDownUpInput)
         {
             //Debug.Log("Jump");
             player.playerData.jumpBufferCounter = 10;
         }
         
         // Toggle sprint
-        if (Input.GetKeyDown(SettingsData.Instance._InputSprint) && SettingsData.Instance._ToggleSprint)
+        if (UserInput.Instance.KeyDownSprint && SettingsData.Instance._ToggleSprint)
         {
             //Debug.Log("Toggle sprint " + SettingsData.Instance._ToggleSprint);
             player.playerData.sprinting = !player.playerData.sprinting;
         }
         // No toggle sprint
-        if (SettingsData.Instance._ToggleSprint == false && Input.GetKeyDown(SettingsData.Instance._InputSprint))
+        if (SettingsData.Instance._ToggleSprint == false && UserInput.Instance.KeyHeldDownSprint)
         {
             //Debug.Log("Holding Sprint " + SettingsData.Instance._ToggleSprint);
             player.playerData.sprinting = true;
         }
-        else if (SettingsData.Instance._ToggleSprint == false && Input.GetKeyUp(SettingsData.Instance._InputSprint))
+        else if (SettingsData.Instance._ToggleSprint == false && !UserInput.Instance.KeyHeldDownSprint)
         {
             //Debug.Log("Let go of sprint " + SettingsData.Instance._ToggleSprint);
             player.playerData.sprinting = false;
@@ -45,20 +44,19 @@ public class PlayerUpdate : PlayerAbstract
         if (SettingsData.Instance._ToggleCrouch)
         {
             // Crouch toggle on
-            if (Input.GetKeyDown(SettingsData.Instance._InputDown))
+            if (UserInput.Instance.KeyDownCrouch)
             {
                 player.playerData.crouching = !player.playerData.crouching;
             }
         }
         else
         {
-            // Crouch toggle on
-            if (SettingsData.Instance._ToggleCrouch == false && Input.GetKey(SettingsData.Instance._InputDown))
+            // Crouch toggle off
+            if (SettingsData.Instance._ToggleCrouch == false && UserInput.Instance.MovementInput.y < -0.4f)
             {
                 player.playerData.crouching = true;
             }
-            // Crouch toggle off
-            if (SettingsData.Instance._ToggleCrouch == false && Input.GetKeyUp(SettingsData.Instance._InputDown))
+            if (SettingsData.Instance._ToggleCrouch == false && UserInput.Instance.MovementInput.y > -0.4f)
             {
                 player.playerData.crouching = false;
             }
@@ -68,5 +66,9 @@ public class PlayerUpdate : PlayerAbstract
             player.SwitchState(player.DeadState);
             return;
         }
+    }
+    public override void LateUpdateState(PlayerStateManager player)
+    {
+        
     }
 }

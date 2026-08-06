@@ -76,7 +76,7 @@ public class TutorialCutsceneManager : MonoBehaviour
             yield return null;
         }
         TextWrite.Instance.WriteText(GetComponent<TextData>());
-        yield return new WaitUntil(() => !TextWrite.Instance._Writing && Input.GetKeyDown(SettingsData.Instance._InputInteract));
+        yield return new WaitUntil(() => !TextWrite.Instance._Writing && (UserInput.Instance.KeyDownInteract||UserInput.Instance.KeyDownAttack));
         TextWrite.Instance.Close();
         textIsOpen = false;
         if (!allowMovementAfter)

@@ -9,6 +9,7 @@ public class PlayerInteracting : PlayerAbstract
     }
     public override void EnterState(PlayerStateManager player) // Start Function
     {
+        player.playerData.interactingCooldown = 30;
         player.playerData.interacting = true;
         frame = 0;
         player.playerData.anim.SetBool("moving", false);
@@ -18,10 +19,14 @@ public class PlayerInteracting : PlayerAbstract
     }
     public override void UpdateState(PlayerStateManager player) // Update Function
     {
+        
+    }
+    public override void LateUpdateState(PlayerStateManager player)
+    {
         player.playerData.PlayerRb.linearVelocity = new Vector2(0,player.playerData.PlayerRb.linearVelocityY);
         if(frame > 15)
         {
-            if (Input.GetKeyDown(SettingsData.Instance._InputInteract) && TextWrite.Instance._Writing == false)
+            if (UserInput.Instance.KeyDownInteract || UserInput.Instance.KeyDownAttack && TextWrite.Instance._Writing == false)
             {
                 //player.playerData.interacting = false;
                 //TextWrite.Instance.Close();

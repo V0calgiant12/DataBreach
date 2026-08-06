@@ -18,7 +18,7 @@ public class PlayerCrouching : PlayerAbstract
         playerSpeed = 3 * PlayerStateManager.Instance.playerData.mudSpeedMulti;
         
         // Down attack
-        if (Input.GetKeyDown(SettingsData.Instance._InputAttack))
+        if (UserInput.Instance.KeyDownAttack)
         {
             player.Attack(PlayerStateManager.AttackType.down);
         }
@@ -35,7 +35,7 @@ public class PlayerCrouching : PlayerAbstract
         // Crouch walking
         moving = false;
         player.playerData.anim.SetBool("moving", false);
-        if (Input.GetKey(SettingsData.Instance._InputRight))
+        if (UserInput.Instance.MovementInput.x > 0.25f)
         {
             PlayerVelocity = new Vector2(playerSpeed, player.playerData.PlayerRb.linearVelocityY);
             player.playerData.PlayerRb.linearVelocity = PlayerVelocity + player.playerData.OffsetVelocity;
@@ -43,7 +43,7 @@ public class PlayerCrouching : PlayerAbstract
             player.playerData.anim.SetBool("moving", true);
             moving = true;
         }
-        if (Input.GetKey(SettingsData.Instance._InputLeft)) 
+        if (UserInput.Instance.MovementInput.x < -0.25f) 
         {
             PlayerVelocity = new Vector2(-playerSpeed, player.playerData.PlayerRb.linearVelocityY);
             player.playerData.PlayerRb.linearVelocity = PlayerVelocity + player.playerData.OffsetVelocity;
@@ -88,5 +88,9 @@ public class PlayerCrouching : PlayerAbstract
             player.playerData.anim.SetBool("crouching", false);
             return;
         }
+    }
+    public override void LateUpdateState(PlayerStateManager player)
+    {
+        
     }
 }

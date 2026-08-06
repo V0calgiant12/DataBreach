@@ -20,7 +20,7 @@ public class PlayerWalking : PlayerAbstract
         
         // Moving
         moving = false;
-        if (Input.GetKey(SettingsData.Instance._InputRight) && player.playerData.movementAllowed)
+        if (UserInput.Instance.MovementInput.x > 0.25f && player.playerData.movementAllowed)
         {
             currentAttack = PlayerStateManager.AttackType.forward;
             PlayerVelocity = new Vector2(playerSpeed, player.playerData.PlayerRb.linearVelocityY);
@@ -30,7 +30,7 @@ public class PlayerWalking : PlayerAbstract
             player.playerData.anim.SetBool("walking", true);
             moving = true;
         }
-        if (Input.GetKey(SettingsData.Instance._InputLeft) && player.playerData.movementAllowed) 
+        if (UserInput.Instance.MovementInput.x < -0.25f && player.playerData.movementAllowed) 
         {
             currentAttack = PlayerStateManager.AttackType.forward;
             PlayerVelocity = new Vector2(-playerSpeed, player.playerData.PlayerRb.linearVelocityY);
@@ -42,7 +42,7 @@ public class PlayerWalking : PlayerAbstract
         }
 
         // Check for Up Attack
-        if (Input.GetKey(SettingsData.Instance._InputUp))
+        if (UserInput.Instance.MovementInput.y > 0.5f)
         {
             currentAttack = PlayerStateManager.AttackType.up;
         }
@@ -60,7 +60,7 @@ public class PlayerWalking : PlayerAbstract
         }
 
         // Attack
-        if (Input.GetKeyDown(SettingsData.Instance._InputAttack))
+        if (UserInput.Instance.KeyDownAttack)
         {
             player.Attack(currentAttack);
         }
@@ -83,30 +83,8 @@ public class PlayerWalking : PlayerAbstract
             return;
         }
 
-        // Jump
-        if (player.playerData.jumpBufferCounter > 0)
-        {
-            //Debug.Log("jump from walking");
-            player.playerData.anim.SetBool("walking", false);
-            player.playerData.PlayerRb.linearVelocity = new Vector2(player.playerData.PlayerRb.linearVelocityX, jumpStrength * PlayerStateManager.Instance.playerData.mudJumpMulti);
-            player.playerData.jumpBufferCounter = 0;
-            player.playerData.coyoteTimeCounter = 0;
-            player.playerData.audioSource.PlayJumpSound(player.playerData._NormalJump);
-            if (GroundCheck.Instance._IsStone)
-            {
-                player.playerData.audioSource.PlayStoneSound(player.playerData._StoneJump);
-            }
-            else
-            {
-                player.playerData.audioSource.PlayGrassSound(player.playerData._GrassJump);
-            }
-            player.SwitchState(player.AirState);
-            player.currentState.UpdateState(player);
-            return;
-        }
-
         // Grounded
-        if (!GroundCheck.Instance._IsGrounded && player.playerData.coyoteTimeCounter < 0)
+        if (!GroundCheck.Instance._IsGrounded)
         {
             player.playerData.audioSource.PlayGrassSound(player.playerData._GrassJump);
             player.playerData.PlayerRb.linearVelocityX = 0;
@@ -138,6 +116,30 @@ public class PlayerWalking : PlayerAbstract
         else
         {
             audioTimer += 1;
+        }
+    }
+    public override void LateUpdateState(PlayerStateManager player)
+    {
+        // Jump
+        if (player.playerData.jumpBufferCounter > 0)
+        {
+            //Debug.Log("jump from walking");
+            player.playerData.anim.SetBool("walking", false);
+            player.playerData.PlayerRb.linearVelocity = new Vector2(player.playerData.PlayerRb.linearVelocityX, jumpStrength * PlayerStateManager.Instance.playerData.mudJumpMulti);
+            player.playerData.jumpBufferCounter = 0;
+            player.playerData.coyoteTimeCounter = 0;
+            player.playerData.audioSource.PlayJumpSound(player.playerData._NormalJump);
+            if (GroundCheck.Instance._IsStone)
+            {
+                player.playerData.audioSource.PlayStoneSound(player.playerData._StoneJump);
+            }
+            else
+            {
+                player.playerData.audioSource.PlayGrassSound(player.playerData._GrassJump);
+            }
+            player.SwitchState(player.AirState);
+            player.currentState.UpdateState(player);
+            return;
         }
     }
 }

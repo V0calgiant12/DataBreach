@@ -22,13 +22,13 @@ public class PlayerIdle : PlayerAbstract
         
 
         // Check for Up Attack
-        if (Input.GetKey(SettingsData.Instance._InputUp))
+        if (UserInput.Instance.MovementInput.y > 0.5f)
         {
             currentAttack = PlayerStateManager.AttackType.up;
         }
 
         // Attack
-        if (Input.GetKeyDown(SettingsData.Instance._InputAttack))
+        if (UserInput.Instance.KeyDownAttack)
         {
             player.Attack(currentAttack);
         }
@@ -41,7 +41,7 @@ public class PlayerIdle : PlayerAbstract
         }
 
         // Movement
-        if (Input.GetKey(SettingsData.Instance._InputLeft) || Input.GetKey(SettingsData.Instance._InputRight))
+        if (UserInput.Instance.MovementInput.x < -0.25f || UserInput.Instance.MovementInput.x > 0.25f)
         {
             player.SwitchState(player.WalkingState);
             player.playerData.anim.SetBool("moving", true);
@@ -55,10 +55,13 @@ public class PlayerIdle : PlayerAbstract
             return;
         }
 
+    }
+    public override void LateUpdateState(PlayerStateManager player)
+    {
         // Jumping
         if (player.playerData.jumpBufferCounter > 0)
         {
-            //Debug.Log("jump from idle");
+            Debug.Log("jump from idle");
             player.playerData.PlayerRb.linearVelocity = new Vector2(player.playerData.PlayerRb.linearVelocityX, jumpStrength * PlayerStateManager.Instance.playerData.mudJumpMulti);
             player.playerData.jumpBufferCounter = 0;
             player.playerData.coyoteTimeCounter = 0;

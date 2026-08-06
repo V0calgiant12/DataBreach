@@ -38,4 +38,8 @@ public class PlayerDead : PlayerAbstract
         }
         //Debug.Log(player.playerData.pixelationMat.GetFloat("_Pixelation") + " " + pixelation);
     }
+    public override void LateUpdateState(PlayerStateManager player)
+    {
+        
+    }
 }

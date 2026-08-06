@@ -75,21 +75,22 @@ public class PlayerStateManager : MonoBehaviour
     }
     void LateUpdate()
     {
-        if(currentState == InteractingState)
+        if ((playerData.movementAllowed || playerData.playerDead) && Time.timeScale == 1)
         {
-            currentState.UpdateState(this); // Update function for current active state.
+            currentState.LateUpdateState(this); // Late Update function for current active state.
+            playerData.interactingCooldown -= Time.timeScale == 1 ? 1 : 0;
         }
-        if (playerData.interacting && currentState != InteractingState)
+        if (playerData.interacting && currentState != InteractingState && Time.timeScale == 1)
         {
             SwitchState(InteractingState);
         }
     }
     void Update()
     {
-
-        if ((playerData.movementAllowed || playerData.playerDead) && currentState != InteractingState)
+        if ((playerData.movementAllowed || playerData.playerDead) && currentState != InteractingState && Time.timeScale == 1)
         {
             currentState.UpdateState(this); // Update function for current active state.
+            playerData.interactingCooldown -= Time.timeScale == 1 ? 1 : 0;
         }
         if (!playerData.playerDead)
         {
@@ -104,6 +105,7 @@ public class PlayerStateManager : MonoBehaviour
         playerData.iFrames -= Time.timeScale == 1 ? 1 : 0;
         playerData.anim.SetInteger("iframes", playerData.iFrames);
 
+        //Debug.Log(currentState);
     }
     public void SwitchState(PlayerAbstract state)
     {
