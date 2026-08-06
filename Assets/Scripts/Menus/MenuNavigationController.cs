@@ -20,6 +20,7 @@ public class MenuNavigationController : MonoBehaviour
     private Slider slider;
     private TMP_Dropdown dropdown;
     private Toggle subDropdown;
+    private Selectable selectable;
     private enum ButtonType
     {
         Button,
@@ -27,7 +28,8 @@ public class MenuNavigationController : MonoBehaviour
         Dropdown,
         SubDropdown,
         Slider,
-        SubSlider
+        SubSlider,
+        Selectable
     }
     [SerializeField] private ButtonType buttonType;
     private Animator anim;
@@ -48,24 +50,34 @@ public class MenuNavigationController : MonoBehaviour
             buttonType = ButtonType.Button;
             button.Select();
         }
-        if(currentlySelected.GetComponent<Toggle>() != null)
+        else if(currentlySelected.GetComponent<Toggle>() != null)
         {
             toggle = currentlySelected.GetComponent<Toggle>();
             buttonType = ButtonType.Toggle;
             toggle.Select();
         }
-        if(currentlySelected.GetComponent<Slider>() != null)
+        else if(currentlySelected.GetComponent<Slider>() != null)
         {
             slider = currentlySelected.GetComponent<Slider>();
             anim = currentlySelected.GetComponent<Animator>();
             buttonType = ButtonType.Slider;
             slider.Select();
         }
-        if(currentlySelected.GetComponent<TMP_Dropdown>() != null)
+        else if(currentlySelected.GetComponent<TMP_Dropdown>() != null)
         {
             dropdown = currentlySelected.GetComponent<TMP_Dropdown>();
             buttonType = ButtonType.Dropdown;
             dropdown.Select();
+        }
+        else if(currentlySelected.GetComponent<Selectable>() != null)
+        {
+            selectable = currentlySelected.GetComponent<Selectable>();
+            buttonType = ButtonType.Selectable;
+            selectable.Select();
+        }
+        else
+        {
+            Debug.LogError("ERROR: No selectable (or adjacent) component found.",currentlySelected);
         }
         if(scrollRect != null)
         {
@@ -107,6 +119,9 @@ public class MenuNavigationController : MonoBehaviour
                 break;
             case (ButtonType.SubDropdown):
                 SubDropdownUpdate();
+                break;
+            case (ButtonType.Selectable):
+                SelectableUpdate();
                 break;
             
         }
@@ -317,6 +332,36 @@ public class MenuNavigationController : MonoBehaviour
         {
             buttonType = ButtonType.Slider;
             Select();
+        }
+    }
+    void SelectableUpdate()
+    {
+        
+        if (UserInput.Instance.NavigateInput.y < -0.5f && UserInput.Instance.NavigateDown)
+        {
+            currentlySelected = selectable.FindSelectableOnDown().gameObject;
+            Select();
+        }
+        if (UserInput.Instance.NavigateInput.y > 0.5f && UserInput.Instance.NavigateDown)
+        {
+            currentlySelected = selectable.FindSelectableOnUp().gameObject;
+            Select();
+        }
+        if (UserInput.Instance.NavigateInput.x < -0.5f && UserInput.Instance.NavigateDown)
+        {
+            currentlySelected = selectable.FindSelectableOnLeft().gameObject;
+            Select();
+        }
+        if (UserInput.Instance.NavigateInput.x > 0.5f && UserInput.Instance.NavigateDown)
+        {
+            currentlySelected = selectable.FindSelectableOnRight().gameObject;
+            Select();
+        }
+        if (UserInput.Instance.CancelInput && backButton != null)
+        {
+            button = backButton;
+            buttonType = ButtonType.Button;
+            button.onClick.Invoke();
         }
     }
 }

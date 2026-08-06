@@ -34,7 +34,23 @@ public class UserInput : MonoBehaviour
     public bool CancelInput {get; private set;}
     public bool RightMenuInput {get; private set;}
     public bool LeftMenuInput {get; private set;}
-    
+    [Header("Other")]
+    public ControllerSchemes currentController;
+    public enum ControllerSchemes
+    {
+        KBM,
+        Controller
+    }
+    public ControllerTypes controllerType;
+    public enum ControllerTypes
+    {
+        KBM,
+        Switch,
+        Xbox,
+        PS,
+        Other
+    }
+    public string joystickName;
     void Start()
     {
         if(Instance != null)
@@ -69,6 +85,36 @@ public class UserInput : MonoBehaviour
     void Update()
     {
         UpdateInputs();
+        switch (_playerInput.currentControlScheme)
+        {
+            case("Keyboard&Mouse"):
+                currentController = ControllerSchemes.KBM;
+                break;
+            case("Gamepad"):
+                currentController = ControllerSchemes.Controller;
+                break;
+        }
+        joystickName = Gamepad.current.displayName.ToString();
+        if(Gamepad.current.displayName.ToLower().Contains("switch")||Gamepad.current.displayName.ToLower().Contains("wireless gamepad"))
+        {
+            controllerType = ControllerTypes.Switch;
+            return;
+        }
+        else if(Gamepad.current.displayName.ToLower().Contains("xbox"))
+        {
+            controllerType = ControllerTypes.Xbox;
+            return;
+        }
+        else if(Gamepad.current.displayName.ToLower().Contains("playstation"))
+        {
+            controllerType = ControllerTypes.PS;
+            return;
+        }
+        else
+        {
+            controllerType = ControllerTypes.KBM;
+            return;
+        }
     }
     private void UpdateInputs()
     {
