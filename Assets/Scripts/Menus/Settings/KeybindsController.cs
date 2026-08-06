@@ -38,7 +38,14 @@ public class KeybindsController : MonoBehaviour
     }
     private IEnumerator StartListeningForKey(int inputNumber) // Listens for the next key to be pressed and acts accordingly when it does.
     {
+        
         buttonText.text = "Press any key...";
+        int elapsed = 0;
+        while(elapsed < 15) // Wait 15 frames so that it doesn't INSTANTLY get set to a key you just pressed to select this.
+        {
+            elapsed += 1;
+            yield return null;
+        }
         yield return new WaitUntil(() => Input.anyKeyDown);
         switch(inputNumber){ // This is a fancy if statement that only checks for the next item if the previous when was false.
             case  0:

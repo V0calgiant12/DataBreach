@@ -11,10 +11,7 @@ public class PlayerUpdate : PlayerAbstract
         
     }
     public override void UpdateState(PlayerStateManager player) // Update Function
-    { 
-        Debug.Log(UserInput.Instance.KeyDownAttack + " Attack");
-        Debug.Log(UserInput.Instance.KeyDownUpInput + " Up");
-
+    {
         // Set jump buffer if pressed
         if(UserInput.Instance.KeyDownJump || SettingsData.Instance._UpToJump && UserInput.Instance.KeyDownUpInput)
         {

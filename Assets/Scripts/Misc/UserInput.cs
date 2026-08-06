@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 public class UserInput : MonoBehaviour
 {
     public static UserInput Instance;
+    private InputActionRebindingExtensions.RebindingOperation rebindingOperation;
+    private InputActionAsset InputActions;
     [Header("References")]
     private PlayerInput _playerInput;
     private InputAction _moveAction;
@@ -92,6 +94,10 @@ public class UserInput : MonoBehaviour
     }
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            UpdateKeyBinds();
+        }
         UpdateInputs();
         switch (_playerInput.currentControlScheme)
         {
@@ -149,5 +155,12 @@ public class UserInput : MonoBehaviour
         CancelInput = _cancelAction.WasPressedThisFrame();
         RightMenuInput = _rightMenuAction.WasPressedThisFrame();
         LeftMenuInput = _leftMenuAction.WasPressedThisFrame();
+    }
+    private void UpdateKeyBinds()
+    {
+        _playerInput.actions.Disable();
+        string newKey = ""+ KeyCode.D;
+        _jumpAction.ApplyBindingOverride(new InputBinding{groups = "Keyboard&Mouse",overridePath= "<Keyboard>/"+newKey.ToLowerInvariant()});
+        _playerInput.actions.Enable();
     }
 }
