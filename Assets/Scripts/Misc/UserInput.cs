@@ -179,6 +179,16 @@ public class UserInput : MonoBehaviour
         _upAction.AddBinding(new InputBinding{groups = "Gamepad", overridePath="<Gamepad>/DPad/Up"});
         _crouchAction.AddBinding(new InputBinding{groups = "Gamepad", overridePath="<Gamepad>/LeftStick/Down"});
         _crouchAction.AddBinding(new InputBinding{groups = "Gamepad", overridePath="<Gamepad>/DPad/Down"});
+        _moveAction.AddCompositeBinding("2DVector(mode=2)")
+            .With("Up","<Gamepad>/LeftStick/Up")
+            .With("Down","<Gamepad>/LeftStick/Down")
+            .With("Left","<Gamepad>/LeftStick/Left")
+            .With("Right","<Gamepad>/LeftStick/Right");
+        _moveAction.AddCompositeBinding("2DVector")
+            .With("Up","<Gamepad>/DPad/Up")
+            .With("Down","<Gamepad>/DPad/Down")
+            .With("Left","<Gamepad>/Dpad/Left")
+            .With("Right","<Gamepad>/Dpad/Right");
         _playerInput.actions.Enable();
     }
 }
