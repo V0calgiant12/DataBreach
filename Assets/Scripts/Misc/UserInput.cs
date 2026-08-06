@@ -94,10 +94,6 @@ public class UserInput : MonoBehaviour
     }
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-            UpdateKeyBinds();
-        }
         UpdateInputs();
         switch (_playerInput.currentControlScheme)
         {
@@ -156,11 +152,33 @@ public class UserInput : MonoBehaviour
         RightMenuInput = _rightMenuAction.WasPressedThisFrame();
         LeftMenuInput = _leftMenuAction.WasPressedThisFrame();
     }
-    private void UpdateKeyBinds()
+    public void UpdateKeyBinds()
     {
         _playerInput.actions.Disable();
-        string newKey = ""+ KeyCode.D;
-        _jumpAction.ApplyBindingOverride(new InputBinding{groups = "Keyboard&Mouse",overridePath= "<Keyboard>/"+newKey.ToLowerInvariant()});
+        _jumpAction.ApplyBindingOverride(new InputBinding{groups = "Keyboard&Mouse",overridePath= "<Keyboard>/"+(""+ SettingsData.Instance._InputJump).ToLowerInvariant()});
+        _attackAction.ApplyBindingOverride(new InputBinding{groups = "Keyboard&Mouse",overridePath= "<Keyboard>/"+(""+ SettingsData.Instance._InputAttack).ToLowerInvariant()});
+        _sprintAction.ApplyBindingOverride(new InputBinding{groups = "Keyboard&Mouse",overridePath= "<Keyboard>/"+(""+ SettingsData.Instance._InputSprint).ToLowerInvariant()});
+        _interactAction.ApplyBindingOverride(new InputBinding{groups = "Keyboard&Mouse",overridePath= "<Keyboard>/"+(""+ SettingsData.Instance._InputInteract).ToLowerInvariant()});
+        _upAction.ApplyBindingOverride(new InputBinding{groups = "Keyboard&Mouse",overridePath= "<Keyboard>/"+(""+ SettingsData.Instance._InputUp).ToLowerInvariant()});
+        _crouchAction.ApplyBindingOverride(new InputBinding{groups = "Keyboard&Mouse",overridePath= "<Keyboard>/"+(""+ SettingsData.Instance._InputDown).ToLowerInvariant()});
+        _moveAction.ApplyBindingOverride(new InputBinding{groups = "Keyboard&Mouse",overridePath= ""});
+        _moveAction.AddCompositeBinding("2DVector")
+            .With("Up","<Keyboard>/"+(""+ SettingsData.Instance._InputUp).ToLowerInvariant())
+            .With("Down","<Keyboard>/"+(""+ SettingsData.Instance._InputDown).ToLowerInvariant())
+            .With("Left","<Keyboard>/"+(""+ SettingsData.Instance._InputLeft).ToLowerInvariant())
+            .With("Right","<Keyboard>/"+(""+ SettingsData.Instance._InputRight).ToLowerInvariant());
+        AddGamepadControls();
+    }
+    private void AddGamepadControls()
+    {
+        _jumpAction.AddBinding(new InputBinding{groups = "Gamepad", overridePath="<Gamepad>/ButtonWest"});
+        _attackAction.AddBinding(new InputBinding{groups = "Gamepad", overridePath="<Gamepad>/ButtonEast"});
+        _sprintAction.AddBinding(new InputBinding{groups = "Gamepad", overridePath="<Gamepad>/ButtonSouth"});
+        _interactAction.AddBinding(new InputBinding{groups = "Gamepad", overridePath="<Gamepad>/ButtonNorth"});
+        _upAction.AddBinding(new InputBinding{groups = "Gamepad", overridePath="<Gamepad>/LeftStick/Up"});
+        _upAction.AddBinding(new InputBinding{groups = "Gamepad", overridePath="<Gamepad>/DPad/Up"});
+        _crouchAction.AddBinding(new InputBinding{groups = "Gamepad", overridePath="<Gamepad>/LeftStick/Down"});
+        _crouchAction.AddBinding(new InputBinding{groups = "Gamepad", overridePath="<Gamepad>/DPad/Down"});
         _playerInput.actions.Enable();
     }
 }

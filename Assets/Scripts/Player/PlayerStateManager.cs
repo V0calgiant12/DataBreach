@@ -78,7 +78,6 @@ public class PlayerStateManager : MonoBehaviour
         if ((playerData.movementAllowed || playerData.playerDead) && Time.timeScale == 1)
         {
             currentState.LateUpdateState(this); // Late Update function for current active state.
-            playerData.interactingCooldown -= Time.timeScale == 1 ? 1 : 0;
         }
         if (playerData.interacting && currentState != InteractingState && Time.timeScale == 1)
         {

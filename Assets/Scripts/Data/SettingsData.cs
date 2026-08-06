@@ -98,6 +98,7 @@ public class SettingsData : MonoBehaviour
         string json = JsonUtility.ToJson(data);
         File.WriteAllText(Application.persistentDataPath + "/settings.json", json);
         Debug.Log("Settings saved to file!");
+        UserInput.Instance.UpdateKeyBinds();
     }
     public void LoadSettings() // Loads data from the JSON file.
     {
@@ -147,6 +148,7 @@ public class SettingsData : MonoBehaviour
             
             Application.runInBackground = _RunInBackground;
             Debug.Log("Loaded settings from file!");
+            UserInput.Instance.UpdateKeyBinds();
         }
         else
         {
@@ -189,6 +191,7 @@ public class SettingsData : MonoBehaviour
         _Pixelation = true;
         
         Application.runInBackground = _RunInBackground;
+        UserInput.Instance.UpdateKeyBinds();
     }
 }
 
