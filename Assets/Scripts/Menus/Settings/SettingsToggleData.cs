@@ -5,12 +5,17 @@ public class SettingsToggleData : MonoBehaviour
 {
     public Toggle toggle;
     public int _ToggleID;
-    public void RefreshVisuals() // Refreshes the toggle state to be up to date with the saves
+    [SerializeField] private KeybindsController keybindsController;
+    void OnEnable()
+    {
+        RefreshVisuals();
+    }
+    public void RefreshVisuals() // Refreshes the toggle state to be up to date with the save's
     {
         switch (_ToggleID)
         {
             case (0):
-                toggle.isOn = SettingsData.Instance._UpToJump;
+                toggle.isOn = keybindsController._UpToJump;
                 break;
             case (1):
                 toggle.isOn = SettingsData.Instance._RunInBackground;
