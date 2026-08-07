@@ -11,6 +11,7 @@ public class SettingsData : MonoBehaviour
     /// Next, add the variable to be saved and loaded in their respective functions.
     /// </summary>
     public static SettingsData Instance;
+    public int loadDelay = 0;
     [Header("Controls")]
     public KeyCode _InputLeft = KeyCode.LeftArrow; // 0
     public KeyCode _InputRight = KeyCode.RightArrow; // 1
@@ -58,6 +59,10 @@ public class SettingsData : MonoBehaviour
         Instance = this;
         DontDestroyOnLoad(gameObject);
     }
+    void Update()
+    {
+        loadDelay -= 1;
+    }
     public void SaveSettings() // Saves data to a JSON file.
     {
         SaveSettings data = new SaveSettings();
@@ -102,6 +107,7 @@ public class SettingsData : MonoBehaviour
     }
     public void LoadSettings() // Loads data from the JSON file.
     {
+        loadDelay = 5;
         string path = Application.persistentDataPath + "/settings.json";
         if (File.Exists(path)) // Checks to see if the file even exists before attempting to read from it.
         {
