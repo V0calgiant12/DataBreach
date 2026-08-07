@@ -14,15 +14,15 @@ public class AirGustPush : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player") && !GroundCheckRef._IsGrounded)
         {
-            if (!Input.GetKey(SettingsData.Instance._InputDown))
+            if (UserInput.Instance.MovementInput.y > -0.5f)
             {
                 PlayerDataRef.inAirGust = true;
-                other.gameObject.GetComponent<ForceManager>().AddForce(0f, GustStrength, other);
+                other.gameObject.GetComponent<ForceManager>().AddForce(0f, GustStrength * (Time.timeScale == 1 ? 1 : 0), other);
             }
         }
         if (other.gameObject.CompareTag("Enemy"))
         {
-            other.gameObject.GetComponent<ForceManager>().AddForce(0f, GustStrength, other);
+            other.gameObject.GetComponent<ForceManager>().AddForce(0f, GustStrength * (Time.timeScale == 1 ? 1 : 0), other);
         }
     }
 }
