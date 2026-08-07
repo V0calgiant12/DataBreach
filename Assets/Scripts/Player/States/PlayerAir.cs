@@ -123,6 +123,27 @@ public class PlayerAir : PlayerAbstract
         {
             player.Attack(currentAttack);
         }
+        // C-Stick Attacking
+        if(UserInput.Instance.DirectionalAttack.y > 0.5f && UserInput.Instance.RightStickPressed)
+        {
+            currentAttack = PlayerStateManager.AttackType.upAir;
+            player.Attack(currentAttack);
+        }
+        if(UserInput.Instance.DirectionalAttack.y < -0.5f && UserInput.Instance.RightStickPressed)
+        {
+            currentAttack = PlayerStateManager.AttackType.downAir;
+            player.Attack(currentAttack);
+        }
+        if(UserInput.Instance.DirectionalAttack.x > 0.5f && UserInput.Instance.RightStickPressed)
+        {
+            currentAttack = player.playerData.leftOrRight ? PlayerStateManager.AttackType.forwardAir : PlayerStateManager.AttackType.backAir;
+            player.Attack(currentAttack);
+        }
+        if(UserInput.Instance.DirectionalAttack.x < -0.5f && UserInput.Instance.RightStickPressed)
+        {
+            currentAttack = player.playerData.leftOrRight ? PlayerStateManager.AttackType.backAir :  PlayerStateManager.AttackType.forwardAir;
+            player.Attack(currentAttack);
+        }
 
         // Short Jumping
 

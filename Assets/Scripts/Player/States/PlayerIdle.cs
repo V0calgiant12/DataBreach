@@ -36,6 +36,29 @@ public class PlayerIdle : PlayerAbstract
         {
             player.Attack(currentAttack);
         }
+        // C-Stick Attacking
+        if(UserInput.Instance.DirectionalAttack.y > 0.5f && UserInput.Instance.RightStickPressed)
+        {
+            currentAttack = PlayerStateManager.AttackType.up;
+            player.Attack(currentAttack);
+        }
+        if(UserInput.Instance.DirectionalAttack.y < -0.5f && UserInput.Instance.RightStickPressed)
+        {
+            currentAttack = PlayerStateManager.AttackType.down;
+            player.Attack(currentAttack);
+        }
+        if(UserInput.Instance.DirectionalAttack.x > 0.5f && UserInput.Instance.RightStickPressed)
+        {
+            player.playerData.leftOrRight = true;
+            currentAttack = PlayerStateManager.AttackType.forward;
+            player.Attack(currentAttack);
+        }
+        if(UserInput.Instance.DirectionalAttack.x < -0.5f && UserInput.Instance.RightStickPressed)
+        {
+            player.playerData.leftOrRight = false;
+            currentAttack = PlayerStateManager.AttackType.forward;
+            player.Attack(currentAttack);
+        }
 
         // Grounded
         if (!GroundCheck.Instance._IsGrounded)

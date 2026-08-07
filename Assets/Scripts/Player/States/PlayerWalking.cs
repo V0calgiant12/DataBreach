@@ -68,6 +68,27 @@ public class PlayerWalking : PlayerAbstract
         {
             player.Attack(currentAttack);
         }
+        // C-Stick Attacking
+        if(UserInput.Instance.DirectionalAttack.y > 0.5f && UserInput.Instance.RightStickPressed)
+        {
+            currentAttack = PlayerStateManager.AttackType.up;
+            player.Attack(currentAttack);
+        }
+        if(UserInput.Instance.DirectionalAttack.y < -0.5f && UserInput.Instance.RightStickPressed)
+        {
+            currentAttack = PlayerStateManager.AttackType.down;
+            player.Attack(currentAttack);
+        }
+        if(UserInput.Instance.DirectionalAttack.x > 0.5f && UserInput.Instance.RightStickPressed)
+        {
+            currentAttack = PlayerStateManager.AttackType.forward;
+            player.Attack(currentAttack);
+        }
+        if(UserInput.Instance.DirectionalAttack.x < -0.5f && UserInput.Instance.RightStickPressed)
+        {
+            currentAttack = PlayerStateManager.AttackType.forward;
+            player.Attack(currentAttack);
+        }
 
         // Crouch
         if (player.playerData.crouching)

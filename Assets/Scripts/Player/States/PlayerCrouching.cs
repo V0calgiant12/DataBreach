@@ -22,6 +22,25 @@ public class PlayerCrouching : PlayerAbstract
         {
             player.Attack(PlayerStateManager.AttackType.down);
         }
+        // C-Stick Attacking
+        if(UserInput.Instance.DirectionalAttack.y > 0.5f && UserInput.Instance.RightStickPressed)
+        {
+            player.Attack(PlayerStateManager.AttackType.up);
+        }
+        if(UserInput.Instance.DirectionalAttack.y < -0.5f && UserInput.Instance.RightStickPressed)
+        {
+            player.Attack(PlayerStateManager.AttackType.down);
+        }
+        if(UserInput.Instance.DirectionalAttack.x > 0.5f && UserInput.Instance.RightStickPressed)
+        {
+            player.playerData.leftOrRight = true;
+            player.Attack(PlayerStateManager.AttackType.forward);
+        }
+        if(UserInput.Instance.DirectionalAttack.x < -0.5f && UserInput.Instance.RightStickPressed)
+        {
+            player.playerData.leftOrRight = false;
+            player.Attack(PlayerStateManager.AttackType.forward);
+        }
 
         // Crouch release check
         if (!player.playerData.crouching)

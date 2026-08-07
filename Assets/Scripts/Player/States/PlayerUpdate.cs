@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class PlayerUpdate : PlayerAbstract
 {
+    bool directionaAttackCrouch = false;
     public override void RunOnce(PlayerStateManager player)
     {
     }
@@ -57,6 +58,16 @@ public class PlayerUpdate : PlayerAbstract
             {
                 player.playerData.crouching = false;
             }
+        }
+        if (UserInput.Instance.DirectionalAttack.y < -0.5f)
+        {
+            player.playerData.crouching = true;
+            directionaAttackCrouch = true;
+        }
+        if (UserInput.Instance.DirectionalAttack.y > -0.25f && directionaAttackCrouch)
+        {
+            player.playerData.crouching = false;
+            directionaAttackCrouch = false;
         }
         if (player.playerData.playerHealth <= 0 && GroundCheck.Instance._IsGrounded)
         {

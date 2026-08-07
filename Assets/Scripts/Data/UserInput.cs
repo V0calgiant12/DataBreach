@@ -6,10 +6,11 @@ public class UserInput : MonoBehaviour
 {
     public static UserInput Instance;
     private InputActionRebindingExtensions.RebindingOperation rebindingOperation;
-    private InputActionAsset InputActions;
     [Header("References")]
     private PlayerInput _playerInput;
     private InputAction _moveAction;
+    private InputAction _directionalAttackAction;
+    private InputAction _rightStickAction;
     private InputAction _upAction;
     private InputAction _crouchAction;
     private InputAction _jumpAction;
@@ -25,6 +26,8 @@ public class UserInput : MonoBehaviour
 
     [Header("Game Controls")]
     public Vector2 MovementInput {get; private set;}
+    public Vector2 DirectionalAttack {get; private set;}
+    public bool RightStickPressed {get; private set;}
     public bool KeyDownUpInput {get; private set;}
     public bool KeyUpMovement {get; private set;}
     public bool KeyDownCrouch {get; private set;}
@@ -76,6 +79,8 @@ public class UserInput : MonoBehaviour
     {
         // Game Controls
         _moveAction = _playerInput.actions["Move"];
+        _directionalAttackAction = _playerInput.actions["Directional Attack"];
+        _rightStickAction = _playerInput.actions["RightStick Pressed"];
         _upAction = _playerInput.actions["UpInput"];
         _crouchAction = _playerInput.actions["Crouch"];
         _jumpAction = _playerInput.actions["Jump"];
@@ -133,6 +138,8 @@ public class UserInput : MonoBehaviour
     {
         // Game Controls
         MovementInput = _moveAction.ReadValue<Vector2>();
+        DirectionalAttack = _directionalAttackAction.ReadValue<Vector2>();
+        RightStickPressed = _rightStickAction.WasPressedThisFrame();
         KeyDownUpInput = _upAction.WasPressedThisFrame();
         KeyUpMovement = _moveAction.WasReleasedThisFrame();
         KeyDownCrouch = _crouchAction.WasPressedThisFrame();

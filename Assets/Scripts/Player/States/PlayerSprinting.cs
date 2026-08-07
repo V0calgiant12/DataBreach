@@ -42,6 +42,11 @@ public class PlayerSprinting : PlayerAbstract
         {
             player.Attack(PlayerStateManager.AttackType.dash);
         }
+        // C-Stick Attacking
+        if((UserInput.Instance.DirectionalAttack.y < -0.5f || UserInput.Instance.DirectionalAttack.y > 0.5f || UserInput.Instance.DirectionalAttack.x < -0.5f || UserInput.Instance.DirectionalAttack.x > 0.5f) && UserInput.Instance.RightStickPressed)
+        {
+            player.Attack(PlayerStateManager.AttackType.dash);
+        }
 
         // if crouching go to crouching
         if (player.playerData.crouching)
