@@ -268,7 +268,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: v0.6.3 ALPHA
+  m_text: v0.6.4 ALPHA
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: f747c42cfb020ef419dec742861afbf5, type: 2}
   m_sharedMaterial: {fileID: 4027503532489475801, guid: f747c42cfb020ef419dec742861afbf5, type: 2}
@@ -378,6 +378,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87dae659f1755bd419087a3ff772d8f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UserInput
+  currentController: 0
+  controllerType: 0
+  joystickName: 
 --- !u!114 &410688023
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1284,6 +1287,10 @@ MonoBehaviour:
   DefaultSelected: {fileID: 1333119744}
   currentlySelected: {fileID: 0}
   backButton: {fileID: 0}
+  NextMenuButton: {fileID: 0}
+  LastMenuButton: {fileID: 0}
+  scrollRect: {fileID: 0}
+  scrollDivide: 0
   buttonType: 0
 --- !u!1 &1243609190
 GameObject:
