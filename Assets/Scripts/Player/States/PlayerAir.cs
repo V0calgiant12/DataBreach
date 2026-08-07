@@ -104,8 +104,16 @@ public class PlayerAir : PlayerAbstract
         {
             currentAttack = PlayerStateManager.AttackType.downAir;
         }
+        else if (UserInput.Instance.MovementInput.y < 0 && UserInput.Instance.MovementInput.x > -0.5f && UserInput.Instance.MovementInput.x < 0.5f)
+        {
+            currentAttack = PlayerStateManager.AttackType.downAir;
+        }
         // Check for Up Air
         if (UserInput.Instance.MovementInput.y > 0.5f)
+        {
+            currentAttack = PlayerStateManager.AttackType.upAir;
+        }
+        else if (UserInput.Instance.MovementInput.y > 0 && UserInput.Instance.MovementInput.x > -0.5f && UserInput.Instance.MovementInput.x < 0.5f)
         {
             currentAttack = PlayerStateManager.AttackType.upAir;
         }

@@ -26,6 +26,10 @@ public class PlayerIdle : PlayerAbstract
         {
             currentAttack = PlayerStateManager.AttackType.up;
         }
+        else if (UserInput.Instance.MovementInput.y > 0 && UserInput.Instance.MovementInput.x > -0.5f && UserInput.Instance.MovementInput.x < 0.5f)
+        {
+            currentAttack = PlayerStateManager.AttackType.up;
+        }
 
         // Attack
         if (UserInput.Instance.KeyDownAttack)

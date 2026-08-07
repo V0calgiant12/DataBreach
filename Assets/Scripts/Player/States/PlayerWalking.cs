@@ -46,6 +46,10 @@ public class PlayerWalking : PlayerAbstract
         {
             currentAttack = PlayerStateManager.AttackType.up;
         }
+        else if (UserInput.Instance.MovementInput.y > 0 && UserInput.Instance.MovementInput.x > -0.5f && UserInput.Instance.MovementInput.x < 0.5f)
+        {
+            currentAttack = PlayerStateManager.AttackType.up;
+        }
         
         // Sprinting (placed in this weird spot because of a bug. Yes, I know, it looks ugly here now.)
         if (player.playerData.sprinting)
