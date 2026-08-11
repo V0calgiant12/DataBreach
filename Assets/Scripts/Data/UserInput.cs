@@ -122,7 +122,7 @@ public class UserInput : MonoBehaviour
                 controllerType = ControllerTypes.Xbox;
                 return;
             }
-            else if(Gamepad.current.displayName.ToLower().Contains("playstation"))
+            else if(Gamepad.current.displayName.ToLower().Contains("playstation")||Gamepad.current.displayName.ToLower().Contains("wireless controller"))
             {
                 controllerType = ControllerTypes.PS;
                 return;
