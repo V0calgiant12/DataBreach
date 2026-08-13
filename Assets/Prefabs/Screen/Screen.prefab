@@ -1348,7 +1348,7 @@ Animator:
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 8db46457f258c9c4584e249a80de0633, type: 2}
   m_CullingMode: 0
-  m_UpdateMode: 2
+  m_UpdateMode: 0
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
@@ -3221,6 +3221,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SceneTransition
       objectReference: {fileID: 0}
+    - target: {fileID: 7598483775852385187, guid: 25c7467804d17754cb7aa4fed6238251, type: 3}
+      propertyPath: transition
+      value: 
+      objectReference: {fileID: 4604459529938413048}
     - target: {fileID: 7598483775852385187, guid: 25c7467804d17754cb7aa4fed6238251, type: 3}
       propertyPath: _Transition
       value: 

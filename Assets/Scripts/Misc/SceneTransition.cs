@@ -4,11 +4,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEditor;
+using System.Timers;
 
 public class SceneTransition : MonoBehaviour
 {
     [Header("Scene Transition References:")]
-    public Animator _Transition;
+    [SerializeField] private Animator transition;
     [SerializeField] private RenderFeatureToggler renderFeatureToggler;
     private MusicManager music;
     public void TransitionToScene(int sceneNumber, float transitionTime)
@@ -18,14 +19,20 @@ public class SceneTransition : MonoBehaviour
     IEnumerator LoadScene(int levelIndex, float transitionTime)
     {
         // NOTE: Transition time does not extend or shorten the fade animation. Fade animation is 1 second long. We can change this if we want later on.
-        _Transition.SetTrigger("Transition");
+        transition.updateMode = AnimatorUpdateMode.UnscaledTime;
+        transition.SetTrigger("Transition");
         if(GameObject.Find("MusicController") != null)
         {
             music = GameObject.Find("MusicController").GetComponent<MusicManager>();
             music.FadeOutCaller(60);
         }
+        float elapsed = 0;
+        while(elapsed < transitionTime)
+        {
+            elapsed += Time.unscaledDeltaTime;
+            yield return null;
+        }
         Time.timeScale = 1;
-        yield return new WaitForSeconds(transitionTime);
         renderFeatureToggler.DisableRenderFeatures();
         SceneManager.LoadScene(levelIndex);
     }
@@ -35,7 +42,7 @@ public class SceneTransition : MonoBehaviour
     }
     IEnumerator ExitFade()
     {
-        _Transition.SetTrigger("Transition");
+        transition.SetTrigger("Transition");
         if(GameObject.Find("MusicController") != null)
         {
             music = GameObject.Find("MusicController").GetComponent<MusicManager>();
