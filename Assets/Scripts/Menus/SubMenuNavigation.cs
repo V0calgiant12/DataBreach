@@ -72,12 +72,18 @@ public class SubMenuNavigation : MonoBehaviour
         
         if (UserInput.Instance.NavigateInput.y < -0.5f && UserInput.Instance.NavigateDown)
         {
-            currentlySelected = subDropdown.FindSelectableOnDown().gameObject;
+            if(subDropdown.FindSelectableOnDown() != null)
+            {
+                currentlySelected = subDropdown.FindSelectableOnDown().gameObject;
+            }
             Select();
         }
         if (UserInput.Instance.NavigateInput.y > 0.5f && UserInput.Instance.NavigateDown)
         {
-            currentlySelected = subDropdown.FindSelectableOnUp().gameObject;
+            if(subDropdown.FindSelectableOnUp() != null)
+            {
+                currentlySelected = subDropdown.FindSelectableOnUp().gameObject;
+            }
             Select();
         }
         if (UserInput.Instance.CancelInput && backButton != null)
