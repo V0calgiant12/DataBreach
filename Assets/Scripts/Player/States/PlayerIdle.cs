@@ -63,8 +63,16 @@ public class PlayerIdle : PlayerAbstract
         // Grounded
         if (!GroundCheck.Instance._IsGrounded)
         {
-            player.SwitchState(player.AirState);
-            return;
+            if(player.playerData.coyoteTimeCounter < 0)
+            {
+                player.playerData.coyoteTimeCounter = 1;
+            }
+            if(player.playerData.coyoteTimeCounter == 0)
+            {
+                player.SwitchState(player.AirState);
+                player.currentState.UpdateState(player);
+                return;
+            }
         }
 
         // Movement

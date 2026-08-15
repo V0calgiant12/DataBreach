@@ -26,6 +26,10 @@ public class PlayerDead : PlayerAbstract
     }
     public override void UpdateState(PlayerStateManager player)
     {
+        if(player.playerData.OffsetVelocity != new Vector2(0, 0))
+        {
+            player.playerData.PlayerRb.linearVelocity = player.playerData.OffsetVelocity;
+        }
         if(pixelation > 10)
         {
             pixelation -= 5;

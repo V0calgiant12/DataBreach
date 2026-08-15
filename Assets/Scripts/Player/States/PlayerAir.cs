@@ -26,9 +26,9 @@ public class PlayerAir : PlayerAbstract
             player.playerData.anim.SetBool("jumping", false);
         }
         
-        if(PlayerStateManager.Instance.playerData.jumpBufferCounter < -5)
+        if(player.playerData.jumpBufferCounter < -5)
         {
-            PlayerStateManager.Instance.playerData.coyoteTimeCounter = 15;
+            player.playerData.coyoteTimeCounter = 15;
         }
     }
     public override void UpdateState(PlayerStateManager player)

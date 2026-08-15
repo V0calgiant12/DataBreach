@@ -97,15 +97,23 @@ public class PlayerCrouching : PlayerAbstract
         }
 
         // Check if grounded
-        if (!GroundCheck.Instance._IsGrounded && player.playerData.coyoteTimeCounter < 0)
+        if (!GroundCheck.Instance._IsGrounded)
         {
             if(SettingsData.Instance._ToggleCrouch != true)
             {
                 player.playerData.crouching = false;
             }
-            player.SwitchState(player.AirState);
-            player.playerData.anim.SetBool("crouching", false);
-            return;
+            if(player.playerData.coyoteTimeCounter < 0)
+            {
+                player.playerData.coyoteTimeCounter = 1;
+            }
+            if(player.playerData.coyoteTimeCounter == 0)
+            {
+                player.SwitchState(player.AirState);
+                player.currentState.UpdateState(player);
+                player.playerData.anim.SetBool("crouching", false);
+                return;
+            }
         }
     }
     public override void LateUpdateState(PlayerStateManager player)
