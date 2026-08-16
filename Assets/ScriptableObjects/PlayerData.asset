@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerData
   playerHealth: 5
   fastFallCounter: 0
-  jumpBufferCounter: -365
-  coyoteTimeCounter: -263
-  interactingCooldown: -851
-  iFrames: -184
+  jumpBufferCounter: -38
+  coyoteTimeCounter: -35
+  interactingCooldown: -34629
+  iFrames: -22607
   ricochet: 0
   mudSpeedMulti: 1
   mudJumpMulti: 1
@@ -25,13 +25,13 @@ MonoBehaviour:
   crouching: 0
   doubleJumpAvailable: 1
   movementAllowed: 1
-  leftOrRight: 0
+  leftOrRight: 1
   interacting: 0
   inAirGust: 0
   pickUpHeart: 0
   playerDead: 0
   inMud: 0
-  lastCheckpoint: {x: 23.25, y: 15}
+  lastCheckpoint: {x: 0, y: 0}
   MainCamera: {fileID: 0}
   ScreenCanvas: {fileID: 0}
   OffsetVelocity: {x: 0, y: 0}

@@ -165,10 +165,10 @@ public class PlayerAir : PlayerAbstract
                 player.playerData.leftOrRight = false;
             }
             //Debug.Log("jump in air");
+            player.playerData.PlayerRb.linearVelocity = new Vector2(player.playerData.PlayerRb.linearVelocityX, jumpStrength * 0.8f);
             player.StartCoroutine(player.WaitUntilNotJumping());
             player.playerData.audioSource.PlayJumpSound(player.playerData._AirJump);
             player.playerData.anim.SetBool("jumping", true);
-            player.playerData.PlayerRb.linearVelocity = new Vector2(player.playerData.PlayerRb.linearVelocityX, jumpStrength * 0.8f);
             player.playerData.doubleJumpAvailable = false;
             player.playerData.coyoteTimeCounter = 0;
         }
@@ -189,7 +189,8 @@ public class PlayerAir : PlayerAbstract
         // Grounded Jump check for Coyote time.
         if (player.playerData.jumpBufferCounter > 0 && player.playerData.coyoteTimeCounter > 0)
         {
-            player.playerData.anim.SetBool("walking", false);
+            player.playerData.anim.SetBool("falling", false);
+            player.playerData.anim.SetBool("jumping", true);
             player.playerData.PlayerRb.linearVelocity = new Vector2(player.playerData.PlayerRb.linearVelocityX, jumpStrength * PlayerStateManager.Instance.playerData.mudJumpMulti);
             player.playerData.jumpBufferCounter = 0;
             player.playerData.coyoteTimeCounter = 0;

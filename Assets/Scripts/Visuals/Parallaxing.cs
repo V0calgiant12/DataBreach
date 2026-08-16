@@ -9,6 +9,10 @@ public class Parallaxing : MonoBehaviour
     private Vector3 Velocity = Vector3.zero;
     public float parallaxX = 5;
     public float parallaxY = 5;
+    void Start()
+    {
+        transform.position = new Vector3((cameraPos.transform.position.x + _Offset.x) / parallaxX, (cameraPos.transform.position.y + _Offset.y) / parallaxY,0);
+    }
     void LateUpdate()
     {
         Vector3 newPos = new Vector3((cameraPos.transform.position.x + _Offset.x) / parallaxX, (cameraPos.transform.position.y + _Offset.y) / parallaxY,0);
