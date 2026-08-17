@@ -232,8 +232,8 @@ MonoBehaviour:
   particlePrefab: {fileID: 0}
   flashEffect: {fileID: 6792435214779163728}
   audioSource: {fileID: 1003367167366328723}
-  hitSound: {fileID: 8300000, guid: 807bd5152a662ed4a9241939b4fef32d, type: 3}
-  deathSound: {fileID: 8300000, guid: 0709a445dfc22cb4d8de281c203077b7, type: 3}
+  hitSound: {fileID: 8300000, guid: 5bc76f111b119fe4b99297778fbda7b7, type: 3}
+  deathSound: {fileID: 8300000, guid: 6c93768c84f0713469e37953ab5ffa69, type: 3}
   volume: 1
   health: 5
   knockbackReduction: {x: 2, y: 1.5}
@@ -1286,6 +1286,7 @@ GameObject:
   - component: {fileID: 3713570006817236553}
   - component: {fileID: 7740921418326878260}
   - component: {fileID: 6203693190275269452}
+  - component: {fileID: 4607775361461878013}
   m_Layer: 7
   m_Name: Goblin
   m_TagString: Enemy
@@ -1420,6 +1421,12 @@ MonoBehaviour:
   groundCheck: {fileID: 1577367954537911280}
   attackRange: {fileID: 1830197730717535922}
   enemyHit: {fileID: 5031553706785026353}
+  audioSource: {fileID: 4607775361461878013}
+  goblinDeath: {fileID: 8300000, guid: 6c93768c84f0713469e37953ab5ffa69, type: 3}
+  goblinReady: {fileID: 8300000, guid: 7710d018fb764e04d8855b965a060390, type: 3}
+  goblinAttack: {fileID: 8300000, guid: ef9701a0495f7244e8573c8c6df4d331, type: 3}
+  goblinAggro: {fileID: 8300000, guid: 49606f0802bd9d8428867448f9b840fc, type: 3}
+  goblinDeaggro: {fileID: 8300000, guid: c61b0a30b10f79d4ebaddf9e9114033f, type: 3}
 --- !u!114 &7740921418326878260
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1458,6 +1465,19 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &4607775361461878013
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6513856301564140633}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ecd83e99770e60a4cb88f27c07e3179e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EffectSound
+  prefab: {fileID: 8734533203902538695, guid: b546d70ed2a00174299d1366a75185f3, type: 3}
 --- !u!1 &6925086431995727968
 GameObject:
   m_ObjectHideFlags: 0
