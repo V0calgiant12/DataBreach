@@ -13,6 +13,7 @@ public class PlayerDead : PlayerAbstract
         player.playerData.pixelationMat.SetFloat("_Pixelation", 550);
         player.playerData.movementAllowed = false;
         player.playerData.playerDead = true;
+        player.playerData.inKnockback = false;
         player.playerData.anim.SetBool("dead", true);
         player.playerData.anim.SetBool("moving", false);
         player.playerData.anim.SetBool("sprinting", false);

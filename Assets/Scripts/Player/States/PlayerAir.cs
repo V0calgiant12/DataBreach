@@ -37,6 +37,7 @@ public class PlayerAir : PlayerAbstract
         // Fast Falling
         if (UserInput.Instance.KeyDownCrouch && player.playerData.PlayerRb.linearVelocityY < 0)
         {
+            player.playerData.inKnockback = false;
             if (SettingsData.Instance._DoubleTapFastFall && player.playerData.fastFallCounter > 0)
             {
                 player.playerData.PlayerRb.linearVelocity = new Vector2(player.playerData.PlayerRb.linearVelocityX, -jumpStrength * 1.5f);
@@ -71,6 +72,7 @@ public class PlayerAir : PlayerAbstract
             PlayerVelocity = new Vector2(playerSpeed, player.playerData.PlayerRb.linearVelocityY);
             player.playerData.PlayerRb.linearVelocity = PlayerVelocity;// + OffsetVelocity;
             moving = true;
+            player.playerData.inKnockback = false;
         }
         if (UserInput.Instance.MovementInput.x < -0.25f) // Moving left
         {
@@ -85,8 +87,9 @@ public class PlayerAir : PlayerAbstract
             PlayerVelocity = new Vector2(-playerSpeed, player.playerData.PlayerRb.linearVelocityY);
             player.playerData.PlayerRb.linearVelocity = PlayerVelocity;// + OffsetVelocity;
             moving = true;
+            player.playerData.inKnockback = false;
         }
-        if (UserInput.Instance.MovementInput.x < 0.25f && UserInput.Instance.MovementInput.x > -0.25f) // If not moving, set x velocity to 0;
+        if (UserInput.Instance.MovementInput.x < 0.25f && UserInput.Instance.MovementInput.x > -0.25f && !player.playerData.inKnockback) // If not moving, set x velocity to 0;
         {
             {
                 player.playerData.PlayerRb.linearVelocityX = 0;

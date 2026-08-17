@@ -12,6 +12,7 @@ public class PlayerIdle : PlayerAbstract
         //Debug.Log("Player Idle / Idle State");
         player.playerData.anim.SetBool("moving", false);
         player.playerData.anim.SetBool("sprinting", false);
+        player.playerData.inKnockback = false;
     }
     public override void UpdateState(PlayerStateManager player)
     {

@@ -12,6 +12,7 @@ public class PlayerWalking : PlayerAbstract
     {
         //Debug.Log("Player is Walking / Walking State - " + player.playerData.sprinting);
         audioTimer = 0;
+        player.playerData.inKnockback = false;
     }
     public override void UpdateState(PlayerStateManager player)
     {
@@ -29,6 +30,7 @@ public class PlayerWalking : PlayerAbstract
             player.playerData.anim.SetBool("moving", true);
             player.playerData.anim.SetBool("walking", true);
             moving = true;
+            player.playerData.inKnockback = false;
         }
         if (UserInput.Instance.MovementInput.x < -0.25f && player.playerData.movementAllowed) 
         {
@@ -39,6 +41,7 @@ public class PlayerWalking : PlayerAbstract
             player.playerData.anim.SetBool("moving", true);
             player.playerData.anim.SetBool("walking", true);
             moving = true;
+            player.playerData.inKnockback = false;
         }
 
         // Check for Up Attack
