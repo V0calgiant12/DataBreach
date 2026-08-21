@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a1729c4832f69e4bb0a9c98f3d7c2f3, type: 3}
   m_Name: PlayerData
   m_EditorClassIdentifier: Assembly-CSharp::PlayerData
-  playerHealth: 2
-  fastFallCounter: -166
-  jumpBufferCounter: -271
-  coyoteTimeCounter: -268
-  interactingCooldown: -52802
-  iFrames: -2768
+  playerHealth: 5
+  fastFallCounter: 0
+  jumpBufferCounter: 0
+  coyoteTimeCounter: 0
+  interactingCooldown: 0
+  iFrames: 0
   ricochet: 0
   mudSpeedMulti: 1
   mudJumpMulti: 1
@@ -30,6 +30,7 @@ MonoBehaviour:
   inAirGust: 0
   pickUpHeart: 0
   playerDead: 0
+  inKnockback: 0
   inMud: 0
   lastCheckpoint: {x: 0, y: 0}
   MainCamera: {fileID: 0}
@@ -54,5 +55,5 @@ MonoBehaviour:
   _PlayerAttack: {fileID: 8300000, guid: b935ba125fdf1f445b2c02af83e856da, type: 3}
   _MudWalk:
   - {fileID: 8300000, guid: ffbdf88c1319f6443bb593a1241a4976, type: 3}
-  - {fileID: 8300000, guid: 64f3b24e2708c8541a8c703a24088967, type: 3}
+  - {fileID: 8300000, guid: 3ad33c511b933fc449e40a6ae9da990a, type: 3}
   - {fileID: 8300000, guid: cedd2dca8ac0675458153c8d8eb7b84c, type: 3}

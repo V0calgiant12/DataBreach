@@ -27,12 +27,12 @@ public class CameraLocationUpdater : MonoBehaviour
     {
         mainCamera = GameObject.Find("Main Camera").GetComponent<Camera>();
     }
-    void Update()
+    void LateUpdate()
     {
         cameraWidth = mainCamera.orthographicSize * mainCamera.aspect;
         cameraHeight = mainCamera.orthographicSize;
         //Debug.Log(transform.position.x + cameraWidth);
-        transform.position = new UnityEngine.Vector3(player.transform.position.x + rb.linearVelocityX/4, player.transform.position.y + rb.linearVelocityY/4, -10);
+        transform.position = new UnityEngine.Vector3(player.transform.position.x, player.transform.position.y, -10);
         if(HorizontalSide != Side.None && limitX != float.NaN)
         {
             if(HorizontalSide == Side.Right && limitX < transform.position.x + cameraWidth)
@@ -50,6 +50,10 @@ public class CameraLocationUpdater : MonoBehaviour
                 {
                     VerticalSide = Side.Right;
                 }
+            }
+            else
+            {
+                transform.position = new UnityEngine.Vector3(transform.position.x + rb.linearVelocityX/4, transform.position.y, -10);
             }
         }
         if(VerticalSide != Side.None && limitY != float.NaN)
@@ -69,6 +73,10 @@ public class CameraLocationUpdater : MonoBehaviour
                 {
                     VerticalSide = Side.Top;
                 }
+            }
+            else
+            {
+                transform.position = new UnityEngine.Vector3(transform.position.x, transform.position.y + rb.linearVelocityY/4, -10);
             }
         }
     }
