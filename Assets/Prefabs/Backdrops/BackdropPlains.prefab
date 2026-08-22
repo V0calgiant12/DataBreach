@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 4167685310281212386}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -57.142857, z: 0}
+  m_LocalPosition: {x: 4.20969, y: -45.191093, z: 0}
   m_LocalScale: {x: 100, y: 100, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -105,9 +105,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Parallaxing
   cameraPos: {fileID: 0}
-  _Offset: {x: 0, y: -400}
+  _Offset: {x: 0, y: -146.5}
   parallaxX: 1
-  parallaxY: 7
+  parallaxY: 3
 --- !u!1 &4175935153819417503
 GameObject:
   m_ObjectHideFlags: 0
@@ -135,7 +135,7 @@ Transform:
   m_GameObject: {fileID: 4175935153819417503}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -2.5, z: 0}
+  m_LocalPosition: {x: 4.20969, y: 6.5834165, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -195,7 +195,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 2
-  m_Size: {x: 360, y: 8}
+  m_Size: {x: 450, y: 8}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -213,9 +213,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Parallaxing
   cameraPos: {fileID: 0}
-  _Offset: {x: 0, y: -5}
+  _Offset: {x: 0, y: 5}
   parallaxX: 2
-  parallaxY: 2
+  parallaxY: 1.7
 --- !u!1 &4390939578528134833
 GameObject:
   m_ObjectHideFlags: 0
@@ -243,7 +243,7 @@ Transform:
   m_GameObject: {fileID: 4390939578528134833}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -2, z: 0}
+  m_LocalPosition: {x: 4.20969, y: 7.64224, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 4}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -303,7 +303,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 2
-  m_Size: {x: 360, y: 8}
+  m_Size: {x: 450, y: 8}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -321,7 +321,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Parallaxing
   cameraPos: {fileID: 0}
-  _Offset: {x: 0, y: -3}
+  _Offset: {x: 0, y: 6}
   parallaxX: 2.1
   parallaxY: 1.5
 --- !u!1 &8886395348558852180
