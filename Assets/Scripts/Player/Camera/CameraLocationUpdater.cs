@@ -53,8 +53,13 @@ public class CameraLocationUpdater : MonoBehaviour
             }
             else
             {
-                transform.position = new UnityEngine.Vector3(transform.position.x + rb.linearVelocityX/4, transform.position.y, -10);
+                transform.position = new UnityEngine.Vector3(player.transform.position.x + rb.linearVelocityX/4, transform.position.y, -10);
             }
+            
+        }
+        else
+        {
+            transform.position = new UnityEngine.Vector3(player.transform.position.x + rb.linearVelocityX/4, transform.position.y, -10);
         }
         if(VerticalSide != Side.None && limitY != float.NaN)
         {
@@ -76,8 +81,12 @@ public class CameraLocationUpdater : MonoBehaviour
             }
             else
             {
-                transform.position = new UnityEngine.Vector3(transform.position.x, transform.position.y + rb.linearVelocityY/4, -10);
+                transform.position = new UnityEngine.Vector3(transform.position.x, player.transform.position.y + rb.linearVelocityY/4, -10);
             }
+        }
+        else
+        {
+            transform.position = new UnityEngine.Vector3(transform.position.x, player.transform.position.y + rb.linearVelocityY/4, -10);
         }
     }
 }
