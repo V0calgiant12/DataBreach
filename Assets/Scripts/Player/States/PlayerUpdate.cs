@@ -74,6 +74,18 @@ public class PlayerUpdate : PlayerAbstract
             player.SwitchState(player.DeadState);
             return;
         }
+
+        // Attack Buffering
+        if (UserInput.Instance.KeyDownAttack)
+        {
+            player.playerData.bufferedAtk = 10;
+        }
+        // C-Stick Attack Buffering
+        if(UserInput.Instance.RightStickPressed)
+        {
+            player.playerData.bufferedAtk = 10;
+            player.playerData.bufferedAtkDir = UserInput.Instance.DirectionalAttack;
+        }
     }
     public override void LateUpdateState(PlayerStateManager player)
     {

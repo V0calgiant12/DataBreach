@@ -19,25 +19,25 @@ public class PlayerCrouching : PlayerAbstract
         playerSpeed = 3 * PlayerStateManager.Instance.playerData.mudSpeedMulti;
         
         // Down attack
-        if (UserInput.Instance.KeyDownAttack)
+        if (player.playerData.bufferedAtk > 0)
         {
             player.Attack(PlayerStateManager.AttackType.down);
         }
         // C-Stick Attacking
-        if(UserInput.Instance.DirectionalAttack.y > 0.5f && UserInput.Instance.RightStickPressed)
+        if(player.playerData.bufferedAtkDir.y > 0.5f && UserInput.Instance.RightStickPressed)
         {
             player.Attack(PlayerStateManager.AttackType.up);
         }
-        if(UserInput.Instance.DirectionalAttack.y < -0.5f && UserInput.Instance.RightStickPressed)
+        if(player.playerData.bufferedAtkDir.y < -0.5f && UserInput.Instance.RightStickPressed)
         {
             player.Attack(PlayerStateManager.AttackType.down);
         }
-        if(UserInput.Instance.DirectionalAttack.x > 0.5f && UserInput.Instance.RightStickPressed)
+        if(player.playerData.bufferedAtkDir.x > 0.5f && UserInput.Instance.RightStickPressed)
         {
             player.playerData.leftOrRight = true;
             player.Attack(PlayerStateManager.AttackType.forward);
         }
-        if(UserInput.Instance.DirectionalAttack.x < -0.5f && UserInput.Instance.RightStickPressed)
+        if(player.playerData.bufferedAtkDir.x < -0.5f && UserInput.Instance.RightStickPressed)
         {
             player.playerData.leftOrRight = false;
             player.Attack(PlayerStateManager.AttackType.forward);

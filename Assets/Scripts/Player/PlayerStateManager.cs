@@ -101,6 +101,7 @@ public class PlayerStateManager : MonoBehaviour
         // Counter countdowns
         playerData.jumpBufferCounter -= Time.timeScale == 1 ? 1 : 0;
         playerData.coyoteTimeCounter -= Time.timeScale == 1 ? 1 : 0;
+        playerData.bufferedAtk -= Time.timeScale == 1 ? 1 : 0;
         playerData.iFrames -= Time.timeScale == 1 ? 1 : 0;
         playerData.anim.SetInteger("iframes", playerData.iFrames);
 
@@ -146,6 +147,8 @@ public class PlayerStateManager : MonoBehaviour
     {
         if(playerData.anim.GetBool("attacking") != true && playerData.movementAllowed)
         {
+            playerData.bufferedAtk = 0;
+            playerData.bufferedAtkDir = new Vector2(0,0);
             playerData.anim.SetBool("attacking", true);
             playerData.audioSource.PlayPlayerAttackSound(playerData._PlayerAttack);
             switch (attackType)

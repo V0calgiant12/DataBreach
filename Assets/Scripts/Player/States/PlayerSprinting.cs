@@ -40,12 +40,12 @@ public class PlayerSprinting : PlayerAbstract
         }
 
         // Attacking
-        if (UserInput.Instance.KeyDownAttack)
+        if (player.playerData.bufferedAtk > 0)
         {
             player.Attack(PlayerStateManager.AttackType.dash);
         }
         // C-Stick Attacking
-        if((UserInput.Instance.DirectionalAttack.y < -0.5f || UserInput.Instance.DirectionalAttack.y > 0.5f || UserInput.Instance.DirectionalAttack.x < -0.5f || UserInput.Instance.DirectionalAttack.x > 0.5f) && UserInput.Instance.RightStickPressed)
+        if((player.playerData.bufferedAtkDir.y < -0.5f || player.playerData.bufferedAtkDir.y > 0.5f || player.playerData.bufferedAtkDir.x < -0.5f || player.playerData.bufferedAtkDir.x > 0.5f) && UserInput.Instance.RightStickPressed)
         {
             player.Attack(PlayerStateManager.AttackType.dash);
         }
