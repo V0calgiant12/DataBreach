@@ -82,14 +82,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7ca3531a9994d149823b972ef689423, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlatformMover
-  platformSpeed: 1
   moveSpeed: 5
   Player: {fileID: 0}
-  Slime: {fileID: 0}
+  Enemy: {fileID: 0}
   platformRb: {fileID: 3483393341903011612}
   pointA: {fileID: 1609728366882718882}
   pointB: {fileID: 6992543821256178064}
-  platform: {fileID: 792373018149614413}
+  currentSpeed: {x: 0, y: 0}
   nextPos: {x: 0, y: 0}
 --- !u!50 &3483393341903011612
 Rigidbody2D:
@@ -228,7 +227,7 @@ GameObject:
   - component: {fileID: 6992543821256178064}
   - component: {fileID: 4137359226921937717}
   - component: {fileID: 1297047450231246141}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: Point B
   m_TagString: PointB
   m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
@@ -507,7 +506,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 1043824287
-  m_SortingLayer: 4
+  m_SortingLayer: 5
   m_SortingOrder: 10
   m_MaskInteraction: 0
   m_Sprite: {fileID: 2695397407002535339, guid: 6c9810f2ae6eb8640874f4e29d5de096, type: 3}
