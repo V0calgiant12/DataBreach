@@ -79,9 +79,10 @@ public class PlayerUpdate : PlayerAbstract
         if (UserInput.Instance.KeyDownAttack)
         {
             player.playerData.bufferedAtk = 10;
+            player.playerData.bufferedAtkDir = new Vector2(0,0);
         }
         // C-Stick Attack Buffering
-        if(UserInput.Instance.RightStickPressed)
+        if((UserInput.Instance.DirectionalAttack.y < -0.5f || UserInput.Instance.DirectionalAttack.y > 0.5f || UserInput.Instance.DirectionalAttack.x < -0.5f || UserInput.Instance.DirectionalAttack.x > 0.5f) && UserInput.Instance.RightStickPressed)
         {
             player.playerData.bufferedAtk = 10;
             player.playerData.bufferedAtkDir = UserInput.Instance.DirectionalAttack;

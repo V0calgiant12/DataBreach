@@ -5,26 +5,23 @@ using UnityEngine;
 public class PlatformMover : MonoBehaviour
 {
     [Header("Moving Platform Settings:")]
-    public float platformSpeed = 1;
     public float moveSpeed = 0.1f;
     [Header("Moving Platform References:")]
     public GameObject Player;
-    public GameObject Slime;
+    public GameObject Enemy;
     public Rigidbody2D platformRb;
     public Transform pointA;
     public Transform pointB;
-    public Transform platform;
     [SerializeField] private Vector2 currentSpeed;
     [SerializeField] private Vector2 nextPos;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        platformRb = GetComponent<Rigidbody2D>();
         Player = GameObject.FindGameObjectWithTag("Player");
-        Slime = GameObject.FindGameObjectWithTag("Enemy");
         currentSpeed = new Vector2(1,1);
         nextPos = pointB.position;
+        transform.position = pointA.position;
         StartCoroutine(MoveTowardsPoint());
     }
 
@@ -60,12 +57,12 @@ public class PlatformMover : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.gameObject.CompareTag("PointA"))
+        if(other.gameObject.CompareTag("PointA") && other.transform.position == pointA.position)
         {
             nextPos = pointB.position;
             StartCoroutine(MoveTowardsPoint());
         }
-        if(other.gameObject.CompareTag("PointB"))
+        if(other.gameObject.CompareTag("PointB") && other.transform.position == pointB.position)
         {
             nextPos = pointA.position;
             StartCoroutine(MoveTowardsPoint());

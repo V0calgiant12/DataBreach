@@ -126,28 +126,32 @@ public class PlayerAir : PlayerAbstract
         // Attacking
         if (player.playerData.bufferedAtk > 0) // Check for an attack.
         {
-            player.Attack(currentAttack);
-        }
-        // C-Stick Attacking
-        if(player.playerData.bufferedAtkDir.y > 0.5f && UserInput.Instance.RightStickPressed)
-        {
-            currentAttack = PlayerStateManager.AttackType.upAir;
-            player.Attack(currentAttack);
-        }
-        if(player.playerData.bufferedAtkDir.y < -0.5f && UserInput.Instance.RightStickPressed)
-        {
-            currentAttack = PlayerStateManager.AttackType.downAir;
-            player.Attack(currentAttack);
-        }
-        if(player.playerData.bufferedAtkDir.x > 0.5f && UserInput.Instance.RightStickPressed)
-        {
-            currentAttack = player.playerData.leftOrRight ? PlayerStateManager.AttackType.forwardAir : PlayerStateManager.AttackType.backAir;
-            player.Attack(currentAttack);
-        }
-        if(player.playerData.bufferedAtkDir.x < -0.5f && UserInput.Instance.RightStickPressed)
-        {
-            currentAttack = player.playerData.leftOrRight ? PlayerStateManager.AttackType.backAir :  PlayerStateManager.AttackType.forwardAir;
-            player.Attack(currentAttack);
+            // Button Press
+            if(player.playerData.bufferedAtkDir == new Vector2(0, 0))
+            {
+                player.Attack(currentAttack);
+            }
+            // C-Stick Attacking
+            if(player.playerData.bufferedAtkDir.y > 0.5f)
+            {
+                currentAttack = PlayerStateManager.AttackType.upAir;
+                player.Attack(currentAttack);
+            }
+            if(player.playerData.bufferedAtkDir.y < -0.5f)
+            {
+                currentAttack = PlayerStateManager.AttackType.downAir;
+                player.Attack(currentAttack);
+            }
+            if(player.playerData.bufferedAtkDir.x > 0.5f)
+            {
+                currentAttack = player.playerData.leftOrRight ? PlayerStateManager.AttackType.forwardAir : PlayerStateManager.AttackType.backAir;
+                player.Attack(currentAttack);
+            }
+            if(player.playerData.bufferedAtkDir.x < -0.5f)
+            {
+                currentAttack = player.playerData.leftOrRight ? PlayerStateManager.AttackType.backAir :  PlayerStateManager.AttackType.forwardAir;
+                player.Attack(currentAttack);
+            }
         }
 
         // Short Jumping

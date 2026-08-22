@@ -32,33 +32,37 @@ public class PlayerIdle : PlayerAbstract
             currentAttack = PlayerStateManager.AttackType.up;
         }
 
-        // Attack
-        if (player.playerData.bufferedAtk > 0)
+        // Attacking
+        if (player.playerData.bufferedAtk > 0) // Check for an attack.
         {
-            player.Attack(currentAttack);
-        }
-        // C-Stick Attacking
-        if(player.playerData.bufferedAtkDir.y > 0.5f && UserInput.Instance.RightStickPressed)
-        {
-            currentAttack = PlayerStateManager.AttackType.up;
-            player.Attack(currentAttack);
-        }
-        if(player.playerData.bufferedAtkDir.y < -0.5f && UserInput.Instance.RightStickPressed)
-        {
-            currentAttack = PlayerStateManager.AttackType.down;
-            player.Attack(currentAttack);
-        }
-        if(player.playerData.bufferedAtkDir.x > 0.5f && UserInput.Instance.RightStickPressed)
-        {
-            player.playerData.leftOrRight = true;
-            currentAttack = PlayerStateManager.AttackType.forward;
-            player.Attack(currentAttack);
-        }
-        if(player.playerData.bufferedAtkDir.x < -0.5f && UserInput.Instance.RightStickPressed)
-        {
-            player.playerData.leftOrRight = false;
-            currentAttack = PlayerStateManager.AttackType.forward;
-            player.Attack(currentAttack);
+            // Button Press
+            if(player.playerData.bufferedAtkDir == new Vector2(0, 0))
+            {
+                player.Attack(currentAttack);
+            }
+            // C-Stick Attacking
+            if(player.playerData.bufferedAtkDir.y > 0.5f)
+            {
+                currentAttack = PlayerStateManager.AttackType.up;
+                player.Attack(currentAttack);
+            }
+            if(player.playerData.bufferedAtkDir.y < -0.5f)
+            {
+                currentAttack = PlayerStateManager.AttackType.down;
+                player.Attack(currentAttack);
+            }
+            if(player.playerData.bufferedAtkDir.x > 0.5f)
+            {
+                player.playerData.leftOrRight = true;
+                currentAttack = PlayerStateManager.AttackType.forward;
+                player.Attack(currentAttack);
+            }
+            if(player.playerData.bufferedAtkDir.x < -0.5f)
+            {
+                player.playerData.leftOrRight = false;
+                currentAttack = PlayerStateManager.AttackType.forward;
+                player.Attack(currentAttack);
+            }
         }
 
         // Grounded

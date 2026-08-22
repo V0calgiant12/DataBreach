@@ -18,29 +18,33 @@ public class PlayerCrouching : PlayerAbstract
     {
         playerSpeed = 3 * PlayerStateManager.Instance.playerData.mudSpeedMulti;
         
-        // Down attack
-        if (player.playerData.bufferedAtk > 0)
+        // Attacking
+        if (player.playerData.bufferedAtk > 0) // Check for an attack.
         {
+            // Button Press
+            if(player.playerData.bufferedAtkDir == new Vector2(0, 0))
+            {
             player.Attack(PlayerStateManager.AttackType.down);
-        }
-        // C-Stick Attacking
-        if(player.playerData.bufferedAtkDir.y > 0.5f && UserInput.Instance.RightStickPressed)
-        {
+            }
+            // C-Stick Attacking
+            if(player.playerData.bufferedAtkDir.y > 0.5f)
+            {
             player.Attack(PlayerStateManager.AttackType.up);
-        }
-        if(player.playerData.bufferedAtkDir.y < -0.5f && UserInput.Instance.RightStickPressed)
-        {
+            }
+            if(player.playerData.bufferedAtkDir.y < -0.5f)
+            {
             player.Attack(PlayerStateManager.AttackType.down);
-        }
-        if(player.playerData.bufferedAtkDir.x > 0.5f && UserInput.Instance.RightStickPressed)
-        {
+            }
+            if(player.playerData.bufferedAtkDir.x > 0.5f)
+            {
             player.playerData.leftOrRight = true;
             player.Attack(PlayerStateManager.AttackType.forward);
-        }
-        if(player.playerData.bufferedAtkDir.x < -0.5f && UserInput.Instance.RightStickPressed)
-        {
+            }
+            if(player.playerData.bufferedAtkDir.x < -0.5f)
+            {
             player.playerData.leftOrRight = false;
             player.Attack(PlayerStateManager.AttackType.forward);
+            }
         }
 
         // Crouch release check
