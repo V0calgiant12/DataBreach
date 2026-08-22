@@ -32,26 +32,26 @@ public class TutorialCutsceneManager : MonoBehaviour
         {
             case(1):
                 InvisbleWall.SetActive(true);
-                TriggerShake.Instance.BurstShake(1,1,false);
+                TriggerShake.Instance.BurstShake(1,1,false,0);
                 audioSource.clip = shake1;
                 audioSource.Play();
                 StartCoroutine(WaitForFrames(60));
                 break;
             case(2):
-                TriggerShake.Instance.BurstShake(1.5f,1.25f,false);
+                TriggerShake.Instance.BurstShake(1.5f,1.25f,false,0);
                 audioSource.clip = shake1;
                 audioSource.Play();
                 StartCoroutine(WaitForFrames(30));
                 break;
             case(3):
-                TriggerShake.Instance.BurstShake(2f,1.5f,false);
+                TriggerShake.Instance.BurstShake(2f,1.5f,false,0);
                 audioSource.clip = shake1;
                 audioSource.Play();
                 StartCoroutine(WaitForFrames(150));
                 break;
             case(4):
                 PlayerStateManager.Instance.Interact();
-                TriggerShake.Instance.BurstShake(4,2,false);
+                TriggerShake.Instance.BurstShake(4,2,false,0);
                 anim.SetInteger("Scene", 4);
                 alarm.Play();
                 audioSource.clip = shake2;

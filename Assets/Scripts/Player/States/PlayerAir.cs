@@ -4,6 +4,7 @@ using NUnit.Framework.Internal.Filters;
 public class PlayerAir : PlayerAbstract
 {
     private PlayerStateManager.AttackType currentAttack;
+    private int fallTimer;
     public override void RunOnce(PlayerStateManager player)
     {
         Setup();
@@ -12,6 +13,7 @@ public class PlayerAir : PlayerAbstract
     {
         //Debug.Log("Player is in the air / Air State");
         playerSpeed = 7;
+        fallTimer = 0;
         shakeOnLand = false;
         player.playerData.fastFallCounter = 0;
         if (player.playerData.PlayerRb.linearVelocityY > 0) 
@@ -182,11 +184,21 @@ public class PlayerAir : PlayerAbstract
         //    doubleJumpAvailable = true;
         //    player.SwitchState(player.WallClingState);
         //}
-        if(player.playerData.PlayerRb.linearVelocityY < -40)
+
+        // Fall Timer
+        if(player.playerData.PlayerRb.linearVelocityY > 0)
+        {
+            fallTimer = 0;
+        }
+        if(player.playerData.PlayerRb.linearVelocityY < 0)
+        {
+            fallTimer += Time.timeScale == 1 ? 1 : 0;
+        }
+        
+        if(fallTimer > 45)
         {
             shakeOnLand = true;
-            //Debug.Log(shakeOnLand);
-            shakeIntensityLvl = Mathf.Abs(player.playerData.PlayerRb.linearVelocityY)/2 - 10;
+            shakeIntensityLvl = fallTimer/5 + Mathf.Abs(player.playerData.PlayerRb.linearVelocityY)/4;
         }
 
         // Grounded Jump check for Coyote time.
@@ -211,10 +223,9 @@ public class PlayerAir : PlayerAbstract
         // Grounded Check
         if (GroundCheck.Instance._IsGrounded)
         {
-            //Debug.Log(shakeOnLand);
             if(shakeOnLand)
             {
-                TriggerShake.Instance.BurstShake(shakeIntensityLvl,1,true);
+                TriggerShake.Instance.BurstShake(shakeIntensityLvl,1,true,0);
             }
             player.playerData.doubleJumpAvailable = true;
             player.playerData.audioSource.PlayJumpSound(player.playerData._NormalFall);

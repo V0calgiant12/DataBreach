@@ -73,7 +73,7 @@ public class EnemyHit : MonoBehaviour
         {
             iFrames = 15;
             _DamageTaken = true;
-            TriggerShake.Instance.BurstShake(1,2,false);
+            TriggerShake.Instance.BurstShake(1,2,false,0);
             if (!invulnerable)
             {
                 switch (PlayerStateManager.Instance.playerData.anim.GetInteger("attackId"))

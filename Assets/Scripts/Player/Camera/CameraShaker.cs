@@ -34,6 +34,7 @@ public class CameraShaker : MonoBehaviour
             // Generate a random point inside a sphere and multiply by magnitude
             float x = Random.Range(-1f, 1f) * magnitude;
             float y = Random.Range(-1f, 1f) * magnitude;
+            
 
             transform.localPosition = originalLocalPosition + new UnityEngine.Vector3(x, y, -10);
 
@@ -46,23 +47,25 @@ public class CameraShaker : MonoBehaviour
         transform.localPosition = originalLocalPosition;
     }
 
-    public IEnumerator BurstShake(float magnitude, float lengthMult, bool playSound)
+    public IEnumerator BurstShake(float magnitude, float lengthMult, bool playSound, float overrideVolume)
     {
-        Debug.Log("Camera Burst Shake " + magnitude + ", pitch: " + magnitude * 0.05f);
+        Debug.Log("Camera Burst Shake " + magnitude + ", pitch: " + (2.5f - (magnitude * 0.09f * (magnitude * 0.09f))));
         UnityEngine.Vector3 originalLocalPosition = transform.localPosition;
         float elapsed = 0f;
+
         if (playSound)
         {
-            audioSource.pitch = 2.5f - (magnitude * 0.05f + Random.Range(-0.1f, 0.1f));
-            audioSource.volume = magnitude * 0.05f;
+            audioSource.pitch = 2.5f - ((magnitude * 0.09f * (magnitude * 0.09f)) + Random.Range(-0.1f, 0.1f)); // p = 2.5 - (0.09 * m)^2
+            audioSource.volume = overrideVolume == 0 ? magnitude * 0.04f : overrideVolume;
             audioSource.Play();
         }
 
-        while (elapsed < 5 + 0.5*magnitude*lengthMult)
+        while (elapsed < 1 + Mathf.Round(0.2f*magnitude*lengthMult*(0.15f*magnitude*lengthMult))) // l = (0.2m*L)^2
         {
             // Generate a random point inside a sphere and multiply by magnitude
             float x = Random.Range(-0.8f, 0.8f) * magnitude;
             float y = Random.Range(-1.5f, 1f) * magnitude;
+
 
             transform.localPosition = originalLocalPosition + new UnityEngine.Vector3(x, y, -10);
 

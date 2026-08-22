@@ -27,7 +27,7 @@ public class CameraLocationUpdater : MonoBehaviour
     {
         mainCamera = GameObject.Find("Main Camera").GetComponent<Camera>();
     }
-    void LateUpdate()
+    void Update()
     {
         cameraWidth = mainCamera.orthographicSize * mainCamera.aspect;
         cameraHeight = mainCamera.orthographicSize;
