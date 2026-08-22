@@ -62,7 +62,7 @@ public class UserInput : MonoBehaviour
         Other
     }
     public string joystickName;
-    void Start()
+    void Awake()
     {
         if(Instance != null)
         {
