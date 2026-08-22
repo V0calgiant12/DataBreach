@@ -30,9 +30,10 @@ public class GoblinStateManager : MonoBehaviour
 
 
     [Header("Combat")]
-    public int attackCD = 60;
+    public int attackCD = 30;
     public int currentAtkCd = 0;
     private int audioCooldown = 0;
+    public bool aggro = false;
 
 
     [Header("References")]
@@ -79,6 +80,11 @@ public class GoblinStateManager : MonoBehaviour
     {
         audioCooldown -= Time.timeScale == 1 ? 1:0;
         currentState.UpdateState(this);
+        if(goblinRb.linearVelocityY < 0)
+        {
+            anim.SetBool("jumping", false);
+            anim.SetBool("falling", true);
+        }
         if(enemyHit.trackedHealth != 0)
         {
             if(currentState != HurtState)
@@ -95,7 +101,16 @@ public class GoblinStateManager : MonoBehaviour
             SwitchState(DeadState);
         }
     }
-
+    public void Aggro()
+    {
+        SwitchState(ChasingState);
+        PlaySound(goblinAggro,1);
+    }
+    public void Deaggro()
+    {
+        SwitchState(IdleState);
+        PlaySound(goblinDeaggro,1);
+    }
 
     public IEnumerator Jump()
     {

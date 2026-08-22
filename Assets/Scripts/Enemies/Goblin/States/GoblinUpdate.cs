@@ -12,6 +12,7 @@ public class GoblinUpdate : GoblinAbstract
     }
     public override void UpdateState(GoblinStateManager goblin)
     {
+        goblin.anim.SetBool("hit", false);
         if (goblin.attackRange.withinRange && goblin.currentAtkCd <= 0)
         {
             goblin.SwitchState(goblin.AttackState);
@@ -23,11 +24,6 @@ public class GoblinUpdate : GoblinAbstract
         if(goblin.currentState != goblin.AttackState)
         {
             goblin.currentAtkCd -= Time.timeScale == 1 ? 1 : 0;
-        }
-        if(goblin.goblinRb.linearVelocityY < 0)
-        {
-            goblin.anim.SetBool("jumping", false);
-            goblin.anim.SetBool("falling", true);
         }
     }
 }

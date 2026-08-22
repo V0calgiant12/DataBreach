@@ -20,14 +20,11 @@ public class GoblinHurt : GoblinAbstract
         if (!goblin.enemyHit._DamageTaken && goblin.groundCheck._IsGrounded)
         {
             goblin.anim.SetBool("hit", false);
-            if(goblin.currentAtkCd != 0)
+            if(goblin.currentAtkCd <= 10)
             {
-                goblin.SwitchState(goblin.AttackState);
+                goblin.currentAtkCd += 10;
             }
-            else
-            {
-                goblin.SwitchState(goblin.ChasingState);
-            }
+            goblin.SwitchState(goblin.ChasingState);
         }
     }
 }

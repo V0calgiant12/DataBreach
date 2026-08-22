@@ -6,18 +6,16 @@ public class GoblinDetect : MonoBehaviour
     [SerializeField] private Rigidbody2D rb;
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("Player") && goblin.currentState != goblin.DeadState)
+        if (other.gameObject.CompareTag("Player"))
         {
-            goblin.SwitchState(goblin.ChasingState);
-            goblin.PlaySound(goblin.goblinAggro,1);
+            goblin.aggro = true;
         }
     }
     void OnTriggerExit2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("Player") && goblin.currentState != goblin.DeadState)
+        if (other.gameObject.CompareTag("Player"))
         {
-            goblin.SwitchState(goblin.IdleState);
-            goblin.PlaySound(goblin.goblinDeaggro,1);
+            goblin.aggro = false;
         }
     }
     

@@ -25,5 +25,9 @@ public class GoblinChasing : GoblinAbstract
         {
             goblin.goblinRb.linearVelocity = new Vector2(direction * goblin.moveSpeed * goblin.mudSpeedMulti, goblin.goblinRb.linearVelocity.y);
         }
+        if (!goblin.aggro)
+        {
+            goblin.Deaggro();
+        }
     }
 }

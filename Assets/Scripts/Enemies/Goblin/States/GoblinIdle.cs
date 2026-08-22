@@ -23,5 +23,9 @@ public class GoblinIdle : GoblinAbstract
         if(idleTime == 0){
             goblin.SwitchState(goblin.PatrollingState);
         }
+        if (goblin.aggro)
+        {
+            goblin.Aggro();
+        }
     }
 }

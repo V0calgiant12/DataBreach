@@ -31,5 +31,9 @@ public class GoblinPatrolling : GoblinAbstract
             patrolTargetX = goblin.originPos.x + Mathf.Floor(Random.Range(-goblin.patrolRange, goblin.patrolRange)) + 0.5f;
             goblin.SwitchState(goblin.IdleState);
         }
+        if (goblin.aggro)
+        {
+            goblin.Aggro();
+        }
     }
 }

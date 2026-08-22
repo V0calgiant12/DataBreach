@@ -8,7 +8,6 @@ public class EnemyHit : MonoBehaviour
 {
     [Header("References")]
     [SerializeField] private GameObject ParentObject;
-    private PlayerStateManager playerStateManager;
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private GameObject particlePrefab;
     [SerializeField] private FlashEffect flashEffect;
@@ -44,7 +43,6 @@ public class EnemyHit : MonoBehaviour
         {
             knockbackReduction.y = 1;
         }
-        playerStateManager = GameObject.Find("Player").GetComponent<PlayerStateManager>();
         trackedHealth = health;
         if(flashEffect == null)
         {
@@ -78,31 +76,31 @@ public class EnemyHit : MonoBehaviour
             TriggerShake.Instance.BurstShake(1,2,false);
             if (!invulnerable)
             {
-                switch (playerStateManager.playerData.anim.GetInteger("attackId"))
+                switch (PlayerStateManager.Instance.playerData.anim.GetInteger("attackId"))
                 {
                     case(0):
                         // Forward attacks (0)
-                        DamageEnemy(1,10,10,other.transform.position.x);
+                        DamageEnemy(1,10,10,PlayerStateManager.Instance.transform.position.x);
                         break;
                     case(1):
                         // Up attacks (1)
-                        DamageEnemy(1,2,30,other.transform.position.x);
+                        DamageEnemy(1,2,30,PlayerStateManager.Instance.transform.position.x);
                         break;
                     case(2):
                         // Backward attacks (2)
-                        DamageEnemy(1,7,10,other.transform.position.x);
+                        DamageEnemy(1,7,10,PlayerStateManager.Instance.transform.position.x);
                         break;
                     case(3):
                         // Down attacks (3)
-                        DamageEnemy(1,8,5,other.transform.position.x);
+                        DamageEnemy(1,8,5,PlayerStateManager.Instance.transform.position.x);
                         break;
                     case(4):
                         // Down air attacks (4)
-                        DamageEnemy(1,8,5,other.transform.position.x);
+                        DamageEnemy(1,8,5,PlayerStateManager.Instance.transform.position.x);
                         break;
                     case(5):
                         // Dash attacks (5)
-                        DamageEnemy(1,15,8,other.transform.position.x);
+                        DamageEnemy(1,15,8,PlayerStateManager.Instance.transform.position.x);
                         break;
                 }
             }

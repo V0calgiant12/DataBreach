@@ -20,7 +20,7 @@ public class GoblinAttack : GoblinAbstract
 
         elapsed += Time.timeScale == 1 ? 1 : 0;
 
-        if(elapsed == 40)
+        if(elapsed == 25)
         {
             goblin.audioSource.PlaySound(goblin.goblinAttack,1,1,1);
         } 
