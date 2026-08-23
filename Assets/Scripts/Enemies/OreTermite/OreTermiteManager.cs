@@ -30,7 +30,7 @@ public class OreTermiteManager : MonoBehaviour
         {
             if (!extended)
             {
-                audioSource.PlaySound(otReady,1,Random.Range(0.9f,1.1f),1);
+                audioSource.PlaySound(otReady,1,Random.Range(0.9f,1.1f),1,1,transform.position);
             }
             animator.SetBool("Prepare",true);
             warning.trigger = false;
@@ -39,7 +39,7 @@ public class OreTermiteManager : MonoBehaviour
         {
             if (!extended)
             {
-                audioSource.PlaySound(otCancel,1,Random.Range(0.9f,1.1f),1);
+                audioSource.PlaySound(otCancel,1,Random.Range(0.9f,1.1f),1,1,transform.position);
             }
             animator.SetBool("Prepare",false);
             warning.trigger = false;
@@ -47,7 +47,7 @@ public class OreTermiteManager : MonoBehaviour
     }
     public void Stab()
     {
-        audioSource.PlaySound(otAttack,1,1,1);
+        audioSource.PlaySound(otAttack,1,1,1,1,transform.position);
         extended = true;
         animator.SetInteger("Stage",1);
         StartCoroutine(Retract());

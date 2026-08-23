@@ -12,7 +12,7 @@ public class GoblinAttack : GoblinAbstract
         goblin.anim.SetBool("attacking", true);
         // Attack animation begin
         elapsed = 0;
-        goblin.audioSource.PlaySound(goblin.goblinReady,1,1,1);
+        goblin.audioSource.PlaySound(goblin.goblinReady,1,1,1,1,goblin.transform.position);
     }
     public override void UpdateState(GoblinStateManager goblin)
     {
@@ -22,7 +22,7 @@ public class GoblinAttack : GoblinAbstract
 
         if(elapsed == 25)
         {
-            goblin.audioSource.PlaySound(goblin.goblinAttack,1,1,1);
+            goblin.audioSource.PlaySound(goblin.goblinAttack,1,1,1,1,goblin.transform.position);
         } 
 
         if(goblin.anim.GetBool("attacking") == false)

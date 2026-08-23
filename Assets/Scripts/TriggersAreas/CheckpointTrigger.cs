@@ -14,7 +14,7 @@ public class CheckpointTrigger : MonoBehaviour
             {
                 //used = true;
                 Vector2 playerPos = PlayerStateManager.Instance.transform.position;
-                audioSource.PlaySound(checkpointSound,1,1,0);
+                audioSource.PlaySound(checkpointSound,1,1,0,1,transform.position);
                 Instantiate(particle,new Vector2(playerPos.x,playerPos.y+1),transform.rotation);
                 PlayerStateManager.Instance.playerData.lastCheckpoint = transform.position;
             }

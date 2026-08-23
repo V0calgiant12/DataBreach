@@ -9,10 +9,10 @@ public class EffectSound : MonoBehaviour
         GameObject audioClone = Instantiate(prefab,transform.position,transform.rotation);
         audioClone.GetComponent<EffectAudioSource>().HeartSound(audio,0.9f);
     }
-    public void PlaySound(AudioClip audio, float volume, float pitch, float spatialBlend)
+    public void PlaySound(AudioClip audio, float volume, float pitch, float spatialBlend, float distanceModifier, Vector3 position)
     {
-        GameObject audioClone = Instantiate(prefab,transform.position,transform.rotation);
-        audioClone.GetComponent<EffectAudioSource>().PlaySound(audio, volume, pitch,spatialBlend);
+        GameObject audioClone = Instantiate(prefab,position,transform.rotation);
+        audioClone.GetComponent<EffectAudioSource>().PlaySound(audio, volume, pitch, spatialBlend, distanceModifier);
     }
     public void PlaySlimeJumpSound(AudioClip audio)
     {

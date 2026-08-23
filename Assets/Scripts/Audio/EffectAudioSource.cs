@@ -16,13 +16,15 @@ public class EffectAudioSource : MonoBehaviour
         audioSource.Play();
         StartCoroutine(Delete());
     }
-    public void PlaySound(AudioClip audioClip,float volume, float pitch, float spatialBlend)
+    public void PlaySound(AudioClip audioClip,float volume, float pitch, float spatialBlend, float distanceModifier)
     {
         audioSource.volume = volume;
         audioSource.pitch = pitch;
         audioSource.outputAudioMixerGroup = audioMixer.FindMatchingGroups("Effects")[0];
         audioSource.clip = audioClip;
         audioSource.spatialBlend = spatialBlend;
+        audioSource.maxDistance = audioSource.maxDistance * distanceModifier;
+        audioSource.minDistance = audioSource.minDistance * distanceModifier;
         audioSource.Play();
         StartCoroutine(Delete());
     }

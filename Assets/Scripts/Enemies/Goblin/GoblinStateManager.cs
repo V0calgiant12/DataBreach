@@ -150,7 +150,7 @@ public class GoblinStateManager : MonoBehaviour
     }
     public void WallCollision()
     {
-        Debug.Log("Wall Collision");
+        //Debug.Log("Wall Collision");
         touchingWall = true;
         StartCoroutine(Jump());
     }
@@ -158,7 +158,7 @@ public class GoblinStateManager : MonoBehaviour
     {
         if(audioCooldown <= 0)
         {
-            audioSource.PlaySound(audio,vol,1,1);
+            audioSource.PlaySound(audio,vol,1,1,1,transform.position);
         }
         audioCooldown = 15;
     }
