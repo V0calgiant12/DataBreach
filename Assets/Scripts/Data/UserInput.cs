@@ -168,12 +168,10 @@ public class UserInput : MonoBehaviour
         _interactAction.ApplyBindingOverride(new InputBinding{groups = "Keyboard&Mouse",overridePath= "<Keyboard>/"+(""+ SettingsData.Instance._InputInteract).ToLowerInvariant()});
         _upAction.ApplyBindingOverride(new InputBinding{groups = "Keyboard&Mouse",overridePath= "<Keyboard>/"+(""+ SettingsData.Instance._InputUp).ToLowerInvariant()});
         _crouchAction.ApplyBindingOverride(new InputBinding{groups = "Keyboard&Mouse",overridePath= "<Keyboard>/"+(""+ SettingsData.Instance._InputDown).ToLowerInvariant()});
-        _moveAction.ApplyBindingOverride(new InputBinding{groups = "Keyboard&Mouse",overridePath= ""});
-        _moveAction.AddCompositeBinding("2DVector")
-            .With("Up","<Keyboard>/"+(""+ SettingsData.Instance._InputUp).ToLowerInvariant())
-            .With("Down","<Keyboard>/"+(""+ SettingsData.Instance._InputDown).ToLowerInvariant())
-            .With("Left","<Keyboard>/"+(""+ SettingsData.Instance._InputLeft).ToLowerInvariant())
-            .With("Right","<Keyboard>/"+(""+ SettingsData.Instance._InputRight).ToLowerInvariant());
+        _moveAction.ApplyBindingOverride(1,new InputBinding{groups = "Keyboard&Mouse",overridePath= "<Keyboard>/"+(""+ SettingsData.Instance._InputUp).ToLowerInvariant()});
+        _moveAction.ApplyBindingOverride(2,new InputBinding{groups = "Keyboard&Mouse",overridePath= "<Keyboard>/"+(""+ SettingsData.Instance._InputDown).ToLowerInvariant()});
+        _moveAction.ApplyBindingOverride(3,new InputBinding{groups = "Keyboard&Mouse",overridePath= "<Keyboard>/"+(""+ SettingsData.Instance._InputLeft).ToLowerInvariant()});
+        _moveAction.ApplyBindingOverride(4,new InputBinding{groups = "Keyboard&Mouse",overridePath= "<Keyboard>/"+(""+ SettingsData.Instance._InputRight).ToLowerInvariant()});
         AddGamepadControls();
     }
     private void AddGamepadControls()

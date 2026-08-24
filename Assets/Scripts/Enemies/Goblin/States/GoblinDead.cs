@@ -18,7 +18,6 @@ public class GoblinDead : GoblinAbstract
     public override void UpdateState(GoblinStateManager goblin)
     {
         elapsed += Time.timeScale == 1 ? 1 : 0;
-        Debug.Log(elapsed);
         if (elapsed >= 225)
         {
             goblin.Kill();
