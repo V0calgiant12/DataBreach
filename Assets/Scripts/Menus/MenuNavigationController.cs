@@ -39,13 +39,13 @@ public class MenuNavigationController : MonoBehaviour
     private void Awake()
     {
         currentlySelected = DefaultSelected;
-        Select();
+        Select(true);
     }
     private void OnEnable()
     {
-        Select();
+        Select(true);
     }
-    public void Select()
+    public void Select(bool autoScroll)
     {
         if(currentlySelected.GetComponent<Button>() != null)
         {
@@ -82,7 +82,7 @@ public class MenuNavigationController : MonoBehaviour
         {
             Debug.LogError("ERROR: No selectable (or adjacent) component found.",currentlySelected);
         }
-        if(scrollRect != null)
+        if(scrollRect != null && autoScroll)
         {
             SnapTo(currentlySelected.transform.parent.gameObject.GetComponent<RectTransform>());
         }
@@ -151,7 +151,7 @@ public class MenuNavigationController : MonoBehaviour
             {
                 currentlySelected = button.FindSelectableOnDown().gameObject;
             }
-            Select();
+            Select(true);
         }
         if (UserInput.Instance.NavigateInput.y > 0.5f && UserInput.Instance.NavigateDown)
         {
@@ -159,7 +159,7 @@ public class MenuNavigationController : MonoBehaviour
             {
                 currentlySelected = button.FindSelectableOnUp().gameObject;
             }
-            Select();
+            Select(true);
         }
         if (UserInput.Instance.NavigateInput.x < -0.5f && UserInput.Instance.NavigateDown)
         {
@@ -167,7 +167,7 @@ public class MenuNavigationController : MonoBehaviour
             {
                 currentlySelected = button.FindSelectableOnLeft().gameObject;
             }
-            Select();
+            Select(true);
         }
         if (UserInput.Instance.NavigateInput.x > 0.5f && UserInput.Instance.NavigateDown)
         {
@@ -175,7 +175,7 @@ public class MenuNavigationController : MonoBehaviour
             {
                 currentlySelected = button.FindSelectableOnRight().gameObject;
             }
-            Select();
+            Select(true);
         }
         if (UserInput.Instance.CancelInput && backButton != null)
         {
@@ -185,7 +185,7 @@ public class MenuNavigationController : MonoBehaviour
         }
         if (UserInput.Instance.SubmitInput)
         {
-            Select();
+            Select(true);
             button.onClick.Invoke();
         }
     }
@@ -198,7 +198,7 @@ public class MenuNavigationController : MonoBehaviour
             {
                 currentlySelected = toggle.FindSelectableOnDown().gameObject;
             }
-            Select();
+            Select(true);
         }
         if (UserInput.Instance.NavigateInput.y > 0.5f && UserInput.Instance.NavigateDown)
         {
@@ -206,7 +206,7 @@ public class MenuNavigationController : MonoBehaviour
             {
                 currentlySelected = toggle.FindSelectableOnUp().gameObject;
             }
-            Select();
+            Select(true);
         }
         if (UserInput.Instance.NavigateInput.x < -0.5f && UserInput.Instance.NavigateDown)
         {
@@ -214,7 +214,7 @@ public class MenuNavigationController : MonoBehaviour
             {
                 currentlySelected = toggle.FindSelectableOnLeft().gameObject;
             }
-            Select();
+            Select(true);
         }
         if (UserInput.Instance.NavigateInput.x > 0.5f && UserInput.Instance.NavigateDown)
         {
@@ -222,7 +222,7 @@ public class MenuNavigationController : MonoBehaviour
             {
                 currentlySelected = toggle.FindSelectableOnRight().gameObject;
             }
-            Select();
+            Select(true);
         }
         if (UserInput.Instance.CancelInput && backButton != null)
         {
@@ -232,7 +232,7 @@ public class MenuNavigationController : MonoBehaviour
         }
         if (UserInput.Instance.SubmitInput)
         {
-            Select();
+            Select(true);
             toggle.isOn = !toggle.isOn;
         }
     }
@@ -245,7 +245,7 @@ public class MenuNavigationController : MonoBehaviour
             {
                 currentlySelected = dropdown.FindSelectableOnDown().gameObject;
             }
-            Select();
+            Select(true);
         }
         if (UserInput.Instance.NavigateInput.y > 0.5f && UserInput.Instance.NavigateDown)
         {
@@ -253,7 +253,7 @@ public class MenuNavigationController : MonoBehaviour
             {
                 currentlySelected = dropdown.FindSelectableOnUp().gameObject;
             }
-            Select();
+            Select(true);
         }
         if (UserInput.Instance.NavigateInput.x < -0.5f && UserInput.Instance.NavigateDown)
         {
@@ -261,7 +261,7 @@ public class MenuNavigationController : MonoBehaviour
             {
                 currentlySelected = dropdown.FindSelectableOnLeft().gameObject;
             }
-            Select();
+            Select(true);
         }
         if (UserInput.Instance.NavigateInput.x > 0.5f && UserInput.Instance.NavigateDown)
         {
@@ -269,7 +269,7 @@ public class MenuNavigationController : MonoBehaviour
             {
                 currentlySelected = dropdown.FindSelectableOnRight().gameObject;
             }
-            Select();
+            Select(true);
         }
         if (UserInput.Instance.CancelInput && backButton != null)
         {
@@ -289,13 +289,13 @@ public class MenuNavigationController : MonoBehaviour
         {
             dropdown.Hide();
             buttonType = ButtonType.Dropdown;
-            Select();
+            Select(true);
         }
         if (UserInput.Instance.SubmitInput)
         {
             dropdown.Hide();
             buttonType = ButtonType.Dropdown;
-            Select();
+            Select(true);
         }
     }
     void SliderUpdate()
@@ -307,7 +307,7 @@ public class MenuNavigationController : MonoBehaviour
             {
                 currentlySelected = slider.FindSelectableOnDown().gameObject;
             }
-            Select();
+            Select(true);
         }
         if (UserInput.Instance.NavigateInput.y > 0.5f && UserInput.Instance.NavigateDown)
         {
@@ -315,7 +315,7 @@ public class MenuNavigationController : MonoBehaviour
             {
                 currentlySelected = slider.FindSelectableOnUp().gameObject;
             }
-            Select();
+            Select(true);
         }
         if (UserInput.Instance.NavigateInput.x < -0.5f && UserInput.Instance.NavigateDown)
         {
@@ -323,7 +323,7 @@ public class MenuNavigationController : MonoBehaviour
             {
                 currentlySelected = slider.FindSelectableOnLeft().gameObject;
             }
-            Select();
+            Select(true);
         }
         if (UserInput.Instance.NavigateInput.x > 0.5f && UserInput.Instance.NavigateDown)
         {
@@ -331,7 +331,7 @@ public class MenuNavigationController : MonoBehaviour
             {
                 currentlySelected = slider.FindSelectableOnRight().gameObject;
             }
-            Select();
+            Select(true);
         }
         if (UserInput.Instance.CancelInput && backButton != null)
         {
@@ -353,7 +353,7 @@ public class MenuNavigationController : MonoBehaviour
             {
                 currentlySelected = slider.FindSelectableOnDown().gameObject;
             }
-            Select();
+            Select(true);
         }
         if (UserInput.Instance.NavigateInput.y > 0.5f && UserInput.Instance.NavigateDown)
         {
@@ -361,7 +361,7 @@ public class MenuNavigationController : MonoBehaviour
             {
                 currentlySelected = slider.FindSelectableOnUp().gameObject;
             }
-            Select();
+            Select(true);
         }
         if (UserInput.Instance.NavigateInput.x < -0.5f)
         {
@@ -388,12 +388,12 @@ public class MenuNavigationController : MonoBehaviour
         if (UserInput.Instance.CancelInput && backButton != null)
         {
             buttonType = ButtonType.Slider;
-            Select();
+            Select(true);
         }
         if (UserInput.Instance.SubmitInput)
         {
             buttonType = ButtonType.Slider;
-            Select();
+            Select(true);
         }
     }
     void SelectableUpdate()
@@ -405,7 +405,7 @@ public class MenuNavigationController : MonoBehaviour
             {
                 currentlySelected = selectable.FindSelectableOnDown().gameObject;
             }
-            Select();
+            Select(true);
         }
         if (UserInput.Instance.NavigateInput.y > 0.5f && UserInput.Instance.NavigateDown)
         {
@@ -413,7 +413,7 @@ public class MenuNavigationController : MonoBehaviour
             {
                 currentlySelected = selectable.FindSelectableOnUp().gameObject;
             }
-            Select();
+            Select(true);
         }
         if (UserInput.Instance.NavigateInput.x < -0.5f && UserInput.Instance.NavigateDown)
         {
@@ -421,7 +421,7 @@ public class MenuNavigationController : MonoBehaviour
             {
                 currentlySelected = selectable.FindSelectableOnLeft().gameObject;
             }
-            Select();
+            Select(true);
         }
         if (UserInput.Instance.NavigateInput.x > 0.5f && UserInput.Instance.NavigateDown)
         {
@@ -429,7 +429,7 @@ public class MenuNavigationController : MonoBehaviour
             {
                 currentlySelected = selectable.FindSelectableOnRight().gameObject;
             }
-            Select();
+            Select(true);
         }
         if (UserInput.Instance.CancelInput && backButton != null)
         {

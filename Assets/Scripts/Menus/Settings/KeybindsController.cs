@@ -88,7 +88,7 @@ public class KeybindsController : MonoBehaviour
             yield return null;
         }
         navController.enableNavigation = true;
-        navController.Select();
+        navController.Select(false);
     }
     public void ToggleSetting(SettingsToggleData data) // Handles when a setting is toggled
     {
