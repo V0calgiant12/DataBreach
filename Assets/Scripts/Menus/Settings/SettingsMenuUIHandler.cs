@@ -53,7 +53,7 @@ public class SettingsMenuUIHandler : MonoBehaviour
         {
             SettingsData.Instance.NoFile();
             LoadSettings();
-            keybinds.RefreshSettings();
+            keybinds.StartCoroutine(keybinds.RefreshSettings());
             gameSettings.RefreshSettings();
             videoSettings.RefreshSettings();
             ControlsButton();

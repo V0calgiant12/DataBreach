@@ -21,9 +21,9 @@ public class KeybindsController : MonoBehaviour
     [SerializeField] private TextMeshProUGUI buttonText;
     [SerializeField] private Button button;
     [SerializeField] private MenuNavigationController navController;
-    void Start() // Refreshes settings on load.
+    void OnEnable() // Refreshes settings on load.
     {
-        RefreshSettings();
+        StartCoroutine(RefreshSettings());
     }
     public void GetName(string name) // Gets object name. Im actually not entirely sure if this code still runs anywhere but it's staying just incase it does.
     {
@@ -99,8 +99,14 @@ public class KeybindsController : MonoBehaviour
                 break;
         }
     }
-    public void RefreshSettings() // Gets the saved settings and tells all other setting objects with the tag "ControlsMenu" to refresh their visuals, which is handled elsewhere.
+    public IEnumerator RefreshSettings() // Gets the saved settings and tells all other setting objects with the tag "ControlsMenu" to refresh their visuals, which is handled elsewhere.
     {
+        int elapsed = 0;
+        while (elapsed != 1)
+        {
+            elapsed++;
+            yield return null;
+        }
         _InputLeft = SettingsData.Instance._InputLeft;
         _InputRight = SettingsData.Instance._InputRight;
         _InputUp = SettingsData.Instance._InputUp;
@@ -113,9 +119,12 @@ public class KeybindsController : MonoBehaviour
 
         _UpToJump = SettingsData.Instance._UpToJump;
         GameObject[] controlsMenuItems = GameObject.FindGameObjectsWithTag("ControlsMenu"); // Puts all controls menu objects in a list.
+        Debug.Log("Refreshing Visuals");
+        Debug.Log(controlsMenuItems.Length);
         int index = 0;
         while (index <= controlsMenuItems.Length - 1) // Repeats for every game object.
         {
+            Debug.Log("Refreshing Visual of " + controlsMenuItems[index],controlsMenuItems[index]);
             controlsMenuItems[index].SendMessage("RefreshVisuals");
             index += 1;
         }
