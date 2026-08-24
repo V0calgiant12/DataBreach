@@ -58,6 +58,7 @@ public class SettingsData : MonoBehaviour
         }
         Instance = this;
         DontDestroyOnLoad(gameObject);
+        LoadSettings();
     }
     void Update()
     {
