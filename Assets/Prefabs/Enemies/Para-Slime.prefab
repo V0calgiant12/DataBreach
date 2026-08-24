@@ -355,7 +355,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7ca3531a9994d149823b972ef689423, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlatformMover
-  moveSpeed: 1
+  moveSpeed: 2
   Player: {fileID: 0}
   Enemy: {fileID: 0}
   platformRb: {fileID: 6970653603546178980}
@@ -875,7 +875,7 @@ BoxCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -1038,7 +1038,7 @@ BoxCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
