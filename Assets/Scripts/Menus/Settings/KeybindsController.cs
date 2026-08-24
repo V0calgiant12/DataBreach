@@ -20,6 +20,7 @@ public class KeybindsController : MonoBehaviour
     private string objectName;
     [SerializeField] private TextMeshProUGUI buttonText;
     [SerializeField] private Button button;
+    [SerializeField] private MenuNavigationController navController;
     void Start() // Refreshes settings on load.
     {
         RefreshSettings();
@@ -34,6 +35,7 @@ public class KeybindsController : MonoBehaviour
         buttonText = data._TextMesh;
         button = data.GetComponent<Button>();
         button.interactable = false;
+        navController.enableNavigation = false;
         StartCoroutine(StartListeningForKey(data._SettingID));
     }
     private IEnumerator StartListeningForKey(int inputNumber) // Listens for the next key to be pressed and acts accordingly when it does.
@@ -41,7 +43,7 @@ public class KeybindsController : MonoBehaviour
         
         buttonText.text = "Press any key...";
         int elapsed = 0;
-        while(elapsed < 15) // Wait 15 frames so that it doesn't INSTANTLY get set to a key you just pressed to select this.
+        while(elapsed < 5) // Wait 5 frames so that it doesn't INSTANTLY get set to a key you just pressed to select this.
         {
             elapsed += 1;
             yield return null;
@@ -79,6 +81,14 @@ public class KeybindsController : MonoBehaviour
         buttonText.text = "" + currentKeyDown;
         //yield return new WaitUntil(()=> )); wait until mouse up
         button.interactable = true;
+        elapsed = 0;
+        while(elapsed != 2)
+        {
+            elapsed++;
+            yield return null;
+        }
+        navController.enableNavigation = true;
+        navController.Select();
     }
     public void ToggleSetting(SettingsToggleData data) // Handles when a setting is toggled
     {

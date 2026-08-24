@@ -8,6 +8,9 @@ using TMPro;
 #pragma warning disable 864121
 public class MenuNavigationController : MonoBehaviour
 {
+    [Header("Info")]
+    public bool enableNavigation = true;
+    [Header("References")]
     [SerializeField] private GameObject DefaultSelected;
     [SerializeField] private GameObject currentlySelected;
     [SerializeField] private Button backButton;
@@ -42,7 +45,7 @@ public class MenuNavigationController : MonoBehaviour
     {
         Select();
     }
-    void Select()
+    public void Select()
     {
         if(currentlySelected.GetComponent<Button>() != null)
         {
@@ -100,39 +103,44 @@ public class MenuNavigationController : MonoBehaviour
     }
     void LateUpdate()
     {
-        switch (buttonType)
+        if (enableNavigation)
         {
-            case (ButtonType.Button):
-                ButtonUpdate();
-                break;
-            case (ButtonType.Toggle):
-                ToggleUpdate();
-                break;
-            case (ButtonType.Slider):
-                SliderUpdate();
-                break;
-            case (ButtonType.SubSlider):
-                SubSliderUpdate();
-                break;
-            case (ButtonType.Dropdown):
-                DropdownUpdate();
-                break;
-            case (ButtonType.SubDropdown):
-                SubDropdownUpdate();
-                break;
-            case (ButtonType.Selectable):
-                SelectableUpdate();
-                break;
-            
+            switch (buttonType)
+            {
+                case (ButtonType.Button):
+                    ButtonUpdate();
+                    break;
+                case (ButtonType.Toggle):
+                    ToggleUpdate();
+                    break;
+                case (ButtonType.Slider):
+                    SliderUpdate();
+                    break;
+                case (ButtonType.SubSlider):
+                    SubSliderUpdate();
+                    break;
+                case (ButtonType.Dropdown):
+                    DropdownUpdate();
+                    break;
+                case (ButtonType.SubDropdown):
+                    SubDropdownUpdate();
+                    break;
+                case (ButtonType.Selectable):
+                    SelectableUpdate();
+                    break;
+            }
+            if (UserInput.Instance.RightMenuInput && NextMenuButton != null && buttonType != ButtonType.SubDropdown)
+            {
+                NextMenuButton.onClick.Invoke();
+            }
+            if (UserInput.Instance.LeftMenuInput && LastMenuButton != null && buttonType != ButtonType.SubDropdown)
+            {
+                LastMenuButton.onClick.Invoke();
+            }
         }
-        if (UserInput.Instance.RightMenuInput && NextMenuButton != null && buttonType != ButtonType.SubDropdown)
-        {
-            NextMenuButton.onClick.Invoke();
-        }
-        if (UserInput.Instance.LeftMenuInput && LastMenuButton != null && buttonType != ButtonType.SubDropdown)
-        {
-            LastMenuButton.onClick.Invoke();
-        }
+        
+
+        
     }
     void ButtonUpdate()
     {

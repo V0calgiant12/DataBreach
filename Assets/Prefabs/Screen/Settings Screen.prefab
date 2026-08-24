@@ -4373,6 +4373,7 @@ MonoBehaviour:
   _UpToJump: 0
   buttonText: {fileID: 0}
   button: {fileID: 0}
+  navController: {fileID: 7100312537425183029}
 --- !u!114 &3798743443091373475
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11329,6 +11330,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3f6b6f628b34284595599b4b1d2d006, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MenuNavigationController
+  enableNavigation: 1
   DefaultSelected: {fileID: 8690274090851604581}
   currentlySelected: {fileID: 0}
   backButton: {fileID: 6068197937102049169}
@@ -24808,6 +24810,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3f6b6f628b34284595599b4b1d2d006, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MenuNavigationController
+  enableNavigation: 1
   DefaultSelected: {fileID: 837626006115246951}
   currentlySelected: {fileID: 0}
   backButton: {fileID: 6068197937102049169}
@@ -27714,6 +27717,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3f6b6f628b34284595599b4b1d2d006, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MenuNavigationController
+  enableNavigation: 1
   DefaultSelected: {fileID: 3427542708649187844}
   currentlySelected: {fileID: 0}
   backButton: {fileID: 6068197937102049169}
@@ -32662,6 +32666,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3f6b6f628b34284595599b4b1d2d006, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MenuNavigationController
+  enableNavigation: 1
   DefaultSelected: {fileID: 3573819521876871158}
   currentlySelected: {fileID: 0}
   backButton: {fileID: 6068197937102049169}
@@ -35576,6 +35581,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3f6b6f628b34284595599b4b1d2d006, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MenuNavigationController
+  enableNavigation: 1
   DefaultSelected: {fileID: 8571873252793098194}
   currentlySelected: {fileID: 0}
   backButton: {fileID: 6068197937102049169}
