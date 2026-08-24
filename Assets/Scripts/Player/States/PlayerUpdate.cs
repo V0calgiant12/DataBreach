@@ -76,13 +76,13 @@ public class PlayerUpdate : PlayerAbstract
         }
 
         // Attack Buffering
-        if (UserInput.Instance.KeyDownAttack)
+        if (UserInput.Instance.KeyDownAttack && Time.timeScale != 0)
         {
             player.playerData.bufferedAtk = 10;
             player.playerData.bufferedAtkDir = new Vector2(0,0);
         }
         // C-Stick Attack Buffering
-        if((UserInput.Instance.DirectionalAttack.y < -0.5f || UserInput.Instance.DirectionalAttack.y > 0.5f || UserInput.Instance.DirectionalAttack.x < -0.5f || UserInput.Instance.DirectionalAttack.x > 0.5f) && UserInput.Instance.RightStickPressed)
+        if((UserInput.Instance.DirectionalAttack.y < -0.5f || UserInput.Instance.DirectionalAttack.y > 0.5f || UserInput.Instance.DirectionalAttack.x < -0.5f || UserInput.Instance.DirectionalAttack.x > 0.5f) && UserInput.Instance.RightStickPressed && Time.timeScale != 0)
         {
             player.playerData.bufferedAtk = 10;
             player.playerData.bufferedAtkDir = UserInput.Instance.DirectionalAttack;
