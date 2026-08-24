@@ -162,16 +162,142 @@ public class UserInput : MonoBehaviour
     public void UpdateKeyBinds()
     {
         _playerInput.actions.Disable();
-        _jumpAction.ApplyBindingOverride(new InputBinding{groups = "Keyboard&Mouse",overridePath= "<Keyboard>/"+(""+ SettingsData.Instance._InputJump).ToLowerInvariant()});
-        _attackAction.ApplyBindingOverride(new InputBinding{groups = "Keyboard&Mouse",overridePath= "<Keyboard>/"+(""+ SettingsData.Instance._InputAttack).ToLowerInvariant()});
-        _sprintAction.ApplyBindingOverride(new InputBinding{groups = "Keyboard&Mouse",overridePath= "<Keyboard>/"+(""+ SettingsData.Instance._InputSprint).ToLowerInvariant()});
-        _interactAction.ApplyBindingOverride(new InputBinding{groups = "Keyboard&Mouse",overridePath= "<Keyboard>/"+(""+ SettingsData.Instance._InputInteract).ToLowerInvariant()});
-        _upAction.ApplyBindingOverride(new InputBinding{groups = "Keyboard&Mouse",overridePath= "<Keyboard>/"+(""+ SettingsData.Instance._InputUp).ToLowerInvariant()});
-        _crouchAction.ApplyBindingOverride(new InputBinding{groups = "Keyboard&Mouse",overridePath= "<Keyboard>/"+(""+ SettingsData.Instance._InputDown).ToLowerInvariant()});
-        _moveAction.ApplyBindingOverride(1,new InputBinding{groups = "Keyboard&Mouse",overridePath= "<Keyboard>/"+(""+ SettingsData.Instance._InputUp).ToLowerInvariant()});
-        _moveAction.ApplyBindingOverride(2,new InputBinding{groups = "Keyboard&Mouse",overridePath= "<Keyboard>/"+(""+ SettingsData.Instance._InputDown).ToLowerInvariant()});
-        _moveAction.ApplyBindingOverride(3,new InputBinding{groups = "Keyboard&Mouse",overridePath= "<Keyboard>/"+(""+ SettingsData.Instance._InputLeft).ToLowerInvariant()});
-        _moveAction.ApplyBindingOverride(4,new InputBinding{groups = "Keyboard&Mouse",overridePath= "<Keyboard>/"+(""+ SettingsData.Instance._InputRight).ToLowerInvariant()});
+        _jumpAction.ApplyBindingOverride
+        (
+            new InputBinding
+            {
+                groups = "Keyboard&Mouse",
+                overridePath =
+                (""+ SettingsData.Instance._InputJump).ToLowerInvariant().Contains("mouse") ? 
+                    (""+ SettingsData.Instance._InputJump).ToLowerInvariant().Contains("mouse0") ? "<Mouse>/leftButton"
+                        : (""+ SettingsData.Instance._InputJump).ToLowerInvariant().Contains("mouse1") ? "<Mouse>/rightButton"
+                            : (""+ SettingsData.Instance._InputJump).ToLowerInvariant().Contains("mouse2") ? "<Mouse>/middleButton"
+                                : (""+ SettingsData.Instance._InputJump).ToLowerInvariant().Contains("mouse3") ? "<Mouse>/backButton"
+                                    : "<Mouse>/forwardButton"
+                    : ("<Keyboard>/" + (""+ SettingsData.Instance._InputJump).ToLowerInvariant()
+                )
+            }
+        );
+        _attackAction.ApplyBindingOverride
+        (
+            new InputBinding{
+            groups = "Keyboard&Mouse",
+            overridePath=
+            (
+              (""+ SettingsData.Instance._InputAttack).ToLowerInvariant().Contains("mouse") ? 
+                (""+ SettingsData.Instance._InputAttack).ToLowerInvariant().Contains("mouse0") ? "<Mouse>/leftButton"
+                    : (""+ SettingsData.Instance._InputAttack).ToLowerInvariant().Contains("mouse1") ? "<Mouse>/rightButton"
+                        : (""+ SettingsData.Instance._InputAttack).ToLowerInvariant().Contains("mouse2") ? "<Mouse>/middleButton"
+                            : (""+ SettingsData.Instance._InputAttack).ToLowerInvariant().Contains("mouse3") ? "<Mouse>/backButton"
+                                : "<Mouse>/forwardButton"
+                : ("<Keyboard>/" + (""+ SettingsData.Instance._InputAttack).ToLowerInvariant())
+            )
+        }
+        );
+        _sprintAction.ApplyBindingOverride
+        (
+            new InputBinding
+            {
+                groups = "Keyboard&Mouse",
+                overridePath=
+                (
+                    (""+ SettingsData.Instance._InputSprint).ToLowerInvariant().Contains("mouse") ? 
+                    (""+ SettingsData.Instance._InputSprint).ToLowerInvariant().Contains("mouse0") ? "<Mouse>/leftButton"
+                        : (""+ SettingsData.Instance._InputSprint).ToLowerInvariant().Contains("mouse1") ? "<Mouse>/rightButton"
+                            : (""+ SettingsData.Instance._InputSprint).ToLowerInvariant().Contains("mouse2") ? "<Mouse>/middleButton"
+                                : (""+ SettingsData.Instance._InputSprint).ToLowerInvariant().Contains("mouse3") ? "<Mouse>/backButton"
+                                    : "<Mouse>/forwardButton"
+                    : ("<Keyboard>/" + (""+ SettingsData.Instance._InputSprint).ToLowerInvariant())
+                )
+            }
+        );
+        _interactAction.ApplyBindingOverride
+        (
+            new InputBinding
+            {
+                groups = "Keyboard&Mouse",
+                overridePath=
+                (
+                    (""+ SettingsData.Instance._InputInteract).ToLowerInvariant().Contains("mouse") ? 
+                    (""+ SettingsData.Instance._InputInteract).ToLowerInvariant().Contains("mouse0") ? "<Mouse>/leftButton"
+                        : (""+ SettingsData.Instance._InputInteract).ToLowerInvariant().Contains("mouse1") ? "<Mouse>/rightButton"
+                            : (""+ SettingsData.Instance._InputInteract).ToLowerInvariant().Contains("mouse2") ? "<Mouse>/middleButton"
+                                : (""+ SettingsData.Instance._InputInteract).ToLowerInvariant().Contains("mouse3") ? "<Mouse>/backButton"
+                                    : "<Mouse>/forwardButton"
+                    : ("<Keyboard>/" + (""+ SettingsData.Instance._InputInteract).ToLowerInvariant())
+                )
+            }
+        );
+        _upAction.ApplyBindingOverride
+        (
+            new InputBinding
+            {
+                groups = "Keyboard&Mouse",
+                overridePath=
+                (
+                    (""+ SettingsData.Instance._InputUp).ToLowerInvariant().Contains("mouse") ? 
+                    (""+ SettingsData.Instance._InputUp).ToLowerInvariant().Contains("mouse0") ? "<Mouse>/leftButton"
+                        : (""+ SettingsData.Instance._InputUp).ToLowerInvariant().Contains("mouse1") ? "<Mouse>/rightButton"
+                            : (""+ SettingsData.Instance._InputUp).ToLowerInvariant().Contains("mouse2") ? "<Mouse>/middleButton"
+                                : (""+ SettingsData.Instance._InputUp).ToLowerInvariant().Contains("mouse3") ? "<Mouse>/backButton"
+                                    : "<Mouse>/forwardButton"
+                    : ("<Keyboard>/" + (""+ SettingsData.Instance._InputUp).ToLowerInvariant())
+                )
+            }
+        );
+        _crouchAction.ApplyBindingOverride
+        (
+            new InputBinding
+            {
+                groups = "Keyboard&Mouse",
+                overridePath=
+                (
+                    (""+ SettingsData.Instance._InputDown).ToLowerInvariant().Contains("mouse") ? 
+                    (""+ SettingsData.Instance._InputDown).ToLowerInvariant().Contains("mouse0") ? "<Mouse>/leftButton"
+                        : (""+ SettingsData.Instance._InputDown).ToLowerInvariant().Contains("mouse1") ? "<Mouse>/rightButton"
+                            : (""+ SettingsData.Instance._InputDown).ToLowerInvariant().Contains("mouse2") ? "<Mouse>/middleButton"
+                                : (""+ SettingsData.Instance._InputDown).ToLowerInvariant().Contains("mouse3") ? "<Mouse>/backButton"
+                                    : "<Mouse>/forwardButton"
+                    : ("<Keyboard>/" + (""+ SettingsData.Instance._InputDown).ToLowerInvariant())
+                )
+            }
+        );
+        _moveAction.ApplyBindingOverride
+        (
+            1,
+            new InputBinding
+            {
+                groups = "Keyboard&Mouse",
+                overridePath=
+                (
+                    (""+ SettingsData.Instance._InputUp).ToLowerInvariant().Contains("mouse") ? 
+                    (""+ SettingsData.Instance._InputUp).ToLowerInvariant().Contains("mouse0") ? "<Mouse>/leftButton"
+                        : (""+ SettingsData.Instance._InputUp).ToLowerInvariant().Contains("mouse1") ? "<Mouse>/rightButton"
+                            : (""+ SettingsData.Instance._InputUp).ToLowerInvariant().Contains("mouse2") ? "<Mouse>/middleButton"
+                                : (""+ SettingsData.Instance._InputUp).ToLowerInvariant().Contains("mouse3") ? "<Mouse>/backButton"
+                                    : "<Mouse>/forwardButton"
+                    : ("<Keyboard>/" + (""+ SettingsData.Instance._InputUp).ToLowerInvariant())
+                )
+            }
+        );
+        _moveAction.ApplyBindingOverride
+        (
+            2,
+            new InputBinding
+            {
+                groups = "Keyboard&Mouse",
+                overridePath=
+                (
+                    (""+ SettingsData.Instance._InputDown).ToLowerInvariant().Contains("mouse") ? 
+                    (""+ SettingsData.Instance._InputDown).ToLowerInvariant().Contains("mouse0") ? "<Mouse>/leftButton"
+                        : (""+ SettingsData.Instance._InputDown).ToLowerInvariant().Contains("mouse1") ? "<Mouse>/rightButton"
+                            : (""+ SettingsData.Instance._InputDown).ToLowerInvariant().Contains("mouse2") ? "<Mouse>/middleButton"
+                                : (""+ SettingsData.Instance._InputDown).ToLowerInvariant().Contains("mouse3") ? "<Mouse>/backButton"
+                                    : "<Mouse>/forwardButton"
+                    : ("<Keyboard>/" + (""+ SettingsData.Instance._InputDown).ToLowerInvariant())
+                )
+            }
+        );
         AddGamepadControls();
     }
     private void AddGamepadControls()

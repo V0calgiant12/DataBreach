@@ -119,12 +119,10 @@ public class KeybindsController : MonoBehaviour
 
         _UpToJump = SettingsData.Instance._UpToJump;
         GameObject[] controlsMenuItems = GameObject.FindGameObjectsWithTag("ControlsMenu"); // Puts all controls menu objects in a list.
-        Debug.Log("Refreshing Visuals");
-        Debug.Log(controlsMenuItems.Length);
         int index = 0;
         while (index <= controlsMenuItems.Length - 1) // Repeats for every game object.
         {
-            Debug.Log("Refreshing Visual of " + controlsMenuItems[index],controlsMenuItems[index]);
+            //Debug.Log("Refreshing Visual of " + controlsMenuItems[index],controlsMenuItems[index]);
             controlsMenuItems[index].SendMessage("RefreshVisuals");
             index += 1;
         }
