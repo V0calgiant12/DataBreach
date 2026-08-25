@@ -9,23 +9,9 @@ using System.Timers;
 public class SceneTransition : MonoBehaviour
 {
     [Header("Scene Transition References:")]
-    [SerializeField] private Animator transition;
+    public Animator transition;
     [SerializeField] private RenderFeatureToggler renderFeatureToggler;
     private MusicManager music;
-    void Start()
-    {
-        StartCoroutine(LateStart());
-    }
-    IEnumerator LateStart()
-    {
-        int elapsed = 0;
-        while(elapsed != 2)
-        {
-            elapsed++;
-            yield return null;
-        }
-        transition.updateMode = AnimatorUpdateMode.UnscaledTime;
-    }
     public void TransitionToScene(int sceneNumber, float transitionTime)
     {
         StartCoroutine(LoadScene(sceneNumber, transitionTime));

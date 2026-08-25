@@ -31,6 +31,7 @@ public class PauseMenuManager : MonoBehaviour
     {
         canvas.SetActive(true);
         Time.timeScale = 0;
+        sceneTransition.transition.updateMode = AnimatorUpdateMode.UnscaledTime;
     }
     public void MainMenuButton()
     {
