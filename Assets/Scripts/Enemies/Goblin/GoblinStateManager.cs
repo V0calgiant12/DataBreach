@@ -80,11 +80,16 @@ public class GoblinStateManager : MonoBehaviour
     {
         audioCooldown -= Time.timeScale == 1 ? 1:0;
         currentState.UpdateState(this);
-        if(goblinRb.linearVelocityY < 0)
+        if (!groundCheck._IsGrounded)
         {
-            anim.SetBool("jumping", false);
-            anim.SetBool("falling", true);
+            anim.SetBool("attacking", false);
+            if(goblinRb.linearVelocityY < 0 || (goblinRb.linearVelocityY > 0 && !anim.GetBool("jumping")))
+            {
+                anim.SetBool("jumping", false);
+                anim.SetBool("falling", true);
+            }
         }
+        
         if(enemyHit.trackedHealth != 0)
         {
             if(currentState != HurtState)
@@ -95,6 +100,7 @@ public class GoblinStateManager : MonoBehaviour
             {
                 anim.SetBool("falling", false);
             }
+            
         }
         else
         {

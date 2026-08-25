@@ -22,7 +22,11 @@ public class AirGustPush : MonoBehaviour
         }
         if (other.gameObject.CompareTag("Enemy"))
         {
-            other.gameObject.GetComponent<ForceManager>().AddForce(0f, GustStrength * (Time.timeScale == 1 ? 1 : 0), other);
+            EnemyGroundCheck enemyGroundCheck = other.gameObject.GetComponentInChildren<EnemyGroundCheck>();
+            if (enemyGroundCheck != null && !enemyGroundCheck._IsGrounded)
+            {
+                other.gameObject.GetComponent<ForceManager>().AddForce(0f, GustStrength * (Time.timeScale == 1 ? 1 : 0), other);
+            }
         }
     }
 }

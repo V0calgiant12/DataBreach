@@ -2,15 +2,15 @@ using UnityEngine;
 
 public class ForceManager : MonoBehaviour
 {
-    public PlayerData PlayerDataRef;
     [SerializeField] private Rigidbody2D rb;
-    public void AddForce(float xForce, float yForce, Collider2D other)
+    public void AddForce(float xForce, float yForce, Collider2D thisObject)
     {
-        rb = other.GetComponent<Rigidbody2D>();
-        rb.linearVelocity = new Vector2(rb.linearVelocityX, yForce + rb.linearVelocityY);
-        if (rb.linearVelocityY <= 0 && other.gameObject.CompareTag("Player"))
+        
+        rb.linearVelocity = new Vector2(xForce + rb.linearVelocityX, yForce + rb.linearVelocityY);
+        
+        if (rb.linearVelocityY <= 0 && thisObject.gameObject.CompareTag("Player"))
         {
-            PlayerDataRef.inAirGust = false;
+            PlayerStateManager.Instance.playerData.inAirGust = false;
         }
     }
 }
