@@ -15,6 +15,14 @@ public class KeybindsController : MonoBehaviour
     public KeyCode _InputAttack = KeyCode.Z; // 6
     public KeyCode _InputParry = KeyCode.V; // 7
     public KeyCode _InputInteract = KeyCode.C; // 8
+    public KeyCode _InputMenuLeft = KeyCode.LeftArrow; // 9
+    public KeyCode _InputMenuRight = KeyCode.RightArrow; // 10
+    public KeyCode _InputMenuUp = KeyCode.UpArrow; // 11
+    public KeyCode _InputMenuDown = KeyCode.DownArrow; // 12
+    public KeyCode _InputSubmit = KeyCode.C; // 13
+    public KeyCode _InputCancel = KeyCode.X; // 14
+    public KeyCode _InputForward = KeyCode.V; // 15
+    public KeyCode _InputBack = KeyCode.Z; // 16
     public bool _UpToJump = false;
     private KeyCode currentKeyDown;
     private string objectName;
@@ -77,6 +85,30 @@ public class KeybindsController : MonoBehaviour
             case  8:
                 _InputInteract = currentKeyDown;
                 break;
+            case  9:
+                _InputMenuLeft = currentKeyDown;
+                break;
+            case  10:
+                _InputMenuRight = currentKeyDown;
+                break;
+            case  11:
+                _InputMenuUp = currentKeyDown;
+                break;
+            case  12:
+                _InputMenuDown = currentKeyDown;
+                break;
+            case  13:
+                _InputSubmit = currentKeyDown;
+                break;
+            case  14:
+                _InputCancel = currentKeyDown;
+                break;
+            case  15:
+                _InputForward = currentKeyDown;
+                break;
+            case  16:
+                _InputBack = currentKeyDown;
+                break;
         }
         buttonText.text = "" + currentKeyDown;
         //yield return new WaitUntil(()=> )); wait until mouse up
@@ -116,6 +148,14 @@ public class KeybindsController : MonoBehaviour
         _InputAttack = SettingsData.Instance._InputAttack;
         _InputParry = SettingsData.Instance._InputParry;
         _InputInteract = SettingsData.Instance._InputInteract;
+        _InputMenuLeft = SettingsData.Instance._InputMenuLeft;
+        _InputMenuRight = SettingsData.Instance._InputMenuRight;
+        _InputMenuUp = SettingsData.Instance._InputMenuUp;
+        _InputMenuDown = SettingsData.Instance._InputMenuDown;
+        _InputSubmit = SettingsData.Instance._InputSubmit;
+        _InputCancel = SettingsData.Instance._InputCancel;
+        _InputForward = SettingsData.Instance._InputForward;
+        _InputBack = SettingsData.Instance._InputBack;
 
         _UpToJump = SettingsData.Instance._UpToJump;
         GameObject[] controlsMenuItems = GameObject.FindGameObjectsWithTag("ControlsMenu"); // Puts all controls menu objects in a list.
@@ -158,6 +198,30 @@ public class KeybindsController : MonoBehaviour
                 break;
             case  8:
                 _InputInteract = data._DefaultBind;
+                break;
+            case  9:
+                _InputMenuLeft = data._DefaultBind;
+                break;
+            case  10:
+                _InputMenuRight = data._DefaultBind;
+                break;
+            case  11:
+                _InputMenuUp = data._DefaultBind;
+                break;
+            case  12:
+                _InputMenuDown = data._DefaultBind;
+                break;
+            case  13:
+                _InputSubmit = data._DefaultBind;
+                break;
+            case  14:
+                _InputCancel = data._DefaultBind;
+                break;
+            case  15:
+                _InputForward = data._DefaultBind;
+                break;
+            case  16:
+                _InputBack = data._DefaultBind;
                 break;
         }
         buttonText.text = "" + data._DefaultBind;

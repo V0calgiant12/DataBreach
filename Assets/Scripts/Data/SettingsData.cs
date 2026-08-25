@@ -22,6 +22,14 @@ public class SettingsData : MonoBehaviour
     public KeyCode _InputAttack = KeyCode.Z; // 6
     public KeyCode _InputParry = KeyCode.V; // 7
     public KeyCode _InputInteract = KeyCode.C; // 8
+    public KeyCode _InputMenuLeft = KeyCode.LeftArrow; // 9
+    public KeyCode _InputMenuRight = KeyCode.RightArrow; // 10
+    public KeyCode _InputMenuUp = KeyCode.UpArrow; // 11
+    public KeyCode _InputMenuDown = KeyCode.DownArrow; // 12
+    public KeyCode _InputSubmit = KeyCode.C; // 13
+    public KeyCode _InputCancel = KeyCode.X; // 14
+    public KeyCode _InputForward = KeyCode.V; // 15
+    public KeyCode _InputBack = KeyCode.Z; // 16
     public bool _UpToJump = false;
     [Header("Audio")]
     public float _MasterVolume = 0.5f;
@@ -78,6 +86,15 @@ public class SettingsData : MonoBehaviour
         data._InputParry = _InputParry;
         data._InputInteract = _InputInteract;
         data._UpToJump = _UpToJump;
+        
+        data._InputMenuLeft = _InputMenuLeft;
+        data._InputMenuRight = _InputMenuRight;
+        data._InputMenuUp = _InputMenuUp;
+        data._InputMenuDown = _InputMenuDown;
+        data._InputSubmit = _InputSubmit;
+        data._InputCancel = _InputCancel;
+        data._InputForward = _InputForward;
+        data._InputBack = _InputBack;
 
         data._MasterVolume = _MasterVolume;
         data._MusicVolume = _MusicVolume;
@@ -125,6 +142,15 @@ public class SettingsData : MonoBehaviour
             _InputParry = data._InputParry;
             _InputInteract = data._InputInteract;
             _UpToJump = data._UpToJump;
+
+            _InputMenuLeft = data._InputMenuLeft;
+            _InputMenuRight = data._InputMenuRight;
+            _InputMenuUp = data._InputMenuUp;
+            _InputMenuDown = data._InputMenuDown;
+            _InputSubmit = data._InputSubmit;
+            _InputCancel = data._InputCancel;
+            _InputForward = data._InputForward;
+            _InputBack = data._InputBack;
             
             _MasterVolume = data._MasterVolume;
             _MusicVolume = data._MusicVolume;
@@ -176,6 +202,15 @@ public class SettingsData : MonoBehaviour
         _InputParry = KeyCode.V;
         _InputInteract = KeyCode.C;
         _UpToJump = false;
+
+        _InputMenuLeft = KeyCode.LeftArrow;
+        _InputMenuRight = KeyCode.RightArrow;
+        _InputMenuUp = KeyCode.UpArrow;
+        _InputMenuDown = KeyCode.DownArrow;
+        _InputSubmit = KeyCode.C;
+        _InputCancel = KeyCode.X;
+        _InputForward = KeyCode.V;
+        _InputBack = KeyCode.Z;
         
         _MasterVolume = 0.5f;
         _MusicVolume = 0.5f;
@@ -215,6 +250,14 @@ class SaveSettings // This class quite literally just stores variables so they c
     public KeyCode _InputAttack = KeyCode.Z; // 6
     public KeyCode _InputParry = KeyCode.V; // 7
     public KeyCode _InputInteract = KeyCode.C; // 8
+    public KeyCode _InputMenuLeft = KeyCode.LeftArrow; // 9
+    public KeyCode _InputMenuRight = KeyCode.RightArrow; // 10
+    public KeyCode _InputMenuUp = KeyCode.UpArrow; // 11
+    public KeyCode _InputMenuDown = KeyCode.DownArrow; // 12
+    public KeyCode _InputSubmit = KeyCode.C; // 13
+    public KeyCode _InputCancel = KeyCode.X; // 14
+    public KeyCode _InputForward = KeyCode.V; // 15
+    public KeyCode _InputBack = KeyCode.Z; // 16
     public bool _UpToJump = false;
     [Header("Audio")]
     public float _MasterVolume = 0.5f;

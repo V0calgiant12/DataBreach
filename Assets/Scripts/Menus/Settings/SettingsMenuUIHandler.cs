@@ -139,6 +139,15 @@ public class SettingsMenuUIHandler : MonoBehaviour
         SettingsData.Instance._InputParry = keybinds._InputParry;
         SettingsData.Instance._InputInteract = keybinds._InputInteract;
         SettingsData.Instance._UpToJump = keybinds._UpToJump;
+        
+        SettingsData.Instance._InputMenuLeft = keybinds._InputMenuLeft;
+        SettingsData.Instance._InputMenuRight = keybinds._InputMenuRight;
+        SettingsData.Instance._InputMenuUp = keybinds._InputMenuUp;
+        SettingsData.Instance._InputMenuDown = keybinds._InputMenuDown;
+        SettingsData.Instance._InputSubmit = keybinds._InputSubmit;
+        SettingsData.Instance._InputCancel = keybinds._InputCancel;
+        SettingsData.Instance._InputForward = keybinds._InputForward;
+        SettingsData.Instance._InputBack = keybinds._InputBack;
 
         // Audio Settings
         // Tells audio sliders to save their settings.
@@ -189,6 +198,15 @@ public class SettingsMenuUIHandler : MonoBehaviour
         keybinds._InputParry = SettingsData.Instance._InputParry;
         keybinds._InputInteract = SettingsData.Instance._InputInteract;
         keybinds._UpToJump = SettingsData.Instance._UpToJump;
+        
+        keybinds._InputMenuLeft = SettingsData.Instance._InputMenuLeft;
+        keybinds._InputMenuRight = SettingsData.Instance._InputMenuRight;
+        keybinds._InputMenuUp = SettingsData.Instance._InputMenuUp;
+        keybinds._InputMenuDown = SettingsData.Instance._InputMenuDown;
+        keybinds._InputSubmit = SettingsData.Instance._InputSubmit;
+        keybinds._InputCancel = SettingsData.Instance._InputCancel;
+        keybinds._InputForward = SettingsData.Instance._InputForward;
+        keybinds._InputBack = SettingsData.Instance._InputBack;
 
         // Audio Settings
         // Tells audio sliders to load their settings.
