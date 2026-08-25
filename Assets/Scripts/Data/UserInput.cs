@@ -298,6 +298,42 @@ public class UserInput : MonoBehaviour
                 )
             }
         );
+        _moveAction.ApplyBindingOverride
+        (
+            3,
+            new InputBinding
+            {
+                groups = "Keyboard&Mouse",
+                overridePath=
+                (
+                    (""+ SettingsData.Instance._InputLeft).ToLowerInvariant().Contains("mouse") ? 
+                    (""+ SettingsData.Instance._InputLeft).ToLowerInvariant().Contains("mouse0") ? "<Mouse>/leftButton"
+                        : (""+ SettingsData.Instance._InputLeft).ToLowerInvariant().Contains("mouse1") ? "<Mouse>/rightButton"
+                            : (""+ SettingsData.Instance._InputLeft).ToLowerInvariant().Contains("mouse2") ? "<Mouse>/middleButton"
+                                : (""+ SettingsData.Instance._InputLeft).ToLowerInvariant().Contains("mouse3") ? "<Mouse>/backButton"
+                                    : "<Mouse>/forwardButton"
+                    : ("<Keyboard>/" + (""+ SettingsData.Instance._InputLeft).ToLowerInvariant())
+                )
+            }
+        );
+        _moveAction.ApplyBindingOverride
+        (
+            4,
+            new InputBinding
+            {
+                groups = "Keyboard&Mouse",
+                overridePath=
+                (
+                    (""+ SettingsData.Instance._InputRight).ToLowerInvariant().Contains("mouse") ? 
+                    (""+ SettingsData.Instance._InputRight).ToLowerInvariant().Contains("mouse0") ? "<Mouse>/leftButton"
+                        : (""+ SettingsData.Instance._InputRight).ToLowerInvariant().Contains("mouse1") ? "<Mouse>/rightButton"
+                            : (""+ SettingsData.Instance._InputRight).ToLowerInvariant().Contains("mouse2") ? "<Mouse>/middleButton"
+                                : (""+ SettingsData.Instance._InputRight).ToLowerInvariant().Contains("mouse3") ? "<Mouse>/backButton"
+                                    : "<Mouse>/forwardButton"
+                    : ("<Keyboard>/" + (""+ SettingsData.Instance._InputRight).ToLowerInvariant())
+                )
+            }
+        );
         AddGamepadControls();
     }
     private void AddGamepadControls()
