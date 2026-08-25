@@ -16,6 +16,7 @@ public class AdvancedParticleCollision : MonoBehaviour
         if (collisionCD < 0)
         {
             particles = new ParticleSystem.Particle[ps.main.maxParticles];
+            ps.GetParticles(particles);
             audioSource.PlaySound(audioClip[Random.Range(0,audioClip.Length-1)], 1f,1f,1f,0.75f,particles[0].position);
             collisionCD = 10;
         }
