@@ -268,7 +268,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: v0.6.5 ALPHA
+  m_text: v0.6.6 ALPHA
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: f747c42cfb020ef419dec742861afbf5, type: 2}
   m_sharedMaterial: {fileID: 4027503532489475801, guid: f747c42cfb020ef419dec742861afbf5, type: 2}
@@ -1206,6 +1206,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3f6b6f628b34284595599b4b1d2d006, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::KeyboardNavigation
+  enableNavigation: 1
   DefaultSelected: {fileID: 1333119744}
   currentlySelected: {fileID: 0}
   backButton: {fileID: 0}
