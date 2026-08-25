@@ -22493,7 +22493,6 @@ GameObject:
   - component: {fileID: 5462610166350467021}
   - component: {fileID: 3954237657708640731}
   - component: {fileID: 3672212584574509015}
-  - component: {fileID: 517146857051347852}
   m_Layer: 5
   m_Name: DebugText
   m_TagString: Untagged
@@ -22635,19 +22634,6 @@ MonoBehaviour:
   RectFrom: {fileID: 1407954508593501672}
   RectTo: {fileID: 8978101875945819192}
   Padding: 49.5
---- !u!114 &517146857051347852
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4617122285153156030}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: faa8021dd5639ae479d9860413775739, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DebugText
-  text: {fileID: 3954237657708640731}
 --- !u!1 &4628507784579775692
 GameObject:
   m_ObjectHideFlags: 0
