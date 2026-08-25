@@ -14,5 +14,9 @@ public class DeleteAfterTime : MonoBehaviour
     void Update()
     {
         timeLeft -= Time.timeScale == 1 ? 1 : pausable ? 0 : 1;
+        if(timeLeft < 0)
+        {
+            Destroy(gameObject);
+        }
     }
 }
