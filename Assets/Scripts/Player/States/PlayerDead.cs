@@ -47,4 +47,8 @@ public class PlayerDead : PlayerAbstract
     {
         
     }
+    public override void LeaveState(PlayerStateManager player)
+    {
+        player.comingFromDash = false;
+    }
 }

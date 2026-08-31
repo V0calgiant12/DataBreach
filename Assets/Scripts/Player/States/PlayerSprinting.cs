@@ -117,7 +117,7 @@ public class PlayerSprinting : PlayerAbstract
         // Jump
         if (player.playerData.jumpBufferCounter > 0)
         {
-            //Debug.Log("jump from Sprinting");
+            Debug.Log("jump from Sprinting");
             player.playerData.anim.SetBool("sprinting", false);
             player.playerData.PlayerRb.linearVelocity = new Vector2(player.playerData.PlayerRb.linearVelocityX, jumpStrength * PlayerStateManager.Instance.playerData.mudJumpMulti);
             player.playerData.jumpBufferCounter = 0;
@@ -131,9 +131,13 @@ public class PlayerSprinting : PlayerAbstract
             {
                 player.playerData.audioSource.PlayGrassSound(player.playerData._GrassJump);
             }
-            player.SwitchState(player.AirState);
+            player.SwitchState(player.DashingState);
             player.currentState.UpdateState(player);
             return;
         }
+    }
+    public override void LeaveState(PlayerStateManager player)
+    {
+        player.comingFromDash = false;
     }
 }

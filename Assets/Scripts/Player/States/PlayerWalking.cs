@@ -179,4 +179,8 @@ public class PlayerWalking : PlayerAbstract
             return;
         }
     }
+    public override void LeaveState(PlayerStateManager player)
+    {
+        player.comingFromDash = false;
+    }
 }

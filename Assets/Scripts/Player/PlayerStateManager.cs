@@ -19,6 +19,7 @@ public class PlayerStateManager : MonoBehaviour
     public PlayerData playerData;
     public GameObject playerSprite;
     public bool isJumping;
+    public bool comingFromDash = false;
     public enum AttackType
     {
         forward,
@@ -110,6 +111,7 @@ public class PlayerStateManager : MonoBehaviour
     }
     public void SwitchState(PlayerAbstract state)
     {
+        currentState.LeaveState(this);
         currentState = state;
         state.EnterState(this);
     }

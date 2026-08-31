@@ -125,4 +125,8 @@ public class PlayerCrouching : PlayerAbstract
     {
         
     }
+    public override void LeaveState(PlayerStateManager player)
+    {
+        player.comingFromDash = false;
+    }
 }

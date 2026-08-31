@@ -12,7 +12,8 @@ public class PlayerAir : PlayerAbstract
     public override void EnterState(PlayerStateManager player)
     {
         //Debug.Log("Player is in the air / Air State");
-        playerSpeed = 7;
+        playerSpeed = player.comingFromDash ? 12:7;
+        Debug.Log(player.comingFromDash);
         fallTimer = 0;
         shakeOnLand = false;
         player.playerData.fastFallCounter = 0;
@@ -35,6 +36,14 @@ public class PlayerAir : PlayerAbstract
     }
     public override void UpdateState(PlayerStateManager player)
     {
+        if(playerSpeed > 7)
+        {
+            playerSpeed -= 0.05f;
+            if(!player.playerData.resetVelocity)
+            {
+                player.playerData.PlayerRb.linearVelocityX -= 0.05f;
+            }
+        }
         player.playerData.fastFallCounter -= 1;
         // Fast Falling
         if (UserInput.Instance.KeyDownCrouch && player.playerData.PlayerRb.linearVelocityY < 0)
@@ -255,5 +264,10 @@ public class PlayerAir : PlayerAbstract
     public override void LateUpdateState(PlayerStateManager player)
     {
         
+    }
+    public override void LeaveState(PlayerStateManager player)
+    {
+        Debug.Log("Air Leave");
+        player.comingFromDash = false;
     }
 }

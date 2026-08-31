@@ -50,4 +50,8 @@ public class PlayerInteracting : PlayerAbstract
             player.playerData.anim.SetBool("jumping", false);
         }
     }
+    public override void LeaveState(PlayerStateManager player)
+    {
+        player.comingFromDash = false;
+    }
 }
