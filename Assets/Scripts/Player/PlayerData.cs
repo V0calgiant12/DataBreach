@@ -27,7 +27,7 @@ public class PlayerData : ScriptableObject
     public bool inAirGust = false;
     public bool pickUpHeart = false;
     public bool playerDead = false;
-    public bool inKnockback = false;
+    public bool resetVelocity = false;
     public bool inMud = false;
     [Header("References")]
     public GameObject MainCamera;
