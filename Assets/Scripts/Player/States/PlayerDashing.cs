@@ -7,6 +7,7 @@ public class PlayerDashing : PlayerAbstract
     }
     public override void EnterState(PlayerStateManager player) // Start Function
     {
+        player.playerData.resetVelocity = false;
     }
     public override void UpdateState(PlayerStateManager player) // Update Function
     {

@@ -213,7 +213,7 @@ public class PlayerStateManager : MonoBehaviour
     }
     public IEnumerator StunPlayer(float xLaunch, float yLaunch, int timer)
     {
-        playerData.inKnockback = true;
+        playerData.resetVelocity = false;
         playerData.movementAllowed = false;
         int elapsed = 0;
         playerData.PlayerRb.linearVelocity = new Vector2(xLaunch, yLaunch);
@@ -235,7 +235,7 @@ public class PlayerStateManager : MonoBehaviour
             if(playerData.pickUpHeart)
             {
                 playerData.PlayerRb.linearVelocity = new Vector2(0, 0);
-                playerData.inKnockback = false;
+                playerData.resetVelocity = true;
                 playerData.pickUpHeart = false;
             }
             yield return null;

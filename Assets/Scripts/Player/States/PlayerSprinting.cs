@@ -27,7 +27,7 @@ public class PlayerSprinting : PlayerAbstract
             player.playerData.PlayerRb.linearVelocity = PlayerVelocity + player.playerData.OffsetVelocity;
             player.playerData.leftOrRight = true;
             moving = true;
-            player.playerData.inKnockback = false;
+            player.playerData.resetVelocity = true;
         }
         // sprint left
         if (UserInput.Instance.MovementInput.x < -0.25f && player.playerData.movementAllowed)
@@ -36,7 +36,7 @@ public class PlayerSprinting : PlayerAbstract
             player.playerData.PlayerRb.linearVelocity = PlayerVelocity + player.playerData.OffsetVelocity;
             player.playerData.leftOrRight = false;
             moving = true;
-            player.playerData.inKnockback = false;
+            player.playerData.resetVelocity = true;
         }
 
         // Attacking

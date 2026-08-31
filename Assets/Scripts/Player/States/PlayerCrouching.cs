@@ -11,7 +11,7 @@ public class PlayerCrouching : PlayerAbstract
     {
         //Debug.Log("Player is Crouching / Crouching State");
         player.playerData.anim.SetBool("crouching", true);
-        player.playerData.inKnockback = false;
+        player.playerData.resetVelocity = true;
         //Switch back to idle after code is done running
     }
     public override void UpdateState(PlayerStateManager player)
