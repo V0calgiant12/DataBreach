@@ -267,7 +267,6 @@ public class PlayerAir : PlayerAbstract
     }
     public override void LeaveState(PlayerStateManager player)
     {
-        Debug.Log("Air Leave");
         player.comingFromDash = false;
     }
 }

@@ -14,6 +14,7 @@ public class PlayerDashing : PlayerAbstract
         player.playerData.PlayerRb.gravityScale = 0;
         dashTimer = 20;
         player.playerData.resetVelocity = false;
+        player.comingFromDash = true;
         player.playerData.PlayerRb.linearVelocity = new Vector2(20 * (player.playerData.leftOrRight? 1 : -1), jumpStrength/2);
     }
     public override void UpdateState(PlayerStateManager player) // Update Function
@@ -65,7 +66,5 @@ public class PlayerDashing : PlayerAbstract
     public override void LeaveState(PlayerStateManager player)
     {
         player.playerData.PlayerRb.gravityScale = storedGrav;
-        player.comingFromDash = true;
-        Debug.Log("Dash Leave");
     }
 }
