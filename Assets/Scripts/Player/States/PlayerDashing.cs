@@ -14,6 +14,7 @@ public class PlayerDashing : PlayerAbstract
         storedGrav = player.playerData.PlayerRb.gravityScale;
         player.playerData.anim.SetBool("dashing",true);
         player.playerData.anim.SetBool("superJumping",false);
+        player.playerData.anim.SetBool("attacking",false);
         playerSpeed = 12;
         player.playerData.PlayerRb.gravityScale = 0;
         dashTimer = 20;
@@ -72,9 +73,10 @@ public class PlayerDashing : PlayerAbstract
         }
 
         // Air Dash Attack
-        if(player.playerData.bufferedAtk > 0)
+        if(player.playerData.bufferedAtk > 0 && !player.playerData.anim.GetBool("attacking"))
         {
             attacked = true;
+            player.playerData.iFrames = 5;
             player.Attack(PlayerStateManager.AttackType.dashAir);
         }
         if (player.playerData.anim.GetBool("attacking"))
