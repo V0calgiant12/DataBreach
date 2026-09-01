@@ -136,11 +136,6 @@ public class PlayerSprinting : PlayerAbstract
                 player.forceSuperJump = false;
                 player.SwitchState(player.DashingState);
             }
-            else
-            {
-                player.forceSuperJump = true;
-                player.SwitchState(player.DashingState);
-            }
             player.currentState.UpdateState(player);
             return;
         }
