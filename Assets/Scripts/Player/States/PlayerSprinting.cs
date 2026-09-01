@@ -136,6 +136,10 @@ public class PlayerSprinting : PlayerAbstract
                 player.forceSuperJump = false;
                 player.SwitchState(player.DashingState);
             }
+            else
+            {
+                player.SwitchState(player.AirState);
+            }
             player.currentState.UpdateState(player);
             return;
         }
@@ -143,6 +147,7 @@ public class PlayerSprinting : PlayerAbstract
     public override void LeaveState(PlayerStateManager player)
     {
         player.comingFromDash = false;
+        player.playerData.sprintBufferCounter = 15;
     }
     private bool CheckGroundInFront(PlayerStateManager player)
     {

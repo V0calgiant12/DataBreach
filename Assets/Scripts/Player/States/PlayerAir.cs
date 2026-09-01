@@ -5,6 +5,7 @@ public class PlayerAir : PlayerAbstract
 {
     private PlayerStateManager.AttackType currentAttack;
     private int fallTimer;
+    private bool pastFirstFrame = false;
     public override void RunOnce(PlayerStateManager player)
     {
         Setup();
@@ -15,6 +16,7 @@ public class PlayerAir : PlayerAbstract
         playerSpeed = player.comingFromDash ? 12:7;
         fallTimer = 0;
         shakeOnLand = false;
+        pastFirstFrame = false;
         player.playerData.fastFallCounter = 0;
         if (player.playerData.PlayerRb.linearVelocityY > 0) 
         {
@@ -26,6 +28,7 @@ public class PlayerAir : PlayerAbstract
         {
             player.playerData.anim.SetBool("falling", true);
             player.playerData.anim.SetBool("jumping", false);
+            player.playerData.anim.SetBool("superJumping",false);
         }
         
         if(player.playerData.jumpBufferCounter < -5)
@@ -109,6 +112,7 @@ public class PlayerAir : PlayerAbstract
         {
             player.playerData.anim.SetBool("falling", true);
             player.playerData.anim.SetBool("jumping", false);
+            player.playerData.anim.SetBool("superJumping",false);
             player.playerData.inAirGust = false;
         }
         
@@ -230,11 +234,21 @@ public class PlayerAir : PlayerAbstract
             {
                 player.playerData.audioSource.PlayGrassSound(player.playerData._GrassJump);
             }
+            if (!CheckGroundInFront(player) && player.playerData.sprintBufferCounter > 0)
+            {
+                player.forceSuperJump = false;
+                player.SwitchState(player.DashingState);
+            }
         }
         
+        
+    }
+    public override void LateUpdateState(PlayerStateManager player)
+    {
         // Grounded Check
-        if (GroundCheck.Instance._IsGrounded)
+        if (GroundCheck.Instance._IsGrounded && pastFirstFrame)
         {
+            Debug.Log("Land");
             if(shakeOnLand)
             {
                 TriggerShake.Instance.BurstShake(shakeIntensityLvl,1,true,0);
@@ -257,15 +271,26 @@ public class PlayerAir : PlayerAbstract
             player.SwitchState(player.IdleState);
             player.playerData.anim.SetBool("falling", false);
             player.playerData.anim.SetBool("jumping", false);
+            player.playerData.anim.SetBool("superJumping",false);
             return;
         }
-    }
-    public override void LateUpdateState(PlayerStateManager player)
-    {
-        
+        pastFirstFrame = true;
     }
     public override void LeaveState(PlayerStateManager player)
     {
         player.comingFromDash = false;
+        player.playerData.anim.SetBool("currentlyFixed",false);
+    }
+    private bool CheckGroundInFront(PlayerStateManager player)
+    {
+        RaycastHit2D forward = Physics2D.Raycast(new Vector2(player.transform.position.x,player.transform.position.y - 0.5f),player.playerData.leftOrRight ? Vector2.right:Vector2.left,1.5f,LayerMask.GetMask("Ground"));
+        Debug.DrawRay(new Vector2(player.transform.position.x,player.transform.position.y - 0.5f),(player.playerData.leftOrRight ? Vector2.right:Vector2.left)*1.5f,Color.red);
+        if (forward)
+        {
+            return forward;
+        }
+        RaycastHit2D down = Physics2D.Raycast(new Vector2(player.transform.position.x + (player.playerData.leftOrRight ? 1.5f:-1.5f),player.transform.position.y - 0.5f),Vector2.down,1,LayerMask.GetMask("Ground"));
+        Debug.DrawRay(new Vector2(player.transform.position.x + (player.playerData.leftOrRight ? 1.5f:-1.5f),player.transform.position.y - 0.5f),Vector2.down*1f,Color.green);
+        return down;
     }
 }

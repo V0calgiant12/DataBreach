@@ -105,6 +105,7 @@ public class PlayerStateManager : MonoBehaviour
         // Counter countdowns
         playerData.jumpBufferCounter -= Time.timeScale == 1 ? 1 : 0;
         playerData.coyoteTimeCounter -= Time.timeScale == 1 ? 1 : 0;
+        playerData.sprintBufferCounter -= Time.timeScale == 1 ? 1 : 0;
         playerData.bufferedAtk -= Time.timeScale == 1 ? 1 : 0;
         playerData.iFrames -= Time.timeScale == 1 ? 1 : 0;
         playerData.anim.SetInteger("iframes", playerData.iFrames);

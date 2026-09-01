@@ -123,6 +123,7 @@ public class PlayerDashing : PlayerAbstract
         player.playerData.PlayerRb.gravityScale = storedGrav;
         player.playerData.PlayerRb.linearVelocity = new Vector2(7 * (player.playerData.leftOrRight? 1 : -1),jumpStrength*1.25f);
         player.comingFromDash = false;
+        player.playerData.anim.SetBool("currentlyFixed",false);
         player.SwitchState(player.AirState);
     }
     public override void LateUpdateState(PlayerStateManager player)
@@ -133,6 +134,5 @@ public class PlayerDashing : PlayerAbstract
     {
         player.playerData.PlayerRb.gravityScale = storedGrav;
         player.playerData.anim.SetBool("dashing",false);
-        player.playerData.anim.SetBool("superJumping",false);
     }
 }

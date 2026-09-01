@@ -8,6 +8,7 @@ public class PlayerData : ScriptableObject
     public int fastFallCounter = 0;
     public int jumpBufferCounter = 0;
     public int coyoteTimeCounter = 0;
+    public int sprintBufferCounter = 0;
     public int interactingCooldown = 0;
     public int iFrames = 0;
     public int ricochet = 0;
