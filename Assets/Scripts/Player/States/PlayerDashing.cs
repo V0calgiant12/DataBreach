@@ -88,7 +88,7 @@ public class PlayerDashing : PlayerAbstract
         // Early Cancel (from external factors)
         {
             // Hit a wall
-            if(player.playerData.ricochet > 0)
+            if(player.playerData.ricochet > 0 && dashTimer < 15)
             {
                 Debug.Log("Early Cancel");
                 player.SwitchState(player.AirState);
