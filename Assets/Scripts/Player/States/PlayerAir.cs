@@ -46,10 +46,11 @@ public class PlayerAir : PlayerAbstract
             playerSpeed -= 0.05f;
             if(!player.playerData.resetVelocity)
             {
-                player.playerData.PlayerRb.linearVelocityX -= 0.05f;
+                player.playerData.PlayerRb.linearVelocityX -= player.playerData.leftOrRight? 0.05f : -0.05f;
             }
         }
         player.playerData.fastFallCounter -= 1;
+
         // Fast Falling
         if (UserInput.Instance.KeyDownCrouch && player.playerData.PlayerRb.linearVelocityY < 0)
         {

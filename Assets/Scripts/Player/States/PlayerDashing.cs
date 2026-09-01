@@ -65,7 +65,7 @@ public class PlayerDashing : PlayerAbstract
         }
 
         // Switch to Super Jump if 5 or less frames in.
-        if(UserInput.Instance.MovementInput.y > 0.5f && dashTimer >= 15)
+        if(UserInput.Instance.MovementInput.y > 0.5f && dashTimer >= 12)
         {
             player.playerData.anim.SetBool("dashing",false);
             player.playerData.anim.SetBool("superJumping",true);
