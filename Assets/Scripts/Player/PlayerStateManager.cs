@@ -221,6 +221,10 @@ public class PlayerStateManager : MonoBehaviour
     }
     public IEnumerator StunPlayer(float xLaunch, float yLaunch, int timer)
     {
+        if (currentState == DashingState)
+        {
+            SwitchState(AirState);
+        }
         playerData.resetVelocity = false;
         playerData.movementAllowed = false;
         int elapsed = 0;
