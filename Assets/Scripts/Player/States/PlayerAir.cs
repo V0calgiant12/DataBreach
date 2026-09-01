@@ -215,7 +215,7 @@ public class PlayerAir : PlayerAbstract
         if(fallDistance > 12.5)
         {
             shakeOnLand = true;
-            shakeIntensityLvl = fallDistance/2 + Mathf.Abs(player.playerData.PlayerRb.linearVelocityY)/4;
+            shakeIntensityLvl = fallDistance/1.6f + Mathf.Abs(player.playerData.PlayerRb.linearVelocityY)/3.5f;
         }
 
         // Grounded Jump check for Coyote time.
@@ -281,6 +281,8 @@ public class PlayerAir : PlayerAbstract
     {
         player.comingFromDash = false;
         player.playerData.anim.SetBool("currentlyFixed",false);
+        player.playerData.anim.SetBool("jumping", false);
+        player.playerData.anim.SetBool("falling", false);
     }
     private bool CheckGroundInFront(PlayerStateManager player)
     {
