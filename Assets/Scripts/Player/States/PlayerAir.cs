@@ -4,7 +4,8 @@ using NUnit.Framework.Internal.Filters;
 public class PlayerAir : PlayerAbstract
 {
     private PlayerStateManager.AttackType currentAttack;
-    private int fallTimer;
+    private float yFallStart;
+    private bool changeYStartNextFall = true;
     private bool pastFirstFrame = false;
     public override void RunOnce(PlayerStateManager player)
     {
@@ -14,21 +15,23 @@ public class PlayerAir : PlayerAbstract
     {
         //Debug.Log("Player is in the air / Air State");
         playerSpeed = player.comingFromDash ? 12:7;
-        fallTimer = 0;
         shakeOnLand = false;
         pastFirstFrame = false;
         player.playerData.fastFallCounter = 0;
+        yFallStart = player.transform.position.y;
         if (player.playerData.PlayerRb.linearVelocityY > 0) 
         {
             player.StartCoroutine(player.WaitUntilNotJumping());
             player.playerData.anim.SetBool("falling", false);
             player.playerData.anim.SetBool("jumping", true);
+            changeYStartNextFall = true;
         }
         if (player.playerData.PlayerRb.linearVelocityY < 0) 
         {
             player.playerData.anim.SetBool("falling", true);
             player.playerData.anim.SetBool("jumping", false);
             player.playerData.anim.SetBool("superJumping",false);
+            yFallStart = player.transform.position.y;
         }
         
         if(player.playerData.jumpBufferCounter < -5)
@@ -108,12 +111,17 @@ public class PlayerAir : PlayerAbstract
                 player.playerData.PlayerRb.linearVelocityX = 0;
             }
         }
-        if (player.playerData.PlayerRb.linearVelocityY < 0) 
+        if (player.playerData.PlayerRb.linearVelocityY < 0)
         {
             player.playerData.anim.SetBool("falling", true);
             player.playerData.anim.SetBool("jumping", false);
             player.playerData.anim.SetBool("superJumping",false);
             player.playerData.inAirGust = false;
+            if (changeYStartNextFall)
+            {
+                yFallStart = player.transform.position.y;
+                changeYStartNextFall = false;
+            }
         }
         
         // Check for Down Air
@@ -185,12 +193,12 @@ public class PlayerAir : PlayerAbstract
             {
                 player.playerData.leftOrRight = false;
             }
-            //Debug.Log("jump in air");
             player.playerData.PlayerRb.linearVelocity = new Vector2(player.playerData.PlayerRb.linearVelocityX, jumpStrength * 0.8f);
             player.StartCoroutine(player.WaitUntilNotJumping());
             player.playerData.audioSource.PlayJumpSound(player.playerData._AirJump);
             player.playerData.anim.SetBool("jumping", true);
             player.playerData.doubleJumpAvailable = false;
+            changeYStartNextFall = true;
             player.playerData.coyoteTimeCounter = 0;
         }
 
@@ -201,20 +209,12 @@ public class PlayerAir : PlayerAbstract
         //    player.SwitchState(player.WallClingState);
         //}
 
-        // Fall Timer
-        if(player.playerData.PlayerRb.linearVelocityY > 0)
-        {
-            fallTimer = 0;
-        }
-        if(player.playerData.PlayerRb.linearVelocityY < 0)
-        {
-            fallTimer += Time.timeScale == 1 ? 1 : 0;
-        }
-        
-        if(fallTimer > 45)
+        // Heavy Fall
+        float fallDistance = yFallStart - player.transform.position.y;
+        if(fallDistance > 12.5)
         {
             shakeOnLand = true;
-            shakeIntensityLvl = fallTimer/5 + Mathf.Abs(player.playerData.PlayerRb.linearVelocityY)/4;
+            shakeIntensityLvl = fallDistance/2 + Mathf.Abs(player.playerData.PlayerRb.linearVelocityY)/4;
         }
 
         // Grounded Jump check for Coyote time.
@@ -225,6 +225,7 @@ public class PlayerAir : PlayerAbstract
             player.playerData.PlayerRb.linearVelocity = new Vector2(player.playerData.PlayerRb.linearVelocityX, jumpStrength * PlayerStateManager.Instance.playerData.mudJumpMulti);
             player.playerData.jumpBufferCounter = 0;
             player.playerData.coyoteTimeCounter = 0;
+            changeYStartNextFall = true;
             player.playerData.audioSource.PlayJumpSound(player.playerData._NormalJump);
             if (GroundCheck.Instance._IsStone)
             {
@@ -248,7 +249,6 @@ public class PlayerAir : PlayerAbstract
         // Grounded Check
         if (GroundCheck.Instance._IsGrounded && pastFirstFrame)
         {
-            Debug.Log("Land");
             if(shakeOnLand)
             {
                 TriggerShake.Instance.BurstShake(shakeIntensityLvl,1,true,0);
