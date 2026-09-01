@@ -20,6 +20,7 @@ public class PlayerStateManager : MonoBehaviour
     public GameObject playerSprite;
     public bool isJumping;
     public bool comingFromDash = false;
+    public bool forceSuperJump = false;
     public enum AttackType
     {
         forward,
