@@ -5,6 +5,7 @@ public class PlayerAir : PlayerAbstract
 {
     private PlayerStateManager.AttackType currentAttack;
     private float yFallStart;
+    private bool changeYStartNextFall = true;
     private bool pastFirstFrame = false;
     public override void RunOnce(PlayerStateManager player)
     {
@@ -23,6 +24,7 @@ public class PlayerAir : PlayerAbstract
             player.StartCoroutine(player.WaitUntilNotJumping());
             player.playerData.anim.SetBool("falling", false);
             player.playerData.anim.SetBool("jumping", true);
+            changeYStartNextFall = true;
         }
         if (player.playerData.PlayerRb.linearVelocityY < 0) 
         {
@@ -116,6 +118,11 @@ public class PlayerAir : PlayerAbstract
             player.playerData.anim.SetBool("jumping", false);
             player.playerData.anim.SetBool("superJumping",false);
             player.playerData.inAirGust = false;
+            if (changeYStartNextFall)
+            {
+                yFallStart = player.transform.position.y;
+                changeYStartNextFall = false;
+            }
         }
         
         // Check for Down Air
@@ -192,6 +199,7 @@ public class PlayerAir : PlayerAbstract
             player.playerData.audioSource.PlayJumpSound(player.playerData._AirJump);
             player.playerData.anim.SetBool("jumping", true);
             player.playerData.doubleJumpAvailable = false;
+            changeYStartNextFall = true;
             player.playerData.coyoteTimeCounter = 0;
         }
 
@@ -203,10 +211,6 @@ public class PlayerAir : PlayerAbstract
         //}
 
         // Heavy Fall
-        if (yFallStart < player.transform.position.y)
-        {
-            yFallStart = player.transform.position.y;
-        }
         float fallDistance = yFallStart - player.transform.position.y;
         if(fallDistance > 12.5)
         {
@@ -222,6 +226,7 @@ public class PlayerAir : PlayerAbstract
             player.playerData.PlayerRb.linearVelocity = new Vector2(player.playerData.PlayerRb.linearVelocityX, jumpStrength * PlayerStateManager.Instance.playerData.mudJumpMulti);
             player.playerData.jumpBufferCounter = 0;
             player.playerData.coyoteTimeCounter = 0;
+            changeYStartNextFall = true;
             player.playerData.audioSource.PlayJumpSound(player.playerData._NormalJump);
             if (GroundCheck.Instance._IsStone)
             {
