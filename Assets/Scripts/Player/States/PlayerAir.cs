@@ -13,7 +13,6 @@ public class PlayerAir : PlayerAbstract
     {
         //Debug.Log("Player is in the air / Air State");
         playerSpeed = player.comingFromDash ? 12:7;
-        Debug.Log(player.comingFromDash);
         fallTimer = 0;
         shakeOnLand = false;
         player.playerData.fastFallCounter = 0;

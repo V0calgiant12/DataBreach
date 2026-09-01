@@ -131,7 +131,14 @@ public class PlayerSprinting : PlayerAbstract
             {
                 player.playerData.audioSource.PlayGrassSound(player.playerData._GrassJump);
             }
-            player.SwitchState(player.DashingState);
+            if (!CheckGroundInFront(player))
+            {
+                player.SwitchState(player.DashingState);
+            }
+            else
+            {
+                player.SwitchState(player.AirState);
+            }
             player.currentState.UpdateState(player);
             return;
         }
@@ -139,5 +146,17 @@ public class PlayerSprinting : PlayerAbstract
     public override void LeaveState(PlayerStateManager player)
     {
         player.comingFromDash = false;
+    }
+    private bool CheckGroundInFront(PlayerStateManager player)
+    {
+        RaycastHit2D forward = Physics2D.Raycast(new Vector2(player.transform.position.x,player.transform.position.y - 0.5f),player.playerData.leftOrRight ? Vector2.right:Vector2.left,1.5f,LayerMask.GetMask("Ground"));
+        Debug.DrawRay(new Vector2(player.transform.position.x,player.transform.position.y - 0.5f),(player.playerData.leftOrRight ? Vector2.right:Vector2.left)*1.5f,Color.red);
+        if (forward)
+        {
+            return forward;
+        }
+        RaycastHit2D down = Physics2D.Raycast(new Vector2(player.transform.position.x + (player.playerData.leftOrRight ? 1.5f:-1.5f),player.transform.position.y - 0.5f),Vector2.down,1,LayerMask.GetMask("Ground"));
+        Debug.DrawRay(new Vector2(player.transform.position.x + (player.playerData.leftOrRight ? 1.5f:-1.5f),player.transform.position.y - 0.5f),Vector2.down*1f,Color.green);
+        return down;
     }
 }
