@@ -30,7 +30,8 @@ public class PlayerStateManager : MonoBehaviour
         forwardAir,
         backAir,
         downAir,
-        upAir
+        upAir,
+        dashAir
     }
     void Awake()
     {
@@ -186,6 +187,9 @@ public class PlayerStateManager : MonoBehaviour
                     playerData.movementAllowed = false;
                     playerData.anim.SetInteger("attackId",5);
                     StartCoroutine(NoMovingWhileAttack(0));
+                    break;
+                case(AttackType.dashAir):
+                    playerData.anim.SetInteger("attackId",6);
                     break;
             }
             //Debug.Log(attackType);

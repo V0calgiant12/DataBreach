@@ -101,7 +101,7 @@ public class PlayerIdle : PlayerAbstract
         // Jumping
         if (player.playerData.jumpBufferCounter > 0)
         {
-            Debug.Log("jump from idle");
+            //Debug.Log("jump from idle");
             player.playerData.PlayerRb.linearVelocity = new Vector2(player.playerData.PlayerRb.linearVelocityX, jumpStrength * PlayerStateManager.Instance.playerData.mudJumpMulti);
             player.playerData.jumpBufferCounter = 0;
             player.playerData.coyoteTimeCounter = 0;

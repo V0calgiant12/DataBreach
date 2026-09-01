@@ -133,6 +133,7 @@ public class PlayerSprinting : PlayerAbstract
             }
             if (!CheckGroundInFront(player))
             {
+                player.forceSuperJump = false;
                 player.SwitchState(player.DashingState);
             }
             else
