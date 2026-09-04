@@ -4,7 +4,9 @@ using NUnit.Framework.Internal.Filters;
 public class PlayerAir : PlayerAbstract
 {
     private PlayerStateManager.AttackType currentAttack;
-    private int fallTimer;
+    private float yFallStart;
+    private bool changeYStartNextFall = true;
+    private bool pastFirstFrame = false;
     public override void RunOnce(PlayerStateManager player)
     {
         Setup();
@@ -12,20 +14,24 @@ public class PlayerAir : PlayerAbstract
     public override void EnterState(PlayerStateManager player)
     {
         //Debug.Log("Player is in the air / Air State");
-        playerSpeed = 7;
-        fallTimer = 0;
+        playerSpeed = player.comingFromDash ? 12:7;
         shakeOnLand = false;
+        pastFirstFrame = false;
         player.playerData.fastFallCounter = 0;
+        yFallStart = player.transform.position.y;
         if (player.playerData.PlayerRb.linearVelocityY > 0) 
         {
             player.StartCoroutine(player.WaitUntilNotJumping());
             player.playerData.anim.SetBool("falling", false);
             player.playerData.anim.SetBool("jumping", true);
+            changeYStartNextFall = true;
         }
         if (player.playerData.PlayerRb.linearVelocityY < 0) 
         {
             player.playerData.anim.SetBool("falling", true);
             player.playerData.anim.SetBool("jumping", false);
+            player.playerData.anim.SetBool("superJumping",false);
+            yFallStart = player.transform.position.y;
         }
         
         if(player.playerData.jumpBufferCounter < -5)
@@ -35,11 +41,20 @@ public class PlayerAir : PlayerAbstract
     }
     public override void UpdateState(PlayerStateManager player)
     {
+        if(playerSpeed > 7)
+        {
+            playerSpeed -= 0.05f;
+            if(!player.playerData.resetVelocity)
+            {
+                player.playerData.PlayerRb.linearVelocityX -= player.playerData.leftOrRight? 0.05f : -0.05f;
+            }
+        }
         player.playerData.fastFallCounter -= 1;
+
         // Fast Falling
         if (UserInput.Instance.KeyDownCrouch && player.playerData.PlayerRb.linearVelocityY < 0)
         {
-            player.playerData.inKnockback = false;
+            player.playerData.resetVelocity = true;
             if (SettingsData.Instance._DoubleTapFastFall && player.playerData.fastFallCounter > 0)
             {
                 player.playerData.PlayerRb.linearVelocity = new Vector2(player.playerData.PlayerRb.linearVelocityX, -jumpStrength * 1.5f);
@@ -74,7 +89,7 @@ public class PlayerAir : PlayerAbstract
             PlayerVelocity = new Vector2(playerSpeed, player.playerData.PlayerRb.linearVelocityY);
             player.playerData.PlayerRb.linearVelocity = PlayerVelocity;// + OffsetVelocity;
             moving = true;
-            player.playerData.inKnockback = false;
+            player.playerData.resetVelocity = true;
         }
         if (UserInput.Instance.MovementInput.x < -0.25f) // Moving left
         {
@@ -89,19 +104,25 @@ public class PlayerAir : PlayerAbstract
             PlayerVelocity = new Vector2(-playerSpeed, player.playerData.PlayerRb.linearVelocityY);
             player.playerData.PlayerRb.linearVelocity = PlayerVelocity;// + OffsetVelocity;
             moving = true;
-            player.playerData.inKnockback = false;
+            player.playerData.resetVelocity = true;
         }
-        if (UserInput.Instance.MovementInput.x < 0.25f && UserInput.Instance.MovementInput.x > -0.25f && !player.playerData.inKnockback) // If not moving, set x velocity to 0;
+        if (UserInput.Instance.MovementInput.x < 0.25f && UserInput.Instance.MovementInput.x > -0.25f && player.playerData.resetVelocity) // If not moving, set x velocity to 0;
         {
             {
                 player.playerData.PlayerRb.linearVelocityX = 0;
             }
         }
-        if (player.playerData.PlayerRb.linearVelocityY < 0) 
+        if (player.playerData.PlayerRb.linearVelocityY < 0)
         {
             player.playerData.anim.SetBool("falling", true);
             player.playerData.anim.SetBool("jumping", false);
+            player.playerData.anim.SetBool("superJumping",false);
             player.playerData.inAirGust = false;
+            if (changeYStartNextFall)
+            {
+                yFallStart = player.transform.position.y;
+                changeYStartNextFall = false;
+            }
         }
         
         // Check for Down Air
@@ -173,12 +194,12 @@ public class PlayerAir : PlayerAbstract
             {
                 player.playerData.leftOrRight = false;
             }
-            //Debug.Log("jump in air");
             player.playerData.PlayerRb.linearVelocity = new Vector2(player.playerData.PlayerRb.linearVelocityX, jumpStrength * 0.8f);
             player.StartCoroutine(player.WaitUntilNotJumping());
             player.playerData.audioSource.PlayJumpSound(player.playerData._AirJump);
             player.playerData.anim.SetBool("jumping", true);
             player.playerData.doubleJumpAvailable = false;
+            changeYStartNextFall = true;
             player.playerData.coyoteTimeCounter = 0;
         }
 
@@ -189,20 +210,12 @@ public class PlayerAir : PlayerAbstract
         //    player.SwitchState(player.WallClingState);
         //}
 
-        // Fall Timer
-        if(player.playerData.PlayerRb.linearVelocityY > 0)
-        {
-            fallTimer = 0;
-        }
-        if(player.playerData.PlayerRb.linearVelocityY < 0)
-        {
-            fallTimer += Time.timeScale == 1 ? 1 : 0;
-        }
-        
-        if(fallTimer > 45)
+        // Heavy Fall
+        float fallDistance = yFallStart - player.transform.position.y;
+        if(fallDistance > 12.5)
         {
             shakeOnLand = true;
-            shakeIntensityLvl = fallTimer/5 + Mathf.Abs(player.playerData.PlayerRb.linearVelocityY)/4;
+            shakeIntensityLvl = fallDistance/1.6f + Mathf.Abs(player.playerData.PlayerRb.linearVelocityY)/3.5f;
         }
 
         // Grounded Jump check for Coyote time.
@@ -213,6 +226,7 @@ public class PlayerAir : PlayerAbstract
             player.playerData.PlayerRb.linearVelocity = new Vector2(player.playerData.PlayerRb.linearVelocityX, jumpStrength * PlayerStateManager.Instance.playerData.mudJumpMulti);
             player.playerData.jumpBufferCounter = 0;
             player.playerData.coyoteTimeCounter = 0;
+            changeYStartNextFall = true;
             player.playerData.audioSource.PlayJumpSound(player.playerData._NormalJump);
             if (GroundCheck.Instance._IsStone)
             {
@@ -222,10 +236,19 @@ public class PlayerAir : PlayerAbstract
             {
                 player.playerData.audioSource.PlayGrassSound(player.playerData._GrassJump);
             }
+            if (!CheckGroundInFront(player) && player.playerData.sprintBufferCounter > 0)
+            {
+                player.forceSuperJump = false;
+                player.SwitchState(player.DashingState);
+            }
         }
         
+        
+    }
+    public override void LateUpdateState(PlayerStateManager player)
+    {
         // Grounded Check
-        if (GroundCheck.Instance._IsGrounded)
+        if (GroundCheck.Instance._IsGrounded && pastFirstFrame)
         {
             if(shakeOnLand)
             {
@@ -249,11 +272,28 @@ public class PlayerAir : PlayerAbstract
             player.SwitchState(player.IdleState);
             player.playerData.anim.SetBool("falling", false);
             player.playerData.anim.SetBool("jumping", false);
+            player.playerData.anim.SetBool("superJumping",false);
             return;
         }
+        pastFirstFrame = true;
     }
-    public override void LateUpdateState(PlayerStateManager player)
+    public override void LeaveState(PlayerStateManager player)
     {
-        
+        player.comingFromDash = false;
+        player.playerData.anim.SetBool("currentlyFixed",false);
+        player.playerData.anim.SetBool("jumping", false);
+        player.playerData.anim.SetBool("falling", false);
+    }
+    private bool CheckGroundInFront(PlayerStateManager player)
+    {
+        RaycastHit2D forward = Physics2D.Raycast(new Vector2(player.transform.position.x,player.transform.position.y - 0.5f),player.playerData.leftOrRight ? Vector2.right:Vector2.left,1.5f,LayerMask.GetMask("Ground"));
+        Debug.DrawRay(new Vector2(player.transform.position.x,player.transform.position.y - 0.5f),(player.playerData.leftOrRight ? Vector2.right:Vector2.left)*1.5f,Color.red);
+        if (forward)
+        {
+            return forward;
+        }
+        RaycastHit2D down = Physics2D.Raycast(new Vector2(player.transform.position.x + (player.playerData.leftOrRight ? 1.5f:-1.5f),player.transform.position.y - 0.5f),Vector2.down,1,LayerMask.GetMask("Ground"));
+        Debug.DrawRay(new Vector2(player.transform.position.x + (player.playerData.leftOrRight ? 1.5f:-1.5f),player.transform.position.y - 0.5f),Vector2.down*1f,Color.green);
+        return down;
     }
 }

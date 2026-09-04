@@ -49,13 +49,18 @@ public class CameraShaker : MonoBehaviour
 
     public IEnumerator BurstShake(float magnitude, float lengthMult, bool playSound, float overrideVolume)
     {
-        Debug.Log("Camera Burst Shake " + magnitude + ", pitch: " + (2.5f - (magnitude * 0.09f * (magnitude * 0.09f))));
+        float m_pitch = 2.5f - (magnitude * 0.06f * (magnitude * 0.06f));
+        if (m_pitch < 0.7)
+        {
+            m_pitch = 0.7f;
+        }
+        Debug.Log("Camera Burst Shake " + magnitude + ", pitch: " + m_pitch);
         UnityEngine.Vector3 originalLocalPosition = transform.localPosition;
         float elapsed = 0f;
 
         if (playSound)
         {
-            audioSource.pitch = 2.5f - ((magnitude * 0.09f * (magnitude * 0.09f)) + Random.Range(-0.1f, 0.1f)); // p = 2.5 - (0.09 * m)^2
+            audioSource.pitch = m_pitch + Random.Range(-0.1f, 0.1f); // p = 2.5 - (0.09 * m)^2
             audioSource.volume = overrideVolume == 0 ? magnitude * 0.04f : overrideVolume;
             audioSource.Play();
         }

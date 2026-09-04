@@ -30,7 +30,7 @@ public class EnemyGroundCheck : MonoBehaviour
         {
             _IsGrounded = false;
         }
-        if (other.gameObject.CompareTag("Stone") && PlayerStateManager.Instance.playerData.coyoteTimeCounter < 0)
+        if (other.gameObject.CompareTag("Stone"))
         {
             _IsStone = false;
         }

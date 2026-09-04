@@ -13,7 +13,7 @@ public class PlayerDead : PlayerAbstract
         player.playerData.pixelationMat.SetFloat("_Pixelation", 550);
         player.playerData.movementAllowed = false;
         player.playerData.playerDead = true;
-        player.playerData.inKnockback = false;
+        player.playerData.resetVelocity = true;
         player.playerData.anim.SetBool("dead", true);
         player.playerData.anim.SetBool("moving", false);
         player.playerData.anim.SetBool("sprinting", false);
@@ -46,5 +46,9 @@ public class PlayerDead : PlayerAbstract
     public override void LateUpdateState(PlayerStateManager player)
     {
         
+    }
+    public override void LeaveState(PlayerStateManager player)
+    {
+        player.comingFromDash = false;
     }
 }

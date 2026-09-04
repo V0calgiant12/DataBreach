@@ -8,6 +8,7 @@ public class PlayerData : ScriptableObject
     public int fastFallCounter = 0;
     public int jumpBufferCounter = 0;
     public int coyoteTimeCounter = 0;
+    public int sprintBufferCounter = 0;
     public int interactingCooldown = 0;
     public int iFrames = 0;
     public int ricochet = 0;
@@ -27,7 +28,7 @@ public class PlayerData : ScriptableObject
     public bool inAirGust = false;
     public bool pickUpHeart = false;
     public bool playerDead = false;
-    public bool inKnockback = false;
+    public bool resetVelocity = false;
     public bool inMud = false;
     [Header("References")]
     public GameObject MainCamera;

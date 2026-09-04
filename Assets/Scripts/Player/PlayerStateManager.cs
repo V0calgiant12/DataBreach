@@ -14,10 +14,13 @@ public class PlayerStateManager : MonoBehaviour
     public PlayerWalking WalkingState = new PlayerWalking();
     public PlayerDead DeadState = new PlayerDead();
     public PlayerInteracting InteractingState = new PlayerInteracting();
+    public PlayerDashing DashingState = new PlayerDashing();
     public static PlayerStateManager Instance;
     public PlayerData playerData;
     public GameObject playerSprite;
     public bool isJumping;
+    public bool comingFromDash = false;
+    public bool forceSuperJump = false;
     public enum AttackType
     {
         forward,
@@ -27,7 +30,8 @@ public class PlayerStateManager : MonoBehaviour
         forwardAir,
         backAir,
         downAir,
-        upAir
+        upAir,
+        dashAir
     }
     void Awake()
     {
@@ -101,6 +105,7 @@ public class PlayerStateManager : MonoBehaviour
         // Counter countdowns
         playerData.jumpBufferCounter -= Time.timeScale == 1 ? 1 : 0;
         playerData.coyoteTimeCounter -= Time.timeScale == 1 ? 1 : 0;
+        playerData.sprintBufferCounter -= Time.timeScale == 1 ? 1 : 0;
         playerData.bufferedAtk -= Time.timeScale == 1 ? 1 : 0;
         playerData.iFrames -= Time.timeScale == 1 ? 1 : 0;
         playerData.anim.SetInteger("iframes", playerData.iFrames);
@@ -109,6 +114,7 @@ public class PlayerStateManager : MonoBehaviour
     }
     public void SwitchState(PlayerAbstract state)
     {
+        currentState.LeaveState(this);
         currentState = state;
         state.EnterState(this);
     }
@@ -183,6 +189,9 @@ public class PlayerStateManager : MonoBehaviour
                     playerData.anim.SetInteger("attackId",5);
                     StartCoroutine(NoMovingWhileAttack(0));
                     break;
+                case(AttackType.dashAir):
+                    playerData.anim.SetInteger("attackId",6);
+                    break;
             }
             //Debug.Log(attackType);
         }
@@ -212,7 +221,11 @@ public class PlayerStateManager : MonoBehaviour
     }
     public IEnumerator StunPlayer(float xLaunch, float yLaunch, int timer)
     {
-        playerData.inKnockback = true;
+        if (currentState == DashingState)
+        {
+            SwitchState(AirState);
+        }
+        playerData.resetVelocity = false;
         playerData.movementAllowed = false;
         int elapsed = 0;
         playerData.PlayerRb.linearVelocity = new Vector2(xLaunch, yLaunch);
@@ -234,7 +247,7 @@ public class PlayerStateManager : MonoBehaviour
             if(playerData.pickUpHeart)
             {
                 playerData.PlayerRb.linearVelocity = new Vector2(0, 0);
-                playerData.inKnockback = false;
+                playerData.resetVelocity = true;
                 playerData.pickUpHeart = false;
             }
             yield return null;

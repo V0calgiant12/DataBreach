@@ -92,4 +92,8 @@ public class PlayerUpdate : PlayerAbstract
     {
         
     }
+    public override void LeaveState(PlayerStateManager player)
+    {
+        
+    }
 }

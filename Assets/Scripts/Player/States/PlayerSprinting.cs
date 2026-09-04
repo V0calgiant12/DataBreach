@@ -27,7 +27,7 @@ public class PlayerSprinting : PlayerAbstract
             player.playerData.PlayerRb.linearVelocity = PlayerVelocity + player.playerData.OffsetVelocity;
             player.playerData.leftOrRight = true;
             moving = true;
-            player.playerData.inKnockback = false;
+            player.playerData.resetVelocity = true;
         }
         // sprint left
         if (UserInput.Instance.MovementInput.x < -0.25f && player.playerData.movementAllowed)
@@ -36,7 +36,7 @@ public class PlayerSprinting : PlayerAbstract
             player.playerData.PlayerRb.linearVelocity = PlayerVelocity + player.playerData.OffsetVelocity;
             player.playerData.leftOrRight = false;
             moving = true;
-            player.playerData.inKnockback = false;
+            player.playerData.resetVelocity = true;
         }
 
         // Attacking
@@ -117,7 +117,7 @@ public class PlayerSprinting : PlayerAbstract
         // Jump
         if (player.playerData.jumpBufferCounter > 0)
         {
-            //Debug.Log("jump from Sprinting");
+            Debug.Log("jump from Sprinting");
             player.playerData.anim.SetBool("sprinting", false);
             player.playerData.PlayerRb.linearVelocity = new Vector2(player.playerData.PlayerRb.linearVelocityX, jumpStrength * PlayerStateManager.Instance.playerData.mudJumpMulti);
             player.playerData.jumpBufferCounter = 0;
@@ -131,9 +131,34 @@ public class PlayerSprinting : PlayerAbstract
             {
                 player.playerData.audioSource.PlayGrassSound(player.playerData._GrassJump);
             }
-            player.SwitchState(player.AirState);
+            if (!CheckGroundInFront(player))
+            {
+                player.forceSuperJump = false;
+                player.SwitchState(player.DashingState);
+            }
+            else
+            {
+                player.SwitchState(player.AirState);
+            }
             player.currentState.UpdateState(player);
             return;
         }
+    }
+    public override void LeaveState(PlayerStateManager player)
+    {
+        player.comingFromDash = false;
+        player.playerData.sprintBufferCounter = 15;
+    }
+    private bool CheckGroundInFront(PlayerStateManager player)
+    {
+        RaycastHit2D forward = Physics2D.Raycast(new Vector2(player.transform.position.x,player.transform.position.y - 0.5f),player.playerData.leftOrRight ? Vector2.right:Vector2.left,1.5f,LayerMask.GetMask("Ground"));
+        Debug.DrawRay(new Vector2(player.transform.position.x,player.transform.position.y - 0.5f),(player.playerData.leftOrRight ? Vector2.right:Vector2.left)*1.5f,Color.red);
+        if (forward)
+        {
+            return forward;
+        }
+        RaycastHit2D down = Physics2D.Raycast(new Vector2(player.transform.position.x + (player.playerData.leftOrRight ? 1.5f:-1.5f),player.transform.position.y - 0.5f),Vector2.down,1,LayerMask.GetMask("Ground"));
+        Debug.DrawRay(new Vector2(player.transform.position.x + (player.playerData.leftOrRight ? 1.5f:-1.5f),player.transform.position.y - 0.5f),Vector2.down*1f,Color.green);
+        return down;
     }
 }
