@@ -123,7 +123,7 @@ public class PlayerDashing : PlayerAbstract
     private void JumpUpdate(PlayerStateManager player)
     {
         player.playerData.PlayerRb.gravityScale = storedGrav;
-        player.playerData.PlayerRb.linearVelocity = new Vector2(5 * (player.playerData.leftOrRight? 1 : -1),jumpStrength*1.2f);
+        player.playerData.PlayerRb.linearVelocity = new Vector2(4.5f * (player.playerData.leftOrRight? 1 : -1),jumpStrength*1.2f);
         player.comingFromDash = false;
         player.playerData.anim.SetBool("currentlyFixed",false);
         player.SwitchState(player.SuperJumpState);
