@@ -112,7 +112,7 @@ public class PlayerStateManager : MonoBehaviour
             currentState.UpdateState(this); // Update function for current active state.
             playerData.interactingCooldown -= Time.timeScale == 1 ? 1 : 0;
         }
-        if (!playerData.playerDead)
+        if (!playerData.playerDead && Time.timeScale == 1)
         {
             GlobalUpdateState.UpdateState(this); // Update function for the Update state.
         }
