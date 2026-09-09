@@ -200,6 +200,10 @@ public class PlayerAir : PlayerAbstract
             player.playerData.PlayerRb.linearVelocity = new Vector2(player.playerData.PlayerRb.linearVelocityX, jumpStrength * 0.8f);
             player.StartCoroutine(player.WaitUntilNotJumping());
             player.playerData.audioSource.PlayJumpSound(player._AirJump);
+            if (player.playerData.anim.GetBool("jumping"))
+            {
+                player.playerData.anim.SetTrigger("next");
+            }
             player.playerData.anim.SetBool("jumping", true);
             player.playerData.doubleJumpAvailable = false;
             changeYStartNextFall = true;

@@ -27,6 +27,7 @@ public class PlayerSuperJump : PlayerAbstract
             player.StartCoroutine(player.WaitUntilNotJumping());
             player.playerData.anim.SetBool("falling", false);
             player.playerData.anim.SetBool("jumping", true);
+            player.playerData.anim.SetBool("superJumping",true);
             changeYStartNextFall = true;
         }
         if (player.playerData.PlayerRb.linearVelocityY < 0) 
@@ -145,6 +146,7 @@ public class PlayerSuperJump : PlayerAbstract
             player.StartCoroutine(player.WaitUntilNotJumping());
             player.playerData.audioSource.PlayJumpSound(player._AirJump);
             player.playerData.anim.SetBool("jumping", true);
+            player.playerData.anim.SetBool("superJumping", false);
             player.playerData.doubleJumpAvailable = false;
             changeYStartNextFall = true;
             player.playerData.coyoteTimeCounter = 0;
