@@ -31,6 +31,7 @@ public class SubMenuNavigation : MonoBehaviour
     }
     void Select()
     {
+        Debug.Log("Selected " + currentlySelected,currentlySelected);
         if(currentlySelected.GetComponent<Toggle>() != null)
         {
             subDropdown = currentlySelected.GetComponent<Toggle>();
