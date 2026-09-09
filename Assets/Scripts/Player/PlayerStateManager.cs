@@ -127,7 +127,12 @@ public class PlayerStateManager : MonoBehaviour
         playerData.iFrames -= Time.timeScale == 1 ? 1 : 0;
         playerData.anim.SetInteger("iframes", playerData.iFrames);
 
-        //Debug.Log(currentState);
+        #if UNITY_EDITOR
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            Debug.Log(currentState);
+        }
+        #endif
     }
     public void SwitchState(PlayerAbstract state)
     {
@@ -300,7 +305,6 @@ public class PlayerStateManager : MonoBehaviour
         }
         else
         {
-            
             while (attackTimer > elapsed)
             {
                 playerData.PlayerRb.linearVelocityX = playerData.PlayerRb.linearVelocityX * 0.75f;
@@ -308,9 +312,8 @@ public class PlayerStateManager : MonoBehaviour
                 yield return null;
             }
         }
-        currentState = IdleState;
         playerData.anim.SetBool("attacking", false);
-        
+        playerData.jumpBufferCounter = 0;
         playerData.movementAllowed = true;
     }
     public IEnumerator WaitUntilNotJumping()

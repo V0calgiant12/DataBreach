@@ -235,14 +235,6 @@ public class PlayerAir : PlayerAbstract
             player.playerData.coyoteTimeCounter = 0;
             changeYStartNextFall = true;
             player.playerData.audioSource.PlayJumpSound(player._NormalJump);
-            if (GroundCheck.Instance._IsStone)
-            {
-                player.playerData.audioSource.PlayStoneSound(player._StoneJump);
-            }
-            else
-            {
-                player.playerData.audioSource.PlayGrassSound(player._GrassJump);
-            }
             if (!CheckGroundInFront(player) && player.playerData.sprintBufferCounter > 0)
             {
                 player.forceSuperJump = false;
