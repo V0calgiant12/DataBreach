@@ -4,6 +4,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using System;
 using TMPro;
+using System.Collections;
 
 #pragma warning disable 864121
 public class MenuNavigationController : MonoBehaviour
@@ -36,13 +37,14 @@ public class MenuNavigationController : MonoBehaviour
     }
     [SerializeField] private ButtonType buttonType;
     private Animator anim;
-    private void Awake()
+    private void Start()
     {
         currentlySelected = DefaultSelected;
         Select(true);
     }
     private void OnEnable()
     {
+        currentlySelected = DefaultSelected;
         Select(true);
     }
     public void Select(bool autoScroll)
