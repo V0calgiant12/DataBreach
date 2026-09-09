@@ -15,6 +15,7 @@ public class PlayerStateManager : MonoBehaviour
     public PlayerDead DeadState = new PlayerDead();
     public PlayerInteracting InteractingState = new PlayerInteracting();
     public PlayerDashing DashingState = new PlayerDashing();
+    public PlayerSuperJump SuperJumpState = new PlayerSuperJump();
     public static PlayerStateManager Instance;
     public PlayerData playerData;
     public GameObject playerSprite;
@@ -31,7 +32,8 @@ public class PlayerStateManager : MonoBehaviour
         backAir,
         downAir,
         upAir,
-        dashAir
+        dashAir,
+        jumpAttack
     }
     void Awake()
     {
@@ -191,6 +193,9 @@ public class PlayerStateManager : MonoBehaviour
                     break;
                 case(AttackType.dashAir):
                     playerData.anim.SetInteger("attackId",6);
+                    break;
+                case(AttackType.jumpAttack):
+                    playerData.anim.SetInteger("attackId",7);
                     break;
             }
             //Debug.Log(attackType);

@@ -106,6 +106,10 @@ public class EnemyHit : MonoBehaviour
                         // Air Dash attacks (6)
                         DamageEnemy(1,12,15,PlayerStateManager.Instance.transform.position.x);
                         break;
+                    case(7):
+                        // Super Jump attacks (7)
+                        DamageEnemy(1,3,35,PlayerStateManager.Instance.transform.position.x);
+                        break;
                 }
             }
             else
