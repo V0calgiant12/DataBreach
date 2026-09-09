@@ -22,6 +22,21 @@ public class PlayerStateManager : MonoBehaviour
     public bool isJumping;
     public bool comingFromDash = false;
     public bool forceSuperJump = false;
+    [Header("Audio")]
+    public AudioClip _GrassWalk;
+    public AudioClip _GrassFall;
+    public AudioClip _GrassJump;
+    public AudioClip _StoneWalk;
+    public AudioClip _StoneFall;
+    public AudioClip _StoneJump;
+    public AudioClip _NormalFall;
+    public AudioClip _NormalJump;
+    public AudioClip _AirJump;
+    public AudioClip _PlayerHit;
+    public AudioClip _PlayerDeath;
+    public AudioClip _PlayerAttack;
+    public AudioClip _PlayerSpinAttack;
+    public AudioClip[] _MudWalk;
     public enum AttackType
     {
         forward,
@@ -136,7 +151,7 @@ public class PlayerStateManager : MonoBehaviour
             playerData.anim.SetBool("hit", true);
             TriggerShake.Instance.BurstShake(3,2,false,0f);
             playerData.playerHealth = playerData.playerHealth - 1;
-            playerData.audioSource.PlayPlayerHitSound(playerData._PlayerHit);
+            playerData.audioSource.PlayPlayerHitSound(_PlayerHit);
             //Debug.Log(playerData.playerHealth);
             if (nonDirectional) // Non-Directional (based on player direction)
             {
@@ -151,14 +166,17 @@ public class PlayerStateManager : MonoBehaviour
             PlayerFlash(2);
         }
     }
-    public void Attack(AttackType attackType)
+    public void Attack(AttackType attackType, bool handleSound)
     {
         if(playerData.anim.GetBool("attacking") != true && playerData.movementAllowed)
         {
             playerData.bufferedAtk = 0;
             playerData.bufferedAtkDir = new Vector2(0,0);
             playerData.anim.SetBool("attacking", true);
-            playerData.audioSource.PlayPlayerAttackSound(playerData._PlayerAttack);
+            if (handleSound)
+            {
+                playerData.audioSource.PlayPlayerAttackSound(_PlayerAttack);
+            }
             switch (attackType)
             {
                 case(AttackType.forward):

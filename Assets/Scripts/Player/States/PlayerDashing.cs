@@ -77,7 +77,7 @@ public class PlayerDashing : PlayerAbstract
         {
             attacked = true;
             player.playerData.iFrames = 5;
-            player.Attack(PlayerStateManager.AttackType.dashAir);
+            player.Attack(PlayerStateManager.AttackType.dashAir,true);
         }
         if (player.playerData.anim.GetBool("attacking"))
         {
@@ -100,14 +100,14 @@ public class PlayerDashing : PlayerAbstract
             if (GroundCheck.Instance._IsGrounded && dashTimer < 15)
             {
                 Debug.Log("Early Cancel");
-                player.playerData.audioSource.PlayJumpSound(player.playerData._NormalFall);
+                player.playerData.audioSource.PlayJumpSound(player._NormalFall);
                 if (GroundCheck.Instance._IsStone)
                 {
-                    player.playerData.audioSource.PlayStoneSound(player.playerData._StoneFall);
+                    player.playerData.audioSource.PlayStoneSound(player._StoneFall);
                 }
                 else
                 {
-                    player.playerData.audioSource.PlayGrassSound(player.playerData._GrassFall);
+                    player.playerData.audioSource.PlayGrassSound(player._GrassFall);
                 }
                 if((player.playerData.anim.GetInteger("attackId") == 2 || player.playerData.anim.GetInteger("attackId") == 4) && player.playerData.anim.GetBool("attacking"))
                 {
@@ -123,7 +123,7 @@ public class PlayerDashing : PlayerAbstract
     private void JumpUpdate(PlayerStateManager player)
     {
         player.playerData.PlayerRb.gravityScale = storedGrav;
-        player.playerData.PlayerRb.linearVelocity = new Vector2(5 * (player.playerData.leftOrRight? 1 : -1),jumpStrength*1.3f);
+        player.playerData.PlayerRb.linearVelocity = new Vector2(5 * (player.playerData.leftOrRight? 1 : -1),jumpStrength*1.2f);
         player.comingFromDash = false;
         player.playerData.anim.SetBool("currentlyFixed",false);
         player.SwitchState(player.SuperJumpState);

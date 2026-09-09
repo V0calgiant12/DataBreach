@@ -14,6 +14,7 @@ public class PlayerSprinting : PlayerAbstract
         player.playerData.anim.SetBool("sprinting", true);
         player.playerData.anim.SetBool("walking", false);
         player.playerData.anim.SetBool("moving", true);
+        player.playerData.shortJumping = true;
     }
     public override void UpdateState(PlayerStateManager player)
     {
@@ -42,7 +43,7 @@ public class PlayerSprinting : PlayerAbstract
         // Attacking
         if (player.playerData.bufferedAtk > 0)
         {
-            player.Attack(PlayerStateManager.AttackType.dash);
+            player.Attack(PlayerStateManager.AttackType.dash,true);
         }
 
         // if crouching go to crouching
@@ -94,16 +95,16 @@ public class PlayerSprinting : PlayerAbstract
             {
                 if (GroundCheck.Instance._IsStone)
                 {
-                    player.playerData.audioSource.PlayStoneSound(player.playerData._StoneWalk);
+                    player.playerData.audioSource.PlayStoneSound(player._StoneWalk);
                 }
                 else
                 {
-                    player.playerData.audioSource.PlayGrassSound(player.playerData._GrassWalk);
+                    player.playerData.audioSource.PlayGrassSound(player._GrassWalk);
                 }
             }
             else
             {
-                player.playerData.audioSource.PlayMudSound(player.playerData._MudWalk[0]);
+                player.playerData.audioSource.PlayMudSound(player._MudWalk[0]);
             }
             audioTimer = 0;
         }
@@ -117,19 +118,18 @@ public class PlayerSprinting : PlayerAbstract
         // Jump
         if (player.playerData.jumpBufferCounter > 0)
         {
-            Debug.Log("jump from Sprinting");
             player.playerData.anim.SetBool("sprinting", false);
             player.playerData.PlayerRb.linearVelocity = new Vector2(player.playerData.PlayerRb.linearVelocityX, jumpStrength * PlayerStateManager.Instance.playerData.mudJumpMulti);
             player.playerData.jumpBufferCounter = 0;
             player.playerData.coyoteTimeCounter = 0;
-            player.playerData.audioSource.PlayJumpSound(player.playerData._NormalJump);
+            player.playerData.audioSource.PlayJumpSound(player._NormalJump);
             if (GroundCheck.Instance._IsStone)
             {
-                player.playerData.audioSource.PlayStoneSound(player.playerData._StoneJump);
+                player.playerData.audioSource.PlayStoneSound(player._StoneJump);
             }
             else
             {
-                player.playerData.audioSource.PlayGrassSound(player.playerData._GrassJump);
+                player.playerData.audioSource.PlayGrassSound(player._GrassJump);
             }
             if (!CheckGroundInFront(player))
             {

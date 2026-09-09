@@ -22,6 +22,7 @@ public class PlayerData : ScriptableObject
     public bool crouching = false;
     public bool doubleJumpAvailable = true;
     public bool movementAllowed = true;
+    public bool shortJumping = true;
     [Header("Checks")]
     public bool leftOrRight = false;
     public bool interacting = false;
@@ -39,18 +40,4 @@ public class PlayerData : ScriptableObject
     public PlayerSound audioSource;
     public Animator anim;
     public Material pixelationMat;
-    [Header("Audio")]
-    public AudioClip _GrassWalk;
-    public AudioClip _GrassFall;
-    public AudioClip _GrassJump;
-    public AudioClip _StoneWalk;
-    public AudioClip _StoneFall;
-    public AudioClip _StoneJump;
-    public AudioClip _NormalFall;
-    public AudioClip _NormalJump;
-    public AudioClip _AirJump;
-    public AudioClip _PlayerHit;
-    public AudioClip _PlayerDeath;
-    public AudioClip _PlayerAttack;
-    public AudioClip[] _MudWalk;
 }

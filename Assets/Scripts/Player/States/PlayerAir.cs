@@ -31,7 +31,6 @@ public class PlayerAir : PlayerAbstract
             player.playerData.anim.SetBool("falling", true);
             player.playerData.anim.SetBool("jumping", false);
             player.playerData.anim.SetBool("superJumping",false);
-            yFallStart = player.transform.position.y;
         }
         
         if(player.playerData.jumpBufferCounter < -5)
@@ -150,33 +149,37 @@ public class PlayerAir : PlayerAbstract
             // Button Press
             if(player.playerData.bufferedAtkDir == new Vector2(0, 0))
             {
-                player.Attack(currentAttack);
+                player.Attack(currentAttack,true);
             }
             // C-Stick Attacking
             if(player.playerData.bufferedAtkDir.y > 0.5f)
             {
                 currentAttack = PlayerStateManager.AttackType.upAir;
-                player.Attack(currentAttack);
+                player.Attack(currentAttack,true);
             }
             if(player.playerData.bufferedAtkDir.y < -0.5f)
             {
                 currentAttack = PlayerStateManager.AttackType.downAir;
-                player.Attack(currentAttack);
+                player.Attack(currentAttack,true);
             }
             if(player.playerData.bufferedAtkDir.x > 0.5f)
             {
                 currentAttack = player.playerData.leftOrRight ? PlayerStateManager.AttackType.forwardAir : PlayerStateManager.AttackType.backAir;
-                player.Attack(currentAttack);
+                player.Attack(currentAttack,true);
             }
             if(player.playerData.bufferedAtkDir.x < -0.5f)
             {
                 currentAttack = player.playerData.leftOrRight ? PlayerStateManager.AttackType.backAir :  PlayerStateManager.AttackType.forwardAir;
-                player.Attack(currentAttack);
+                player.Attack(currentAttack,true);
             }
         }
 
         // Short Jumping
-
+        // If not attacking, enable short jumping.
+        if (!player.playerData.anim.GetBool("attacking"))
+        {
+            player.playerData.shortJumping = true;
+        }
         if(!(UserInput.Instance.KeyHeldDownJump || SettingsData.Instance._UpToJump && UserInput.Instance.MovementInput.y > 0.5f) && player.playerData.PlayerRb.linearVelocity.y > 0 && !player.playerData.inAirGust && player.isJumping)
         {
             player.playerData.PlayerRb.linearVelocity = new Vector2(player.playerData.PlayerRb.linearVelocityX, player.playerData.PlayerRb.linearVelocityY * 0.5f);
@@ -196,7 +199,7 @@ public class PlayerAir : PlayerAbstract
             }
             player.playerData.PlayerRb.linearVelocity = new Vector2(player.playerData.PlayerRb.linearVelocityX, jumpStrength * 0.8f);
             player.StartCoroutine(player.WaitUntilNotJumping());
-            player.playerData.audioSource.PlayJumpSound(player.playerData._AirJump);
+            player.playerData.audioSource.PlayJumpSound(player._AirJump);
             player.playerData.anim.SetBool("jumping", true);
             player.playerData.doubleJumpAvailable = false;
             changeYStartNextFall = true;
@@ -217,6 +220,10 @@ public class PlayerAir : PlayerAbstract
             shakeOnLand = true;
             shakeIntensityLvl = fallDistance/1.6f + Mathf.Abs(player.playerData.PlayerRb.linearVelocityY)/3.5f;
         }
+        else
+        {
+            shakeOnLand = false;
+        }
 
         // Grounded Jump check for Coyote time.
         if (player.playerData.jumpBufferCounter > 0 && player.playerData.coyoteTimeCounter > 0)
@@ -227,14 +234,14 @@ public class PlayerAir : PlayerAbstract
             player.playerData.jumpBufferCounter = 0;
             player.playerData.coyoteTimeCounter = 0;
             changeYStartNextFall = true;
-            player.playerData.audioSource.PlayJumpSound(player.playerData._NormalJump);
+            player.playerData.audioSource.PlayJumpSound(player._NormalJump);
             if (GroundCheck.Instance._IsStone)
             {
-                player.playerData.audioSource.PlayStoneSound(player.playerData._StoneJump);
+                player.playerData.audioSource.PlayStoneSound(player._StoneJump);
             }
             else
             {
-                player.playerData.audioSource.PlayGrassSound(player.playerData._GrassJump);
+                player.playerData.audioSource.PlayGrassSound(player._GrassJump);
             }
             if (!CheckGroundInFront(player) && player.playerData.sprintBufferCounter > 0)
             {
@@ -255,14 +262,14 @@ public class PlayerAir : PlayerAbstract
                 TriggerShake.Instance.BurstShake(shakeIntensityLvl,1,true,0);
             }
             player.playerData.doubleJumpAvailable = true;
-            player.playerData.audioSource.PlayJumpSound(player.playerData._NormalFall);
+            player.playerData.audioSource.PlayJumpSound(player._NormalFall);
             if (GroundCheck.Instance._IsStone)
             {
-                player.playerData.audioSource.PlayStoneSound(player.playerData._StoneFall);
+                player.playerData.audioSource.PlayStoneSound(player._StoneFall);
             }
             else
             {
-                player.playerData.audioSource.PlayGrassSound(player.playerData._GrassFall);
+                player.playerData.audioSource.PlayGrassSound(player._GrassFall);
             }
             if((player.playerData.anim.GetInteger("attackId") == 2 || player.playerData.anim.GetInteger("attackId") == 4) && player.playerData.anim.GetBool("attacking"))
             {

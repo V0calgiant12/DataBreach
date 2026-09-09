@@ -13,6 +13,7 @@ public class PlayerIdle : PlayerAbstract
         player.playerData.anim.SetBool("moving", false);
         player.playerData.anim.SetBool("sprinting", false);
         player.playerData.resetVelocity = true;
+        player.playerData.shortJumping = true;
     }
     public override void UpdateState(PlayerStateManager player)
     {
@@ -38,30 +39,30 @@ public class PlayerIdle : PlayerAbstract
             // Button Press
             if(player.playerData.bufferedAtkDir == new Vector2(0, 0))
             {
-                player.Attack(currentAttack);
+                player.Attack(currentAttack,true);
             }
             // C-Stick Attacking
             if(player.playerData.bufferedAtkDir.y > 0.5f)
             {
                 currentAttack = PlayerStateManager.AttackType.up;
-                player.Attack(currentAttack);
+                player.Attack(currentAttack,true);
             }
             if(player.playerData.bufferedAtkDir.y < -0.5f)
             {
                 currentAttack = PlayerStateManager.AttackType.down;
-                player.Attack(currentAttack);
+                player.Attack(currentAttack,true);
             }
             if(player.playerData.bufferedAtkDir.x > 0.5f)
             {
                 player.playerData.leftOrRight = true;
                 currentAttack = PlayerStateManager.AttackType.forward;
-                player.Attack(currentAttack);
+                player.Attack(currentAttack,true);
             }
             if(player.playerData.bufferedAtkDir.x < -0.5f)
             {
                 player.playerData.leftOrRight = false;
                 currentAttack = PlayerStateManager.AttackType.forward;
-                player.Attack(currentAttack);
+                player.Attack(currentAttack,true);
             }
         }
 
@@ -105,14 +106,14 @@ public class PlayerIdle : PlayerAbstract
             player.playerData.PlayerRb.linearVelocity = new Vector2(player.playerData.PlayerRb.linearVelocityX, jumpStrength * PlayerStateManager.Instance.playerData.mudJumpMulti);
             player.playerData.jumpBufferCounter = 0;
             player.playerData.coyoteTimeCounter = 0;
-            player.playerData.audioSource.PlayJumpSound(player.playerData._NormalJump);
+            player.playerData.audioSource.PlayJumpSound(player._NormalJump);
             if (GroundCheck.Instance._IsStone)
             {
-                player.playerData.audioSource.PlayStoneSound(player.playerData._StoneJump);
+                player.playerData.audioSource.PlayStoneSound(player._StoneJump);
             }
             else
             {
-                player.playerData.audioSource.PlayGrassSound(player.playerData._GrassJump);
+                player.playerData.audioSource.PlayGrassSound(player._GrassJump);
             }
             player.SwitchState(player.AirState);
             return;

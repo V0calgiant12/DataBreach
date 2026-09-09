@@ -13,6 +13,7 @@ public class PlayerWalking : PlayerAbstract
         //Debug.Log("Player is Walking / Walking State - " + player.playerData.sprinting);
         audioTimer = 0;
         player.playerData.resetVelocity = true;
+        player.playerData.shortJumping = true;
     }
     public override void UpdateState(PlayerStateManager player)
     {
@@ -72,28 +73,28 @@ public class PlayerWalking : PlayerAbstract
             // Button Press
             if(player.playerData.bufferedAtkDir == new Vector2(0, 0))
             {
-                player.Attack(currentAttack);
+                player.Attack(currentAttack,true);
             }
             // C-Stick Attacking
             if(player.playerData.bufferedAtkDir.y > 0.5f)
             {
                 currentAttack = PlayerStateManager.AttackType.up;
-                player.Attack(currentAttack);
+                player.Attack(currentAttack,true);
             }
             if(player.playerData.bufferedAtkDir.y < -0.5f)
             {
                 currentAttack = PlayerStateManager.AttackType.down;
-                player.Attack(currentAttack);
+                player.Attack(currentAttack,true);
             }
             if(player.playerData.bufferedAtkDir.x > 0.5f)
             {
                 currentAttack = PlayerStateManager.AttackType.forward;
-                player.Attack(currentAttack);
+                player.Attack(currentAttack,true);
             }
             if(player.playerData.bufferedAtkDir.x < -0.5f)
             {
                 currentAttack = PlayerStateManager.AttackType.forward;
-                player.Attack(currentAttack);
+                player.Attack(currentAttack,true);
             }
         }
 
@@ -137,16 +138,16 @@ public class PlayerWalking : PlayerAbstract
             {
                 if (GroundCheck.Instance._IsStone)
                 {
-                    player.playerData.audioSource.PlayStoneSound(player.playerData._StoneWalk);
+                    player.playerData.audioSource.PlayStoneSound(player._StoneWalk);
                 }
                 else
                 {
-                    player.playerData.audioSource.PlayGrassSound(player.playerData._GrassWalk);
+                    player.playerData.audioSource.PlayGrassSound(player._GrassWalk);
                 }
             }
             else
             {
-                player.playerData.audioSource.PlayMudSound(player.playerData._MudWalk[0]);
+                player.playerData.audioSource.PlayMudSound(player._MudWalk[0]);
             }
             audioTimer = 0;
         }
@@ -165,14 +166,14 @@ public class PlayerWalking : PlayerAbstract
             player.playerData.PlayerRb.linearVelocity = new Vector2(player.playerData.PlayerRb.linearVelocityX, jumpStrength * PlayerStateManager.Instance.playerData.mudJumpMulti);
             player.playerData.jumpBufferCounter = 0;
             player.playerData.coyoteTimeCounter = 0;
-            player.playerData.audioSource.PlayJumpSound(player.playerData._NormalJump);
+            player.playerData.audioSource.PlayJumpSound(player._NormalJump);
             if (GroundCheck.Instance._IsStone)
             {
-                player.playerData.audioSource.PlayStoneSound(player.playerData._StoneJump);
+                player.playerData.audioSource.PlayStoneSound(player._StoneJump);
             }
             else
             {
-                player.playerData.audioSource.PlayGrassSound(player.playerData._GrassJump);
+                player.playerData.audioSource.PlayGrassSound(player._GrassJump);
             }
             player.SwitchState(player.AirState);
             player.currentState.UpdateState(player);
