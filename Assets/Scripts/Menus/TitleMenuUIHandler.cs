@@ -46,7 +46,7 @@ public class TitleMenuUIHandler : MonoBehaviour
     public void SettingsButton() // Switches to settings menu.
     {
         settingsMenu.SetActive(true);
-        settingsHandler.OnAwake();
+        settingsHandler.OnEnable();
         gameObject.SetActive(false);
     }
     public void Exit() // Close the game.

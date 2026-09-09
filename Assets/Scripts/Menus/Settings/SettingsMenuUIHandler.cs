@@ -60,7 +60,7 @@ public class SettingsMenuUIHandler : MonoBehaviour
 
         }
     }
-    public void OnAwake() // Defaults to controls tab
+    public void OnEnable() // Defaults to controls tab
     {
         CurrentMenu = Menus.Controls;
         controlsMenu.SetActive(true);
