@@ -176,11 +176,7 @@ public class PlayerAir : PlayerAbstract
 
         // Short Jumping
         // If not attacking, enable short jumping.
-        if (!player.playerData.anim.GetBool("attacking"))
-        {
-            player.playerData.shortJumping = true;
-        }
-        if(!(UserInput.Instance.KeyHeldDownJump || SettingsData.Instance._UpToJump && UserInput.Instance.MovementInput.y > 0.5f) && player.playerData.PlayerRb.linearVelocity.y > 0 && !player.playerData.inAirGust && player.isJumping)
+        if(!(UserInput.Instance.KeyHeldDownJump || SettingsData.Instance._UpToJump && UserInput.Instance.MovementInput.y > 0.5f) && player.playerData.PlayerRb.linearVelocity.y > 0 && !player.playerData.inAirGust && player.isJumping && player.playerData.shortJumping)
         {
             player.playerData.PlayerRb.linearVelocity = new Vector2(player.playerData.PlayerRb.linearVelocityX, player.playerData.PlayerRb.linearVelocityY * 0.5f);
         }
@@ -206,6 +202,7 @@ public class PlayerAir : PlayerAbstract
             }
             player.playerData.anim.SetBool("jumping", true);
             player.playerData.doubleJumpAvailable = false;
+            player.playerData.shortJumping = true;
             changeYStartNextFall = true;
             player.playerData.coyoteTimeCounter = 0;
         }

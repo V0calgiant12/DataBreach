@@ -149,6 +149,7 @@ public class PlayerSuperJump : PlayerAbstract
             player.playerData.anim.SetBool("jumping", true);
             player.playerData.anim.SetBool("superJumping", false);
             player.playerData.doubleJumpAvailable = false;
+            player.playerData.shortJumping = true;
             changeYStartNextFall = true;
             player.playerData.coyoteTimeCounter = 0;
             player.SwitchState(player.AirState);

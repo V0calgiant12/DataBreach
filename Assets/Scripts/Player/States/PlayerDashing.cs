@@ -20,6 +20,7 @@ public class PlayerDashing : PlayerAbstract
         dashTimer = 20;
         player.playerData.resetVelocity = false;
         player.comingFromDash = true;
+        player.playerData.shortJumping = false;
         attacked = false;
         player.playerData.PlayerRb.linearVelocity = new Vector2(20 * (player.playerData.leftOrRight? 1 : -1), jumpStrength/2);
         if(UserInput.Instance.MovementInput.y > 0.5f || player.forceSuperJump)
@@ -125,6 +126,7 @@ public class PlayerDashing : PlayerAbstract
         player.playerData.PlayerRb.gravityScale = storedGrav;
         player.playerData.PlayerRb.linearVelocity = new Vector2(4.5f * (player.playerData.leftOrRight? 1 : -1),jumpStrength*1.2f);
         player.comingFromDash = false;
+        player.playerData.shortJumping = true;
         player.playerData.anim.SetBool("currentlyFixed",false);
         player.SwitchState(player.SuperJumpState);
     }
