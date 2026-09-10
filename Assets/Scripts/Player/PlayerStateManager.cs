@@ -286,7 +286,6 @@ public class PlayerStateManager : MonoBehaviour
     public IEnumerator NoMovingWhileAttack(float attackTimer)
     {
         int elapsed = 0;
-        playerData.anim.SetBool("moving", false);
         if(attackTimer == 0)
         {
             playerData.PlayerRb.linearVelocityX = 50 * ((playerData.PlayerRb.linearVelocityX > 0) ? 1 : -1);
