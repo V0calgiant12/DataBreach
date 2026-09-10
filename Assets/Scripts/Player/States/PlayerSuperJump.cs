@@ -47,6 +47,7 @@ public class PlayerSuperJump : PlayerAbstract
         player.playerData.fastFallCounter -= 1;
 
         // Exit Super Jump
+        // Rethink this part of the code. May not be a good feature.
         if (SettingsData.Instance._DoubleTapFastFall && UserInput.Instance.KeyDownCrouch)
         {
             player.playerData.fastFallCounter = 45;
@@ -202,12 +203,15 @@ public class PlayerSuperJump : PlayerAbstract
             elapsed += Time.timeScale == 1 ? 1:0;
             yield return null;
         }
-        player.playerData.PlayerRb.linearVelocity = new Vector2(4 * (player.playerData.leftOrRight? 1 : -1),(player.playerData.PlayerRb.linearVelocityY > 0 ? player.playerData.PlayerRb.linearVelocityY : 0) +jumpStrength);
-        if(player.playerData.PlayerRb.linearVelocityY > 22.2f)
+        if(UserInput.Instance.MovementInput.y > -0.5f)
         {
-            player.playerData.PlayerRb.linearVelocityY = 22.2f;
+            player.playerData.PlayerRb.linearVelocity = new Vector2(4 * (player.playerData.leftOrRight? 1 : -1),(player.playerData.PlayerRb.linearVelocityY > 0 ? player.playerData.PlayerRb.linearVelocityY : 0) +jumpStrength);
+            if(player.playerData.PlayerRb.linearVelocityY > 22.2f)
+            {
+                player.playerData.PlayerRb.linearVelocityY = 22.2f;
+            }
+            changeYStartNextFall = true;
         }
         player.playerData.audioSource.PlayPlayerAttackSound(player._PlayerSpinAttack);
-        changeYStartNextFall = true;
     }
 }
