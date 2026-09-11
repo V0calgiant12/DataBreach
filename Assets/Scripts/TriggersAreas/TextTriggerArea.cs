@@ -13,8 +13,11 @@ public class TextTriggerArea : MonoBehaviour
         if (other.gameObject.CompareTag("Player") && !Triggered)
         {
             Triggered = true;
-            PlayerStateManager.Instance.Interact();
-            TextWrite.Instance.WriteText(GetComponent<TextData>());
+            if (GetComponent<TextData>() != null)
+            {
+                PlayerStateManager.Instance.Interact();
+                TextWrite.Instance.WriteText(GetComponent<TextData>());
+            }
 
             if (CanRepeat)
             {

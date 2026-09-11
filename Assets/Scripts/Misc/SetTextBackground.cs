@@ -9,7 +9,7 @@ public class SetTextBackground : MonoBehaviour
     void Start()
     {
         sr = GetComponent<SpriteRenderer>();
-        InvokeRepeating("OffsetUpdate",0,1);
+        InvokeRepeating("OffsetUpdate",0,0.5f);
     }
     private void OffsetUpdate()
     {

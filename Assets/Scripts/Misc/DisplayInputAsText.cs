@@ -35,7 +35,7 @@ public class DisplayInputAsText : MonoBehaviour
     [SerializeField] private InputType inputDisplayed;
     void Start()
     {
-        InvokeRepeating("OffsetUpdate",0,1);
+        InvokeRepeating("OffsetUpdate",0,0.5f);
     }
     private void OffsetUpdate()
     {
@@ -121,12 +121,12 @@ public class DisplayInputAsText : MonoBehaviour
             case(KeyCode.Mouse3):
                 icon.SetActive(true);
                 text.text = " ";
-                GetIconOfInput(InputType.MouseForward);
+                GetIconOfInput(InputType.MouseBack);
                 return;
             case(KeyCode.Mouse4):
                 icon.SetActive(true);
                 text.text = " ";
-                GetIconOfInput(InputType.MouseBack);
+                GetIconOfInput(InputType.MouseForward);
                 return;
             case(KeyCode.Space):
                 icon.SetActive(true);

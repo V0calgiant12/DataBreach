@@ -21,7 +21,7 @@ public class EnableIfSetting : MonoBehaviour
     [SerializeField] private GameObject[] objects;
     void Start()
     {
-        InvokeRepeating("OffsetUpdate",0,1);
+        InvokeRepeating("OffsetUpdate",0,0.5f);
     }
     private void OffsetUpdate()
     {

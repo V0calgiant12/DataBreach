@@ -18,7 +18,11 @@ public class ControllerDetect : MonoBehaviour
         ControllerType
     }
     [SerializeField] private Function scriptFunction;
-    void Update()
+    void Start()
+    {
+        InvokeRepeating("OffsetUpdate",0,0.5f);
+    }
+    private void OffsetUpdate()
     {
         switch (scriptFunction)
         {
