@@ -52,7 +52,7 @@ public class TutorialCutsceneManager : MonoBehaviour
             case(4):
                 PlayerStateManager.Instance.Interact();
                 TriggerShake.Instance.BurstShake(4,2,false,0);
-                anim.SetInteger("Scene", 4);
+                anim.SetTrigger("Next");
                 alarm.Play();
                 audioSource.clip = shake2;
                 audioSource.Play();
@@ -60,7 +60,7 @@ public class TutorialCutsceneManager : MonoBehaviour
                 break;
             case(5):
                 PlayerStateManager.Instance.Interact();
-                anim.SetInteger("Scene", 5);
+                anim.SetTrigger("Next");
                 audioSource.clip = rapidExplosion;
                 audioSource.Play();
                 TriggerShake.Instance.Shake(90,5);
