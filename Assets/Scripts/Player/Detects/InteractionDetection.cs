@@ -30,7 +30,7 @@ public class InteractionDetection : MonoBehaviour
             {
                 InteractableData data = colliderOther.gameObject.GetComponent<InteractableData>();
                 indicator.color = new Color(indicator.color.r,indicator.color.g,indicator.color.b, 0);
-                switch (data._Id)
+                switch (data._TypeId)
                 {
                     case(0):
                         player.Interact();

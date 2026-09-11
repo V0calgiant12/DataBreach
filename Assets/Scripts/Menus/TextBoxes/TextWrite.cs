@@ -120,7 +120,7 @@ public class TextWrite : MonoBehaviour
     {
         while (textBox.open)
         {
-            if ((UserInput.Instance.KeyDownInteract||UserInput.Instance.KeyDownAttack) && _Writing == false)
+            if ((UserInput.Instance.KeyDownInteract||UserInput.Instance.KeyDownAttack) && _Writing == false && Time.timeScale == 1)
             {
                 PlayerStateManager.Instance.playerData.interacting = false;
                 Close();
