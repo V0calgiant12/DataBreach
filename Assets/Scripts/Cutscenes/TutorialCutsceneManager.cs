@@ -16,13 +16,16 @@ public class TutorialCutsceneManager : MonoBehaviour
     [SerializeField] private AudioClip rapidExplosion;
     [SerializeField] private int currentScene;
     public bool textIsOpen;
+    void Start()
+    {
+        anim.enabled = false;
+    }
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            PlayerStateManager.Instance.Interact();
+            PlayerStateManager.Instance.Interact(PlayerStateManager.InteractControls.WalkRight,4);
             ProgressCutscene();
-            music.FadeOutCaller(60);
         }
     }
     private void ProgressCutscene()
@@ -31,39 +34,28 @@ public class TutorialCutsceneManager : MonoBehaviour
         switch (currentScene)
         {
             case(1):
+                anim.enabled = true;
+                anim.SetTrigger("Next");
+                break;
+            case(2):
+                music.FadeOutCaller(60);
                 InvisbleWall.SetActive(true);
                 TriggerShake.Instance.BurstShake(1,1,false,0);
                 audioSource.clip = shake1;
                 audioSource.Play();
                 StartCoroutine(WaitForFrames(60));
                 break;
-            case(2):
+            case(3):
                 TriggerShake.Instance.BurstShake(1.5f,1.25f,false,0);
                 audioSource.clip = shake1;
                 audioSource.Play();
                 StartCoroutine(WaitForFrames(30));
                 break;
-            case(3):
+            case(4):
                 TriggerShake.Instance.BurstShake(2f,1.5f,false,0);
                 audioSource.clip = shake1;
                 audioSource.Play();
                 StartCoroutine(WaitForFrames(150));
-                break;
-            case(4):
-                PlayerStateManager.Instance.Interact();
-                TriggerShake.Instance.BurstShake(4,2,false,0);
-                anim.SetTrigger("Next");
-                alarm.Play();
-                audioSource.clip = shake2;
-                audioSource.Play();
-                StartCoroutine(WaitUntilTextCloses(120,60,false));
-                break;
-            case(5):
-                PlayerStateManager.Instance.Interact();
-                anim.SetTrigger("Next");
-                audioSource.clip = rapidExplosion;
-                audioSource.Play();
-                TriggerShake.Instance.Shake(90,5);
                 break;
         }
     }
@@ -81,7 +73,7 @@ public class TutorialCutsceneManager : MonoBehaviour
         textIsOpen = false;
         if (!allowMovementAfter)
         {
-            PlayerStateManager.Instance.Interact();
+            PlayerStateManager.Instance.Interact(PlayerStateManager.InteractControls.Stop,0);
         }
         elapsed = 0;
         while(delay2 > elapsed)

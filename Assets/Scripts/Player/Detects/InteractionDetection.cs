@@ -33,7 +33,7 @@ public class InteractionDetection : MonoBehaviour
                 switch (data._TypeId)
                 {
                     case(0):
-                        player.Interact();
+                        player.Interact(PlayerStateManager.InteractControls.Stop,0);
                         TextWrite.Instance.WriteText(colliderOther.gameObject.GetComponent<TextData>());
                         break;
                 }

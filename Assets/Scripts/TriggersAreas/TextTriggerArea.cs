@@ -15,7 +15,7 @@ public class TextTriggerArea : MonoBehaviour
             Triggered = true;
             if (GetComponent<TextData>() != null)
             {
-                PlayerStateManager.Instance.Interact();
+                PlayerStateManager.Instance.Interact(PlayerStateManager.InteractControls.Stop,0);
                 TextWrite.Instance.WriteText(GetComponent<TextData>());
             }
 

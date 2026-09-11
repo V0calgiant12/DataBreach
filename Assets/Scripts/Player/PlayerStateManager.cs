@@ -50,14 +50,26 @@ public class PlayerStateManager : MonoBehaviour
         dashAir,
         jumpAttack
     }
+    public enum InteractControls
+    {
+        WalkRight,
+        WalkLeft,
+        SprintRight,
+        SprintLeft,
+        FullJump,
+        ShortJump,
+        Stop
+    }
     void Awake()
     {
         Instance = this;
         GoToCheckpoint();
     }
-    public void Interact()
+    public void Interact(InteractControls action, float distance)
     {
         playerData.interacting = true;
+        InteractingState.state = action;
+        InteractingState.distance = distance;
     }
     void Start()
     {
@@ -116,6 +128,10 @@ public class PlayerStateManager : MonoBehaviour
         {
             GlobalUpdateState.UpdateState(this); // Update function for the Update state.
         }
+        if(currentState == InteractingState && Time.timeScale == 1)
+        {
+            currentState.UpdateState(this); // Update function for Interact State
+        }
 
         FindPlayerObject();
         playerSprite.transform.localScale = new Vector3(playerData.leftOrRight ? 1:-1,1,1);
@@ -128,7 +144,7 @@ public class PlayerStateManager : MonoBehaviour
         playerData.anim.SetInteger("iframes", playerData.iFrames);
 
         #if UNITY_EDITOR
-        if(Input.GetKeyDown(KeyCode.Space))
+        if(Input.GetKeyDown(KeyCode.F3))
         {
             Debug.Log(currentState);
         }
@@ -136,9 +152,12 @@ public class PlayerStateManager : MonoBehaviour
     }
     public void SwitchState(PlayerAbstract state)
     {
-        currentState.LeaveState(this);
-        currentState = state;
-        state.EnterState(this);
+        if(currentState != state)
+        {
+            currentState.LeaveState(this);
+            currentState = state;
+            state.EnterState(this);
+        }
     }
     public void FindPlayerObject()
     {
