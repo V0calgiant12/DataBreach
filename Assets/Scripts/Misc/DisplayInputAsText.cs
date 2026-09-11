@@ -8,7 +8,6 @@ public class DisplayInputAsText : MonoBehaviour
     [SerializeField] private TextMeshPro text;
     [SerializeField] private GameObject icon;
     [SerializeField] private SpriteRenderer sr;
-    private string output;
     private enum InputType
     {
         MoveUp,
@@ -19,12 +18,19 @@ public class DisplayInputAsText : MonoBehaviour
         Sprint,
         Attack,
         Interact,
+        // Here down is specific icons for Keyboard & Mouse controlls.
         LeftStick,
         RightStick,
         UpArrow,
         DownArrow,
         LeftArrow,
-        RightArrow
+        RightArrow,
+        MouseLeft,
+        MouseRight,
+        MouseMiddle,
+        MouseForward,
+        MouseBack,
+        Space
     }
     [SerializeField] private InputType inputDisplayed;
     void Start()
@@ -47,74 +53,88 @@ public class DisplayInputAsText : MonoBehaviour
     }
     private void GetOutputOfKey(InputType input)
     {
+        KeyCode keyCodeOut = KeyCode.None;
         switch (input)
         {
             case(InputType.MoveUp):
-                if(SettingsData.Instance._InputUp == KeyCode.UpArrow)
-                {
-                    icon.SetActive(true);
-                    text.text = " ";
-                    GetIconOfInput(InputType.UpArrow);
-                    return;
-                }
-                else
-                {
-                    output = "" + SettingsData.Instance._InputUp;
-                }
+                keyCodeOut = SettingsData.Instance._InputUp;
                 break;
             case(InputType.MoveDown):
-                if(SettingsData.Instance._InputDown == KeyCode.DownArrow)
-                {
-                    icon.SetActive(true);
-                    text.text = " ";
-                    GetIconOfInput(InputType.DownArrow);
-                    return;
-                }
-                else
-                {
-                    output = "" + SettingsData.Instance._InputDown;
-                }
+                keyCodeOut = SettingsData.Instance._InputDown;
                 break;
             case(InputType.MoveLeft):
-                if(SettingsData.Instance._InputLeft == KeyCode.LeftArrow)
-                {
-                    icon.SetActive(true);
-                    text.text = " ";
-                    GetIconOfInput(InputType.LeftArrow);
-                    return;
-                }
-                else
-                {
-                    output = "" + SettingsData.Instance._InputLeft;
-                }
+                keyCodeOut = SettingsData.Instance._InputLeft;
                 break;
             case(InputType.MoveRight):
-                if(SettingsData.Instance._InputRight == KeyCode.RightArrow)
-                {
-                    icon.SetActive(true);
-                    text.text = " ";
-                    GetIconOfInput(InputType.RightArrow);
-                    return;
-                }
-                else
-                {
-                    output = "" + SettingsData.Instance._InputRight;
-                }
+                keyCodeOut = SettingsData.Instance._InputRight;
                 break;
             case(InputType.Jump):
-                output = "" + SettingsData.Instance._InputJump;
+                keyCodeOut = SettingsData.Instance._InputJump;
                 break;
             case(InputType.Sprint):
-                output = "" + SettingsData.Instance._InputSprint;
+                keyCodeOut = SettingsData.Instance._InputSprint;
                 break;
             case(InputType.Attack):
-                output = "" + SettingsData.Instance._InputAttack;
+                keyCodeOut = SettingsData.Instance._InputAttack;
                 break;
             case(InputType.Interact):
-                output = "" + SettingsData.Instance._InputInteract;
+                keyCodeOut = SettingsData.Instance._InputInteract;
                 break;
         }
-        text.text = output;
+        switch(keyCodeOut)
+        {
+            case(KeyCode.UpArrow):
+                icon.SetActive(true);
+                text.text = " ";
+                GetIconOfInput(InputType.UpArrow);
+                return;
+            case(KeyCode.DownArrow):
+                icon.SetActive(true);
+                text.text = " ";
+                GetIconOfInput(InputType.DownArrow);
+                return;
+            case(KeyCode.LeftArrow):
+                icon.SetActive(true);
+                text.text = " ";
+                GetIconOfInput(InputType.LeftArrow);
+                return;
+            case(KeyCode.RightArrow):
+                icon.SetActive(true);
+                text.text = " ";
+                GetIconOfInput(InputType.RightArrow);
+                return;
+            case(KeyCode.Mouse0):
+                icon.SetActive(true);
+                text.text = " ";
+                GetIconOfInput(InputType.MouseLeft);
+                return;
+            case(KeyCode.Mouse1):
+                icon.SetActive(true);
+                text.text = " ";
+                GetIconOfInput(InputType.MouseRight);
+                return;
+            case(KeyCode.Mouse2):
+                icon.SetActive(true);
+                text.text = " ";
+                GetIconOfInput(InputType.MouseMiddle);
+                return;
+            case(KeyCode.Mouse3):
+                icon.SetActive(true);
+                text.text = " ";
+                GetIconOfInput(InputType.MouseForward);
+                return;
+            case(KeyCode.Mouse4):
+                icon.SetActive(true);
+                text.text = " ";
+                GetIconOfInput(InputType.MouseBack);
+                return;
+            case(KeyCode.Space):
+                icon.SetActive(true);
+                text.text = "  ";
+                GetIconOfInput(InputType.Space);
+                return;
+        }
+        text.text = "" + keyCodeOut;
     }
     private void GetIconOfInput(InputType input)
     {
@@ -162,6 +182,24 @@ public class DisplayInputAsText : MonoBehaviour
                 break;
             case(InputType.RightArrow):
                 path = "UI/ControllerIcons/RightArrow";
+                break;
+            case(InputType.MouseLeft):
+                path = "UI/ControllerIcons/MouseLeft";
+                break;
+            case(InputType.MouseRight):
+                path = "UI/ControllerIcons/MouseRight";
+                break;
+            case(InputType.MouseMiddle):
+                path = "UI/ControllerIcons/MouseMiddle";
+                break;
+            case(InputType.MouseForward):
+                path = "UI/ControllerIcons/MouseForward";
+                break;
+            case(InputType.MouseBack):
+                path = "UI/ControllerIcons/MouseBack";
+                break;
+            case(InputType.Space):
+                path = "UI/ControllerIcons/Space";
                 break;
         }
         sr.sprite = Resources.Load<Sprite>(path);
