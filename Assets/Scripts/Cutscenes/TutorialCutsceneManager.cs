@@ -37,7 +37,7 @@ public class TutorialCutsceneManager : MonoBehaviour
         switch (currentScene)
         {
             case(1):
-                bit.StartCoroutine(bit.GlideTo(new Vector2(transform.position.x,transform.position.y-4)));
+                bit.StartCoroutine(bit.GlideTo(new Vector2(transform.position.x,transform.position.y-3.5f)));
                 StartCoroutine(WaitForFrames(90,true));
                 break;
             case(2):

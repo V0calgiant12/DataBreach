@@ -24,10 +24,10 @@ public class BitAI : MonoBehaviour
     }
     public IEnumerator GlideTo(Vector2 location)
     {
-        rb.linearVelocityX = moveSpeed*moveSpeed * (location.x - transform.position.x);
-        rb.linearVelocityY = moveSpeed*moveSpeed * (location.y - transform.position.y);
-        while(Vector2.Distance(transform.position,location) > 2.5)
+        while(Vector2.Distance(transform.position,location) > 0.1)
         {
+            rb.linearVelocityX = moveSpeed*moveSpeed*moveSpeed * (location.x - transform.position.x);
+            rb.linearVelocityY = moveSpeed*moveSpeed*moveSpeed * (location.y - transform.position.y);
             yield return null;
         }
         rb.linearVelocity = new Vector2(0,0);
