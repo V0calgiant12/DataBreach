@@ -82,8 +82,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: -405566945
-  m_SortingLayer: 5
-  m_SortingOrder: 50
+  m_SortingLayer: 6
+  m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: 6552428614829903414, guid: 1100c44c90e732142adc6eff5f3e402c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -171,7 +171,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BitAI
   moveSpeed: 1.2
-  player: {fileID: 0}
+  waitForPlayer: 0
+  playerOverride: {fileID: 0}
   rb: {fileID: 5290098960536404355}
 --- !u!1 &8339709187638341504
 GameObject:

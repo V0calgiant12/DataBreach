@@ -22,6 +22,16 @@ public class BitAI : MonoBehaviour
     {
         transform.Rotate(0,0,(rb.linearVelocityX+rb.linearVelocityY)*Time.timeScale);
     }
+    public IEnumerator GlideTo(Vector2 location)
+    {
+        rb.linearVelocityX = moveSpeed*moveSpeed * (location.x - transform.position.x);
+        rb.linearVelocityY = moveSpeed*moveSpeed * (location.y - transform.position.y);
+        while(Vector2.Distance(transform.position,location) > 2.5)
+        {
+            yield return null;
+        }
+        rb.linearVelocity = new Vector2(0,0);
+    }
     private void OnTriggerEnter2D(Collider2D other)
     {
         if(waitForPlayer && other.gameObject.CompareTag("Player"))

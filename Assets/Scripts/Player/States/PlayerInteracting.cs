@@ -86,36 +86,160 @@ public class PlayerInteracting : PlayerAbstract
                 }
                 break;
             case(PlayerStateManager.InteractControls.FullJump):
-                player.playerData.PlayerRb.linearVelocityY = jumpStrength * PlayerStateManager.Instance.playerData.mudJumpMulti;
-                player.playerData.audioSource.PlayJumpSound(player._NormalJump);
-                if (GroundCheck.Instance._IsStone)
+                if (GroundCheck.Instance._IsGrounded)
                 {
-                    player.playerData.audioSource.PlayStoneSound(player._StoneJump);
+                    player.playerData.PlayerRb.linearVelocityY = jumpStrength * PlayerStateManager.Instance.playerData.mudJumpMulti;
+                    player.playerData.audioSource.PlayJumpSound(player._NormalJump);
+                    if (GroundCheck.Instance._IsStone)
+                    {
+                        player.playerData.audioSource.PlayStoneSound(player._StoneJump);
+                    }
+                    else
+                    {
+                        player.playerData.audioSource.PlayGrassSound(player._GrassJump);
+                    }
+                    player.playerData.anim.SetBool("jumping", true);
                 }
-                else
-                {
-                    player.playerData.audioSource.PlayGrassSound(player._GrassJump);
-                }
-                player.playerData.anim.SetBool("moving", true);
-                player.playerData.anim.SetBool("walking", true);
+                player.playerData.anim.SetBool("moving", false);
+                player.playerData.anim.SetBool("walking", false);
                 player.playerData.anim.SetBool("sprinting", false);
                 player.playerData.anim.SetBool("crouching", false);
+                state = PlayerStateManager.InteractControls.Stop;
+                break;
+            case(PlayerStateManager.InteractControls.FullJumpRight):
+                playerSpeed = 7*PlayerStateManager.Instance.playerData.mudSpeedMulti;
+                player.playerData.leftOrRight = true;
+                player.playerData.PlayerRb.linearVelocityX = playerSpeed;
+                if (GroundCheck.Instance._IsGrounded)
+                {
+                    player.playerData.PlayerRb.linearVelocityY = jumpStrength * PlayerStateManager.Instance.playerData.mudJumpMulti;
+                    player.playerData.audioSource.PlayJumpSound(player._NormalJump);
+                    if (GroundCheck.Instance._IsStone)
+                    {
+                        player.playerData.audioSource.PlayStoneSound(player._StoneJump);
+                    }
+                    else
+                    {
+                        player.playerData.audioSource.PlayGrassSound(player._GrassJump);
+                    }
+                    player.playerData.anim.SetBool("jumping", true);
+                }
+                player.playerData.anim.SetBool("moving", true);
+                player.playerData.anim.SetBool("walking", false);
+                player.playerData.anim.SetBool("sprinting", false);
+                player.playerData.anim.SetBool("crouching", false);
+                currentDistance = Mathf.Abs(player.transform.position.x - startPoint);
+                Debug.Log(currentDistance+ " " +distance+ " "+ (currentDistance <= distance+0.1f && currentDistance >= distance - 0.1f));
+                if(currentDistance <= distance+0.1f && currentDistance >= distance - 0.1f)
+                {
+                    state = PlayerStateManager.InteractControls.Stop;
+                }
+                break;
+            case(PlayerStateManager.InteractControls.FullJumpLeft):
+                playerSpeed = 7*PlayerStateManager.Instance.playerData.mudSpeedMulti;
+                player.playerData.leftOrRight = false;
+                player.playerData.PlayerRb.linearVelocityX = -playerSpeed;
+                if (GroundCheck.Instance._IsGrounded)
+                {
+                    player.playerData.PlayerRb.linearVelocityY = jumpStrength * PlayerStateManager.Instance.playerData.mudJumpMulti;
+                    player.playerData.audioSource.PlayJumpSound(player._NormalJump);
+                    if (GroundCheck.Instance._IsStone)
+                    {
+                        player.playerData.audioSource.PlayStoneSound(player._StoneJump);
+                    }
+                    else
+                    {
+                        player.playerData.audioSource.PlayGrassSound(player._GrassJump);
+                    }
+                    player.playerData.anim.SetBool("jumping", true);
+                }
+                player.playerData.anim.SetBool("moving", true);
+                player.playerData.anim.SetBool("walking", false);
+                player.playerData.anim.SetBool("sprinting", false);
+                player.playerData.anim.SetBool("crouching", false);
+                currentDistance = player.transform.position.x - startPoint;
+                if(currentDistance <= distance+0.1f && currentDistance >= distance - 0.1f)
+                {
+                    state = PlayerStateManager.InteractControls.Stop;
+                }
                 break;
             case(PlayerStateManager.InteractControls.ShortJump):
-                player.playerData.PlayerRb.linearVelocityY = jumpStrength/2 * PlayerStateManager.Instance.playerData.mudJumpMulti;
-                player.playerData.audioSource.PlayJumpSound(player._NormalJump);
-                if (GroundCheck.Instance._IsStone)
+                if (GroundCheck.Instance._IsGrounded)
                 {
-                    player.playerData.audioSource.PlayStoneSound(player._StoneJump);
+                    player.playerData.PlayerRb.linearVelocityY = jumpStrength/2 * PlayerStateManager.Instance.playerData.mudJumpMulti;
+                    player.playerData.audioSource.PlayJumpSound(player._NormalJump);
+                    if (GroundCheck.Instance._IsStone)
+                    {
+                        player.playerData.audioSource.PlayStoneSound(player._StoneJump);
+                    }
+                    else
+                    {
+                        player.playerData.audioSource.PlayGrassSound(player._GrassJump);
+                    }
+                    player.playerData.anim.SetBool("jumping", true);
                 }
-                else
-                {
-                    player.playerData.audioSource.PlayGrassSound(player._GrassJump);
-                }
-                player.playerData.anim.SetBool("moving", true);
-                player.playerData.anim.SetBool("walking", true);
+                player.playerData.anim.SetBool("moving", false);
+                player.playerData.anim.SetBool("walking", false);
                 player.playerData.anim.SetBool("sprinting", false);
                 player.playerData.anim.SetBool("crouching", false);
+                state = PlayerStateManager.InteractControls.Stop;
+                break;
+            case(PlayerStateManager.InteractControls.ShortJumpRight):
+                playerSpeed = 7*PlayerStateManager.Instance.playerData.mudSpeedMulti;
+                player.playerData.leftOrRight = true;
+                player.playerData.PlayerRb.linearVelocityX = playerSpeed;
+                if (GroundCheck.Instance._IsGrounded)
+                {
+                    player.playerData.PlayerRb.linearVelocityY = jumpStrength/2 * PlayerStateManager.Instance.playerData.mudJumpMulti;
+                    player.playerData.audioSource.PlayJumpSound(player._NormalJump);
+                    if (GroundCheck.Instance._IsStone)
+                    {
+                        player.playerData.audioSource.PlayStoneSound(player._StoneJump);
+                    }
+                    else
+                    {
+                        player.playerData.audioSource.PlayGrassSound(player._GrassJump);
+                    }
+                    player.playerData.anim.SetBool("jumping", true);
+                }
+                player.playerData.anim.SetBool("moving", true);
+                player.playerData.anim.SetBool("walking", false);
+                player.playerData.anim.SetBool("sprinting", false);
+                player.playerData.anim.SetBool("crouching", false);
+                currentDistance = Mathf.Abs(player.transform.position.x - startPoint);
+                Debug.Log(currentDistance+ " " +distance+ " "+ (currentDistance <= distance+0.1f && currentDistance >= distance - 0.1f));
+                if(currentDistance <= distance+0.1f && currentDistance >= distance - 0.1f)
+                {
+                    state = PlayerStateManager.InteractControls.Stop;
+                }
+                break;
+            case(PlayerStateManager.InteractControls.ShortJumpLeft):
+                playerSpeed = 7*PlayerStateManager.Instance.playerData.mudSpeedMulti;
+                player.playerData.leftOrRight = false;
+                player.playerData.PlayerRb.linearVelocityX = -playerSpeed;
+                if (GroundCheck.Instance._IsGrounded)
+                {
+                    player.playerData.PlayerRb.linearVelocityY = jumpStrength/2 * PlayerStateManager.Instance.playerData.mudJumpMulti;
+                    player.playerData.audioSource.PlayJumpSound(player._NormalJump);
+                    if (GroundCheck.Instance._IsStone)
+                    {
+                        player.playerData.audioSource.PlayStoneSound(player._StoneJump);
+                    }
+                    else
+                    {
+                        player.playerData.audioSource.PlayGrassSound(player._GrassJump);
+                    }
+                    player.playerData.anim.SetBool("jumping", true);
+                }
+                player.playerData.anim.SetBool("moving", true);
+                player.playerData.anim.SetBool("walking", false);
+                player.playerData.anim.SetBool("sprinting", false);
+                player.playerData.anim.SetBool("crouching", false);
+                currentDistance = player.transform.position.x - startPoint;
+                if(currentDistance <= distance+0.1f && currentDistance >= distance - 0.1f)
+                {
+                    state = PlayerStateManager.InteractControls.Stop;
+                }
                 break;
         }
     }

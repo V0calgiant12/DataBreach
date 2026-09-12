@@ -57,7 +57,11 @@ public class PlayerStateManager : MonoBehaviour
         SprintRight,
         SprintLeft,
         FullJump,
+        FullJumpRight,
+        FullJumpLeft,
         ShortJump,
+        ShortJumpRight,
+        ShortJumpLeft,
         Stop
     }
     void Awake()
@@ -68,6 +72,7 @@ public class PlayerStateManager : MonoBehaviour
     public void Interact(InteractControls action, float distance)
     {
         playerData.interacting = true;
+        InteractingState.startPoint = transform.position.x;
         InteractingState.state = action;
         InteractingState.distance = distance;
     }

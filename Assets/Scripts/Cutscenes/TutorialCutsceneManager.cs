@@ -8,6 +8,7 @@ public class TutorialCutsceneManager : MonoBehaviour
     public GameObject InvisbleWall;
     [SerializeField] private Animator anim;
     [SerializeField] private Animator screen;
+    [SerializeField] private BitAI bit;
     [SerializeField] private MusicManager music;
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private AudioSource alarm;
@@ -19,12 +20,14 @@ public class TutorialCutsceneManager : MonoBehaviour
     void Start()
     {
         anim.enabled = false;
+        bit = GetComponentInChildren<BitAI>();
     }
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            PlayerStateManager.Instance.Interact(PlayerStateManager.InteractControls.WalkRight,4);
+            currentScene = 0;
+            PlayerStateManager.Instance.Interact(PlayerStateManager.InteractControls.Stop,0);
             ProgressCutscene();
         }
     }
@@ -34,28 +37,24 @@ public class TutorialCutsceneManager : MonoBehaviour
         switch (currentScene)
         {
             case(1):
-                anim.enabled = true;
-                anim.SetTrigger("Next");
+                bit.StartCoroutine(bit.GlideTo(new Vector2(transform.position.x,transform.position.y-4)));
+                StartCoroutine(WaitForFrames(90,true));
                 break;
             case(2):
-                music.FadeOutCaller(60);
-                InvisbleWall.SetActive(true);
-                TriggerShake.Instance.BurstShake(1,1,false,0);
-                audioSource.clip = shake1;
-                audioSource.Play();
-                StartCoroutine(WaitForFrames(60));
+                bit.enabled = false;
+                anim.SetInteger("Scene",2);
+                StartCoroutine(WaitForFrames(180,true));
                 break;
             case(3):
-                TriggerShake.Instance.BurstShake(1.5f,1.25f,false,0);
-                audioSource.clip = shake1;
-                audioSource.Play();
-                StartCoroutine(WaitForFrames(30));
+                anim.SetInteger("Scene",3);
+                StartCoroutine(WaitForFrames(120,true));
                 break;
             case(4):
-                TriggerShake.Instance.BurstShake(2f,1.5f,false,0);
-                audioSource.clip = shake1;
-                audioSource.Play();
-                StartCoroutine(WaitForFrames(150));
+                PlayerStateManager.Instance.Interact(PlayerStateManager.InteractControls.SprintRight,4);
+                StartCoroutine(WaitForFrames(180,true));
+                break;
+            case(5):
+                PlayerStateManager.Instance.Interact(PlayerStateManager.InteractControls.ShortJumpRight,3);
                 break;
         }
     }
@@ -83,16 +82,37 @@ public class TutorialCutsceneManager : MonoBehaviour
         }
         ProgressCutscene();
     }
-    private IEnumerator WaitForFrames(int frames)
+    private IEnumerator WaitForFrames(int frames,bool animState)
     {
         int timer = frames;
-        Debug.Log(timer);
+        //Debug.Log(timer);
         while (timer > 0)
         {
             timer -= Time.timeScale == 1 ? 1 : 0;
-            Debug.Log(timer);
+            //Debug.Log(timer);
             yield return null;
         }
+        anim.enabled = animState;
         ProgressCutscene();
     }
 }
+//            case(2):
+//                music.FadeOutCaller(60);
+//                InvisbleWall.SetActive(true);
+//                TriggerShake.Instance.BurstShake(1,1,false,0);
+//                audioSource.clip = shake1;
+//                audioSource.Play();
+//                StartCoroutine(WaitForFrames(60));
+//                break;
+//            case(3):
+//                TriggerShake.Instance.BurstShake(1.5f,1.25f,false,0);
+//                audioSource.clip = shake1;
+//                audioSource.Play();
+//                StartCoroutine(WaitForFrames(30));
+//                break;
+//            case(4):
+//                TriggerShake.Instance.BurstShake(2f,1.5f,false,0);
+//                audioSource.clip = shake1;
+//                audioSource.Play();
+//                StartCoroutine(WaitForFrames(150));
+//                break;
