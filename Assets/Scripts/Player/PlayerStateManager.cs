@@ -191,8 +191,8 @@ public class PlayerStateManager : MonoBehaviour
                 StartCoroutine(StunPlayer(xLaunch*(transform.position.x <= damageSourceX ? -1 : 1), yLaunch,timer));
             }
             playerData.iFrames = 120;
-            PlayerFlash(1);
-            PlayerFlash(2);
+            PlayerFlash(1,0);
+            PlayerFlash(2,0);
         }
     }
     public void Attack(AttackType attackType, bool handleSound)
@@ -248,27 +248,33 @@ public class PlayerStateManager : MonoBehaviour
             //Debug.Log(attackType);
         }
     }
-    public void PlayerFlash(int type)
+    public void PlayerFlash(int type,int overrideTime)
     {
         GameObject[] playerSprites = GameObject.FindGameObjectsWithTag("PlayerSprite"); // Puts all player sprite objects in a list.
         int index = 0;
-        if(type == 1) // White Flash
+        switch (type)
         {
-            Debug.Log("White Flash");
-            while (index <= playerSprites.Length - 1) // Repeats for every game object.
-            {
-                playerSprites[index].SendMessage("WhiteFlash");
-                index += 1;
-            }
-        }
-        else if(type == 2) // Invulnerable Flash
-        {
-            Debug.Log("Invulnerable Flash");
-            while (index <= playerSprites.Length - 1) // Repeats for every game object.
-            {
-                playerSprites[index].SendMessage("InvulnerableFlash", playerData.iFrames);
-                index += 1;
-            }
+            case(1): // White Flash
+                while (index <= playerSprites.Length - 1) // Repeats for every game object.
+                {
+                    playerSprites[index].SendMessage("WhiteFlash");
+                    index += 1;
+                }
+                return;
+            case(2): // Invulnerable Flash
+                while (index <= playerSprites.Length - 1) // Repeats for every game object.
+                {
+                    playerSprites[index].SendMessage("InvulnerableFlash", overrideTime == 0 ? playerData.iFrames : overrideTime);
+                    index += 1;
+                }
+                return;
+            case(3): // Invisible
+                while (index <= playerSprites.Length - 1) // Repeats for every game object.
+                {
+                    playerSprites[index].SendMessage("SetInvisible", overrideTime == 0 ? playerData.iFrames : overrideTime);
+                    index += 1;
+                }
+                return;
         }
     }
     public IEnumerator StunPlayer(float xLaunch, float yLaunch, int timer)
@@ -293,7 +299,7 @@ public class PlayerStateManager : MonoBehaviour
                 Debug.Log(playerData.PlayerRb.linearVelocity);
                 playerData.ricochet = 0;
                 TriggerShake.Instance.BurstShake(-1*MathF.Cos(playerData.PlayerRb.linearVelocityX/2)+(2+elapsed/25),2,true,0);
-                PlayerFlash(1);
+                PlayerFlash(1,0);
                 timer += 15;
             }
             if(playerData.pickUpHeart)

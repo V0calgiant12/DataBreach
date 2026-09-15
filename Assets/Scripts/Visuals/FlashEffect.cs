@@ -21,6 +21,10 @@ public class FlashEffect : MonoBehaviour
     {
         StartCoroutine(InvulnerableFlashAnimation(iFrames));
     }
+    public void SetInvisible(int iFrames)
+    {
+        StartCoroutine(InvisibleFor(iFrames));
+    }
 
     IEnumerator WhiteFlashAnimation(int time)
     {
@@ -54,6 +58,17 @@ public class FlashEffect : MonoBehaviour
             yield return null;
         }
         //sr.color = new UnityEngine.Color(originalColor.r,originalColor.b,originalColor.g,1);
+        sr.material = litMat;
+    }
+    IEnumerator InvisibleFor(int time)
+    {
+        int elapsed = 0;
+        while (time > elapsed)
+        {
+            sr.material = invulMat;
+            elapsed += Time.timeScale == 1 ? 1 : 0;
+            yield return null;
+        }
         sr.material = litMat;
     }
 }

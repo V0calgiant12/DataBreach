@@ -38,25 +38,58 @@ public class TutorialCutsceneManager : MonoBehaviour
         {
             case(1):
                 bit.StartCoroutine(bit.GlideTo(new Vector2(transform.position.x,transform.position.y-3.5f)));
-                StartCoroutine(WaitForFrames(90,true));
+                StartCoroutine(WaitForFrames(90,true,true));
+                music.FadeOutCaller(60);
+                StartCoroutine(Explosion(1,1,30,shake1));
                 break;
             case(2):
                 bit.enabled = false;
                 anim.SetInteger("Scene",2);
-                StartCoroutine(WaitForFrames(180,true));
+                StartCoroutine(Explosion(1.5f,1.5f,45,shake1));
+                StartCoroutine(Explosion(2,2,75,shake1));
+                StartCoroutine(WaitForFrames(180,true,true));
                 break;
             case(3):
                 anim.SetInteger("Scene",3);
-                StartCoroutine(WaitForFrames(120,true));
+                alarm.Play();
+                StartCoroutine(Explosion(5,2,40,shake2));
+                StartCoroutine(WaitForFrames(120,true,true));
                 break;
             case(4):
                 PlayerStateManager.Instance.Interact(PlayerStateManager.InteractControls.SprintRight,4);
-                StartCoroutine(WaitForFrames(180,true));
+                anim.SetInteger("Scene",4);
+                StartCoroutine(PlayerLook());
                 break;
             case(5):
                 PlayerStateManager.Instance.Interact(PlayerStateManager.InteractControls.ShortJumpRight,3);
                 break;
         }
+    }
+    private IEnumerator Explosion(float magnitude, float lengthMult, int delay, AudioClip audioClip)
+    {
+        int elapsed = 0;
+        while(elapsed < delay)
+        {
+            elapsed += Time.timeScale == 1 ? 1:0;
+            yield return null;
+        }
+        TriggerShake.Instance.BurstShake(magnitude,lengthMult,false,0);
+        audioSource.clip = audioClip;
+        audioSource.Play();
+    }
+    private IEnumerator PlayerLook()
+    {
+        int elapsed = 0;
+        while (elapsed < 256)
+        {
+            if(elapsed == 30)
+            {
+                PlayerStateManager.Instance.PlayerFlash(3,225);
+            }
+            elapsed += Time.timeScale == 1 ? 1 : 0;
+            yield return null;
+        }
+        ProgressCutscene();
     }
     private IEnumerator WaitUntilTextCloses(int delay, int delay2, bool allowMovementAfter)
     {
@@ -82,7 +115,7 @@ public class TutorialCutsceneManager : MonoBehaviour
         }
         ProgressCutscene();
     }
-    private IEnumerator WaitForFrames(int frames,bool animState)
+    private IEnumerator WaitForFrames(int frames,bool animState,bool progress)
     {
         int timer = frames;
         //Debug.Log(timer);
@@ -93,7 +126,10 @@ public class TutorialCutsceneManager : MonoBehaviour
             yield return null;
         }
         anim.enabled = animState;
-        ProgressCutscene();
+        if (progress)
+        {
+            ProgressCutscene();
+        }
     }
 }
 //            case(2):
