@@ -10,10 +10,13 @@ public class TutorialCutsceneManager : MonoBehaviour
     [SerializeField] private Animator screen;
     [SerializeField] private BitAI bit;
     [SerializeField] private MusicManager music;
+    [SerializeField] private EffectSound effectAS;
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private AudioSource alarm;
     [SerializeField] private AudioClip shake1;
     [SerializeField] private AudioClip shake2;
+    [SerializeField] private AudioClip impact;
+    [SerializeField] private AudioClip sparkHit;
     [SerializeField] private AudioClip rapidExplosion;
     [SerializeField] private int currentScene;
     public bool textIsOpen;
@@ -52,6 +55,8 @@ public class TutorialCutsceneManager : MonoBehaviour
             case(3):
                 anim.SetInteger("Scene",3);
                 alarm.Play();
+                StartCoroutine(BitFallSound(63));
+                StartCoroutine(BitFallSound(90));
                 StartCoroutine(Explosion(5,2,40,shake2));
                 StartCoroutine(WaitForFrames(120,true,true));
                 break;
@@ -61,6 +66,10 @@ public class TutorialCutsceneManager : MonoBehaviour
                 StartCoroutine(PlayerLook());
                 break;
             case(5):
+                anim.SetInteger("Scene",5);
+                StartCoroutine(PlayerJump());
+                break;
+            case(6):
                 PlayerStateManager.Instance.Interact(PlayerStateManager.InteractControls.ShortJumpRight,3);
                 break;
         }
@@ -77,14 +86,44 @@ public class TutorialCutsceneManager : MonoBehaviour
         audioSource.clip = audioClip;
         audioSource.Play();
     }
+    private IEnumerator BitFallSound(int delay)
+    {
+        int elapsed = 0;
+        while (elapsed < delay)
+        {
+            elapsed += Time.timeScale == 1 ? 1 : 0;
+            yield return null;
+        }
+        effectAS.PlaySound(impact,1,1.7f,1,1,effectAS.transform.position);
+        effectAS.PlaySound(sparkHit,0.8f,1.7f,1,1,effectAS.transform.position);
+    }
     private IEnumerator PlayerLook()
     {
         int elapsed = 0;
-        while (elapsed < 256)
+        while (elapsed < 90)
         {
             if(elapsed == 30)
             {
                 PlayerStateManager.Instance.PlayerFlash(3,225);
+            }
+            elapsed += Time.timeScale == 1 ? 1 : 0;
+            yield return null;
+        }
+        StartCoroutine(WaitUntilTextCloses(0,30,false));
+        while (currentScene == 4)
+        {
+            PlayerStateManager.Instance.PlayerFlash(3,166);
+            yield return null;
+        }
+    }
+    private IEnumerator PlayerJump()
+    {
+        int elapsed = 0;
+        while (elapsed < 167)
+        {
+            if(elapsed == 28||elapsed == 58||elapsed == 88||elapsed == 118||elapsed == 164)
+            {
+                PlayerStateManager.Instance.playerData.audioSource.PlayStoneSound(PlayerStateManager.Instance._StoneWalk);
             }
             elapsed += Time.timeScale == 1 ? 1 : 0;
             yield return null;

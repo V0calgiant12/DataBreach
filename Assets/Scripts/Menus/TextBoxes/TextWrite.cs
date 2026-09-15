@@ -15,6 +15,7 @@ public class TextWrite : MonoBehaviour
     public int _TextSpeed;
     public AudioClip _TextSound;
     public bool _Writing;
+    public bool _DelayBetweenLines;
     [Header("References")]
     [SerializeField] private int characterNum;
     [SerializeField] private TextMeshProUGUI text;
@@ -59,6 +60,7 @@ public class TextWrite : MonoBehaviour
         _TextInput = data._TextInput;
         _TextSound = data._TextSound;
         _TextSpeed = data._TextSpeed;
+        _DelayBetweenLines = data._DelayBetweenLines;
         frame = 0;
         StartCoroutine(Write());
     }
@@ -80,7 +82,11 @@ public class TextWrite : MonoBehaviour
             if(waitTime == 0)
             {
                 waitTime = _TextSpeed;
-                if(!char.IsWhiteSpace(_TextInput[characterNum]) && char.ToString(_TextInput[characterNum]) != "<" && char.ToString(_TextInput[characterNum]) != ">")
+                if(char.ToString(_TextInput[characterNum]) == "." || char.ToString(_TextInput[characterNum]) == "," || char.ToString(_TextInput[characterNum]) == ";" || char.ToString(_TextInput[characterNum]) == "?" || char.ToString(_TextInput[characterNum]) == "!")
+                {
+                    waitTime = _TextSpeed * 3;
+                }
+                if(!char.IsWhiteSpace(_TextInput[characterNum]) && char.ToString(_TextInput[characterNum]) != "<" && char.ToString(_TextInput[characterNum]) != ">" && char.ToString(_TextInput[characterNum]) != "'" && char.ToString(_TextInput[characterNum]) != "\"")
                 {
                     GameObject audioClone = Instantiate(prefab);
                     audioClone.GetComponent<MenuAudioSource>().TextSound(this);
@@ -95,10 +101,13 @@ public class TextWrite : MonoBehaviour
                     characterNum += 1;
                     output += _TextInput[characterNum];
                     characterNum += 1;
-                    waitTime = _TextSpeed * 3;
+                    waitTime = _TextSpeed * (_DelayBetweenLines ? 10 : 3);
                 }
-                output += _TextInput[characterNum];
-                characterNum += 1;
+                else
+                {
+                    output += _TextInput[characterNum];
+                    characterNum += 1;
+                }
                 if (inputBuffer > 0)
                 {
                     inputBuffer = 0;

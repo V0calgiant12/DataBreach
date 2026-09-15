@@ -32,7 +32,6 @@ public class EnableIfSetting : MonoBehaviour
         }
         for(int i = 0; i < objects.Length; i++)
         {
-            Debug.Log(settingEnabled);
             objects[i].SetActive(settingEnabled);
         }
     }

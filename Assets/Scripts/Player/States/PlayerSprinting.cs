@@ -110,7 +110,7 @@ public class PlayerSprinting : PlayerAbstract
         }
         else
         {
-            audioTimer += 1;
+            audioTimer += Time.timeScale == 1 ? 1:0;
         }
     }
     public override void LateUpdateState(PlayerStateManager player)

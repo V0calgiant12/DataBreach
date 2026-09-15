@@ -72,7 +72,7 @@ public class PlayerStateManager : MonoBehaviour
     public void Interact(InteractControls action, float distance)
     {
         playerData.interacting = true;
-        InteractingState.startPoint = transform.position.x;
+        InteractingState.firstInteractFrame = true;
         InteractingState.state = action;
         InteractingState.distance = distance;
     }

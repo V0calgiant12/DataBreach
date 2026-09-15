@@ -4,7 +4,9 @@ using UnityEngine;
 public class PlayerInteracting : PlayerAbstract
 {
     private int frame = 0;
+    private int audioTimer = 0;
     public PlayerStateManager.InteractControls state;
+    public bool firstInteractFrame = true;
     public float distance = 0;
     private float currentDistance;
     public float startPoint = 0;
@@ -16,10 +18,16 @@ public class PlayerInteracting : PlayerAbstract
         player.playerData.interactingCooldown = 30;
         player.playerData.interacting = true;
         frame = 0;
-        startPoint = player.transform.position.x;
+        firstInteractFrame = true;
     }
     public override void UpdateState(PlayerStateManager player) // Update Function
     {
+        if (firstInteractFrame)
+        {
+            audioTimer = state == PlayerStateManager.InteractControls.SprintRight || state == PlayerStateManager.InteractControls.SprintLeft ? 3:0;
+            startPoint = player.transform.position.x;
+            firstInteractFrame = false;
+        }
         switch (state)
         {
             case(PlayerStateManager.InteractControls.Stop):
@@ -241,6 +249,30 @@ public class PlayerInteracting : PlayerAbstract
                     state = PlayerStateManager.InteractControls.Stop;
                 }
                 break;
+        }
+        // Audio
+        if((audioTimer == 11 && (state == PlayerStateManager.InteractControls.WalkLeft || state == PlayerStateManager.InteractControls.WalkRight)) || (audioTimer == 5 && (state == PlayerStateManager.InteractControls.SprintLeft || state == PlayerStateManager.InteractControls.SprintRight)))
+        {
+            if (!player.playerData.inMud)
+            {
+                if (GroundCheck.Instance._IsStone)
+                {
+                    player.playerData.audioSource.PlayStoneSound(player._StoneWalk);
+                }
+                else
+                {
+                    player.playerData.audioSource.PlayGrassSound(player._GrassWalk);
+                }
+            }
+            else
+            {
+                player.playerData.audioSource.PlayMudSound(player._MudWalk[0]);
+            }
+            audioTimer = 0;
+        }
+        else
+        {
+            audioTimer += Time.timeScale == 1 ? 1:0;
         }
     }
     public override void LateUpdateState(PlayerStateManager player)
