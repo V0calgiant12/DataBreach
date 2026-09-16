@@ -7,7 +7,6 @@ using UnityEngine.TextCore.Text;
 using Unity.Collections;
 using Unity.VisualScripting;
 using System.Timers;
-//DataBreach v0.6.8 ALPHA - Windows
 
 public class TextWrite : MonoBehaviour
 {
