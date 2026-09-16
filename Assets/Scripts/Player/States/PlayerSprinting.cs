@@ -15,6 +15,7 @@ public class PlayerSprinting : PlayerAbstract
         player.playerData.anim.SetBool("walking", false);
         player.playerData.anim.SetBool("moving", true);
         player.playerData.shortJumping = true;
+        player.playerData.resetVelocity = true;
         player.playerData.playerSpeed = 15;
         player.playerData.basePlayerSpeed = 15;
     }
@@ -54,14 +55,14 @@ public class PlayerSprinting : PlayerAbstract
         }
 
         // if crouching go to crouching
-        if (player.playerData.crouching && player.playerData.playerSpeed == player.playerData.basePlayerSpeed)
+        if (player.playerData.crouching)
         {
             player.SwitchState(player.CrouchingState);
             player.currentState.UpdateState(player);
             return;
         }
         // if not moving then go to idle
-        if (!moving && player.playerData.resetVelocity && player.playerData.playerSpeed == player.playerData.basePlayerSpeed)
+        if (!moving)
         {
             player.playerData.PlayerRb.linearVelocityX = 0;
             player.SwitchState(player.IdleState);
@@ -69,7 +70,7 @@ public class PlayerSprinting : PlayerAbstract
             return;
         }
         // if not sprinting go to walking 
-        if (player.playerData.sprinting == false && player.playerData.playerSpeed == player.playerData.basePlayerSpeed)
+        if (player.playerData.sprinting == false)
         {
             player.playerData.anim.SetBool("sprinting", false);
             //Debug.Log(player.playerData.sprinting);

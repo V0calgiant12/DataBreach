@@ -13,6 +13,7 @@ public class PlayerWalking : PlayerAbstract
         //Debug.Log("Player is Walking / Walking State - " + player.playerData.sprinting);
         audioTimer = 0;
         player.playerData.shortJumping = true;
+        player.playerData.resetVelocity = true;
         player.playerData.playerSpeed = 8;
         player.playerData.basePlayerSpeed = 8;
     }
@@ -113,7 +114,7 @@ public class PlayerWalking : PlayerAbstract
         }
 
         // Idle
-        if (!moving && player.playerData.resetVelocity)
+        if (!moving)
         {
             player.playerData.PlayerRb.linearVelocityX = 0;
             player.playerData.anim.SetBool("moving", false);
