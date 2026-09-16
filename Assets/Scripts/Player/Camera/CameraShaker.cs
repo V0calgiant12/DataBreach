@@ -25,7 +25,7 @@ public class CameraShaker : MonoBehaviour
 
     public IEnumerator Shake(int duration, float magnitude) // Duration is in frames.
     {
-        Debug.Log("Camera shake " + duration + " " + magnitude);
+        //Debug.Log("Camera shake " + duration + " " + magnitude);
         UnityEngine.Vector3 originalLocalPosition = transform.localPosition;
         float elapsed = 0f;
 
@@ -54,7 +54,7 @@ public class CameraShaker : MonoBehaviour
         {
             m_pitch = 0.7f;
         }
-        Debug.Log("Camera Burst Shake " + magnitude + ", pitch: " + m_pitch);
+        //Debug.Log("Camera Burst Shake " + magnitude + ", pitch: " + m_pitch);
         UnityEngine.Vector3 originalLocalPosition = transform.localPosition;
         float elapsed = 0f;
 

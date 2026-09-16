@@ -92,19 +92,19 @@ public class BitCutsceneManager : MonoBehaviour
         switch (number)
         {
             case(1):
-                textData._TextInput = "The bit doesn't seem to be anywhere around here...";
+                textData._TextPageInput[0] = "The bit doesn't seem to be anywhere around here...";
                 textData._TextSpeed = 3;
                 textData._TextSound = bitSound;
                 StartCoroutine(WaitUntilTextCloses(30,60));
                 break;
             case(2):
-                textData._TextInput = "Maybe it's further up ahead.";
+                textData._TextPageInput[0] = "Maybe it's further up ahead.";
                 textData._TextSpeed = 3;
                 textData._TextSound = bitSound;
                 StartCoroutine(WaitUntilTextCloses(200,30));
                 break;
             case(3):
-                textData._TextInput = "Let's hope this new world wasn't affected by whatever happened before...";
+                textData._TextPageInput[0] = "Let's hope this new world wasn't affected by whatever happened before...";
                 textData._TextSpeed = 3;
                 textData._TextSound = bitSound;
                 StartCoroutine(WaitUntilTextCloses(240,60));

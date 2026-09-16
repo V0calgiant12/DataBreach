@@ -7,6 +7,7 @@ using UnityEngine.TextCore.Text;
 using Unity.Collections;
 using Unity.VisualScripting;
 using System.Timers;
+//DataBreach v0.6.8 ALPHA - Windows
 
 public class TextWrite : MonoBehaviour
 {
@@ -16,12 +17,15 @@ public class TextWrite : MonoBehaviour
     public AudioClip _TextSound;
     public bool _Writing;
     public bool _DelayBetweenLines;
+    private int pageNumber;
+    private int maxPages;
     [Header("References")]
     [SerializeField] private int characterNum;
     [SerializeField] private TextMeshProUGUI text;
     public TextBoxAnimation textBox;
     [SerializeField] private GameObject prefab;
     public static TextWrite Instance;
+    private TextData storedData;
 
     private int frame = 0;
     private int inputBuffer = 0;
@@ -57,19 +61,53 @@ public class TextWrite : MonoBehaviour
     }
     public void WriteText(TextData data)
     {
-        _TextInput = data._TextInput;
+        pageNumber = 0;
+        maxPages = data._TextPageInput.Length-1;
+        if(pageNumber > maxPages || data._TextPageInput[pageNumber] == null)
+        {
+            _TextInput = "ERROR: NO TEXT DATA FOR PAGE " + pageNumber + ".";
+        }
+        else
+        {
+            _TextInput = data._TextPageInput[pageNumber];
+        }
         _TextSound = data._TextSound;
         _TextSpeed = data._TextSpeed;
         _DelayBetweenLines = data._DelayBetweenLines;
+        storedData = data;
         frame = 0;
-        StartCoroutine(Write());
+        StartCoroutine(Write(true));
+    }
+    private void WriteNextPage()
+    {
+        text.text = "";
+        pageNumber += 1;
+        if(storedData._TextPageInput[pageNumber] == null)
+        {
+            _TextInput = "ERROR: NO TEXT DATA FOR PAGE " + pageNumber + ".";
+        }
+        else
+        {
+            _TextInput = storedData._TextPageInput[pageNumber];
+        }
+        _TextSound = storedData._TextSound;
+        _TextSpeed = storedData._TextSpeed;
+        _DelayBetweenLines = storedData._DelayBetweenLines;
+        frame = 0;
+        StartCoroutine(Write(false));
     }
 
-    IEnumerator Write()
+    IEnumerator Write(bool delay)
     {
         textBox.Open();
         _Writing = true;
-        while(frame < 40) // Delay before beginning to write.
+        while(frame < 1) // Always a 1 frame delay no matter what.
+        {
+            frame += 1;
+            yield return null;
+        }
+        inputBuffer = 0;
+        while(frame < 40 && delay) // Delay before beginning to write.
         {
             frame += 1;
             yield return null;
@@ -131,9 +169,16 @@ public class TextWrite : MonoBehaviour
         {
             if ((UserInput.Instance.KeyDownInteract||UserInput.Instance.KeyDownAttack) && _Writing == false && Time.timeScale == 1)
             {
-                PlayerStateManager.Instance.playerData.interacting = false;
-                Close();
-                PlayerStateManager.Instance.SwitchState(PlayerStateManager.Instance.IdleState);
+                if(pageNumber >= maxPages)
+                {
+                    PlayerStateManager.Instance.playerData.interacting = false;
+                    Close();
+                    PlayerStateManager.Instance.SwitchState(PlayerStateManager.Instance.IdleState);
+                }
+                else
+                {
+                    WriteNextPage();
+                }
             }
             yield return null;
         }

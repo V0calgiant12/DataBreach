@@ -92,19 +92,19 @@ public class IntroCutsceneManager : MonoBehaviour
         switch (number)
         {
             case(1):
-                textData._TextInput = "The bit doesn't seem to be anywhere around here...";
+                textData._TextPageInput[0] = "The bit doesn't seem to be anywhere around here...";
                 textData._TextSpeed = 3;
                 textData._TextSound = bitSound;
                 StartCoroutine(WaitUntilTextCloses(30,60));
                 break;
             case(2):
-                textData._TextInput = "Maybe it's further up ahead.";
+                textData._TextPageInput[0] = "You need to find it quick, who knows what could have happened to it by now.<br>Maybe it's further up ahead.";
                 textData._TextSpeed = 3;
                 textData._TextSound = bitSound;
                 StartCoroutine(WaitUntilTextCloses(200,30));
                 break;
             case(3):
-                textData._TextInput = "Let's hope this new world wasn't affected by whatever happened before...";
+                textData._TextPageInput[0] = "Without knowing what caused whatever happened up there, there's no telling what could've happened down here.<br>This world could end up being extremely dangerous.";
                 textData._TextSpeed = 3;
                 textData._TextSound = bitSound;
                 StartCoroutine(WaitUntilTextCloses(240,60));

@@ -20,7 +20,7 @@ public class BitAI : MonoBehaviour
     }
     void Update()
     {
-        transform.Rotate(0,0,(rb.linearVelocityX+rb.linearVelocityY)*Time.timeScale);
+        transform.Rotate(0,0,(rb.linearVelocityX+rb.linearVelocityY+0.5f)*Time.timeScale);
     }
     public IEnumerator GlideTo(Vector2 location)
     {
