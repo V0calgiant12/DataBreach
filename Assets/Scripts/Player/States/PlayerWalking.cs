@@ -12,12 +12,20 @@ public class PlayerWalking : PlayerAbstract
     {
         //Debug.Log("Player is Walking / Walking State - " + player.playerData.sprinting);
         audioTimer = 0;
-        player.playerData.resetVelocity = true;
         player.playerData.shortJumping = true;
+        player.playerData.playerSpeed = 8;
+        player.playerData.basePlayerSpeed = 8;
     }
     public override void UpdateState(PlayerStateManager player)
     {
-        playerSpeed = 8 * PlayerStateManager.Instance.playerData.mudSpeedMulti;
+        if(player.playerData.playerSpeed != player.playerData.basePlayerSpeed && player.playerData.autoResetSpeed)
+        {
+            player.playerData.playerSpeed += player.playerData.playerSpeed > player.playerData.basePlayerSpeed ? -0.05f:0.05f;
+            if(!player.playerData.resetVelocity)
+            {
+                player.playerData.PlayerRb.linearVelocityX -= player.playerData.leftOrRight? 0.05f : -0.05f;
+            }
+        }
         currentAttack  = PlayerStateManager.AttackType.forward; // Default to forward attack if nothing is inputed this frame.
         
         // Moving
@@ -25,18 +33,17 @@ public class PlayerWalking : PlayerAbstract
         if (UserInput.Instance.MovementInput.x > 0.25f && player.playerData.movementAllowed)
         {
             currentAttack = PlayerStateManager.AttackType.forward;
-            PlayerVelocity = new Vector2(playerSpeed, player.playerData.PlayerRb.linearVelocityY);
+            PlayerVelocity = new Vector2(player.playerData.playerSpeed, player.playerData.PlayerRb.linearVelocityY);
             player.playerData.PlayerRb.linearVelocity = PlayerVelocity + player.playerData.OffsetVelocity;
             player.playerData.leftOrRight = true;
             player.playerData.anim.SetBool("moving", true);
             player.playerData.anim.SetBool("walking", true);
             moving = true;
-            player.playerData.resetVelocity = true;
         }
         if (UserInput.Instance.MovementInput.x < -0.25f && player.playerData.movementAllowed) 
         {
             currentAttack = PlayerStateManager.AttackType.forward;
-            PlayerVelocity = new Vector2(-playerSpeed, player.playerData.PlayerRb.linearVelocityY);
+            PlayerVelocity = new Vector2(-player.playerData.playerSpeed, player.playerData.PlayerRb.linearVelocityY);
             player.playerData.PlayerRb.linearVelocity = PlayerVelocity + player.playerData.OffsetVelocity;
             player.playerData.leftOrRight = false;
             player.playerData.anim.SetBool("moving", true);
@@ -106,7 +113,7 @@ public class PlayerWalking : PlayerAbstract
         }
 
         // Idle
-        if (!moving)
+        if (!moving && player.playerData.resetVelocity)
         {
             player.playerData.PlayerRb.linearVelocityX = 0;
             player.playerData.anim.SetBool("moving", false);

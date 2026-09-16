@@ -14,7 +14,8 @@ public class PlayerAir : PlayerAbstract
     public override void EnterState(PlayerStateManager player)
     {
         //Debug.Log("Player is in the air / Air State");
-        playerSpeed = player.comingFromDash ? 12:7;
+        player.playerData.playerSpeed = player.comingFromDash ? 12:7;
+        player.playerData.basePlayerSpeed = 7;
         shakeOnLand = false;
         pastFirstFrame = false;
         player.playerData.fastFallCounter = 0;
@@ -40,9 +41,9 @@ public class PlayerAir : PlayerAbstract
     }
     public override void UpdateState(PlayerStateManager player)
     {
-        if(playerSpeed > 7)
+        if(player.playerData.playerSpeed > player.playerData.basePlayerSpeed && player.playerData.autoResetSpeed)
         {
-            playerSpeed -= 0.05f;
+            player.playerData.playerSpeed += player.playerData.playerSpeed > player.playerData.basePlayerSpeed ? -0.1f:0.1f;
             if(!player.playerData.resetVelocity)
             {
                 player.playerData.PlayerRb.linearVelocityX -= player.playerData.leftOrRight? 0.05f : -0.05f;
@@ -85,7 +86,7 @@ public class PlayerAir : PlayerAbstract
                 currentAttack = PlayerStateManager.AttackType.backAir;
             }
             
-            PlayerVelocity = new Vector2(playerSpeed, player.playerData.PlayerRb.linearVelocityY);
+            PlayerVelocity = new Vector2(player.playerData.playerSpeed, player.playerData.PlayerRb.linearVelocityY);
             player.playerData.PlayerRb.linearVelocity = PlayerVelocity;// + OffsetVelocity;
             moving = true;
             player.playerData.resetVelocity = true;
@@ -100,7 +101,7 @@ public class PlayerAir : PlayerAbstract
             {
                 currentAttack = PlayerStateManager.AttackType.forwardAir;
             }
-            PlayerVelocity = new Vector2(-playerSpeed, player.playerData.PlayerRb.linearVelocityY);
+            PlayerVelocity = new Vector2(-player.playerData.playerSpeed, player.playerData.PlayerRb.linearVelocityY);
             player.playerData.PlayerRb.linearVelocity = PlayerVelocity;// + OffsetVelocity;
             moving = true;
             player.playerData.resetVelocity = true;
@@ -280,6 +281,7 @@ public class PlayerAir : PlayerAbstract
     public override void LeaveState(PlayerStateManager player)
     {
         player.comingFromDash = false;
+        player.playerData.resetVelocity = true;
         player.playerData.anim.SetBool("currentlyFixed",false);
         player.playerData.anim.SetBool("jumping", false);
         player.playerData.anim.SetBool("falling", false);

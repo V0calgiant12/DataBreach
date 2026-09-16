@@ -3,7 +3,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "PlayerData", menuName = "ScriptableObjects/PlayerData")]
 public class PlayerData : ScriptableObject
 {
-    [Header("Stats")]
+    [Header("General Stats")]
     public int playerHealth = 5;
     public int fastFallCounter = 0;
     public int jumpBufferCounter = 0;
@@ -12,17 +12,22 @@ public class PlayerData : ScriptableObject
     public int interactingCooldown = 0;
     public int iFrames = 0;
     public int ricochet = 0;
-    public float mudSpeedMulti = 1;
-    public float mudJumpMulti = 1;
     public Vector2 lastCheckpoint = new Vector2(0,0);
     public int bufferedAtk = 0;
     public Vector2 bufferedAtkDir = new Vector2(0,0);
     [Header("Movement")]
+    public float basePlayerSpeed;
+    public float playerSpeed;
+    public float generalSpeedMulti = 1;
+    public float mudSpeedMulti = 1;
+    public float mudJumpMulti = 1;
     public bool sprinting = false;
     public bool crouching = false;
     public bool doubleJumpAvailable = true;
     public bool movementAllowed = true;
+    public bool limitedMovement = false;
     public bool shortJumping = true;
+    public bool autoResetSpeed = true;
     [Header("Checks")]
     public bool leftOrRight = false;
     public bool interacting = false;

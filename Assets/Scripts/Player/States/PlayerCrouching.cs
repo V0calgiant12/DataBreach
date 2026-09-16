@@ -13,11 +13,20 @@ public class PlayerCrouching : PlayerAbstract
         player.playerData.anim.SetBool("crouching", true);
         player.playerData.resetVelocity = true;
         player.playerData.shortJumping = true;
+        player.playerData.playerSpeed = 3;
+        player.playerData.basePlayerSpeed = 3;
         //Switch back to idle after code is done running
     }
     public override void UpdateState(PlayerStateManager player)
     {
-        playerSpeed = 3 * PlayerStateManager.Instance.playerData.mudSpeedMulti;
+        if(player.playerData.playerSpeed != player.playerData.basePlayerSpeed && player.playerData.autoResetSpeed)
+        {
+            player.playerData.playerSpeed += player.playerData.playerSpeed > player.playerData.basePlayerSpeed ? -0.1f:0.1f;
+            if(!player.playerData.resetVelocity)
+            {
+                player.playerData.PlayerRb.linearVelocityX -= player.playerData.leftOrRight? 0.1f : -0.1f;
+            }
+        }
         
         // Attacking
         if (player.playerData.bufferedAtk > 0) // Check for an attack.
@@ -62,7 +71,7 @@ public class PlayerCrouching : PlayerAbstract
         player.playerData.anim.SetBool("moving", false);
         if (UserInput.Instance.MovementInput.x > 0.25f)
         {
-            PlayerVelocity = new Vector2(playerSpeed, player.playerData.PlayerRb.linearVelocityY);
+            PlayerVelocity = new Vector2(player.playerData.playerSpeed, player.playerData.PlayerRb.linearVelocityY);
             player.playerData.PlayerRb.linearVelocity = PlayerVelocity + player.playerData.OffsetVelocity;
             player.playerData.leftOrRight = true;
             player.playerData.anim.SetBool("moving", true);
@@ -70,7 +79,7 @@ public class PlayerCrouching : PlayerAbstract
         }
         if (UserInput.Instance.MovementInput.x < -0.25f) 
         {
-            PlayerVelocity = new Vector2(-playerSpeed, player.playerData.PlayerRb.linearVelocityY);
+            PlayerVelocity = new Vector2(-player.playerData.playerSpeed, player.playerData.PlayerRb.linearVelocityY);
             player.playerData.PlayerRb.linearVelocity = PlayerVelocity + player.playerData.OffsetVelocity;
             player.playerData.leftOrRight = false;
             player.playerData.anim.SetBool("moving", true);

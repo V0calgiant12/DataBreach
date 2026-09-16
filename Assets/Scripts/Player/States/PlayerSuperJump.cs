@@ -15,7 +15,8 @@ public class PlayerSuperJump : PlayerAbstract
     }
     public override void EnterState(PlayerStateManager player)
     {
-        playerSpeed = 7;
+        player.playerData.playerSpeed = 7;
+        player.playerData.basePlayerSpeed = 7;
         shakeOnLand = false;
         initialJump = true;
         pastFirstFrame = false;
@@ -66,14 +67,14 @@ public class PlayerSuperJump : PlayerAbstract
             if (UserInput.Instance.MovementInput.x > 0.25f) // Moving Right
             {
                 
-                PlayerVelocity = new Vector2(playerSpeed, player.playerData.PlayerRb.linearVelocityY);
+                PlayerVelocity = new Vector2(player.playerData.playerSpeed, player.playerData.PlayerRb.linearVelocityY);
                 player.playerData.PlayerRb.linearVelocity = PlayerVelocity;// + OffsetVelocity;
                 moving = true;
                 player.playerData.resetVelocity = true;
             }
             if (UserInput.Instance.MovementInput.x < -0.25f) // Moving left
             {
-                PlayerVelocity = new Vector2(-playerSpeed, player.playerData.PlayerRb.linearVelocityY);
+                PlayerVelocity = new Vector2(-player.playerData.playerSpeed, player.playerData.PlayerRb.linearVelocityY);
                 player.playerData.PlayerRb.linearVelocity = PlayerVelocity;// + OffsetVelocity;
                 moving = true;
                 player.playerData.resetVelocity = true;

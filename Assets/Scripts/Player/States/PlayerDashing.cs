@@ -15,7 +15,8 @@ public class PlayerDashing : PlayerAbstract
         player.playerData.anim.SetBool("dashing",true);
         player.playerData.anim.SetBool("superJumping",false);
         player.playerData.anim.SetBool("attacking",false);
-        playerSpeed = 12;
+        player.playerData.playerSpeed = 12;
+        player.playerData.basePlayerSpeed = 12;
         player.playerData.PlayerRb.gravityScale = 0;
         dashTimer = 20;
         player.playerData.resetVelocity = false;
@@ -57,7 +58,7 @@ public class PlayerDashing : PlayerAbstract
             player.SwitchState(player.AirState);
             if (!attacked)
             {
-                player.playerData.PlayerRb.linearVelocityX = playerSpeed * (player.playerData.leftOrRight? 1 : -1);
+                player.playerData.PlayerRb.linearVelocityX = player.playerData.playerSpeed * (player.playerData.leftOrRight? 1 : -1);
             }
             else
             {
@@ -95,7 +96,7 @@ public class PlayerDashing : PlayerAbstract
             {
                 Debug.Log("Early Cancel");
                 player.SwitchState(player.AirState);
-                //player.playerData.PlayerRb.linearVelocityX = playerSpeed ;
+                //player.playerData.PlayerRb.linearVelocityX = player.playerData.playerSpeed ;
             }
             // Ground Check
             if (GroundCheck.Instance._IsGrounded && dashTimer < 15)

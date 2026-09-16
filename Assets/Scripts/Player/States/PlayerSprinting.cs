@@ -15,29 +15,36 @@ public class PlayerSprinting : PlayerAbstract
         player.playerData.anim.SetBool("walking", false);
         player.playerData.anim.SetBool("moving", true);
         player.playerData.shortJumping = true;
+        player.playerData.playerSpeed = 15;
+        player.playerData.basePlayerSpeed = 15;
     }
     public override void UpdateState(PlayerStateManager player)
     {
-        playerSpeed = 15f * PlayerStateManager.Instance.playerData.mudSpeedMulti;
+        if(player.playerData.playerSpeed != player.playerData.basePlayerSpeed && player.playerData.autoResetSpeed)
+        {
+            player.playerData.playerSpeed += player.playerData.playerSpeed > player.playerData.basePlayerSpeed ? -0.1f:0.1f;
+            if(!player.playerData.resetVelocity)
+            {
+                player.playerData.PlayerRb.linearVelocityX -= player.playerData.leftOrRight? 0.1f : -0.1f;
+            }
+        }
         moving = false;
 
         // sprint right
         if (UserInput.Instance.MovementInput.x > 0.25f && player.playerData.movementAllowed)
         {
-            PlayerVelocity = new Vector2(playerSpeed, player.playerData.PlayerRb.linearVelocityY);
+            PlayerVelocity = new Vector2(player.playerData.playerSpeed, player.playerData.PlayerRb.linearVelocityY);
             player.playerData.PlayerRb.linearVelocity = PlayerVelocity + player.playerData.OffsetVelocity;
             player.playerData.leftOrRight = true;
             moving = true;
-            player.playerData.resetVelocity = true;
         }
         // sprint left
         if (UserInput.Instance.MovementInput.x < -0.25f && player.playerData.movementAllowed)
         {
-            PlayerVelocity = new Vector2(-playerSpeed, player.playerData.PlayerRb.linearVelocityY);
+            PlayerVelocity = new Vector2(-player.playerData.playerSpeed, player.playerData.PlayerRb.linearVelocityY);
             player.playerData.PlayerRb.linearVelocity = PlayerVelocity + player.playerData.OffsetVelocity;
             player.playerData.leftOrRight = false;
             moving = true;
-            player.playerData.resetVelocity = true;
         }
 
         // Attacking
@@ -47,14 +54,14 @@ public class PlayerSprinting : PlayerAbstract
         }
 
         // if crouching go to crouching
-        if (player.playerData.crouching)
+        if (player.playerData.crouching && player.playerData.playerSpeed == player.playerData.basePlayerSpeed)
         {
             player.SwitchState(player.CrouchingState);
             player.currentState.UpdateState(player);
             return;
         }
         // if not moving then go to idle
-        if (!moving)
+        if (!moving && player.playerData.resetVelocity && player.playerData.playerSpeed == player.playerData.basePlayerSpeed)
         {
             player.playerData.PlayerRb.linearVelocityX = 0;
             player.SwitchState(player.IdleState);
@@ -62,7 +69,7 @@ public class PlayerSprinting : PlayerAbstract
             return;
         }
         // if not sprinting go to walking 
-        if (player.playerData.sprinting == false)
+        if (player.playerData.sprinting == false && player.playerData.playerSpeed == player.playerData.basePlayerSpeed)
         {
             player.playerData.anim.SetBool("sprinting", false);
             //Debug.Log(player.playerData.sprinting);

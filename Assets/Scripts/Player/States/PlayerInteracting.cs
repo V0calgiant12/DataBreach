@@ -38,9 +38,9 @@ public class PlayerInteracting : PlayerAbstract
                 player.playerData.anim.SetBool("crouching", false);
                 break;
             case(PlayerStateManager.InteractControls.WalkLeft):
-                playerSpeed = 8*PlayerStateManager.Instance.playerData.mudSpeedMulti;
+                player.playerData.playerSpeed = 8*PlayerStateManager.Instance.playerData.mudSpeedMulti;
                 player.playerData.leftOrRight = false;
-                player.playerData.PlayerRb.linearVelocityX = -playerSpeed;
+                player.playerData.PlayerRb.linearVelocityX = -player.playerData.playerSpeed;
                 player.playerData.anim.SetBool("moving", true);
                 player.playerData.anim.SetBool("walking", true);
                 player.playerData.anim.SetBool("sprinting", false);
@@ -52,9 +52,9 @@ public class PlayerInteracting : PlayerAbstract
                 }
                 break;
             case(PlayerStateManager.InteractControls.WalkRight):
-                playerSpeed = 8*PlayerStateManager.Instance.playerData.mudSpeedMulti;
+                player.playerData.playerSpeed = 8*PlayerStateManager.Instance.playerData.mudSpeedMulti;
                 player.playerData.leftOrRight = true;
-                player.playerData.PlayerRb.linearVelocityX = playerSpeed;
+                player.playerData.PlayerRb.linearVelocityX = player.playerData.playerSpeed;
                 player.playerData.anim.SetBool("moving", true);
                 player.playerData.anim.SetBool("walking", true);
                 player.playerData.anim.SetBool("sprinting", false);
@@ -66,9 +66,9 @@ public class PlayerInteracting : PlayerAbstract
                 }
                 break;
             case(PlayerStateManager.InteractControls.SprintLeft):
-                playerSpeed = 15*PlayerStateManager.Instance.playerData.mudSpeedMulti;
+                player.playerData.playerSpeed = 15*PlayerStateManager.Instance.playerData.mudSpeedMulti;
                 player.playerData.leftOrRight = false;
-                player.playerData.PlayerRb.linearVelocityX = -playerSpeed;
+                player.playerData.PlayerRb.linearVelocityX = -player.playerData.playerSpeed;
                 player.playerData.anim.SetBool("moving", true);
                 player.playerData.anim.SetBool("walking", false);
                 player.playerData.anim.SetBool("sprinting", true);
@@ -80,9 +80,9 @@ public class PlayerInteracting : PlayerAbstract
                 }
                 break;
             case(PlayerStateManager.InteractControls.SprintRight):
-                playerSpeed = 15*PlayerStateManager.Instance.playerData.mudSpeedMulti;
+                player.playerData.playerSpeed = 15*PlayerStateManager.Instance.playerData.mudSpeedMulti;
                 player.playerData.leftOrRight = true;
-                player.playerData.PlayerRb.linearVelocityX = playerSpeed;
+                player.playerData.PlayerRb.linearVelocityX = player.playerData.playerSpeed;
                 player.playerData.anim.SetBool("moving", true);
                 player.playerData.anim.SetBool("walking", false);
                 player.playerData.anim.SetBool("sprinting", true);
@@ -115,9 +115,9 @@ public class PlayerInteracting : PlayerAbstract
                 state = PlayerStateManager.InteractControls.Stop;
                 break;
             case(PlayerStateManager.InteractControls.FullJumpRight):
-                playerSpeed = 7*PlayerStateManager.Instance.playerData.mudSpeedMulti;
+                player.playerData.playerSpeed = 7*PlayerStateManager.Instance.playerData.mudSpeedMulti;
                 player.playerData.leftOrRight = true;
-                player.playerData.PlayerRb.linearVelocityX = playerSpeed;
+                player.playerData.PlayerRb.linearVelocityX = player.playerData.playerSpeed;
                 if (GroundCheck.Instance._IsGrounded)
                 {
                     player.playerData.PlayerRb.linearVelocityY = jumpStrength * PlayerStateManager.Instance.playerData.mudJumpMulti;
@@ -144,9 +144,9 @@ public class PlayerInteracting : PlayerAbstract
                 }
                 break;
             case(PlayerStateManager.InteractControls.FullJumpLeft):
-                playerSpeed = 7*PlayerStateManager.Instance.playerData.mudSpeedMulti;
+                player.playerData.playerSpeed = 7*PlayerStateManager.Instance.playerData.mudSpeedMulti;
                 player.playerData.leftOrRight = false;
-                player.playerData.PlayerRb.linearVelocityX = -playerSpeed;
+                player.playerData.PlayerRb.linearVelocityX = -player.playerData.playerSpeed;
                 if (GroundCheck.Instance._IsGrounded)
                 {
                     player.playerData.PlayerRb.linearVelocityY = jumpStrength * PlayerStateManager.Instance.playerData.mudJumpMulti;
@@ -193,9 +193,9 @@ public class PlayerInteracting : PlayerAbstract
                 state = PlayerStateManager.InteractControls.Stop;
                 break;
             case(PlayerStateManager.InteractControls.ShortJumpRight):
-                playerSpeed = 7*PlayerStateManager.Instance.playerData.mudSpeedMulti;
+                player.playerData.playerSpeed = 7*PlayerStateManager.Instance.playerData.mudSpeedMulti;
                 player.playerData.leftOrRight = true;
-                player.playerData.PlayerRb.linearVelocityX = playerSpeed;
+                player.playerData.PlayerRb.linearVelocityX = player.playerData.playerSpeed;
                 if (GroundCheck.Instance._IsGrounded)
                 {
                     player.playerData.PlayerRb.linearVelocityY = jumpStrength/2 * PlayerStateManager.Instance.playerData.mudJumpMulti;
@@ -222,9 +222,9 @@ public class PlayerInteracting : PlayerAbstract
                 }
                 break;
             case(PlayerStateManager.InteractControls.ShortJumpLeft):
-                playerSpeed = 7*PlayerStateManager.Instance.playerData.mudSpeedMulti;
+                player.playerData.playerSpeed = 7*PlayerStateManager.Instance.playerData.mudSpeedMulti;
                 player.playerData.leftOrRight = false;
-                player.playerData.PlayerRb.linearVelocityX = -playerSpeed;
+                player.playerData.PlayerRb.linearVelocityX = -player.playerData.playerSpeed;
                 if (GroundCheck.Instance._IsGrounded)
                 {
                     player.playerData.PlayerRb.linearVelocityY = jumpStrength/2 * PlayerStateManager.Instance.playerData.mudJumpMulti;
@@ -274,6 +274,8 @@ public class PlayerInteracting : PlayerAbstract
         {
             audioTimer += Time.timeScale == 1 ? 1:0;
         }
+        
+        player.playerData.basePlayerSpeed = player.playerData.playerSpeed;
     }
     public override void LateUpdateState(PlayerStateManager player)
     {
