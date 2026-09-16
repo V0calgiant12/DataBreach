@@ -70,7 +70,7 @@ public class TutorialCutsceneManager : MonoBehaviour
                 StartCoroutine(PlayerJump());
                 break;
             case(6):
-                PlayerStateManager.Instance.Interact(PlayerStateManager.InteractControls.ShortJumpRight,3);
+                PlayerStateManager.Instance.Interact(PlayerStateManager.InteractControls.ShortJumpRight,2.5f);
                 break;
         }
     }
