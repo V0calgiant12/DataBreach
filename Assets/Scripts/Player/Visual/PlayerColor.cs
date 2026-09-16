@@ -7,8 +7,9 @@ public class PlayerColor : MonoBehaviour
     [SerializeField] private UnityEngine.Color playerColor;
     [Header("Player Color References:")]
     [SerializeField] private SpriteRenderer sr;
-    void Start()
+    void OnEnable()
     {
+        Update();
     }
 
     void Update()
