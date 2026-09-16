@@ -92,19 +92,20 @@ public class IntroCutsceneManager : MonoBehaviour
         switch (number)
         {
             case(1):
-                textData._TextPageInput[0] = "The bit doesn't seem to be anywhere around here...";
+                textData.ChangeText(0,"The bit is no where in sight.",true);
                 textData._TextSpeed = 3;
                 textData._TextSound = bitSound;
                 StartCoroutine(WaitUntilTextCloses(30,60));
                 break;
             case(2):
-                textData._TextPageInput[0] = "You need to find it quick, who knows what could have happened to it by now.<br>Maybe it's further up ahead.";
+                textData.ChangeText(0,"It needs to be found quickly, who knows what could have happened to it by now.",true);
+                textData.ChangeText(1,"It must be further ahead.",false);
                 textData._TextSpeed = 3;
                 textData._TextSound = bitSound;
                 StartCoroutine(WaitUntilTextCloses(200,30));
                 break;
             case(3):
-                textData._TextPageInput[0] = "Without knowing what caused whatever happened up there, there's no telling what could've happened down here.<br>This world could end up being extremely dangerous.";
+                textData.ChangeText(0,"Without knowing what caused whatever happened up there, there's no telling what could've happened down here.<br>This world could end up being extremely dangerous.",true);
                 textData._TextSpeed = 3;
                 textData._TextSound = bitSound;
                 StartCoroutine(WaitUntilTextCloses(240,60));
@@ -190,19 +191,16 @@ public class IntroCutsceneManager : MonoBehaviour
         int elapsed = 0;
         while(delay > elapsed)
         {
-            elapsed += 1;
-            inputTimer = -100;
+            elapsed += Time.timeScale == 1 ? 1 : 0;
             yield return null;
         }
-        TextWrite.Instance.WriteText(textData);
-        yield return new WaitUntil(() => !TextWrite.Instance._Writing && (UserInput.Instance.KeyDownInteract||UserInput.Instance.KeyDownAttack));
-        TextWrite.Instance.Close();
+        TextWrite.Instance.WriteText(GetComponent<TextData>());
+        yield return new WaitUntil(() => !TextWrite.Instance.textBox.open);
         textIsOpen = false;
         elapsed = 0;
         while(delay2 > elapsed)
         {
-            elapsed += 1;
-            inputTimer = -100;
+            elapsed += Time.timeScale == 1 ? 1 : 0;
             yield return null;
         }
         ProgressCutscene();

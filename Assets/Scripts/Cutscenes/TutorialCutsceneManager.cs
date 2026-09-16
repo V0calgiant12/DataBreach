@@ -140,8 +140,6 @@ public class TutorialCutsceneManager : MonoBehaviour
         }
         TextWrite.Instance.WriteText(GetComponent<TextData>());
         yield return new WaitUntil(() => !TextWrite.Instance._Writing && (UserInput.Instance.KeyDownInteract||UserInput.Instance.KeyDownAttack));
-        TextWrite.Instance.Close();
-        textIsOpen = false;
         if (!allowMovementAfter)
         {
             PlayerStateManager.Instance.Interact(PlayerStateManager.InteractControls.Stop,0);

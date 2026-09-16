@@ -16,10 +16,7 @@ public class TextData : MonoBehaviour
         {
             Array.Clear(_TextPageInput,0,1);
         }
-        if(pageNumber > _TextPageInput.Length - 1)
-        {
-            Array.Resize(ref _TextPageInput,pageNumber+1);
-        }
+        Array.Resize(ref _TextPageInput,pageNumber+1);
         _TextPageInput[pageNumber] = newText;
     }
 }

@@ -157,22 +157,18 @@ public class TextWrite : MonoBehaviour
             yield return null;
         }
         _Writing = false;
-        if(GameObject.Find("Player").GetComponent<PlayerStateManager>() != null)
-        {
-            StartCoroutine(ReadyToClose());
-        }
-    }
-    private IEnumerator ReadyToClose()
-    {
         while (textBox.open)
         {
             if ((UserInput.Instance.KeyDownInteract||UserInput.Instance.KeyDownAttack) && _Writing == false && Time.timeScale == 1)
             {
                 if(pageNumber >= maxPages)
                 {
-                    PlayerStateManager.Instance.playerData.interacting = false;
+                    if(GameObject.Find("Player").GetComponent<PlayerStateManager>() != null)
+                    {
+                        PlayerStateManager.Instance.playerData.interacting = false;
+                        PlayerStateManager.Instance.SwitchState(PlayerStateManager.Instance.IdleState);
+                    }
                     Close();
-                    PlayerStateManager.Instance.SwitchState(PlayerStateManager.Instance.IdleState);
                 }
                 else
                 {
