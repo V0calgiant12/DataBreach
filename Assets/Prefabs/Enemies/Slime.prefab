@@ -559,6 +559,7 @@ MonoBehaviour:
   knockbackReduction: {x: 1, y: 1}
   knockbackImmune: 0
   invulnerable: 0
+  immediatelDestroyOnDeath: 1
   iFrames: 0
   trackedHealth: 1
   _DamageTaken: 0
@@ -895,6 +896,7 @@ MonoBehaviour:
   _SlimeImpact: {fileID: 8300000, guid: 35ee2d919fad96a469e7f79092bb6691, type: 3}
   _SlimeAttack: {fileID: 8300000, guid: 807bd5152a662ed4a9241939b4fef32d, type: 3}
   _SlimeDeath: {fileID: 8300000, guid: 0709a445dfc22cb4d8de281c203077b7, type: 3}
+  enemyHit: {fileID: 6030855377424304500}
 --- !u!114 &2061067415103168959
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -907,7 +909,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3319696bd4fbe2241a944ab0d8fb086a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ForceManager
-  PlayerDataRef: {fileID: 11400000, guid: ef22878c3af9ca548a85988a7addec59, type: 2}
   rb: {fileID: 7965548649738066340}
 --- !u!114 &5601684875710946543
 MonoBehaviour:

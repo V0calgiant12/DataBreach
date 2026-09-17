@@ -100,7 +100,7 @@ public class EnemyHit : MonoBehaviour
                         break;
                     case(5):
                         // Dash attacks (5)
-                        DamageEnemy(1,15,8,PlayerStateManager.Instance.transform.position.x);
+                        DamageEnemy(1,20,8,PlayerStateManager.Instance.transform.position.x);
                         break;
                     case(6):
                         // Air Dash attacks (6)

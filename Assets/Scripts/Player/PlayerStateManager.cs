@@ -20,6 +20,7 @@ public class PlayerStateManager : MonoBehaviour
     public PlayerData playerData;
     public GameObject playerSprite;
     public float storedXRicochet = 0;
+    public int dashAttackCd = 0;
     public bool isJumping;
     public bool comingFromDash = false;
     public bool forceSuperJump = false;
@@ -143,6 +144,7 @@ public class PlayerStateManager : MonoBehaviour
         FindPlayerObject();
         playerSprite.transform.localScale = new Vector3(playerData.leftOrRight ? 1:-1,1,1);
         // Counter countdowns
+        dashAttackCd -= Time.timeScale == 1 ? 1 : 0;
         playerData.jumpBufferCounter -= Time.timeScale == 1 ? 1 : 0;
         playerData.coyoteTimeCounter -= Time.timeScale == 1 ? 1 : 0;
         playerData.sprintBufferCounter -= Time.timeScale == 1 ? 1 : 0;
@@ -238,7 +240,7 @@ public class PlayerStateManager : MonoBehaviour
                 case(AttackType.dash):
                     playerData.movementAllowed = false;
                     playerData.anim.SetInteger("attackId",5);
-                    StartCoroutine(NoMovingWhileAttack(0));
+                    StartCoroutine(NoMovingWhileAttack());
                     break;
                 case(AttackType.dashAir):
                     playerData.anim.SetInteger("attackId",6);
@@ -322,37 +324,28 @@ public class PlayerStateManager : MonoBehaviour
         playerData.anim.SetBool("hit", false);
         playerData.movementAllowed = true;
     }
-    public IEnumerator NoMovingWhileAttack(float attackTimer)
+    public IEnumerator NoMovingWhileAttack()
     {
         int elapsed = 0;
-        if(attackTimer == 0)
+        playerData.PlayerRb.linearVelocityX = 25 * ((playerData.PlayerRb.linearVelocityX > 0) ? 1 : -1);
+        playerData.iFrames = Mathf.Abs(Mathf.FloorToInt(20*playerData.mudSpeedMulti)); // t=d/r, t=velocity/0.8f since velocity is multiplied by 0.8f every frame
+        while ((playerData.leftOrRight ? playerData.PlayerRb.linearVelocityX > 1.25f:playerData.PlayerRb.linearVelocityX < -1.25f)  || elapsed > 120)
         {
-            playerData.PlayerRb.linearVelocityX = 50 * ((playerData.PlayerRb.linearVelocityX > 0) ? 1 : -1);
-            playerData.iFrames = Mathf.Abs(Mathf.FloorToInt(playerData.PlayerRb.linearVelocityX/0.8f))-40; // t=d/r, t=velocity/0.8f since velocity is multiplied by 0.8f every frame
-            while (MathF.Abs(playerData.PlayerRb.linearVelocityX) > 1f || elapsed > 120)
-            {
-                elapsed += Time.timeScale == 1 ? 1 : 0;
-                playerData.PlayerRb.linearVelocityX = playerData.PlayerRb.linearVelocityX * 0.8f;
-                yield return null;
-            }
-            elapsed = 0;
-            while(elapsed > 5)
-            {
-                elapsed += Time.timeScale == 1 ? 1 : 0;
-            }
+            elapsed += Time.timeScale == 1 ? 1 : 0;
+            playerData.PlayerRb.linearVelocityX += Time.timeScale == 1 ? (playerData.leftOrRight? -elapsed/5:elapsed/5) : 0;
+            Debug.Log(MathF.Abs(playerData.PlayerRb.linearVelocityX));
+            yield return null;
         }
-        else
+        playerData.PlayerRb.linearVelocityX = 0;
+        elapsed = 0;
+        while(elapsed > 10)
         {
-            while (attackTimer > elapsed)
-            {
-                playerData.PlayerRb.linearVelocityX = playerData.PlayerRb.linearVelocityX * 0.75f;
-                elapsed += Time.timeScale == 1 ? 1 : 0;
-                yield return null;
-            }
+            elapsed += Time.timeScale == 1 ? 1 : 0;
         }
         playerData.anim.SetBool("attacking", false);
         playerData.jumpBufferCounter = 0;
         playerData.movementAllowed = true;
+        dashAttackCd = 25;
     }
     public IEnumerator WaitUntilNotJumping()
     {

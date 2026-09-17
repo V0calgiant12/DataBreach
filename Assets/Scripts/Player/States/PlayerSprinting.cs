@@ -49,7 +49,7 @@ public class PlayerSprinting : PlayerAbstract
         }
 
         // Attacking
-        if (player.playerData.bufferedAtk > 0)
+        if (player.playerData.bufferedAtk > 0 && player.dashAttackCd < 0)
         {
             player.Attack(PlayerStateManager.AttackType.dash,true);
         }

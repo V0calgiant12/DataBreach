@@ -23,15 +23,16 @@ public class SlimeStateManager : MonoBehaviour
     public bool lastGrounded = true;
 
     [Header("References")]
-    public GameObject slimeTrigger;
+    [SerializeField] private GameObject slimeTrigger;
     [SerializeField] private EnemyGroundCheck groundCheck;
-    public Rigidbody2D slimeRb;
-    public Transform player;
+    [SerializeField] private Rigidbody2D slimeRb;
+    [SerializeField] private Transform player;
     [SerializeField] private EffectSound audioSource;
-    public AudioClip _SlimeJump;
-    public AudioClip _SlimeImpact;
-    public AudioClip _SlimeAttack;
-    public AudioClip _SlimeDeath;
+    [SerializeField] private AudioClip _SlimeJump;
+    [SerializeField] private AudioClip _SlimeImpact;
+    [SerializeField] private AudioClip _SlimeAttack;
+    [SerializeField] private AudioClip _SlimeDeath;
+    [SerializeField] private EnemyHit enemyHit;
 
     void Awake()
     {
@@ -65,6 +66,10 @@ public class SlimeStateManager : MonoBehaviour
         {
             lastGrounded = true;
             audioSource.PlaySlimeJumpSound(_SlimeImpact);
+        }
+        if (groundCheck._IsGrounded && Mathf.Abs(slimeRb.linearVelocityX) > 5 && !enemyHit._DamageTaken)
+        {
+            slimeRb.linearVelocityX = slimeRb.linearVelocityX > 0 ? 5 : -5;
         }
     }
     private void SlimeUpdate()
