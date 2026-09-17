@@ -8,6 +8,27 @@ public class HealthTriggerArea : MonoBehaviour
     [SerializeField] private bool CanRepeat = false;
     [SerializeField] private bool DamagePlayer = false;
     [SerializeField] private bool HealPlayer = false;
+    [SerializeField] private SpriteRenderer LaserTop;
+    [SerializeField] private SpriteRenderer LaserBottom;
+    [SerializeField] private Animator anim;
+    [SerializeField] private Color laserColor;
+    void Start()
+    {
+        if(DamagePlayer)
+        {
+            laserColor = UnityEngine.Color.HSVToRGB(0,0.5f,1);
+        }
+        else if (HealPlayer)
+        {
+            laserColor = UnityEngine.Color.HSVToRGB(0.4f,0.5f,1);
+        }
+        else
+        {
+            laserColor = UnityEngine.Color.HSVToRGB(0,0,1);
+        }
+        LaserTop.color = new UnityEngine.Color(laserColor.r, laserColor.g, laserColor.b, laserColor.a);
+        LaserBottom.color = new UnityEngine.Color(laserColor.r, laserColor.g, laserColor.b, laserColor.a);
+    }
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("Player") && !Triggered)
@@ -16,6 +37,10 @@ public class HealthTriggerArea : MonoBehaviour
             if (CanRepeat)
             {
                 Triggered = false;
+            }
+            else
+            {
+                anim.SetTrigger("TurnOff");
             }
             if(DamagePlayer)
             {
