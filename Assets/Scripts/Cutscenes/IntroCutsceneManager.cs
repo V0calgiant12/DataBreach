@@ -5,59 +5,21 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class IntroCutsceneManager : MonoBehaviour
+public class IntroCutsceneManager : GeneralCutsceneManager
 {
-    [Header("Cutscene Manager References:")]
-    [SerializeField] private Animator anim;
-    [SerializeField] private Animator playerAnim;
-    [SerializeField] private TextMeshProUGUI inputText;
-    [SerializeField] private SceneTransition sceneTransition;
-    public Rigidbody2D playerRb;
-    [SerializeField] private TextData textData;
+    [Header("Intro Cutscene Manager References:")]
     [SerializeField] private AudioSource fallingWind;
-    [SerializeField] private AudioClip bitSound;
-    [SerializeField] private AudioClip playerSound;
-    public bool falling;
-    public static IntroCutsceneManager Instance;
-
-    private int inputTimer;
-    [SerializeField] private int currentScene;
-    public int maxScene;
-    public bool textIsOpen;
     void Start()
     {
         Instance = this;
-        inputTimer = 0;
-        HideInputMethod();
         ProgressCutscene();
     }
     void Update()
     {
-        if ((UserInput.Instance.KeyDownInteract||UserInput.Instance.KeyDownAttack) && inputTimer > 100)
-        {
-            HideInputMethod();
-            inputTimer = 0;
-        }
-        else
-        {
-            inputTimer += 1;
-        }
-        if(inputTimer == 600)
-        {
-            ShowInputMethod();
-        }
 
         //fallingWind.pitch = 6/playerRb.linearVelocityY-3;
     }
-    private void ShowInputMethod()
-    {
-        inputText.text = "Press " + SettingsData.Instance._InputInteract + ".";
-    }
-    private void HideInputMethod()
-    {
-        inputText.text = "";
-    }
-    public void ProgressCutscene()
+    public override void ProgressCutscene()
     {
         currentScene += 1;
         switch (currentScene)
@@ -118,7 +80,6 @@ public class IntroCutsceneManager : MonoBehaviour
         float elapsed = 0;
         while (falling)
         {
-            inputTimer = -100;
             yield return null;
         }
         playerAnim.SetInteger("attackId",10);
@@ -144,14 +105,12 @@ public class IntroCutsceneManager : MonoBehaviour
             {
                 playerRb.linearVelocityY = playerFallingVelocity;
             }
-            inputTimer = -100;
             elapsed += 1;
             yield return null;
         }
         elapsed = 0;
         while (elapsed != 500)
         {
-            inputTimer = -100;
             elapsed += 1;
             yield return null;
         }
@@ -160,7 +119,6 @@ public class IntroCutsceneManager : MonoBehaviour
         elapsed = 0;
         while (elapsed != 260)
         {
-            inputTimer = -100;
             elapsed += 1;
             yield return null;
         }
@@ -168,7 +126,6 @@ public class IntroCutsceneManager : MonoBehaviour
         elapsed = 0;
         while (elapsed != 90)
         {
-            inputTimer = -100;
             elapsed += 1;
             yield return null;
         }
@@ -179,7 +136,6 @@ public class IntroCutsceneManager : MonoBehaviour
         int elapsed = 0;
         while (elapsed != 400)
         {
-            inputTimer = -100;
             playerRb.linearVelocityX = 8;
             elapsed += 1;
             yield return null;

@@ -51,7 +51,7 @@ public class TextWrite : MonoBehaviour
                 text.text = "";
             }
         }
-        else if (!IntroCutsceneManager.Instance.textIsOpen)
+        else if (!GeneralCutsceneManager.Instance.textIsOpen)
         {
             text.text = "";
         }

@@ -4,6 +4,6 @@ public class CutsceneProgressionTrigger : MonoBehaviour
 {
     void OnTriggerEnter2D(Collider2D other)
     {
-        IntroCutsceneManager.Instance.falling = false;
+        GeneralCutsceneManager.Instance.falling = false;
     }
 }
