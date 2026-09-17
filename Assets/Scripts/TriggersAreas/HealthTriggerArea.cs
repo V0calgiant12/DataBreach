@@ -11,16 +11,20 @@ public class HealthTriggerArea : MonoBehaviour
     [SerializeField] private SpriteRenderer LaserTop;
     [SerializeField] private SpriteRenderer LaserBottom;
     [SerializeField] private Animator anim;
+    [SerializeField] private GameObject HealthParticle;
+    [SerializeField] private GameObject DamageParticle;
     [SerializeField] private Color laserColor;
     void Start()
     {
         if(DamagePlayer)
         {
             laserColor = UnityEngine.Color.HSVToRGB(0,0.5f,1);
+            DamageParticle.SetActive(true);
         }
         else if (HealPlayer)
         {
             laserColor = UnityEngine.Color.HSVToRGB(0.4f,0.5f,1);
+            HealthParticle.SetActive(true);
         }
         else
         {
@@ -41,6 +45,8 @@ public class HealthTriggerArea : MonoBehaviour
             else
             {
                 anim.SetTrigger("TurnOff");
+                HealthParticle.SetActive(false);
+                DamageParticle.SetActive(false);
             }
             if(DamagePlayer)
             {
