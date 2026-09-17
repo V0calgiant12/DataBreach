@@ -30,7 +30,7 @@ public class GoblinStateManager : MonoBehaviour
 
 
     [Header("Combat")]
-    public int attackCD = 30;
+    public int attackCD = 25;
     public int currentAtkCd = 0;
     private int audioCooldown = 0;
     public bool aggro = false;
