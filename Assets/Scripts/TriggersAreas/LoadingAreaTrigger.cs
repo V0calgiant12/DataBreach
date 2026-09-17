@@ -12,10 +12,19 @@ public class LoadingAreaTrigger : MonoBehaviour
     /// <returns></returns>
     [SerializeField] private GameObject ObjectsAndEnemies;
     [SerializeField] private GameObject Grid;
+    [SerializeField] private int Id;
     void Awake()
     {
-        ObjectsAndEnemies.SetActive(false);
-        Grid.SetActive(false);
+        if (Id == 0)
+        {
+            ObjectsAndEnemies.SetActive(true);
+            Grid.SetActive(true);
+        }
+        else
+        {
+            ObjectsAndEnemies.SetActive(false);
+            Grid.SetActive(false);
+        }
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
