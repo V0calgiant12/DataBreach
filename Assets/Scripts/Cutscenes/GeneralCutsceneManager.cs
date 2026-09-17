@@ -16,9 +16,14 @@ public abstract class GeneralCutsceneManager : MonoBehaviour
     public AudioClip playerSound;
     public static GeneralCutsceneManager Instance;
     public int currentScene;
-    public int maxScene;
     public bool textIsOpen;
     public bool falling;
+    public enum CutsceneType
+    {
+        Intro,
+        Bit
+    }
+    public CutsceneType cutscene;
 
     void Start()
     {
@@ -56,4 +61,29 @@ public abstract class GeneralCutsceneManager : MonoBehaviour
         }
     }
     public abstract void ProgressCutscene();
+    public abstract void Text(int number);
+    public IEnumerator WaitUntilTextCloses(int delay, int delay2)
+    {
+        int elapsed = 0;
+        while(delay > elapsed)
+        {
+            elapsed += Time.timeScale == 1 ? 1 : 0;
+            yield return null;
+        }
+        TextWrite.Instance.WriteText(GetComponent<TextData>());
+        yield return new WaitUntil(() => !TextWrite.Instance.textBox.open);
+        textIsOpen = false;
+        elapsed = 0;
+        while(delay2 > elapsed)
+        {
+            elapsed += Time.timeScale == 1 ? 1 : 0;
+            yield return null;
+        }
+        ProgressCutscene();
+    }
+    public IEnumerator WaitForFrames(int frames)
+    {
+        yield return new WaitForFrames(frames);
+        ProgressCutscene();
+    }
 }

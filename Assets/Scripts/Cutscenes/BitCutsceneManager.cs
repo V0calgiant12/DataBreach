@@ -24,16 +24,17 @@ public class BitCutsceneManager : GeneralCutsceneManager
         switch (currentScene)
         {
             case(1):
-                Walk(35,false);
+                StartCoroutine(Walk(20,false));
                 break;
             case(2):
-                
+                StartCoroutine(WaitForFrames(60));
                 break;
             case(3):
-                
+                anim.SetInteger("Scene", 3);
+                StartCoroutine(WaitForFrames(30));
                 break;
             case(4):
-                
+                StartCoroutine(Sprint(20,false));
                 break;
             case(5):
                 EndCutscene();
@@ -44,7 +45,7 @@ public class BitCutsceneManager : GeneralCutsceneManager
     {
         sceneTransition.TransitionToScene(2,2);
     }
-    private void Text(int number)
+    public override void Text(int number)
     {
         textIsOpen = true;
         switch (number)
@@ -69,29 +70,5 @@ public class BitCutsceneManager : GeneralCutsceneManager
                 StartCoroutine(WaitUntilTextCloses(240,60));
                 break;
         }
-    }
-    private IEnumerator WaitUntilTextCloses(int delay, int delay2)
-    {
-        int elapsed = 0;
-        while(delay > elapsed)
-        {
-            elapsed += Time.timeScale == 1 ? 1 : 0;
-            yield return null;
-        }
-        TextWrite.Instance.WriteText(GetComponent<TextData>());
-        yield return new WaitUntil(() => !TextWrite.Instance.textBox.open);
-        textIsOpen = false;
-        elapsed = 0;
-        while(delay2 > elapsed)
-        {
-            elapsed += Time.timeScale == 1 ? 1 : 0;
-            yield return null;
-        }
-        ProgressCutscene();
-    }
-    private IEnumerator WaitForFrames(int frames)
-    {
-        yield return new WaitForFrames(frames);
-        ProgressCutscene();
     }
 }

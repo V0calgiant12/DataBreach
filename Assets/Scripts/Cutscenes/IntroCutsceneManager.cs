@@ -48,7 +48,7 @@ public class IntroCutsceneManager : GeneralCutsceneManager
     {
         sceneTransition.TransitionToScene(2,2);
     }
-    private void Text(int number)
+    public override void Text(int number)
     {
         textIsOpen = true;
         switch (number)
@@ -142,28 +142,5 @@ public class IntroCutsceneManager : GeneralCutsceneManager
         }
         anim.SetTrigger("FadeOut");
     }
-    private IEnumerator WaitUntilTextCloses(int delay, int delay2)
-    {
-        int elapsed = 0;
-        while(delay > elapsed)
-        {
-            elapsed += Time.timeScale == 1 ? 1 : 0;
-            yield return null;
-        }
-        TextWrite.Instance.WriteText(GetComponent<TextData>());
-        yield return new WaitUntil(() => !TextWrite.Instance.textBox.open);
-        textIsOpen = false;
-        elapsed = 0;
-        while(delay2 > elapsed)
-        {
-            elapsed += Time.timeScale == 1 ? 1 : 0;
-            yield return null;
-        }
-        ProgressCutscene();
-    }
-    private IEnumerator WaitForFrames(int frames)
-    {
-        yield return new WaitForFrames(frames);
-        ProgressCutscene();
-    }
+    
 }

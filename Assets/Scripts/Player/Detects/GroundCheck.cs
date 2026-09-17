@@ -15,7 +15,7 @@ public class GroundCheck : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (_InCutscene && other.gameObject.CompareTag("Ground"))
+        if (_InCutscene && other.gameObject.CompareTag("Ground") && GeneralCutsceneManager.Instance.cutscene == GeneralCutsceneManager.CutsceneType.Intro)
         {
             TriggerShake.Instance.BurstShake(15,1,true,0);
         }
