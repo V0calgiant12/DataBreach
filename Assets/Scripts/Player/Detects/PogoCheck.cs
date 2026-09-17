@@ -8,7 +8,6 @@ public class PogoCheck : MonoBehaviour
     {
         if(playerData.anim.GetInteger("attackId") == 4)
         {
-            Debug.Log("Adding Force",other.gameObject);
             playerData.PlayerRb.linearVelocity = new Vector2(playerData.PlayerRb.linearVelocityX,20f);
         }
     }

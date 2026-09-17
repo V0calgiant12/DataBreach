@@ -19,9 +19,11 @@ public class PlayerStateManager : MonoBehaviour
     public static PlayerStateManager Instance;
     public PlayerData playerData;
     public GameObject playerSprite;
+    public float storedXRicochet = 0;
     public bool isJumping;
     public bool comingFromDash = false;
     public bool forceSuperJump = false;
+    public bool ricochetAvailable = false;
     [Header("Audio")]
     public AudioClip _GrassWalk;
     public AudioClip _GrassFall;
@@ -277,6 +279,18 @@ public class PlayerStateManager : MonoBehaviour
                 return;
         }
     }
+    public void Ricochet()
+    {
+        if(ricochetAvailable)
+        {
+            //-playerData.PlayerRb.linearVelocity.x + ((playerData.ricochet == 1 ? -1.1f : 1.1f) * xLaunch)
+            //Mathf.Abs(playerData.PlayerRb.linearVelocity.x) * (playerData.ricochet == 1 ? -0.9f : 0.9f)
+            playerData.PlayerRb.linearVelocityX = Mathf.Abs(storedXRicochet) * (playerData.ricochet == 2 ? -0.9f : 0.9f);
+            TriggerShake.Instance.BurstShake(storedXRicochet/2,2,true,0.8f);
+            PlayerFlash(1,0);
+        }
+    }
+    
     public IEnumerator StunPlayer(float xLaunch, float yLaunch, int timer)
     {
         if (currentState == DashingState)
@@ -285,6 +299,7 @@ public class PlayerStateManager : MonoBehaviour
         }
         playerData.resetVelocity = false;
         playerData.movementAllowed = false;
+        ricochetAvailable = true;
         int elapsed = 0;
         playerData.PlayerRb.linearVelocity = new Vector2(xLaunch, yLaunch);
         while(GroundCheck.Instance._IsGrounded == false && timer > elapsed || elapsed < 15)
@@ -292,12 +307,8 @@ public class PlayerStateManager : MonoBehaviour
             elapsed += Time.timeScale == 1 ? 1 : 0;
             if(playerData.ricochet > 0)
             {
-                //-playerData.PlayerRb.linearVelocity.x + ((playerData.ricochet == 1 ? -1.1f : 1.1f) * xLaunch)
-                //Mathf.Abs(playerData.PlayerRb.linearVelocity.x) * (playerData.ricochet == 1 ? -0.9f : 0.9f)
-                playerData.PlayerRb.linearVelocity = new Vector2(Mathf.Abs(playerData.PlayerRb.linearVelocity.x) * (playerData.ricochet == 2 ? -0.9f : 0.9f), playerData.PlayerRb.linearVelocity.y + yLaunch * 0.25f);
+                playerData.PlayerRb.linearVelocityY = playerData.PlayerRb.linearVelocity.y + yLaunch * 0.25f;
                 playerData.ricochet = 0;
-                TriggerShake.Instance.BurstShake(-1*MathF.Cos(playerData.PlayerRb.linearVelocityX/2)+(2+elapsed/25),2,true,0);
-                PlayerFlash(1,0);
                 timer += 15;
             }
             if(playerData.pickUpHeart)

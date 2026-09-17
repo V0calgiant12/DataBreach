@@ -90,6 +90,7 @@ public class PlayerAir : PlayerAbstract
             player.playerData.PlayerRb.linearVelocity = PlayerVelocity;// + OffsetVelocity;
             moving = true;
             player.playerData.resetVelocity = true;
+            player.ricochetAvailable = false;
         }
         if (UserInput.Instance.MovementInput.x < -0.25f) // Moving left
         {
@@ -105,6 +106,7 @@ public class PlayerAir : PlayerAbstract
             player.playerData.PlayerRb.linearVelocity = PlayerVelocity;// + OffsetVelocity;
             moving = true;
             player.playerData.resetVelocity = true;
+            player.ricochetAvailable = false;
         }
         if (UserInput.Instance.MovementInput.x < 0.25f && UserInput.Instance.MovementInput.x > -0.25f && player.playerData.resetVelocity) // If not moving, set x velocity to 0;
         {
@@ -206,6 +208,7 @@ public class PlayerAir : PlayerAbstract
             player.playerData.shortJumping = true;
             changeYStartNextFall = true;
             player.playerData.coyoteTimeCounter = 0;
+            player.ricochetAvailable = false;
         }
 
         // Wall Check

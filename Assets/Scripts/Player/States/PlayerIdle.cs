@@ -14,6 +14,7 @@ public class PlayerIdle : PlayerAbstract
         player.playerData.anim.SetBool("sprinting", false);
         player.playerData.resetVelocity = true;
         player.playerData.shortJumping = true;
+        player.ricochetAvailable = false;
     }
     public override void UpdateState(PlayerStateManager player)
     {

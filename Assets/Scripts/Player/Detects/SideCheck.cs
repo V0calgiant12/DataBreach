@@ -18,6 +18,11 @@ public class SideCheck : MonoBehaviour
         if (other.gameObject.CompareTag("Ground")||other.gameObject.CompareTag("MovingPlatform")||other.gameObject.CompareTag("Stone"))
         {
             playerData.ricochet = gameObject.name== "LeftSide" ? 1:2;
+            if(Mathf.Abs(playerData.PlayerRb.linearVelocityX) > 1)
+            {
+                PlayerStateManager.Instance.storedXRicochet = playerData.PlayerRb.linearVelocityX;
+            }
+            PlayerStateManager.Instance.Ricochet();
         }
         if (other.gameObject.CompareTag("Stone"))
         {
