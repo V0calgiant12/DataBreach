@@ -49,7 +49,12 @@ public class BitAI : MonoBehaviour
     }
     private IEnumerator MoveTowardsPlayer()
     {
-        GameObject player = playerOverride != null ? PlayerStateManager.Instance.gameObject : playerOverride;
+        GameObject player = playerOverride != null ? playerOverride : null;
+        if(player == null)
+        {
+            player = PlayerStateManager.Instance.gameObject;
+        }
+        
         while(Vector2.Distance(transform.position,player.transform.position) > 2.5)
         {
             rb.linearVelocityX = moveSpeed*moveSpeed*moveSpeed * (player.transform.position.x - transform.position.x);
