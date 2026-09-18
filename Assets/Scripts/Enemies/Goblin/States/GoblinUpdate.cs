@@ -17,10 +17,6 @@ public class GoblinUpdate : GoblinAbstract
         {
             goblin.SwitchState(goblin.AttackState);
         }
-        if (goblin.enemyHit._DamageTaken)
-        {
-            goblin.SwitchState(goblin.HurtState);
-        }
         if(goblin.currentState != goblin.AttackState)
         {
             goblin.currentAtkCd -= Time.timeScale == 1 ? 1 : 0;

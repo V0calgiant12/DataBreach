@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class SlimeStateManager : MonoBehaviour
+public class SlimeStateManager : EnemyAbstract
 {
     public enum State { Idle, Chase, Dead}
     public State currentState = State.Idle;
@@ -11,33 +11,32 @@ public class SlimeStateManager : MonoBehaviour
     public float mudJumpMulti = 1f;
     public float forwardForce = 1f;   // Horizontal power toward player
     public float mudSpeedMulti = 1f;
-    public int timeBetweenJumps = 90;
 
     [Header("Detection")]
     public LayerMask groundLayer;
 
     [Header("Variables")]
-    public int jumpTimer;
     public bool slimeLeftOrRight;
-    public bool slimeSizeable = true;
     public bool lastGrounded = true;
 
     [Header("References")]
-    [SerializeField] private GameObject slimeTrigger;
     [SerializeField] private EnemyGroundCheck groundCheck;
     [SerializeField] private Rigidbody2D slimeRb;
+    [SerializeField] private Animator anim;
     [SerializeField] private Transform player;
     [SerializeField] private EffectSound audioSource;
     [SerializeField] private AudioClip _SlimeJump;
     [SerializeField] private AudioClip _SlimeImpact;
-    [SerializeField] private AudioClip _SlimeAttack;
-    [SerializeField] private AudioClip _SlimeDeath;
     [SerializeField] private EnemyHit enemyHit;
 
     void Awake()
     {
         groundCheck._IsGrounded = false;
-        slimeTrigger.SetActive(false);
+    }
+    void OnEnable()
+    {
+        StopCoroutine(SlimeUpdate());
+        StartCoroutine(SlimeUpdate());
     }
     void Start()
     {
@@ -48,63 +47,80 @@ public class SlimeStateManager : MonoBehaviour
         {
             player = GameObject.FindGameObjectWithTag("Player").transform;
         }
-        if (slimeSizeable)
-        {
-            float scaleOffset = Random.Range(0.8f, 1.3f);
-            transform.localScale = new Vector3(scaleOffset,scaleOffset,scaleOffset);
-        }
-        InvokeRepeating(nameof(SlimeUpdate), 1.5f, 1.5f+Random.Range(0.0f, 0.5f));
+    }
+    public override void OnGroundTouch()
+    {
+        audioSource.PlaySound(_SlimeImpact,0.8f,Random.Range(0.7f,1.3f),1,1,transform.position);
+    }
+    public override void OnGroundLeave()
+    {
+    }
+    public override void OnHit()
+    {
+        StartCoroutine(DamageAnimation());
     }
     void Update()
     {
-        jumpTimer += 1;
-        if (!groundCheck._IsGrounded)
-        {
-            lastGrounded = false;
-        }
-        if (groundCheck._IsGrounded && !lastGrounded)
-        {
-            lastGrounded = true;
-            audioSource.PlaySlimeJumpSound(_SlimeImpact);
-        }
         if (groundCheck._IsGrounded && Mathf.Abs(slimeRb.linearVelocityX) > 5 && !enemyHit._DamageTaken)
         {
             slimeRb.linearVelocityX = slimeRb.linearVelocityX > 0 ? 5 : -5;
         }
     }
-    private void SlimeUpdate()
+    private IEnumerator SlimeUpdate()
     {
-        float dist = Vector2.Distance(transform.position, player.position);
-        // Jump Logic
-        if (jumpTimer >= timeBetweenJumps && groundCheck._IsGrounded)
+        int elapsed = 0;
+        int timer = Random.Range(90,120);
+        while(elapsed < timer)
         {
-            if (currentState == State.Chase)
-            {
-                JumpTowardsPlayer();
-            }
-            jumpTimer = 0;
+            elapsed += Time.timeScale == 1 ? 1:0;
+            yield return null;
         }
+        yield return new WaitUntil(() => currentState == State.Chase && groundCheck._IsGrounded);
+        StartCoroutine(JumpTowardsPlayer());
     }
 
-    void JumpTowardsPlayer()
+    private IEnumerator JumpTowardsPlayer()
     {
         // Calculate direction to player (Left or Right)
-        float direction = (player.position.x > transform.position.x) ? 1f : -1f;
+        Debug.Log("calculating dir");
+        slimeLeftOrRight = (player.position.x > transform.position.x) ? true : false;
         // if slimeLeftOrRight is true, then it's facing right, otherwise it's facing left
-        if (direction == 1f)
+        anim.SetInteger("attackPhase",1);
+        int elapsed = 0;
+        while(elapsed < 45)
         {
-            slimeLeftOrRight = true;
+            elapsed += Time.timeScale == 1 ? 1 : 0;
+            yield return null;
         }
-        if (direction == -1f)
-        {
-            slimeLeftOrRight = false;
-        }
-        // Play slime jump sound
-        audioSource.PlaySlimeJumpSound(_SlimeJump);
+        yield return new WaitUntil(() => groundCheck._IsGrounded);
+        anim.SetInteger("attackPhase",2);
 
-        //Debug.Log("jump");
+        // Play slime jump sound
+        audioSource.PlaySound(_SlimeJump,0.8f,Random.Range(0.7f,1.3f),1,1,transform.position);
+
         // Apply a diagonal "Hop" force
-        Vector2 hopVector = new Vector2(direction * forwardForce * mudSpeedMulti, jumpForce * mudJumpMulti);
-        slimeRb.AddForce(hopVector, ForceMode2D.Impulse);
+        slimeRb.AddForce(new Vector2((slimeLeftOrRight?1:-1) * forwardForce * mudSpeedMulti, jumpForce * mudJumpMulti), ForceMode2D.Impulse);
+        elapsed = 0;
+        while(elapsed < 5)
+        {
+            elapsed += Time.timeScale == 1 ? 1 : 0;
+            yield return null;
+        }
+        yield return new WaitUntil(() => groundCheck._IsGrounded);
+        anim.SetInteger("attackPhase",0);
+        StartCoroutine(SlimeUpdate());
+    }
+    private IEnumerator DamageAnimation()
+    {
+        anim.SetInteger("attackPhase",2);
+        anim.SetTrigger("restartAnimation");
+        int elapsed = 0;
+        while(elapsed < 5)
+        {
+            elapsed += Time.timeScale == 1 ? 1 : 0;
+            yield return null;
+        }
+        yield return new WaitUntil(() => groundCheck._IsGrounded);
+        anim.SetInteger("attackPhase",0);
     }
 }

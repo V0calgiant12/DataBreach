@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.UIElements;
 
 
-public class GoblinStateManager : MonoBehaviour
+public class GoblinStateManager : EnemyAbstract
 {
     [Header("States")]
     public GoblinAbstract currentState;
@@ -74,8 +74,16 @@ public class GoblinStateManager : MonoBehaviour
             state.EnterState(this);
         }
     }
-
-
+    public override void OnGroundTouch()
+    {
+    }
+    public override void OnGroundLeave()
+    {
+    }
+    public override void OnHit()
+    {
+        SwitchState(HurtState);
+    }
     void Update()
     {
         audioCooldown -= Time.timeScale == 1 ? 1:0;

@@ -7,12 +7,13 @@ public class EnemyGroundCheck : MonoBehaviour
     public bool _IsGrounded;
     public bool _IsStone;
 
-    private void OnTriggerStay2D(Collider2D other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
         //Debug.Log("Stay " + other.gameObject.CompareTag("Ground"));
         if (other.gameObject.CompareTag("Ground") || other.gameObject.CompareTag("MovingPlatform") || other.gameObject.CompareTag("Stone") && !_IsGrounded)
         {
             _IsGrounded = true;
+            GetComponentInParent<EnemyAbstract>().OnGroundTouch();
         }
         if (other.gameObject.CompareTag("Stone"))
         {
@@ -29,6 +30,7 @@ public class EnemyGroundCheck : MonoBehaviour
         if (other.gameObject.CompareTag("Ground") || other.gameObject.CompareTag("MovingPlatform") || other.gameObject.CompareTag("Stone"))
         {
             _IsGrounded = false;
+            GetComponentInParent<EnemyAbstract>().OnGroundLeave();
         }
         if (other.gameObject.CompareTag("Stone"))
         {

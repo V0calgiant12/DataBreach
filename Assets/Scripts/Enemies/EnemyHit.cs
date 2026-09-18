@@ -73,6 +73,11 @@ public class EnemyHit : MonoBehaviour
         {
             iFrames = 15;
             _DamageTaken = true;
+            EnemyAbstract enemyAbstract = GetComponentInParent<EnemyAbstract>();
+            if(enemyAbstract != null)
+            {
+                enemyAbstract.OnHit();
+            }
             TriggerShake.Instance.BurstShake(1,2,false,0);
             if (!invulnerable)
             {
@@ -100,11 +105,11 @@ public class EnemyHit : MonoBehaviour
                         break;
                     case(5):
                         // Dash attacks (5)
-                        DamageEnemy(1,20,8,PlayerStateManager.Instance.transform.position.x);
+                        DamageEnemy(1,20,8,PlayerStateManager.Instance.transform.position.x + (PlayerStateManager.Instance.playerData.leftOrRight ? -10:10));
                         break;
                     case(6):
                         // Air Dash attacks (6)
-                        DamageEnemy(1,12,15,PlayerStateManager.Instance.transform.position.x);
+                        DamageEnemy(1,12,15,PlayerStateManager.Instance.transform.position.x + (PlayerStateManager.Instance.playerData.leftOrRight ? -10:10));
                         break;
                     case(7):
                         // Super Jump attacks (7)
