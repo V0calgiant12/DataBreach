@@ -333,7 +333,6 @@ public class PlayerStateManager : MonoBehaviour
         {
             elapsed += Time.timeScale == 1 ? 1 : 0;
             playerData.PlayerRb.linearVelocityX += Time.timeScale == 1 ? (playerData.leftOrRight? -elapsed/5:elapsed/5) : 0;
-            Debug.Log(MathF.Abs(playerData.PlayerRb.linearVelocityX));
             yield return null;
         }
         playerData.PlayerRb.linearVelocityX = 0;

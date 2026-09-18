@@ -82,7 +82,6 @@ public class SlimeStateManager : EnemyAbstract
     private IEnumerator JumpTowardsPlayer()
     {
         // Calculate direction to player (Left or Right)
-        Debug.Log("calculating dir");
         slimeLeftOrRight = (player.position.x > transform.position.x) ? true : false;
         // if slimeLeftOrRight is true, then it's facing right, otherwise it's facing left
         anim.SetInteger("attackPhase",1);

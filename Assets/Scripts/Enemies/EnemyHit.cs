@@ -149,7 +149,7 @@ public class EnemyHit : MonoBehaviour
         int index = 0;
         if(type == 1) // White Flash
         {
-            Debug.Log("White Flash");
+            //Debug.Log("White Flash");
             while (index <= sprites.Length - 1) // Repeats for every game object.
             {
                 sprites[index].SendMessage("WhiteFlash");
@@ -158,7 +158,7 @@ public class EnemyHit : MonoBehaviour
         }
         else if(type == 2) // Invulnerable Flash
         {
-            Debug.Log("Invulnerable Flash");
+            //Debug.Log("Invulnerable Flash");
             while (index <= sprites.Length - 1) // Repeats for every game object.
             {
                 sprites[index].SendMessage("InvulnerableFlash", iFrames);
