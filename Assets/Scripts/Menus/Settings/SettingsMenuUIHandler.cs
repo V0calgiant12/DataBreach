@@ -181,6 +181,7 @@ public class SettingsMenuUIHandler : MonoBehaviour
         SettingsData.Instance._ChromaticAberration = videoSettings._ChromaticAberration;
         SettingsData.Instance._Vignette = videoSettings._Vignette;
         SettingsData.Instance._Pixelation = videoSettings._Pixelation;
+        SettingsData.Instance._Volumetrics = videoSettings._Volumetrics;
     }
     public void LoadSettings() // Fetches settings to load them.
     {
@@ -236,6 +237,7 @@ public class SettingsMenuUIHandler : MonoBehaviour
         videoSettings._ChromaticAberration = SettingsData.Instance._ChromaticAberration;
         videoSettings._Vignette = SettingsData.Instance._Vignette;
         videoSettings._Pixelation = SettingsData.Instance._Pixelation;
+        videoSettings._Volumetrics = SettingsData.Instance._Volumetrics;
         
         videoSettings.SetFullscreenMode(SettingsData.Instance._Fullscreen);
         videoSettings.SetResolution(SettingsData.Instance._Resolution);

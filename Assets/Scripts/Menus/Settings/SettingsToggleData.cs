@@ -35,6 +35,9 @@ public class SettingsToggleData : MonoBehaviour
             case (6):
                 toggle.isOn = SettingsData.Instance._DoubleTapFastFall;
                 break;
+            case (7):
+                toggle.isOn = SettingsData.Instance._Volumetrics;
+                break;
         }
     }
 }

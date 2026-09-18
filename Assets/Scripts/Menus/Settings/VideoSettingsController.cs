@@ -14,6 +14,7 @@ public class VideoSettingsController : MonoBehaviour
     public bool _ChromaticAberration;
     public bool _Vignette;
     public bool _Pixelation;
+    public bool _Volumetrics;
     
     void Start() // Refreshes settings on load.
     {
@@ -130,6 +131,9 @@ public class VideoSettingsController : MonoBehaviour
                 break;
             case(5): // Run in background
                 _Pixelation = data.toggle.isOn;
+                break;
+            case(7): // Run in background
+                _Volumetrics = data.toggle.isOn;
                 break;
         }
     }
