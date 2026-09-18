@@ -72,12 +72,6 @@ public class EnemyHit : MonoBehaviour
         if (other.gameObject.CompareTag("PlayerHitbox") && iFrames < 0 && trackedHealth > 0)
         {
             iFrames = 15;
-            _DamageTaken = true;
-            EnemyAbstract enemyAbstract = GetComponentInParent<EnemyAbstract>();
-            if(enemyAbstract != null)
-            {
-                enemyAbstract.OnHit();
-            }
             TriggerShake.Instance.BurstShake(1,2,false,0);
             if (!invulnerable)
             {
@@ -131,6 +125,12 @@ public class EnemyHit : MonoBehaviour
     public void DamageEnemy(int damage, float xLaunch, float yLaunch, float damageSourceX)
     {
         //Debug.Log("Damaged Enemy for " + damage + " damage.");
+        _DamageTaken = true;
+        EnemyAbstract enemyAbstract = GetComponentInParent<EnemyAbstract>();
+        if(enemyAbstract != null)
+        {
+            enemyAbstract.OnHit();
+        }
         if(trackedHealth != 1)
         {
             audioSource.PlaySound(hitSound,volume,1,1,1,transform.position);
