@@ -1,4 +1,5 @@
 using System.IO;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.InputSystem;
@@ -12,6 +13,8 @@ public class SettingsData : MonoBehaviour
     /// </summary>
     public static SettingsData Instance;
     public int loadDelay = 0;
+    public int currentVersion;
+    public int _SaveFileVersion = 0;
     [Header("Controls")]
     public KeyCode _InputLeft = KeyCode.LeftArrow; // 0
     public KeyCode _InputRight = KeyCode.RightArrow; // 1
@@ -53,6 +56,7 @@ public class SettingsData : MonoBehaviour
     public bool _ChromaticAberration;
     public bool _Vignette;
     public bool _Pixelation;
+    public bool _Volumetrics;
 
     [Header("Not Settings")]
     [SerializeField] private AudioMixer Mixer;
@@ -75,6 +79,8 @@ public class SettingsData : MonoBehaviour
     public void SaveSettings() // Saves data to a JSON file.
     {
         SaveSettings data = new SaveSettings();
+
+        data._SaveFileVersion = currentVersion;
 
         data._InputLeft = _InputLeft;
         data._InputRight = _InputRight;
@@ -117,6 +123,7 @@ public class SettingsData : MonoBehaviour
         data._ChromaticAberration =_ChromaticAberration;
         data._Vignette =_Vignette;
         data._Pixelation =_Pixelation;
+        data._Volumetrics =_Volumetrics;
 
         string json = JsonUtility.ToJson(data);
         File.WriteAllText(Application.persistentDataPath + "/settings.json", json);
@@ -131,7 +138,13 @@ public class SettingsData : MonoBehaviour
         {
             string json = File.ReadAllText(path);
             SaveSettings data = JsonUtility.FromJson<SaveSettings>(json);
-            
+            _SaveFileVersion = data._SaveFileVersion;
+            if(_SaveFileVersion != currentVersion)
+            {
+                Debug.LogWarning("Old settings file detected. Wiping settings file.");
+                NoFile();
+                return;
+            }
             _InputLeft = data._InputLeft;
             _InputRight = data._InputRight;
             _InputUp = data._InputUp;
@@ -178,6 +191,7 @@ public class SettingsData : MonoBehaviour
             _ChromaticAberration = data._ChromaticAberration;
             _Vignette = data._Vignette;
             _Pixelation = data._Pixelation;
+            _Volumetrics = data._Volumetrics;
             
             Application.runInBackground = _RunInBackground;
             Debug.Log("Loaded settings from file!");
@@ -231,15 +245,18 @@ public class SettingsData : MonoBehaviour
         _ChromaticAberration = true;
         _Vignette = true;
         _Pixelation = true;
+        _Volumetrics = false;
         
         Application.runInBackground = _RunInBackground;
         UserInput.Instance.UpdateKeyBinds();
+        SaveSettings();
     }
 }
 
 [System.Serializable]
 class SaveSettings // This class quite literally just stores variables so they can be saved.
 {
+    public int _SaveFileVersion = 0;
     [Header("Controls")]
     public KeyCode _InputLeft = KeyCode.LeftArrow; // 0
     public KeyCode _InputRight = KeyCode.RightArrow; // 1
@@ -281,4 +298,5 @@ class SaveSettings // This class quite literally just stores variables so they c
     public bool _ChromaticAberration;
     public bool _Vignette;
     public bool _Pixelation;
+    public bool _Volumetrics;
 }

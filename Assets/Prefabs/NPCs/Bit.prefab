@@ -184,6 +184,7 @@ GameObject:
   m_Component:
   - component: {fileID: 259602988085979669}
   - component: {fileID: 6386047791283776157}
+  - component: {fileID: 2484542562842563004}
   m_Layer: 0
   m_Name: Spot Light 2D
   m_TagString: Untagged
@@ -258,3 +259,20 @@ MonoBehaviour:
   - {x: 0.5, y: -0.5, z: 0}
   - {x: 0.5, y: 0.5, z: 0}
   - {x: -0.5, y: 0.5, z: 0}
+--- !u!114 &2484542562842563004
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8339709187638341504}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0b2459b27c55c142a61a8bdd255aa04, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::VolumetricEnabler
+  settingToGet: 0
+  settingEnabled: 0
+  flipOutput: 0
+  objects:
+  - {fileID: 8339709187638341504}

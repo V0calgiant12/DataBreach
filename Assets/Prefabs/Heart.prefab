@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3650551565809336118}
   - component: {fileID: 5933593975725797242}
+  - component: {fileID: 4693897966523635475}
   m_Layer: 6
   m_Name: Light
   m_TagString: Untagged
@@ -84,6 +85,23 @@ MonoBehaviour:
   - {x: 0.5, y: -0.5, z: 0}
   - {x: 0.5, y: 0.5, z: 0}
   - {x: -0.5, y: 0.5, z: 0}
+--- !u!114 &4693897966523635475
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2099140097046124318}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0b2459b27c55c142a61a8bdd255aa04, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::VolumetricEnabler
+  settingToGet: 0
+  settingEnabled: 0
+  flipOutput: 0
+  objects:
+  - {fileID: 2099140097046124318}
 --- !u!1 &3657625647464911553
 GameObject:
   m_ObjectHideFlags: 0

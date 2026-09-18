@@ -13,7 +13,8 @@ public class EnableIfSetting : MonoBehaviour
         Bloom,
         ChromaticAberration,
         Vignette,
-        Pixelation
+        Pixelation,
+        Volumetrics
     }
     [SerializeField] private Setting settingToGet;
     [SerializeField] private bool settingEnabled;
@@ -55,6 +56,8 @@ public class EnableIfSetting : MonoBehaviour
                 return SettingsData.Instance._Vignette;
             case(Setting.Pixelation):
                 return SettingsData.Instance._Pixelation;
+            case(Setting.Volumetrics):
+                return SettingsData.Instance._Volumetrics;
         }
         return false;
     }

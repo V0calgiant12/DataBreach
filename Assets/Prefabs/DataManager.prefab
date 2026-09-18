@@ -59,6 +59,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 623edf30ee27c2044ab09bc52936e474, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SettingsData
+  loadDelay: 0
+  currentVersion: 1
+  _SaveFileVersion: 0
   _InputLeft: 276
   _InputRight: 275
   _InputUp: 273
@@ -68,6 +71,14 @@ MonoBehaviour:
   _InputAttack: 122
   _InputParry: 118
   _InputInteract: 99
+  _InputMenuLeft: 276
+  _InputMenuRight: 275
+  _InputMenuUp: 273
+  _InputMenuDown: 274
+  _InputSubmit: 99
+  _InputCancel: 120
+  _InputForward: 118
+  _InputBack: 122
   _UpToJump: 0
   _MasterVolume: 0
   _MusicVolume: 0
@@ -76,6 +87,7 @@ MonoBehaviour:
   _RunInBackground: 1
   _ToggleSprint: 0
   _ToggleCrouch: 0
+  _DoubleTapFastFall: 1
   _CameraZoom: 10
   _PlayerHue: 0.03577745
   _PlayerSaturation: 0.7988939
@@ -87,4 +99,5 @@ MonoBehaviour:
   _ChromaticAberration: 0
   _Vignette: 0
   _Pixelation: 1
+  _Volumetrics: 0
   Mixer: {fileID: 24100000, guid: 246f48f13ca5833448ea181663ec054d, type: 2}
