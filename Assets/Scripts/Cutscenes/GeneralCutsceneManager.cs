@@ -18,6 +18,8 @@ public abstract class GeneralCutsceneManager : MonoBehaviour
     public int currentScene;
     public bool textIsOpen;
     public bool falling;
+    public bool automaticCamera = true;
+    public Vector2 cameraLoc = new Vector2(0,0);
     public enum CutsceneType
     {
         Intro,
@@ -30,7 +32,7 @@ public abstract class GeneralCutsceneManager : MonoBehaviour
         Instance = this;
     }
     
-    public IEnumerator Walk(float distance,bool fade)
+    public IEnumerator Walk(float distance,bool fade,int delay)
     {
         float startX = playerRb.transform.position.x;
         while (playerRb.transform.position.x < startX + distance)
@@ -44,10 +46,16 @@ public abstract class GeneralCutsceneManager : MonoBehaviour
         }
         else
         {
+            int elapsed = 0;
+            while(elapsed < delay)
+            {
+                elapsed += Time.timeScale == 1 ? 1:0;
+                yield return null;
+            }
             ProgressCutscene();
         }
     }
-    public IEnumerator Sprint(float distance,bool fade)
+    public IEnumerator Sprint(float distance,bool fade,int delay)
     {
         float startX = playerRb.transform.position.x;
         while (playerRb.transform.position.x < startX + distance)
@@ -58,6 +66,16 @@ public abstract class GeneralCutsceneManager : MonoBehaviour
         if (fade)
         {
             anim.SetTrigger("FadeOut");
+        }
+        else
+        {
+            int elapsed = 0;
+            while(elapsed < delay)
+            {
+                elapsed += Time.timeScale == 1 ? 1:0;
+                yield return null;
+            }
+            ProgressCutscene();
         }
     }
     public abstract void ProgressCutscene();

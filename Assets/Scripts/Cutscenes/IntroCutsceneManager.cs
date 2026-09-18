@@ -12,6 +12,7 @@ public class IntroCutsceneManager : GeneralCutsceneManager
     void Start()
     {
         Instance = this;
+        automaticCamera = true;
         ProgressCutscene();
     }
     void Update()

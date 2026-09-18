@@ -11,6 +11,7 @@ public class BitCutsceneManager : GeneralCutsceneManager
     void Start()
     {
         Instance = this;
+        automaticCamera = true;
         ProgressCutscene();
     }
     void Update()
@@ -24,20 +25,20 @@ public class BitCutsceneManager : GeneralCutsceneManager
         switch (currentScene)
         {
             case(1):
-                StartCoroutine(Walk(20,false));
+                StartCoroutine(Walk(20,false,60));
                 break;
             case(2):
-                StartCoroutine(WaitForFrames(60));
-                break;
-            case(3):
-                anim.SetInteger("Scene", 3);
+                cameraLoc = new Vector2(21f,0);
+                automaticCamera = false;
                 StartCoroutine(WaitForFrames(30));
                 break;
+            case(3):
+                StartCoroutine(Sprint(28,false,60));
+                break;
             case(4):
-                StartCoroutine(Sprint(20,false));
+                anim.SetInteger("Scene", 4);
                 break;
             case(5):
-                EndCutscene();
                 break;
         }
     }
