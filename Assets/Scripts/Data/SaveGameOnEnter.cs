@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 
 public class SaveGameOnEnter : MonoBehaviour
 {
-    void Awake()
+    void Start()
     {
         GameData.Instance._SceneId = SceneManager.GetActiveScene().buildIndex;
         GameObject.Find("Screen").GetComponent<Animator>().SetBool("IsSaveScene", true);
