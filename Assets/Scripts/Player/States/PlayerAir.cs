@@ -31,7 +31,7 @@ public class PlayerAir : PlayerAbstract
         {
             player.playerData.anim.SetBool(player.falling, true);
             player.playerData.anim.SetBool(player.jumping, false);
-            player.playerData.anim.SetBool("superJumping",false);
+            player.playerData.anim.SetBool(player.superJumping,false);
         }
         
         if(player.playerData.jumpBufferCounter < -5)
@@ -118,7 +118,7 @@ public class PlayerAir : PlayerAbstract
         {
             player.playerData.anim.SetBool(player.falling, true);
             player.playerData.anim.SetBool(player.jumping, false);
-            player.playerData.anim.SetBool("superJumping",false);
+            player.playerData.anim.SetBool(player.superJumping,false);
             player.playerData.inAirGust = false;
             if (changeYStartNextFall)
             {
@@ -276,7 +276,7 @@ public class PlayerAir : PlayerAbstract
             player.SwitchState(player.IdleState);
             player.playerData.anim.SetBool(player.falling, false);
             player.playerData.anim.SetBool(player.jumping, false);
-            player.playerData.anim.SetBool("superJumping",false);
+            player.playerData.anim.SetBool(player.superJumping,false);
             return;
         }
         pastFirstFrame = true;
@@ -285,7 +285,7 @@ public class PlayerAir : PlayerAbstract
     {
         player.comingFromDash = false;
         player.playerData.resetVelocity = true;
-        player.playerData.anim.SetBool("currentlyFixed",false);
+        player.playerData.anim.SetBool(player.currentlyFixed,false);
         player.playerData.anim.SetBool(player.jumping, false);
         player.playerData.anim.SetBool(player.falling, false);
     }

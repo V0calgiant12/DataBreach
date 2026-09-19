@@ -36,6 +36,9 @@ public class PlayerStateManager : MonoBehaviour
     public int walking = Animator.StringToHash("walking");
     public int crouching = Animator.StringToHash("crouching");
     public int iFrames = Animator.StringToHash("iframes");
+    public int dashing = Animator.StringToHash("dashing");
+    public int superJumping = Animator.StringToHash("superJumping");
+    public int currentlyFixed = Animator.StringToHash("currentlyFixed");
     [Header("Audio")]
     public AudioClip _GrassWalk;
     public AudioClip _GrassFall;

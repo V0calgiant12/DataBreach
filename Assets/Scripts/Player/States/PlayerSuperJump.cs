@@ -28,14 +28,14 @@ public class PlayerSuperJump : PlayerAbstract
             player.StartCoroutine(player.WaitUntilNotJumping());
             player.playerData.anim.SetBool(player.falling, false);
             player.playerData.anim.SetBool(player.jumping, true);
-            player.playerData.anim.SetBool("superJumping",true);
+            player.playerData.anim.SetBool(player.superJumping,true);
             changeYStartNextFall = true;
         }
         if (player.playerData.PlayerRb.linearVelocityY < 0) 
         {
             player.playerData.anim.SetBool(player.falling, true);
             player.playerData.anim.SetBool(player.jumping, false);
-            player.playerData.anim.SetBool("superJumping",false);
+            player.playerData.anim.SetBool(player.superJumping,false);
         }
         
         if(player.playerData.jumpBufferCounter < -5)
@@ -91,7 +91,7 @@ public class PlayerSuperJump : PlayerAbstract
             initialJump = false;
             player.playerData.anim.SetBool(player.falling, true);
             player.playerData.anim.SetBool(player.jumping, false);
-            player.playerData.anim.SetBool("superJumping",false);
+            player.playerData.anim.SetBool(player.superJumping,false);
             player.playerData.inAirGust = false;
             if (changeYStartNextFall)
             {
@@ -148,7 +148,7 @@ public class PlayerSuperJump : PlayerAbstract
             player.StartCoroutine(player.WaitUntilNotJumping());
             player.playerData.audioSource.PlayJumpSound(player._AirJump);
             player.playerData.anim.SetBool(player.jumping, true);
-            player.playerData.anim.SetBool("superJumping", false);
+            player.playerData.anim.SetBool(player.superJumping, false);
             player.playerData.doubleJumpAvailable = false;
             player.playerData.shortJumping = true;
             changeYStartNextFall = true;
@@ -184,7 +184,7 @@ public class PlayerSuperJump : PlayerAbstract
             player.SwitchState(player.IdleState);
             player.playerData.anim.SetBool(player.falling, false);
             player.playerData.anim.SetBool(player.jumping, false);
-            player.playerData.anim.SetBool("superJumping",false);
+            player.playerData.anim.SetBool(player.superJumping,false);
             return;
         }
         pastFirstFrame = true;
@@ -192,7 +192,7 @@ public class PlayerSuperJump : PlayerAbstract
     public override void LeaveState(PlayerStateManager player)
     {
         player.comingFromDash = false;
-        player.playerData.anim.SetBool("currentlyFixed",false);
+        player.playerData.anim.SetBool(player.currentlyFixed,false);
         player.playerData.anim.SetBool(player.jumping, false);
         player.playerData.anim.SetBool(player.falling, false);
         player.playerData.jumpBufferCounter = 0;

@@ -12,8 +12,8 @@ public class PlayerDashing : PlayerAbstract
     public override void EnterState(PlayerStateManager player) // Start Function
     {
         storedGrav = player.playerData.PlayerRb.gravityScale;
-        player.playerData.anim.SetBool("dashing",true);
-        player.playerData.anim.SetBool("superJumping",false);
+        player.playerData.anim.SetBool(player.dashing,true);
+        player.playerData.anim.SetBool(player.superJumping,false);
         player.playerData.anim.SetBool(player.attacking,false);
         player.playerData.playerSpeed = 12;
         player.playerData.basePlayerSpeed = 12;
@@ -26,8 +26,8 @@ public class PlayerDashing : PlayerAbstract
         player.playerData.PlayerRb.linearVelocity = new Vector2(20 * (player.playerData.leftOrRight? 1 : -1), jumpStrength/2);
         if(UserInput.Instance.MovementInput.y > 0.5f || player.forceSuperJump)
         {
-            player.playerData.anim.SetBool("dashing",false);
-            player.playerData.anim.SetBool("superJumping",true);
+            player.playerData.anim.SetBool(player.dashing,false);
+            player.playerData.anim.SetBool(player.superJumping,true);
             superJump = true;
         }
         else
@@ -52,7 +52,7 @@ public class PlayerDashing : PlayerAbstract
         // End of Dash
         if(dashTimer <= 0 && !player.playerData.anim.GetBool(player.attacking))
         {
-            player.playerData.anim.SetBool("currentlyFixed",true);
+            player.playerData.anim.SetBool(player.currentlyFixed,true);
             player.playerData.jumpBufferCounter = 0;
             player.playerData.coyoteTimeCounter = 0;
             player.SwitchState(player.AirState);
@@ -62,15 +62,15 @@ public class PlayerDashing : PlayerAbstract
             }
             else
             {
-                player.playerData.anim.SetBool("currentlyFixed",false);
+                player.playerData.anim.SetBool(player.currentlyFixed,false);
             }
         }
 
         // Switch to Super Jump if 5 or less frames in.
         if(UserInput.Instance.MovementInput.y > 0.5f && dashTimer >= 12)
         {
-            player.playerData.anim.SetBool("dashing",false);
-            player.playerData.anim.SetBool("superJumping",true);
+            player.playerData.anim.SetBool(player.dashing,false);
+            player.playerData.anim.SetBool(player.superJumping,true);
             superJump = true;
         }
 
@@ -83,7 +83,7 @@ public class PlayerDashing : PlayerAbstract
         }
         if (player.playerData.anim.GetBool(player.attacking))
         {
-            player.playerData.anim.SetBool("dashing",false);
+            player.playerData.anim.SetBool(player.dashing,false);
             player.playerData.anim.SetBool(player.falling,true);
             player.playerData.PlayerRb.linearVelocityX -= Time.timeScale == 1 ? 0.3f*(player.playerData.leftOrRight? 1 : -1):0;
             player.playerData.PlayerRb.linearVelocityY -= Time.timeScale == 1 ? 0.4625f:0;
@@ -128,7 +128,7 @@ public class PlayerDashing : PlayerAbstract
         player.playerData.PlayerRb.linearVelocity = new Vector2(4.5f * (player.playerData.leftOrRight? 1 : -1),jumpStrength*1.2f);
         player.comingFromDash = false;
         player.playerData.shortJumping = true;
-        player.playerData.anim.SetBool("currentlyFixed",false);
+        player.playerData.anim.SetBool(player.currentlyFixed,false);
         player.SwitchState(player.SuperJumpState);
     }
     public override void LateUpdateState(PlayerStateManager player)
@@ -138,6 +138,6 @@ public class PlayerDashing : PlayerAbstract
     public override void LeaveState(PlayerStateManager player)
     {
         player.playerData.PlayerRb.gravityScale = storedGrav;
-        player.playerData.anim.SetBool("dashing",false);
+        player.playerData.anim.SetBool(player.dashing,false);
     }
 }
