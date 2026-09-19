@@ -84,7 +84,7 @@ public class PlayerDashing : PlayerAbstract
         if (player.playerData.anim.GetBool(player.attacking))
         {
             player.playerData.anim.SetBool("dashing",false);
-            player.playerData.anim.SetBool("falling",true);
+            player.playerData.anim.SetBool(player.falling,true);
             player.playerData.PlayerRb.linearVelocityX -= Time.timeScale == 1 ? 0.3f*(player.playerData.leftOrRight? 1 : -1):0;
             player.playerData.PlayerRb.linearVelocityY -= Time.timeScale == 1 ? 0.4625f:0;
         }
@@ -116,7 +116,7 @@ public class PlayerDashing : PlayerAbstract
                     player.playerData.anim.SetBool(player.attacking, false);
                 }
                 player.SwitchState(player.IdleState);
-                player.playerData.anim.SetBool("falling", false);
+                player.playerData.anim.SetBool(player.falling, false);
                 player.playerData.anim.SetBool(player.jumping, false);
                 return;
             }
