@@ -26,15 +26,15 @@ public class PlayerSuperJump : PlayerAbstract
         if (player.playerData.PlayerRb.linearVelocityY > 0) 
         {
             player.StartCoroutine(player.WaitUntilNotJumping());
-            player.playerData.anim.SetBool("falling", false);
-            player.playerData.anim.SetBool("jumping", true);
+            player.playerData.anim.SetBool(player.falling, false);
+            player.playerData.anim.SetBool(player.jumping, true);
             player.playerData.anim.SetBool("superJumping",true);
             changeYStartNextFall = true;
         }
         if (player.playerData.PlayerRb.linearVelocityY < 0) 
         {
-            player.playerData.anim.SetBool("falling", true);
-            player.playerData.anim.SetBool("jumping", false);
+            player.playerData.anim.SetBool(player.falling, true);
+            player.playerData.anim.SetBool(player.jumping, false);
             player.playerData.anim.SetBool("superJumping",false);
         }
         
@@ -89,8 +89,8 @@ public class PlayerSuperJump : PlayerAbstract
         if (player.playerData.PlayerRb.linearVelocityY < 0)
         {
             initialJump = false;
-            player.playerData.anim.SetBool("falling", true);
-            player.playerData.anim.SetBool("jumping", false);
+            player.playerData.anim.SetBool(player.falling, true);
+            player.playerData.anim.SetBool(player.jumping, false);
             player.playerData.anim.SetBool("superJumping",false);
             player.playerData.inAirGust = false;
             if (changeYStartNextFall)
@@ -101,7 +101,7 @@ public class PlayerSuperJump : PlayerAbstract
         }
 
         // Attacking
-        if (player.playerData.bufferedAtk > 0 && !player.playerData.anim.GetBool("attacking") && !usedAttack)
+        if (player.playerData.bufferedAtk > 0 && !player.playerData.anim.GetBool(player.attacking) && !usedAttack)
         {
             player.StartCoroutine(DelayedBoost(player));
             player.Attack(PlayerStateManager.AttackType.jumpAttack,false);
@@ -111,7 +111,7 @@ public class PlayerSuperJump : PlayerAbstract
 
         // Short Jumping
         // If not attacking, enable short jumping.
-        if (!player.playerData.anim.GetBool("attacking"))
+        if (!player.playerData.anim.GetBool(player.attacking))
         {
             player.playerData.shortJumping = true;
         }
@@ -147,7 +147,7 @@ public class PlayerSuperJump : PlayerAbstract
             player.playerData.PlayerRb.linearVelocity = new Vector2(player.playerData.PlayerRb.linearVelocityX, jumpStrength * 0.8f);
             player.StartCoroutine(player.WaitUntilNotJumping());
             player.playerData.audioSource.PlayJumpSound(player._AirJump);
-            player.playerData.anim.SetBool("jumping", true);
+            player.playerData.anim.SetBool(player.jumping, true);
             player.playerData.anim.SetBool("superJumping", false);
             player.playerData.doubleJumpAvailable = false;
             player.playerData.shortJumping = true;
@@ -175,15 +175,15 @@ public class PlayerSuperJump : PlayerAbstract
             {
                 player.playerData.audioSource.PlayGrassSound(player._GrassFall);
             }
-            if((player.playerData.anim.GetInteger("attackId") == 2 || player.playerData.anim.GetInteger("attackId") == 4) && player.playerData.anim.GetBool("attacking"))
+            if((player.playerData.anim.GetInteger(player.attackId) == 2 || player.playerData.anim.GetInteger(player.attackId) == 4) && player.playerData.anim.GetBool(player.attacking))
             {
-                player.playerData.anim.SetBool("attacking", false);
+                player.playerData.anim.SetBool(player.attacking, false);
             }
             player.playerData.fastFallCounter = 0;
             changeYStartNextFall = true;
             player.SwitchState(player.IdleState);
-            player.playerData.anim.SetBool("falling", false);
-            player.playerData.anim.SetBool("jumping", false);
+            player.playerData.anim.SetBool(player.falling, false);
+            player.playerData.anim.SetBool(player.jumping, false);
             player.playerData.anim.SetBool("superJumping",false);
             return;
         }
@@ -193,8 +193,8 @@ public class PlayerSuperJump : PlayerAbstract
     {
         player.comingFromDash = false;
         player.playerData.anim.SetBool("currentlyFixed",false);
-        player.playerData.anim.SetBool("jumping", false);
-        player.playerData.anim.SetBool("falling", false);
+        player.playerData.anim.SetBool(player.jumping, false);
+        player.playerData.anim.SetBool(player.falling, false);
         player.playerData.jumpBufferCounter = 0;
     }
     public IEnumerator DelayedBoost(PlayerStateManager player)

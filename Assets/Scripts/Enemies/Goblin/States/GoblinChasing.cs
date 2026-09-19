@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class GoblinChasing : GoblinAbstract
 {
+    int directionGetCd = 0; 
+    float direction;
     public override void RunOnce(GoblinStateManager goblin)
     {
 
@@ -12,11 +14,20 @@ public class GoblinChasing : GoblinAbstract
         goblin.anim.SetBool("moving", true);
         goblin.anim.SetBool("attacking", false);
         goblin.anim.SetBool("sprinting", true);
+        directionGetCd = 0;
     }
     public override void UpdateState(GoblinStateManager goblin)
     {
         // Checks if the player is left (-1) or right (1) of the goblin
-        float direction = PlayerStateManager.Instance.transform.position.x > goblin.transform.position.x ? 1 : -1;
+        if(directionGetCd == 0)
+        {
+            direction = PlayerStateManager.Instance.transform.position.x > goblin.transform.position.x ? 1 : -1;
+            directionGetCd = 20;
+        }
+        else
+        {
+            directionGetCd -= 1;
+        }
         
         goblin.spriteHolder.transform.localScale = new Vector3(direction,1,1);
 

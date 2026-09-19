@@ -37,8 +37,8 @@ public class PlayerWalking : PlayerAbstract
             PlayerVelocity = new Vector2(player.playerData.playerSpeed, player.playerData.PlayerRb.linearVelocityY);
             player.playerData.PlayerRb.linearVelocity = PlayerVelocity + player.playerData.OffsetVelocity;
             player.playerData.leftOrRight = true;
-            player.playerData.anim.SetBool("moving", true);
-            player.playerData.anim.SetBool("walking", true);
+            player.playerData.anim.SetBool(player.moving, true);
+            player.playerData.anim.SetBool(player.walking, true);
             moving = true;
         }
         if (UserInput.Instance.MovementInput.x < -0.25f && player.playerData.movementAllowed) 
@@ -47,8 +47,8 @@ public class PlayerWalking : PlayerAbstract
             PlayerVelocity = new Vector2(-player.playerData.playerSpeed, player.playerData.PlayerRb.linearVelocityY);
             player.playerData.PlayerRb.linearVelocity = PlayerVelocity + player.playerData.OffsetVelocity;
             player.playerData.leftOrRight = false;
-            player.playerData.anim.SetBool("moving", true);
-            player.playerData.anim.SetBool("walking", true);
+            player.playerData.anim.SetBool(player.moving, true);
+            player.playerData.anim.SetBool(player.walking, true);
             moving = true;
             player.playerData.resetVelocity = true;
         }
@@ -68,9 +68,9 @@ public class PlayerWalking : PlayerAbstract
         {
             currentAttack = PlayerStateManager.AttackType.dash;
             player.SwitchState(player.SprintingState);
-            player.playerData.anim.SetBool("moving", true);
-            player.playerData.anim.SetBool("walking", false);
-            player.playerData.anim.SetBool("sprinting", true);
+            player.playerData.anim.SetBool(player.moving, true);
+            player.playerData.anim.SetBool(player.walking, false);
+            player.playerData.anim.SetBool(player.sprinting, true);
             player.currentState.UpdateState(player);
             return;
         }
@@ -117,8 +117,8 @@ public class PlayerWalking : PlayerAbstract
         if (!moving)
         {
             player.playerData.PlayerRb.linearVelocityX = 0;
-            player.playerData.anim.SetBool("moving", false);
-            player.playerData.anim.SetBool("walking", false);
+            player.playerData.anim.SetBool(player.moving, false);
+            player.playerData.anim.SetBool(player.walking, false);
             player.SwitchState(player.IdleState);
             player.currentState.UpdateState(player);
             return;
@@ -170,7 +170,7 @@ public class PlayerWalking : PlayerAbstract
         if (player.playerData.jumpBufferCounter > 0)
         {
             //Debug.Log("jump from walking");
-            player.playerData.anim.SetBool("walking", false);
+            player.playerData.anim.SetBool(player.walking, false);
             player.playerData.PlayerRb.linearVelocity = new Vector2(player.playerData.PlayerRb.linearVelocityX, jumpStrength * PlayerStateManager.Instance.playerData.mudJumpMulti);
             player.playerData.jumpBufferCounter = 0;
             player.playerData.coyoteTimeCounter = 0;

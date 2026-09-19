@@ -19,7 +19,7 @@ public class GoblinUpdate : GoblinAbstract
         }
         if(goblin.currentState != goblin.AttackState)
         {
-            goblin.currentAtkCd -= Time.timeScale == 1 ? 1 : 0;
+            goblin.currentAtkCd -= 1;
         }
     }
 }

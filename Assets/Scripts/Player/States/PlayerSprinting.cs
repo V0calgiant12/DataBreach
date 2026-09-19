@@ -11,9 +11,9 @@ public class PlayerSprinting : PlayerAbstract
     {
         //Debug.Log("Player is Sprinting / Sprinting State - " + player.playerData.sprinting);
         audioTimer = 3;
-        player.playerData.anim.SetBool("sprinting", true);
-        player.playerData.anim.SetBool("walking", false);
-        player.playerData.anim.SetBool("moving", true);
+        player.playerData.anim.SetBool(player.sprinting, true);
+        player.playerData.anim.SetBool(player.walking, false);
+        player.playerData.anim.SetBool(player.moving, true);
         player.playerData.shortJumping = true;
         player.playerData.resetVelocity = true;
         player.playerData.playerSpeed = 15;
@@ -72,7 +72,7 @@ public class PlayerSprinting : PlayerAbstract
         // if not sprinting go to walking 
         if (player.playerData.sprinting == false)
         {
-            player.playerData.anim.SetBool("sprinting", false);
+            player.playerData.anim.SetBool(player.sprinting, false);
             //Debug.Log(player.playerData.sprinting);
             player.SwitchState(player.WalkingState);
             player.currentState.UpdateState(player);
@@ -126,7 +126,7 @@ public class PlayerSprinting : PlayerAbstract
         // Jump
         if (player.playerData.jumpBufferCounter > 0)
         {
-            player.playerData.anim.SetBool("sprinting", false);
+            player.playerData.anim.SetBool(player.sprinting, false);
             player.playerData.PlayerRb.linearVelocity = new Vector2(player.playerData.PlayerRb.linearVelocityX, jumpStrength * PlayerStateManager.Instance.playerData.mudJumpMulti);
             player.playerData.jumpBufferCounter = 0;
             player.playerData.coyoteTimeCounter = 0;

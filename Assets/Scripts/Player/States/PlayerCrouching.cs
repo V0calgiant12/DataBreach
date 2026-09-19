@@ -10,7 +10,7 @@ public class PlayerCrouching : PlayerAbstract
     public override void EnterState(PlayerStateManager player)
     {
         //Debug.Log("Player is Crouching / Crouching State");
-        player.playerData.anim.SetBool("crouching", true);
+        player.playerData.anim.SetBool(player.crouching, true);
         player.playerData.resetVelocity = true;
         player.playerData.shortJumping = true;
         player.playerData.playerSpeed = 3;
@@ -61,20 +61,20 @@ public class PlayerCrouching : PlayerAbstract
         if (!player.playerData.crouching)
         {
             // Leave crouch
-            player.playerData.anim.SetBool("crouching", false);
+            player.playerData.anim.SetBool(player.crouching, false);
             player.SwitchState(player.IdleState);
             return;
         }
 
         // Crouch walking
         moving = false;
-        player.playerData.anim.SetBool("moving", false);
+        player.playerData.anim.SetBool(player.moving, false);
         if (UserInput.Instance.MovementInput.x > 0.25f)
         {
             PlayerVelocity = new Vector2(player.playerData.playerSpeed, player.playerData.PlayerRb.linearVelocityY);
             player.playerData.PlayerRb.linearVelocity = PlayerVelocity + player.playerData.OffsetVelocity;
             player.playerData.leftOrRight = true;
-            player.playerData.anim.SetBool("moving", true);
+            player.playerData.anim.SetBool(player.moving, true);
             moving = true;
         }
         if (UserInput.Instance.MovementInput.x < -0.25f) 
@@ -82,7 +82,7 @@ public class PlayerCrouching : PlayerAbstract
             PlayerVelocity = new Vector2(-player.playerData.playerSpeed, player.playerData.PlayerRb.linearVelocityY);
             player.playerData.PlayerRb.linearVelocity = PlayerVelocity + player.playerData.OffsetVelocity;
             player.playerData.leftOrRight = false;
-            player.playerData.anim.SetBool("moving", true);
+            player.playerData.anim.SetBool(player.moving, true);
             moving = true;
         }
         if (!moving)
@@ -107,7 +107,7 @@ public class PlayerCrouching : PlayerAbstract
                 player.playerData.audioSource.PlayGrassSound(player._GrassJump);
             }
             player.SwitchState(player.AirState);
-            player.playerData.anim.SetBool("crouching", false);
+            player.playerData.anim.SetBool(player.crouching, false);
             return;
         }
 
@@ -126,7 +126,7 @@ public class PlayerCrouching : PlayerAbstract
             {
                 player.SwitchState(player.AirState);
                 player.currentState.UpdateState(player);
-                player.playerData.anim.SetBool("crouching", false);
+                player.playerData.anim.SetBool(player.crouching, false);
                 return;
             }
         }

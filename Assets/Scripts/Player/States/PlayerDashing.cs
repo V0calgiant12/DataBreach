@@ -14,7 +14,7 @@ public class PlayerDashing : PlayerAbstract
         storedGrav = player.playerData.PlayerRb.gravityScale;
         player.playerData.anim.SetBool("dashing",true);
         player.playerData.anim.SetBool("superJumping",false);
-        player.playerData.anim.SetBool("attacking",false);
+        player.playerData.anim.SetBool(player.attacking,false);
         player.playerData.playerSpeed = 12;
         player.playerData.basePlayerSpeed = 12;
         player.playerData.PlayerRb.gravityScale = 0;
@@ -50,7 +50,7 @@ public class PlayerDashing : PlayerAbstract
     {
         dashTimer -= Time.timeScale == 1 ? 1:0;
         // End of Dash
-        if(dashTimer <= 0 && !player.playerData.anim.GetBool("attacking"))
+        if(dashTimer <= 0 && !player.playerData.anim.GetBool(player.attacking))
         {
             player.playerData.anim.SetBool("currentlyFixed",true);
             player.playerData.jumpBufferCounter = 0;
@@ -75,13 +75,13 @@ public class PlayerDashing : PlayerAbstract
         }
 
         // Air Dash Attack
-        if(player.playerData.bufferedAtk > 0 && !player.playerData.anim.GetBool("attacking"))
+        if(player.playerData.bufferedAtk > 0 && !player.playerData.anim.GetBool(player.attacking))
         {
             attacked = true;
             player.playerData.iFrames = 5;
             player.Attack(PlayerStateManager.AttackType.dashAir,true);
         }
-        if (player.playerData.anim.GetBool("attacking"))
+        if (player.playerData.anim.GetBool(player.attacking))
         {
             player.playerData.anim.SetBool("dashing",false);
             player.playerData.anim.SetBool("falling",true);
@@ -111,13 +111,13 @@ public class PlayerDashing : PlayerAbstract
                 {
                     player.playerData.audioSource.PlayGrassSound(player._GrassFall);
                 }
-                if((player.playerData.anim.GetInteger("attackId") == 2 || player.playerData.anim.GetInteger("attackId") == 4) && player.playerData.anim.GetBool("attacking"))
+                if((player.playerData.anim.GetInteger(player.attackId) == 2 || player.playerData.anim.GetInteger(player.attackId) == 4) && player.playerData.anim.GetBool(player.attacking))
                 {
-                    player.playerData.anim.SetBool("attacking", false);
+                    player.playerData.anim.SetBool(player.attacking, false);
                 }
                 player.SwitchState(player.IdleState);
                 player.playerData.anim.SetBool("falling", false);
-                player.playerData.anim.SetBool("jumping", false);
+                player.playerData.anim.SetBool(player.jumping, false);
                 return;
             }
         }

@@ -32,19 +32,19 @@ public class PlayerInteracting : PlayerAbstract
         {
             case(PlayerStateManager.InteractControls.Stop):
                 player.playerData.PlayerRb.linearVelocityX = 0;
-                player.playerData.anim.SetBool("moving", false);
-                player.playerData.anim.SetBool("walking", false);
-                player.playerData.anim.SetBool("sprinting", false);
-                player.playerData.anim.SetBool("crouching", false);
+                player.playerData.anim.SetBool(player.moving, false);
+                player.playerData.anim.SetBool(player.walking, false);
+                player.playerData.anim.SetBool(player.sprinting, false);
+                player.playerData.anim.SetBool(player.crouching, false);
                 break;
             case(PlayerStateManager.InteractControls.WalkLeft):
                 player.playerData.playerSpeed = 8*PlayerStateManager.Instance.playerData.mudSpeedMulti;
                 player.playerData.leftOrRight = false;
                 player.playerData.PlayerRb.linearVelocityX = -player.playerData.playerSpeed;
-                player.playerData.anim.SetBool("moving", true);
-                player.playerData.anim.SetBool("walking", true);
-                player.playerData.anim.SetBool("sprinting", false);
-                player.playerData.anim.SetBool("crouching", false);
+                player.playerData.anim.SetBool(player.moving, true);
+                player.playerData.anim.SetBool(player.walking, true);
+                player.playerData.anim.SetBool(player.sprinting, false);
+                player.playerData.anim.SetBool(player.crouching, false);
                 currentDistance = player.transform.position.x - startPoint;
                 if(currentDistance <= distance+0.1f && currentDistance >= distance - 0.1f)
                 {
@@ -55,10 +55,10 @@ public class PlayerInteracting : PlayerAbstract
                 player.playerData.playerSpeed = 8*PlayerStateManager.Instance.playerData.mudSpeedMulti;
                 player.playerData.leftOrRight = true;
                 player.playerData.PlayerRb.linearVelocityX = player.playerData.playerSpeed;
-                player.playerData.anim.SetBool("moving", true);
-                player.playerData.anim.SetBool("walking", true);
-                player.playerData.anim.SetBool("sprinting", false);
-                player.playerData.anim.SetBool("crouching", false);
+                player.playerData.anim.SetBool(player.moving, true);
+                player.playerData.anim.SetBool(player.walking, true);
+                player.playerData.anim.SetBool(player.sprinting, false);
+                player.playerData.anim.SetBool(player.crouching, false);
                 currentDistance = player.transform.position.x - startPoint;
                 if(currentDistance <= distance+0.1f && currentDistance >= distance - 0.1f)
                 {
@@ -69,10 +69,10 @@ public class PlayerInteracting : PlayerAbstract
                 player.playerData.playerSpeed = 15*PlayerStateManager.Instance.playerData.mudSpeedMulti;
                 player.playerData.leftOrRight = false;
                 player.playerData.PlayerRb.linearVelocityX = -player.playerData.playerSpeed;
-                player.playerData.anim.SetBool("moving", true);
-                player.playerData.anim.SetBool("walking", false);
-                player.playerData.anim.SetBool("sprinting", true);
-                player.playerData.anim.SetBool("crouching", false);
+                player.playerData.anim.SetBool(player.moving, true);
+                player.playerData.anim.SetBool(player.walking, false);
+                player.playerData.anim.SetBool(player.sprinting, true);
+                player.playerData.anim.SetBool(player.crouching, false);
                 currentDistance = player.transform.position.x - startPoint;
                 if(currentDistance <= distance+0.1f && currentDistance >= distance - 0.1f)
                 {
@@ -83,10 +83,10 @@ public class PlayerInteracting : PlayerAbstract
                 player.playerData.playerSpeed = 15*PlayerStateManager.Instance.playerData.mudSpeedMulti;
                 player.playerData.leftOrRight = true;
                 player.playerData.PlayerRb.linearVelocityX = player.playerData.playerSpeed;
-                player.playerData.anim.SetBool("moving", true);
-                player.playerData.anim.SetBool("walking", false);
-                player.playerData.anim.SetBool("sprinting", true);
-                player.playerData.anim.SetBool("crouching", false);
+                player.playerData.anim.SetBool(player.moving, true);
+                player.playerData.anim.SetBool(player.walking, false);
+                player.playerData.anim.SetBool(player.sprinting, true);
+                player.playerData.anim.SetBool(player.crouching, false);
                 currentDistance = player.transform.position.x - startPoint;
                 if(currentDistance <= distance+0.1f && currentDistance >= distance - 0.1f)
                 {
@@ -106,12 +106,12 @@ public class PlayerInteracting : PlayerAbstract
                     {
                         player.playerData.audioSource.PlayGrassSound(player._GrassJump);
                     }
-                    player.playerData.anim.SetBool("jumping", true);
+                    player.playerData.anim.SetBool(player.jumping, true);
                 }
-                player.playerData.anim.SetBool("moving", false);
-                player.playerData.anim.SetBool("walking", false);
-                player.playerData.anim.SetBool("sprinting", false);
-                player.playerData.anim.SetBool("crouching", false);
+                player.playerData.anim.SetBool(player.moving, false);
+                player.playerData.anim.SetBool(player.walking, false);
+                player.playerData.anim.SetBool(player.sprinting, false);
+                player.playerData.anim.SetBool(player.crouching, false);
                 state = PlayerStateManager.InteractControls.Stop;
                 break;
             case(PlayerStateManager.InteractControls.FullJumpRight):
@@ -130,12 +130,12 @@ public class PlayerInteracting : PlayerAbstract
                     {
                         player.playerData.audioSource.PlayGrassSound(player._GrassJump);
                     }
-                    player.playerData.anim.SetBool("jumping", true);
+                    player.playerData.anim.SetBool(player.jumping, true);
                 }
-                player.playerData.anim.SetBool("moving", true);
-                player.playerData.anim.SetBool("walking", false);
-                player.playerData.anim.SetBool("sprinting", false);
-                player.playerData.anim.SetBool("crouching", false);
+                player.playerData.anim.SetBool(player.moving, true);
+                player.playerData.anim.SetBool(player.walking, false);
+                player.playerData.anim.SetBool(player.sprinting, false);
+                player.playerData.anim.SetBool(player.crouching, false);
                 currentDistance = Mathf.Abs(player.transform.position.x - startPoint);
                 Debug.Log(currentDistance+ " " +distance+ " "+ (currentDistance <= distance+0.1f && currentDistance >= distance - 0.1f));
                 if(currentDistance <= distance+0.1f && currentDistance >= distance - 0.1f)
@@ -159,12 +159,12 @@ public class PlayerInteracting : PlayerAbstract
                     {
                         player.playerData.audioSource.PlayGrassSound(player._GrassJump);
                     }
-                    player.playerData.anim.SetBool("jumping", true);
+                    player.playerData.anim.SetBool(player.jumping, true);
                 }
-                player.playerData.anim.SetBool("moving", true);
-                player.playerData.anim.SetBool("walking", false);
-                player.playerData.anim.SetBool("sprinting", false);
-                player.playerData.anim.SetBool("crouching", false);
+                player.playerData.anim.SetBool(player.moving, true);
+                player.playerData.anim.SetBool(player.walking, false);
+                player.playerData.anim.SetBool(player.sprinting, false);
+                player.playerData.anim.SetBool(player.crouching, false);
                 currentDistance = player.transform.position.x - startPoint;
                 if(currentDistance <= distance+0.1f && currentDistance >= distance - 0.1f)
                 {
@@ -184,12 +184,12 @@ public class PlayerInteracting : PlayerAbstract
                     {
                         player.playerData.audioSource.PlayGrassSound(player._GrassJump);
                     }
-                    player.playerData.anim.SetBool("jumping", true);
+                    player.playerData.anim.SetBool(player.jumping, true);
                 }
-                player.playerData.anim.SetBool("moving", false);
-                player.playerData.anim.SetBool("walking", false);
-                player.playerData.anim.SetBool("sprinting", false);
-                player.playerData.anim.SetBool("crouching", false);
+                player.playerData.anim.SetBool(player.moving, false);
+                player.playerData.anim.SetBool(player.walking, false);
+                player.playerData.anim.SetBool(player.sprinting, false);
+                player.playerData.anim.SetBool(player.crouching, false);
                 state = PlayerStateManager.InteractControls.Stop;
                 break;
             case(PlayerStateManager.InteractControls.ShortJumpRight):
@@ -208,12 +208,12 @@ public class PlayerInteracting : PlayerAbstract
                     {
                         player.playerData.audioSource.PlayGrassSound(player._GrassJump);
                     }
-                    player.playerData.anim.SetBool("jumping", true);
+                    player.playerData.anim.SetBool(player.jumping, true);
                 }
-                player.playerData.anim.SetBool("moving", true);
-                player.playerData.anim.SetBool("walking", false);
-                player.playerData.anim.SetBool("sprinting", false);
-                player.playerData.anim.SetBool("crouching", false);
+                player.playerData.anim.SetBool(player.moving, true);
+                player.playerData.anim.SetBool(player.walking, false);
+                player.playerData.anim.SetBool(player.sprinting, false);
+                player.playerData.anim.SetBool(player.crouching, false);
                 currentDistance = Mathf.Abs(player.transform.position.x - startPoint);
                 Debug.Log(currentDistance+ " " +distance+ " "+ (currentDistance <= distance+0.1f && currentDistance >= distance - 0.1f));
                 if(currentDistance <= distance+0.1f && currentDistance >= distance - 0.1f)
@@ -237,12 +237,12 @@ public class PlayerInteracting : PlayerAbstract
                     {
                         player.playerData.audioSource.PlayGrassSound(player._GrassJump);
                     }
-                    player.playerData.anim.SetBool("jumping", true);
+                    player.playerData.anim.SetBool(player.jumping, true);
                 }
-                player.playerData.anim.SetBool("moving", true);
-                player.playerData.anim.SetBool("walking", false);
-                player.playerData.anim.SetBool("sprinting", false);
-                player.playerData.anim.SetBool("crouching", false);
+                player.playerData.anim.SetBool(player.moving, true);
+                player.playerData.anim.SetBool(player.walking, false);
+                player.playerData.anim.SetBool(player.sprinting, false);
+                player.playerData.anim.SetBool(player.crouching, false);
                 currentDistance = player.transform.position.x - startPoint;
                 if(currentDistance <= distance+0.1f && currentDistance >= distance - 0.1f)
                 {
@@ -296,13 +296,13 @@ public class PlayerInteracting : PlayerAbstract
         // Falling Animation
         if (player.playerData.PlayerRb.linearVelocityY < 0) 
         {
-            player.playerData.anim.SetBool("falling", true);
-            player.playerData.anim.SetBool("jumping", false);
+            player.playerData.anim.SetBool(player.falling, true);
+            player.playerData.anim.SetBool(player.jumping, false);
         }
         if (GroundCheck.Instance._IsGrounded)
         {
-            player.playerData.anim.SetBool("falling", false);
-            player.playerData.anim.SetBool("jumping", false);
+            player.playerData.anim.SetBool(player.falling, false);
+            player.playerData.anim.SetBool(player.jumping, false);
         }
     }
     public override void LeaveState(PlayerStateManager player)

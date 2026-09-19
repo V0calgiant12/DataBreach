@@ -15,11 +15,11 @@ public class PlayerDead : PlayerAbstract
         player.playerData.playerDead = true;
         player.playerData.resetVelocity = true;
         player.playerData.anim.SetBool("dead", true);
-        player.playerData.anim.SetBool("moving", false);
-        player.playerData.anim.SetBool("sprinting", false);
-        player.playerData.anim.SetBool("jumping", false);
-        player.playerData.anim.SetBool("falling", false);
-        player.playerData.anim.SetBool("crouching", false);
+        player.playerData.anim.SetBool(player.moving, false);
+        player.playerData.anim.SetBool(player.sprinting, false);
+        player.playerData.anim.SetBool(player.jumping, false);
+        player.playerData.anim.SetBool(player.falling, false);
+        player.playerData.anim.SetBool(player.crouching, false);
         player.playerData.PlayerRb.linearVelocityX = 0;
         player.playerData.audioSource.PlayPlayerDeathSound(player._PlayerDeath);
         player.playerData.ScreenCanvas.SetTrigger("Death");

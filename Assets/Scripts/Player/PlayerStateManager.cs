@@ -25,6 +25,17 @@ public class PlayerStateManager : MonoBehaviour
     public bool comingFromDash = false;
     public bool forceSuperJump = false;
     public bool ricochetAvailable = false;
+    [Header("HashedStrings")]
+    public int attacking = Animator.StringToHash("attacking");
+    public int jumping = Animator.StringToHash("jumping");
+    public int falling = Animator.StringToHash("falling");
+    public int hit = Animator.StringToHash("hit");
+    public int attackId = Animator.StringToHash("attackId");
+    public int moving = Animator.StringToHash("moving");
+    public int sprinting = Animator.StringToHash("sprinting");
+    public int walking = Animator.StringToHash("walking");
+    public int crouching = Animator.StringToHash("crouching");
+    public int iFrames = Animator.StringToHash("iframes");
     [Header("Audio")]
     public AudioClip _GrassWalk;
     public AudioClip _GrassFall;
@@ -98,9 +109,9 @@ public class PlayerStateManager : MonoBehaviour
         GlobalUpdateState.EnterState(this);
         currentState.EnterState(this);
         
-        playerData.anim.SetBool("attacking", false);
-        playerData.anim.SetBool("moving", false);
-        playerData.anim.SetBool("sprinting", false);
+        playerData.anim.SetBool(attacking, false);
+        playerData.anim.SetBool(moving, false);
+        playerData.anim.SetBool(sprinting, false);
 
         playerData.pixelationMat.SetFloat("_Pixelation", 550);
 
@@ -150,7 +161,7 @@ public class PlayerStateManager : MonoBehaviour
         playerData.sprintBufferCounter -= Time.timeScale == 1 ? 1 : 0;
         playerData.bufferedAtk -= Time.timeScale == 1 ? 1 : 0;
         playerData.iFrames -= Time.timeScale == 1 ? 1 : 0;
-        playerData.anim.SetInteger("iframes", playerData.iFrames);
+        playerData.anim.SetInteger(iFrames, playerData.iFrames);
 
         #if UNITY_EDITOR
         if(Input.GetKeyDown(KeyCode.F3))
@@ -181,7 +192,7 @@ public class PlayerStateManager : MonoBehaviour
         if (playerData.iFrames < 0 || overrideIFrames)
         {
             //PlayerFlash(1);
-            playerData.anim.SetBool("hit", true);
+            playerData.anim.SetBool(hit, true);
             TriggerShake.Instance.BurstShake(3,2,false,0f);
             playerData.playerHealth = playerData.playerHealth - 1;
             playerData.audioSource.PlayPlayerHitSound(_PlayerHit);
@@ -201,11 +212,11 @@ public class PlayerStateManager : MonoBehaviour
     }
     public void Attack(AttackType attackType, bool handleSound)
     {
-        if(playerData.anim.GetBool("attacking") != true && playerData.movementAllowed)
+        if(playerData.anim.GetBool(attacking) != true && playerData.movementAllowed)
         {
             playerData.bufferedAtk = 0;
             playerData.bufferedAtkDir = new Vector2(0,0);
-            playerData.anim.SetBool("attacking", true);
+            playerData.anim.SetBool(attacking, true);
             if (handleSound)
             {
                 playerData.audioSource.PlayPlayerAttackSound(_PlayerAttack);
@@ -213,40 +224,40 @@ public class PlayerStateManager : MonoBehaviour
             switch (attackType)
             {
                 case(AttackType.forward):
-                    playerData.anim.SetInteger("attackId",0);
+                    playerData.anim.SetInteger(attackId,0);
                     break;
                 case(AttackType.up):
-                    playerData.anim.SetInteger("attackId",1);
+                    playerData.anim.SetInteger(attackId,1);
                     break;
                 case(AttackType.down):
-                    playerData.anim.SetInteger("attackId",3);
+                    playerData.anim.SetInteger(attackId,3);
                     break;
                 case(AttackType.forwardAir):
-                    playerData.anim.SetInteger("attackId",0);
+                    playerData.anim.SetInteger(attackId,0);
                     break;
                 case(AttackType.backAir):
-                    playerData.anim.SetInteger("attackId",2);
+                    playerData.anim.SetInteger(attackId,2);
                     break;
                 case(AttackType.upAir):
-                    playerData.anim.SetInteger("attackId",1);
+                    playerData.anim.SetInteger(attackId,1);
                     break;
                 case(AttackType.downAir):
                     if(playerData.PlayerRb.linearVelocityY < -5)
                     {
                         playerData.PlayerRb.linearVelocity = new Vector2(playerData.PlayerRb.linearVelocityX, -5f);
                     }
-                    playerData.anim.SetInteger("attackId",4);
+                    playerData.anim.SetInteger(attackId,4);
                     break;
                 case(AttackType.dash):
                     playerData.movementAllowed = false;
-                    playerData.anim.SetInteger("attackId",5);
+                    playerData.anim.SetInteger(attackId,5);
                     StartCoroutine(NoMovingWhileAttack());
                     break;
                 case(AttackType.dashAir):
-                    playerData.anim.SetInteger("attackId",6);
+                    playerData.anim.SetInteger(attackId,6);
                     break;
                 case(AttackType.jumpAttack):
-                    playerData.anim.SetInteger("attackId",7);
+                    playerData.anim.SetInteger(attackId,7);
                     break;
             }
             //Debug.Log(attackType);
@@ -321,7 +332,7 @@ public class PlayerStateManager : MonoBehaviour
             }
             yield return null;
         }
-        playerData.anim.SetBool("hit", false);
+        playerData.anim.SetBool(hit, false);
         playerData.movementAllowed = true;
     }
     public IEnumerator NoMovingWhileAttack()
@@ -341,7 +352,7 @@ public class PlayerStateManager : MonoBehaviour
         {
             elapsed += Time.timeScale == 1 ? 1 : 0;
         }
-        playerData.anim.SetBool("attacking", false);
+        playerData.anim.SetBool(attacking, false);
         playerData.jumpBufferCounter = 0;
         playerData.movementAllowed = true;
         dashAttackCd = 25;

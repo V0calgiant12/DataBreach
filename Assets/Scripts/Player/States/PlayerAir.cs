@@ -23,14 +23,14 @@ public class PlayerAir : PlayerAbstract
         if (player.playerData.PlayerRb.linearVelocityY > 0) 
         {
             player.StartCoroutine(player.WaitUntilNotJumping());
-            player.playerData.anim.SetBool("falling", false);
-            player.playerData.anim.SetBool("jumping", true);
+            player.playerData.anim.SetBool(player.falling, false);
+            player.playerData.anim.SetBool(player.jumping, true);
             changeYStartNextFall = true;
         }
         if (player.playerData.PlayerRb.linearVelocityY < 0) 
         {
-            player.playerData.anim.SetBool("falling", true);
-            player.playerData.anim.SetBool("jumping", false);
+            player.playerData.anim.SetBool(player.falling, true);
+            player.playerData.anim.SetBool(player.jumping, false);
             player.playerData.anim.SetBool("superJumping",false);
         }
         
@@ -116,8 +116,8 @@ public class PlayerAir : PlayerAbstract
         }
         if (player.playerData.PlayerRb.linearVelocityY < 0)
         {
-            player.playerData.anim.SetBool("falling", true);
-            player.playerData.anim.SetBool("jumping", false);
+            player.playerData.anim.SetBool(player.falling, true);
+            player.playerData.anim.SetBool(player.jumping, false);
             player.playerData.anim.SetBool("superJumping",false);
             player.playerData.inAirGust = false;
             if (changeYStartNextFall)
@@ -199,11 +199,11 @@ public class PlayerAir : PlayerAbstract
             player.playerData.PlayerRb.linearVelocity = new Vector2(player.playerData.PlayerRb.linearVelocityX, jumpStrength * 0.8f);
             player.StartCoroutine(player.WaitUntilNotJumping());
             player.playerData.audioSource.PlayJumpSound(player._AirJump);
-            if (player.playerData.anim.GetBool("jumping"))
+            if (player.playerData.anim.GetBool(player.jumping))
             {
                 player.playerData.anim.SetTrigger("next");
             }
-            player.playerData.anim.SetBool("jumping", true);
+            player.playerData.anim.SetBool(player.jumping, true);
             player.playerData.doubleJumpAvailable = false;
             player.playerData.shortJumping = true;
             changeYStartNextFall = true;
@@ -233,8 +233,8 @@ public class PlayerAir : PlayerAbstract
         // Grounded Jump check for Coyote time.
         if (player.playerData.jumpBufferCounter > 0 && player.playerData.coyoteTimeCounter > 0)
         {
-            player.playerData.anim.SetBool("falling", false);
-            player.playerData.anim.SetBool("jumping", true);
+            player.playerData.anim.SetBool(player.falling, false);
+            player.playerData.anim.SetBool(player.jumping, true);
             player.playerData.PlayerRb.linearVelocity = new Vector2(player.playerData.PlayerRb.linearVelocityX, jumpStrength * PlayerStateManager.Instance.playerData.mudJumpMulti);
             player.playerData.jumpBufferCounter = 0;
             player.playerData.coyoteTimeCounter = 0;
@@ -268,14 +268,14 @@ public class PlayerAir : PlayerAbstract
             {
                 player.playerData.audioSource.PlayGrassSound(player._GrassFall);
             }
-            if((player.playerData.anim.GetInteger("attackId") == 2 || player.playerData.anim.GetInteger("attackId") == 4) && player.playerData.anim.GetBool("attacking"))
+            if((player.playerData.anim.GetInteger(player.attackId) == 2 || player.playerData.anim.GetInteger(player.attackId) == 4) && player.playerData.anim.GetBool(player.attacking))
             {
-                player.playerData.anim.SetBool("attacking", false);
+                player.playerData.anim.SetBool(player.attacking, false);
             }
             player.playerData.fastFallCounter = 0;
             player.SwitchState(player.IdleState);
-            player.playerData.anim.SetBool("falling", false);
-            player.playerData.anim.SetBool("jumping", false);
+            player.playerData.anim.SetBool(player.falling, false);
+            player.playerData.anim.SetBool(player.jumping, false);
             player.playerData.anim.SetBool("superJumping",false);
             return;
         }
@@ -286,8 +286,8 @@ public class PlayerAir : PlayerAbstract
         player.comingFromDash = false;
         player.playerData.resetVelocity = true;
         player.playerData.anim.SetBool("currentlyFixed",false);
-        player.playerData.anim.SetBool("jumping", false);
-        player.playerData.anim.SetBool("falling", false);
+        player.playerData.anim.SetBool(player.jumping, false);
+        player.playerData.anim.SetBool(player.falling, false);
     }
     private bool CheckGroundInFront(PlayerStateManager player)
     {

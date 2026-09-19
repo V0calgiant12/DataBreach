@@ -18,7 +18,7 @@ public class GoblinAttack : GoblinAbstract
     {
         goblin.spriteHolder.transform.localScale = new Vector3(PlayerStateManager.Instance.transform.position.x > goblin.transform.position.x ? 1:-1,1,1);
 
-        elapsed += Time.timeScale == 1 ? 1 : 0;
+        elapsed += 1;
 
         if(elapsed == 15)
         {

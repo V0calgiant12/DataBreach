@@ -87,7 +87,10 @@ public class GoblinStateManager : EnemyAbstract
     void Update()
     {
         audioCooldown -= Time.timeScale == 1 ? 1:0;
-        currentState.UpdateState(this);
+        if(Time.timeScale == 1)
+        {
+            currentState.UpdateState(this);
+        }
         if (!groundCheck._IsGrounded)
         {
             anim.SetBool("attacking", false);

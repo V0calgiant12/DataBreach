@@ -10,8 +10,8 @@ public class PlayerIdle : PlayerAbstract
     public override void EnterState(PlayerStateManager player)
     {
         //Debug.Log("Player Idle / Idle State");
-        player.playerData.anim.SetBool("moving", false);
-        player.playerData.anim.SetBool("sprinting", false);
+        player.playerData.anim.SetBool(player.moving, false);
+        player.playerData.anim.SetBool(player.sprinting, false);
         player.playerData.resetVelocity = true;
         player.playerData.shortJumping = true;
         player.ricochetAvailable = false;
@@ -86,7 +86,7 @@ public class PlayerIdle : PlayerAbstract
         if (UserInput.Instance.MovementInput.x < -0.25f || UserInput.Instance.MovementInput.x > 0.25f)
         {
             player.SwitchState(player.WalkingState);
-            player.playerData.anim.SetBool("moving", true);
+            player.playerData.anim.SetBool(player.moving, true);
             return;
         }
 

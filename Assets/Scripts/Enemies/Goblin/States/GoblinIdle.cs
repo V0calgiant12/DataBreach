@@ -17,7 +17,7 @@ public class GoblinIdle : GoblinAbstract
     }
     public override void UpdateState(GoblinStateManager goblin)
     {
-        idleTime -=  Time.timeScale == 1 ? 1 : 0;;
+        idleTime -= 1;
         goblin.goblinRb.linearVelocityX = 0;
 
         if(idleTime == 0){
