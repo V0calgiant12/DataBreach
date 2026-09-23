@@ -22,6 +22,7 @@ public class GoblinChasing : GoblinAbstract
         if(directionGetCd == 0)
         {
             direction = PlayerStateManager.Instance.transform.position.x > goblin.transform.position.x ? 1 : -1;
+            goblin.spriteHolder.transform.localScale = new Vector3(direction,1,1);
             directionGetCd = 20;
         }
         else
@@ -29,7 +30,7 @@ public class GoblinChasing : GoblinAbstract
             directionGetCd -= 1;
         }
         
-        goblin.spriteHolder.transform.localScale = new Vector3(direction,1,1);
+        
 
         // Walk forward (direction dependant)
         if(Mathf.Abs(PlayerStateManager.Instance.transform.position.x - goblin.transform.position.x) > 0.5)

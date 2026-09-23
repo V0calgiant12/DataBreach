@@ -11,13 +11,14 @@ public class StalagtiteTrigger : MonoBehaviour
     [SerializeField] private AudioClip _StalactiteGround;
     [SerializeField] private AudioClip _StalactiteDetach;
     [SerializeField] private AudioSource audioSource;
+    [Header("Options:")]
+    public bool detectEnemies = false;
     private void OnTriggerEnter2D(Collider2D other)
     {
         // Damage Player
-        if(other.gameObject.CompareTag("Player") && gameObject.CompareTag("Hitbox"))
+        if((other.gameObject.CompareTag("Player")||other.gameObject.CompareTag("EnemyHurtbox") && detectEnemies) && gameObject.CompareTag("Hitbox"))
         {
             PlayerStateManager.Instance.DamagePlayer(10, UnityEngine.Random.Range(6,10),60,false,transform.position.x,false);
-            //Debug.Log("Stalagtite Damaged Player " + Convert.ToInt16(PlayerStateManager.Instance.playerData.leftOrRight));
         }
         // Damage enemy
         if(other.gameObject.CompareTag("EnemyHurtbox") && gameObject.CompareTag("Hitbox"))
@@ -25,13 +26,14 @@ public class StalagtiteTrigger : MonoBehaviour
             other.GetComponent<EnemyHit>().DamageEnemy(10, 10, UnityEngine.Random.Range(6,10),transform.position.x);
         }
         // Detect ground
-        if((other.gameObject.CompareTag("Ground")||other.gameObject.CompareTag("Stone")) && gameObject.CompareTag("Hitbox"))
+        if((other.gameObject.CompareTag("Ground")||other.gameObject.CompareTag("Stone")||other.gameObject.CompareTag("Spikes")) && gameObject.CompareTag("Hitbox"))
         {
             audioSource.clip = _StalactiteGround;
             audioSource.Play();
             Hitbox.SetActive(false);
             Collider.SetActive(true);
             StalagmiteRb.bodyType = RigidbodyType2D.Static;
+            transform.parent.transform.position = new Vector2(transform.parent.transform.position.x,Mathf.Floor(Hitbox.transform.position.y-0.1f) + (other.gameObject.CompareTag("Spikes") ? 1.25f : 1.5f));
         }
         // Detect Player
         if(other.gameObject.CompareTag("Player") && !gameObject.CompareTag("Hitbox"))

@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class GoblinPatrolling : GoblinAbstract
 {
-    int directionGetCd = 0; 
+    bool directionGetCd = true; 
     float direction;    public float patrolTargetX;
     public override void RunOnce(GoblinStateManager goblin)
     {
@@ -15,17 +15,15 @@ public class GoblinPatrolling : GoblinAbstract
         goblin.anim.SetBool("moving", true);
         goblin.anim.SetBool("attacking", false);
         goblin.anim.SetBool("sprinting", false);
+        directionGetCd = true;
     }
     public override void UpdateState(GoblinStateManager goblin)
     {
-        if(directionGetCd == 0)
+        if(directionGetCd)
         {
             direction = patrolTargetX > goblin.transform.position.x ? 1 : -1;
-            directionGetCd = 20;
-        }
-        else
-        {
-            directionGetCd -= 1;
+            goblin.spriteHolder.transform.localScale = new Vector3(direction,1,1);
+            directionGetCd = false;
         }
 
         // Walk forward (direction dependant) 
