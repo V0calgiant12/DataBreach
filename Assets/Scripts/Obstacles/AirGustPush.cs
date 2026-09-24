@@ -3,8 +3,6 @@ using UnityEngine;
 public class AirGustPush : MonoBehaviour
 {
     public float GustStrength;
-    public GroundCheck GroundCheckRef;
-    public SlimeStateManager SlimeStateManagerRef;
     public PlayerData PlayerDataRef;
     void Start()
     {
@@ -12,7 +10,7 @@ public class AirGustPush : MonoBehaviour
     }
     public void OnTriggerStay2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("Player") && !GroundCheckRef._IsGrounded)
+        if (other.gameObject.CompareTag("Player") && !GroundCheck.Instance._IsGrounded)
         {
             if (UserInput.Instance.MovementInput.y > -0.5f)
             {

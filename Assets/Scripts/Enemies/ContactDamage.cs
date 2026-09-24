@@ -8,10 +8,12 @@ public class ContactDamage : MonoBehaviour
     [SerializeField] private Vector2 knockback;
     private Vector2 appliedKnockback;
     [SerializeField] private bool rotationDependant = false;
+    [SerializeField] private bool ignoreIFrames = false;
+    private bool damagedPlayer = false;
 
     void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Player"))
+        if (collision.gameObject.CompareTag("Player") && !damagedPlayer)
         {
             if(!StopAtOneHp || StopAtOneHp && PlayerStateManager.Instance.playerData.playerHealth != 1)
             {
@@ -35,8 +37,19 @@ public class ContactDamage : MonoBehaviour
                             break;
                     }
                 }
-                PlayerStateManager.Instance.DamagePlayer(appliedKnockback.x, appliedKnockback.y, 30, false, transform.position.x, false);
+                if (ignoreIFrames)
+                {
+                    damagedPlayer = true;
+                }
+                PlayerStateManager.Instance.DamagePlayer(appliedKnockback.x, appliedKnockback.y, 30, ignoreIFrames, transform.position.x, false);
             }
+        }
+    }
+    void OnTriggerExit2D(Collider2D other)
+    {
+        if(other.gameObject.CompareTag("Player") && ignoreIFrames)
+        {
+            damagedPlayer = false;
         }
     }
 }

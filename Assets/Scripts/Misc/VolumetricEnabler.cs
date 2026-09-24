@@ -1,5 +1,3 @@
-using System;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 
@@ -23,7 +21,7 @@ public class VolumetricEnabler : MonoBehaviour
     [SerializeField] private GameObject[] objects;
     void Start()
     {
-        InvokeRepeating("OffsetUpdate",0,1f);
+        InvokeRepeating("OffsetUpdate",0,1f + Random.Range(0.0f,0.25f));
     }
     private void OffsetUpdate()
     {
