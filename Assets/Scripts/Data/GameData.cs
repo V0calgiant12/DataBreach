@@ -31,13 +31,23 @@ public class GameData : MonoBehaviour
     }
     public bool SaveExists()
     {
+        LoadData();
         string path = Application.persistentDataPath + "/gameData.json";
-        if (File.Exists(path) && _SaveFileVersion == currentVersion) // Checks to see if the file even exists.
+        if (File.Exists(path)) // Checks to see if the file even exists.
         {
-            return true;
+            if(_SaveFileVersion == currentVersion)
+            {
+                return true;
+            }
+            else
+            {
+                Debug.LogError("Old Save File Version Found.");
+                return false;
+            }
         }
         else
         {
+            Debug.LogError("No Save File Found");
             return false;
         }
     }
@@ -82,7 +92,7 @@ public class GameData : MonoBehaviour
             playerData.playerHealth = _PlayerHealth;
             playerData.maxHealth = _MaxHealth;
             playerData.hasHeartCoin = _HasHeartCoin;
-            Debug.Log("Data Exists");
+            Debug.Log("Save File Loaded");
         }
     }
     
