@@ -12,20 +12,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a1729c4832f69e4bb0a9c98f3d7c2f3, type: 3}
   m_Name: PlayerData
   m_EditorClassIdentifier: Assembly-CSharp::PlayerData
-  playerHealth: 6
-  maxHealth: 6
+  playerHealth: 5
+  maxHealth: 5
   fastFallCounter: 0
-  jumpBufferCounter: -173
-  coyoteTimeCounter: -173
-  sprintBufferCounter: -185
-  interactingCooldown: -151202
-  iFrames: -603
+  jumpBufferCounter: -849
+  coyoteTimeCounter: -215
+  sprintBufferCounter: -119
+  interactingCooldown: -153081
+  iFrames: -2482
   ricochet: 0
-  lastCheckpoint: {x: 74.5, y: 15}
-  bufferedAtk: -4077
+  lastCheckpoint: {x: 0, y: 0}
+  bufferedAtk: -5956
   bufferedAtkDir: {x: 0, y: 0}
-  basePlayerSpeed: 7
-  playerSpeed: 7
+  basePlayerSpeed: 8
+  playerSpeed: 8
   generalSpeedMulti: 1
   mudSpeedMulti: 1
   mudJumpMulti: 1
@@ -36,13 +36,14 @@ MonoBehaviour:
   limitedMovement: 0
   shortJumping: 1
   autoResetSpeed: 1
-  leftOrRight: 1
+  leftOrRight: 0
   interacting: 0
   inAirGust: 0
   pickUpHeart: 0
   playerDead: 0
   resetVelocity: 1
   inMud: 0
+  hasHeartCoin: 1
   MainCamera: {fileID: 0}
   ScreenCanvas: {fileID: 0}
   OffsetVelocity: {x: 0, y: 0}

@@ -10,8 +10,14 @@ public class GameData : MonoBehaviour
     /// </summary>
     public static GameData Instance;
     [SerializeField] private PlayerData playerData;
+    [Header("Save Version")]
+    public int currentVersion;
+    public int _SaveFileVersion = 0;
     [Header("Save Data")]
     public int _SceneId;
+    public int _PlayerHealth;
+    public int _MaxHealth;
+    public bool _HasHeartCoin;
 // Need level ID 
     private void Awake()
     {
@@ -26,7 +32,7 @@ public class GameData : MonoBehaviour
     public bool SaveExists()
     {
         string path = Application.persistentDataPath + "/gameData.json";
-        if (File.Exists(path)) // Checks to see if the file even exists.
+        if (File.Exists(path) && _SaveFileVersion == currentVersion) // Checks to see if the file even exists.
         {
             return true;
         }
@@ -40,8 +46,10 @@ public class GameData : MonoBehaviour
         SaveData data = new SaveData();
 
         //data.variable = variable;
+        data._SaveFileVersion = currentVersion;
         data._PlayerHealth = playerData.playerHealth;
         data._MaxHealth = playerData.maxHealth;
+        data._HasHeartCoin = playerData.hasHeartCoin;
         data._SceneId = _SceneId;
 
         string json = JsonUtility.ToJson(data);
@@ -58,9 +66,22 @@ public class GameData : MonoBehaviour
             SaveData data = JsonUtility.FromJson<SaveData>(json);
             
             //variable = data.variable;
-            playerData.playerHealth = data._PlayerHealth;
-            playerData.maxHealth = data._MaxHealth;
+            _SaveFileVersion = data._SaveFileVersion;
             _SceneId = data._SceneId;
+            _PlayerHealth = data._PlayerHealth;
+            _MaxHealth = data._MaxHealth;
+            _HasHeartCoin = data._HasHeartCoin;
+            if(data._MaxHealth < 5)
+            {
+                _PlayerHealth = 5;
+            }
+            if(data._PlayerHealth == 0)
+            {
+                _PlayerHealth = _MaxHealth;
+            }
+            playerData.playerHealth = _PlayerHealth;
+            playerData.maxHealth = _MaxHealth;
+            playerData.hasHeartCoin = _HasHeartCoin;
             Debug.Log("Data Exists");
         }
     }
@@ -73,6 +94,8 @@ class SaveData // This class quite literally just stores variables so they can b
     public int _PlayerHealth;
     public int _MaxHealth;
     public int _SceneId;
+    public bool _HasHeartCoin;
+    public int _SaveFileVersion = 0;
 }
 
 public class WaitForFrames : CustomYieldInstruction

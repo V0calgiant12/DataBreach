@@ -13,6 +13,7 @@ public class SettingsData : MonoBehaviour
     /// </summary>
     public static SettingsData Instance;
     public int loadDelay = 0;
+    [Header("File Version")]
     public int currentVersion;
     public int _SaveFileVersion = 0;
     [Header("Controls")]

@@ -27,6 +27,7 @@ public class TitleMenuUIHandler : MonoBehaviour
         playerData.lastCheckpoint = new Vector2(0,0);
         playerData.maxHealth = 5;
         playerData.playerHealth = playerData.maxHealth;
+        playerData.hasHeartCoin = false;
         sceneTransition.TransitionToScene(13,1); // Intro scene, 1 second transition.
     }
     public void ContinueButton()
