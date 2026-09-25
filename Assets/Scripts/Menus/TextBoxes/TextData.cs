@@ -8,6 +8,12 @@ public class TextData : MonoBehaviour
     public string[] _TextPageInput;
     public int _TextSpeed;
     public bool _DelayBetweenLines;
+    [Header("Decisions")]
+    public bool _DecisionAfterText;
+    public bool _UsesHeartCoin;
+    public string[] _DecisionOptions;
+    public string[] _PostDecisionTextDecision1;
+    public string[] _PostDecisionTextDecision2;
     [Header("Interaction References:")]
     public AudioClip _TextSound;
     public void ChangeText(int pageNumber, string newText, bool clearPages)

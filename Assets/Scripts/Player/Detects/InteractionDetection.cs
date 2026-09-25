@@ -36,6 +36,22 @@ public class InteractionDetection : MonoBehaviour
                         player.Interact(PlayerStateManager.InteractControls.Stop,0);
                         TextWrite.Instance.WriteText(colliderOther.gameObject.GetComponent<TextData>());
                         break;
+                    case(1):
+                        player.Interact(PlayerStateManager.InteractControls.Stop,0);
+                        TextData textData = colliderOther.gameObject.GetComponent<TextData>();
+                        if (PlayerStateManager.Instance.playerData.hasHeartCoin)
+                        {
+                            textData.ChangeText(3,"Hey, is that a Heart Coin you got there?",false);
+                            textData.ChangeText(4,"I can use that Heart Coin on ya if you'd like.<br>They're easy to lose so it's better to use them while you have them.",false);
+                            textData._DecisionAfterText = true;
+                        }
+                        else
+                        {
+                            textData._DecisionAfterText = false;
+                        }
+                        TextWrite.Instance.WriteText(textData);
+
+                        break;
                 }
                 
             }

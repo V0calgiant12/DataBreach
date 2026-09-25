@@ -8,6 +8,7 @@ public class TextBoxAnimation : MonoBehaviour
     [Header("Peramiters")]
     public float _OpenSpeed;
     public bool open = false;
+    public bool options = false;
     [Header("References")]
     [SerializeField] private RectTransform rectTransform;
     [SerializeField] private Animator animator;
@@ -27,5 +28,17 @@ public class TextBoxAnimation : MonoBehaviour
         animator.SetFloat("Speed", _OpenSpeed);
         animator.SetBool("Open", false);
         open = false;
+    }
+    public void OptionsUp()
+    {
+        animator.SetFloat("Speed", _OpenSpeed);
+        animator.SetBool("Options", true);
+        options = true;
+    }
+    public void OptionsDown()
+    {
+        animator.SetFloat("Speed", _OpenSpeed);
+        animator.SetBool("Options", false);
+        options = false;
     }
 }

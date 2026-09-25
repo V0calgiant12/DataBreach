@@ -23,6 +23,16 @@ public class MenuAudioSource : MonoBehaviour
         audioSource.Play();
         StartCoroutine(Delete());
     }
+    
+    public void HeartSound(AudioClip audioClip,float volume)
+    {
+        audioSource.volume = volume;
+        audioSource.outputAudioMixerGroup = audioMixer.FindMatchingGroups("Effects")[0];
+        audioSource.clip = audioClip;
+        audioSource.spatialBlend = 0;
+        audioSource.Play();
+        StartCoroutine(Delete());
+    }
 
     IEnumerator Delete()
     {

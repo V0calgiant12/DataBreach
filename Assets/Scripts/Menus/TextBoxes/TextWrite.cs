@@ -7,20 +7,27 @@ using UnityEngine.TextCore.Text;
 using Unity.Collections;
 using Unity.VisualScripting;
 using System.Timers;
+using Unity.Android.Gradle.Manifest;
 
 public class TextWrite : MonoBehaviour
 {
     [Header("Perameters")]
     public string _TextInput;
+    public string[] _TextPageInput;
     public int _TextSpeed;
     public AudioClip _TextSound;
+    public AudioClip _HeartSound;
     public bool _Writing;
+    public bool _WaitingForDecision;
     public bool _DelayBetweenLines;
+    public bool _DecisionAfterText;
     private int pageNumber;
     private int maxPages;
     [Header("References")]
     [SerializeField] private int characterNum;
     [SerializeField] private TextMeshProUGUI text;
+    [SerializeField] private TextMeshProUGUI option1Text;
+    [SerializeField] private TextMeshProUGUI option2Text;
     public TextBoxAnimation textBox;
     [SerializeField] private GameObject prefab;
     public static TextWrite Instance;
@@ -62,17 +69,19 @@ public class TextWrite : MonoBehaviour
     {
         pageNumber = 0;
         maxPages = data._TextPageInput.Length-1;
-        if(pageNumber > maxPages || data._TextPageInput[pageNumber] == null)
+        _TextPageInput = data._TextPageInput;
+        if(pageNumber > maxPages || _TextPageInput[pageNumber] == null)
         {
             _TextInput = "ERROR: NO TEXT DATA FOR PAGE " + pageNumber + ".";
         }
         else
         {
-            _TextInput = data._TextPageInput[pageNumber];
+            _TextInput = _TextPageInput[pageNumber];
         }
         _TextSound = data._TextSound;
         _TextSpeed = data._TextSpeed;
         _DelayBetweenLines = data._DelayBetweenLines;
+        _DecisionAfterText = data._DecisionAfterText;
         storedData = data;
         frame = 0;
         StartCoroutine(Write(true));
@@ -81,13 +90,14 @@ public class TextWrite : MonoBehaviour
     {
         text.text = "";
         pageNumber += 1;
-        if(storedData._TextPageInput[pageNumber] == null)
+        maxPages = _TextPageInput.Length-1;
+        if(_TextPageInput[pageNumber] == null)
         {
             _TextInput = "ERROR: NO TEXT DATA FOR PAGE " + pageNumber + ".";
         }
         else
         {
-            _TextInput = storedData._TextPageInput[pageNumber];
+            _TextInput = _TextPageInput[pageNumber];
         }
         _TextSound = storedData._TextSound;
         _TextSpeed = storedData._TextSpeed;
@@ -157,9 +167,18 @@ public class TextWrite : MonoBehaviour
             yield return null;
         }
         _Writing = false;
+        if(pageNumber >= maxPages && _DecisionAfterText)
+        {
+            _WaitingForDecision = true;
+            textBox.OptionsUp();
+            yield return new WaitForFrames(1);
+            option1Text.text = storedData._DecisionOptions[0];
+            option2Text.text = storedData._DecisionOptions[1];
+        }
+
         while (textBox.open)
         {
-            if ((UserInput.Instance.KeyDownInteract||UserInput.Instance.KeyDownAttack) && _Writing == false && Time.timeScale == 1)
+            if ((UserInput.Instance.KeyDownInteract||UserInput.Instance.KeyDownAttack) && _Writing == false && Time.timeScale == 1 && !_WaitingForDecision)
             {
                 if(pageNumber >= maxPages)
                 {
@@ -177,5 +196,45 @@ public class TextWrite : MonoBehaviour
             }
             yield return null;
         }
+    }
+    public void Option(int optionNumber)
+    {
+        switch (optionNumber)
+        {
+            case(1):
+                Array.Resize(ref _TextPageInput,storedData._TextPageInput.Length + storedData._PostDecisionTextDecision1.Length);
+                for(int i = _TextPageInput.Length-storedData._PostDecisionTextDecision1.Length; i < _TextPageInput.Length; i++)
+                {
+                    _TextPageInput[i] = storedData._PostDecisionTextDecision1[i-storedData._TextPageInput.Length];
+                }
+                break;
+            case(2):
+                Array.Resize(ref _TextPageInput,storedData._TextPageInput.Length + storedData._PostDecisionTextDecision2.Length);
+                for(int i = _TextPageInput.Length-storedData._PostDecisionTextDecision2.Length; i < _TextPageInput.Length; i++)
+                {
+                    //Debug.Log(i + ", " + (i-storedData._TextPageInput.Length) + ", " + storedData._PostDecisionTextDecision2.Length + ", " + (storedData._TextPageInput.Length + storedData._PostDecisionTextDecision2.Length-1));
+                    _TextPageInput[i] = storedData._PostDecisionTextDecision2[i-storedData._TextPageInput.Length];
+                }
+                if (storedData._UsesHeartCoin)
+                {
+                    UseHeartCoin();
+                }
+                break;
+        }
+        _DecisionAfterText = false;
+        _WaitingForDecision = false;
+        textBox.OptionsDown();
+        WriteNextPage();
+        
+    }
+    private void UseHeartCoin()
+    {
+        GameObject audioClone = Instantiate(prefab);
+        audioClone.GetComponent<MenuAudioSource>().HeartSound(_HeartSound,0.9f);
+        PlayerStateManager.Instance.playerData.maxHealth += 1;
+        PlayerStateManager.Instance.playerData.playerHealth = PlayerStateManager.Instance.playerData.maxHealth;
+        PlayerStateManager.Instance.playerData.hasHeartCoin = false;
+        PlayerStateManager.Instance.playerData.heartCoinSaved = false;
+        HeartCoinIconHandler.Instance.UpdateGUI();
     }
 }
