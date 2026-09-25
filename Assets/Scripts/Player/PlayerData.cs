@@ -38,6 +38,7 @@ public class PlayerData : ScriptableObject
     public bool resetVelocity = false;
     public bool inMud = false;
     public bool hasHeartCoin = false;
+    public bool heartCoinSaved = false;
     [Header("References")]
     public GameObject MainCamera;
     public Animator ScreenCanvas;

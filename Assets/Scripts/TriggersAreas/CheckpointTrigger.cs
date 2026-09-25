@@ -17,6 +17,7 @@ public class CheckpointTrigger : MonoBehaviour
                 audioSource.PlaySound(checkpointSound,1,1,0,1,transform.position);
                 Instantiate(particle,new Vector2(playerPos.x,playerPos.y+1),transform.rotation);
                 PlayerStateManager.Instance.playerData.lastCheckpoint = transform.position;
+                PlayerStateManager.Instance.playerData.heartCoinSaved = PlayerStateManager.Instance.playerData.hasHeartCoin;
             }
         }
     }

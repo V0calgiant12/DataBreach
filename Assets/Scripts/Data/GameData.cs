@@ -59,7 +59,7 @@ public class GameData : MonoBehaviour
         data._SaveFileVersion = currentVersion;
         data._PlayerHealth = playerData.playerHealth;
         data._MaxHealth = playerData.maxHealth;
-        data._HasHeartCoin = playerData.hasHeartCoin;
+        data._HasHeartCoin = playerData.heartCoinSaved;
         data._SceneId = _SceneId;
 
         string json = JsonUtility.ToJson(data);
@@ -91,7 +91,7 @@ public class GameData : MonoBehaviour
             }
             playerData.playerHealth = _PlayerHealth;
             playerData.maxHealth = _MaxHealth;
-            playerData.hasHeartCoin = _HasHeartCoin;
+            playerData.heartCoinSaved = _HasHeartCoin;
             Debug.Log("Save File Loaded");
         }
     }

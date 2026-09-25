@@ -123,6 +123,7 @@ public class PlayerStateManager : MonoBehaviour
     }
     private void GoToCheckpoint()
     {
+        playerData.hasHeartCoin = playerData.heartCoinSaved;
         if(playerData.lastCheckpoint != new Vector2(0,0))
         {
             transform.position = playerData.lastCheckpoint;

@@ -5,6 +5,13 @@ public class HeartCoin : MonoBehaviour
     [SerializeField] private EffectSound audioSource;
     [SerializeField] private AudioClip audioClip;
     [SerializeField] private PlayerData playerData;
+    void Start()
+    {
+        if (playerData.hasHeartCoin)
+        {
+            Destroy(gameObject);
+        }
+    }
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
