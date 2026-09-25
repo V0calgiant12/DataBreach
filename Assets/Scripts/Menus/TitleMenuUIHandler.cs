@@ -25,6 +25,7 @@ public class TitleMenuUIHandler : MonoBehaviour
     public void NewSaveButton() // Starts a transition to the Intro scene
     {
         playerData.lastCheckpoint = new Vector2(0,0);
+        playerData.maxHealth = 5;
         playerData.playerHealth = playerData.maxHealth;
         sceneTransition.TransitionToScene(13,1); // Intro scene, 1 second transition.
     }
