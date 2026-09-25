@@ -8,6 +8,8 @@ public class HealthHud : MonoBehaviour
     void Start()
     {
         animator.SetBool("SceneStarted", false);
+        animator.SetInteger("PlayerHealth", PlayerStateManager.Instance.playerData.playerHealth);
+        animator.SetInteger("MaxHealth", PlayerStateManager.Instance.playerData.maxHealth);
         StartCoroutine(LateStart());
     }
     IEnumerator LateStart()
@@ -23,5 +25,6 @@ public class HealthHud : MonoBehaviour
     void OnGUI()
     {
         animator.SetInteger("PlayerHealth", PlayerStateManager.Instance.playerData.playerHealth);
+        animator.SetInteger("MaxHealth", PlayerStateManager.Instance.playerData.maxHealth);
     }
 }

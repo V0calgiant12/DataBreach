@@ -54,11 +54,11 @@ public class HealthTriggerArea : MonoBehaviour
             }
             else if (HealPlayer)
             {
-                if(PlayerStateManager.Instance.playerData.playerHealth != 5)
+                if(PlayerStateManager.Instance.playerData.playerHealth != PlayerStateManager.Instance.playerData.maxHealth)
                 {
                     audioSource.Play();
                 }
-                PlayerStateManager.Instance.playerData.playerHealth = 5;
+                PlayerStateManager.Instance.playerData.playerHealth = PlayerStateManager.Instance.playerData.maxHealth;
             }
             else
             {

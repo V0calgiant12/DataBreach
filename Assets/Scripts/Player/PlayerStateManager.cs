@@ -102,7 +102,7 @@ public class PlayerStateManager : MonoBehaviour
         playerData.playerDead = false;
         if(playerData.playerHealth <= 0)
         {
-            playerData.playerHealth = 5;
+            playerData.playerHealth = playerData.maxHealth;
         }
         playerData.OffsetVelocity = new Vector2(0,0);
         playerData.interacting = false;

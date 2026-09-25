@@ -12,19 +12,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a1729c4832f69e4bb0a9c98f3d7c2f3, type: 3}
   m_Name: PlayerData
   m_EditorClassIdentifier: Assembly-CSharp::PlayerData
-  playerHealth: 5
+  playerHealth: 6
+  maxHealth: 6
   fastFallCounter: 0
-  jumpBufferCounter: -644
-  coyoteTimeCounter: -553
-  sprintBufferCounter: -186
-  interactingCooldown: -109539
-  iFrames: -542
+  jumpBufferCounter: -1328
+  coyoteTimeCounter: -1378
+  sprintBufferCounter: -1392
+  interactingCooldown: -120055
+  iFrames: -1416
   ricochet: 0
-  lastCheckpoint: {x: 0, y: 0}
-  bufferedAtk: -683
+  lastCheckpoint: {x: 133, y: 31.5}
+  bufferedAtk: -3084
   bufferedAtkDir: {x: 0, y: 0}
-  basePlayerSpeed: 8
-  playerSpeed: 8
+  basePlayerSpeed: 7
+  playerSpeed: 7
   generalSpeedMulti: 1
   mudSpeedMulti: 1
   mudJumpMulti: 1

@@ -41,6 +41,7 @@ public class GameData : MonoBehaviour
 
         //data.variable = variable;
         data._PlayerHealth = playerData.playerHealth;
+        data._MaxHealth = playerData.maxHealth;
         data._SceneId = _SceneId;
 
         string json = JsonUtility.ToJson(data);
@@ -58,6 +59,7 @@ public class GameData : MonoBehaviour
             
             //variable = data.variable;
             playerData.playerHealth = data._PlayerHealth;
+            playerData.maxHealth = data._MaxHealth;
             _SceneId = data._SceneId;
             Debug.Log("Data Exists");
         }
@@ -69,6 +71,7 @@ public class GameData : MonoBehaviour
 class SaveData // This class quite literally just stores variables so they can be saved.
 {
     public int _PlayerHealth;
+    public int _MaxHealth;
     public int _SceneId;
 }
 

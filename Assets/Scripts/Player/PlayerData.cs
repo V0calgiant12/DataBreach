@@ -5,6 +5,7 @@ public class PlayerData : ScriptableObject
 {
     [Header("General Stats")]
     public int playerHealth = 5;
+    public int maxHealth = 5;
     public int fastFallCounter = 0;
     public int jumpBufferCounter = 0;
     public int coyoteTimeCounter = 0;
