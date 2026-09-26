@@ -23,7 +23,10 @@ public class MenuAudioSource : MonoBehaviour
         audioSource.Play();
         StartCoroutine(Delete());
     }
-    
+    public void PlayAudioSource()
+    {
+        audioSource.Play();
+    }
     public void HeartSound(AudioClip audioClip,float volume)
     {
         audioSource.volume = volume;

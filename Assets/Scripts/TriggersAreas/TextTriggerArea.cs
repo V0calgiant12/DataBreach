@@ -5,20 +5,24 @@ public class TextTriggerArea : MonoBehaviour
 {
     [SerializeField] private bool Triggered = false;
     [SerializeField] private bool CanRepeat = false;
+    [SerializeField] private bool HeartCoinReminder = false;
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("Player") && !Triggered)
+        if((HeartCoinReminder && PlayerStateManager.Instance.playerData.hasHeartCoin) || !HeartCoinReminder)
         {
-            Triggered = true;
-            if (GetComponent<TextData>() != null)
+            if (other.gameObject.CompareTag("Player") && !Triggered)
             {
-                PlayerStateManager.Instance.Interact(PlayerStateManager.InteractControls.Stop,0);
-                TextWrite.Instance.WriteText(GetComponent<TextData>());
-            }
+                Triggered = true;
+                if (GetComponent<TextData>() != null)
+                {
+                    PlayerStateManager.Instance.Interact(PlayerStateManager.InteractControls.Stop,0);
+                    TextWrite.Instance.WriteText(GetComponent<TextData>());
+                }
 
-            if (CanRepeat)
-            {
-                Triggered = false;
+                if (CanRepeat)
+                {
+                    Triggered = false;
+                }
             }
         }
     }

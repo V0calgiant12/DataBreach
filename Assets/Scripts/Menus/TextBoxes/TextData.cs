@@ -25,4 +25,12 @@ public class TextData : MonoBehaviour
         Array.Resize(ref _TextPageInput,pageNumber+1);
         _TextPageInput[pageNumber] = newText;
     }
+    public void TrimPages(int numberOfPages)
+    {
+        for(int i = numberOfPages; i < numberOfPages; i++)
+        {
+            _TextPageInput[i] = "";
+        }
+        Array.Resize(ref _TextPageInput,numberOfPages);
+    }
 }

@@ -47,6 +47,7 @@ public class InteractionDetection : MonoBehaviour
                         }
                         else
                         {
+                            textData.TrimPages(3);
                             textData._DecisionAfterText = false;
                         }
                         TextWrite.Instance.WriteText(textData);
