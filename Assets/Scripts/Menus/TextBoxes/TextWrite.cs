@@ -1,13 +1,7 @@
 using UnityEngine;
-using UnityEngine.UI;
 using TMPro;
 using System.Collections;
 using System;
-using UnityEngine.TextCore.Text;
-using Unity.Collections;
-using Unity.VisualScripting;
-using System.Timers;
-using Unity.Android.Gradle.Manifest;
 
 public class TextWrite : MonoBehaviour
 {

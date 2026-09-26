@@ -1,6 +1,6 @@
+#if UNITY_EDITOR
 using UnityEditor;
 using UnityEngine;
-
 [CustomEditor(typeof(TextData))]
 public class TextDataInspector : Editor
 {
@@ -39,3 +39,4 @@ public class TextDataInspector : Editor
         serializedObject.ApplyModifiedProperties();
     }
 }
+#endif

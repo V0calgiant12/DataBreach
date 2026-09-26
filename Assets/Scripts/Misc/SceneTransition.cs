@@ -35,6 +35,10 @@ public class SceneTransition : MonoBehaviour
         Time.timeScale = 1;
         renderFeatureToggler.DisableRenderFeatures();
         SceneManager.LoadScene(levelIndex);
+        if(PlayerStateManager.Instance != null)
+        {
+            PlayerStateManager.Instance.playerData.heartCoinSaved = PlayerStateManager.Instance.playerData.hasHeartCoin;
+        }
     }
     public void ExitButton()
     {
