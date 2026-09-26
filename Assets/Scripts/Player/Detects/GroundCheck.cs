@@ -6,6 +6,7 @@ public class GroundCheck : MonoBehaviour
     
     public bool _IsGrounded;
     public bool _IsStone;
+    public bool _IsWood;
     public bool _InCutscene = false;
     public static GroundCheck Instance;
 
@@ -23,7 +24,7 @@ public class GroundCheck : MonoBehaviour
     private void OnTriggerStay2D(Collider2D other)
     {
         //Debug.Log("Stay " + other.gameObject.CompareTag("Ground"));
-        if (other.gameObject.CompareTag("Ground")||other.gameObject.CompareTag("MovingPlatform")||other.gameObject.CompareTag("Stone"))
+        if (other.gameObject.CompareTag("Ground")||other.gameObject.CompareTag("MovingPlatform")||other.gameObject.CompareTag("Stone")||other.gameObject.CompareTag("Wood"))
         {
             _IsGrounded = true;
         }
@@ -35,10 +36,18 @@ public class GroundCheck : MonoBehaviour
         {
             _IsStone = false;
         }
+        if (other.gameObject.CompareTag("Wood"))
+        {
+            _IsWood = true;
+        }
+        else
+        {
+            _IsWood = false;
+        }
     }
     private void OnTriggerExit2D(Collider2D other) 
     {
-        if (other.gameObject.CompareTag("Ground")||other.gameObject.CompareTag("MovingPlatform")||other.gameObject.CompareTag("Stone"))
+        if (other.gameObject.CompareTag("Ground")||other.gameObject.CompareTag("MovingPlatform")||other.gameObject.CompareTag("Stone") || other.gameObject.CompareTag("Wood"))
         {
             _IsGrounded = false;
         }

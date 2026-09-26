@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using UnityEngine;
 
@@ -40,6 +39,7 @@ public class PlayerStateManager : MonoBehaviour
     public int superJumping = Animator.StringToHash("superJumping");
     public int currentlyFixed = Animator.StringToHash("currentlyFixed");
     [Header("Audio")]
+    public EffectSound audioSource;
     public AudioClip _GrassWalk;
     public AudioClip _GrassFall;
     public AudioClip _GrassJump;
@@ -54,6 +54,9 @@ public class PlayerStateManager : MonoBehaviour
     public AudioClip _PlayerAttack;
     public AudioClip _PlayerSpinAttack;
     public AudioClip[] _MudWalk;
+    public AudioClip[] _WoodWalk;
+    public AudioClip _WoodJump;
+    public AudioClip _WoodLand;
     public enum AttackType
     {
         forward,
@@ -187,7 +190,6 @@ public class PlayerStateManager : MonoBehaviour
     {
         playerData.anim = GetComponent<Animator>(); 
         playerData.PlayerRb = gameObject.GetComponent<Rigidbody2D>();
-        playerData.audioSource = gameObject.GetComponent<PlayerSound>();
         playerData.collider = gameObject.GetComponent<BoxCollider2D>();
         playerData.MainCamera = GameObject.Find("Main Camera");
     }
@@ -199,7 +201,7 @@ public class PlayerStateManager : MonoBehaviour
             playerData.anim.SetBool(hit, true);
             TriggerShake.Instance.BurstShake(3,2,false,0f);
             playerData.playerHealth = playerData.playerHealth - 1;
-            playerData.audioSource.PlayPlayerHitSound(_PlayerHit);
+            audioSource.PlaySound(_PlayerHit,1,Random.Range(0.6f,1.3f),0,1,transform.position);
             //Debug.Log(playerData.playerHealth);
             if (nonDirectional) // Non-Directional (based on player direction)
             {
@@ -223,7 +225,8 @@ public class PlayerStateManager : MonoBehaviour
             playerData.anim.SetBool(attacking, true);
             if (handleSound)
             {
-                playerData.audioSource.PlayPlayerAttackSound(_PlayerAttack);
+                
+                audioSource.PlaySound(_PlayerAttack,1,Random.Range(0.6f,1.3f),0,1,transform.position);
             }
             switch (attackType)
             {

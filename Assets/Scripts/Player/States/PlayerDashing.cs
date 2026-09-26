@@ -94,22 +94,24 @@ public class PlayerDashing : PlayerAbstract
             // Hit a wall
             if(player.playerData.ricochet > 0 && dashTimer < 15)
             {
-                Debug.Log("Early Cancel");
                 player.SwitchState(player.AirState);
                 //player.playerData.PlayerRb.linearVelocityX = player.playerData.playerSpeed ;
             }
             // Ground Check
             if (GroundCheck.Instance._IsGrounded && dashTimer < 15)
             {
-                Debug.Log("Early Cancel");
-                player.playerData.audioSource.PlayJumpSound(player._NormalFall);
+                player.audioSource.PlaySound(player._NormalFall,1,Random.Range(0.7f,1.4f),0,1,player.transform.position);
                 if (GroundCheck.Instance._IsStone)
                 {
-                    player.playerData.audioSource.PlayStoneSound(player._StoneFall);
+                    player.audioSource.PlaySound(player._StoneFall,1,Random.Range(0.6f,1.3f),0,1,player.transform.position);
+                }
+                else if(GroundCheck.Instance._IsWood)
+                {
+                    player.audioSource.PlaySound(player._WoodLand,1,Random.Range(0.7f,1.4f),0,1,player.transform.position);
                 }
                 else
                 {
-                    player.playerData.audioSource.PlayGrassSound(player._GrassFall);
+                    player.audioSource.PlaySound(player._GrassFall,0.8f,Random.Range(0.8f,1.5f),0,1,player.transform.position);
                 }
                 if((player.playerData.anim.GetInteger(player.attackId) == 2 || player.playerData.anim.GetInteger(player.attackId) == 4) && player.playerData.anim.GetBool(player.attacking))
                 {

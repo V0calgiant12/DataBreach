@@ -3,8 +3,7 @@ using UnityEngine;
 public class MudDetect : MonoBehaviour
 {
     [Header("Mud References:")]
-    [SerializeField] private PlayerSound playerAudioSource;
-    [SerializeField] private EffectSound otherAudioSource;
+    [SerializeField] private EffectSound audioSource;
     [SerializeField] private AudioClip mudLand;
     [SerializeField] private AudioClip mudJump;
     
@@ -15,12 +14,12 @@ public class MudDetect : MonoBehaviour
     {
         if(other.gameObject.CompareTag("Mud") && gameObject.CompareTag("Player"))
         {
-            playerAudioSource.PlayMudSound(mudLand);
+            audioSource.PlaySound(mudLand,1f,Random.Range(0.8f,1.2f),0,1,transform.position);
             gameObject.GetComponent<PlayerStateManager>().playerData.inMud = true;
         }
         if(other.gameObject.CompareTag("Mud") && gameObject.CompareTag("Enemy"))
         {
-            otherAudioSource.PlayMudSound(mudLand);
+            audioSource.PlaySound(mudLand,1f,Random.Range(0.8f,1.2f),1,1,transform.position);
         }
     }
 
@@ -54,15 +53,15 @@ public class MudDetect : MonoBehaviour
     private void OnTriggerExit2D(Collider2D other)
     {
         if(other.gameObject.CompareTag("Mud") && gameObject.CompareTag("Player"))
-        {   
-            playerAudioSource.PlayMudSound(mudJump);
+        {
+            audioSource.PlaySound(mudJump,1f,Random.Range(0.8f,1.2f),0,1,transform.position);
             PlayerStateManager.Instance.playerData.mudSpeedMulti = 1f;
             PlayerStateManager.Instance.playerData.mudJumpMulti = 1f;
             gameObject.GetComponent<PlayerStateManager>().playerData.inMud = false;
         }
         if(other.gameObject.CompareTag("Mud") && gameObject.CompareTag("Enemy"))
         {
-            otherAudioSource.PlayMudSound(mudJump);
+            audioSource.PlaySound(mudJump,1f,Random.Range(0.8f,1.2f),1,1,transform.position);
             switch(gameObject.name)
             {
                 case("Slime"):

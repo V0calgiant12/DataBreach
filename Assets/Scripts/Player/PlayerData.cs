@@ -45,7 +45,6 @@ public class PlayerData : ScriptableObject
     public Vector2 OffsetVelocity;
     public Rigidbody2D PlayerRb;
     public BoxCollider2D collider; 
-    public PlayerSound audioSource;
     public Animator anim;
     public Material pixelationMat;
 }

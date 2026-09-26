@@ -198,7 +198,7 @@ public class PlayerAir : PlayerAbstract
             }
             player.playerData.PlayerRb.linearVelocity = new Vector2(player.playerData.PlayerRb.linearVelocityX, jumpStrength * 0.8f);
             player.StartCoroutine(player.WaitUntilNotJumping());
-            player.playerData.audioSource.PlayJumpSound(player._AirJump);
+            player.audioSource.PlaySound(player._AirJump,1,Random.Range(0.7f,1.4f),0,1,player.transform.position);
             if (player.playerData.anim.GetBool(player.jumping))
             {
                 player.playerData.anim.SetTrigger("next");
@@ -239,7 +239,7 @@ public class PlayerAir : PlayerAbstract
             player.playerData.jumpBufferCounter = 0;
             player.playerData.coyoteTimeCounter = 0;
             changeYStartNextFall = true;
-            player.playerData.audioSource.PlayJumpSound(player._NormalJump);
+            player.audioSource.PlaySound(player._NormalFall,1,Random.Range(0.6f,1.3f),0,1,player.transform.position);
             if (!CheckGroundInFront(player) && player.playerData.sprintBufferCounter > 0)
             {
                 player.forceSuperJump = false;
@@ -259,14 +259,18 @@ public class PlayerAir : PlayerAbstract
                 TriggerShake.Instance.BurstShake(shakeIntensityLvl,1,true,0);
             }
             player.playerData.doubleJumpAvailable = true;
-            player.playerData.audioSource.PlayJumpSound(player._NormalFall);
+            player.audioSource.PlaySound(player._NormalFall,1,Random.Range(0.7f,1.4f),0,1,player.transform.position);
             if (GroundCheck.Instance._IsStone)
             {
-                player.playerData.audioSource.PlayStoneSound(player._StoneFall);
+                player.audioSource.PlaySound(player._StoneFall,1,Random.Range(0.6f,1.3f),0,1,player.transform.position);
+            }
+            else if(GroundCheck.Instance._IsWood)
+            {
+                player.audioSource.PlaySound(player._WoodLand,1,Random.Range(0.7f,1.4f),0,1,player.transform.position);
             }
             else
             {
-                player.playerData.audioSource.PlayGrassSound(player._GrassFall);
+                player.audioSource.PlaySound(player._GrassFall,0.8f,Random.Range(0.8f,1.5f),0,1,player.transform.position);
             }
             if((player.playerData.anim.GetInteger(player.attackId) == 2 || player.playerData.anim.GetInteger(player.attackId) == 4) && player.playerData.anim.GetBool(player.attacking))
             {

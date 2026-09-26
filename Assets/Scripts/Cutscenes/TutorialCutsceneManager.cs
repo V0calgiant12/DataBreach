@@ -123,7 +123,7 @@ public class TutorialCutsceneManager : MonoBehaviour
         {
             if(elapsed == 28||elapsed == 58||elapsed == 88||elapsed == 118||elapsed == 164)
             {
-                PlayerStateManager.Instance.playerData.audioSource.PlayStoneSound(PlayerStateManager.Instance._StoneWalk);
+                PlayerStateManager.Instance.audioSource.PlaySound(PlayerStateManager.Instance._StoneWalk,1f,Random.Range(0.6f,1.3f),0,1,PlayerStateManager.Instance.transform.position);
             }
             elapsed += Time.timeScale == 1 ? 1 : 0;
             yield return null;

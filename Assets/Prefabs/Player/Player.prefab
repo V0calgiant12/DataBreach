@@ -1313,6 +1313,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GroundCheck
   _IsGrounded: 0
   _IsStone: 0
+  _IsWood: 0
   _InCutscene: 0
 --- !u!50 &5815840524265208408
 Rigidbody2D:
@@ -2800,7 +2801,7 @@ GameObject:
   - component: {fileID: 405897520248931599}
   - component: {fileID: 1040065690880391275}
   - component: {fileID: 6500149941911911826}
-  - component: {fileID: 6383165355602986983}
+  - component: {fileID: 5864785075377450772}
   - component: {fileID: 5286028048835201690}
   - component: {fileID: 3695443898285562483}
   m_Layer: 6
@@ -2919,9 +2920,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerStateManager
   playerData: {fileID: 11400000, guid: ef22878c3af9ca548a85988a7addec59, type: 2}
   playerSprite: {fileID: 592267721215442143}
+  storedXRicochet: 0
+  dashAttackCd: 0
   isJumping: 0
   comingFromDash: 0
   forceSuperJump: 0
+  ricochetAvailable: 0
+  attacking: 60754182
+  jumping: -1938423366
+  falling: -197203244
+  hit: 1523721793
+  attackId: 1406187391
+  moving: 1060167814
+  sprinting: 2055887140
+  walking: -1472183017
+  crouching: 70061904
+  iFrames: -856752431
+  dashing: 242445561
+  superJumping: 1998281500
+  currentlyFixed: -1702392288
+  audioSource: {fileID: 5864785075377450772}
   _GrassWalk: {fileID: 8300000, guid: 0a7bcb5adf063a24da9d72f4dc0f02a0, type: 3}
   _GrassFall: {fileID: 8300000, guid: 46a651f22e879ac4f9102ee15625f1e6, type: 3}
   _GrassJump: {fileID: 8300000, guid: 6be5f03a7ae371945ba45091fdd2967a, type: 3}
@@ -2939,6 +2957,16 @@ MonoBehaviour:
   - {fileID: 8300000, guid: ffbdf88c1319f6443bb593a1241a4976, type: 3}
   - {fileID: 8300000, guid: 3ad33c511b933fc449e40a6ae9da990a, type: 3}
   - {fileID: 8300000, guid: cedd2dca8ac0675458153c8d8eb7b84c, type: 3}
+  _WoodWalk:
+  - {fileID: 8300000, guid: 016ccee15dd5d544381a5782b62a0ddc, type: 3}
+  - {fileID: 8300000, guid: bb031d4a1b23fe848b745a91c64ebd7a, type: 3}
+  - {fileID: 8300000, guid: de95933146d677c4093c346713cdf4c6, type: 3}
+  - {fileID: 8300000, guid: 206a0f6eac80ed74991a0fd3ab8a9914, type: 3}
+  - {fileID: 8300000, guid: d728009b3071ce640b14b7daa54ea68c, type: 3}
+  - {fileID: 8300000, guid: 70ac60ad72113c44b9223f5dfa734ec3, type: 3}
+  - {fileID: 8300000, guid: eb191c3bd8064ff4c9775a4381b59faf, type: 3}
+  _WoodJump: {fileID: 8300000, guid: f2a261912d357b1499c3ee97096f140d, type: 3}
+  _WoodLand: {fileID: 8300000, guid: c53b95d5c0961d7438466056e8987746, type: 3}
 --- !u!114 &1040065690880391275
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2964,11 +2992,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 510388b6cc4a4ba4ba3cd773aa053522, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MudDetect
-  playerAudioSource: {fileID: 6383165355602986983}
-  otherAudioSource: {fileID: 0}
+  audioSource: {fileID: 0}
   mudLand: {fileID: 8300000, guid: 4a21d881f0d8ccc4d9996c9f1bc7b306, type: 3}
   mudJump: {fileID: 8300000, guid: c2ee8e27bf31df4468ac9e25fb811960, type: 3}
---- !u!114 &6383165355602986983
+--- !u!114 &5864785075377450772
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2977,10 +3004,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 7503720962246340740}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2556baf8be0d6f5408da01640da6cafb, type: 3}
+  m_Script: {fileID: 11500000, guid: ecd83e99770e60a4cb88f27c07e3179e, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerSound
-  prefab: {fileID: 8734533203902538695, guid: 21dd3930a865c1b43a4c893ead294474, type: 3}
+  m_EditorClassIdentifier: Assembly-CSharp::EffectSound
+  prefab: {fileID: 8734533203902538695, guid: b546d70ed2a00174299d1366a75185f3, type: 3}
 --- !u!95 &5286028048835201690
 Animator:
   serializedVersion: 7

@@ -97,15 +97,7 @@ public class PlayerInteracting : PlayerAbstract
                 if (GroundCheck.Instance._IsGrounded)
                 {
                     player.playerData.PlayerRb.linearVelocityY = jumpStrength * PlayerStateManager.Instance.playerData.mudJumpMulti;
-                    player.playerData.audioSource.PlayJumpSound(player._NormalJump);
-                    if (GroundCheck.Instance._IsStone)
-                    {
-                        player.playerData.audioSource.PlayStoneSound(player._StoneJump);
-                    }
-                    else
-                    {
-                        player.playerData.audioSource.PlayGrassSound(player._GrassJump);
-                    }
+                    JumpAudio(player);
                     player.playerData.anim.SetBool(player.jumping, true);
                 }
                 player.playerData.anim.SetBool(player.moving, false);
@@ -121,15 +113,7 @@ public class PlayerInteracting : PlayerAbstract
                 if (GroundCheck.Instance._IsGrounded)
                 {
                     player.playerData.PlayerRb.linearVelocityY = jumpStrength * PlayerStateManager.Instance.playerData.mudJumpMulti;
-                    player.playerData.audioSource.PlayJumpSound(player._NormalJump);
-                    if (GroundCheck.Instance._IsStone)
-                    {
-                        player.playerData.audioSource.PlayStoneSound(player._StoneJump);
-                    }
-                    else
-                    {
-                        player.playerData.audioSource.PlayGrassSound(player._GrassJump);
-                    }
+                    JumpAudio(player);
                     player.playerData.anim.SetBool(player.jumping, true);
                 }
                 player.playerData.anim.SetBool(player.moving, true);
@@ -150,15 +134,7 @@ public class PlayerInteracting : PlayerAbstract
                 if (GroundCheck.Instance._IsGrounded)
                 {
                     player.playerData.PlayerRb.linearVelocityY = jumpStrength * PlayerStateManager.Instance.playerData.mudJumpMulti;
-                    player.playerData.audioSource.PlayJumpSound(player._NormalJump);
-                    if (GroundCheck.Instance._IsStone)
-                    {
-                        player.playerData.audioSource.PlayStoneSound(player._StoneJump);
-                    }
-                    else
-                    {
-                        player.playerData.audioSource.PlayGrassSound(player._GrassJump);
-                    }
+                    JumpAudio(player);
                     player.playerData.anim.SetBool(player.jumping, true);
                 }
                 player.playerData.anim.SetBool(player.moving, true);
@@ -175,15 +151,7 @@ public class PlayerInteracting : PlayerAbstract
                 if (GroundCheck.Instance._IsGrounded)
                 {
                     player.playerData.PlayerRb.linearVelocityY = jumpStrength/2 * PlayerStateManager.Instance.playerData.mudJumpMulti;
-                    player.playerData.audioSource.PlayJumpSound(player._NormalJump);
-                    if (GroundCheck.Instance._IsStone)
-                    {
-                        player.playerData.audioSource.PlayStoneSound(player._StoneJump);
-                    }
-                    else
-                    {
-                        player.playerData.audioSource.PlayGrassSound(player._GrassJump);
-                    }
+                    JumpAudio(player);
                     player.playerData.anim.SetBool(player.jumping, true);
                 }
                 player.playerData.anim.SetBool(player.moving, false);
@@ -199,15 +167,7 @@ public class PlayerInteracting : PlayerAbstract
                 if (GroundCheck.Instance._IsGrounded)
                 {
                     player.playerData.PlayerRb.linearVelocityY = jumpStrength/2 * PlayerStateManager.Instance.playerData.mudJumpMulti;
-                    player.playerData.audioSource.PlayJumpSound(player._NormalJump);
-                    if (GroundCheck.Instance._IsStone)
-                    {
-                        player.playerData.audioSource.PlayStoneSound(player._StoneJump);
-                    }
-                    else
-                    {
-                        player.playerData.audioSource.PlayGrassSound(player._GrassJump);
-                    }
+                    JumpAudio(player);
                     player.playerData.anim.SetBool(player.jumping, true);
                 }
                 player.playerData.anim.SetBool(player.moving, true);
@@ -228,15 +188,7 @@ public class PlayerInteracting : PlayerAbstract
                 if (GroundCheck.Instance._IsGrounded)
                 {
                     player.playerData.PlayerRb.linearVelocityY = jumpStrength/2 * PlayerStateManager.Instance.playerData.mudJumpMulti;
-                    player.playerData.audioSource.PlayJumpSound(player._NormalJump);
-                    if (GroundCheck.Instance._IsStone)
-                    {
-                        player.playerData.audioSource.PlayStoneSound(player._StoneJump);
-                    }
-                    else
-                    {
-                        player.playerData.audioSource.PlayGrassSound(player._GrassJump);
-                    }
+                    JumpAudio(player);
                     player.playerData.anim.SetBool(player.jumping, true);
                 }
                 player.playerData.anim.SetBool(player.moving, true);
@@ -253,20 +205,24 @@ public class PlayerInteracting : PlayerAbstract
         // Audio
         if((audioTimer == 11 && (state == PlayerStateManager.InteractControls.WalkLeft || state == PlayerStateManager.InteractControls.WalkRight)) || (audioTimer == 5 && (state == PlayerStateManager.InteractControls.SprintLeft || state == PlayerStateManager.InteractControls.SprintRight)))
         {
-            if (!player.playerData.inMud)
+            if(!player.playerData.inMud)
             {
-                if (GroundCheck.Instance._IsStone)
+                if(GroundCheck.Instance._IsStone)
                 {
-                    player.playerData.audioSource.PlayStoneSound(player._StoneWalk);
+                    player.audioSource.PlaySound(player._StoneWalk,1f,Random.Range(0.6f,1.3f),0,1,player.transform.position);
+                }
+                else if(GroundCheck.Instance._IsWood)
+                {
+                    player.audioSource.PlaySound(player._WoodWalk[Random.Range(0,6)],0.8f,Random.Range(0.6f,1.3f),0,1,player.transform.position);
                 }
                 else
                 {
-                    player.playerData.audioSource.PlayGrassSound(player._GrassWalk);
+                    player.audioSource.PlaySound(player._GrassWalk,0.8f,Random.Range(0.8f,1.5f),0,1,player.transform.position);
                 }
             }
             else
             {
-                player.playerData.audioSource.PlayMudSound(player._MudWalk[0]);
+                player.audioSource.PlaySound(player._MudWalk[0],1f,Random.Range(0.8f,1.2f),0,1,player.transform.position);
             }
             audioTimer = 0;
         }
@@ -308,5 +264,37 @@ public class PlayerInteracting : PlayerAbstract
     public override void LeaveState(PlayerStateManager player)
     {
         player.comingFromDash = false;
+    }
+    private void LandAudio(PlayerStateManager player)
+    {
+        player.audioSource.PlaySound(player._NormalFall,1,Random.Range(0.7f,1.4f),0,1,player.transform.position);
+        if (GroundCheck.Instance._IsStone)
+        {
+            player.audioSource.PlaySound(player._StoneFall,1,Random.Range(0.6f,1.3f),0,1,player.transform.position);
+        }
+        else if(GroundCheck.Instance._IsWood)
+        {
+            player.audioSource.PlaySound(player._WoodLand,1f,Random.Range(0.7f,1.4f),0,1,player.transform.position);
+        }
+        else
+        {
+            player.audioSource.PlaySound(player._GrassFall,0.8f,Random.Range(0.8f,1.5f),0,1,player.transform.position);
+        }
+    }
+    private void JumpAudio(PlayerStateManager player)
+    {
+        player.audioSource.PlaySound(player._NormalJump,1,Random.Range(0.7f,1.4f),0,1,player.transform.position);
+        if (GroundCheck.Instance._IsStone)
+        {
+            player.audioSource.PlaySound(player._StoneJump,1,Random.Range(0.6f,1.3f),0,1,player.transform.position);
+        }
+        else if(GroundCheck.Instance._IsWood)
+        {
+            player.audioSource.PlaySound(player._WoodJump,1f,Random.Range(0.7f,1.4f),0,1,player.transform.position);
+        }
+        else
+        {
+            player.audioSource.PlaySound(player._GrassJump,0.8f,Random.Range(0.8f,1.5f),0,1,player.transform.position);
+        }
     }
 }

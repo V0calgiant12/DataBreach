@@ -146,7 +146,7 @@ public class PlayerSuperJump : PlayerAbstract
             }
             player.playerData.PlayerRb.linearVelocity = new Vector2(player.playerData.PlayerRb.linearVelocityX, jumpStrength * 0.8f);
             player.StartCoroutine(player.WaitUntilNotJumping());
-            player.playerData.audioSource.PlayJumpSound(player._AirJump);
+            player.audioSource.PlaySound(player._AirJump,1,Random.Range(0.7f,1.4f),0,1,player.transform.position);
             player.playerData.anim.SetBool(player.jumping, true);
             player.playerData.anim.SetBool(player.superJumping, false);
             player.playerData.doubleJumpAvailable = false;
@@ -166,14 +166,14 @@ public class PlayerSuperJump : PlayerAbstract
                 TriggerShake.Instance.BurstShake(shakeIntensityLvl,1,true,0);
             }
             player.playerData.doubleJumpAvailable = true;
-            player.playerData.audioSource.PlayJumpSound(player._NormalFall);
+            player.audioSource.PlaySound(player._NormalFall,1,Random.Range(0.7f,1.4f),0,1,player.transform.position);
             if (GroundCheck.Instance._IsStone)
             {
-                player.playerData.audioSource.PlayStoneSound(player._StoneFall);
+                player.audioSource.PlaySound(player._StoneFall,1,Random.Range(0.6f,1.3f),0,1,player.transform.position);
             }
-            else
+            else if(GroundCheck.Instance._IsWood)
             {
-                player.playerData.audioSource.PlayGrassSound(player._GrassFall);
+                player.audioSource.PlaySound(player._GrassFall,0.8f,Random.Range(0.8f,1.5f),0,1,player.transform.position);
             }
             if((player.playerData.anim.GetInteger(player.attackId) == 2 || player.playerData.anim.GetInteger(player.attackId) == 4) && player.playerData.anim.GetBool(player.attacking))
             {
@@ -214,6 +214,6 @@ public class PlayerSuperJump : PlayerAbstract
             }
             changeYStartNextFall = true;
         }
-        player.playerData.audioSource.PlayPlayerAttackSound(player._PlayerSpinAttack);
+        player.audioSource.PlaySound(player._PlayerSpinAttack,1,Random.Range(0.6f,1.3f),0,1,player.transform.position);
     }
 }

@@ -6,11 +6,19 @@ public class EnemyGroundCheck : MonoBehaviour
 
     public bool _IsGrounded;
     public bool _IsStone;
+    public bool _IsWood;
+    private void OnTriggerStay2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("Ground") || other.gameObject.CompareTag("MovingPlatform") || other.gameObject.CompareTag("Stone") || other.gameObject.CompareTag("Wood"))
+        {
+            _IsGrounded = true;
+        }
+    }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
         //Debug.Log("Stay " + other.gameObject.CompareTag("Ground"));
-        if (other.gameObject.CompareTag("Ground") || other.gameObject.CompareTag("MovingPlatform") || other.gameObject.CompareTag("Stone") && !_IsGrounded)
+        if (other.gameObject.CompareTag("Ground") || other.gameObject.CompareTag("MovingPlatform") || other.gameObject.CompareTag("Stone") || other.gameObject.CompareTag("Wood") && !_IsGrounded)
         {
             _IsGrounded = true;
             GetComponentInParent<EnemyAbstract>().OnGroundTouch();
@@ -23,11 +31,19 @@ public class EnemyGroundCheck : MonoBehaviour
         {
             _IsStone = false;
         }
+        if (other.gameObject.CompareTag("Wood"))
+        {
+            _IsWood = true;
+        }
+        else
+        {
+            _IsWood = false;
+        }
     }
     private void OnTriggerExit2D(Collider2D other)
     {
         //Debug.Log("Exit " + other.gameObject.CompareTag("Ground"));
-        if (other.gameObject.CompareTag("Ground") || other.gameObject.CompareTag("MovingPlatform") || other.gameObject.CompareTag("Stone"))
+        if (other.gameObject.CompareTag("Ground") || other.gameObject.CompareTag("MovingPlatform") || other.gameObject.CompareTag("Stone") || other.gameObject.CompareTag("Wood"))
         {
             _IsGrounded = false;
             GetComponentInParent<EnemyAbstract>().OnGroundLeave();
@@ -35,6 +51,10 @@ public class EnemyGroundCheck : MonoBehaviour
         if (other.gameObject.CompareTag("Stone"))
         {
             _IsStone = false;
+        }
+        if (other.gameObject.CompareTag("Wood"))
+        {
+            _IsWood = false;
         }
     }
 }

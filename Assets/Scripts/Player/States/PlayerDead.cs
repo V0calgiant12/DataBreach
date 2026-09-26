@@ -21,7 +21,7 @@ public class PlayerDead : PlayerAbstract
         player.playerData.anim.SetBool(player.falling, false);
         player.playerData.anim.SetBool(player.crouching, false);
         player.playerData.PlayerRb.linearVelocityX = 0;
-        player.playerData.audioSource.PlayPlayerDeathSound(player._PlayerDeath);
+        player.audioSource.PlaySound(player._PlayerDeath,1,1,0,1,player.transform.position);
         player.playerData.ScreenCanvas.SetTrigger("Death");
         Debug.Log("You Are Dead");
     }

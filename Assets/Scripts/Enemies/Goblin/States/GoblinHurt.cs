@@ -11,7 +11,6 @@ public class GoblinHurt : GoblinAbstract
         goblin.goblinRb.linearVelocity = goblin.enemyHit._LastKnockbackTaken;
         goblin.anim.SetBool("hit", true);
         goblin.anim.SetBool("attacking", false);
-        Debug.Log("hurtstate");
     }
     public override void UpdateState(GoblinStateManager goblin)
     {
