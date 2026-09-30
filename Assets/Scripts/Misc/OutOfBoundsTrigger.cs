@@ -9,7 +9,7 @@ public class OutOfBoundsTrigger : MonoBehaviour
             PlayerStateManager.Instance.DamagePlayer(0,0,0,true,0,true);
             PlayerStateManager.Instance.playerData.playerHealth = 0;
         }
-        else
+        else if(collision.CompareTag("Enemy"))
         {
             Destroy(collision.gameObject);
         }

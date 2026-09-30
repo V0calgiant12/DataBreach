@@ -64,17 +64,31 @@ public class CameraShaker : MonoBehaviour
             audioSource.volume = overrideVolume == 0 ? magnitude * 0.04f : overrideVolume;
             audioSource.Play();
         }
-
-        while (elapsed < 1 + Mathf.Round(0.2f*magnitude*lengthMult*(0.15f*magnitude*lengthMult))) // l = (0.2m*L)^2
+        float length = Mathf.Round(0.2f*magnitude*lengthMult*(0.15f*magnitude*lengthMult));
+        if(length > 15)
+        {
+            length = 15;
+        }
+        while (elapsed < 1 + length) // l = (0.2m*L)^2
         {
             // Generate a random point inside a sphere and multiply by magnitude
             float x = Random.Range(-0.8f, 0.8f) * magnitude;
             float y = Random.Range(-1.5f, 1f) * magnitude;
-
+            
+            // Limiter
+            float limit = 15;
+            if(Mathf.Abs(x) > limit)
+            {
+                x = x > 0 ? limit:-limit;
+            }
+            if(Mathf.Abs(y) > limit)
+            {
+                y = y > 0 ? limit:-limit;
+            }
 
             transform.localPosition = originalLocalPosition + new UnityEngine.Vector3(x, y, -10);
 
-            elapsed += 1; // We are not using Time.deltaTime in this project, so this counts up every frame.
+            elapsed += Time.timeScale == 1 ? 1:0; // We are not using Time.deltaTime in this project, so this counts up every frame.
 
             yield return null; // Wait until the next frame
         }
