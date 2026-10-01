@@ -13,13 +13,13 @@ public class GoblinUpdate : GoblinAbstract
     public override void UpdateState(GoblinStateManager goblin)
     {
         goblin.anim.SetBool("hit", false);
-        if (goblin.attackRange.withinRange && goblin.currentAtkCd <= 0)
+        if (goblin.attackRange.withinRange && goblin.currentAtkCd <= 0 && goblin.groundCheck._IsGrounded)
         {
             goblin.SwitchState(goblin.AttackState);
         }
         if(goblin.currentState != goblin.AttackState)
         {
-            goblin.currentAtkCd -= 1;
+            goblin.currentAtkCd -= Time.deltaTime;
         }
     }
 }

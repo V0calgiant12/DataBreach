@@ -78,8 +78,8 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 1032702753
+  m_SortingLayer: 1
   m_SortingOrder: 8
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: ede569877b1bb3a4686c00a1e11e518e, type: 3}
@@ -349,8 +349,8 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 1032702753
+  m_SortingLayer: 1
   m_SortingOrder: 7
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: 19e776590e7bc784b9e38f31cba2717a, type: 3}
@@ -1029,8 +1029,8 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 1032702753
+  m_SortingLayer: 1
   m_SortingOrder: 2
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: 3fd39e15562bd5f4191e421b743a3c40, type: 3}
@@ -1388,7 +1388,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.7, y: 1.9}
+  m_Size: {x: 0.65, y: 1.9}
   m_EdgeRadius: 0
 --- !u!114 &3713570006817236553
 MonoBehaviour:
@@ -1411,7 +1411,7 @@ MonoBehaviour:
   forwardForce: 2
   leftOrRight: 0
   touchingWall: 0
-  attackCD: 60
+  attackCD: 1
   currentAtkCd: 0
   aggro: 0
   goblinRb: {fileID: 3763291612955310094}
@@ -1442,8 +1442,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 510388b6cc4a4ba4ba3cd773aa053522, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MudDetect
-  playerAudioSource: {fileID: 0}
-  otherAudioSource: {fileID: 1003367167366328723}
+  audioSource: {fileID: 0}
   mudLand: {fileID: 8300000, guid: 4a21d881f0d8ccc4d9996c9f1bc7b306, type: 3}
   mudJump: {fileID: 8300000, guid: c2ee8e27bf31df4468ac9e25fb811960, type: 3}
 --- !u!95 &6203693190275269452
@@ -1822,7 +1821,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.7, y: 0.15}
+  m_Size: {x: 0.6, y: 0.15}
   m_EdgeRadius: 0
 --- !u!114 &1577367954537911280
 MonoBehaviour:
@@ -1838,6 +1837,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyGroundCheck
   _IsGrounded: 0
   _IsStone: 0
+  _IsWood: 0
 --- !u!50 &7698849981099487528
 Rigidbody2D:
   serializedVersion: 5
@@ -1976,8 +1976,8 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 1032702753
+  m_SortingLayer: 1
   m_SortingOrder: 6
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: 5656e5db548f6104da060debc76790ef, type: 3}
@@ -6978,8 +6978,8 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 1032702753
+  m_SortingLayer: 1
   m_SortingOrder: 4
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: 6b837e95156f4bb4192285673450fd45, type: 3}

@@ -30,9 +30,9 @@ public class GoblinStateManager : EnemyAbstract
 
 
     [Header("Combat")]
-    public int attackCD = 25;
-    public int currentAtkCd = 0;
-    private int audioCooldown = 0;
+    public float attackCD = 1f;
+    public float currentAtkCd = 0;
+    private float audioCooldown = 0;
     public bool aggro = false;
 
 
@@ -86,7 +86,7 @@ public class GoblinStateManager : EnemyAbstract
     }
     void Update()
     {
-        audioCooldown -= Time.timeScale == 1 ? 1:0;
+        audioCooldown -= Time.deltaTime;
         if(Time.timeScale == 1)
         {
             currentState.UpdateState(this);
@@ -177,7 +177,7 @@ public class GoblinStateManager : EnemyAbstract
         {
             audioSource.PlaySound(audio,vol,1,1,1,transform.position);
         }
-        audioCooldown = 15;
+        audioCooldown = 0.25f;
     }
     public void Kill()
     {
