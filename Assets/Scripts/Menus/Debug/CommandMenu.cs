@@ -59,6 +59,9 @@ public class CommandMenu : MonoBehaviour
         commandPrompt.text = "";
         int id = -1;
         int number = -1;
+        int x = 0;
+        
+        int y = 0;
         switch (commandSplit[0])
         {
             case("save"):
@@ -109,6 +112,12 @@ public class CommandMenu : MonoBehaviour
                 {
                     LogOutput("ERROR: Invalid health amount.");
                 }
+                return;
+            case("setcheckpoint"):
+                Int32.TryParse(commandSplit[1], out x);
+                Int32.TryParse(commandSplit[2], out y);
+                playerData.lastCheckpoint = new Vector2(x,y);
+                LogOutput("Set new checkpoint to " + playerData.lastCheckpoint);
                 return;
         }
         if(commandInput != "")
