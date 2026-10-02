@@ -46,7 +46,10 @@ public class EnemyGroundCheck : MonoBehaviour
         if (other.gameObject.CompareTag("Ground") || other.gameObject.CompareTag("MovingPlatform") || other.gameObject.CompareTag("Stone") || other.gameObject.CompareTag("Wood"))
         {
             _IsGrounded = false;
-            GetComponentInParent<EnemyAbstract>().OnGroundLeave();
+            if (gameObject.activeInHierarchy)
+            {
+                GetComponentInParent<EnemyAbstract>().OnGroundLeave();
+            }
         }
         if (other.gameObject.CompareTag("Stone"))
         {
