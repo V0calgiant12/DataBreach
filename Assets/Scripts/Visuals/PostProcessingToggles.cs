@@ -5,44 +5,21 @@ using UnityEngine.Rendering.Universal;
 public class PostProcessingToggles : MonoBehaviour
 {
     [SerializeField] private Volume volume;
+    private Bloom bloom;
+    private ChromaticAberration chromaticAberration;
+    private Vignette vignette;
     void Start()
     {
-        UpdatePostProcessing();
+        volume.profile.TryGet(out bloom);
+        volume.profile.TryGet(out chromaticAberration);
+        volume.profile.TryGet(out vignette);
+        //InvokeRepeating("UpdatePostProcessing",0,1);
     }
     public void UpdatePostProcessing()
     {
-        if(volume.profile.TryGet(out Bloom bloom))
-        {
-            if (SettingsData.Instance._Bloom)
-            {
-                bloom.active = true;
-            }
-            else
-            {
-                bloom.active = false;
-            }
-        }
-        if(volume.profile.TryGet(out ChromaticAberration chromaticAberration))
-        {
-            if (SettingsData.Instance._Bloom)
-            {
-                chromaticAberration.active = true;
-            }
-            else
-            {
-                chromaticAberration.active = false;
-            }
-        }
-        if(volume.profile.TryGet(out Vignette vignette))
-        {
-            if (SettingsData.Instance._Bloom)
-            {
-                vignette.active = true;
-            }
-            else
-            {
-                vignette.active = false;
-            }
-        }
+        Debug.Log("PostProcessingUpdate");
+        bloom.active = SettingsData.Instance._Bloom;
+        chromaticAberration.active = SettingsData.Instance._ChromaticAberration;
+        vignette.active = SettingsData.Instance._Vignette;
     }
 }
