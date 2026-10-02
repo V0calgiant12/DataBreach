@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Audio;
 
@@ -7,6 +8,7 @@ public class HeartObject : MonoBehaviour
     [SerializeField] private PlayerData PlayerDataRef;
     [SerializeField] private EffectSound audioSource;
     [SerializeField] private AudioClip heartObtainSound;
+    [SerializeField] private Animator anim;
     private Vector2 startPos;
     void Start()
     {
@@ -21,8 +23,19 @@ public class HeartObject : MonoBehaviour
             PlayerDataRef.resetVelocity = true;
             audioSource.HeartSound(heartObtainSound);
             PlayerStateManager.Instance.playerData.playerHealth += 1;
-            Destroy(gameObject);
+            anim.SetTrigger("Collect");
+            StartCoroutine(DestroyObject());
         }
+    }
+    private IEnumerator DestroyObject()
+    {
+        float elapsed = 0;
+        while(elapsed < 0.5f)
+        {
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+        Destroy(gameObject);
     }
 }
 // [Heart shaped object]
