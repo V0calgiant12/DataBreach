@@ -72,6 +72,7 @@ public class CommandMenu : MonoBehaviour
                 Int32.TryParse(commandSplit[1], out id);
                 if(id >= 0 && id <= SceneManager.sceneCountInBuildSettings)
                 {
+                    playerData.lastCheckpoint = new Vector2(0,0);
                     sceneTransition.TransitionToScene(id,1);
                     LogOutput("Loading scene with Id " + id);
                 }
