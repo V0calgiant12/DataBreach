@@ -7,7 +7,7 @@ public class UserInput : MonoBehaviour
     public static UserInput Instance;
     private InputActionRebindingExtensions.RebindingOperation rebindingOperation;
     [Header("References")]
-    private PlayerInput _playerInput;
+    public PlayerInput _playerInput;
     private InputAction _moveAction;
     private InputAction _directionalAttackAction;
     private InputAction _rightStickAction;
