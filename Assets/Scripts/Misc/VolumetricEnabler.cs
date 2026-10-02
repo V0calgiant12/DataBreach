@@ -19,9 +19,14 @@ public class VolumetricEnabler : MonoBehaviour
     [SerializeField] private bool settingEnabled;
     [SerializeField] private bool flipOutput;
     [SerializeField] private GameObject[] objects;
-    void Start()
+    void Awake()
     {
-        InvokeRepeating("OffsetUpdate",0,1f + Random.Range(0.0f,0.25f));
+        OffsetUpdate();
+    }
+    void OnEnable()
+    {
+        CancelInvoke("OffsetUpdate");
+        InvokeRepeating("OffsetUpdate",0.1f + Random.Range(0.0f,0.25f),1f);
     }
     private void OffsetUpdate()
     {
