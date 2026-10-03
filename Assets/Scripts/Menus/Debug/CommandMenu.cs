@@ -13,7 +13,7 @@ public class CommandMenu : MonoBehaviour
     [SerializeField] private TMP_InputField commandPrompt;
     [SerializeField] private TextMeshProUGUI log;
     [SerializeField] private PlayerData playerData;
-    public string[] CommandList {get;} = {"help","save","loadscene <int>","sethealth <int>","setmaxhealth <int>","setcheckpoint <x> <y>"}; 
+    public string[] CommandList {get;} = {"help","save","loadscene <int>","sethealth <int>","setmaxhealth <int>","setcheckpoint <x> <y>","tp <x> <y>"}; 
     void Start()
     {
         CommandConsole.SetActive(false);
@@ -134,34 +134,140 @@ public class CommandMenu : MonoBehaviour
                 }
                 return;
             case("setcheckpoint"):
-                float.TryParse(commandSplit[1], out x);
-                float.TryParse(commandSplit[2], out y);
-                if(commandSplit[1] == "~")
+                if(!float.TryParse(commandSplit[1], out x))
                 {
-                    if(PlayerStateManager.Instance != null)
+                    if(char.ToString(commandSplit[1][0]) == "~")
                     {
-                        x = PlayerStateManager.Instance.transform.position.x;
+                        if(PlayerStateManager.Instance != null)
+                        {
+                            x = PlayerStateManager.Instance.transform.position.x;
+                            commandSplit[1] = commandSplit[1].Replace("~", string.Empty);
+                            if(float.TryParse(commandSplit[1], out float addX))
+                            {
+                                x += addX;
+                            }
+                            else if(commandSplit[1] != "")
+                            {
+                                LogOutput("ERROR: Not a float.");
+                                return;
+                            }
+                        }
+                        else
+                        {
+                            LogOutput("ERROR: Player does not currently exist in scene. Please use a float instead of a tilda.");
+                            return;
+                        }
                     }
                     else
                     {
-                        LogOutput("ERROR: Player does not currently exist in scene. Please use a float instead of a tilda.");
+                        LogOutput("ERROR: Invalid float. If you are using a ~, please make sure any numbers you want to add go directly after it.");
                         return;
                     }
                 }
-                if(commandSplit[2] == "~")
+                if(!float.TryParse(commandSplit[2], out y))
                 {
-                    if(PlayerStateManager.Instance != null)
+                    if(char.ToString(commandSplit[2][0]) == "~")
                     {
-                        y = PlayerStateManager.Instance.transform.position.y;
+                        if(PlayerStateManager.Instance != null)
+                        {
+                            y = PlayerStateManager.Instance.transform.position.y;
+                            commandSplit[2] = commandSplit[2].Replace("~", string.Empty);
+                            if(float.TryParse(commandSplit[2], out float addY))
+                            {
+                                y += addY;
+                            }
+                            else if(commandSplit[2] != "")
+                            {
+                                LogOutput("ERROR: Not a float.");
+                                return;
+                            }
+                        }
+                        else
+                        {
+                            LogOutput("ERROR: Player does not currently exist in scene. Please use a float instead of a tilda.");
+                            return;
+                        }
                     }
                     else
                     {
-                        LogOutput("ERROR: Player does not currently exist in scene. Please use a float instead of a tilda.");
+                        LogOutput("ERROR: Invalid float. If you are using a ~, please make sure any numbers you want to add go directly after it.");
                         return;
                     }
                 }
                 playerData.lastCheckpoint = new Vector2(x,y);
                 LogOutput("Set new checkpoint to " + playerData.lastCheckpoint);
+                return;
+            case("tp"):
+                if(PlayerStateManager.Instance != null)
+                {
+                    if(!float.TryParse(commandSplit[1], out x))
+                    {
+                        if(char.ToString(commandSplit[1][0]) == "~")
+                        {
+                            if(PlayerStateManager.Instance != null)
+                            {
+                                x = PlayerStateManager.Instance.transform.position.x;
+                                commandSplit[1] = commandSplit[1].Replace("~", string.Empty);
+                                if(float.TryParse(commandSplit[1], out float addX))
+                                {
+                                    x += addX;
+                                }
+                                else if(commandSplit[1] != "")
+                                {
+                                    LogOutput("ERROR: Not a float.");
+                                    return;
+                                }
+                            }
+                            else
+                            {
+                                LogOutput("ERROR: Player does not currently exist in scene. Please use a float instead of a tilda.");
+                                return;
+                            }
+                        }
+                        else
+                        {
+                            LogOutput("ERROR: Invalid float. If you are using a ~, please make sure any numbers you want to add go directly after it.");
+                            return;
+                        }
+                    }
+                    if(!float.TryParse(commandSplit[2], out y))
+                    {
+                        if(char.ToString(commandSplit[2][0]) == "~")
+                        {
+                            if(PlayerStateManager.Instance != null)
+                            {
+                                y = PlayerStateManager.Instance.transform.position.y;
+                                commandSplit[2] = commandSplit[2].Replace("~", string.Empty);
+                                if(float.TryParse(commandSplit[2], out float addY))
+                                {
+                                    y += addY;
+                                }
+                                else if(commandSplit[2] != "")
+                                {
+                                    LogOutput("ERROR: Not a float.");
+                                    return;
+                                }
+                            }
+                            else
+                            {
+                                LogOutput("ERROR: Player does not currently exist in scene. Please use a float instead of a tilda.");
+                                return;
+                            }
+                        }
+                        else
+                        {
+                            LogOutput("ERROR: Invalid float. If you are using a ~, please make sure any numbers you want to add go directly after it.");
+                            return;
+                        }
+                    }
+                    PlayerStateManager.Instance.transform.position = new Vector2(x,y);
+                    playerData.PlayerRb.position = new Vector2(x,y);
+                    LogOutput("Teleported player to " + new Vector2(x,y));
+                }
+                else
+                {
+                    LogOutput("ERROR: No player currently exists in the scene.");
+                }
                 return;
         }
         if(commandInput != "")
