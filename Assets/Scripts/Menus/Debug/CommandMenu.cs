@@ -13,6 +13,7 @@ public class CommandMenu : MonoBehaviour
     [SerializeField] private TMP_InputField commandPrompt;
     [SerializeField] private TextMeshProUGUI log;
     [SerializeField] private PlayerData playerData;
+    public string[] CommandList {get;} = {"help","save","loadscene <int>","sethealth <int>","setmaxhealth <int>","setcheckpoint <x> <y>"}; 
     void Start()
     {
         CommandConsole.SetActive(false);
@@ -56,7 +57,7 @@ public class CommandMenu : MonoBehaviour
         commandPrompt.Select();
         commandPrompt.ActivateInputField();
         string[] commandSplit = commandInput.ToLower().Split();
-        Array.Resize(ref commandSplit,commandSplit.Length + 5); 
+        Array.Resize(ref commandSplit,commandSplit.Length + 5);
         commandPrompt.text = "";
         int id = -1;
         int number = -1;
@@ -64,6 +65,18 @@ public class CommandMenu : MonoBehaviour
         float y = 0;
         switch (commandSplit[0])
         {
+            case("help"):
+                string listOutput = "Command list: "; 
+                for(int i = 0; i < CommandList.Length; i++)
+                {
+                    if(listOutput != "Command list: ")
+                    {
+                        listOutput += ", ";
+                    }
+                    listOutput += CommandList[i];
+                }
+                LogOutput(listOutput);
+                return;
             case("save"):
                 GameData.Instance._SceneId = SceneManager.GetActiveScene().buildIndex;
                 GameData.Instance.SaveData();
@@ -72,8 +85,12 @@ public class CommandMenu : MonoBehaviour
                 return;
             case("loadscene"):
                 SceneTransition sceneTransition = GameObject.Find("SceneTransition").GetComponent<SceneTransition>();
-                Int32.TryParse(commandSplit[1], out id);
-                if(id >= 0 && id <= SceneManager.sceneCountInBuildSettings)
+                if(sceneTransition == null)
+                {
+                    LogOutput("ERROR: No scene transition found.");
+                    return;
+                }
+                if (Int32.TryParse(commandSplit[1], out id) && id >= 0 && id <= SceneManager.sceneCountInBuildSettings)
                 {
                     playerData.lastCheckpoint = new Vector2(0,0);
                     sceneTransition.TransitionToScene(id,1);
@@ -85,8 +102,7 @@ public class CommandMenu : MonoBehaviour
                 }
                 return;
             case("sethealth"):
-                Int32.TryParse(commandSplit[1], out number);
-                if(number >= 0)
+                if(Int32.TryParse(commandSplit[1], out number))
                 {
                     playerData.playerHealth = number;
                     LogOutput("Set player health to " + number);
@@ -102,8 +118,7 @@ public class CommandMenu : MonoBehaviour
                 }
                 return;
             case("setmaxhealth"):
-                Int32.TryParse(commandSplit[1], out number);
-                if(number > 0 && number < 11)
+                if(Int32.TryParse(commandSplit[1], out number))
                 {
                     playerData.maxHealth = number;
                     LogOutput("Set max player health to " + number);
