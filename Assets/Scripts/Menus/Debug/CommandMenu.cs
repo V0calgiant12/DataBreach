@@ -59,9 +59,8 @@ public class CommandMenu : MonoBehaviour
         commandPrompt.text = "";
         int id = -1;
         int number = -1;
-        int x = 0;
-        
-        int y = 0;
+        float x = 0;
+        float y = 0;
         switch (commandSplit[0])
         {
             case("save"):
@@ -114,8 +113,30 @@ public class CommandMenu : MonoBehaviour
                 }
                 return;
             case("setcheckpoint"):
-                Int32.TryParse(commandSplit[1], out x);
-                Int32.TryParse(commandSplit[2], out y);
+                float.TryParse(commandSplit[1], out x);
+                float.TryParse(commandSplit[2], out y);
+                if(commandSplit[1] == "~")
+                {
+                    if(PlayerStateManager.Instance != null)
+                    {
+                        x = PlayerStateManager.Instance.transform.position.x;
+                    }
+                    else
+                    {
+                        LogOutput("ERROR: Player does not currently exist in scene. Please use a float instead of a tilda.");
+                    }
+                }
+                if(commandSplit[2] == "~")
+                {
+                    if(PlayerStateManager.Instance != null)
+                    {
+                        y = PlayerStateManager.Instance.transform.position.y;
+                    }
+                    else
+                    {
+                        LogOutput("ERROR: Player does not currently exist in scene. Please use a float instead of a tilda.");
+                    }
+                }
                 playerData.lastCheckpoint = new Vector2(x,y);
                 LogOutput("Set new checkpoint to " + playerData.lastCheckpoint);
                 return;
@@ -135,6 +156,6 @@ public class CommandMenu : MonoBehaviour
         {
             log.text += logString;
         }
-        Debug.Log("Command Output: " + logString);
+        Debug.Log("Command Output: \"" + logString + "\"");
     }
 }
