@@ -78,6 +78,11 @@ public class CommandMenu : MonoBehaviour
                 LogOutput(listOutput);
                 return;
             case("save"):
+                if(SceneManager.GetActiveScene().buildIndex == 0)
+                {
+                    LogOutput("ERROR: Cannot save in Main Menu due to missing game objects.");
+                    return;
+                }
                 GameData.Instance._SceneId = SceneManager.GetActiveScene().buildIndex;
                 GameData.Instance.SaveData();
                 GameObject.Find("Screen").GetComponent<Animator>().SetTrigger("Save");
