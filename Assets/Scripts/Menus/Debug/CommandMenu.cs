@@ -56,6 +56,7 @@ public class CommandMenu : MonoBehaviour
         commandPrompt.Select();
         commandPrompt.ActivateInputField();
         string[] commandSplit = commandInput.ToLower().Split();
+        Array.Resize(ref commandSplit,commandSplit.Length + 5); 
         commandPrompt.text = "";
         int id = -1;
         int number = -1;
