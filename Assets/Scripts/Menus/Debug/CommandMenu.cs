@@ -125,6 +125,7 @@ public class CommandMenu : MonoBehaviour
                     else
                     {
                         LogOutput("ERROR: Player does not currently exist in scene. Please use a float instead of a tilda.");
+                        return;
                     }
                 }
                 if(commandSplit[2] == "~")
@@ -136,6 +137,7 @@ public class CommandMenu : MonoBehaviour
                     else
                     {
                         LogOutput("ERROR: Player does not currently exist in scene. Please use a float instead of a tilda.");
+                        return;
                     }
                 }
                 playerData.lastCheckpoint = new Vector2(x,y);
