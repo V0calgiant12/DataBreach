@@ -18,6 +18,7 @@ public class VolumetricEnabler : MonoBehaviour
     [SerializeField] private Setting settingToGet;
     [SerializeField] private bool settingEnabled;
     [SerializeField] private bool flipOutput;
+    [SerializeField] private bool state;
     [SerializeField] private GameObject[] objects;
     void Start()
     {
@@ -37,11 +38,9 @@ public class VolumetricEnabler : MonoBehaviour
         }
         for(int i = 0; i < objects.Length; i++)
         {
-            bool state = objects[i].activeInHierarchy;
-            objects[i].SetActive(true);
+            state = objects[i].activeInHierarchy;
             Light2D light = objects[i].GetComponent<Light2D>();
             light.volumetricEnabled = settingEnabled;
-            objects[i].SetActive(state);
         }
     }
     private bool GetSetting(Setting setting)

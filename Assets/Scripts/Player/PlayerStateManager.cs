@@ -130,6 +130,7 @@ public class PlayerStateManager : MonoBehaviour
         if(playerData.lastCheckpoint != new Vector2(0,0))
         {
             transform.position = playerData.lastCheckpoint;
+            //playerData.PlayerRb.transform.position = playerData.lastCheckpoint;
         }
     }
     void LateUpdate()

@@ -32,7 +32,7 @@ public class HeartObject : MonoBehaviour
     private IEnumerator DestroyObject()
     {
         float elapsed = 0;
-        while(elapsed < 0.5f)
+        while(elapsed < 0.75f)
         {
             elapsed += Time.deltaTime;
             yield return null;

@@ -1,10 +1,7 @@
 using System;
-using System.Globalization;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 public class CommandMenu : MonoBehaviour
 {
@@ -134,7 +131,7 @@ public class CommandMenu : MonoBehaviour
                 }
                 return;
             case("setcheckpoint"):
-                if(!float.TryParse(commandSplit[1], out x))
+                if(!float.TryParse(commandSplit[1], out x) && commandSplit[1] != "")
                 {
                     if(char.ToString(commandSplit[1][0]) == "~")
                     {
@@ -164,7 +161,7 @@ public class CommandMenu : MonoBehaviour
                         return;
                     }
                 }
-                if(!float.TryParse(commandSplit[2], out y))
+                if(!float.TryParse(commandSplit[2], out y) && commandSplit[2] != "")
                 {
                     if(char.ToString(commandSplit[2][0]) == "~")
                     {

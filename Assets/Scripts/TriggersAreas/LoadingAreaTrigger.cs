@@ -15,29 +15,22 @@ public class LoadingAreaTrigger : MonoBehaviour
     [SerializeField] private int Id;
     void Awake()
     {
-        if (Id == 0)
-        {
-            ObjectsAndEnemies.SetActive(true);
-            Grid.SetActive(true);
-        }
-        else
-        {
-            ObjectsAndEnemies.SetActive(false);
-            Grid.SetActive(false);
-        }
+        ObjectsAndEnemies.SetActive(false);
+        Grid.SetActive(false);
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
-        //Debug.Log(other.gameObject + " entered loading.", this);
+        Debug.Log(other.gameObject + " entered loading area.", this);
         if (other.gameObject.CompareTag("RealCamera"))
         {
-            //Debug.Log("Loading Area.", this);
+            Debug.Log("Loading Area.", this);
             ObjectsAndEnemies.SetActive(true);
             Grid.SetActive(true);   
         }
     }
     private void OnTriggerExit2D(Collider2D other)
     {
+        Debug.Log(other.gameObject + " exited loading area.", this);
         if (other.gameObject.CompareTag("RealCamera"))
         {
             ObjectsAndEnemies.SetActive(false);
