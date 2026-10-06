@@ -32,13 +32,17 @@ public class SceneTransition : MonoBehaviour
             elapsed += Time.unscaledDeltaTime;
             yield return null;
         }
-        Time.timeScale = 1;
-        renderFeatureToggler.DisableRenderFeatures();
-        SceneManager.LoadScene(levelIndex);
         if(PlayerStateManager.Instance != null)
         {
             PlayerStateManager.Instance.playerData.heartCoinSaved = PlayerStateManager.Instance.playerData.hasHeartCoin;
         }
+        renderFeatureToggler.DisableRenderFeatures();
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(levelIndex,LoadSceneMode.Single);
+        while (!asyncLoad.isDone)
+        {
+            yield return null;
+        }
+        Time.timeScale = 1;
     }
     public void ExitButton()
     {
