@@ -16,6 +16,10 @@ public class SceneTransition : MonoBehaviour
     {
         StartCoroutine(LoadScene(sceneNumber, transitionTime));
     }
+    void Start()
+    {
+        Time.timeScale = 1;
+    }
     IEnumerator LoadScene(int levelIndex, float transitionTime)
     {
         // NOTE: Transition time does not extend or shorten the fade animation. Fade animation is 1 second long. We can change this if we want later on.
@@ -42,7 +46,6 @@ public class SceneTransition : MonoBehaviour
         {
             yield return null;
         }
-        Time.timeScale = 1;
     }
     public void ExitButton()
     {
