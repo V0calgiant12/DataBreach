@@ -10,7 +10,7 @@ public class CommandMenu : MonoBehaviour
     [SerializeField] private TMP_InputField commandPrompt;
     [SerializeField] private TextMeshProUGUI log;
     [SerializeField] private PlayerData playerData;
-    public string[] CommandList {get;} = {"help","save","loadscene <int>","sethealth <int>","setmaxhealth <int>","setcheckpoint <x> <y>","tp <x> <y>"}; 
+    public string[] CommandList {get;} = {"help","save","loadscene <int>","sethealth <int>","setmaxhealth <int>","setcheckpoint <x> <y>","tp <x> <y>","reload","resetcheckpoint","return"}; 
     void Start()
     {
         CommandConsole.SetActive(false);
@@ -55,6 +55,7 @@ public class CommandMenu : MonoBehaviour
         commandPrompt.ActivateInputField();
         string[] commandSplit = commandInput.ToLower().Split();
         Array.Resize(ref commandSplit,commandSplit.Length + 5);
+        SceneTransition sceneTransition = GameObject.Find("SceneTransition").GetComponent<SceneTransition>();
         commandPrompt.text = "";
         int id = -1;
         int number = -1;
@@ -86,7 +87,6 @@ public class CommandMenu : MonoBehaviour
                 LogOutput("Saved Game");
                 return;
             case("loadscene"):
-                SceneTransition sceneTransition = GameObject.Find("SceneTransition").GetComponent<SceneTransition>();
                 if(sceneTransition == null)
                 {
                     LogOutput("ERROR: No scene transition found.");
@@ -265,6 +265,27 @@ public class CommandMenu : MonoBehaviour
                 {
                     LogOutput("ERROR: No player currently exists in the scene.");
                 }
+                return;
+            case("reload"):
+                if(sceneTransition == null)
+                {
+                    LogOutput("ERROR: No scene transition found.");
+                    return;
+                }
+                else
+                {
+                    sceneTransition.TransitionToScene(SceneManager.GetActiveScene().buildIndex,1);
+                    LogOutput("Reloading scene");
+                }
+                return;
+            case("resetcheckpoint"):
+                playerData.lastCheckpoint = new Vector2(0,0);
+                LogOutput("Reset checkpoint");
+                return;
+            case("return"):
+                PlayerStateManager.Instance.transform.position = playerData.lastCheckpoint;
+                playerData.PlayerRb.position = playerData.lastCheckpoint;
+                LogOutput("Reset checkpoint");
                 return;
         }
         if(commandInput != "")

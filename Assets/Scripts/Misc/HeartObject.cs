@@ -4,26 +4,31 @@ using UnityEngine.Audio;
 
 public class HeartObject : MonoBehaviour
 {
+    [Header("Stats:")]
+    public int restorationAmount = 1;
     [Header("Heart Powerup References:")]
-    [SerializeField] private PlayerData PlayerDataRef;
+    [SerializeField] private PlayerData playerData;
     [SerializeField] private EffectSound audioSource;
     [SerializeField] private AudioClip heartObtainSound;
     [SerializeField] private Animator anim;
     private bool pickedUp = false;
-    private Vector2 startPos;
     void Start()
     {
-        PlayerDataRef.pickUpHeart = false;
+        playerData.pickUpHeart = false;
     }
     private void OnTriggerEnter2D(Collider2D other) 
     {
         // If the player has less than full health and touches the powerup, then it uses it
-        if(other.gameObject.CompareTag("Player") && PlayerStateManager.Instance.playerData.playerHealth < PlayerStateManager.Instance.playerData.maxHealth && !pickedUp)
+        if(other.gameObject.CompareTag("Player") && playerData.playerHealth < playerData.maxHealth && !pickedUp)
         {
-            PlayerDataRef.pickUpHeart = true;
-            PlayerDataRef.resetVelocity = true;
+            playerData.pickUpHeart = true;
+            playerData.resetVelocity = true;
             audioSource.HeartSound(heartObtainSound);
-            PlayerStateManager.Instance.playerData.playerHealth += 1;
+            playerData.playerHealth += restorationAmount;
+            if(playerData.maxHealth < playerData.playerHealth)
+            {
+                playerData.playerHealth = playerData.maxHealth;
+            }
             pickedUp = true;
             anim.SetTrigger("Collect");
             StartCoroutine(DestroyObject());
