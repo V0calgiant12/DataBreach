@@ -27,12 +27,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 413927164297424870}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.5, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
-  m_Father: {fileID: 1641376023483015430}
+  m_Father: {fileID: 3042787976135953805}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &2162547385396896464
 BoxCollider2D:
@@ -93,7 +93,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyHit
   ParentObject: {fileID: 6271156301276086668}
-  rb: {fileID: 7862003289902813592}
+  rb: {fileID: 8530397539892109846}
   particlePrefab: {fileID: 469266653561010877, guid: 10705ee75d410684cbfc0b6d717e941f, type: 3}
   flashEffect: {fileID: 0}
   audioSource: {fileID: 1281590913369525869}
@@ -133,7 +133,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1228185631193351710}
   - component: {fileID: 3549686502712173665}
-  - component: {fileID: 8704252516064307898}
   m_Layer: 3
   m_Name: Collider
   m_TagString: Stone
@@ -150,11 +149,11 @@ Transform:
   m_GameObject: {fileID: 2671669778738227143}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: 1, w: 0}
-  m_LocalPosition: {x: 0, y: -0.5, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1641376023483015430}
+  m_Father: {fileID: 3042787976135953805}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &3549686502712173665
 BoxCollider2D:
@@ -202,33 +201,6 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.5, y: 1}
   m_EdgeRadius: 0
---- !u!50 &8704252516064307898
-Rigidbody2D:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2671669778738227143}
-  m_BodyType: 1
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDamping: 0
-  m_AngularDamping: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 256
-  m_Interpolate: 1
-  m_SleepingMode: 1
-  m_CollisionDetection: 1
-  m_Constraints: 4
 --- !u!1 &5278600094845802158
 GameObject:
   m_ObjectHideFlags: 0
@@ -331,7 +303,7 @@ Rigidbody2D:
     m_Bits: 64
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 8
+    m_Bits: 1032
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
@@ -348,14 +320,46 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fcc4ca78d31f94d46ac01799c4b3cb42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Stalagtite
-  StalagmiteRb: {fileID: 7862003289902813592}
+  StalagmiteRb: {fileID: 8530397539892109846}
   Collider: {fileID: 2671669778738227143}
   Hitbox: {fileID: 7391128039705364989}
   Trigger: {fileID: 5278600094845802158}
   _StalactiteGround: {fileID: 8300000, guid: 46cf2693ad35806449dbd982bc5488ca, type: 3}
   _StalactiteDetach: {fileID: 8300000, guid: 8de5f9a6ee59a184fab42c993e517d1f, type: 3}
   audioSource: {fileID: 694354313636809589}
+  LandPoint: {fileID: 1805581908727572183}
   detectEnemies: 0
+--- !u!1 &5403928465727366396
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1805581908727572183}
+  m_Layer: 10
+  m_Name: LandPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1805581908727572183
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5403928465727366396}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -10, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1641376023483015430}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6271156301276086668
 GameObject:
   m_ObjectHideFlags: 0
@@ -365,7 +369,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1641376023483015430}
-  - component: {fileID: 7862003289902813592}
   - component: {fileID: 694354313636809589}
   m_Layer: 10
   m_Name: Stalactites
@@ -388,39 +391,10 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1918472618601220788}
-  - {fileID: 6549925569839828548}
-  - {fileID: 1228185631193351710}
   - {fileID: 3042787976135953805}
-  - {fileID: 2145798986899743862}
+  - {fileID: 1805581908727572183}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!50 &7862003289902813592
-Rigidbody2D:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6271156301276086668}
-  m_BodyType: 2
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDamping: 0
-  m_AngularDamping: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 256
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 5
 --- !u!82 &694354313636809589
 AudioSource:
   m_ObjectHideFlags: 0
@@ -546,7 +520,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6549925569839828548}
   - component: {fileID: 4436947923574971470}
-  - component: {fileID: 1064318398792073163}
   - component: {fileID: 941218188586590271}
   m_Layer: 10
   m_Name: Hitbox
@@ -564,11 +537,11 @@ Transform:
   m_GameObject: {fileID: 7391128039705364989}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: 1, w: 0}
-  m_LocalPosition: {x: 0, y: -0.5, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1641376023483015430}
+  m_Father: {fileID: 3042787976135953805}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &4436947923574971470
 BoxCollider2D:
@@ -586,7 +559,7 @@ BoxCollider2D:
     m_Bits: 200
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 1024
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -616,33 +589,6 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.6, y: 0.8}
   m_EdgeRadius: 0
---- !u!50 &1064318398792073163
-Rigidbody2D:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7391128039705364989}
-  m_BodyType: 1
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDamping: 0
-  m_AngularDamping: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 200
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_Interpolate: 1
-  m_SleepingMode: 1
-  m_CollisionDetection: 1
-  m_Constraints: 4
 --- !u!114 &941218188586590271
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -655,13 +601,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fcc4ca78d31f94d46ac01799c4b3cb42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Stalagtite
-  StalagmiteRb: {fileID: 7862003289902813592}
+  StalagmiteRb: {fileID: 8530397539892109846}
   Collider: {fileID: 2671669778738227143}
   Hitbox: {fileID: 7391128039705364989}
   Trigger: {fileID: 5278600094845802158}
   _StalactiteGround: {fileID: 8300000, guid: 46cf2693ad35806449dbd982bc5488ca, type: 3}
   _StalactiteDetach: {fileID: 8300000, guid: 8de5f9a6ee59a184fab42c993e517d1f, type: 3}
   audioSource: {fileID: 694354313636809589}
+  LandPoint: {fileID: 1805581908727572183}
   detectEnemies: 0
 --- !u!1 &9120588367307259411
 GameObject:
@@ -673,6 +620,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3042787976135953805}
   - component: {fileID: 1487666146239282395}
+  - component: {fileID: 8530397539892109846}
   m_Layer: 10
   m_Name: Visual
   m_TagString: Untagged
@@ -692,7 +640,10 @@ Transform:
   m_LocalPosition: {x: 0, y: -0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 2145798986899743862}
+  - {fileID: 1228185631193351710}
+  - {fileID: 6549925569839828548}
   m_Father: {fileID: 1641376023483015430}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1487666146239282395
@@ -740,8 +691,8 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: -690482411
-  m_SortingLayer: 0
+  m_SortingLayerID: 2109123155
+  m_SortingLayer: 3
   m_SortingOrder: 10
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: bc182bcf36b387f4c95f21fd459cb43a, type: 3}
@@ -754,3 +705,30 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!50 &8530397539892109846
+Rigidbody2D:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9120588367307259411}
+  m_BodyType: 2
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0

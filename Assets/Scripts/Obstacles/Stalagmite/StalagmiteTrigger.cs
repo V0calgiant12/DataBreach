@@ -11,6 +11,7 @@ public class StalagtiteTrigger : MonoBehaviour
     [SerializeField] private AudioClip _StalactiteGround;
     [SerializeField] private AudioClip _StalactiteDetach;
     [SerializeField] private AudioSource audioSource;
+    [SerializeField] private Transform LandPoint;
     [Header("Options:")]
     public bool detectEnemies = false;
     private void OnTriggerEnter2D(Collider2D other)
@@ -33,7 +34,8 @@ public class StalagtiteTrigger : MonoBehaviour
             Hitbox.SetActive(false);
             Collider.SetActive(true);
             StalagmiteRb.bodyType = RigidbodyType2D.Static;
-            transform.parent.transform.position = new Vector2(transform.parent.transform.position.x,Mathf.Floor(Hitbox.transform.position.y-0.1f) + (other.gameObject.CompareTag("Spikes") ? 1.25f : 1.5f));
+            //transform.parent.transform.position = new Vector2(transform.parent.transform.position.x,Mathf.Floor(Hitbox.transform.position.y-0.1f) + (other.gameObject.CompareTag("Spikes") ? 1.25f : 1.5f));
+            transform.parent.transform.position = LandPoint.position;
         }
         // Detect Player
         if(other.gameObject.CompareTag("Player") && !gameObject.CompareTag("Hitbox"))
