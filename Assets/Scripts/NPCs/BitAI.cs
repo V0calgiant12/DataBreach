@@ -15,6 +15,11 @@ public class BitAI : MonoBehaviour
     {
         if(!waitForPlayer)
         {
+            float distance = PlayerStateManager.Instance.transform.position.x - transform.position.x;
+            if(distance > 20)
+            {
+                transform.position = new Vector2(PlayerStateManager.Instance.transform.position.x-10,PlayerStateManager.Instance.transform.position.y);
+            }
             StartCoroutine(MoveTowardsPlayer());
         }
     }
