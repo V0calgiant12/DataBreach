@@ -177,11 +177,13 @@ public class SettingsMenuUIHandler : MonoBehaviour
         // Video Settings
         SettingsData.Instance._Fullscreen = videoSettings._Fullscreen;
         SettingsData.Instance._Resolution = videoSettings._Resolution;
+        SettingsData.Instance._Particles = videoSettings._Particles;
         SettingsData.Instance._Bloom = videoSettings._Bloom;
         SettingsData.Instance._ChromaticAberration = videoSettings._ChromaticAberration;
         SettingsData.Instance._Vignette = videoSettings._Vignette;
         SettingsData.Instance._Pixelation = videoSettings._Pixelation;
         SettingsData.Instance._Volumetrics = videoSettings._Volumetrics;
+        SettingsData.Instance._FilmGrain = videoSettings._FilmGrain;
     }
     public void LoadSettings() // Fetches settings to load them.
     {
@@ -233,11 +235,13 @@ public class SettingsMenuUIHandler : MonoBehaviour
         // Video Settings
         videoSettings._Fullscreen = SettingsData.Instance._Fullscreen;
         videoSettings._Resolution = SettingsData.Instance._Resolution;
+        videoSettings._Particles = SettingsData.Instance._Particles;
         videoSettings._Bloom = SettingsData.Instance._Bloom;
         videoSettings._ChromaticAberration = SettingsData.Instance._ChromaticAberration;
         videoSettings._Vignette = SettingsData.Instance._Vignette;
         videoSettings._Pixelation = SettingsData.Instance._Pixelation;
         videoSettings._Volumetrics = SettingsData.Instance._Volumetrics;
+        videoSettings._FilmGrain = SettingsData.Instance._FilmGrain;
         
         videoSettings.SetFullscreenMode(SettingsData.Instance._Fullscreen);
         videoSettings.SetResolution(SettingsData.Instance._Resolution);

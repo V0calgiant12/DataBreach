@@ -9,8 +9,9 @@ public class EnemyHit : MonoBehaviour
     [Header("References")]
     [SerializeField] private GameObject ParentObject;
     [SerializeField] private Rigidbody2D rb;
-    [SerializeField] private GameObject particlePrefab;
     [SerializeField] private FlashEffect flashEffect;
+    [SerializeField] private ParticleSpawner particleSpawner;
+    [SerializeField] private string particleId;
 
     [Header("Audio")]
     [SerializeField] private EffectSound audioSource;
@@ -60,9 +61,9 @@ public class EnemyHit : MonoBehaviour
         if (trackedHealth <= 0 && immediatelDestroyOnDeath) // IF immediatelyDestroyOnDeath is false, we assume it's handeled elsewhere as it's likely a State Machine handeling it.
         {
             audioSource.PlaySound(deathSound,volume,1,1,1,transform.position);
-            if(particlePrefab != null)
+            if(particleSpawner != null)
             {
-                Instantiate(particlePrefab, gameObject.transform.position, gameObject.transform.rotation);
+                particleSpawner.SpawnParticle(particleId, transform.position);
             }
             Destroy(ParentObject);
         }
@@ -115,9 +116,9 @@ public class EnemyHit : MonoBehaviour
             {
                 audioSource.PlaySound(hitSound,volume,1,1,1,transform.position);
                 flashEffect.WhiteFlash();
-                if(particlePrefab != null)
+                if(particleSpawner != null)
                 {
-                    Instantiate(particlePrefab, GameObject.Find("HitPoint").transform.position, gameObject.transform.rotation);
+                    particleSpawner.SpawnParticle(particleId, GameObject.Find("HitPoint").transform.position);
                 }
             }
         }

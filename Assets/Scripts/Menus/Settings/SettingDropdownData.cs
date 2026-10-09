@@ -11,16 +11,19 @@ public class SettingDropdownData : MonoBehaviour
         switch (_DropdownID)
         {
             case (0):
-                dropdown.value = SettingsData.Instance._Fullscreen;
-                break;
-            case (1):
                 dropdown.value = Convert.ToInt16(SettingsData.Instance._ToggleSprint);
                 break;
+            case (1):
+                dropdown.value = Convert.ToInt16(SettingsData.Instance._ToggleCrouch);
+                break;
             case (2):
-                dropdown.value = SettingsData.Instance._Resolution;
+                dropdown.value = SettingsData.Instance._Fullscreen;
                 break;
             case (3):
-                dropdown.value = Convert.ToInt16(SettingsData.Instance._ToggleCrouch);
+                dropdown.value = SettingsData.Instance._Resolution;
+                break;
+            case (4):
+                dropdown.value = SettingsData.Instance._Particles;
                 break;
         }
     }

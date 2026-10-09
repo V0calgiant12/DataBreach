@@ -262,6 +262,7 @@ GameObject:
   - component: {fileID: 3133644454548173911}
   - component: {fileID: 1168737744056301480}
   - component: {fileID: 2876216839205939040}
+  - component: {fileID: 9157377588030506189}
   m_Layer: 10
   m_Name: Blade
   m_TagString: Untagged
@@ -362,15 +363,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyHit
   ParentObject: {fileID: 4852414782968120626}
   rb: {fileID: 1168737744056301480}
-  particlePrefab: {fileID: 1098669158986698556, guid: 4195be341637d03468f1496dcbe6bd18, type: 3}
   flashEffect: {fileID: 2476309736813669732}
+  particleSpawner: {fileID: 9157377588030506189}
+  particleId: Deflect
   audioSource: {fileID: 3133644454548173911}
   hitSound: {fileID: 8300000, guid: c426778c5b2d53b43b5b8abb4a1ec5b6, type: 3}
   deathSound: {fileID: 0}
   volume: 1
   health: 9999
+  knockbackReduction: {x: 1, y: 1}
   knockbackImmune: 1
   invulnerable: 1
+  immediatelDestroyOnDeath: 1
+  iFrames: 0
+  trackedHealth: 1
+  _DamageTaken: 0
+  _LastKnockbackTaken: {x: 0, y: 0}
+  sprites: []
 --- !u!114 &3133644454548173911
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -508,6 +517,18 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &9157377588030506189
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4852414782968120626}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c6f3fcce61a885469bf02d4fa65f7d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ParticleSpawner
 --- !u!1 &6210606152114764866
 GameObject:
   m_ObjectHideFlags: 0

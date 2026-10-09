@@ -40,10 +40,10 @@ public class GameSettingsController : MonoBehaviour
     {
         switch (data._DropdownID)
         {
-            case(1):
+            case(0):
                 _ToggleSprint = data.dropdown.value == 1;
                 break;
-            case(3):
+            case(1):
                 _ToggleCrouch = data.dropdown.value == 1;
                 break;
         }

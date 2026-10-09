@@ -9,12 +9,14 @@ public class VideoSettingsController : MonoBehaviour
     [SerializeField] private Renderer2DData renderer2D;
     public int _Fullscreen;
     public int _Resolution;
+    public int _Particles;
     public int _LightQuality;
     public bool _Bloom;
     public bool _ChromaticAberration;
     public bool _Vignette;
     public bool _Pixelation;
     public bool _Volumetrics;
+    public bool _FilmGrain;
     
     void Start() // Refreshes settings on load.
     {
@@ -103,13 +105,16 @@ public class VideoSettingsController : MonoBehaviour
     {
         switch (data._DropdownID)
         {
-            case(0):
+            case(2):
                 _Fullscreen = data.dropdown.value;
                 SetFullscreenMode(data.dropdown.value);
                 break;
-            case(2):
+            case(3):
                 _Resolution = data.dropdown.value;
                 SetResolution(data.dropdown.value);
+                break;
+            case(4):
+                _Particles = data.dropdown.value;
                 break;
         }
     }
@@ -134,6 +139,9 @@ public class VideoSettingsController : MonoBehaviour
                 break;
             case(7): // Run in background
                 _Volumetrics = data.toggle.isOn;
+                break;
+            case(8):
+                _FilmGrain = data.toggle.isOn;
                 break;
         }
     }

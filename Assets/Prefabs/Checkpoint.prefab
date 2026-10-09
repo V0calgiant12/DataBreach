@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6412055173930981899}
   - component: {fileID: 330479936457026386}
   - component: {fileID: 7547706148973745438}
+  - component: {fileID: 3305410018758881356}
   m_Layer: 0
   m_Name: Checkpoint
   m_TagString: Untagged
@@ -122,7 +123,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CheckpointTrigger
   audioSource: {fileID: 7547706148973745438}
   checkpointSound: {fileID: 8300000, guid: e2c8eedfc372b05499b5e1f50659a460, type: 3}
-  particle: {fileID: 8763256330025796000, guid: 17dcc69781031ac4cac8181f44221555, type: 3}
+  particleSpawner: {fileID: 3305410018758881356}
 --- !u!114 &7547706148973745438
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -136,3 +137,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EffectSound
   prefab: {fileID: 8734533203902538695, guid: b546d70ed2a00174299d1366a75185f3, type: 3}
+--- !u!114 &3305410018758881356
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9141083450005631944}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c6f3fcce61a885469bf02d4fa65f7d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ParticleSpawner

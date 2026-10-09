@@ -230,6 +230,7 @@ MonoBehaviour:
   StopAtOneHp: 0
   knockback: {x: 5, y: 5}
   rotationDependant: 0
+  ignoreIFrames: 0
 --- !u!82 &4986386367766769081
 AudioSource:
   m_ObjectHideFlags: 0
@@ -578,8 +579,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyHit
   ParentObject: {fileID: 8027678710126338495}
   rb: {fileID: 7965548649738066340}
-  particlePrefab: {fileID: 2489886994720635918, guid: b6f49d710ad50454195d5f99b91a9ce7, type: 3}
   flashEffect: {fileID: 2626645688240376206}
+  particleSpawner: {fileID: 147355537875966479}
+  particleId: SlimeDeath
   audioSource: {fileID: 4140950964649096466}
   hitSound: {fileID: 8300000, guid: 807bd5152a662ed4a9241939b4fef32d, type: 3}
   deathSound: {fileID: 8300000, guid: 0709a445dfc22cb4d8de281c203077b7, type: 3}
@@ -701,6 +703,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyGroundCheck
   _IsGrounded: 0
   _IsStone: 0
+  _IsWood: 0
 --- !u!1 &8027678710126338495
 GameObject:
   m_ObjectHideFlags: 0
@@ -715,6 +718,7 @@ GameObject:
   - component: {fileID: 3052226611263945404}
   - component: {fileID: 2061067415103168959}
   - component: {fileID: 5601684875710946543}
+  - component: {fileID: 147355537875966479}
   - component: {fileID: 7642874545852493589}
   m_Layer: 7
   m_Name: Slime
@@ -871,10 +875,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 510388b6cc4a4ba4ba3cd773aa053522, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MudDetect
-  playerAudioSource: {fileID: 0}
-  otherAudioSource: {fileID: 4140950964649096466}
+  audioSource: {fileID: 0}
   mudLand: {fileID: 8300000, guid: 4a21d881f0d8ccc4d9996c9f1bc7b306, type: 3}
   mudJump: {fileID: 8300000, guid: c2ee8e27bf31df4468ac9e25fb811960, type: 3}
+--- !u!114 &147355537875966479
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8027678710126338495}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c6f3fcce61a885469bf02d4fa65f7d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ParticleSpawner
 --- !u!95 &7642874545852493589
 Animator:
   serializedVersion: 7

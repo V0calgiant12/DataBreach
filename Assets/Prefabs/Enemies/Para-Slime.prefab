@@ -213,6 +213,7 @@ MonoBehaviour:
   StopAtOneHp: 0
   knockback: {x: 7, y: 10}
   rotationDependant: 0
+  ignoreIFrames: 0
 --- !u!1 &1172246738268572851
 GameObject:
   m_ObjectHideFlags: 0
@@ -226,6 +227,7 @@ GameObject:
   - component: {fileID: 1441861567795638056}
   - component: {fileID: 8176816787592996751}
   - component: {fileID: 4070333370378440304}
+  - component: {fileID: 4696515186406924575}
   - component: {fileID: 6970653603546178980}
   - component: {fileID: 5224105826202410676}
   m_Layer: 7
@@ -363,6 +365,18 @@ MonoBehaviour:
   pointB: {fileID: 4509773959322852861}
   currentSpeed: {x: 0, y: 0}
   nextPos: {x: 0, y: 0}
+--- !u!114 &4696515186406924575
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1172246738268572851}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c6f3fcce61a885469bf02d4fa65f7d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ParticleSpawner
 --- !u!50 &6970653603546178980
 Rigidbody2D:
   serializedVersion: 5
@@ -705,8 +719,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyHit
   ParentObject: {fileID: 6655625841267738903}
   rb: {fileID: 7735234664607809060}
-  particlePrefab: {fileID: 2489886994720635918, guid: b6f49d710ad50454195d5f99b91a9ce7, type: 3}
   flashEffect: {fileID: 0}
+  particleSpawner: {fileID: 4696515186406924575}
+  particleId: SlimeDeath
   audioSource: {fileID: 8582808800498537180}
   hitSound: {fileID: 8300000, guid: 807bd5152a662ed4a9241939b4fef32d, type: 3}
   deathSound: {fileID: 8300000, guid: 0709a445dfc22cb4d8de281c203077b7, type: 3}

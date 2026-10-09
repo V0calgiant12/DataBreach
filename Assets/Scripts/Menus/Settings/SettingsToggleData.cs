@@ -38,6 +38,9 @@ public class SettingsToggleData : MonoBehaviour
             case (7):
                 toggle.isOn = SettingsData.Instance._Volumetrics;
                 break;
+            case (8):
+                toggle.isOn = SettingsData.Instance._FilmGrain;
+                break;
         }
     }
 }

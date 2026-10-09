@@ -1,0 +1,54 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a1729c4832f69e4bb0a9c98f3d7c2f3, type: 3}
+  m_Name: PlayerData
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerData
+  playerHealth: 3
+  maxHealth: 5
+  fastFallCounter: 0
+  jumpBufferCounter: -179
+  coyoteTimeCounter: -179
+  sprintBufferCounter: -182
+  interactingCooldown: -306009
+  iFrames: -444
+  ricochet: 0
+  lastCheckpoint: {x: 266.5, y: 86}
+  bufferedAtk: -48
+  bufferedAtkDir: {x: 0, y: 0}
+  basePlayerSpeed: 8
+  playerSpeed: 8
+  generalSpeedMulti: 1
+  mudSpeedMulti: 1
+  mudJumpMulti: 1
+  sprinting: 0
+  crouching: 0
+  doubleJumpAvailable: 1
+  movementAllowed: 1
+  limitedMovement: 0
+  shortJumping: 1
+  autoResetSpeed: 1
+  leftOrRight: 0
+  interacting: 0
+  inAirGust: 0
+  pickUpHeart: 0
+  playerDead: 0
+  resetVelocity: 1
+  inMud: 0
+  hasHeartCoin: 0
+  heartCoinSaved: 0
+  MainCamera: {fileID: 0}
+  ScreenCanvas: {fileID: 0}
+  OffsetVelocity: {x: 0, y: 0}
+  PlayerRb: {fileID: 0}
+  collider: {fileID: 0}
+  anim: {fileID: 0}
+  pixelationMat: {fileID: 2100000, guid: 4c683fc6bc2d87548a869699295c3659, type: 2}

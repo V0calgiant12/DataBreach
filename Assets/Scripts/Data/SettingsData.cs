@@ -52,12 +52,14 @@ public class SettingsData : MonoBehaviour
     [Header("Video")]
     public int _Fullscreen = 0;
     public int _Resolution = 2;
+    public int _Particles = 0;
     public int _LightQuality = 4;
     public bool _Bloom;
     public bool _ChromaticAberration;
     public bool _Vignette;
     public bool _Pixelation;
     public bool _Volumetrics;
+    public bool _FilmGrain;
 
     [Header("Not Settings")]
     [SerializeField] private AudioMixer Mixer;
@@ -119,12 +121,14 @@ public class SettingsData : MonoBehaviour
         
         data._Fullscreen = _Fullscreen;
         data._Resolution = _Resolution;
+        data._Particles = _Particles;
         data._LightQuality = _LightQuality;
         data._Bloom =_Bloom;
         data._ChromaticAberration =_ChromaticAberration;
         data._Vignette =_Vignette;
         data._Pixelation =_Pixelation;
         data._Volumetrics =_Volumetrics;
+        data._FilmGrain = _FilmGrain;
 
         string json = JsonUtility.ToJson(data);
         File.WriteAllText(Application.persistentDataPath + "/settings.json", json);
@@ -187,12 +191,14 @@ public class SettingsData : MonoBehaviour
 
             _Fullscreen = data._Fullscreen;
             _Resolution = data._Resolution;
+            _Particles = data._Particles;
             _LightQuality = data._LightQuality;
             _Bloom = data._Bloom;
             _ChromaticAberration = data._ChromaticAberration;
             _Vignette = data._Vignette;
             _Pixelation = data._Pixelation;
             _Volumetrics = data._Volumetrics;
+            _FilmGrain = data._FilmGrain;
             
             Application.runInBackground = _RunInBackground;
             Debug.Log("Loaded settings from file!");
@@ -241,12 +247,14 @@ public class SettingsData : MonoBehaviour
 
         _Fullscreen = 0;
         _Resolution = 2;
+        _Particles = 0;
         _LightQuality = 4;
         _Bloom = true;
         _ChromaticAberration = true;
         _Vignette = true;
         _Pixelation = true;
         _Volumetrics = false;
+        _FilmGrain = true;
         
         Application.runInBackground = _RunInBackground;
         UserInput.Instance.UpdateKeyBinds();
@@ -294,10 +302,12 @@ class SaveSettings // This class quite literally just stores variables so they c
     [Header("Video")]
     public int _Fullscreen = 0;
     public int _Resolution = 2;
+    public int _Particles = 0;
     public int _LightQuality = 4;
     public bool _Bloom;
     public bool _ChromaticAberration;
     public bool _Vignette;
     public bool _Pixelation;
     public bool _Volumetrics;
+    public bool _FilmGrain;
 }
