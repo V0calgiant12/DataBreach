@@ -7,6 +7,7 @@ public class VineCreator : MonoBehaviour
     [SerializeField] private GameObject prefab;
     [Header("Settings")]
     public int vineLength = 3;
+    public float vineUpdateOffset;
     private string vinePath;
     public void RefreshVines()
     {
@@ -63,6 +64,7 @@ public class VineCreator : MonoBehaviour
                 vines[i].GetComponent<VineUpdater>().LinkedObjectBottom = vines[i];
             }
             vines[i].GetComponent<VineUpdater>().sectionCount = i;
+            vines[i].GetComponent<VineUpdater>().updateOffset = vineUpdateOffset;
         }
         foreach(GameObject vine in vines)
         {
