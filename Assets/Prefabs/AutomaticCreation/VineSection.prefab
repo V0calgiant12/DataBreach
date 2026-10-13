@@ -33,7 +33,7 @@ Transform:
   m_GameObject: {fileID: 7351083664282948228}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -2.5, z: 0}
+  m_LocalPosition: {x: 0, y: -1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -145,9 +145,9 @@ HingeJoint2D:
   m_UseConnectedAnchor: 1
   m_UseMotor: 0
   m_Motor:
-    m_MotorSpeed: 0
+    m_MotorSpeed: 99
     m_MaximumMotorForce: 10000
-  m_UseLimits: 0
+  m_UseLimits: 1
   m_AngleLimits:
     m_LowerAngle: 0
     m_UpperAngle: 180
@@ -216,7 +216,7 @@ MonoBehaviour:
   particleId: VineDeath
   audioSource: {fileID: 258334290240981244}
   hitSound: {fileID: 0}
-  deathSound: {fileID: 8300000, guid: b17471b81556df343be81d50ad9bf15c, type: 3}
+  deathSound: {fileID: 8300000, guid: 3ebcc9daebda20545ada1930d45d0fc7, type: 3}
   volume: 1
   health: 1
   knockbackReduction: {x: 1, y: 1}
@@ -267,3 +267,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::VineUpdater
   LinkedObjectTop: {fileID: 0}
   LinkedObjectBottom: {fileID: 0}
+  texturePath: Objects/Vines
+  sectionCount: 0
+  updateOffset: 0

@@ -18,7 +18,7 @@ public class VineUpdater : MonoBehaviour
     {
         if (LinkedObjectBottom == null)
         {
-            GetComponent<SpriteRenderer>().sprite = Resources.LoadAll<Sprite>(texturePath)[2];
+            GetComponent<SpriteRenderer>().sprite = Resources.LoadAll<Sprite>(texturePath)[sectionCount == 0 ? 3:2];
         }
         if(LinkedObjectTop == null)
         {

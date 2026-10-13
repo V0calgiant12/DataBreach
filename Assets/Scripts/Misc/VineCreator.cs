@@ -59,7 +59,7 @@ public class VineCreator : MonoBehaviour
             {
                 // End of Vine
                 vines[i].name = "VineEnd";
-                vines[i].GetComponent<SpriteRenderer>().sprite = Resources.LoadAll<Sprite>(vinePath)[2];
+                vines[i].GetComponent<SpriteRenderer>().sprite = Resources.LoadAll<Sprite>(vinePath)[i == 0 ? 3 : 2];
                 vines[i].GetComponent<VineUpdater>().LinkedObjectTop = vines[i-1];
                 vines[i].GetComponent<VineUpdater>().LinkedObjectBottom = vines[i];
             }

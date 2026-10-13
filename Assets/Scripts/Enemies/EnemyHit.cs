@@ -18,6 +18,7 @@ public class EnemyHit : MonoBehaviour
     [SerializeField] private AudioClip hitSound;
     [SerializeField] private AudioClip deathSound;
     [SerializeField] private float volume = 1;
+    [SerializeField] private Vector2 pitchVariance = new Vector2(1,1);
 
     [Header("Stats")]
     [Tooltip("Default health values: Slime 3, Para-Slimes 1, Goblin 5, Gliberknocker 6")]
@@ -60,7 +61,7 @@ public class EnemyHit : MonoBehaviour
         }
         if (trackedHealth <= 0 && immediatelDestroyOnDeath) // IF immediatelyDestroyOnDeath is false, we assume it's handeled elsewhere as it's likely a State Machine handeling it.
         {
-            audioSource.PlaySound(deathSound,volume,1,1,1,transform.position);
+            audioSource.PlaySound(deathSound,volume,Random.Range(pitchVariance.x, pitchVariance.y),1,1,transform.position);
             if(particleSpawner != null)
             {
                 particleSpawner.SpawnParticle(particleId, transform.position);
@@ -114,7 +115,7 @@ public class EnemyHit : MonoBehaviour
             }
             else
             {
-                audioSource.PlaySound(hitSound,volume,1,1,1,transform.position);
+                audioSource.PlaySound(hitSound,volume,Random.Range(pitchVariance.x, pitchVariance.y),1,1,transform.position);
                 flashEffect.WhiteFlash();
                 if(particleSpawner != null)
                 {
@@ -134,7 +135,7 @@ public class EnemyHit : MonoBehaviour
         }
         if(trackedHealth != 1)
         {
-            audioSource.PlaySound(hitSound,volume,1,1,1,transform.position);
+            audioSource.PlaySound(hitSound,volume,Random.Range(pitchVariance.x, pitchVariance.y),1,1,transform.position);
             AdvancedFlash(1);
         }
         if (!knockbackImmune)
