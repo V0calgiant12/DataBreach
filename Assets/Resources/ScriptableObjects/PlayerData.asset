@@ -12,35 +12,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a1729c4832f69e4bb0a9c98f3d7c2f3, type: 3}
   m_Name: PlayerData
   m_EditorClassIdentifier: Assembly-CSharp::PlayerData
-  playerHealth: 3
+  playerHealth: 0
   maxHealth: 5
   fastFallCounter: 0
-  jumpBufferCounter: -179
-  coyoteTimeCounter: -179
-  sprintBufferCounter: -182
-  interactingCooldown: -306009
-  iFrames: -444
+  jumpBufferCounter: -778
+  coyoteTimeCounter: -85
+  sprintBufferCounter: -763
+  interactingCooldown: -347847
+  iFrames: -654
   ricochet: 0
-  lastCheckpoint: {x: 266.5, y: 86}
-  bufferedAtk: -48
+  lastCheckpoint: {x: 385.75, y: 104}
+  bufferedAtk: -760
   bufferedAtkDir: {x: 0, y: 0}
-  basePlayerSpeed: 8
-  playerSpeed: 8
+  basePlayerSpeed: 7
+  playerSpeed: 7
   generalSpeedMulti: 1
   mudSpeedMulti: 1
   mudJumpMulti: 1
   sprinting: 0
   crouching: 0
   doubleJumpAvailable: 1
-  movementAllowed: 1
+  movementAllowed: 0
   limitedMovement: 0
   shortJumping: 1
   autoResetSpeed: 1
-  leftOrRight: 0
+  leftOrRight: 1
   interacting: 0
   inAirGust: 0
   pickUpHeart: 0
-  playerDead: 0
+  playerDead: 1
   resetVelocity: 1
   inMud: 0
   hasHeartCoin: 0

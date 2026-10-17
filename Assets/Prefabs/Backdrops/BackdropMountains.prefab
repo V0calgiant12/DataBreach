@@ -62,7 +62,7 @@ Transform:
   m_GameObject: {fileID: 2120909762857647988}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 6.1532, y: 31.589096, z: 0}
+  m_LocalPosition: {x: 6.1532, y: 15.037605, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -122,7 +122,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 2
-  m_Size: {x: 360, y: 8.4}
+  m_Size: {x: 360, y: 14}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -140,9 +140,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Parallaxing
   cameraPos: {fileID: 0}
-  _Offset: {x: 0, y: 0}
-  parallaxX: 2
-  parallaxY: 1.8
+  _Offset: {x: 0, y: 8}
+  parallaxX: 2.2
+  parallaxY: 1.23
 --- !u!1 &3970793637574590994
 GameObject:
   m_ObjectHideFlags: 0
@@ -170,7 +170,7 @@ Transform:
   m_GameObject: {fileID: 3970793637574590994}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 6.1532, y: 41.747826, z: 0}
+  m_LocalPosition: {x: 6.1532, y: 17.462112, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 4}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -230,7 +230,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 2
-  m_Size: {x: 360, y: 8.4}
+  m_Size: {x: 360, y: 14}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -248,9 +248,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Parallaxing
   cameraPos: {fileID: 0}
-  _Offset: {x: 0, y: 5}
-  parallaxX: 2.3
-  parallaxY: 1.4
+  _Offset: {x: 0, y: 10}
+  parallaxX: 2.4
+  parallaxY: 1.12
 --- !u!1 &6461023181640922366
 GameObject:
   m_ObjectHideFlags: 0
@@ -278,7 +278,7 @@ Transform:
   m_GameObject: {fileID: 6461023181640922366}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 6.1532, y: 37.59604, z: 0}
+  m_LocalPosition: {x: 1.8053741, y: 16.193115, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 4}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -338,7 +338,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 2
-  m_Size: {x: 360, y: 8.4}
+  m_Size: {x: 360, y: 14}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -356,9 +356,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Parallaxing
   cameraPos: {fileID: 0}
-  _Offset: {x: 0, y: 5}
-  parallaxX: 2.15
-  parallaxY: 1.6
+  _Offset: {x: -10, y: 9}
+  parallaxX: 2.3
+  parallaxY: 1.175
 --- !u!1 &7063974265996829347
 GameObject:
   m_ObjectHideFlags: 0
@@ -386,7 +386,7 @@ Transform:
   m_GameObject: {fileID: 7063974265996829347}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.1532, y: -27.716461, z: 0}
+  m_LocalPosition: {x: 6.1532, y: -45.633125, z: 0}
   m_LocalScale: {x: 100, y: 100, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -442,7 +442,7 @@ SpriteRenderer:
   m_SortingOrder: -101
   m_MaskInteraction: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0.18823533, g: 0.6, b: 0.15, a: 1}
+  m_Color: {r: 0.2085393, g: 0.64, b: 0.14022473, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -464,6 +464,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Parallaxing
   cameraPos: {fileID: 0}
-  _Offset: {x: 0, y: -114}
+  _Offset: {x: 0, y: -65}
   parallaxX: 1
-  parallaxY: 2
+  parallaxY: 1.2
