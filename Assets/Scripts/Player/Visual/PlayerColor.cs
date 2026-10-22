@@ -1,4 +1,5 @@
 using System.Drawing;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerColor : MonoBehaviour 
@@ -7,12 +8,34 @@ public class PlayerColor : MonoBehaviour
     [SerializeField] private UnityEngine.Color playerColor;
     [Header("Player Color References:")]
     [SerializeField] private SpriteRenderer sr;
+    private enum UpdateTime
+    {
+        Always,
+        EverySecond
+
+    }
+    [SerializeField] private UpdateTime updateTime;
     void OnEnable()
     {
-        Update();
+        CancelInvoke("SetColor");
+        if(updateTime == UpdateTime.EverySecond)
+        {
+            InvokeRepeating("SetColor",0,1);
+        }
+        else
+        {
+            SetColor();
+        }
     }
 
     void Update()
+    {
+        if(updateTime == UpdateTime.Always)
+        {
+            SetColor();
+        }
+    }
+    void SetColor()
     {
         playerColor = UnityEngine.Color.HSVToRGB(SettingsData.Instance._PlayerHue, SettingsData.Instance._PlayerSaturation, SettingsData.Instance._PlayerValue);
         sr.color = new UnityEngine.Color(playerColor.r,playerColor.g,playerColor.b, sr.color.a);

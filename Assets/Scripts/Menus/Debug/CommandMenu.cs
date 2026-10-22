@@ -1,6 +1,7 @@
 using System;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 using UnityEngine.SceneManagement;
 
 public class CommandMenu : MonoBehaviour
@@ -10,11 +11,24 @@ public class CommandMenu : MonoBehaviour
     [SerializeField] private TMP_InputField commandPrompt;
     [SerializeField] private TextMeshProUGUI log;
     [SerializeField] private PlayerData playerData;
-    public string[] CommandList {get;} = {"help","save","loadscene <int>","sethealth <int>","setmaxhealth <int>","setcheckpoint <x> <y>","tp <x> <y>","reload","resetcheckpoint","return"}; 
+    private bool darkmode = false;
+    public string[] CommandList {get;} = {"help","save","loadscene <int>","sethealth <int>","setmaxhealth <int>","setcheckpoint <x> <y>","tp <x> <y>","reload","resetcheckpoint","return","darkMode <bool>"}; 
     void Start()
     {
         CommandConsole.SetActive(false);
         commandPromptOpen = false;
+    }
+    void OnLevelWasLoaded(int level)
+    {
+        if (darkmode)
+        {
+            if(!CurrentSceneIsALevel())
+            {
+                LogOutput("ERROR: The current scene, " + SceneManager.GetActiveScene().buildIndex + ", is not a level.");
+                return;
+            }
+            Darkmode();
+        }
     }
     void Update()
     {
@@ -59,6 +73,7 @@ public class CommandMenu : MonoBehaviour
         commandPrompt.text = "";
         int id = -1;
         int number = -1;
+        bool state = true;
         float x = 0;
         float y = 0;
         switch (commandSplit[0])
@@ -287,10 +302,32 @@ public class CommandMenu : MonoBehaviour
                 playerData.PlayerRb.position = playerData.lastCheckpoint;
                 LogOutput("Reset checkpoint");
                 return;
+            case("darkmode"):
+                if(bool.TryParse(commandSplit[1], out state))
+                {
+                    if(!CurrentSceneIsALevel())
+                    {
+                        LogOutput("ERROR: The current scene, " + SceneManager.GetActiveScene().buildIndex + ", is not a level.");
+                        return;
+                    }
+                    darkmode = state;
+                    Darkmode();
+                }
+                else
+                {
+                    if(!CurrentSceneIsALevel())
+                    {
+                        LogOutput("ERROR: The current scene, " + SceneManager.GetActiveScene().buildIndex + ", is not a level.");
+                        return;
+                    }
+                    darkmode = !darkmode;
+                    Darkmode();
+                }
+                return;
         }
         if(commandInput != "")
         {
-            LogOutput("ERROR: Command invalid or not found.");
+            LogOutput("ERROR: Command \"" + commandSplit[0] + "\" is invalid or not found.");
         }
     }
     public void LogOutput(string logString)
@@ -304,5 +341,48 @@ public class CommandMenu : MonoBehaviour
             log.text += logString;
         }
         Debug.Log("Command Output: \"" + logString + "\"");
+    }
+    public void Darkmode()
+    {
+        GameObject globalLight2D = GameObject.Find("Global Light 2D");
+        if(darkmode == true && CurrentSceneHasLightingAreas())
+        {
+            GameObject[] lightList = globalLight2D.GetComponent<LightingAreaHolder>().lightingObjects;
+            for(int i = 0; i<lightList.Length; i++)
+            {
+                lightList[i].SetActive(false);
+            }
+            globalLight2D.GetComponent<LightingAreaHolder>().enabled = !darkmode;
+        }
+        else if (darkmode == false && CurrentSceneHasLightingAreas())
+        {
+            GameObject.Find("Loading Area 1").GetComponent<LightingAreaTrigger>().RefreshActiveLight();
+        }
+        globalLight2D.GetComponent<Light2D>().enabled = !darkmode;
+        LogOutput("Set dark mode to " + darkmode);
+    }
+    public bool CurrentSceneIsALevel()
+    {
+        int[] levels = {2,3,4,13};
+        for(int i = 0; i < levels.Length; i++)
+        {
+            if(SceneManager.GetActiveScene().buildIndex == levels[i])
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+    public bool CurrentSceneHasLightingAreas()
+    {
+        int[] levels = {2,4};
+        for(int i = 0; i < levels.Length; i++)
+        {
+            if(SceneManager.GetActiveScene().buildIndex == levels[i])
+            {
+                return true;
+            }
+        }
+        return false;
     }
 }

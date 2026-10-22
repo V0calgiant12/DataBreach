@@ -1,26 +1,31 @@
 using System.Numerics;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 public class InteractionDetection : MonoBehaviour 
 {
     [SerializeField] private SpriteRenderer indicator;
+    [SerializeField] private Light2D ambientLight;
     [SerializeField] private PlayerStateManager player;
     private bool interactable;
     private Collider2D colliderOther;
 
     void Start()
     {
-        indicator.color = new Color(indicator.color.r,indicator.color.g,indicator.color.b, 0);
+        indicator.enabled = false;
+        ambientLight.enabled = false;
     }
     private void OnTriggerExit2D(Collider2D other)
     {
-        indicator.color = new Color(indicator.color.r,indicator.color.g,indicator.color.b, 0);
+        indicator.enabled = false;
+        ambientLight.enabled = false;
         interactable = false;
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
-        indicator.color = new Color(indicator.color.r,indicator.color.g,indicator.color.b, 1);
+        indicator.enabled = true;
+        ambientLight.enabled = true;
     }
     void FixedUpdate()
     {
@@ -29,7 +34,8 @@ public class InteractionDetection : MonoBehaviour
             if (UserInput.Instance.KeyDownInteract && player.playerData.interacting == false)
             {
                 InteractableData data = colliderOther.gameObject.GetComponent<InteractableData>();
-                indicator.color = new Color(indicator.color.r,indicator.color.g,indicator.color.b, 0);
+                indicator.enabled = false;
+                ambientLight.enabled = false;
                 switch (data._TypeId)
                 {
                     case(0):

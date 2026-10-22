@@ -18,6 +18,9 @@ public class PlayerStateManager : MonoBehaviour
     public static PlayerStateManager Instance;
     public PlayerData playerData;
     public GameObject playerSprite;
+    public GameObject MainCamera;
+    public Animator ScreenCanvas;
+    public Material pixelationMat;
     public float storedXRicochet = 0;
     public int dashAttackCd = 0;
     public bool isJumping;
@@ -119,17 +122,19 @@ public class PlayerStateManager : MonoBehaviour
         playerData.anim.SetBool(moving, false);
         playerData.anim.SetBool(sprinting, false);
 
-        playerData.pixelationMat.SetFloat("_Pixelation", 550);
+        pixelationMat.SetFloat("_Pixelation", 550);
 
-        playerData.ScreenCanvas = GameObject.Find("Screen").GetComponent<Animator>();
-
+        if(ScreenCanvas == null)
+        {
+            ScreenCanvas = GameObject.Find("Screen").GetComponent<Animator>();
+        }
     }
     private void GoToCheckpoint()
     {
         playerData.hasHeartCoin = playerData.heartCoinSaved;
         if(playerData.lastCheckpoint != new Vector2(0,0))
         {
-            transform.position = playerData.lastCheckpoint;
+            transform.position = new Vector2(playerData.lastCheckpoint.x,playerData.lastCheckpoint.y+0.1f);
             //playerData.PlayerRb.transform.position = playerData.lastCheckpoint;
         }
     }
@@ -191,8 +196,7 @@ public class PlayerStateManager : MonoBehaviour
     {
         playerData.anim = GetComponent<Animator>(); 
         playerData.PlayerRb = gameObject.GetComponent<Rigidbody2D>();
-        playerData.collider = gameObject.GetComponent<BoxCollider2D>();
-        playerData.MainCamera = GameObject.Find("Main Camera");
+        MainCamera = GameObject.Find("Main Camera");
     }
     public void DamagePlayer(float xLaunch, float yLaunch, int timer, bool overrideIFrames, float damageSourceX, bool nonDirectional)
     {

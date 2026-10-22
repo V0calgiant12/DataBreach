@@ -4,7 +4,8 @@ using UnityEngine;
 public class LightingAreaTrigger : MonoBehaviour
 {
     [SerializeField] private bool detectPlayer = false;
-    [SerializeField] private int activeLightId = 0;
+    static public int activeLightId = 0;
+    [SerializeField] private int lightId = 0;
     [SerializeField] private LightingAreaHolder holder;
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -22,15 +23,23 @@ public class LightingAreaTrigger : MonoBehaviour
         Debug.Log("Entered Lighing Area",this);
         for(int i = 0; i < holder.lightingObjects.Length; i++)
         {
-            if(holder.lightingObjects[i].GetComponent<LightingAreaObject>().id != activeLightId)
+            
+            if(holder.lightingObjects[i].GetComponent<LightingAreaObject>().id != lightId)
             {
                 holder.lightingObjects[i].SetActive(false);
             }
             else
             {
-                holder.lightingObjects[i].SetActive(true);
+                activeLightId = lightId;
+                if(holder.enabled)
+                {
+                    holder.lightingObjects[i].SetActive(true);
+                }
             }
         }
-        
+    }
+    public void RefreshActiveLight()
+    {
+        holder.lightingObjects[activeLightId].SetActive(true);
     }
 }

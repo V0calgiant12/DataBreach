@@ -8,7 +8,7 @@ public class PlayerUpdate : PlayerAbstract
     }
     public override void EnterState(PlayerStateManager player) // Start Function
     {
-        player.playerData.MainCamera.GetComponent<Camera>().orthographicSize = SettingsData.Instance._CameraZoom;
+        player.MainCamera.GetComponent<Camera>().orthographicSize = SettingsData.Instance._CameraZoom;
         
     }
     public override void UpdateState(PlayerStateManager player) // Update Function

@@ -40,11 +40,7 @@ public class PlayerData : ScriptableObject
     public bool hasHeartCoin = false;
     public bool heartCoinSaved = false;
     [Header("References")]
-    public GameObject MainCamera;
-    public Animator ScreenCanvas;
-    public Vector2 OffsetVelocity;
     public Rigidbody2D PlayerRb;
-    public BoxCollider2D collider; 
+    public Vector2 OffsetVelocity;
     public Animator anim;
-    public Material pixelationMat;
 }

@@ -36,7 +36,7 @@ public class PlatformMover : MonoBehaviour
     private IEnumerator MoveTowardsPoint()
     {
         currentSpeed = new Vector2((nextPos.x - transform.position.x)/moveSpeed,(nextPos.y - transform.position.y)/moveSpeed);
-        while(Vector2.Distance(transform.position,nextPos) > 1)
+        while(Vector2.Distance(transform.position,nextPos) > 0.2)
         {
             //Debug.Log(UnityEngine.Vector2.Distance(transform.position,nextPos));
             platformRb.linearVelocityX = currentSpeed.x;

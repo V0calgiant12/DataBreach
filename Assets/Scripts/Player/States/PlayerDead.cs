@@ -10,7 +10,7 @@ public class PlayerDead : PlayerAbstract
     public override void EnterState(PlayerStateManager player)
     {
         pixelation = 550;
-        player.playerData.pixelationMat.SetFloat("_Pixelation", 550);
+        player.pixelationMat.SetFloat("_Pixelation", 550);
         player.playerData.movementAllowed = false;
         player.playerData.playerDead = true;
         player.playerData.resetVelocity = true;
@@ -22,7 +22,7 @@ public class PlayerDead : PlayerAbstract
         player.playerData.anim.SetBool(player.crouching, false);
         player.playerData.PlayerRb.linearVelocityX = 0;
         player.audioSource.PlaySound(player._PlayerDeath,1,1,0,1,player.transform.position);
-        player.playerData.ScreenCanvas.SetTrigger("Death");
+        player.ScreenCanvas.SetTrigger("Death");
         Debug.Log("You Are Dead");
     }
     public override void UpdateState(PlayerStateManager player)
@@ -34,12 +34,12 @@ public class PlayerDead : PlayerAbstract
         if(pixelation > 10)
         {
             pixelation -= 5;
-            player.playerData.pixelationMat.SetFloat("_Pixelation", pixelation);
+            player.pixelationMat.SetFloat("_Pixelation", pixelation);
             
         }
         else
         {
-            player.playerData.pixelationMat.SetFloat("_Pixelation", 550);
+            player.pixelationMat.SetFloat("_Pixelation", 550);
         }
         //Debug.Log(player.playerData.pixelationMat.GetFloat("_Pixelation") + " " + pixelation);
     }
