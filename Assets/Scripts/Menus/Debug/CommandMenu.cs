@@ -12,7 +12,7 @@ public class CommandMenu : MonoBehaviour
     [SerializeField] private TextMeshProUGUI log;
     [SerializeField] private PlayerData playerData;
     private bool darkmode = false;
-    public string[] CommandList {get;} = {"help","save","loadscene <int>","sethealth <int>","setmaxhealth <int>","setcheckpoint <x> <y>","tp <x> <y>","reload","resetcheckpoint","return","darkMode <bool>"}; 
+    public string[] CommandList {get;} = {"help","save","loadscene <int>","sethealth <int>","setmaxhealth <int>","setcheckpoint <x> <y>","tp <x> <y>","reload","resetcheckpoint","return","darkMode <bool>","givecoin","takecoin"}; 
     void Start()
     {
         CommandConsole.SetActive(false);
@@ -323,6 +323,24 @@ public class CommandMenu : MonoBehaviour
                     darkmode = !darkmode;
                     Darkmode();
                 }
+                return;
+            case("givecoin"):
+                playerData.hasHeartCoin = true;
+                playerData.heartCoinSaved = true;
+                if(HeartCoinIconHandler.Instance != null)
+                {
+                    HeartCoinIconHandler.Instance.UpdateGUI();
+                }
+                LogOutput("Gave Heart Coin to player.");
+                return;
+            case("takecoin"):
+                playerData.hasHeartCoin = false;
+                playerData.heartCoinSaved = false;
+                if(HeartCoinIconHandler.Instance != null)
+                {
+                    HeartCoinIconHandler.Instance.UpdateGUI();
+                }
+                LogOutput("Took Heart Coin from player.");
                 return;
         }
         if(commandInput != "")
