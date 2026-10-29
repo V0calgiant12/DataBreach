@@ -15,17 +15,17 @@ MonoBehaviour:
   playerHealth: 5
   maxHealth: 5
   fastFallCounter: 0
-  jumpBufferCounter: -1029
-  coyoteTimeCounter: -1029
-  sprintBufferCounter: -1066
-  interactingCooldown: -38278
-  iFrames: -1066
+  jumpBufferCounter: 0
+  coyoteTimeCounter: 0
+  sprintBufferCounter: 0
+  interactingCooldown: 0
+  iFrames: 0
   ricochet: 0
-  lastCheckpoint: {x: 74, y: 15}
-  bufferedAtk: -1071
+  lastCheckpoint: {x: 0, y: 0}
+  bufferedAtk: 0
   bufferedAtkDir: {x: 0, y: 0}
-  basePlayerSpeed: 7
-  playerSpeed: 6.999986
+  basePlayerSpeed: 0
+  playerSpeed: 0
   generalSpeedMulti: 1
   mudSpeedMulti: 1
   mudJumpMulti: 1
@@ -41,7 +41,7 @@ MonoBehaviour:
   inAirGust: 0
   pickUpHeart: 0
   playerDead: 0
-  resetVelocity: 1
+  resetVelocity: 0
   inMud: 0
   hasHeartCoin: 0
   heartCoinSaved: 0
