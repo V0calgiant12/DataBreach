@@ -210,11 +210,11 @@ public class PlayerStateManager : MonoBehaviour
             //Debug.Log(playerData.playerHealth);
             if (nonDirectional) // Non-Directional (based on player direction)
             {
-                StartCoroutine(StunPlayer(xLaunch*(playerData.leftOrRight ? -1 : 1), yLaunch,timer));
+                StartCoroutine(StunPlayer((xLaunch+3)*(playerData.leftOrRight ? -1 : 1), yLaunch+3,timer,playerData.leftOrRight ? -1 : 1,yLaunch<0 ? -1 : 1));
             }
             else // Directional (based on where the hit came from)
             {
-                StartCoroutine(StunPlayer(xLaunch*(transform.position.x <= damageSourceX ? -1 : 1), yLaunch,timer));
+                StartCoroutine(StunPlayer((xLaunch+3)*(transform.position.x <= damageSourceX ? -1 : 1), yLaunch+3,timer,transform.position.x <= damageSourceX ? -1 : 1,yLaunch<0 ? -1 : 1));
             }
             playerData.iFrames = 120;
             PlayerFlash(1,0);
@@ -316,7 +316,7 @@ public class PlayerStateManager : MonoBehaviour
         }
     }
     
-    public IEnumerator StunPlayer(float xLaunch, float yLaunch, int timer)
+    public IEnumerator StunPlayer(float xLaunch, float yLaunch, int timer, int directionx, int directiony)
     {
         if (currentState == DashingState)
         {
@@ -326,7 +326,16 @@ public class PlayerStateManager : MonoBehaviour
         playerData.movementAllowed = false;
         ricochetAvailable = true;
         int elapsed = 0;
-        playerData.PlayerRb.linearVelocity = new Vector2(xLaunch, yLaunch);
+        playerData.PlayerRb.linearVelocity = new Vector2((Mathf.Abs(xLaunch)-playerData.playerHealth)*directionx, (Mathf.Abs(yLaunch)-playerData.playerHealth)*directiony);
+        if(Mathf.Abs(playerData.PlayerRb.linearVelocityY) < 5)
+        {
+            playerData.PlayerRb.linearVelocityY = directiony * 5f;
+        }
+        if(Mathf.Abs(playerData.PlayerRb.linearVelocityX) < 5)
+        {
+            Debug.Log(playerData.PlayerRb.linearVelocityX);
+            playerData.PlayerRb.linearVelocityX = directionx * 5f;
+        }
         while(GroundCheck.Instance._IsGrounded == false && timer > elapsed || elapsed < 15)
         {
             elapsed += Time.timeScale == 1 ? 1 : 0;
