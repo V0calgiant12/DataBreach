@@ -333,7 +333,6 @@ public class PlayerStateManager : MonoBehaviour
         }
         if(Mathf.Abs(playerData.PlayerRb.linearVelocityX) < 5)
         {
-            Debug.Log(playerData.PlayerRb.linearVelocityX);
             playerData.PlayerRb.linearVelocityX = directionx * 5f;
         }
         while(GroundCheck.Instance._IsGrounded == false && timer > elapsed || elapsed < 15)

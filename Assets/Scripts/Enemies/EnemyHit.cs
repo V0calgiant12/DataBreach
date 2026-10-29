@@ -129,6 +129,8 @@ public class EnemyHit : MonoBehaviour
         //Debug.Log("Damaged Enemy for " + damage + " damage.");
         _DamageTaken = true;
         EnemyAbstract enemyAbstract = GetComponentInParent<EnemyAbstract>();
+        int directionx = transform.position.x <= damageSourceX ? -1 : 1;
+        int directiony = yLaunch < 0 ? -1 : 1;
         if(enemyAbstract != null)
         {
             enemyAbstract.OnHit();
@@ -140,7 +142,16 @@ public class EnemyHit : MonoBehaviour
         }
         if (!knockbackImmune)
         {
-            _LastKnockbackTaken = new Vector2(xLaunch*(transform.position.x <= damageSourceX ? -1 : 1)/knockbackReduction.x, yLaunch/knockbackReduction.y);
+            _LastKnockbackTaken = new Vector2(((xLaunch/knockbackReduction.x)+(health/2))*(transform.position.x <= damageSourceX ? -1 : 1), (yLaunch/knockbackReduction.y)+(health/2));
+            _LastKnockbackTaken = new Vector2((Mathf.Abs(_LastKnockbackTaken.x)-trackedHealth)*directionx, (Mathf.Abs(_LastKnockbackTaken.y)-trackedHealth)*directiony);
+            if(Mathf.Abs(_LastKnockbackTaken.y) < 5)
+            {
+                _LastKnockbackTaken.y = directiony * 5f;
+            }
+            if(_LastKnockbackTaken.x < 2 && directionx == 1||_LastKnockbackTaken.x > -2 && directionx == -1)
+            {
+                _LastKnockbackTaken.x = directionx * 2f;
+            }
             rb.linearVelocity = _LastKnockbackTaken;
         }
         trackedHealth -= damage;
