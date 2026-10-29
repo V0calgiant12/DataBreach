@@ -23,7 +23,6 @@ public class PlayerDead : PlayerAbstract
         player.playerData.PlayerRb.linearVelocityX = 0;
         player.audioSource.PlaySound(player._PlayerDeath,1,1,0,1,player.transform.position);
         player.ScreenCanvas.SetTrigger("Death");
-        Debug.Log("You Are Dead");
     }
     public override void UpdateState(PlayerStateManager player)
     {

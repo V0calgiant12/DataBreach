@@ -47,6 +47,14 @@ public class SceneTransition : MonoBehaviour
             yield return null;
         }
     }
+    public IEnumerator ReloadScene()
+    {
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex,LoadSceneMode.Single);
+        while (!asyncLoad.isDone)
+        {
+            yield return null;
+        }
+    }
     public void ExitButton()
     {
         StartCoroutine(ExitFade());
