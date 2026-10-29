@@ -302,10 +302,12 @@ MonoBehaviour:
   HealPlayer: 0
   LaserTop: {fileID: 4662896713854622296}
   LaserBottom: {fileID: 6451260477638173391}
+  LaserLight: {fileID: 9216098763366158168}
   anim: {fileID: 8071571017524677946}
   HealthParticle: {fileID: 9163582231398510948}
   DamageParticle: {fileID: 7626123549741933984}
   laserColor: {r: 1, g: 1, b: 1, a: 1}
+  lightColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!82 &544188429893592874
 AudioSource:
   m_ObjectHideFlags: 0
@@ -5431,6 +5433,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2460759303843308945}
   - component: {fileID: 8071571017524677946}
+  - component: {fileID: 7017636615325142891}
   m_Layer: 0
   m_Name: Laser
   m_TagString: Untagged
@@ -5455,6 +5458,7 @@ Transform:
   - {fileID: 6901542392031386827}
   - {fileID: 6323389804922443772}
   - {fileID: 2195012488882540898}
+  - {fileID: 8482078390867835525}
   - {fileID: 3328121941602494421}
   - {fileID: 8089534133669863351}
   - {fileID: 8294564109414659464}
@@ -5483,6 +5487,24 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &7017636615325142891
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8003337206711313209}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0b2459b27c55c142a61a8bdd255aa04, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::VolumetricEnabler
+  settingToGet: 0
+  settingEnabled: 0
+  flipOutput: 0
+  state: 0
+  objects:
+  - {fileID: 9140238625461786476}
 --- !u!1 &8405186308761560556
 GameObject:
   m_ObjectHideFlags: 0
@@ -5574,6 +5596,90 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!1 &9140238625461786476
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8482078390867835525}
+  - component: {fileID: 9216098763366158168}
+  m_Layer: 0
+  m_Name: Light
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8482078390867835525
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9140238625461786476}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.9, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2460759303843308945}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &9216098763366158168
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9140238625461786476}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 073797afb82c5a1438f328866b10b3f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.2D.Runtime::UnityEngine.Rendering.Universal.Light2D
+  m_ComponentVersion: 2
+  m_LightType: 1
+  m_BlendStyleIndex: 0
+  m_FalloffIntensity: 0.5
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Intensity: 1
+  m_LightVolumeIntensity: 0.1
+  m_LightVolumeEnabled: 1
+  m_ApplyToSortingLayers: f5ef8e53f141809809b380710000000021cb8d3dd153f3f953aab67deb26d8149f7e373e1f8ad3e7
+  m_LightCookieSprite: {fileID: 0}
+  m_DeprecatedPointLightCookieSprite: {fileID: 0}
+  m_LightOrder: 0
+  m_AlphaBlendOnOverlap: 0
+  m_OverlapOperation: 0
+  m_NormalMapDistance: 3
+  m_NormalMapQuality: 2
+  m_UseNormalMap: 0
+  m_ShadowsEnabled: 0
+  m_ShadowIntensity: 1
+  m_ShadowSoftness: 0.3
+  m_ShadowSoftnessFalloffIntensity: 1
+  m_ShadowVolumeIntensityEnabled: 0
+  m_ShadowVolumeIntensity: 0.5
+  m_LocalBounds:
+    m_Center: {x: -0.00024998188, y: -0.000099897385, z: 0}
+    m_Extent: {x: 2.20045, y: 5.8759003, z: 0}
+  m_PointLightInnerAngle: 360
+  m_PointLightOuterAngle: 360
+  m_PointLightInnerRadius: 0
+  m_PointLightOuterRadius: 1
+  m_ShapeLightParametricSides: 5
+  m_ShapeLightParametricAngleOffset: 0
+  m_ShapeLightParametricRadius: 1
+  m_ShapeLightFalloffSize: 2
+  m_ShapeLightFalloffOffset: {x: 0, y: 0}
+  m_ShapePath:
+  - {x: -0.19999999, y: -3.875, z: 0}
+  - {x: 0.2, y: -3.875, z: 0}
+  - {x: 0.2, y: 3.875, z: 0}
+  - {x: -0.2, y: 3.875, z: 0}
 --- !u!1 &9163582231398510948
 GameObject:
   m_ObjectHideFlags: 0
