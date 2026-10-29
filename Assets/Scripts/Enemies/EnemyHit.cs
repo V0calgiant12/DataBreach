@@ -142,9 +142,11 @@ public class EnemyHit : MonoBehaviour
         }
         if (!knockbackImmune)
         {
-            _LastKnockbackTaken = new Vector2(((xLaunch/knockbackReduction.x)+(health/2))*(transform.position.x <= damageSourceX ? -1 : 1), (yLaunch/knockbackReduction.y)+(health/2));
-            _LastKnockbackTaken = new Vector2((Mathf.Abs(_LastKnockbackTaken.x)-trackedHealth)*directionx, (Mathf.Abs(_LastKnockbackTaken.y)-trackedHealth)*directiony);
-            if(Mathf.Abs(_LastKnockbackTaken.y) < 5)
+            float healthRatio = trackedHealth*1f/health;
+            float m = 1.5f*(healthRatio*healthRatio)-2.75f*healthRatio+2;
+            Debug.Log(healthRatio + ", " + m  + ", " + knockbackReduction);
+            _LastKnockbackTaken = new Vector2(xLaunch*m/knockbackReduction.x*(transform.position.x <= damageSourceX ? -1 : 1), yLaunch*m/knockbackReduction.y);
+            if(_LastKnockbackTaken.y < 5 && directiony == 1|| _LastKnockbackTaken.y > -5 && directiony == -1)
             {
                 _LastKnockbackTaken.y = directiony * 5f;
             }

@@ -210,11 +210,11 @@ public class PlayerStateManager : MonoBehaviour
             //Debug.Log(playerData.playerHealth);
             if (nonDirectional) // Non-Directional (based on player direction)
             {
-                StartCoroutine(StunPlayer((xLaunch+3)*(playerData.leftOrRight ? -1 : 1), yLaunch+3,timer,playerData.leftOrRight ? -1 : 1,yLaunch<0 ? -1 : 1));
+                StartCoroutine(StunPlayer((xLaunch+0)*(playerData.leftOrRight ? -1 : 1), yLaunch+0,timer,playerData.leftOrRight ? -1 : 1,yLaunch<0 ? -1 : 1));
             }
             else // Directional (based on where the hit came from)
             {
-                StartCoroutine(StunPlayer((xLaunch+3)*(transform.position.x <= damageSourceX ? -1 : 1), yLaunch+3,timer,transform.position.x <= damageSourceX ? -1 : 1,yLaunch<0 ? -1 : 1));
+                StartCoroutine(StunPlayer((xLaunch+0)*(transform.position.x <= damageSourceX ? -1 : 1), yLaunch+0,timer,transform.position.x <= damageSourceX ? -1 : 1,yLaunch<0 ? -1 : 1));
             }
             playerData.iFrames = 120;
             PlayerFlash(1,0);
@@ -326,18 +326,33 @@ public class PlayerStateManager : MonoBehaviour
         playerData.movementAllowed = false;
         ricochetAvailable = true;
         int elapsed = 0;
-        playerData.PlayerRb.linearVelocity = new Vector2((Mathf.Abs(xLaunch)-playerData.playerHealth)*directionx, (Mathf.Abs(yLaunch)-playerData.playerHealth)*directiony);
-        if(Mathf.Abs(playerData.PlayerRb.linearVelocityY) < 5)
+        float healthRatio = playerData.playerHealth * 1f/playerData.maxHealth;
+        float m = 1.5f*(healthRatio*healthRatio)-2.75f*healthRatio+2;
+        //Debug.Log(healthRatio + ", " + m  + ", " + playerData.knockbackReduction);
+        playerData.PlayerRb.linearVelocity = new Vector2(xLaunch*m/playerData.knockbackReduction.x, yLaunch*m/playerData.knockbackReduction.y);
+        // Lower Limit
+        if(playerData.PlayerRb.linearVelocityY < 5 && directiony == 1|| playerData.PlayerRb.linearVelocityY > -5 && directiony == -1)
         {
             playerData.PlayerRb.linearVelocityY = directiony * 5f;
         }
-        if(Mathf.Abs(playerData.PlayerRb.linearVelocityX) < 5)
+        if(playerData.PlayerRb.linearVelocityX < 4 && directionx == 1|| playerData.PlayerRb.linearVelocityX > -4 && directionx == -1)
         {
-            playerData.PlayerRb.linearVelocityX = directionx * 5f;
+            playerData.PlayerRb.linearVelocityX = directionx * 4f;
         }
+        // Upper limit
+        if(playerData.PlayerRb.linearVelocityY > 20 && directiony == 1|| playerData.PlayerRb.linearVelocityY < -20 && directiony == -1)
+        {
+            playerData.PlayerRb.linearVelocityY = directiony * 20f;
+        }
+        if(playerData.PlayerRb.linearVelocityX > 20 && directionx == 1|| playerData.PlayerRb.linearVelocityX < -20 && directionx == -1)
+        {
+            playerData.PlayerRb.linearVelocityX = directionx * 20f;
+        }
+        // Loop while in the air.
         while(GroundCheck.Instance._IsGrounded == false && timer > elapsed || elapsed < 15)
         {
             elapsed += Time.timeScale == 1 ? 1 : 0;
+            playerData.resetVelocity = false;
             if(playerData.ricochet > 0)
             {
                 playerData.PlayerRb.linearVelocityY = playerData.PlayerRb.linearVelocity.y + yLaunch * 0.25f;

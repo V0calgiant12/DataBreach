@@ -13,9 +13,10 @@ public class PlayerData : ScriptableObject
     public int interactingCooldown = 0;
     public int iFrames = 0;
     public int ricochet = 0;
-    public Vector2 lastCheckpoint = new Vector2(0,0);
     public int bufferedAtk = 0;
+    public Vector2 lastCheckpoint = new Vector2(0,0);
     public Vector2 bufferedAtkDir = new Vector2(0,0);
+    public Vector2 knockbackReduction = new Vector2(1,1);
     [Header("Movement")]
     public float basePlayerSpeed;
     public float playerSpeed;
