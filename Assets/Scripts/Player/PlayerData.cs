@@ -40,6 +40,7 @@ public class PlayerData : ScriptableObject
     public bool inMud = false;
     public bool hasHeartCoin = false;
     public bool heartCoinSaved = false;
+    public bool invincible = false;
     [Header("References")]
     public Rigidbody2D PlayerRb;
     public Vector2 OffsetVelocity;

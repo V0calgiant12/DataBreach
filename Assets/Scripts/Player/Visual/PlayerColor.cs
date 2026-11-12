@@ -39,10 +39,6 @@ public class PlayerColor : MonoBehaviour
         {
             SetColor();
         }
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            rainbow = !rainbow;
-        }
     }
     void SetColor()
     {

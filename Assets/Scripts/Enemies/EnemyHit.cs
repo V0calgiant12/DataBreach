@@ -7,7 +7,7 @@ using UnityEngine;
 public class EnemyHit : MonoBehaviour
 {
     [Header("References")]
-    [SerializeField] private GameObject ParentObject;
+    public GameObject ParentObject;
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private FlashEffect flashEffect;
     [SerializeField] private ParticleSpawner particleSpawner;
@@ -73,7 +73,6 @@ public class EnemyHit : MonoBehaviour
     {
         if (other.gameObject.CompareTag("PlayerHitbox") && iFrames < 0 && trackedHealth > 0)
         {
-            iFrames = 15;
             TriggerShake.Instance.BurstShake(1,2,false,0);
             if (!invulnerable)
             {
@@ -126,37 +125,45 @@ public class EnemyHit : MonoBehaviour
     }
     public void DamageEnemy(int damage, float xLaunch, float yLaunch, float damageSourceX)
     {
-        //Debug.Log("Damaged Enemy for " + damage + " damage.");
-        _DamageTaken = true;
-        EnemyAbstract enemyAbstract = GetComponentInParent<EnemyAbstract>();
-        int directionx = transform.position.x <= damageSourceX ? -1 : 1;
-        int directiony = yLaunch < 0 ? -1 : 1;
-        if(enemyAbstract != null)
+        if (!invulnerable && iFrames < 0 && trackedHealth > 0)
         {
-            enemyAbstract.OnHit();
-        }
-        if(trackedHealth != 1)
-        {
-            audioSource.PlaySound(hitSound,volume,Random.Range(pitchVariance.x, pitchVariance.y),1,1,transform.position);
-            AdvancedFlash(1);
-        }
-        if (!knockbackImmune)
-        {
-            float healthRatio = trackedHealth*1f/health;
-            float m = 1.5f*(healthRatio*healthRatio)-2.75f*healthRatio+2;
-            Debug.Log(healthRatio + ", " + m  + ", " + knockbackReduction);
-            _LastKnockbackTaken = new Vector2(xLaunch*m/knockbackReduction.x*(transform.position.x <= damageSourceX ? -1 : 1), yLaunch*m/knockbackReduction.y);
-            if(_LastKnockbackTaken.y < 5 && directiony == 1|| _LastKnockbackTaken.y > -5 && directiony == -1)
+            iFrames = 15;
+            _DamageTaken = true;
+            EnemyAbstract enemyAbstract = GetComponentInParent<EnemyAbstract>();
+            int directionx = transform.position.x <= damageSourceX ? -1 : 1;
+            int directiony = yLaunch < 0 ? -1 : 1;
+            if(enemyAbstract != null)
             {
-                _LastKnockbackTaken.y = directiony * 5f;
+                enemyAbstract.OnHit();
             }
-            if(_LastKnockbackTaken.x < 2 && directionx == 1||_LastKnockbackTaken.x > -2 && directionx == -1)
+            if(trackedHealth != 1)
             {
-                _LastKnockbackTaken.x = directionx * 2f;
+                audioSource.PlaySound(hitSound,volume,Random.Range(pitchVariance.x, pitchVariance.y),1,1,transform.position);
+                AdvancedFlash(1);
             }
-            rb.linearVelocity = _LastKnockbackTaken;
+            if (!knockbackImmune)
+            {
+                float healthRatio = trackedHealth*1f/health;
+                float m = 1.5f*(healthRatio*healthRatio)-2.75f*healthRatio+2;
+                //Debug.Log(healthRatio + ", " + m  + ", " + knockbackReduction);
+                _LastKnockbackTaken = new Vector2(xLaunch*m/knockbackReduction.x*(transform.position.x <= damageSourceX ? -1 : 1), yLaunch*m/knockbackReduction.y);
+                if(_LastKnockbackTaken.y < 5 && directiony == 1|| _LastKnockbackTaken.y > -5 && directiony == -1)
+                {
+                    _LastKnockbackTaken.y = directiony * 5f;
+                }
+                if(_LastKnockbackTaken.x < 2 && directionx == 1||_LastKnockbackTaken.x > -2 && directionx == -1)
+                {
+                    _LastKnockbackTaken.x = directionx * 2f;
+                }
+                rb.linearVelocity = _LastKnockbackTaken;
+            }
+            trackedHealth -= damage;
         }
-        trackedHealth -= damage;
+        else
+        {
+            Debug.Log("Failed to Deal Damage to " + ParentObject,this);
+        }
+        
     }
     
     public void AdvancedFlash(int type)

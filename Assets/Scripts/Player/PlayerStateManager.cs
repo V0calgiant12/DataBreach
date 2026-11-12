@@ -19,6 +19,7 @@ public class PlayerStateManager : MonoBehaviour
     public PlayerData playerData;
     public GameObject playerSprite;
     public GameObject MainCamera;
+    public GameObject Barrier;
     public Animator ScreenCanvas;
     public Material pixelationMat;
     public float storedXRicochet = 0;
@@ -176,6 +177,18 @@ public class PlayerStateManager : MonoBehaviour
         playerData.iFrames -= Time.timeScale == 1 ? 1 : 0;
         playerData.anim.SetInteger(iFrames, playerData.iFrames);
 
+        if(Input.GetKeyDown(KeyCode.P))
+        {
+            if (playerData.invincible)
+            {
+                MakeInvincible(true, false);
+            }
+            else
+            {
+                MakeInvincible(true, true);
+            }
+        }
+
         #if UNITY_EDITOR
         if(Input.GetKeyDown(KeyCode.F3))
         {
@@ -200,7 +213,7 @@ public class PlayerStateManager : MonoBehaviour
     }
     public void DamagePlayer(float xLaunch, float yLaunch, int timer, bool overrideIFrames, float damageSourceX, bool nonDirectional)
     {
-        if (playerData.iFrames < 0 || overrideIFrames)
+        if ((playerData.iFrames < 0 || overrideIFrames) && !playerData.invincible)
         {
             //PlayerFlash(1);
             playerData.anim.SetBool(hit, true);
@@ -315,7 +328,24 @@ public class PlayerStateManager : MonoBehaviour
             PlayerFlash(1,0);
         }
     }
-    
+    public void MakeInvincible(bool rainbow, bool state)
+    {
+        if (!state)
+        {
+            playerData.invincible = false;
+            PlayerColor.rainbow = false;
+            Barrier.SetActive(false);
+        }
+        else
+        {
+            playerData.invincible = true;
+            if (rainbow)
+            {
+                PlayerColor.rainbow = true;
+                Barrier.SetActive(true);
+            }
+        }
+    }
     public IEnumerator StunPlayer(float xLaunch, float yLaunch, int timer, int directionx, int directiony)
     {
         if (currentState == DashingState)
