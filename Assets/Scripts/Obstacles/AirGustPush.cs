@@ -24,6 +24,39 @@ public class AirGustPush : MonoBehaviour
             if (enemyGroundCheck != null && !enemyGroundCheck._IsGrounded)
             {
                 other.gameObject.GetComponent<ForceManager>().AddForce(0f, GustStrength * (Time.timeScale == 1 ? 1 : 0), other);
+                switch(other.gameObject.name)
+                {
+                    case("Slime"):
+                        SlimeStateManager SlimeStateManagerRef;
+                        SlimeStateManagerRef = other.gameObject.GetComponent<SlimeStateManager>();
+                        SlimeStateManagerRef.floating = true;
+                        return;
+                }
+            }
+            else
+            {
+                switch(other.gameObject.name)
+                {
+                    case("Slime"):
+                        SlimeStateManager SlimeStateManagerRef;
+                        SlimeStateManagerRef = other.gameObject.GetComponent<SlimeStateManager>();
+                        SlimeStateManagerRef.floating = false;
+                        return;
+                }
+            }
+        }
+    }
+    public void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("Enemy"))
+        {
+            switch(other.gameObject.name)
+            {
+                case("Slime"):
+                    SlimeStateManager SlimeStateManagerRef;
+                    SlimeStateManagerRef = other.gameObject.GetComponent<SlimeStateManager>();
+                    SlimeStateManagerRef.floating = false;
+                    return;
             }
         }
     }

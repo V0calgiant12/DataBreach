@@ -1,4 +1,6 @@
 using System.Collections;
+using System.Threading;
+using Unity.Burst.CompilerServices;
 using UnityEngine;
 
 public class SlimeStateManager : EnemyAbstract
@@ -14,6 +16,7 @@ public class SlimeStateManager : EnemyAbstract
 
     [Header("Detection")]
     public LayerMask groundLayer;
+    public bool floating;
 
     [Header("Variables")]
     public bool slimeLeftOrRight;
@@ -68,15 +71,26 @@ public class SlimeStateManager : EnemyAbstract
     }
     private IEnumerator SlimeUpdate()
     {
-        int elapsed = 0;
-        int timer = Random.Range(90,120);
+        float elapsed = 0;
+        float timer = Random.Range(1.5f,2.0f);
         while(elapsed < timer)
         {
-            elapsed += Time.timeScale == 1 ? 1:0;
+            elapsed += Time.deltaTime;
+            if (floating)
+            {
+                elapsed = timer;
+            }
             yield return null;
         }
-        yield return new WaitUntil(() => currentState == State.Chase && groundCheck._IsGrounded);
-        StartCoroutine(JumpTowardsPlayer());
+        yield return new WaitUntil(() => currentState == State.Chase && (groundCheck._IsGrounded||floating));
+        if (floating)
+        {
+            StartCoroutine(FloatTowardsPlayer());
+        }
+        else
+        {
+            StartCoroutine(JumpTowardsPlayer());
+        }
     }
 
     private IEnumerator JumpTowardsPlayer()
@@ -85,10 +99,10 @@ public class SlimeStateManager : EnemyAbstract
         slimeLeftOrRight = (player.position.x > transform.position.x) ? true : false;
         // if slimeLeftOrRight is true, then it's facing right, otherwise it's facing left
         anim.SetInteger("attackPhase",1);
-        int elapsed = 0;
-        while(elapsed < 45)
+        float elapsed = 0;
+        while(elapsed < 0.75f)
         {
-            elapsed += Time.timeScale == 1 ? 1 : 0;
+            elapsed += Time.deltaTime;
             yield return null;
         }
         yield return new WaitUntil(() => groundCheck._IsGrounded);
@@ -100,12 +114,36 @@ public class SlimeStateManager : EnemyAbstract
         // Apply a diagonal "Hop" force
         slimeRb.AddForce(new Vector2((slimeLeftOrRight?1:-1) * forwardForce * waterSpeedMulti, jumpForce * waterJumpMulti), ForceMode2D.Impulse);
         elapsed = 0;
-        while(elapsed < 5)
+        while(elapsed < 0.1)
         {
-            elapsed += Time.timeScale == 1 ? 1 : 0;
+            elapsed += Time.deltaTime;
             yield return null;
         }
-        yield return new WaitUntil(() => groundCheck._IsGrounded);
+        yield return new WaitUntil(() => groundCheck._IsGrounded||floating);
+        anim.SetInteger("attackPhase",0);
+        StartCoroutine(SlimeUpdate());
+    }
+    private IEnumerator FloatTowardsPlayer()
+    {
+        anim.SetInteger("attackPhase",3);
+        float elapsed = 0;
+        while (elapsed < 0.2f)
+        {
+            slimeLeftOrRight = (player.position.x > transform.position.x) ? true : false;
+            slimeRb.AddForce(new Vector2((slimeLeftOrRight?1:-1) * forwardForce * waterSpeedMulti,0), ForceMode2D.Force);
+            if(Mathf.Abs(slimeRb.linearVelocityX) > 5f)
+            {
+                slimeRb.linearVelocityX = (slimeLeftOrRight?1:-1) * 5f;
+            }
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+        yield return new WaitUntil(() => groundCheck._IsGrounded||floating);
+        if (floating)
+        {
+            StartCoroutine(FloatTowardsPlayer());
+            yield break;
+        }
         anim.SetInteger("attackPhase",0);
         StartCoroutine(SlimeUpdate());
     }
@@ -113,13 +151,13 @@ public class SlimeStateManager : EnemyAbstract
     {
         anim.SetInteger("attackPhase",2);
         anim.SetTrigger("restartAnimation");
-        int elapsed = 0;
-        while(elapsed < 5)
+        float elapsed = 0;
+        while(elapsed < 0.08)
         {
             elapsed += Time.timeScale == 1 ? 1 : 0;
             yield return null;
         }
-        yield return new WaitUntil(() => groundCheck._IsGrounded);
+        yield return new WaitUntil(() => groundCheck._IsGrounded||floating);
         anim.SetInteger("attackPhase",0);
     }
 }

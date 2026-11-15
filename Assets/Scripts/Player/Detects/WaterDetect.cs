@@ -6,13 +6,17 @@ public class WaterDetect : MonoBehaviour
     [SerializeField] private EffectSound audioSource;
     [SerializeField] private AudioClip waterLand;
     [SerializeField] private AudioClip waterJump;
-    public Rigidbody2D rb;
-    public float baseGravity;
+    private Rigidbody2D rb;
+    private float baseGravity;
+    private float baseLinearDamp;
+    private float baseAngularDamp;
     
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         baseGravity = rb.gravityScale;
+        baseLinearDamp = rb.linearDamping;
+        baseAngularDamp = rb.angularDamping;
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -23,7 +27,7 @@ public class WaterDetect : MonoBehaviour
         }
         if(other.gameObject.CompareTag("Water") && gameObject.CompareTag("Enemy"))
         {
-            audioSource.PlaySound(waterLand,1f,Random.Range(0.8f,1.2f),1,1,transform.position);
+            audioSource.PlaySound(waterLand,0.8f,Random.Range(0.8f,1.2f),1,1,transform.position);
         }
     }
 
@@ -32,26 +36,32 @@ public class WaterDetect : MonoBehaviour
         
         if(other.gameObject.CompareTag("Water") && gameObject.CompareTag("Player"))
         {
-            rb.gravityScale = baseGravity/1.5f;
-            PlayerStateManager.Instance.playerData.waterSpeedMulti = 0.5f;
-            //PlayerStateManager.Instance.playerData.waterJumpMulti = 0.6f;
+            rb.gravityScale = baseGravity/2f;
+            rb.linearDamping = 2f;
+            rb.angularDamping = 2f;
+            PlayerStateManager.Instance.playerData.waterSpeedMulti = 0.25f;
+            PlayerStateManager.Instance.playerData.waterJumpMulti = 1f;
         }
         if(other.gameObject.CompareTag("Water") && gameObject.CompareTag("Enemy"))
         {
-            rb.gravityScale = baseGravity/1.5f;
+            rb.gravityScale = baseGravity/2f;
+            rb.linearDamping = 2f;
+            rb.angularDamping = 2f;
             switch(gameObject.name)
             {
                 case("Slime"):
                     SlimeStateManager SlimeStateManagerRef;
                     SlimeStateManagerRef = gameObject.GetComponent<SlimeStateManager>();
-                    SlimeStateManagerRef.waterSpeedMulti = 0.6f;
-                    SlimeStateManagerRef.waterJumpMulti = 0.6f;
+                    SlimeStateManagerRef.waterSpeedMulti = 2f;
+                    SlimeStateManagerRef.waterJumpMulti = 1f;
+                    SlimeStateManagerRef.floating = true;
+                    gameObject.GetComponent<ForceManager>().AddForce(0f, 1.5f * (Time.timeScale == 1 ? 1 : 0), other);
                     break;
                 case("Goblin"):
                     GoblinStateManager goblinStateManager;
                     goblinStateManager = gameObject.GetComponent<GoblinStateManager>();
-                    goblinStateManager.waterSpeedMulti = 0.7f;
-                    goblinStateManager.waterJumpMulti = 0.75f;
+                    goblinStateManager.waterSpeedMulti = 0.5f;
+                    goblinStateManager.waterJumpMulti = 1f;
                     break;
             }
         }
@@ -61,6 +71,8 @@ public class WaterDetect : MonoBehaviour
         if(other.gameObject.CompareTag("Water") && gameObject.CompareTag("Player"))
         {
             rb.gravityScale = baseGravity;
+            rb.linearDamping = baseLinearDamp;
+            rb.angularDamping = baseAngularDamp;
             audioSource.PlaySound(waterJump,1f,Random.Range(0.8f,1.2f),0,1,transform.position);
             PlayerStateManager.Instance.playerData.waterSpeedMulti = 1f;
             PlayerStateManager.Instance.playerData.waterJumpMulti = 1f;
@@ -69,7 +81,9 @@ public class WaterDetect : MonoBehaviour
         if(other.gameObject.CompareTag("Water") && gameObject.CompareTag("Enemy"))
         {
             rb.gravityScale = baseGravity;
-            audioSource.PlaySound(waterJump,1f,Random.Range(0.8f,1.2f),1,1,transform.position);
+            rb.linearDamping = baseLinearDamp;
+            rb.angularDamping = baseAngularDamp;
+            audioSource.PlaySound(waterJump,0.5f,Random.Range(0.8f,1.2f),1,1,transform.position);
             switch(gameObject.name)
             {
                 case("Slime"):
@@ -77,13 +91,14 @@ public class WaterDetect : MonoBehaviour
                     SlimeStateManagerRef = gameObject.GetComponent<SlimeStateManager>();
                     SlimeStateManagerRef.waterSpeedMulti = 1f;
                     SlimeStateManagerRef.waterJumpMulti = 1f;
-                    break;
+                    SlimeStateManagerRef.floating = false;
+                    return;
                 case("Goblin"):
                     GoblinStateManager goblinStateManager;
                     goblinStateManager = gameObject.GetComponent<GoblinStateManager>();
                     goblinStateManager.waterSpeedMulti = 1f;
                     goblinStateManager.waterJumpMulti = 1f;
-                    break;
+                    return;
             }
         }
     }

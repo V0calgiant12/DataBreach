@@ -621,6 +621,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5504170821017973638}
   - component: {fileID: 8251869522763567193}
+  - component: {fileID: 2346355680515862509}
   - component: {fileID: 935464401651345776}
   m_Layer: 7
   m_Name: GroundCheck
@@ -690,6 +691,33 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.9, y: 0.2}
   m_EdgeRadius: 0
+--- !u!50 &2346355680515862509
+Rigidbody2D:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5725915929612139358}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 1
+  m_Constraints: 4
 --- !u!114 &935464401651345776
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -819,7 +847,7 @@ Rigidbody2D:
     m_Bits: 64
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 1
+  m_CollisionDetection: 0
   m_Constraints: 4
 --- !u!114 &3052226611263945404
 MonoBehaviour:
@@ -841,6 +869,7 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 0
+  floating: 0
   slimeLeftOrRight: 0
   lastGrounded: 1
   groundCheck: {fileID: 935464401651345776}
