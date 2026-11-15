@@ -10,6 +10,7 @@ public class VideoSettingsController : MonoBehaviour
     public int _Fullscreen;
     public int _Resolution;
     public int _Particles;
+    public int _WaterQuality;
     public int _LightQuality;
     public bool _Bloom;
     public bool _ChromaticAberration;
@@ -115,6 +116,9 @@ public class VideoSettingsController : MonoBehaviour
                 break;
             case(4):
                 _Particles = data.dropdown.value;
+                break;
+            case(5):
+                _WaterQuality = data.dropdown.value;
                 break;
         }
     }

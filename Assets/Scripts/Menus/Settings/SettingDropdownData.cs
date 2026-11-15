@@ -25,6 +25,9 @@ public class SettingDropdownData : MonoBehaviour
             case (4):
                 dropdown.value = SettingsData.Instance._Particles;
                 break;
+            case (5):
+                dropdown.value = SettingsData.Instance._WaterQuality;
+                break;
         }
     }
 }
