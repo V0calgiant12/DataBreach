@@ -35,7 +35,7 @@ public class GoblinChasing : GoblinAbstract
         // Walk forward (direction dependant)
         if(Mathf.Abs(PlayerStateManager.Instance.transform.position.x - goblin.transform.position.x) > 0.5)
         {
-            goblin.goblinRb.linearVelocity = new Vector2(direction * goblin.moveSpeed * goblin.mudSpeedMulti, goblin.goblinRb.linearVelocity.y);
+            goblin.goblinRb.linearVelocity = new Vector2(direction * goblin.moveSpeed * goblin.waterSpeedMulti, goblin.goblinRb.linearVelocity.y);
         }
         if (!goblin.aggro)
         {

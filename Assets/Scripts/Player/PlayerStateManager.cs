@@ -57,7 +57,7 @@ public class PlayerStateManager : MonoBehaviour
     public AudioClip _PlayerDeath;
     public AudioClip _PlayerAttack;
     public AudioClip _PlayerSpinAttack;
-    public AudioClip[] _MudWalk;
+    public AudioClip[] _WaterWalk;
     public AudioClip[] _WoodWalk;
     public AudioClip _WoodJump;
     public AudioClip _WoodLand;
@@ -404,7 +404,7 @@ public class PlayerStateManager : MonoBehaviour
     {
         int elapsed = 0;
         playerData.PlayerRb.linearVelocityX = 25 * ((playerData.PlayerRb.linearVelocityX > 0) ? 1 : -1);
-        playerData.iFrames = Mathf.Abs(Mathf.FloorToInt(20*playerData.mudSpeedMulti)); // t=d/r, t=velocity/0.8f since velocity is multiplied by 0.8f every frame
+        playerData.iFrames = Mathf.Abs(Mathf.FloorToInt(20*playerData.waterSpeedMulti)); // t=d/r, t=velocity/0.8f since velocity is multiplied by 0.8f every frame
         while ((playerData.leftOrRight ? playerData.PlayerRb.linearVelocityX > 1.25f:playerData.PlayerRb.linearVelocityX < -1.25f)  || elapsed > 120)
         {
             elapsed += Time.timeScale == 1 ? 1 : 0;

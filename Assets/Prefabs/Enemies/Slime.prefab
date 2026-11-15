@@ -586,6 +586,7 @@ MonoBehaviour:
   hitSound: {fileID: 8300000, guid: 807bd5152a662ed4a9241939b4fef32d, type: 3}
   deathSound: {fileID: 8300000, guid: 0709a445dfc22cb4d8de281c203077b7, type: 3}
   volume: 1
+  pitchVariance: {x: 1, y: 1}
   health: 3
   knockbackReduction: {x: 1, y: 1}
   knockbackImmune: 0
@@ -834,9 +835,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SlimeStateManager
   currentState: 0
   jumpForce: 16
-  mudJumpMulti: 1
+  waterJumpMulti: 1
   forwardForce: 4
-  mudSpeedMulti: 1
+  waterSpeedMulti: 1
   groundLayer:
     serializedVersion: 2
     m_Bits: 0
@@ -875,9 +876,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 510388b6cc4a4ba4ba3cd773aa053522, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MudDetect
-  audioSource: {fileID: 0}
-  mudLand: {fileID: 8300000, guid: 4a21d881f0d8ccc4d9996c9f1bc7b306, type: 3}
-  mudJump: {fileID: 8300000, guid: c2ee8e27bf31df4468ac9e25fb811960, type: 3}
+  audioSource: {fileID: 4140950964649096466}
+  waterLand: {fileID: 8300000, guid: 4a21d881f0d8ccc4d9996c9f1bc7b306, type: 3}
+  waterJump: {fileID: 8300000, guid: c2ee8e27bf31df4468ac9e25fb811960, type: 3}
 --- !u!114 &147355537875966479
 MonoBehaviour:
   m_ObjectHideFlags: 0

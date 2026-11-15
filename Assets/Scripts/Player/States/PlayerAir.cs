@@ -235,7 +235,7 @@ public class PlayerAir : PlayerAbstract
         {
             player.playerData.anim.SetBool(player.falling, false);
             player.playerData.anim.SetBool(player.jumping, true);
-            player.playerData.PlayerRb.linearVelocity = new Vector2(player.playerData.PlayerRb.linearVelocityX, jumpStrength * PlayerStateManager.Instance.playerData.mudJumpMulti);
+            player.playerData.PlayerRb.linearVelocity = new Vector2(player.playerData.PlayerRb.linearVelocityX, jumpStrength * PlayerStateManager.Instance.playerData.waterJumpMulti);
             player.playerData.jumpBufferCounter = 0;
             player.playerData.coyoteTimeCounter = 0;
             changeYStartNextFall = true;

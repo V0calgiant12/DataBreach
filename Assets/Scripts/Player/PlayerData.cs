@@ -21,8 +21,8 @@ public class PlayerData : ScriptableObject
     public float basePlayerSpeed;
     public float playerSpeed;
     public float generalSpeedMulti = 1;
-    public float mudSpeedMulti = 1;
-    public float mudJumpMulti = 1;
+    public float waterSpeedMulti = 1;
+    public float waterJumpMulti = 1;
     public bool sprinting = false;
     public bool crouching = false;
     public bool doubleJumpAvailable = true;
@@ -37,7 +37,7 @@ public class PlayerData : ScriptableObject
     public bool pickUpHeart = false;
     public bool playerDead = false;
     public bool resetVelocity = false;
-    public bool inMud = false;
+    public bool inLiquid = false;
     public bool hasHeartCoin = false;
     public bool heartCoinSaved = false;
     public bool invincible = false;

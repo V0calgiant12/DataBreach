@@ -229,12 +229,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyHit
   ParentObject: {fileID: 6513856301564140633}
   rb: {fileID: 3763291612955310094}
-  particlePrefab: {fileID: 0}
   flashEffect: {fileID: 6792435214779163728}
+  particleSpawner: {fileID: 0}
+  particleId: 
   audioSource: {fileID: 1003367167366328723}
   hitSound: {fileID: 8300000, guid: 5bc76f111b119fe4b99297778fbda7b7, type: 3}
   deathSound: {fileID: 8300000, guid: 6c93768c84f0713469e37953ab5ffa69, type: 3}
   volume: 1
+  pitchVariance: {x: 1, y: 1}
   health: 5
   knockbackReduction: {x: 2, y: 1.5}
   knockbackImmune: 0
@@ -1403,11 +1405,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GoblinStateManager
   moveSpeed: 5
-  mudSpeedMulti: 1
+  waterSpeedMulti: 1
   patrolRange: 6
   chaseRange: 10
   jumpForce: 16
-  mudJumpMulti: 1
+  waterJumpMulti: 1
   forwardForce: 2
   leftOrRight: 0
   touchingWall: 0
@@ -1442,9 +1444,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 510388b6cc4a4ba4ba3cd773aa053522, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MudDetect
-  audioSource: {fileID: 0}
-  mudLand: {fileID: 8300000, guid: 4a21d881f0d8ccc4d9996c9f1bc7b306, type: 3}
-  mudJump: {fileID: 8300000, guid: c2ee8e27bf31df4468ac9e25fb811960, type: 3}
+  audioSource: {fileID: 4607775361461878013}
+  waterLand: {fileID: 8300000, guid: 4a21d881f0d8ccc4d9996c9f1bc7b306, type: 3}
+  waterJump: {fileID: 8300000, guid: c2ee8e27bf31df4468ac9e25fb811960, type: 3}
 --- !u!95 &6203693190275269452
 Animator:
   serializedVersion: 7

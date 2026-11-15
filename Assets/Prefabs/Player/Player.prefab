@@ -2646,7 +2646,7 @@ MonoBehaviour:
   _PlayerDeath: {fileID: 8300000, guid: 976094d299c0b534e9bd1f2c10707c6e, type: 3}
   _PlayerAttack: {fileID: 8300000, guid: b935ba125fdf1f445b2c02af83e856da, type: 3}
   _PlayerSpinAttack: {fileID: 8300000, guid: 73d375999520d3f45b5799d26eeeae32, type: 3}
-  _MudWalk:
+  _WaterWalk:
   - {fileID: 8300000, guid: ffbdf88c1319f6443bb593a1241a4976, type: 3}
   - {fileID: 8300000, guid: 3ad33c511b933fc449e40a6ae9da990a, type: 3}
   - {fileID: 8300000, guid: cedd2dca8ac0675458153c8d8eb7b84c, type: 3}
@@ -2686,8 +2686,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MudDetect
   audioSource: {fileID: 5864785075377450772}
-  mudLand: {fileID: 8300000, guid: 4a21d881f0d8ccc4d9996c9f1bc7b306, type: 3}
-  mudJump: {fileID: 8300000, guid: c2ee8e27bf31df4468ac9e25fb811960, type: 3}
+  waterLand: {fileID: 8300000, guid: 4a21d881f0d8ccc4d9996c9f1bc7b306, type: 3}
+  waterJump: {fileID: 8300000, guid: c2ee8e27bf31df4468ac9e25fb811960, type: 3}
 --- !u!114 &5864785075377450772
 MonoBehaviour:
   m_ObjectHideFlags: 0

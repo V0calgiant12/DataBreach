@@ -8,9 +8,9 @@ public class SlimeStateManager : EnemyAbstract
 
     [Header("Jump Settings")]
     public float jumpForce = 5f;      // Upward power
-    public float mudJumpMulti = 1f;
+    public float waterJumpMulti = 1f;
     public float forwardForce = 1f;   // Horizontal power toward player
-    public float mudSpeedMulti = 1f;
+    public float waterSpeedMulti = 1f;
 
     [Header("Detection")]
     public LayerMask groundLayer;
@@ -98,7 +98,7 @@ public class SlimeStateManager : EnemyAbstract
         audioSource.PlaySound(_SlimeJump,0.8f,Random.Range(0.7f,1.3f),1,1,transform.position);
 
         // Apply a diagonal "Hop" force
-        slimeRb.AddForce(new Vector2((slimeLeftOrRight?1:-1) * forwardForce * mudSpeedMulti, jumpForce * mudJumpMulti), ForceMode2D.Impulse);
+        slimeRb.AddForce(new Vector2((slimeLeftOrRight?1:-1) * forwardForce * waterSpeedMulti, jumpForce * waterJumpMulti), ForceMode2D.Impulse);
         elapsed = 0;
         while(elapsed < 5)
         {

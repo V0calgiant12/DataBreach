@@ -19,11 +19,11 @@ public class GoblinStateManager : EnemyAbstract
 
     [Header("Movement & Gravity")]
     public float moveSpeed = 3f;
-    public float mudSpeedMulti = 1f;
+    public float waterSpeedMulti = 1f;
     public float patrolRange = 5f;
     public float chaseRange = 7f;
     public float jumpForce = 16f;
-    public float mudJumpMulti = 1f;
+    public float waterJumpMulti = 1f;
     public float forwardForce = 2f;
     public bool leftOrRight;
     public bool touchingWall = false;
@@ -135,7 +135,7 @@ public class GoblinStateManager : EnemyAbstract
         {
             leftOrRight = (PlayerStateManager.Instance.transform.position.x > transform.position.x) ? true : false;
 
-            goblinRb.linearVelocity = new Vector2((leftOrRight == true ? -1 : 1) * forwardForce, jumpForce * mudJumpMulti);
+            goblinRb.linearVelocity = new Vector2((leftOrRight == true ? -1 : 1) * forwardForce, jumpForce * waterJumpMulti);
             int elapsed = 0;
             anim.SetBool("jumping", true);
             while(elapsed != 5)

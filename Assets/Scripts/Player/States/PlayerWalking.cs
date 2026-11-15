@@ -142,7 +142,7 @@ public class PlayerWalking : PlayerAbstract
         // Audio
         if(audioTimer == 11)
         {
-            if(!player.playerData.inMud)
+            if(!player.playerData.inLiquid)
             {
                 if(GroundCheck.Instance._IsStone)
                 {
@@ -159,7 +159,7 @@ public class PlayerWalking : PlayerAbstract
             }
             else
             {
-                player.audioSource.PlaySound(player._MudWalk[0],1f,Random.Range(0.8f,1.2f),0,1,player.transform.position);
+                player.audioSource.PlaySound(player._WaterWalk[0],1f,Random.Range(0.8f,1.2f),0,1,player.transform.position);
             }
             audioTimer = 0;
         }
@@ -175,7 +175,7 @@ public class PlayerWalking : PlayerAbstract
         {
             //Debug.Log("jump from walking");
             player.playerData.anim.SetBool(player.walking, false);
-            player.playerData.PlayerRb.linearVelocity = new Vector2(player.playerData.PlayerRb.linearVelocityX, jumpStrength * PlayerStateManager.Instance.playerData.mudJumpMulti);
+            player.playerData.PlayerRb.linearVelocity = new Vector2(player.playerData.PlayerRb.linearVelocityX, jumpStrength * PlayerStateManager.Instance.playerData.waterJumpMulti);
             player.playerData.jumpBufferCounter = 0;
             player.playerData.coyoteTimeCounter = 0;
             player.audioSource.PlaySound(player._NormalJump,1,Random.Range(0.7f,1.4f),0,1,player.transform.position);
