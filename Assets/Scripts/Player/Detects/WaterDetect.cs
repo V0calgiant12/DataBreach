@@ -36,35 +36,40 @@ public class WaterDetect : MonoBehaviour
     private void OnTriggerStay2D(Collider2D other)
     {
         
-        if(other.gameObject.CompareTag("Water") && gameObject.CompareTag("Player"))
+        if(other.gameObject.CompareTag("Water"))
         {
             rb.gravityScale = baseGravity/2f;
             rb.linearDamping = 2f;
             rb.angularDamping = 2f;
-            PlayerStateManager.Instance.playerData.waterSpeedMulti = 0.25f;
-            PlayerStateManager.Instance.playerData.waterJumpMulti = 1f;
-        }
-        if(other.gameObject.CompareTag("Water") && gameObject.CompareTag("Enemy"))
-        {
-            rb.gravityScale = baseGravity/2f;
-            rb.linearDamping = 2f;
-            rb.angularDamping = 2f;
-            switch(gameObject.name)
+            // Limit decent in water
+            if(rb.linearVelocityY < -5)
             {
-                case("Slime"):
-                    SlimeStateManager SlimeStateManagerRef;
-                    SlimeStateManagerRef = gameObject.GetComponent<SlimeStateManager>();
-                    SlimeStateManagerRef.waterSpeedMulti = 2f;
-                    SlimeStateManagerRef.waterJumpMulti = 1f;
-                    SlimeStateManagerRef.floating = true;
-                    gameObject.GetComponent<ForceManager>().AddForce(0f, 1.5f * (Time.timeScale == 1 ? 1 : 0), other);
-                    break;
-                case("Goblin"):
-                    GoblinStateManager goblinStateManager;
-                    goblinStateManager = gameObject.GetComponent<GoblinStateManager>();
-                    goblinStateManager.waterSpeedMulti = 0.5f;
-                    goblinStateManager.waterJumpMulti = 1f;
-                    break;
+                rb.linearVelocityY = -5f;
+            }
+            if (gameObject.CompareTag("Player"))
+            {
+                PlayerStateManager.Instance.playerData.waterSpeedMulti = 0.25f;
+                PlayerStateManager.Instance.playerData.waterJumpMulti = 1f;
+            }
+            if (gameObject.CompareTag("Enemy"))
+            {
+                switch(gameObject.name)
+                {
+                    case("Slime"):
+                        SlimeStateManager SlimeStateManagerRef;
+                        SlimeStateManagerRef = gameObject.GetComponent<SlimeStateManager>();
+                        SlimeStateManagerRef.waterSpeedMulti = 2f;
+                        SlimeStateManagerRef.waterJumpMulti = 1f;
+                        SlimeStateManagerRef.floating = true;
+                        gameObject.GetComponent<ForceManager>().AddForce(0f, 1.5f * (Time.timeScale == 1 ? 1 : 0), other);
+                        break;
+                    case("Goblin"):
+                        GoblinStateManager goblinStateManager;
+                        goblinStateManager = gameObject.GetComponent<GoblinStateManager>();
+                        goblinStateManager.waterSpeedMulti = 0.5f;
+                        goblinStateManager.waterJumpMulti = 1f;
+                        break;
+                }
             }
         }
     }
@@ -76,33 +81,32 @@ public class WaterDetect : MonoBehaviour
             rb.gravityScale = baseGravity;
             rb.linearDamping = baseLinearDamp;
             rb.angularDamping = baseAngularDamp;
-            audioSource.PlaySound(waterJump,1f,Random.Range(0.8f,1.2f),0,1,transform.position);
-            PlayerStateManager.Instance.playerData.waterSpeedMulti = 1f;
-            PlayerStateManager.Instance.playerData.waterJumpMulti = 1f;
-            gameObject.GetComponent<PlayerStateManager>().playerData.inLiquid = false;
-        }
-        if(other.gameObject.CompareTag("Water") && gameObject.CompareTag("Enemy"))
-        {
-            SpawnSplashParticles(other.gameObject);
-            rb.gravityScale = baseGravity;
-            rb.linearDamping = baseLinearDamp;
-            rb.angularDamping = baseAngularDamp;
-            audioSource.PlaySound(waterJump,0.5f,Random.Range(0.8f,1.2f),1,1,transform.position);
-            switch(gameObject.name)
+            if (gameObject.CompareTag("Player"))
             {
-                case("Slime"):
-                    SlimeStateManager SlimeStateManagerRef;
-                    SlimeStateManagerRef = gameObject.GetComponent<SlimeStateManager>();
-                    SlimeStateManagerRef.waterSpeedMulti = 1f;
-                    SlimeStateManagerRef.waterJumpMulti = 1f;
-                    SlimeStateManagerRef.floating = false;
-                    return;
-                case("Goblin"):
-                    GoblinStateManager goblinStateManager;
-                    goblinStateManager = gameObject.GetComponent<GoblinStateManager>();
-                    goblinStateManager.waterSpeedMulti = 1f;
-                    goblinStateManager.waterJumpMulti = 1f;
-                    return;
+                audioSource.PlaySound(waterJump,1f,Random.Range(0.8f,1.2f),0,1,transform.position);
+                PlayerStateManager.Instance.playerData.waterSpeedMulti = 1f;
+                PlayerStateManager.Instance.playerData.waterJumpMulti = 1f;
+                gameObject.GetComponent<PlayerStateManager>().playerData.inLiquid = false;
+            }
+            if (gameObject.CompareTag("Enemy"))
+            {
+                audioSource.PlaySound(waterJump,0.5f,Random.Range(0.8f,1.2f),1,1,transform.position);
+                switch(gameObject.name)
+                {
+                    case("Slime"):
+                        SlimeStateManager SlimeStateManagerRef;
+                        SlimeStateManagerRef = gameObject.GetComponent<SlimeStateManager>();
+                        SlimeStateManagerRef.waterSpeedMulti = 1f;
+                        SlimeStateManagerRef.waterJumpMulti = 1f;
+                        SlimeStateManagerRef.floating = false;
+                        return;
+                    case("Goblin"):
+                        GoblinStateManager goblinStateManager;
+                        goblinStateManager = gameObject.GetComponent<GoblinStateManager>();
+                        goblinStateManager.waterSpeedMulti = 1f;
+                        goblinStateManager.waterJumpMulti = 1f;
+                        return;
+                }
             }
         }
     }
