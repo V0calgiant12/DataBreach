@@ -75,7 +75,7 @@ public class WaterDetect : MonoBehaviour
     }
     private void OnTriggerExit2D(Collider2D other)
     {
-        if(other.gameObject.CompareTag("Water") && gameObject.CompareTag("Player"))
+        if(other.gameObject.CompareTag("Water"))
         {
             SpawnSplashParticles(other.gameObject);
             rb.gravityScale = baseGravity;
@@ -90,6 +90,7 @@ public class WaterDetect : MonoBehaviour
             }
             if (gameObject.CompareTag("Enemy"))
             {
+                Debug.Log("Is enemy");
                 audioSource.PlaySound(waterJump,0.5f,Random.Range(0.8f,1.2f),1,1,transform.position);
                 switch(gameObject.name)
                 {
