@@ -28,6 +28,7 @@ public class WaterDetect : MonoBehaviour
         }
         if(other.gameObject.CompareTag("Water") && gameObject.CompareTag("Enemy"))
         {
+            SpawnSplashParticles(other.gameObject);
             audioSource.PlaySound(waterLand,0.8f,Random.Range(0.8f,1.2f),1,1,transform.position);
         }
     }
@@ -71,6 +72,7 @@ public class WaterDetect : MonoBehaviour
     {
         if(other.gameObject.CompareTag("Water") && gameObject.CompareTag("Player"))
         {
+            SpawnSplashParticles(other.gameObject);
             rb.gravityScale = baseGravity;
             rb.linearDamping = baseLinearDamp;
             rb.angularDamping = baseAngularDamp;
@@ -81,6 +83,7 @@ public class WaterDetect : MonoBehaviour
         }
         if(other.gameObject.CompareTag("Water") && gameObject.CompareTag("Enemy"))
         {
+            SpawnSplashParticles(other.gameObject);
             rb.gravityScale = baseGravity;
             rb.linearDamping = baseLinearDamp;
             rb.angularDamping = baseAngularDamp;
@@ -109,5 +112,6 @@ public class WaterDetect : MonoBehaviour
         RaycastHit2D down = Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y + 0.5f),Vector2.down,2.5f,LayerMask.GetMask("Water"));
         Debug.DrawRay(new Vector2(transform.position.x, transform.position.y + 0.5f),Vector2.down*2.5f,Color.skyBlue);
         ps.SpawnParticle("WaterSplash",new Vector2(transform.position.x, Mathf.Round(down.point.y)));
+        ps.SpawnParticle("BigSplash",new Vector2(transform.position.x, Mathf.Round(down.point.y)+0.6f));
     }
 }
