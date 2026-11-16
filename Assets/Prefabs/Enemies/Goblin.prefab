@@ -1338,7 +1338,7 @@ Rigidbody2D:
   m_Material: {fileID: 6200000, guid: 2100a2afc1a1b2a4dbd7e7ae29213083, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 8
+    m_Bits: 24
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 64
@@ -1359,7 +1359,7 @@ BoxCollider2D:
   m_Material: {fileID: 6200000, guid: d887694030d038c47b2fee3c7d0dbee7, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 8
+    m_Bits: 24
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 192
@@ -1445,8 +1445,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MudDetect
   audioSource: {fileID: 4607775361461878013}
-  waterLand: {fileID: 8300000, guid: 4a21d881f0d8ccc4d9996c9f1bc7b306, type: 3}
-  waterJump: {fileID: 8300000, guid: c2ee8e27bf31df4468ac9e25fb811960, type: 3}
+  waterLand: {fileID: 8300000, guid: 4715e8e5e7a201c40aac4bc37dd87cd1, type: 3}
+  waterJump: {fileID: 8300000, guid: 9581ec88df273024f83abe1018d84d26, type: 3}
 --- !u!95 &6203693190275269452
 Animator:
   serializedVersion: 7

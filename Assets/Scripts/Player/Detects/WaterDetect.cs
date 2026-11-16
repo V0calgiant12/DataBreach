@@ -22,6 +22,7 @@ public class WaterDetect : MonoBehaviour
     {
         if(other.gameObject.CompareTag("Water") && gameObject.CompareTag("Player"))
         {
+            SpawnSplashParticles(other.gameObject);
             audioSource.PlaySound(waterLand,1f,Random.Range(0.8f,1.2f),0,1,transform.position);
             gameObject.GetComponent<PlayerStateManager>().playerData.inLiquid = true;
         }
@@ -101,5 +102,12 @@ public class WaterDetect : MonoBehaviour
                     return;
             }
         }
+    }
+    private void SpawnSplashParticles(GameObject other)
+    {
+        ParticleSpawner ps = other.GetComponent<ParticleSpawner>();
+        RaycastHit2D down = Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y + 0.5f),Vector2.down,2.5f,LayerMask.GetMask("Water"));
+        Debug.DrawRay(new Vector2(transform.position.x, transform.position.y + 0.5f),Vector2.down*2.5f,Color.skyBlue);
+        ps.SpawnParticle("WaterSplash",new Vector2(transform.position.x, Mathf.Round(down.point.y)));
     }
 }
