@@ -61,7 +61,7 @@ public class WaterDetect : MonoBehaviour
                         SlimeStateManagerRef.waterSpeedMulti = 2f;
                         SlimeStateManagerRef.waterJumpMulti = 1f;
                         SlimeStateManagerRef.floating = true;
-                        gameObject.GetComponent<ForceManager>().AddForce(0f, 1.5f * (Time.timeScale == 1 ? 1 : 0), other);
+                        gameObject.GetComponent<ForceManager>().AddForce(0f, 1f * (Time.timeScale == 1 ? 1 : 0), other);
                         break;
                     case("Goblin"):
                         GoblinStateManager goblinStateManager;
