@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class PlayerDashing : PlayerAbstract
 {
-    int dashTimer = 0;
+    float dashTimer = 0;
     float storedGrav;
     bool superJump = false;
     bool attacked = false;
@@ -18,7 +18,7 @@ public class PlayerDashing : PlayerAbstract
         player.playerData.playerSpeed = 12;
         player.playerData.basePlayerSpeed = 12;
         player.playerData.PlayerRb.gravityScale = 0;
-        dashTimer = 20;
+        dashTimer = 0.34f;
         player.playerData.resetVelocity = false;
         player.comingFromDash = true;
         player.playerData.shortJumping = false;
@@ -48,7 +48,7 @@ public class PlayerDashing : PlayerAbstract
     }
     private void DashUpdate(PlayerStateManager player)
     {
-        dashTimer -= Time.timeScale == 1 ? 1:0;
+        dashTimer -= Time.deltaTime;
         // End of Dash
         if(dashTimer <= 0 && !player.playerData.anim.GetBool(player.attacking))
         {
@@ -66,8 +66,8 @@ public class PlayerDashing : PlayerAbstract
             }
         }
 
-        // Switch to Super Jump if 5 or less frames in.
-        if(UserInput.Instance.MovementInput.y > 0.5f && dashTimer >= 12)
+        // Switch to Super Jump if 12 or less frames in.
+        if(UserInput.Instance.MovementInput.y > 0.5f && dashTimer >= 0.2f)
         {
             player.playerData.anim.SetBool(player.dashing,false);
             player.playerData.anim.SetBool(player.superJumping,true);
@@ -78,41 +78,30 @@ public class PlayerDashing : PlayerAbstract
         if(player.playerData.bufferedAtk > 0 && !player.playerData.anim.GetBool(player.attacking))
         {
             attacked = true;
-            player.playerData.iFrames = 5;
+            player.playerData.iFrames = 0.084f;
             player.Attack(PlayerStateManager.AttackType.dashAir,true);
         }
         if (player.playerData.anim.GetBool(player.attacking))
         {
             player.playerData.anim.SetBool(player.dashing,false);
             player.playerData.anim.SetBool(player.falling,true);
-            player.playerData.PlayerRb.linearVelocityX -= Time.timeScale == 1 ? 0.3f*(player.playerData.leftOrRight? 1 : -1):0;
-            player.playerData.PlayerRb.linearVelocityY -= Time.timeScale == 1 ? 0.4625f:0;
+            player.playerData.PlayerRb.linearVelocityX -= Time.deltaTime * 0.3f*(player.playerData.leftOrRight? 1 : -1) * 50;
+            player.playerData.PlayerRb.linearVelocityY -= Time.deltaTime * 0.4625f * 50;
         }
 
         // Early Cancel (from external factors)
         {
             // Hit a wall
-            if(player.playerData.ricochet > 0 && dashTimer < 15)
+            if(player.playerData.ricochet > 0 && dashTimer < 0.25)
             {
                 player.SwitchState(player.AirState);
                 //player.playerData.PlayerRb.linearVelocityX = player.playerData.playerSpeed ;
             }
             // Ground Check
-            if (GroundCheck.Instance._IsGrounded && dashTimer < 15)
+            if (GroundCheck.Instance._IsGrounded && dashTimer < 0.25)
             {
                 player.audioSource.PlaySound(player._NormalFall,1,Random.Range(0.7f,1.4f),0,1,player.transform.position);
-                if (GroundCheck.Instance._IsStone)
-                {
-                    player.audioSource.PlaySound(player._StoneFall,1,Random.Range(0.6f,1.3f),0,1,player.transform.position);
-                }
-                else if(GroundCheck.Instance._IsWood)
-                {
-                    player.audioSource.PlaySound(player._WoodLand,1,Random.Range(0.7f,1.4f),0,1,player.transform.position);
-                }
-                else
-                {
-                    player.audioSource.PlaySound(player._GrassFall,0.8f,Random.Range(0.8f,1.5f),0,1,player.transform.position);
-                }
+            player.audioSource.PlaySound(player._CurrentLand,player._CurrentVolume,Random.Range(player._CurrentPitch.x,player._CurrentPitch.y),0,1,player.transform.position);
                 if((player.playerData.anim.GetInteger(player.attackId) == 2 || player.playerData.anim.GetInteger(player.attackId) == 4) && player.playerData.anim.GetBool(player.attacking))
                 {
                     player.playerData.anim.SetBool(player.attacking, false);

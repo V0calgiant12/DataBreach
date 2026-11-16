@@ -11,8 +11,11 @@ public class EffectSound : MonoBehaviour
     }
     public void PlaySound(AudioClip audio, float volume, float pitch, float spatialBlend, float distanceModifier, Vector3 position)
     {
-        GameObject audioClone = Instantiate(prefab,position,transform.rotation);
-        audioClone.GetComponent<EffectAudioSource>().PlaySound(audio, volume, pitch, spatialBlend, distanceModifier);
+        if(audio != null)
+        {
+            GameObject audioClone = Instantiate(prefab,position,transform.rotation);
+            audioClone.GetComponent<EffectAudioSource>().PlaySound(audio, volume, pitch, spatialBlend, distanceModifier);
+        }
     }
     public void PlaySlimeJumpSound(AudioClip audio)
     {

@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using System;
 
 public class PlayerStateManager : MonoBehaviour
 {
@@ -23,7 +24,7 @@ public class PlayerStateManager : MonoBehaviour
     public Animator ScreenCanvas;
     public Material pixelationMat;
     public float storedXRicochet = 0;
-    public int dashAttackCd = 0;
+    public float dashAttackCd = 0;
     public bool isJumping;
     public bool comingFromDash = false;
     public bool forceSuperJump = false;
@@ -38,11 +39,15 @@ public class PlayerStateManager : MonoBehaviour
     public int sprinting = Animator.StringToHash("sprinting");
     public int walking = Animator.StringToHash("walking");
     public int crouching = Animator.StringToHash("crouching");
-    public int iFrames = Animator.StringToHash("iframes");
     public int dashing = Animator.StringToHash("dashing");
     public int superJumping = Animator.StringToHash("superJumping");
     public int currentlyFixed = Animator.StringToHash("currentlyFixed");
     [Header("Audio")]
+    public AudioClip[] _CurrentFootstep;
+    public AudioClip _CurrentJump;
+    public AudioClip _CurrentLand;
+    public Vector2 _CurrentPitch;
+    public float _CurrentVolume;
     public EffectSound audioSource;
     public AudioClip _GrassWalk;
     public AudioClip _GrassFall;
@@ -155,7 +160,7 @@ public class PlayerStateManager : MonoBehaviour
         if ((playerData.movementAllowed || playerData.playerDead) && currentState != InteractingState && Time.timeScale == 1)
         {
             currentState.UpdateState(this); // Update function for current active state.
-            playerData.interactingCooldown -= Time.timeScale == 1 ? 1 : 0;
+            playerData.interactingCooldown -= Time.deltaTime;
         }
         if (!playerData.playerDead && currentState != InteractingState && Time.timeScale == 1)
         {
@@ -169,13 +174,12 @@ public class PlayerStateManager : MonoBehaviour
         FindPlayerObject();
         playerSprite.transform.localScale = new Vector3(playerData.leftOrRight ? 1:-1,1,1);
         // Counter countdowns
-        dashAttackCd -= Time.timeScale == 1 ? 1 : 0;
-        playerData.jumpBufferCounter -= Time.timeScale == 1 ? 1 : 0;
-        playerData.coyoteTimeCounter -= Time.timeScale == 1 ? 1 : 0;
-        playerData.sprintBufferCounter -= Time.timeScale == 1 ? 1 : 0;
-        playerData.bufferedAtk -= Time.timeScale == 1 ? 1 : 0;
-        playerData.iFrames -= Time.timeScale == 1 ? 1 : 0;
-        playerData.anim.SetInteger(iFrames, playerData.iFrames);
+        dashAttackCd -= Time.deltaTime;
+        playerData.jumpBufferCounter -= Time.deltaTime;
+        playerData.coyoteTimeCounter -= Time.deltaTime;
+        playerData.sprintBufferCounter -= Time.deltaTime;
+        playerData.bufferedAtk -= Time.deltaTime;
+        playerData.iFrames -= Time.deltaTime;
 
         if(Input.GetKeyDown(KeyCode.P))
         {
@@ -187,6 +191,42 @@ public class PlayerStateManager : MonoBehaviour
             {
                 MakeInvincible(true, true);
             }
+        }
+        if (GroundCheck.Instance._IsStone)
+        {
+            Array.Resize(ref _CurrentFootstep,1);
+            _CurrentFootstep[0] = _StoneWalk;
+            _CurrentJump = _StoneJump;
+            _CurrentLand = _StoneFall;
+            _CurrentVolume = 1;
+            _CurrentPitch = new Vector2(0.6f, 1.3f);
+        }
+        else if (playerData.inLiquid)
+        {
+            Array.Resize(ref _CurrentFootstep,_WaterWalk.Length);
+            _CurrentFootstep = _WaterWalk;
+            _CurrentJump = null;
+            _CurrentLand = null;
+            _CurrentVolume = 1;
+            _CurrentPitch = new Vector2(0.8f, 1.2f);
+        }
+        else if(GroundCheck.Instance._IsWood)
+        {
+            Array.Resize(ref _CurrentFootstep,_WoodWalk.Length);
+            _CurrentFootstep = _WoodWalk;
+            _CurrentJump = _StoneJump;
+            _CurrentLand = _StoneFall;
+            _CurrentVolume = 1;
+            _CurrentPitch = new Vector2(0.7f, 1.4f);
+        }
+        else
+        {
+            Array.Resize(ref _CurrentFootstep,1);
+            _CurrentFootstep[0] = _GrassWalk;
+            _CurrentJump = _GrassJump;
+            _CurrentLand = _GrassFall;
+            _CurrentVolume = 0.8f;
+            _CurrentPitch = new Vector2(0.8f, 1.5f);
         }
 
         #if UNITY_EDITOR
@@ -211,7 +251,7 @@ public class PlayerStateManager : MonoBehaviour
         playerData.PlayerRb = gameObject.GetComponent<Rigidbody2D>();
         MainCamera = GameObject.Find("Main Camera");
     }
-    public void DamagePlayer(float xLaunch, float yLaunch, int timer, bool overrideIFrames, float damageSourceX, bool nonDirectional)
+    public void DamagePlayer(float xLaunch, float yLaunch, float timer, bool overrideIFrames, float damageSourceX, bool nonDirectional)
     {
         if ((playerData.iFrames < 0 || overrideIFrames) && !playerData.invincible)
         {
@@ -219,7 +259,7 @@ public class PlayerStateManager : MonoBehaviour
             playerData.anim.SetBool(hit, true);
             TriggerShake.Instance.BurstShake(3,2,false,0f);
             playerData.playerHealth = playerData.playerHealth - 1;
-            audioSource.PlaySound(_PlayerHit,1,Random.Range(0.6f,1.3f),0,1,transform.position);
+            audioSource.PlaySound(_PlayerHit,1,UnityEngine.Random.Range(0.6f,1.3f),0,1,transform.position);
             //Debug.Log(playerData.playerHealth);
             if (nonDirectional) // Non-Directional (based on player direction)
             {
@@ -229,7 +269,7 @@ public class PlayerStateManager : MonoBehaviour
             {
                 StartCoroutine(StunPlayer((xLaunch+0)*(transform.position.x <= damageSourceX ? -1 : 1), yLaunch+0,timer,transform.position.x <= damageSourceX ? -1 : 1,yLaunch<0 ? -1 : 1));
             }
-            playerData.iFrames = 120;
+            playerData.iFrames = 2;
             PlayerFlash(1,0);
             PlayerFlash(2,0);
         }
@@ -244,7 +284,7 @@ public class PlayerStateManager : MonoBehaviour
             if (handleSound)
             {
                 
-                audioSource.PlaySound(_PlayerAttack,1,Random.Range(0.6f,1.3f),0,1,transform.position);
+                audioSource.PlaySound(_PlayerAttack,1,UnityEngine.Random.Range(0.6f,1.3f),0,1,transform.position);
             }
             switch (attackType)
             {
@@ -346,7 +386,7 @@ public class PlayerStateManager : MonoBehaviour
             }
         }
     }
-    public IEnumerator StunPlayer(float xLaunch, float yLaunch, int timer, int directionx, int directiony)
+    public IEnumerator StunPlayer(float xLaunch, float yLaunch, float timer, int directionx, int directiony)
     {
         if (currentState == DashingState)
         {
@@ -355,7 +395,7 @@ public class PlayerStateManager : MonoBehaviour
         playerData.resetVelocity = false;
         playerData.movementAllowed = false;
         ricochetAvailable = true;
-        int elapsed = 0;
+        float elapsed = 0;
         float healthRatio = playerData.playerHealth * 1f/playerData.maxHealth;
         float m = 1.5f*(healthRatio*healthRatio)-2.75f*healthRatio+2;
         //Debug.Log(healthRatio + ", " + m  + ", " + playerData.knockbackReduction);
@@ -379,9 +419,9 @@ public class PlayerStateManager : MonoBehaviour
             playerData.PlayerRb.linearVelocityX = directionx * 20f;
         }
         // Loop while in the air.
-        while(GroundCheck.Instance._IsGrounded == false && timer > elapsed || elapsed < 15)
+        while(GroundCheck.Instance._IsGrounded == false && timer > elapsed || elapsed < 0.25)
         {
-            elapsed += Time.timeScale == 1 ? 1 : 0;
+            elapsed += Time.deltaTime;
             playerData.resetVelocity = false;
             if(playerData.ricochet > 0)
             {
@@ -402,25 +442,26 @@ public class PlayerStateManager : MonoBehaviour
     }
     public IEnumerator NoMovingWhileAttack()
     {
-        int elapsed = 0;
+        float elapsed = 0.001f;
         playerData.PlayerRb.linearVelocityX = 25 * ((playerData.PlayerRb.linearVelocityX > 0) ? 1 : -1);
-        playerData.iFrames = Mathf.Abs(Mathf.FloorToInt(20*playerData.waterSpeedMulti)); // t=d/r, t=velocity/0.8f since velocity is multiplied by 0.8f every frame
-        while ((playerData.leftOrRight ? playerData.PlayerRb.linearVelocityX > 1.25f:playerData.PlayerRb.linearVelocityX < -1.25f)  || elapsed > 120)
+        playerData.iFrames = 1/60 * Mathf.Abs(Mathf.FloorToInt(20*playerData.waterSpeedMulti)); // t=d/r, t=velocity/0.8f since velocity is multiplied by 0.8f every frame
+        while ((playerData.leftOrRight ? playerData.PlayerRb.linearVelocityX > 3f:playerData.PlayerRb.linearVelocityX < -3f) || elapsed > 0.6f)
         {
-            elapsed += Time.timeScale == 1 ? 1 : 0;
-            playerData.PlayerRb.linearVelocityX += Time.timeScale == 1 ? (playerData.leftOrRight? -elapsed/5:elapsed/5) : 0;
+            elapsed += Time.deltaTime;
+            playerData.PlayerRb.linearVelocityX -= Time.deltaTime * (playerData.leftOrRight ? 1:-1) * 60;
+            Debug.Log(Time.deltaTime * (playerData.leftOrRight ? 1:-1) * 60 + ", " + elapsed + ", " + playerData.PlayerRb.linearVelocityX);
             yield return null;
         }
         playerData.PlayerRb.linearVelocityX = 0;
         elapsed = 0;
-        while(elapsed > 10)
+        while(elapsed > 0.16)
         {
-            elapsed += Time.timeScale == 1 ? 1 : 0;
+            elapsed += Time.deltaTime;
         }
         playerData.anim.SetBool(attacking, false);
         playerData.jumpBufferCounter = 0;
         playerData.movementAllowed = true;
-        dashAttackCd = 25;
+        dashAttackCd = 0.4f;
     }
     public IEnumerator WaitUntilNotJumping()
     {

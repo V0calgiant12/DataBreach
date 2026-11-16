@@ -38,20 +38,20 @@ public class PlayerSuperJump : PlayerAbstract
             player.playerData.anim.SetBool(player.superJumping,false);
         }
         
-        if(player.playerData.jumpBufferCounter < -5)
+        if(player.playerData.jumpBufferCounter < -0.083f)
         {
-            player.playerData.coyoteTimeCounter = 15;
+            player.playerData.coyoteTimeCounter = 0.25f;
         }
     }
     public override void UpdateState(PlayerStateManager player)
     {
-        player.playerData.fastFallCounter -= 1;
+        player.playerData.fastFallCounter -= Time.deltaTime;
 
         // Exit Super Jump
         // Rethink this part of the code. May not be a good feature.
         if (SettingsData.Instance._DoubleTapFastFall && UserInput.Instance.KeyDownCrouch)
         {
-            player.playerData.fastFallCounter = 45;
+            player.playerData.fastFallCounter = 0.75f;
         }
         if (UserInput.Instance.KeyDownCrouch)
         {
@@ -167,18 +167,7 @@ public class PlayerSuperJump : PlayerAbstract
             }
             player.playerData.doubleJumpAvailable = true;
             player.audioSource.PlaySound(player._NormalFall,1,Random.Range(0.7f,1.4f),0,1,player.transform.position);
-            if (GroundCheck.Instance._IsStone)
-            {
-                player.audioSource.PlaySound(player._StoneFall,1,Random.Range(0.6f,1.3f),0,1,player.transform.position);
-            }
-            else if(GroundCheck.Instance._IsWood)
-            {
-                player.audioSource.PlaySound(player._GrassFall,0.8f,Random.Range(0.8f,1.5f),0,1,player.transform.position);
-            }
-            if((player.playerData.anim.GetInteger(player.attackId) == 2 || player.playerData.anim.GetInteger(player.attackId) == 4) && player.playerData.anim.GetBool(player.attacking))
-            {
-                player.playerData.anim.SetBool(player.attacking, false);
-            }
+            player.audioSource.PlaySound(player._CurrentLand,player._CurrentVolume,Random.Range(player._CurrentPitch.x,player._CurrentPitch.y),0,1,player.transform.position);
             player.playerData.fastFallCounter = 0;
             changeYStartNextFall = true;
             player.SwitchState(player.IdleState);
@@ -199,10 +188,10 @@ public class PlayerSuperJump : PlayerAbstract
     }
     public IEnumerator DelayedBoost(PlayerStateManager player)
     {
-        int elapsed = 0;
-        while (elapsed < 8)
+        float elapsed = 0;
+        while (elapsed < 0.13)
         {
-            elapsed += Time.timeScale == 1 ? 1:0;
+            elapsed += Time.deltaTime;
             yield return null;
         }
         if(UserInput.Instance.MovementInput.y > -0.5f)

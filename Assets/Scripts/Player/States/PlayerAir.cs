@@ -7,6 +7,7 @@ public class PlayerAir : PlayerAbstract
     private float yFallStart;
     private bool changeYStartNextFall = true;
     private bool pastFirstFrame = false;
+    private float audioTimer = 0;
     public override void RunOnce(PlayerStateManager player)
     {
         Setup();
@@ -34,9 +35,9 @@ public class PlayerAir : PlayerAbstract
             player.playerData.anim.SetBool(player.superJumping,false);
         }
         
-        if(player.playerData.jumpBufferCounter < -5)
+        if(player.playerData.jumpBufferCounter < -0.083)
         {
-            player.playerData.coyoteTimeCounter = 15;
+            player.playerData.coyoteTimeCounter = 0.25f;
         }
     }
     public override void UpdateState(PlayerStateManager player)
@@ -49,7 +50,7 @@ public class PlayerAir : PlayerAbstract
                 player.playerData.PlayerRb.linearVelocityX -= player.playerData.leftOrRight? 0.05f : -0.05f;
             }
         }
-        player.playerData.fastFallCounter -= 1;
+        player.playerData.fastFallCounter -= Time.deltaTime;
 
         // Fast Falling
         if (UserInput.Instance.KeyDownCrouch && player.playerData.PlayerRb.linearVelocityY < 0)
@@ -67,7 +68,7 @@ public class PlayerAir : PlayerAbstract
         }
         if (SettingsData.Instance._DoubleTapFastFall && UserInput.Instance.KeyDownCrouch)
         {
-            player.playerData.fastFallCounter = 45;
+            player.playerData.fastFallCounter = 0.75f;
         }
         
         // Default to Forward Air if nothing else is inputed. (If anything else is inputed, this will be overwritten.)
@@ -229,6 +230,19 @@ public class PlayerAir : PlayerAbstract
         {
             shakeOnLand = false;
         }
+        // Audio
+        if(audioTimer >= 0.3 && Mathf.Abs(player.playerData.PlayerRb.linearVelocityY) > 3)
+        {
+            if(player.playerData.inLiquid)
+            {
+                player.audioSource.PlaySound(player._WaterWalk[0],1f,Random.Range(0.8f,1.2f),0,1,player.transform.position);
+            }
+            audioTimer = 0;
+        }
+        else
+        {
+            audioTimer += Time.deltaTime;
+        }
 
         // Grounded Jump check for Coyote time.
         if (player.playerData.jumpBufferCounter > 0 && player.playerData.coyoteTimeCounter > 0)
@@ -260,18 +274,7 @@ public class PlayerAir : PlayerAbstract
             }
             player.playerData.doubleJumpAvailable = true;
             player.audioSource.PlaySound(player._NormalFall,1,Random.Range(0.7f,1.4f),0,1,player.transform.position);
-            if (GroundCheck.Instance._IsStone)
-            {
-                player.audioSource.PlaySound(player._StoneFall,1,Random.Range(0.6f,1.3f),0,1,player.transform.position);
-            }
-            else if(GroundCheck.Instance._IsWood)
-            {
-                player.audioSource.PlaySound(player._WoodLand,1,Random.Range(0.7f,1.4f),0,1,player.transform.position);
-            }
-            else
-            {
-                player.audioSource.PlaySound(player._GrassFall,0.8f,Random.Range(0.8f,1.5f),0,1,player.transform.position);
-            }
+            player.audioSource.PlaySound(player._CurrentLand,player._CurrentVolume,Random.Range(player._CurrentPitch.x,player._CurrentPitch.y),0,1,player.transform.position);
             if((player.playerData.anim.GetInteger(player.attackId) == 2 || player.playerData.anim.GetInteger(player.attackId) == 4) && player.playerData.anim.GetBool(player.attacking))
             {
                 player.playerData.anim.SetBool(player.attacking, false);

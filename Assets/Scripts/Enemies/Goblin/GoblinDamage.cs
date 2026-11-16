@@ -10,7 +10,7 @@ public class GoblinDamage : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            PlayerStateManager.Instance.DamagePlayer(Random.Range(10, 15), Random.Range(5, 10), 90, false, transform.position.x, false);
+            PlayerStateManager.Instance.DamagePlayer(Random.Range(10, 15), Random.Range(5, 10), 1.5f, false, transform.position.x, false);
         }
     }
 }

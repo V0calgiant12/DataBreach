@@ -41,7 +41,7 @@ public class ContactDamage : MonoBehaviour
                 {
                     damagedPlayer = true;
                 }
-                PlayerStateManager.Instance.DamagePlayer(appliedKnockback.x, appliedKnockback.y, 30, ignoreIFrames, transform.position.x, false);
+                PlayerStateManager.Instance.DamagePlayer(appliedKnockback.x, appliedKnockback.y, 0.5f, ignoreIFrames, transform.position.x, false);
             }
         }
     }

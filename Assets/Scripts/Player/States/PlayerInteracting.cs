@@ -4,7 +4,7 @@ using UnityEngine;
 public class PlayerInteracting : PlayerAbstract
 {
     private int frame = 0;
-    private int audioTimer = 0;
+    private float audioTimer = 0;
     public PlayerStateManager.InteractControls state;
     public bool firstInteractFrame = true;
     public float distance = 0;
@@ -15,7 +15,7 @@ public class PlayerInteracting : PlayerAbstract
     }
     public override void EnterState(PlayerStateManager player) // Start Function
     {
-        player.playerData.interactingCooldown = 30;
+        player.playerData.interactingCooldown = 0.5f;
         player.playerData.interacting = true;
         frame = 0;
         firstInteractFrame = true;
@@ -203,22 +203,11 @@ public class PlayerInteracting : PlayerAbstract
                 break;
         }
         // Audio
-        if((audioTimer == 11 && (state == PlayerStateManager.InteractControls.WalkLeft || state == PlayerStateManager.InteractControls.WalkRight)) || (audioTimer == 5 && (state == PlayerStateManager.InteractControls.SprintLeft || state == PlayerStateManager.InteractControls.SprintRight)))
+        if((audioTimer == 0.18f && (state == PlayerStateManager.InteractControls.WalkLeft || state == PlayerStateManager.InteractControls.WalkRight)) || (audioTimer == 0.08f && (state == PlayerStateManager.InteractControls.SprintLeft || state == PlayerStateManager.InteractControls.SprintRight)))
         {
             if(!player.playerData.inLiquid)
             {
-                if(GroundCheck.Instance._IsStone)
-                {
-                    player.audioSource.PlaySound(player._StoneWalk,1f,Random.Range(0.6f,1.3f),0,1,player.transform.position);
-                }
-                else if(GroundCheck.Instance._IsWood)
-                {
-                    player.audioSource.PlaySound(player._WoodWalk[Random.Range(0,6)],0.8f,Random.Range(0.6f,1.3f),0,1,player.transform.position);
-                }
-                else
-                {
-                    player.audioSource.PlaySound(player._GrassWalk,0.8f,Random.Range(0.8f,1.5f),0,1,player.transform.position);
-                }
+                player.audioSource.PlaySound(player._CurrentFootstep[Random.Range(0,player._CurrentFootstep.Length-1)],player._CurrentVolume,Random.Range(player._CurrentPitch.x,player._CurrentPitch.y),0,1,player.transform.position);
             }
             else
             {
@@ -228,7 +217,7 @@ public class PlayerInteracting : PlayerAbstract
         }
         else
         {
-            audioTimer += Time.timeScale == 1 ? 1:0;
+            audioTimer += Time.deltaTime;
         }
         
         player.playerData.basePlayerSpeed = player.playerData.playerSpeed;
@@ -268,33 +257,11 @@ public class PlayerInteracting : PlayerAbstract
     private void LandAudio(PlayerStateManager player)
     {
         player.audioSource.PlaySound(player._NormalFall,1,Random.Range(0.7f,1.4f),0,1,player.transform.position);
-        if (GroundCheck.Instance._IsStone)
-        {
-            player.audioSource.PlaySound(player._StoneFall,1,Random.Range(0.6f,1.3f),0,1,player.transform.position);
-        }
-        else if(GroundCheck.Instance._IsWood)
-        {
-            player.audioSource.PlaySound(player._WoodLand,1f,Random.Range(0.7f,1.4f),0,1,player.transform.position);
-        }
-        else
-        {
-            player.audioSource.PlaySound(player._GrassFall,0.8f,Random.Range(0.8f,1.5f),0,1,player.transform.position);
-        }
+        player.audioSource.PlaySound(player._CurrentLand,player._CurrentVolume,Random.Range(player._CurrentPitch.x,player._CurrentPitch.y),0,1,player.transform.position);
     }
     private void JumpAudio(PlayerStateManager player)
     {
         player.audioSource.PlaySound(player._NormalJump,1,Random.Range(0.7f,1.4f),0,1,player.transform.position);
-        if (GroundCheck.Instance._IsStone)
-        {
-            player.audioSource.PlaySound(player._StoneJump,1,Random.Range(0.6f,1.3f),0,1,player.transform.position);
-        }
-        else if(GroundCheck.Instance._IsWood)
-        {
-            player.audioSource.PlaySound(player._WoodJump,1f,Random.Range(0.7f,1.4f),0,1,player.transform.position);
-        }
-        else
-        {
-            player.audioSource.PlaySound(player._GrassJump,0.8f,Random.Range(0.8f,1.5f),0,1,player.transform.position);
-        }
+        player.audioSource.PlaySound(player._CurrentJump,player._CurrentVolume,Random.Range(player._CurrentPitch.x,player._CurrentPitch.y),0,1,player.transform.position);
     }
 }

@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class PlayerSprinting : PlayerAbstract
 {
-    private int audioTimer = 0;
+    private float audioTimer = 0;
     public override void RunOnce(PlayerStateManager player)
     {
         Setup();
@@ -83,11 +83,7 @@ public class PlayerSprinting : PlayerAbstract
         if (!GroundCheck.Instance._IsGrounded)
         {
             
-            if(player.playerData.coyoteTimeCounter < 0)
-            {
-                player.playerData.coyoteTimeCounter = 1;
-            }
-            if(player.playerData.coyoteTimeCounter == 0)
+            if(player.playerData.coyoteTimeCounter <= 0)
             {
                 player.playerData.PlayerRb.linearVelocityX = 0;
                 player.SwitchState(player.AirState);
@@ -97,22 +93,11 @@ public class PlayerSprinting : PlayerAbstract
         }
 
         // Audio
-        if(audioTimer == 9)
+        if(audioTimer >= 0.15)
         {
             if(!player.playerData.inLiquid)
             {
-                if(GroundCheck.Instance._IsStone)
-                {
-                    player.audioSource.PlaySound(player._StoneWalk,1f,Random.Range(0.6f,1.3f),0,1,player.transform.position);
-                }
-                else if(GroundCheck.Instance._IsWood)
-                {
-                    player.audioSource.PlaySound(player._WoodWalk[Random.Range(0,6)],0.8f,Random.Range(0.6f,1.3f),0,1,player.transform.position);
-                }
-                else
-                {
-                    player.audioSource.PlaySound(player._GrassWalk,0.8f,Random.Range(0.8f,1.5f),0,1,player.transform.position);
-                }
+                player.audioSource.PlaySound(player._CurrentFootstep[Random.Range(0,player._CurrentFootstep.Length-1)],player._CurrentVolume,Random.Range(player._CurrentPitch.x,player._CurrentPitch.y),0,1,player.transform.position);
             }
             else
             {
@@ -122,7 +107,7 @@ public class PlayerSprinting : PlayerAbstract
         }
         else
         {
-            audioTimer += Time.timeScale == 1 ? 1:0;
+            audioTimer += Time.deltaTime;
         }
     }
     public override void LateUpdateState(PlayerStateManager player)
@@ -135,18 +120,7 @@ public class PlayerSprinting : PlayerAbstract
             player.playerData.jumpBufferCounter = 0;
             player.playerData.coyoteTimeCounter = 0;
             player.audioSource.PlaySound(player._NormalFall,1,Random.Range(0.7f,1.4f),0,1,player.transform.position);
-            if (GroundCheck.Instance._IsStone)
-            {
-                player.audioSource.PlaySound(player._StoneFall,1,Random.Range(0.6f,1.3f),0,1,player.transform.position);
-            }
-            else if(GroundCheck.Instance._IsWood)
-            {
-                player.audioSource.PlaySound(player._WoodLand,1f,Random.Range(0.7f,1.4f),0,1,player.transform.position);
-            }
-            else
-            {
-                player.audioSource.PlaySound(player._GrassFall,0.8f,Random.Range(0.8f,1.5f),0,1,player.transform.position);
-            }
+            player.audioSource.PlaySound(player._CurrentLand,player._CurrentVolume,Random.Range(player._CurrentPitch.x,player._CurrentPitch.y),0,1,player.transform.position);
             if (!CheckGroundInFront(player))
             {
                 player.forceSuperJump = false;
@@ -163,7 +137,7 @@ public class PlayerSprinting : PlayerAbstract
     public override void LeaveState(PlayerStateManager player)
     {
         player.comingFromDash = false;
-        player.playerData.sprintBufferCounter = 15;
+        player.playerData.sprintBufferCounter = 0.25f;
     }
     private bool CheckGroundInFront(PlayerStateManager player)
     {

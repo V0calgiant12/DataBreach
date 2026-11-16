@@ -60,7 +60,7 @@ public class HealthTriggerArea : MonoBehaviour
             }
             if(DamagePlayer)
             {
-                PlayerStateManager.Instance.DamagePlayer(0,0,60,true,transform.position.x,true);
+                PlayerStateManager.Instance.DamagePlayer(0,0,1,true,transform.position.x,true);
             }
             else if (HealPlayer)
             {

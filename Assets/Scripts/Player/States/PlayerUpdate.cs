@@ -17,7 +17,7 @@ public class PlayerUpdate : PlayerAbstract
         if(UserInput.Instance.KeyDownJump || SettingsData.Instance._UpToJump && UserInput.Instance.KeyDownUpInput)
         {
             //Debug.Log("Jump");
-            player.playerData.jumpBufferCounter = 10;
+            player.playerData.jumpBufferCounter = 0.167f;
         }
         
         // Toggle sprint
@@ -78,13 +78,13 @@ public class PlayerUpdate : PlayerAbstract
         // Attack Buffering
         if (UserInput.Instance.KeyDownAttack && Time.timeScale != 0)
         {
-            player.playerData.bufferedAtk = 10;
+            player.playerData.bufferedAtk = 0.167f;
             player.playerData.bufferedAtkDir = new Vector2(0,0);
         }
         // C-Stick Attack Buffering
         if((UserInput.Instance.DirectionalAttack.y < -0.5f || UserInput.Instance.DirectionalAttack.y > 0.5f || UserInput.Instance.DirectionalAttack.x < -0.5f || UserInput.Instance.DirectionalAttack.x > 0.5f) && UserInput.Instance.RightStickPressed && Time.timeScale != 0)
         {
-            player.playerData.bufferedAtk = 10;
+            player.playerData.bufferedAtk = 0.167f;
             player.playerData.bufferedAtkDir = UserInput.Instance.DirectionalAttack;
         }
     }

@@ -19,7 +19,7 @@ public class StalagtiteTrigger : MonoBehaviour
         // Damage Player
         if((other.gameObject.CompareTag("Player")||other.gameObject.CompareTag("EnemyHurtbox") && detectEnemies) && gameObject.CompareTag("Hitbox"))
         {
-            PlayerStateManager.Instance.DamagePlayer(10, UnityEngine.Random.Range(6,10),60,false,transform.position.x,false);
+            PlayerStateManager.Instance.DamagePlayer(10, UnityEngine.Random.Range(6,10),1,false,transform.position.x,false);
         }
         // Damage enemy
         if(other.gameObject.CompareTag("EnemyHurtbox") && gameObject.CompareTag("Hitbox"))

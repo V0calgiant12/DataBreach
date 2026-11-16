@@ -63,7 +63,7 @@ AnimatorStateMachine:
     m_Position: {x: -470, y: -600, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -7810347299358586412}
-    m_Position: {x: -500, y: -520, z: 0}
+    m_Position: {x: -470, y: -530, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions:
   - {fileID: -7464744171917508923}
@@ -1194,12 +1194,6 @@ AnimatorController:
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 9100000}
-  - m_Name: iframes
-    m_Type: 3
-    m_DefaultFloat: 0
-    m_DefaultInt: 0
-    m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
   - m_Name: attacking
     m_Type: 4
     m_DefaultFloat: 0
@@ -1238,6 +1232,12 @@ AnimatorController:
     m_Controller: {fileID: 9100000}
   - m_Name: attackId
     m_Type: 3
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 9100000}
+  - m_Name: iFrames
+    m_Type: 1
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0

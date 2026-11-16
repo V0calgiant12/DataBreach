@@ -6,14 +6,14 @@ public class PlayerData : ScriptableObject
     [Header("General Stats")]
     public int playerHealth = 5;
     public int maxHealth = 5;
-    public int fastFallCounter = 0;
-    public int jumpBufferCounter = 0;
-    public int coyoteTimeCounter = 0;
-    public int sprintBufferCounter = 0;
-    public int interactingCooldown = 0;
-    public int iFrames = 0;
+    public float fastFallCounter = 0;
+    public float jumpBufferCounter = 0;
+    public float coyoteTimeCounter = 0;
+    public float sprintBufferCounter = 0;
+    public float interactingCooldown = 0;
+    public float iFrames = 0;
+    public float bufferedAtk = 0;
     public int ricochet = 0;
-    public int bufferedAtk = 0;
     public Vector2 lastCheckpoint = new Vector2(0,0);
     public Vector2 bufferedAtkDir = new Vector2(0,0);
     public Vector2 knockbackReduction = new Vector2(1,1);

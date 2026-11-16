@@ -72,7 +72,7 @@ public class PlayerIdle : PlayerAbstract
         {
             if(player.playerData.coyoteTimeCounter < 0)
             {
-                player.playerData.coyoteTimeCounter = 1;
+                player.playerData.coyoteTimeCounter = 0.017f;
             }
             if(player.playerData.coyoteTimeCounter == 0)
             {
@@ -108,18 +108,7 @@ public class PlayerIdle : PlayerAbstract
             player.playerData.jumpBufferCounter = 0;
             player.playerData.coyoteTimeCounter = 0;
             player.audioSource.PlaySound(player._NormalJump,1,Random.Range(0.7f,1.4f),0,1,player.transform.position);
-            if (GroundCheck.Instance._IsStone)
-            {
-                player.audioSource.PlaySound(player._StoneJump,1,Random.Range(0.6f,1.3f),0,1,player.transform.position);
-            }
-            else if(GroundCheck.Instance._IsWood)
-            {
-                player.audioSource.PlaySound(player._WoodJump,1,Random.Range(0.7f,1.4f),0,1,player.transform.position);
-            }
-            else
-            {
-                player.audioSource.PlaySound(player._GrassJump,0.8f,Random.Range(0.8f,1.5f),0,1,player.transform.position);
-            }
+            player.audioSource.PlaySound(player._CurrentJump,player._CurrentVolume,Random.Range(player._CurrentPitch.x,player._CurrentPitch.y),0,1,player.transform.position);
             player.SwitchState(player.AirState);
             return;
         }
