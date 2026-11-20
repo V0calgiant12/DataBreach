@@ -192,6 +192,16 @@ public class PlayerStateManager : MonoBehaviour
                 MakeInvincible(true, true);
             }
         }
+
+        #if UNITY_EDITOR
+        if(Input.GetKeyDown(KeyCode.F3))
+        {
+            Debug.Log(currentState);
+        }
+        #endif
+    }
+    public void UpdateSounds()
+    {
         if (GroundCheck.Instance._IsStone)
         {
             Array.Resize(ref _CurrentFootstep,1);
@@ -228,13 +238,6 @@ public class PlayerStateManager : MonoBehaviour
             _CurrentVolume = 0.8f;
             _CurrentPitch = new Vector2(0.8f, 1.5f);
         }
-
-        #if UNITY_EDITOR
-        if(Input.GetKeyDown(KeyCode.F3))
-        {
-            Debug.Log(currentState);
-        }
-        #endif
     }
     public void SwitchState(PlayerAbstract state)
     {
