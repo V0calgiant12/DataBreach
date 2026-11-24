@@ -27,8 +27,8 @@ public class TextWrite : MonoBehaviour
     public static TextWrite Instance;
     private TextData storedData;
 
-    private int frame = 0;
-    private int inputBuffer = 0;
+    private float frame = 0;
+    private float inputBuffer = 0;
     void Start()
     {
         Instance = this;
@@ -57,7 +57,7 @@ public class TextWrite : MonoBehaviour
             text.text = "";
         }
 
-        inputBuffer -= Time.timeScale == 1 ? 1:0;
+        inputBuffer -= Time.deltaTime;
     }
     public void WriteText(TextData data)
     {
@@ -104,28 +104,29 @@ public class TextWrite : MonoBehaviour
     {
         textBox.Open();
         _Writing = true;
-        while(frame < 1) // Always a 1 frame delay no matter what.
+        while(frame < 0.016) // Always a 1 frame delay no matter what.
         {
-            frame += 1;
+            frame += Time.deltaTime;
             yield return null;
         }
         inputBuffer = 0;
-        while(frame < 40 && delay) // Delay before beginning to write.
+        while(frame < 0.667f && delay) // Delay before beginning to write.
         {
-            frame += 1;
+            frame += Time.deltaTime;
             yield return null;
         }
         characterNum = 0;
-        int waitTime = 0;
+        float waitTime = 0;
         string output = "";
         while(characterNum < _TextInput.Length)
         {
-            if(waitTime == 0)
+            if(waitTime <= 0)
             {
-                waitTime = _TextSpeed;
+                waitTime = 1f/60f * _TextSpeed;
+                Debug.Log(waitTime);
                 if(char.ToString(_TextInput[characterNum]) == "." || char.ToString(_TextInput[characterNum]) == "," || char.ToString(_TextInput[characterNum]) == ";" || char.ToString(_TextInput[characterNum]) == "?" || char.ToString(_TextInput[characterNum]) == "!")
                 {
-                    waitTime = _TextSpeed * 3;
+                    waitTime = 1f/60f * _TextSpeed * 3;
                 }
                 if(!char.IsWhiteSpace(_TextInput[characterNum]) && char.ToString(_TextInput[characterNum]) != "<" && char.ToString(_TextInput[characterNum]) != ">" && char.ToString(_TextInput[characterNum]) != "'" && char.ToString(_TextInput[characterNum]) != "\"")
                 {
@@ -142,7 +143,7 @@ public class TextWrite : MonoBehaviour
                     characterNum += 1;
                     output += _TextInput[characterNum];
                     characterNum += 1;
-                    waitTime = _TextSpeed * (_DelayBetweenLines ? 10 : 3);
+                    waitTime = 1f/60f * _TextSpeed * (_DelayBetweenLines ? 10 : 3);
                 }
                 else
                 {
@@ -157,7 +158,7 @@ public class TextWrite : MonoBehaviour
                 }
                 text.text = output;
             }
-            waitTime -= Time.timeScale == 1 ? 1 : 0;
+            waitTime -= Time.deltaTime;
             yield return null;
         }
         _Writing = false;
