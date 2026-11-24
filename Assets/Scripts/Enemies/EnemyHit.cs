@@ -80,7 +80,7 @@ public class EnemyHit : MonoBehaviour
                 {
                     case(0):
                         // Forward attacks (0)
-                        DamageEnemy(1,10,10,PlayerStateManager.Instance.transform.position.x);
+                        DamageEnemy(1,10,10,PlayerStateManager.Instance.transform.position.x + (PlayerStateManager.Instance.playerData.leftOrRight ? -10:10));
                         break;
                     case(1):
                         // Up attacks (1)
@@ -88,11 +88,11 @@ public class EnemyHit : MonoBehaviour
                         break;
                     case(2):
                         // Backward attacks (2)
-                        DamageEnemy(1,7,10,PlayerStateManager.Instance.transform.position.x);
+                        DamageEnemy(1,12,10,PlayerStateManager.Instance.transform.position.x + (PlayerStateManager.Instance.playerData.leftOrRight ? 10:-10));
                         break;
                     case(3):
                         // Down attacks (3)
-                        DamageEnemy(1,8,5,PlayerStateManager.Instance.transform.position.x);
+                        DamageEnemy(1,8,5,PlayerStateManager.Instance.transform.position.x + (PlayerStateManager.Instance.playerData.leftOrRight ? -10:10));
                         break;
                     case(4):
                         // Down air attacks (4)
