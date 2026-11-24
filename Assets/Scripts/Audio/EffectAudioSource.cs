@@ -52,7 +52,7 @@ public class EffectAudioSource : MonoBehaviour
     {
         if(audioSource.clip != null)
         {
-            yield return new WaitForSeconds(audioSource.clip.length);
+            yield return new WaitForSecondsRealtime(audioSource.clip.length);
         }
         Destroy(gameObject);
     }
