@@ -23,10 +23,6 @@ public class MenuAudioSource : MonoBehaviour
         audioSource.Play();
         StartCoroutine(Delete());
     }
-    public void PlayAudioSource()
-    {
-        audioSource.Play();
-    }
     public void HeartSound(AudioClip audioClip,float volume)
     {
         audioSource.volume = volume;
@@ -39,7 +35,7 @@ public class MenuAudioSource : MonoBehaviour
 
     IEnumerator Delete()
     {
-        yield return new WaitForSeconds(audioSource.clip.length);
+        yield return new WaitForSecondsRealtime(audioSource.clip.length);
         Destroy(gameObject);
     }
 }
