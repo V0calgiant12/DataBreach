@@ -7,8 +7,8 @@ public class PlayerColor : MonoBehaviour
 {
     [Header("Player Color Settings:")]
     [SerializeField] private UnityEngine.Color playerColor;
-    public static float rainbowHue;
-    public static UnityEngine.Color rainbowColor;
+    public static float rainbowHue = 1;
+    public static UnityEngine.Color rainbowColor = new UnityEngine.Color(1,1,1);
     public static bool rainbow = false;
     private bool coroutineRunning;
     [Header("Player Color References:")]
