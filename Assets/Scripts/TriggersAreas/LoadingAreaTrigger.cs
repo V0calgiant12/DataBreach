@@ -12,6 +12,7 @@ public class LoadingAreaTrigger : MonoBehaviour
     /// <returns></returns>
     [SerializeField] private GameObject ObjectsAndEnemies;
     [SerializeField] private GameObject Grid;
+    [SerializeField] private Transform Enemies;
     [SerializeField] private int Id;
     void Awake()
     {
@@ -20,21 +21,29 @@ public class LoadingAreaTrigger : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log(other.gameObject + " entered loading area.", this);
+        //Debug.Log(other.gameObject + " entered loading area.", this);
         if (other.gameObject.CompareTag("RealCamera"))
         {
-            Debug.Log("Loading Area.", this);
+            Debug.Log("Loading New Area.", this);
             ObjectsAndEnemies.SetActive(true);
             Grid.SetActive(true);   
+        }
+        if (other.gameObject.CompareTag("Enemy"))
+        {
+            other.gameObject.transform.SetParent(Enemies);
         }
     }
     private void OnTriggerExit2D(Collider2D other)
     {
-        Debug.Log(other.gameObject + " exited loading area.", this);
+        //Debug.Log(other.gameObject + " exited loading area.", this);
         if (other.gameObject.CompareTag("RealCamera"))
         {
             ObjectsAndEnemies.SetActive(false);
             Grid.SetActive(false);   
+        }
+        if (other.gameObject.CompareTag("Enemy"))
+        {
+               
         }
     }
 }
