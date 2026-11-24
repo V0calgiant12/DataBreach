@@ -5,10 +5,12 @@ using UnityEngine.Audio;
 public class Sawblade : MonoBehaviour
 {
     [Header("Sawblade Settings:")]
-    public int sawbladeTime = 60;
     public float activeDistance = 10f;
     public float upDistance = 1f;
-    public int upTime = 20;
+    [Tooltip("Time it takes for the sawblade to make it from one side to the other.")]
+    public float sawbladeTime = 1;
+    [Tooltip("How long it takes for the sawblade to go up/down.")]
+    public float upTime = 0.334f;
     public enum LeftRight
     {
         Left,
@@ -65,12 +67,12 @@ public class Sawblade : MonoBehaviour
     {
         float startingY = transform.localPosition.y;
         // SawbladeSpinVolume is for fading in and out the volume over time
-        int elapsed = 0;
+        float elapsed = 0;
         bool moving = false;
         SawbladeSpinVolume = 0f;
         while (upDistance > transform.localPosition.y)
         {
-            elapsed += Time.timeScale == 1 ? 1 : 0;
+            elapsed += Time.deltaTime;
             SawbladeSpinVolume += Time.timeScale == 1 ? upDistance/upTime : 0;
             transform.localPosition = new Vector2(transform.localPosition.x, upDistance/upTime * elapsed + startingY); // d=r/t, r=d*t
             //Debug.Log("UpTime: " + upTime + " UpDist: " + upDistance + " Elapsed: " + elapsed + " StartingY: " + startingY + " Combined: " + (upDistance/upTime * elapsed + startingY));
@@ -86,18 +88,18 @@ public class Sawblade : MonoBehaviour
     private IEnumerator Move()
     {
         float startX = transform.localPosition.x;
-        int elapsedM = 0;
-        while(elapsedM < sawbladeTime - upTime/2)
+        float elapsed = 0;
+        while(elapsed < sawbladeTime - upTime/2)
         {
-            elapsedM += Time.timeScale == 1 ? 1 : 0;
-            transform.localPosition = new Vector2(activeDistance/sawbladeTime * ((SawbladeDirection == LeftRight.Right) ? 1f : -1f)* elapsedM + startX,transform.localPosition.y);
+            elapsed += Time.deltaTime;
+            transform.localPosition = new Vector2(activeDistance/sawbladeTime * ((SawbladeDirection == LeftRight.Right) ? 1f : -1f)* elapsed + startX,transform.localPosition.y);
             yield return null;
         }
         StartCoroutine(SawbladeDown());
-        while(elapsedM < sawbladeTime)
+        while(elapsed < sawbladeTime)
         {
-            elapsedM += Time.timeScale == 1 ? 1 : 0;
-            transform.localPosition = new Vector2(activeDistance/sawbladeTime * ((SawbladeDirection == LeftRight.Right) ? 1f : -1f)* elapsedM + startX,transform.localPosition.y);
+            elapsed += Time.deltaTime;
+            transform.localPosition = new Vector2(activeDistance/sawbladeTime * ((SawbladeDirection == LeftRight.Right) ? 1f : -1f)* elapsed + startX,transform.localPosition.y);
             yield return null;
         }
         
@@ -106,10 +108,10 @@ public class Sawblade : MonoBehaviour
     {
         Debug.Log("Starting Down");
         float startingY = transform.localPosition.y;
-        int elapsed = 0;
+        float elapsed = 0;
         while (0 < transform.localPosition.y)
         {
-            elapsed += Time.timeScale == 1 ? 1 : 0;
+            elapsed += Time.deltaTime;
             SawbladeSpinVolume -= Time.timeScale == 1 ? upDistance/upTime : 0;
             transform.localPosition = new Vector2(transform.localPosition.x, -1 * upDistance/upTime * elapsed + startingY);
             //Debug.Log("UpTime: " + upTime + " UpDist: " + upDistance + " Elapsed: " + elapsed + " StartingY: " + startingY + " Combined: " + (-1*upDistance/upTime * elapsed + startingY));
