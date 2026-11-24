@@ -54,7 +54,7 @@ public class SettingsData : MonoBehaviour
     public int _Resolution = 2;
     public int _Particles = 0;
     public int _WaterQuality = 0;
-    public int _LightQuality = 4;
+    public int _LightQuality = 2;
     public bool _Bloom;
     public bool _ChromaticAberration;
     public bool _Vignette;
@@ -252,7 +252,7 @@ public class SettingsData : MonoBehaviour
         _Resolution = 2;
         _Particles = 0;
         _WaterQuality = 0;
-        _LightQuality = 4;
+        _LightQuality = 2;
         _Bloom = true;
         _ChromaticAberration = true;
         _Vignette = true;
@@ -308,7 +308,7 @@ class SaveSettings // This class quite literally just stores variables so they c
     public int _Resolution = 2;
     public int _Particles = 0;
     public int _WaterQuality = 0;
-    public int _LightQuality = 4;
+    public int _LightQuality = 2;
     public bool _Bloom;
     public bool _ChromaticAberration;
     public bool _Vignette;

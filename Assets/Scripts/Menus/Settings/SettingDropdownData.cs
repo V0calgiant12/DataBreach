@@ -6,7 +6,7 @@ public class SettingDropdownData : MonoBehaviour
 {
     public TMP_Dropdown dropdown;
     public int _DropdownID;
-    public void RefreshVisuals() // Refreshes the toggle state to be up to date witht he saves
+    public void RefreshVisuals() // Refreshes the toggle state to be up to date with the saves
     {
         switch (_DropdownID)
         {
@@ -27,6 +27,9 @@ public class SettingDropdownData : MonoBehaviour
                 break;
             case (5):
                 dropdown.value = SettingsData.Instance._WaterQuality;
+                break;
+            case (6):
+                dropdown.value = SettingsData.Instance._LightQuality;
                 break;
         }
     }

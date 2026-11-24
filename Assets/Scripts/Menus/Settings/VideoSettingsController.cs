@@ -79,26 +79,24 @@ public class VideoSettingsController : MonoBehaviour
     {
         switch (res)
         {
-            case(0): // Ultra High 1.0
-            
-                //renderer2D.m_LightRenderTextureScale = 1.0f;
-                break;
-            case(1): // Very High 0.85
-                //renderer2D.m_LightRenderTextureScale = 0.85f;
-                break;
-            case(2): // High 0.70
-                //renderer2D.m_LightRenderTextureScale = 0.70f;
-                break;
-            case(3): // Medium 0.50
-                //renderer2D.m_LightRenderTextureScale = 0.50f;
-                break;
-            case(4): // Low 0.32
-                //renderer2D.m_LightRenderTextureScale = 0.32f;
-                break;
+            case(0): // Ultra 1.0
+                renderer2D.m_LightRenderTextureScale = 1.0f;
+                return;
+            case(1): // Very High 0.75
+                renderer2D.m_LightRenderTextureScale = 0.75f;
+                return;
+            case(2): // High 0.50
+                renderer2D.m_LightRenderTextureScale = 0.5f;
+                return;
+            case(3): // Medium 0.35
+                renderer2D.m_LightRenderTextureScale = 0.35f;
+                return;
+            case(4): // Low 0.22
+                renderer2D.m_LightRenderTextureScale = 0.22f;
+                return;
             case(5): // Very Low 0.16
-            
-                //renderer2D.m_LightRenderTextureScale = 0.16f;
-                break;
+                renderer2D.m_LightRenderTextureScale = 0.16f;
+                return;
         }
     }
     
@@ -119,6 +117,10 @@ public class VideoSettingsController : MonoBehaviour
                 break;
             case(5):
                 _WaterQuality = data.dropdown.value;
+                break;
+            case(6):
+                _LightQuality = data.dropdown.value;
+                SetLightQuality(data.dropdown.value);
                 break;
         }
     }

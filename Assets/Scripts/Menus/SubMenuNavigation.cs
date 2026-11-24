@@ -26,7 +26,7 @@ public class SubMenuNavigation : MonoBehaviour
     [SerializeField] private ButtonType buttonType;
     private void Start()
     {
-        currentlySelected = DefaultSelected.GetComponent<Toggle>().FindSelectableOnDown().GetComponent<Toggle>().FindSelectableOnUp().gameObject;
+        currentlySelected = DefaultSelected.transform.parent.GetChild(1).gameObject;
         Select();
     }
     void Select()

@@ -179,6 +179,7 @@ public class SettingsMenuUIHandler : MonoBehaviour
         SettingsData.Instance._Resolution = videoSettings._Resolution;
         SettingsData.Instance._Particles = videoSettings._Particles;
         SettingsData.Instance._WaterQuality = videoSettings._WaterQuality;
+        SettingsData.Instance._LightQuality = videoSettings._LightQuality;
         SettingsData.Instance._Bloom = videoSettings._Bloom;
         SettingsData.Instance._ChromaticAberration = videoSettings._ChromaticAberration;
         SettingsData.Instance._Vignette = videoSettings._Vignette;
@@ -238,6 +239,7 @@ public class SettingsMenuUIHandler : MonoBehaviour
         videoSettings._Resolution = SettingsData.Instance._Resolution;
         videoSettings._Particles = SettingsData.Instance._Particles;
         videoSettings._WaterQuality = SettingsData.Instance._WaterQuality;
+        videoSettings._LightQuality = SettingsData.Instance._LightQuality;
         videoSettings._Bloom = SettingsData.Instance._Bloom;
         videoSettings._ChromaticAberration = SettingsData.Instance._ChromaticAberration;
         videoSettings._Vignette = SettingsData.Instance._Vignette;
@@ -247,6 +249,7 @@ public class SettingsMenuUIHandler : MonoBehaviour
         
         videoSettings.SetFullscreenMode(SettingsData.Instance._Fullscreen);
         videoSettings.SetResolution(SettingsData.Instance._Resolution);
+        videoSettings.SetLightQuality(SettingsData.Instance._LightQuality);
         
         gameMenu.SetActive(false);
         audioMenu.SetActive(false);
