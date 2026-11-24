@@ -28,26 +28,6 @@ public class EffectAudioSource : MonoBehaviour
         audioSource.Play();
         StartCoroutine(Delete());
     }
-    public void SlimeJumpSound(AudioClip audioClip,float volume)
-    {
-        audioSource.pitch = Random.Range(0.7f,1.3f);
-        audioSource.volume = volume;
-        audioSource.outputAudioMixerGroup = audioMixer.FindMatchingGroups("Effects")[0];
-        audioSource.clip = audioClip;
-        audioSource.spatialBlend = 1;
-        audioSource.Play();
-        StartCoroutine(Delete());
-    }
-    public void MudSound(AudioClip audioClip,float volume)
-    {
-        audioSource.pitch = Random.Range(0.8f,1.2f);
-        audioSource.volume = volume;
-        audioSource.outputAudioMixerGroup = audioMixer.FindMatchingGroups("Effects")[0];
-        audioSource.clip = audioClip;
-        audioSource.spatialBlend = 1;
-        audioSource.Play();
-        StartCoroutine(Delete());
-    }
     IEnumerator Delete()
     {
         if(audioSource.clip != null)
