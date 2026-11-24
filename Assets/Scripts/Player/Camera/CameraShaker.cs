@@ -23,7 +23,7 @@ public class CameraShaker : MonoBehaviour
         Instance = this;
     }
 
-    public IEnumerator Shake(int duration, float magnitude) // Duration is in frames.
+    public IEnumerator Shake(float duration, float magnitude) // Duration is in frames.
     {
         //Debug.Log("Camera shake " + duration + " " + magnitude);
         UnityEngine.Vector3 originalLocalPosition = transform.localPosition;
@@ -38,7 +38,7 @@ public class CameraShaker : MonoBehaviour
 
             transform.localPosition = originalLocalPosition + new UnityEngine.Vector3(x, y, -10);
 
-            elapsed += 1; // We are not using Time.deltaTime in this project, so this counts up every frame.
+            elapsed += Time.deltaTime; // We are ARE using Time.deltaTime in this project, so this counts the amount of time between this frame and the last frame.
 
             yield return null; // Wait until the next frame
         }
@@ -64,18 +64,18 @@ public class CameraShaker : MonoBehaviour
             audioSource.volume = overrideVolume == 0 ? magnitude * 0.04f : overrideVolume;
             audioSource.Play();
         }
-        float length = Mathf.Round(0.2f*magnitude*lengthMult*(0.15f*magnitude*lengthMult));
-        if(length > 15)
+        float length = 1f/60f * Mathf.Round(0.2f*magnitude*lengthMult*(0.15f*magnitude*lengthMult));
+        if(length > 0.25f)
         {
-            length = 15;
+            length = 0.25f;
         }
-        while (elapsed < 1 + length) // l = (0.2m*L)^2
+        while (elapsed < length) // l = (0.2m*L)^2
         {
             // Generate a random point inside a sphere and multiply by magnitude
             float x = Random.Range(-0.8f, 0.8f) * magnitude;
             float y = Random.Range(-1.5f, 1f) * magnitude;
             
-            // Limiter
+            // Limiter (Clamp x/y position)
             float limit = 15;
             if(Mathf.Abs(x) > limit)
             {
@@ -88,7 +88,7 @@ public class CameraShaker : MonoBehaviour
 
             transform.localPosition = originalLocalPosition + new UnityEngine.Vector3(x, y, -10);
 
-            elapsed += Time.timeScale == 1 ? 1:0; // We are not using Time.deltaTime in this project, so this counts up every frame.
+            elapsed += Time.deltaTime; // We are not using Time.deltaTime in this project, so this counts up every frame.
 
             yield return null; // Wait until the next frame
         }

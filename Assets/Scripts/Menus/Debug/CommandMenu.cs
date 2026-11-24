@@ -12,7 +12,7 @@ public class CommandMenu : MonoBehaviour
     [SerializeField] private TextMeshProUGUI log;
     [SerializeField] private PlayerData playerData;
     private bool darkmode = false;
-    public string[] CommandList {get;} = {"help","save","loadscene <int>","sethealth <int>","setmaxhealth <int>","setcheckpoint <x> <y>","tp <x> <y>","reload","resetcheckpoint","return","darkMode <bool>","givecoin","takecoin"}; 
+    public string[] CommandList {get;} = {"help","save","loadscene <int>","sethealth <int>","setmaxhealth <int>","setcheckpoint <x> <y>","tp <x> <y>","reload","resetcheckpoint","return","darkMode <bool>","givecoin","takecoin","shake <float> <float>","burstshake <float> <float> <bool> <float>"}; 
     void Start()
     {
         CommandConsole.SetActive(false);
@@ -76,6 +76,9 @@ public class CommandMenu : MonoBehaviour
         bool state = true;
         float x = 0;
         float y = 0;
+        float number1 = 0;
+        float number2 = 0;
+        float number3 = 0;
         switch (commandSplit[0])
         {
             case("help"):
@@ -341,6 +344,50 @@ public class CommandMenu : MonoBehaviour
                     HeartCoinIconHandler.Instance.UpdateGUI();
                 }
                 LogOutput("Took Heart Coin from player.");
+                return;
+            case("shake"):
+                if(TriggerShake.Instance != null)
+                {
+                    if(!float.TryParse(commandSplit[1], out number1) && number1 < 0)
+                    {
+                        LogOutput("ERROR: No valid duration provided. Must be a positive number.");
+                    }
+                    if(!float.TryParse(commandSplit[2], out number2) && number < 0)
+                    {
+                        LogOutput("ERROR: No valid magnitude provided. Must be a positive number.");
+                    }
+                    TriggerShake.Instance.Shake(number1,number2);
+                }
+                else
+                {
+                    LogOutput("ERROR: No shakeable camera in this scene.");
+                }
+                return;
+            case("burstshake"):
+                if(TriggerShake.Instance != null)
+                {
+                    if(!float.TryParse(commandSplit[1], out number1) && number1 < 0)
+                    {
+                        LogOutput("ERROR: No valid magnitude provided. Must be a positive number.");
+                    }
+                    if(!float.TryParse(commandSplit[2], out number2) && number < 0)
+                    {
+                        LogOutput("ERROR: No valid lengthMult provided. Must be a positive number.");
+                    }
+                    if(!bool.TryParse(commandSplit[3], out state))
+                    {
+                        LogOutput("ERROR: No true/false provided for playSound.");
+                    }
+                    if(!float.TryParse(commandSplit[4], out number3) && number < 0)
+                    {
+                        LogOutput("ERROR: No valid overrideVolume provided. Must be a positive number. Set to 0 to not override.");
+                    }
+                    TriggerShake.Instance.BurstShake(number1,number2,state,number3);
+                }
+                else
+                {
+                    LogOutput("ERROR: No shakeable camera in this scene.");
+                }
                 return;
         }
         if(commandInput != "")
