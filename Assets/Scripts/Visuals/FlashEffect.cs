@@ -15,58 +15,58 @@ public class FlashEffect : MonoBehaviour
     }
     public void WhiteFlash()
     {
-        StartCoroutine(WhiteFlashAnimation(15));
+        StartCoroutine(WhiteFlashAnimation(0.25f));
     }
-    public void InvulnerableFlash(int iFrames)
+    public void InvulnerableFlash(float iFrames)
     {
         StartCoroutine(InvulnerableFlashAnimation(iFrames));
     }
-    public void SetInvisible(int iFrames)
+    public void SetInvisible(float iFrames)
     {
         StartCoroutine(InvisibleFor(iFrames));
     }
 
-    IEnumerator WhiteFlashAnimation(int time)
+    IEnumerator WhiteFlashAnimation(float time)
     {
         sr.material = hitMat;
-        int elapsed = 0;
+        float elapsed = 0;
         whiteFlashing = true;
         while (time > elapsed)
         {
             //sr.color = new UnityEngine.Color(1,1,1,1);
-            elapsed += Time.timeScale == 1 ? 1 : 0;
+            elapsed += Time.deltaTime;
             yield return null;
         }
         whiteFlashing = false;
         sr.material = litMat;
     }
-    IEnumerator InvulnerableFlashAnimation(int time)
+    IEnumerator InvulnerableFlashAnimation(float time)
     {
-        int elapsed = 0;
-        int visible = 0;
+        float elapsed = 0;
+        float visible = 0;
         UnityEngine.Color originalColor = sr.color;
         while (time > elapsed)
         {
-            //sr.color = new UnityEngine.Color(1,1,1,(visible < 5) ? 1 : 0);
-            sr.material = (visible < 5) ? invulMat : whiteFlashing ? hitMat : litMat;
-            elapsed += Time.timeScale == 1 ? 1 : 0;
-            visible += Time.timeScale == 1 ? 1 : 0;
-            if(visible == 10)
+            //sr.color = new UnityEngine.Color(1,1,1,(visible < 0.84f) ? 1 : 0);
+            sr.material = (visible < 0.12f) ? invulMat : whiteFlashing ? hitMat : litMat;
+            elapsed += Time.deltaTime;
+            if(visible >= 0.24f)
             {
                 visible = 0;
             }
+            visible += Time.deltaTime;
             yield return null;
         }
         //sr.color = new UnityEngine.Color(originalColor.r,originalColor.b,originalColor.g,1);
         sr.material = litMat;
     }
-    IEnumerator InvisibleFor(int time)
+    IEnumerator InvisibleFor(float time)
     {
-        int elapsed = 0;
+        float elapsed = 0;
         while (time > elapsed)
         {
             sr.material = invulMat;
-            elapsed += Time.timeScale == 1 ? 1 : 0;
+            elapsed += Time.deltaTime;
             yield return null;
         }
         sr.material = litMat;

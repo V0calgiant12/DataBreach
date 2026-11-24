@@ -425,6 +425,7 @@ public class PlayerStateManager : MonoBehaviour
         while(GroundCheck.Instance._IsGrounded == false && timer > elapsed || elapsed < 0.25)
         {
             elapsed += Time.deltaTime;
+            currentState = AirState;
             playerData.resetVelocity = false;
             if(playerData.ricochet > 0)
             {
