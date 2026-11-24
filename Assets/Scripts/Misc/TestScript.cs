@@ -3,9 +3,11 @@ using UnityEngine.Rendering.Universal;
 
 public class TestScript : MonoBehaviour
 {
-    [SerializeField] private Renderer2DData renderer2D;
-    void Update()
+    [SerializeField] private UniversalRenderPipelineAsset urd;
+    [SerializeField] private Renderer2DData _2DRenderer;
+    void Start()
     {
-        //renderer2D. = 0.16f;
+        urd.LoadBuiltinRendererData(RendererType._2DRenderer);
+
     }
 }
