@@ -453,7 +453,7 @@ public class PlayerStateManager : MonoBehaviour
         {
             elapsed += Time.deltaTime;
             playerData.PlayerRb.linearVelocityX -= Time.deltaTime * (playerData.leftOrRight ? 1:-1) * 60;
-            Debug.Log(Time.deltaTime * (playerData.leftOrRight ? 1:-1) * 60 + ", " + elapsed + ", " + playerData.PlayerRb.linearVelocityX);
+            //Debug.Log(Time.deltaTime * (playerData.leftOrRight ? 1:-1) * 60 + ", " + elapsed + ", " + playerData.PlayerRb.linearVelocityX);
             yield return null;
         }
         playerData.PlayerRb.linearVelocityX = 0;

@@ -154,7 +154,7 @@ public class SlimeStateManager : EnemyAbstract
         float elapsed = 0;
         while(elapsed < 0.08)
         {
-            elapsed += Time.timeScale == 1 ? 1 : 0;
+            elapsed += Time.deltaTime;
             yield return null;
         }
         yield return new WaitUntil(() => groundCheck._IsGrounded||floating);

@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class EnemyGroundCheck : MonoBehaviour
@@ -7,6 +8,7 @@ public class EnemyGroundCheck : MonoBehaviour
     public bool _IsGrounded;
     public bool _IsStone;
     public bool _IsWood;
+    private bool delay = false;
     private void OnTriggerStay2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("Ground") || other.gameObject.CompareTag("MovingPlatform") || other.gameObject.CompareTag("Stone") || other.gameObject.CompareTag("Wood"))
@@ -21,7 +23,11 @@ public class EnemyGroundCheck : MonoBehaviour
         if (other.gameObject.CompareTag("Ground") || other.gameObject.CompareTag("MovingPlatform") || other.gameObject.CompareTag("Stone") || other.gameObject.CompareTag("Wood") && !_IsGrounded)
         {
             _IsGrounded = true;
-            GetComponentInParent<EnemyAbstract>().OnGroundTouch();
+            if (!delay)
+            {
+                GetComponentInParent<EnemyAbstract>().OnGroundTouch();
+                StartCoroutine(SmallDelay());
+            }
         }
         if (other.gameObject.CompareTag("Stone"))
         {
@@ -39,6 +45,7 @@ public class EnemyGroundCheck : MonoBehaviour
         {
             _IsWood = false;
         }
+        
     }
     private void OnTriggerExit2D(Collider2D other)
     {
@@ -59,5 +66,11 @@ public class EnemyGroundCheck : MonoBehaviour
         {
             _IsWood = false;
         }
+    }
+    public IEnumerator SmallDelay()
+    {
+        delay = true;
+        yield return new WaitForSeconds(0.05f);
+        delay = false;
     }
 }
