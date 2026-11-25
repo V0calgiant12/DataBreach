@@ -42,7 +42,7 @@ public class MusicChild : MonoBehaviour
         float currentVol = audioSource.volume;
         while(audioSource.volume > 0)
         {
-            audioSource.volume -= currentVol/(time*Time.deltaTime);
+            audioSource.volume -= currentVol/time*Time.deltaTime;
             yield return null;
         }
     }
@@ -53,7 +53,7 @@ public class MusicChild : MonoBehaviour
             float currentVol = audioSource.volume;
             while (audioSource.volume < maxVol)
             {
-                audioSource.volume += (maxVol-currentVol)/(time*Time.deltaTime);
+                audioSource.volume += (maxVol-currentVol)/time*Time.deltaTime;
                 yield return null;
             }
         }

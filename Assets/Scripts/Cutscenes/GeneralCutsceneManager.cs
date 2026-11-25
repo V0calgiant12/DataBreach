@@ -32,7 +32,7 @@ public abstract class GeneralCutsceneManager : MonoBehaviour
         Instance = this;
     }
     
-    public IEnumerator Walk(float distance,bool fade,int delay)
+    public IEnumerator Walk(float distance,bool fade,float delay)
     {
         float startX = playerRb.transform.position.x;
         while (playerRb.transform.position.x < startX + distance)
@@ -46,16 +46,16 @@ public abstract class GeneralCutsceneManager : MonoBehaviour
         }
         else
         {
-            int elapsed = 0;
+            float elapsed = 0;
             while(elapsed < delay)
             {
-                elapsed += Time.timeScale == 1 ? 1:0;
+                elapsed += Time.deltaTime;
                 yield return null;
             }
             ProgressCutscene();
         }
     }
-    public IEnumerator Sprint(float distance,bool fade,int delay)
+    public IEnumerator Sprint(float distance,bool fade,float delay)
     {
         float startX = playerRb.transform.position.x;
         while (playerRb.transform.position.x < startX + distance)
@@ -69,10 +69,10 @@ public abstract class GeneralCutsceneManager : MonoBehaviour
         }
         else
         {
-            int elapsed = 0;
+            float elapsed = 0;
             while(elapsed < delay)
             {
-                elapsed += Time.timeScale == 1 ? 1:0;
+                elapsed += Time.deltaTime;
                 yield return null;
             }
             ProgressCutscene();
@@ -80,12 +80,12 @@ public abstract class GeneralCutsceneManager : MonoBehaviour
     }
     public abstract void ProgressCutscene();
     public abstract void Text(int number);
-    public IEnumerator WaitUntilTextCloses(int delay, int delay2)
+    public IEnumerator WaitUntilTextCloses(float delay, float delay2)
     {
-        int elapsed = 0;
+        float elapsed = 0;
         while(delay > elapsed)
         {
-            elapsed += Time.timeScale == 1 ? 1 : 0;
+            elapsed += Time.deltaTime;
             yield return null;
         }
         TextWrite.Instance.WriteText(GetComponent<TextData>());
@@ -94,7 +94,7 @@ public abstract class GeneralCutsceneManager : MonoBehaviour
         elapsed = 0;
         while(delay2 > elapsed)
         {
-            elapsed += Time.timeScale == 1 ? 1 : 0;
+            elapsed += Time.deltaTime;
             yield return null;
         }
         ProgressCutscene();

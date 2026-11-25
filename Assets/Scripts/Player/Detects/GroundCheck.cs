@@ -62,7 +62,10 @@ public class GroundCheck : MonoBehaviour
         {
             _IsWood = false;
         }
-        playerStateManager.UpdateSounds();
+        if (!_InCutscene)
+        {
+            playerStateManager.UpdateSounds();
+        }
         if (other.gameObject.CompareTag("Ground")||other.gameObject.CompareTag("MovingPlatform")||other.gameObject.CompareTag("Stone")||other.gameObject.CompareTag("Wood"))
         {
             _IsGrounded = true;
