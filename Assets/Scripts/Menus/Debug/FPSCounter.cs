@@ -14,7 +14,7 @@ public class FPSCounter : MonoBehaviour
         Array.Resize(ref frames,30);
         float current = 0;
         current = (int)(1f / Time.unscaledDeltaTime);
-        avgFrameRate = (int)current + 1;
+        avgFrameRate = (int)current;
         display_Text.text = avgFrameRate.ToString() + " FPS";
     }
     public void Update ()
@@ -31,7 +31,7 @@ public class FPSCounter : MonoBehaviour
                 math += frames[I];
             }
             math /= frames.Length;
-            avgFrameRate = (int)math + 1;
+            avgFrameRate = (int)math;
             i = 0;
         }
         display_Text.text = avgFrameRate.ToString() + " FPS";

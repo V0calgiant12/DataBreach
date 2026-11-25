@@ -529,6 +529,7 @@ GameObject:
   - component: {fileID: 1752757031312985587}
   - component: {fileID: 5278059480062337892}
   - component: {fileID: 7764222896559772188}
+  - component: {fileID: 5537424433646433367}
   m_Layer: 11
   m_Name: CameraHolder
   m_TagString: RealCamera
@@ -596,6 +597,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AudioEffectsController
   Mixer: {fileID: 24100000, guid: 246f48f13ca5833448ea181663ec054d, type: 2}
+--- !u!114 &5537424433646433367
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8182806896029491250}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48734b9cad7df284080e4e4a727115ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CameraFrameLimiter
 --- !u!1001 &3293707215924818452
 PrefabInstance:
   m_ObjectHideFlags: 0

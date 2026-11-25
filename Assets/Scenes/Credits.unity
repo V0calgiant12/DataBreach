@@ -767,6 +767,7 @@ GameObject:
   - component: {fileID: 753673116}
   - component: {fileID: 753673115}
   - component: {fileID: 753673114}
+  - component: {fileID: 753673122}
   m_Layer: 11
   m_Name: Main Camera
   m_TagString: RealCamera
@@ -991,6 +992,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &753673122
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 753673113}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48734b9cad7df284080e4e4a727115ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CameraFrameLimiter
 --- !u!1 &801407587
 GameObject:
   m_ObjectHideFlags: 0
