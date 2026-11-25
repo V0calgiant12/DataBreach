@@ -181,7 +181,7 @@ public class PlayerStateManager : MonoBehaviour
         playerData.bufferedAtk -= Time.deltaTime;
         playerData.iFrames -= Time.deltaTime;
 
-        if(Input.GetKeyDown(KeyCode.P))
+        if(Input.GetKeyDown(KeyCode.P) && Input.GetKey(KeyCode.F3))
         {
             if (playerData.invincible)
             {
