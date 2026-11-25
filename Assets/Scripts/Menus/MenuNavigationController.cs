@@ -84,7 +84,8 @@ public class MenuNavigationController : MonoBehaviour
         {
             inputField = currentlySelected.GetComponent<TMP_InputField>();
             buttonType = ButtonType.InputField;
-            inputField.animator.SetTrigger("Highlighted");
+            inputField.Select();
+            inputField.DeactivateInputField();
         }
         else if(currentlySelected.GetComponent<Selectable>() != null)
         {
