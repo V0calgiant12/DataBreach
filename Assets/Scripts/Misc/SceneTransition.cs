@@ -28,7 +28,7 @@ public class SceneTransition : MonoBehaviour
         if(GameObject.Find("MusicController") != null)
         {
             music = GameObject.Find("MusicController").GetComponent<MusicManager>();
-            music.FadeOutCaller(60);
+            music.FadeOutCaller(1);
         }
         float elapsed = 0;
         while(elapsed < transitionTime)
@@ -65,7 +65,7 @@ public class SceneTransition : MonoBehaviour
         if(GameObject.Find("MusicController") != null)
         {
             music = GameObject.Find("MusicController").GetComponent<MusicManager>();
-            music.FadeOutCaller(60);
+            music.FadeOutCaller(1);
         }
         yield return new WaitForSeconds(1);
         #if UNITY_EDITOR

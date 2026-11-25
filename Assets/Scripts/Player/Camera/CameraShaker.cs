@@ -64,7 +64,7 @@ public class CameraShaker : MonoBehaviour
             audioSource.volume = overrideVolume == 0 ? magnitude * 0.04f : overrideVolume;
             audioSource.Play();
         }
-        float length = 1f/60f * Mathf.Round(0.2f*magnitude*lengthMult*(0.15f*magnitude*lengthMult));
+        float length = 1f/60f * (0.2f*magnitude*lengthMult*(0.15f*magnitude*lengthMult));
         if(length > 0.25f)
         {
             length = 0.25f;

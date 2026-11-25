@@ -14,46 +14,46 @@ public class MusicChild : MonoBehaviour
         maxVol = audioSource.volume;
         audioSource.volume = 0;
     }
-    public void FadeOutCaller(int speed)
+    public void FadeOutCaller(float time)
     {
         if (active)
         {
-            StartCoroutine(FadeOut(speed));
+            StartCoroutine(FadeOut(time));
         }
     }
-    public void FadeInCaller(int speed)
+    public void FadeInCaller(float time)
     {
-        StartCoroutine(FadeIn(speed));
+        StartCoroutine(FadeIn(time));
     }
     public void Activate()
     {
         active = true;
-        StartCoroutine(FadeIn(120));
+        StartCoroutine(FadeIn(2));
     }
     public void Deactivate()
     {
         active = false;
-        StartCoroutine(FadeOut(60));
+        StartCoroutine(FadeOut(1));
     }
 
     
-    private IEnumerator FadeOut(int speed)
+    private IEnumerator FadeOut(float time)
     {
         float currentVol = audioSource.volume;
         while(audioSource.volume > 0)
         {
-            audioSource.volume -= currentVol/speed;
+            audioSource.volume -= currentVol/(time*Time.deltaTime);
             yield return null;
         }
     }
-    private IEnumerator FadeIn(int speed)
+    private IEnumerator FadeIn(float time)
     {
         if (active)
         {
             float currentVol = audioSource.volume;
             while (audioSource.volume < maxVol)
             {
-                audioSource.volume += (maxVol-currentVol)/speed;
+                audioSource.volume += (maxVol-currentVol)/(time*Time.deltaTime);
                 yield return null;
             }
         }

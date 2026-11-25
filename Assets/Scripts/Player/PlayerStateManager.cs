@@ -331,7 +331,7 @@ public class PlayerStateManager : MonoBehaviour
             //Debug.Log(attackType);
         }
     }
-    public void PlayerFlash(int type,int overrideTime)
+    public void PlayerFlash(int type,float overrideTime)
     {
         GameObject[] playerSprites = GameObject.FindGameObjectsWithTag("PlayerSprite"); // Puts all player sprite objects in a list.
         int index = 0;

@@ -16,13 +16,13 @@ public class MusicManager : MonoBehaviour
     {
         ChangeInstruments(instrumentsActive);
     }
-    public void FadeOutCaller(int speed)
+    public void FadeOutCaller(float time)
     {
-        StartCoroutine(FadeOut(speed));
+        StartCoroutine(FadeOut(time));
     }
-    public void FadeInCaller(int speed)
+    public void FadeInCaller(float time)
     {
-        StartCoroutine(FadeIn(speed));
+        StartCoroutine(FadeIn(time));
     }
     public void ChangeInstruments(int count)
     {
@@ -30,24 +30,24 @@ public class MusicManager : MonoBehaviour
         StartCoroutine(SetInstruments(count));
     }
 
-    private IEnumerator FadeOut(int speed)
+    private IEnumerator FadeOut(float time)
     {
         int index = 0;
         while (index <= children.Length-1)
         {
-            children[index].FadeOutCaller(speed);
+            children[index].FadeOutCaller(time);
             index += 1;
             yield return null;
         }
     }
-    private IEnumerator FadeIn(int speed)
+    private IEnumerator FadeIn(float time)
     {
         int index = 0;
         Debug.Log(children[0]);
         Debug.Log(children[1]);
         while (index <= children.Length-1)
         {
-            children[index].FadeInCaller(speed);
+            children[index].FadeInCaller(time);
             index += 1;
             yield return null;
         }
