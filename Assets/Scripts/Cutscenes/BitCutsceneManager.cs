@@ -25,23 +25,23 @@ public class BitCutsceneManager : GeneralCutsceneManager
         switch (currentScene)
         {
             case(1):
-                StartCoroutine(Walk(20,false,60));
+                StartCoroutine(Walk(30,false,1));
                 break;
             case(2):
                 cameraLoc = new Vector2(21f,0);
                 automaticCamera = false;
-                StartCoroutine(WaitForFrames(30));
+                StartCoroutine(WaitForSeconds(0.5f));
                 break;
             case(3):
-                StartCoroutine(Sprint(28,false,60));
+                StartCoroutine(Sprint(18,false,1f));
                 break;
             case(4):
                 playerAnim.SetTrigger("help");
-                StartCoroutine(WaitForFrames(120));
+                StartCoroutine(WaitForSeconds(2f));
                 break;
             case(5):
                 anim.SetInteger("Scene",5);
-                StartCoroutine(WaitForFrames(150));
+                StartCoroutine(WaitForSeconds(2.5f));
                 break;
             case(6):
                 Text(1);
@@ -54,11 +54,11 @@ public class BitCutsceneManager : GeneralCutsceneManager
             case(8):
                 playerAnim.SetTrigger("pet");
                 anim.SetInteger("Scene",8);
-                StartCoroutine(WaitForFrames(160));
+                StartCoroutine(WaitForSeconds(2.667f));
                 break;
             case(9):
                 automaticCamera = true;
-                StartCoroutine(Walk(50,true,30));
+                StartCoroutine(Walk(50,true,0.5f));
                 Text(3);
                 break;
             case(10):
@@ -79,21 +79,21 @@ public class BitCutsceneManager : GeneralCutsceneManager
                 textData.ChangeText(0,"You woke up the bit!",true);
                 textData._TextSpeed = 3;
                 textData._TextSound = bitSound;
-                StartCoroutine(WaitUntilTextCloses(0,30));
+                StartCoroutine(WaitUntilTextCloses(0f,0.5f));
                 break;
             case(2):
                 textData.ChangeText(0,"It seems very happy to see you.",true);
                 textData.ChangeText(1,"It almost feels like it's humming.",false);
                 textData._TextSpeed = 3;
                 textData._TextSound = bitSound;
-                StartCoroutine(WaitUntilTextCloses(120,60));
+                StartCoroutine(WaitUntilTextCloses(2f,1f));
                 break;
             case(3):
                 textData.ChangeText(0,"Now that you have reunited with your bit, you have a new goal, find a way to get back to the system.",true);
                 textData.ChangeText(1,"But there's no telling what you'll run into on your way there.",false);
                 textData._TextSpeed = 3;
                 textData._TextSound = bitSound;
-                StartCoroutine(WaitUntilTextCloses(45,60));
+                StartCoroutine(WaitUntilTextCloses(0.75f,1f));
                 break;
         }
     }

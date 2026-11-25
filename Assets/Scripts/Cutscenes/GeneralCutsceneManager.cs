@@ -99,9 +99,9 @@ public abstract class GeneralCutsceneManager : MonoBehaviour
         }
         ProgressCutscene();
     }
-    public IEnumerator WaitForFrames(int frames)
+    public IEnumerator WaitForSeconds(float seconds)
     {
-        yield return new WaitForFrames(frames);
+        yield return new WaitForSeconds(seconds);
         ProgressCutscene();
     }
 }
