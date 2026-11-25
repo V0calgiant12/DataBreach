@@ -10,6 +10,6 @@ public class CameraFrameLimiter : MonoBehaviour
     void Update()
     {
 	    QualitySettings.vSyncCount = SettingsData.Instance._VSync ? 1 : 0;
-	    Application.targetFrameRate = (int) SettingsData.Instance._MaxFrameRate;
+	    Application.targetFrameRate = SettingsData.Instance._MaxFrameRate == 500 ? -1 : (int) SettingsData.Instance._MaxFrameRate;
     }
 }
