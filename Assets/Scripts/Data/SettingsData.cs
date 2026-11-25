@@ -55,6 +55,8 @@ public class SettingsData : MonoBehaviour
     public int _Particles = 0;
     public int _WaterQuality = 0;
     public int _LightQuality = 2;
+    public float _MaxFrameRate = 60;
+    public bool _VSync = true;
     public bool _Bloom;
     public bool _ChromaticAberration;
     public bool _Vignette;
@@ -125,6 +127,8 @@ public class SettingsData : MonoBehaviour
         data._Particles = _Particles;
         data._WaterQuality = _WaterQuality;
         data._LightQuality = _LightQuality;
+        data._MaxFrameRate = _MaxFrameRate;
+        data._VSync = _VSync;
         data._Bloom =_Bloom;
         data._ChromaticAberration =_ChromaticAberration;
         data._Vignette =_Vignette;
@@ -196,6 +200,8 @@ public class SettingsData : MonoBehaviour
             _Particles = data._Particles;
             _WaterQuality = data._WaterQuality;
             _LightQuality = data._LightQuality;
+            _MaxFrameRate = data._MaxFrameRate;
+            _VSync = data._VSync;
             _Bloom = data._Bloom;
             _ChromaticAberration = data._ChromaticAberration;
             _Vignette = data._Vignette;
@@ -253,6 +259,8 @@ public class SettingsData : MonoBehaviour
         _Particles = 0;
         _WaterQuality = 0;
         _LightQuality = 2;
+        _MaxFrameRate = 60;
+        _VSync = true;
         _Bloom = true;
         _ChromaticAberration = true;
         _Vignette = true;
@@ -309,6 +317,8 @@ class SaveSettings // This class quite literally just stores variables so they c
     public int _Particles = 0;
     public int _WaterQuality = 0;
     public int _LightQuality = 2;
+    public float _MaxFrameRate = 60;
+    public bool _VSync = true;
     public bool _Bloom;
     public bool _ChromaticAberration;
     public bool _Vignette;

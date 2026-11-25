@@ -180,6 +180,8 @@ public class SettingsMenuUIHandler : MonoBehaviour
         SettingsData.Instance._Particles = videoSettings._Particles;
         SettingsData.Instance._WaterQuality = videoSettings._WaterQuality;
         SettingsData.Instance._LightQuality = videoSettings._LightQuality;
+        SettingsData.Instance._MaxFrameRate = videoSettings._MaxFrameRate;
+        SettingsData.Instance._VSync = videoSettings._VSync;
         SettingsData.Instance._Bloom = videoSettings._Bloom;
         SettingsData.Instance._ChromaticAberration = videoSettings._ChromaticAberration;
         SettingsData.Instance._Vignette = videoSettings._Vignette;
@@ -240,6 +242,8 @@ public class SettingsMenuUIHandler : MonoBehaviour
         videoSettings._Particles = SettingsData.Instance._Particles;
         videoSettings._WaterQuality = SettingsData.Instance._WaterQuality;
         videoSettings._LightQuality = SettingsData.Instance._LightQuality;
+        videoSettings._MaxFrameRate = SettingsData.Instance._MaxFrameRate;
+        videoSettings._VSync = SettingsData.Instance._VSync;
         videoSettings._Bloom = SettingsData.Instance._Bloom;
         videoSettings._ChromaticAberration = SettingsData.Instance._ChromaticAberration;
         videoSettings._Vignette = SettingsData.Instance._Vignette;

@@ -41,6 +41,7 @@ public class UserInput : MonoBehaviour
     public bool MenuInput {get; private set;}
     public Vector2 NavigateInput {get; private set;}
     public bool NavigateDown {get; private set;}
+    public bool NavigateHeld {get; private set;}
     public bool SubmitInput {get; private set;}
     public bool CancelInput {get; private set;}
     public bool RightMenuInput {get; private set;}
@@ -154,6 +155,7 @@ public class UserInput : MonoBehaviour
         MenuInput = _menuAction.WasPressedThisFrame();
         NavigateInput = _navigateAction.ReadValue<Vector2>();
         NavigateDown = _navigateAction.WasPressedThisFrame();
+        NavigateHeld = _navigateAction.IsPressed();
         SubmitInput = _submitAction.WasPressedThisFrame();
         CancelInput = _cancelAction.WasPressedThisFrame();
         RightMenuInput = _rightMenuAction.WasPressedThisFrame();

@@ -12,6 +12,8 @@ public class VideoSettingsController : MonoBehaviour
     public int _Particles;
     public int _WaterQuality;
     public int _LightQuality;
+    public float _MaxFrameRate;
+    public bool _VSync;
     public bool _Bloom;
     public bool _ChromaticAberration;
     public bool _Vignette;
@@ -148,6 +150,19 @@ public class VideoSettingsController : MonoBehaviour
                 break;
             case(8):
                 _FilmGrain = data.toggle.isOn;
+                break;
+            case(9):
+                _VSync = data.toggle.isOn;
+                break;
+        }
+    }
+    
+    public void SliderSetting(SettingSliderData data)
+    {
+        switch (data._SliderID)
+        {
+            case(4):
+                _MaxFrameRate = data.slider.value;
                 break;
         }
     }

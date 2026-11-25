@@ -41,6 +41,9 @@ public class SettingsToggleData : MonoBehaviour
             case (8):
                 toggle.isOn = SettingsData.Instance._FilmGrain;
                 break;
+            case (9):
+                toggle.isOn = SettingsData.Instance._VSync;
+                break;
         }
     }
 }

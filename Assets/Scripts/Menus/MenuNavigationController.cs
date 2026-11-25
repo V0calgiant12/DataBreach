@@ -5,12 +5,14 @@ using UnityEngine.InputSystem;
 using System;
 using TMPro;
 using System.Collections;
+using Unity.VisualScripting;
 
 #pragma warning disable 864121
 public class MenuNavigationController : MonoBehaviour
 {
     [Header("Info")]
     public bool enableNavigation = true;
+    private bool promptOpen;
     [Header("References")]
     [SerializeField] private GameObject DefaultSelected;
     [SerializeField] private GameObject currentlySelected;
@@ -19,11 +21,13 @@ public class MenuNavigationController : MonoBehaviour
     [SerializeField] private Button LastMenuButton;
     [SerializeField] private ScrollRect scrollRect;
     [SerializeField] private float scrollDivide;
+    private float holdTimer = 0;
     private Button button;
     private Toggle toggle;
     private Slider slider;
     private TMP_Dropdown dropdown;
     private Toggle subDropdown;
+    private TMP_InputField inputField;
     private Selectable selectable;
     private enum ButtonType
     {
@@ -33,6 +37,8 @@ public class MenuNavigationController : MonoBehaviour
         SubDropdown,
         Slider,
         SubSlider,
+        InputField,
+        Prompt,
         Selectable
     }
     [SerializeField] private ButtonType buttonType;
@@ -73,6 +79,12 @@ public class MenuNavigationController : MonoBehaviour
             dropdown = currentlySelected.GetComponent<TMP_Dropdown>();
             buttonType = ButtonType.Dropdown;
             dropdown.Select();
+        }
+        else if(currentlySelected.GetComponent<TMP_InputField>() != null)
+        {
+            inputField = currentlySelected.GetComponent<TMP_InputField>();
+            buttonType = ButtonType.InputField;
+            inputField.animator.SetTrigger("Highlighted");
         }
         else if(currentlySelected.GetComponent<Selectable>() != null)
         {
@@ -127,15 +139,21 @@ public class MenuNavigationController : MonoBehaviour
                 case (ButtonType.SubDropdown):
                     SubDropdownUpdate();
                     break;
+                case (ButtonType.InputField):
+                    InputFieldUpdate();
+                    break;
+                case (ButtonType.Prompt):
+                    PromptUpdate();
+                    break;
                 case (ButtonType.Selectable):
                     SelectableUpdate();
                     break;
             }
-            if (UserInput.Instance.RightMenuInput && NextMenuButton != null && buttonType != ButtonType.SubDropdown)
+            if (UserInput.Instance.RightMenuInput && NextMenuButton != null && buttonType != ButtonType.SubDropdown && buttonType != ButtonType.Prompt)
             {
                 NextMenuButton.onClick.Invoke();
             }
-            if (UserInput.Instance.LeftMenuInput && LastMenuButton != null && buttonType != ButtonType.SubDropdown)
+            if (UserInput.Instance.LeftMenuInput && LastMenuButton != null && buttonType != ButtonType.SubDropdown && buttonType != ButtonType.Prompt)
             {
                 LastMenuButton.onClick.Invoke();
             }
@@ -367,24 +385,16 @@ public class MenuNavigationController : MonoBehaviour
         }
         if (UserInput.Instance.NavigateInput.x < -0.5f)
         {
-            if (!slider.wholeNumbers)
+            if(UserInput.Instance.NavigateDown || holdTimer > 0.5f)
             {
-                slider.value -= 0.01f;
-            }
-            else if(UserInput.Instance.NavigateDown)
-            {
-                slider.value -= 1;
+                slider.value -= slider.GetComponent<SettingSliderData>()._StepSize;
             }
         }
         if (UserInput.Instance.NavigateInput.x > 0.5f)
         {
-            if (!slider.wholeNumbers)
+            if(UserInput.Instance.NavigateDown || holdTimer > 0.5f)
             {
-                slider.value += 0.01f;
-            }
-            else if(UserInput.Instance.NavigateDown)
-            {
-                slider.value += 1;
+                slider.value += slider.GetComponent<SettingSliderData>()._StepSize;
             }
         }
         if (UserInput.Instance.CancelInput && backButton != null)
@@ -397,6 +407,83 @@ public class MenuNavigationController : MonoBehaviour
             buttonType = ButtonType.Slider;
             Select(true);
         }
+        if (UserInput.Instance.NavigateHeld)
+        {
+            holdTimer += Time.unscaledDeltaTime;
+        }
+        else
+        {
+            holdTimer = 0;
+        }
+    }
+    void InputFieldUpdate()
+    {
+        
+        if (UserInput.Instance.NavigateInput.y < -0.5f && UserInput.Instance.NavigateDown)
+        {
+            if(inputField.FindSelectableOnDown() != null)
+            {
+                currentlySelected = inputField.FindSelectableOnDown().gameObject;
+            }
+            Select(true);
+        }
+        if (UserInput.Instance.NavigateInput.y > 0.5f && UserInput.Instance.NavigateDown)
+        {
+            if(inputField.FindSelectableOnUp() != null)
+            {
+                currentlySelected = inputField.FindSelectableOnUp().gameObject;
+            }
+            Select(true);
+        }
+        if (UserInput.Instance.NavigateInput.x < -0.5f && UserInput.Instance.NavigateDown)
+        {
+            if(inputField.FindSelectableOnLeft() != null)
+            {
+                currentlySelected = inputField.FindSelectableOnLeft().gameObject;
+            }
+            Select(true);
+        }
+        if (UserInput.Instance.NavigateInput.x > 0.5f && UserInput.Instance.NavigateDown)
+        {
+            if(inputField.FindSelectableOnRight() != null)
+            {
+                currentlySelected = inputField.FindSelectableOnRight().gameObject;
+            }
+            Select(true);
+        }
+        if (UserInput.Instance.CancelInput && backButton != null)
+        {
+            button = backButton;
+            buttonType = ButtonType.Button;
+            button.onClick.Invoke();
+        }
+        if (UserInput.Instance.SubmitInput)
+        {
+            buttonType = ButtonType.Prompt;
+            OpenPrompt(inputField);
+        }
+    }
+    void PromptUpdate()
+    {
+        if (UserInput.Instance.CancelInput)
+        {
+            ClosePrompt(inputField);
+        }
+    }
+    public void OpenPrompt(TMP_InputField data)
+    {
+        promptOpen = true;
+        buttonType = ButtonType.Prompt;
+        data.Select();
+        Select(data);
+        inputField.ActivateInputField();
+    }
+    public void ClosePrompt(TMP_InputField data)
+    {
+        promptOpen = false;
+        buttonType = ButtonType.InputField;
+        data.DeactivateInputField();
+        Select(inputField);
     }
     void SelectableUpdate()
     {
