@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class GoblinDead : GoblinAbstract
 {
-    private int elapsed = 0;
+    private float elapsed = 0;
     public override void RunOnce(GoblinStateManager goblin)
     {
 
@@ -17,8 +17,8 @@ public class GoblinDead : GoblinAbstract
     }
     public override void UpdateState(GoblinStateManager goblin)
     {
-        elapsed += 1;
-        if (elapsed >= 225)
+        elapsed += Time.deltaTime;
+        if (elapsed >= 3.75f)
         {
             goblin.Kill();
         }

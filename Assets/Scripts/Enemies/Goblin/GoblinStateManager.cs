@@ -136,12 +136,12 @@ public class GoblinStateManager : EnemyAbstract
             leftOrRight = (PlayerStateManager.Instance.transform.position.x > transform.position.x) ? true : false;
 
             goblinRb.linearVelocity = new Vector2((leftOrRight == true ? -1 : 1) * forwardForce, jumpForce * waterJumpMulti);
-            int elapsed = 0;
+            float elapsed = 0;
             anim.SetBool("jumping", true);
-            while(elapsed != 5)
+            while(elapsed < 0.084f)
             {
-                elapsed += Time.timeScale == 1 ? 1 : 0;
-                if(elapsed == 5)
+                elapsed += Time.deltaTime;
+                if(elapsed >= 0.084f)
                 {
                     StartCoroutine(ShortJump());
                 }
@@ -151,13 +151,13 @@ public class GoblinStateManager : EnemyAbstract
     }
     public IEnumerator ShortJump()
     {
-        int elapsed = 0;
+        float elapsed = 0;
         while(!groundCheck._IsGrounded)
         {
             if (!touchingWall && goblinRb.linearVelocityY > 0)
             {
-                elapsed += Time.timeScale == 1 ? 1 : 0;
-                if(elapsed > 5)
+                elapsed += Time.deltaTime;
+                if(elapsed > 0.084f)
                 {
                     goblinRb.linearVelocity = new Vector2(goblinRb.linearVelocityX, goblinRb.linearVelocityY * 0.8f);
                 }
@@ -184,6 +184,10 @@ public class GoblinStateManager : EnemyAbstract
         Destroy(gameObject);
     }
     
+    public void PlayAttackSound()
+    {
+        audioSource.PlaySound(goblinAttack,1,1,1,1,transform.position);
+    }
 }
 
 

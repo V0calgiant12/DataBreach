@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class GoblinAttack : GoblinAbstract
 {
-    int elapsed = 0;
     public override void RunOnce(GoblinStateManager goblin)
     {
 
@@ -11,19 +10,11 @@ public class GoblinAttack : GoblinAbstract
     {
         goblin.anim.SetBool("attacking", true);
         // Attack animation begin
-        elapsed = 0;
         goblin.audioSource.PlaySound(goblin.goblinReady,1,1,1,1,goblin.transform.position);
     }
     public override void UpdateState(GoblinStateManager goblin)
     {
         goblin.spriteHolder.transform.localScale = new Vector3(PlayerStateManager.Instance.transform.position.x > goblin.transform.position.x ? 1:-1,1,1);
-
-        elapsed += 1;
-
-        if(elapsed == 15)
-        {
-            goblin.audioSource.PlaySound(goblin.goblinAttack,1,1,1,1,goblin.transform.position);
-        } 
 
         if(goblin.anim.GetBool("attacking") == false)
         {
