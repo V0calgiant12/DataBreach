@@ -90,7 +90,6 @@ public class WaterDetect : MonoBehaviour
             }
             if (gameObject.CompareTag("Enemy"))
             {
-                Debug.Log("Is enemy");
                 audioSource.PlaySound(waterJump,0.5f,Random.Range(0.8f,1.2f),1,1,transform.position);
                 switch(gameObject.name)
                 {

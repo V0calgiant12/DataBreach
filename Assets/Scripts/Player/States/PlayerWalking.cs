@@ -16,6 +16,7 @@ public class PlayerWalking : PlayerAbstract
         player.playerData.resetVelocity = true;
         player.playerData.playerSpeed = 8;
         player.playerData.basePlayerSpeed = 8;
+        player.ResetGravity();
     }
     public override void UpdateState(PlayerStateManager player)
     {

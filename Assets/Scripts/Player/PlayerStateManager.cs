@@ -1,7 +1,6 @@
 using System.Collections;
 using UnityEngine;
 using System;
-
 public class PlayerStateManager : MonoBehaviour
 {
     [Header("Player State Manager References:")]
@@ -29,9 +28,13 @@ public class PlayerStateManager : MonoBehaviour
     public bool comingFromDash = false;
     public bool forceSuperJump = false;
     public bool ricochetAvailable = false;
+    private float baseGravity;
+    private float baseLinearDamp;
+    private float baseAngularDamp;
     [Header("Particles")]
     public ParticleSystem grassKickup;
     [Header("HashedStrings")]
+    public int next = Animator.StringToHash("next");
     public int attacking = Animator.StringToHash("attacking");
     public int jumping = Animator.StringToHash("jumping");
     public int falling = Animator.StringToHash("falling");
@@ -114,6 +117,9 @@ public class PlayerStateManager : MonoBehaviour
         playerData.crouching = false;
         playerData.movementAllowed = true;
         playerData.playerDead = false;
+        baseGravity = playerData.PlayerRb.gravityScale;
+        baseLinearDamp = playerData.PlayerRb.linearDamping;
+        baseAngularDamp = playerData.PlayerRb.angularDamping;
         if(playerData.playerHealth <= 0)
         {
             playerData.playerHealth = playerData.maxHealth;
@@ -256,6 +262,17 @@ public class PlayerStateManager : MonoBehaviour
         else
         {
             grassKickup.Play();
+        }
+    }
+    public void ResetGravity()
+    {
+        if (!playerData.inLiquid)
+        {
+            playerData.PlayerRb.gravityScale = baseGravity;
+            playerData.PlayerRb.linearDamping = baseLinearDamp;
+            playerData.PlayerRb.angularDamping = baseAngularDamp;
+            playerData.waterSpeedMulti = 1f;
+            playerData.waterJumpMulti = 1f;
         }
     }
     public void SwitchState(PlayerAbstract state)

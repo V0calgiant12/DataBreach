@@ -91,17 +91,20 @@ public class PlayerDashing : PlayerAbstract
 
         // Early Cancel (from external factors)
         {
-            // Hit a wall
-            if(player.playerData.ricochet > 0 && dashTimer < 0.25)
+            // Hit a wall or in a liquid
+            if((player.playerData.ricochet > 0 && dashTimer < 0.25) || player.playerData.inLiquid)
             {
+                Debug.Log("Early Cancel");
                 player.SwitchState(player.AirState);
+                player.playerData.anim.SetTrigger(player.next);
                 //player.playerData.PlayerRb.linearVelocityX = player.playerData.playerSpeed ;
             }
             // Ground Check
             if (GroundCheck.Instance._IsGrounded && dashTimer < 0.25)
             {
+                Debug.Log("Hit Ground");
                 player.audioSource.PlaySound(player._NormalFall,1,Random.Range(0.7f,1.4f),0,1,player.transform.position);
-            player.audioSource.PlaySound(player._CurrentLand,player._CurrentVolume,Random.Range(player._CurrentPitch.x,player._CurrentPitch.y),0,1,player.transform.position);
+                player.audioSource.PlaySound(player._CurrentLand,player._CurrentVolume,Random.Range(player._CurrentPitch.x,player._CurrentPitch.y),0,1,player.transform.position);
                 if((player.playerData.anim.GetInteger(player.attackId) == 2 || player.playerData.anim.GetInteger(player.attackId) == 4) && player.playerData.anim.GetBool(player.attacking))
                 {
                     player.playerData.anim.SetBool(player.attacking, false);
@@ -109,6 +112,7 @@ public class PlayerDashing : PlayerAbstract
                 player.SwitchState(player.IdleState);
                 player.playerData.anim.SetBool(player.falling, false);
                 player.playerData.anim.SetBool(player.jumping, false);
+                player.playerData.anim.SetTrigger(player.next);
                 return;
             }
         }
@@ -128,6 +132,11 @@ public class PlayerDashing : PlayerAbstract
     }
     public override void LeaveState(PlayerStateManager player)
     {
+        Debug.Log(dashTimer);
+        if(dashTimer > 0)
+        {
+            player.playerData.anim.SetTrigger(player.next);
+        }
         player.playerData.PlayerRb.gravityScale = storedGrav;
         player.playerData.anim.SetBool(player.dashing,false);
     }

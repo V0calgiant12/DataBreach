@@ -18,6 +18,7 @@ public class PlayerSprinting : PlayerAbstract
         player.playerData.resetVelocity = true;
         player.playerData.playerSpeed = 15;
         player.playerData.basePlayerSpeed = 15;
+        player.ResetGravity();
     }
     public override void UpdateState(PlayerStateManager player)
     {

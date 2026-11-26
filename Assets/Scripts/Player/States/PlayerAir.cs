@@ -39,6 +39,7 @@ public class PlayerAir : PlayerAbstract
         {
             player.playerData.coyoteTimeCounter = 0.25f;
         }
+        player.ResetGravity();
     }
     public override void UpdateState(PlayerStateManager player)
     {
