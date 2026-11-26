@@ -34,6 +34,8 @@ public class PlayerStateManager : MonoBehaviour
     [Header("Particles")]
     public ParticleSystem grassKickup;
     public ParticleSystem waterTrail;
+    public ParticleSystem doubleJump;
+    public ParticleSystem superJump;
     [Header("HashedStrings")]
     public int next = Animator.StringToHash("next");
     public int attacking = Animator.StringToHash("attacking");

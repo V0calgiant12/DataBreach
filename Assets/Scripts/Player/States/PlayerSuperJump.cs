@@ -197,6 +197,7 @@ public class PlayerSuperJump : PlayerAbstract
         if(UserInput.Instance.MovementInput.y > -0.5f)
         {
             player.playerData.PlayerRb.linearVelocity = new Vector2(4 * (player.playerData.leftOrRight? 1 : -1),(player.playerData.PlayerRb.linearVelocityY > 0 ? player.playerData.PlayerRb.linearVelocityY : 0) +jumpStrength);
+            player.superJump.Play();
             if(player.playerData.PlayerRb.linearVelocityY > 22.2f)
             {
                 player.playerData.PlayerRb.linearVelocityY = 22.2f;

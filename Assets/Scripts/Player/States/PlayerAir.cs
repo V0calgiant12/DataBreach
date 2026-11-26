@@ -206,6 +206,7 @@ public class PlayerAir : PlayerAbstract
                 player.playerData.anim.SetTrigger("next");
             }
             player.playerData.anim.SetBool(player.jumping, true);
+            player.doubleJump.Play();
             player.playerData.doubleJumpAvailable = false;
             player.playerData.shortJumping = true;
             changeYStartNextFall = true;
