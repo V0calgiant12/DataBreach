@@ -12,7 +12,6 @@ public class MenuNavigationController : MonoBehaviour
 {
     [Header("Info")]
     public bool enableNavigation = true;
-    private bool promptOpen;
     [Header("References")]
     [SerializeField] private GameObject DefaultSelected;
     [SerializeField] private GameObject currentlySelected;
@@ -475,7 +474,6 @@ public class MenuNavigationController : MonoBehaviour
     }
     public void OpenPrompt(TMP_InputField data)
     {
-        promptOpen = true;
         buttonType = ButtonType.Prompt;
         data.Select();
         Select(data);
@@ -483,7 +481,6 @@ public class MenuNavigationController : MonoBehaviour
     }
     public void ClosePrompt(TMP_InputField data)
     {
-        promptOpen = false;
         buttonType = ButtonType.InputField;
         data.DeactivateInputField();
         Select(inputField);

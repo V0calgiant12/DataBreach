@@ -125,9 +125,6 @@ public class PlayerStateManager : MonoBehaviour
         playerData.crouching = false;
         playerData.movementAllowed = true;
         playerData.playerDead = false;
-        baseGravity = playerData.PlayerRb.gravityScale;
-        baseLinearDamp = playerData.PlayerRb.linearDamping;
-        baseAngularDamp = playerData.PlayerRb.angularDamping;
         if(playerData.playerHealth <= 0)
         {
             playerData.playerHealth = playerData.maxHealth;
@@ -135,6 +132,9 @@ public class PlayerStateManager : MonoBehaviour
         playerData.OffsetVelocity = new Vector2(0,0);
         playerData.interacting = false;
         FindPlayerObject();
+        baseGravity = playerData.PlayerRb.gravityScale;
+        baseLinearDamp = playerData.PlayerRb.linearDamping;
+        baseAngularDamp = playerData.PlayerRb.angularDamping;
         currentState = IdleState;
         currentState.RunOnce(this);
         GlobalUpdateState.EnterState(this);
