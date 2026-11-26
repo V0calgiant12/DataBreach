@@ -9,10 +9,12 @@ public class MapParallax : MonoBehaviour
     [SerializeField] private Vector4 edgePos;
     [SerializeField] private RectTransform TopRight;
     [SerializeField] private RectTransform BottomLeft;
-    private float swayX = 0;
-    private bool swayXDir = false;
-    private float swayY = 0;
-    private bool swayYDir = false;
+    [SerializeField] private float swayX = 0;
+    static public float randomSwayX;
+    [SerializeField] private float swayY = 0;
+    static public float randomSwayY;
+    public float swaySpeed;
+    [SerializeField] private float timer;
     public float parallaxValue;
     public float offsetX;
     public float offsetY;
@@ -26,19 +28,12 @@ public class MapParallax : MonoBehaviour
     {
         if(Input.mousePosition.x != 0 && Input.mousePosition.y != 0)
         {
-            Debug.Log(mainCamera.aspect);
+            //Debug.Log(mainCamera.aspect);
             rectTransform.position = new Vector2((Input.mousePosition.x * parallaxValue/mainCamera.aspect)+(Screen.width/2)+offsetX,(Input.mousePosition.y * parallaxValue)+(Screen.height/2)+offsetY);
         }
-        swayX += (swayXDir == true) ? 0.01f : -0.01f;
-        swayY += (swayYDir == true) ? 0.01f : -0.01f;
-        if(swayX >= 2 || swayX <= -2)
-        {
-            swayXDir = (swayX < 0) ? true : false;
-        }
-        if(swayY >= 1 || swayY <= -1)
-        {
-            swayYDir = (swayY < 0) ? true : false;
-        }
+        timer += Time.deltaTime;
+        swayX = Mathf.Sin(timer * swaySpeed + randomSwayX) * 5;
+        swayY = MathF.Cos(timer * swaySpeed + randomSwayY) * 5;
         rectTransform.position = new Vector2(rectTransform.position.x + swayX, rectTransform.position.y + swayY);
 
         if(TopRight.position.x < MaxPos.x && MaxPos.x != 0)

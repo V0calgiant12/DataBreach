@@ -386,16 +386,18 @@ public class MenuNavigationController : MonoBehaviour
         }
         if (UserInput.Instance.NavigateInput.x < -0.5f)
         {
-            if(UserInput.Instance.NavigateDown || holdTimer > 0.5f)
+            if(UserInput.Instance.NavigateDown || holdTimer > 0.52f)
             {
                 slider.value -= slider.GetComponent<SettingSliderData>()._StepSize;
+                holdTimer = holdTimer > 0.5f ? 0.52f : holdTimer;
             }
         }
         if (UserInput.Instance.NavigateInput.x > 0.5f)
         {
-            if(UserInput.Instance.NavigateDown || holdTimer > 0.5f)
+            if(UserInput.Instance.NavigateDown || holdTimer > 0.52f)
             {
                 slider.value += slider.GetComponent<SettingSliderData>()._StepSize;
+                holdTimer = holdTimer > 0.5f ? 0.52f : holdTimer;
             }
         }
         if (UserInput.Instance.CancelInput && backButton != null)

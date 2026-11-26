@@ -208,6 +208,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MainMenuParallax
   rectTransform: {fileID: 250901327}
+  swayX: 0
+  swayY: 0
+  swaySpeed: 0.2
+  timer: 0
   parallaxValue: 0.01
   offsetX: -400
   offsetY: 0
@@ -1529,6 +1533,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MainMenuParallax
   rectTransform: {fileID: 1294154971}
+  swayX: 0
+  swayY: 0
+  swaySpeed: 0.2
+  timer: 0
   parallaxValue: 0.02
   offsetX: 0
   offsetY: 25
@@ -2353,6 +2361,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MainMenuParallax
   rectTransform: {fileID: 1834672300}
+  swayX: 0
+  swayY: 0
+  swaySpeed: 0.2
+  timer: 0
   parallaxValue: 0.03
   offsetX: 0
   offsetY: 0
