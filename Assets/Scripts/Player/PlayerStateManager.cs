@@ -33,6 +33,7 @@ public class PlayerStateManager : MonoBehaviour
     private float baseAngularDamp;
     [Header("Particles")]
     public ParticleSystem grassKickup;
+    public ParticleSystem waterTrail;
     [Header("HashedStrings")]
     public int next = Animator.StringToHash("next");
     public int attacking = Animator.StringToHash("attacking");
@@ -255,6 +256,7 @@ public class PlayerStateManager : MonoBehaviour
         }
         else if (playerData.inLiquid)
         {
+            waterTrail.Play();
         }
         else if(GroundCheck.Instance._IsWood)
         {

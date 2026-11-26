@@ -146,6 +146,7 @@ public class PlayerWalking : PlayerAbstract
             else
             {
                 player.audioSource.PlaySound(player._WaterWalk[0],1f,Random.Range(0.8f,1.2f),0,1,player.transform.position);
+                player.PlayFootstepParticle();
             }
             audioTimer = 0;
         }

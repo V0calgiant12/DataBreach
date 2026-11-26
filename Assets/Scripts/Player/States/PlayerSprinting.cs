@@ -96,10 +96,10 @@ public class PlayerSprinting : PlayerAbstract
         // Audio & Particles
         if(audioTimer >= 0.15)
         {
+            player.PlayFootstepParticle();
             if(!player.playerData.inLiquid)
             {
                 player.audioSource.PlaySound(player._CurrentFootstep[Random.Range(0,player._CurrentFootstep.Length-1)],player._CurrentVolume,Random.Range(player._CurrentPitch.x,player._CurrentPitch.y),0,1,player.transform.position);
-                player.PlayFootstepParticle();
             }
             else
             {
