@@ -29,6 +29,8 @@ public class PlayerStateManager : MonoBehaviour
     public bool comingFromDash = false;
     public bool forceSuperJump = false;
     public bool ricochetAvailable = false;
+    [Header("Particles")]
+    public ParticleSystem grassKickup;
     [Header("HashedStrings")]
     public int attacking = Animator.StringToHash("attacking");
     public int jumping = Animator.StringToHash("jumping");
@@ -237,6 +239,23 @@ public class PlayerStateManager : MonoBehaviour
             _CurrentLand = _GrassFall;
             _CurrentVolume = 0.8f;
             _CurrentPitch = new Vector2(0.8f, 1.5f);
+        }
+    }
+    public void PlayFootstepParticle()
+    {
+        
+        if (GroundCheck.Instance._IsStone)
+        {
+        }
+        else if (playerData.inLiquid)
+        {
+        }
+        else if(GroundCheck.Instance._IsWood)
+        {
+        }
+        else
+        {
+            grassKickup.Play();
         }
     }
     public void SwitchState(PlayerAbstract state)
