@@ -33,7 +33,8 @@ public class PlayerStateManager : MonoBehaviour
     private float baseLinearDamp;
     private float baseAngularDamp;
     [Header("Particles")]
-    public ParticleSystem grassKickup;
+    public ParticleSystem[] grassKickup;
+    public ParticleSystem[] rockKickup;
     public ParticleSystem waterTrail;
     public ParticleSystem doubleJump;
     public ParticleSystem groundedJump;
@@ -257,6 +258,7 @@ public class PlayerStateManager : MonoBehaviour
     {
         if (GroundCheck.Instance._IsStone)
         {
+            rockKickup[playerData.leftOrRight?0:1].Play();
         }
         else if (playerData.inLiquid)
         {
@@ -267,7 +269,7 @@ public class PlayerStateManager : MonoBehaviour
         }
         else
         {
-            grassKickup.Play();
+            grassKickup[playerData.leftOrRight?0:1].Play();
         }
     }
     public void ResetGravity()
