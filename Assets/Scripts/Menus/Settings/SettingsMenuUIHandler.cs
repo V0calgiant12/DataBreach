@@ -110,6 +110,7 @@ public class SettingsMenuUIHandler : MonoBehaviour
     {
         SaveSettings(); // Saves for scene persistence
         SettingsData.Instance.SaveSettings(); // Saves for instance persistence
+        ControlsButton();
         titleMenu.SetActive(true);
         gameObject.SetActive(false);
     }
