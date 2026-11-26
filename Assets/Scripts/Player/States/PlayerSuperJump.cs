@@ -168,6 +168,7 @@ public class PlayerSuperJump : PlayerAbstract
             player.playerData.doubleJumpAvailable = true;
             player.audioSource.PlaySound(player._NormalFall,1,Random.Range(0.7f,1.4f),0,1,player.transform.position);
             player.audioSource.PlaySound(player._CurrentLand,player._CurrentVolume,Random.Range(player._CurrentPitch.x,player._CurrentPitch.y),0,1,player.transform.position);
+            player.doubleJump.Play();
             player.playerData.fastFallCounter = 0;
             changeYStartNextFall = true;
             player.SwitchState(player.IdleState);

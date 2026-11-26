@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using System;
+using Unity.Collections;
 public class PlayerStateManager : MonoBehaviour
 {
     [Header("Player State Manager References:")]
@@ -35,6 +36,8 @@ public class PlayerStateManager : MonoBehaviour
     public ParticleSystem grassKickup;
     public ParticleSystem waterTrail;
     public ParticleSystem doubleJump;
+    public ParticleSystem groundedJump;
+    public ParticleSystem angledJump;
     public ParticleSystem superJump;
     [Header("HashedStrings")]
     public int next = Animator.StringToHash("next");
@@ -252,7 +255,6 @@ public class PlayerStateManager : MonoBehaviour
     }
     public void PlayFootstepParticle()
     {
-        
         if (GroundCheck.Instance._IsStone)
         {
         }

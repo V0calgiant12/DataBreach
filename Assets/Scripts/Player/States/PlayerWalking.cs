@@ -167,6 +167,7 @@ public class PlayerWalking : PlayerAbstract
             player.playerData.coyoteTimeCounter = 0;
             player.audioSource.PlaySound(player._NormalJump,1,Random.Range(0.7f,1.4f),0,1,player.transform.position);
             player.audioSource.PlaySound(player._CurrentLand,player._CurrentVolume,Random.Range(player._CurrentPitch.x,player._CurrentPitch.y),0,1,player.transform.position);
+            player.groundedJump.Play();
             player.SwitchState(player.AirState);
             player.currentState.UpdateState(player);
             return;

@@ -99,6 +99,7 @@ public class PlayerInteracting : PlayerAbstract
                     player.playerData.PlayerRb.linearVelocityY = jumpStrength * PlayerStateManager.Instance.playerData.waterJumpMulti;
                     JumpAudio(player);
                     player.playerData.anim.SetBool(player.jumping, true);
+                    player.groundedJump.Play();
                 }
                 player.playerData.anim.SetBool(player.moving, false);
                 player.playerData.anim.SetBool(player.walking, false);
@@ -115,6 +116,7 @@ public class PlayerInteracting : PlayerAbstract
                     player.playerData.PlayerRb.linearVelocityY = jumpStrength * PlayerStateManager.Instance.playerData.waterJumpMulti;
                     JumpAudio(player);
                     player.playerData.anim.SetBool(player.jumping, true);
+                    player.groundedJump.Play();
                 }
                 player.playerData.anim.SetBool(player.moving, true);
                 player.playerData.anim.SetBool(player.walking, false);
@@ -136,6 +138,7 @@ public class PlayerInteracting : PlayerAbstract
                     player.playerData.PlayerRb.linearVelocityY = jumpStrength * PlayerStateManager.Instance.playerData.waterJumpMulti;
                     JumpAudio(player);
                     player.playerData.anim.SetBool(player.jumping, true);
+                    player.groundedJump.Play();
                 }
                 player.playerData.anim.SetBool(player.moving, true);
                 player.playerData.anim.SetBool(player.walking, false);
@@ -153,6 +156,7 @@ public class PlayerInteracting : PlayerAbstract
                     player.playerData.PlayerRb.linearVelocityY = jumpStrength/2 * PlayerStateManager.Instance.playerData.waterJumpMulti;
                     JumpAudio(player);
                     player.playerData.anim.SetBool(player.jumping, true);
+                    player.groundedJump.Play();
                 }
                 player.playerData.anim.SetBool(player.moving, false);
                 player.playerData.anim.SetBool(player.walking, false);
@@ -169,6 +173,7 @@ public class PlayerInteracting : PlayerAbstract
                     player.playerData.PlayerRb.linearVelocityY = jumpStrength/2 * PlayerStateManager.Instance.playerData.waterJumpMulti;
                     JumpAudio(player);
                     player.playerData.anim.SetBool(player.jumping, true);
+                    player.groundedJump.Play();
                 }
                 player.playerData.anim.SetBool(player.moving, true);
                 player.playerData.anim.SetBool(player.walking, false);
@@ -190,6 +195,7 @@ public class PlayerInteracting : PlayerAbstract
                     player.playerData.PlayerRb.linearVelocityY = jumpStrength/2 * PlayerStateManager.Instance.playerData.waterJumpMulti;
                     JumpAudio(player);
                     player.playerData.anim.SetBool(player.jumping, true);
+                    player.groundedJump.Play();
                 }
                 player.playerData.anim.SetBool(player.moving, true);
                 player.playerData.anim.SetBool(player.walking, false);

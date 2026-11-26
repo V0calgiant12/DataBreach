@@ -127,9 +127,12 @@ public class PlayerSprinting : PlayerAbstract
             {
                 player.forceSuperJump = false;
                 player.SwitchState(player.DashingState);
+                player.angledJump.gameObject.transform.localScale = new Vector3(player.playerData.leftOrRight?1:-1,1,1);
+                player.angledJump.Play();
             }
             else
             {
+                player.groundedJump.Play();
                 player.SwitchState(player.AirState);
             }
             player.currentState.UpdateState(player);
