@@ -110,6 +110,7 @@ public class PlayerDashing : PlayerAbstract
                     player.playerData.anim.SetBool(player.attacking, false);
                 }
                 player.SwitchState(player.IdleState);
+                player.land.Play();
                 player.playerData.anim.SetBool(player.falling, false);
                 player.playerData.anim.SetBool(player.jumping, false);
                 player.playerData.anim.SetTrigger(player.next);

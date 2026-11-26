@@ -147,6 +147,7 @@ public class PlayerSuperJump : PlayerAbstract
             player.playerData.PlayerRb.linearVelocity = new Vector2(player.playerData.PlayerRb.linearVelocityX, jumpStrength * 0.8f);
             player.StartCoroutine(player.WaitUntilNotJumping());
             player.audioSource.PlaySound(player._AirJump,1,Random.Range(0.7f,1.4f),0,1,player.transform.position);
+            player.doubleJump.Play();
             player.playerData.anim.SetBool(player.jumping, true);
             player.playerData.anim.SetBool(player.superJumping, false);
             player.playerData.doubleJumpAvailable = false;
@@ -168,7 +169,7 @@ public class PlayerSuperJump : PlayerAbstract
             player.playerData.doubleJumpAvailable = true;
             player.audioSource.PlaySound(player._NormalFall,1,Random.Range(0.7f,1.4f),0,1,player.transform.position);
             player.audioSource.PlaySound(player._CurrentLand,player._CurrentVolume,Random.Range(player._CurrentPitch.x,player._CurrentPitch.y),0,1,player.transform.position);
-            player.doubleJump.Play();
+            player.land.Play();
             player.playerData.fastFallCounter = 0;
             changeYStartNextFall = true;
             player.SwitchState(player.IdleState);

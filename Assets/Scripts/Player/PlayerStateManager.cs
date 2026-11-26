@@ -36,6 +36,7 @@ public class PlayerStateManager : MonoBehaviour
     public ParticleSystem[] grassKickup;
     public ParticleSystem[] rockKickup;
     public ParticleSystem waterTrail;
+    public ParticleSystem land;
     public ParticleSystem doubleJump;
     public ParticleSystem groundedJump;
     public ParticleSystem angledJump;

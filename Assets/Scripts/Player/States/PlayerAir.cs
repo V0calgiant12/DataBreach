@@ -288,6 +288,7 @@ public class PlayerAir : PlayerAbstract
             {
                 player.playerData.anim.SetBool(player.attacking, false);
             }
+            player.land.Play();
             player.playerData.fastFallCounter = 0;
             player.SwitchState(player.IdleState);
             player.playerData.anim.SetBool(player.falling, false);
