@@ -1,8 +1,11 @@
 using System;
+using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.SceneManagement;
+using UnityEngine.UIElements;
 
 public class CommandMenu : MonoBehaviour
 {
@@ -11,10 +14,13 @@ public class CommandMenu : MonoBehaviour
     [SerializeField] private TMP_InputField commandPrompt;
     [SerializeField] private TextMeshProUGUI log;
     [SerializeField] private PlayerData playerData;
+    [SerializeField] private string[] previousCommands;
+    private int previousCommandIndex;
     private bool darkmode = false;
     public string[] CommandList {get;} = {"help","save","loadscene <int>","sethealth <int>","setmaxhealth <int>","setcheckpoint <x> <y>","tp <x> <y>","reload","resetcheckpoint","return","darkMode <bool>","givecoin","takecoin","shake <float> <float>","burstshake <float> <float> <bool> <float>"}; 
     void Start()
     {
+        Array.Resize(ref previousCommands,1);
         CommandConsole.SetActive(false);
         commandPromptOpen = false;
     }
@@ -36,9 +42,9 @@ public class CommandMenu : MonoBehaviour
         {
             OpenCommandPrompt();
         }
-        if (commandPromptOpen && Input.GetKeyDown(KeyCode.Escape))
+        if (commandPromptOpen)
         {
-            CloseCommandPrompt();
+            OpenUpdate();
         }
         if (log.isTextTruncated)
         {
@@ -49,10 +55,28 @@ public class CommandMenu : MonoBehaviour
             log.text = log.text.Substring(1);
         }
     }
+    private void OpenUpdate()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            CloseCommandPrompt();
+        }
+        if (Input.GetKeyDown(KeyCode.UpArrow))
+        {
+            previousCommandIndex++;
+            CyclePreviousCommands(true);
+        }
+        if (Input.GetKeyDown(KeyCode.DownArrow))
+        {
+            previousCommandIndex--;
+            CyclePreviousCommands(false);
+        }
+    }
     public void OpenCommandPrompt()
     {
         UserInput.Instance._playerInput.actions.Disable();
         commandPromptOpen = true;
+        previousCommandIndex = 0;
         CommandConsole.SetActive(true);
         commandPrompt.Select();
         commandPrompt.ActivateInputField();
@@ -65,6 +89,7 @@ public class CommandMenu : MonoBehaviour
     }
     public void SubmitCommand(string commandInput)
     {
+        SaveCommandToList(commandInput);
         commandPrompt.Select();
         commandPrompt.ActivateInputField();
         string[] commandSplit = commandInput.ToLower().Split();
@@ -449,5 +474,35 @@ public class CommandMenu : MonoBehaviour
             }
         }
         return false;
+    }
+    void SaveCommandToList(string newCommand)
+    {
+        Array.Resize(ref previousCommands, previousCommands.Length + 1);
+        for(int i = previousCommands.Length-1; i > 1; i--)
+        {
+            previousCommands[i] = previousCommands[i-1];
+        }
+        previousCommands[1] = newCommand;
+        previousCommands[0] = "";
+    }
+    void CyclePreviousCommands(bool direction)
+    {
+        if(previousCommandIndex < 0)
+        {
+            previousCommandIndex = 0;
+        }
+        if(previousCommandIndex >= previousCommands.Length)
+        {
+            previousCommandIndex = previousCommands.Length-1;
+        }
+        if(previousCommandIndex-1 == 0 && direction)
+        {
+            previousCommands[0] = commandPrompt.text;
+        }
+        if (previousCommands.Length != 1)
+        {
+            commandPrompt.text = previousCommands[previousCommandIndex];
+        }
+        commandPrompt.caretPosition = commandPrompt.text.Length;
     }
 }
