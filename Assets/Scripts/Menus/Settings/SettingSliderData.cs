@@ -32,6 +32,10 @@ public class SettingSliderData : MonoBehaviour
     }
     public void InputValue(string value)
     {
+        if(value == "NaN")
+        {
+            value = "1";
+        }
         float newValue = slider.value;
         if(!float.TryParse(value,out newValue))
         {
