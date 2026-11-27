@@ -15,12 +15,12 @@ MonoBehaviour:
   playerHealth: 5
   maxHealth: 5
   fastFallCounter: 0
-  jumpBufferCounter: -72.38266
-  coyoteTimeCounter: -72.38266
-  sprintBufferCounter: -72.649155
-  interactingCooldown: -116.82356
-  iFrames: -73.89883
-  bufferedAtk: -69.98437
+  jumpBufferCounter: 0
+  coyoteTimeCounter: 0
+  sprintBufferCounter: 0
+  interactingCooldown: 0
+  iFrames: 0
+  bufferedAtk: 0
   ricochet: 0
   lastCheckpoint: {x: 0, y: 0}
   bufferedAtkDir: {x: 0, y: 0}
@@ -46,7 +46,7 @@ MonoBehaviour:
   inLiquid: 0
   hasHeartCoin: 0
   heartCoinSaved: 0
-  invincible: 1
+  invincible: 0
   PlayerRb: {fileID: 0}
   OffsetVelocity: {x: 0, y: 0}
   anim: {fileID: 0}
